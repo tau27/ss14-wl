@@ -35,6 +35,7 @@ namespace Content.Shared.Preferences
         private HumanoidCharacterProfile(
             string name,
             string flavortext,
+            string ooctext, // WL-OOCText
             string species,
             string voice, // Corvax-TTS
             int age,
@@ -50,6 +51,7 @@ namespace Content.Shared.Preferences
         {
             Name = name;
             FlavorText = flavortext;
+            OocText = ooctext; // WL-OOCText
             Species = species;
             Voice = voice; // Corvax-TTS
             Age = age;
@@ -70,7 +72,7 @@ namespace Content.Shared.Preferences
             Dictionary<string, JobPriority> jobPriorities,
             List<string> antagPreferences,
             List<string> traitPreferences)
-            : this(other.Name, other.FlavorText, other.Species, other.Voice, other.Age, other.Sex, other.Gender, other.Appearance, other.Clothing, other.Backpack,
+            : this(other.Name, other.FlavorText, other.OocText, other.Species, other.Voice, other.Age, other.Sex, other.Gender, other.Appearance, other.Clothing, other.Backpack,
                 jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences)
         {
         }
@@ -84,6 +86,7 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
+            string ooctext, // WL-OOCText
             string species,
             string voice, // Corvax-TTS
             int age,
@@ -96,7 +99,7 @@ namespace Content.Shared.Preferences
             PreferenceUnavailableMode preferenceUnavailable,
             IReadOnlyList<string> antagPreferences,
             IReadOnlyList<string> traitPreferences)
-            : this(name, flavortext, species, voice, age, sex, gender, appearance, clothing, backpack, new Dictionary<string, JobPriority>(jobPriorities),
+            : this(name, flavortext, ooctext, species, voice, age, sex, gender, appearance, clothing, backpack, new Dictionary<string, JobPriority>(jobPriorities),
                 preferenceUnavailable, new List<string>(antagPreferences), new List<string>(traitPreferences))
         {
         }
@@ -109,6 +112,7 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile() : this(
             "John Doe",
             "",
+            "", // WL-OOCText
             SharedHumanoidAppearanceSystem.DefaultSpecies,
             SharedHumanoidAppearanceSystem.DefaultVoice, // Corvax-TTS
                 18,
@@ -137,6 +141,7 @@ namespace Content.Shared.Preferences
             return new(
                 "John Doe",
                 "",
+                "", // WL-OOCText
                 species,
                 SharedHumanoidAppearanceSystem.DefaultVoice, // Corvax-TTS
                 18,
@@ -193,7 +198,7 @@ namespace Content.Shared.Preferences
 
             var name = GetName(species, gender);
 
-            return new HumanoidCharacterProfile(name, "", species, voiceId, age, sex, gender, HumanoidCharacterAppearance.Random(species, sex), ClothingPreference.Jumpsuit, BackpackPreference.Backpack,
+            return new HumanoidCharacterProfile(name, "", "", species, voiceId, age, sex, gender, HumanoidCharacterAppearance.Random(species, sex), ClothingPreference.Jumpsuit, BackpackPreference.Backpack,
                 new Dictionary<string, JobPriority>
                 {
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High},
@@ -202,6 +207,7 @@ namespace Content.Shared.Preferences
 
         public string Name { get; private set; }
         public string FlavorText { get; private set; }
+        public string OocText { get; private set; } // WL-OOCText
         public string Species { get; private set; }
         public string Voice { get; private set; } // Corvax-TTS
 
@@ -234,6 +240,13 @@ namespace Content.Shared.Preferences
         {
             return new(this) { FlavorText = flavorText };
         }
+
+        // WL-OOCText-Start
+        public HumanoidCharacterProfile WithOocText(string oocText)
+        {
+            return new(this) { OocText = oocText };
+        }
+        // WL-OOCText-End
 
         public HumanoidCharacterProfile WithAge(int age)
         {
@@ -453,6 +466,18 @@ namespace Content.Shared.Preferences
                 flavortext = FormattedMessage.RemoveMarkup(FlavorText);
             }
 
+            // WL-OOCText-Start
+            string oocText;
+            if (OocText.Length > MaxDescLength)
+            {
+                oocText = FormattedMessage.RemoveMarkup(OocText)[..MaxDescLength];
+            }
+            else
+            {
+                oocText = FormattedMessage.RemoveMarkup(OocText);
+            }
+            // WL-OOCText-End
+
             var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, sponsorMarkings);
 
             var prefsUnavailableMode = PreferenceUnavailable switch
@@ -497,6 +522,7 @@ namespace Content.Shared.Preferences
 
             Name = name;
             FlavorText = flavortext;
+            OocText = oocText; // WL-OOCText
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -518,14 +544,14 @@ namespace Content.Shared.Preferences
 
             _traitPreferences.Clear();
             _traitPreferences.AddRange(traits);
-            
+
             // Corvax-TTS-Start
             prototypeManager.TryIndex<TTSVoicePrototype>(Voice, out var voice);
             if (voice is null || !CanHaveVoice(voice, Sex))
                 Voice = SharedHumanoidAppearanceSystem.DefaultSexVoice[sex];
             // Corvax-TTS-End
         }
-        
+
         // Corvax-TTS-Start
         // MUST NOT BE PUBLIC, BUT....
         public static bool CanHaveVoice(TTSVoicePrototype voice, Sex sex)

@@ -60,7 +60,8 @@ namespace Content.Client.Preferences.UI
 
         private LineEdit _ageEdit => CAgeEdit;
         private LineEdit _nameEdit => CNameEdit;
-        private LineEdit _flavorTextEdit = null!;
+        private TextEdit _flavorTextEdit = null!;
+        private TextEdit _oocTextEdit = null!; // WL-OOCText
         private Button _nameRandomButton => CNameRandomize;
         private Button _randomizeEverythingButton => CRandomizeEverything;
         private RichTextLabel _warningLabel => CWarningLabel;
@@ -480,8 +481,10 @@ namespace Content.Client.Preferences.UI
                 _tabContainer.AddChild(flavorText);
                 _tabContainer.SetTabTitle(_tabContainer.ChildCount - 1, Loc.GetString("humanoid-profile-editor-flavortext-tab"));
                 _flavorTextEdit = flavorText.CFlavorTextInput;
+                _oocTextEdit = flavorText.COocTextInput; // WL-OOCText
 
                 flavorText.OnFlavorTextChanged += OnFlavorTextChange;
+                flavorText.OnOocTextChanged += OnOocTextChange; // WL-OOCText
             }
 
             #endregion FlavorText
@@ -639,6 +642,17 @@ namespace Content.Client.Preferences.UI
             Profile = Profile.WithFlavorText(content);
             IsDirty = true;
         }
+
+        // WL-OOCText-Start
+        private void OnOocTextChange(string content)
+        {
+            if (Profile is null)
+                return;
+
+            Profile = Profile.WithOocText(content);
+            IsDirty = true;
+        }
+        // WL-OOCText-End
 
         private void OnMarkingChange(MarkingSet markings)
         {
@@ -886,9 +900,19 @@ namespace Content.Client.Preferences.UI
         {
             if(_flavorTextEdit != null)
             {
-                _flavorTextEdit.Text = Profile?.FlavorText ?? "";
+                _flavorTextEdit.TextRope = new Rope.Leaf(Profile?.FlavorText ?? ""); // WL-OOCText
             }
         }
+
+        // WL-OOCText-Start
+        private void UpdateOocTextEdit()
+        {
+            if(_oocTextEdit != null)
+            {
+                _oocTextEdit.TextRope = new Rope.Leaf(Profile?.OocText ?? "");
+            }
+        }
+        // WL-OOCText-End
 
         private void UpdateAgeEdit()
         {
@@ -1160,6 +1184,7 @@ namespace Content.Client.Preferences.UI
             if (Profile is null) return;
             UpdateNameEdit();
             UpdateFlavorTextEdit();
+            UpdateOocTextEdit(); // WL-OOCText
             UpdateSexControls();
             UpdateGenderControls();
             UpdateSkinColor();
