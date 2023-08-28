@@ -132,7 +132,7 @@ namespace Content.Client.Preferences.UI
             _nameEdit.OnTextChanged += args => { SetName(args.Text); };
             _nameRandomButton.OnPressed += args => RandomizeName();
             _randomizeEverythingButton.OnPressed += args => { RandomizeEverything(); };
-            _warningLabel.SetMarkup($"[color=red]{Loc.GetString("humanoid-profile-editor-naming-rules-warning")}[/color]");
+            // _warningLabel.SetMarkup($"[color=red]{Loc.GetString("humanoid-profile-editor-naming-rules-warning")}[/color]"); // WL-HRP: Don't really make sense for this RP level project
 
             #endregion Name
 
