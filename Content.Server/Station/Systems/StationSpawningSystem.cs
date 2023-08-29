@@ -1,4 +1,5 @@
-﻿using Content.Server.Access.Systems;
+﻿using Content.Server._WL.CharacterInformation;
+using Content.Server.Access.Systems;
 using Content.Server.DetailExaminable;
 using Content.Server.Hands.Systems;
 using Content.Server.Humanoid;
@@ -153,6 +154,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
             {
                 AddComp<DetailExaminableComponent>(entity.Value).Content = profile.FlavorText;
             }
+            EnsureComp<CharacterInformationComponent>(entity.Value).FlavorText = profile.FlavorText; // WL-CharacterInformation
         }
 
         DoJobSpecials(job, entity.Value);

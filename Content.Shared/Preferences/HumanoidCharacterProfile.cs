@@ -26,7 +26,7 @@ namespace Content.Shared.Preferences
     public sealed partial class HumanoidCharacterProfile : ICharacterProfile
     {
         public const int MaxNameLength = 32;
-        public const int MaxDescLength = 512;
+        public const int MaxDescLength = 512 * 2; // WL-CharacterInfo: Increase
 
         private readonly Dictionary<string, JobPriority> _jobPriorities;
         private readonly List<string> _antagPreferences;
