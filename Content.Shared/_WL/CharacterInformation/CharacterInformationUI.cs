@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Serialization;
+﻿using Content.Shared._WL.Preferences;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._WL.CharacterInformation;
 
@@ -15,12 +16,19 @@ public sealed class CharacterInformationBuiState : BoundUserInterfaceState
     public string CharacterName;
     public string FlavorText;
     public string? OocText;
+    public ErpStatus? ErpStatus;
 
-    public CharacterInformationBuiState(EntityUid uid, string characterName, string flavorText, string? oocText)
+    public CharacterInformationBuiState(
+        EntityUid uid,
+        string characterName,
+        string flavorText,
+        string? oocText,
+        ErpStatus? erpStatus)
     {
         Uid = uid;
         CharacterName = characterName;
         FlavorText = flavorText;
         OocText = oocText;
+        ErpStatus = erpStatus;
     }
 }

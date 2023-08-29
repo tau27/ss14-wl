@@ -1,4 +1,6 @@
-﻿namespace Content.Server._WL.CharacterInformation;
+﻿using Content.Shared._WL.Preferences;
+
+namespace Content.Server._WL.CharacterInformation;
 
 /// <summary>
 ///     Adds examine details verb and store information that can be accessed without mob actor
@@ -9,4 +11,8 @@ public sealed partial class CharacterInformationComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("flavorText")]
     public string FlavorText = string.Empty;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("status")]
+    public ErpStatus Status = ErpStatus.Ask;
 }

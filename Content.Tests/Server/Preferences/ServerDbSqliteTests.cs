@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Content.Shared._WL.Preferences;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
@@ -49,6 +50,7 @@ namespace Content.Tests.Server.Preferences
             return new(
                 "Charlie Charlieson",
                 "The biggest boy around.",
+                "Im cool!", // WL-OOCText
                 "Human",
                 "Eugene", // Corvax-TTS
                 21,
@@ -70,6 +72,7 @@ namespace Content.Tests.Server.Preferences
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High}
                 },
                 PreferenceUnavailableMode.StayInLobby,
+                ErpStatus.Ask, // WL-ERPStatus
                 new List<string> (),
                 new List<string>()
             );

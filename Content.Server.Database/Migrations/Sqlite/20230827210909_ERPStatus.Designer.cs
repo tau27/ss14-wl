@@ -3,6 +3,7 @@ using System;
 using Content.Server.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Content.Server.Database.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteServerDbContext))]
-    partial class SqliteServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230827210909_ERPStatus")]
+    partial class ERPStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -717,11 +720,9 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("clothing");
 
-                    // WL-ERPStatus-Start
                     b.Property<int>("ErpStatus")
                         .HasColumnType("INTEGER")
                         .HasColumnName("erp_status");
-                    // WL-ERPStatus-End
 
                     b.Property<string>("EyeColor")
                         .IsRequired()
@@ -761,13 +762,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Property<byte[]>("Markings")
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
-
-                    // WL-OOCText-Start
-                    b.Property<string>("OocText")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("ooc_text");
-                    // WL-OOCText-End
 
                     b.Property<int>("PreferenceId")
                         .HasColumnType("INTEGER")

@@ -95,6 +95,13 @@
                                     <Control HorizontalExpand="True"/>
                                     <OptionButton Name="CSpeciesButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
+                                <!-- WL-ERPStatus-Start -->
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-erpstatus-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <OptionButton Name="CERPStatusButton" HorizontalAlignment="Right" />
+                                </BoxContainer>
+                                <!-- WL-ERPStatus-End -->
                                 <!-- Corvax-TTS-Start -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-voice-label'}" />

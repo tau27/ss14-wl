@@ -6,6 +6,7 @@ using Content.Client.Message;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
+using Content.Shared._WL.Preferences;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
@@ -178,6 +179,28 @@ namespace Content.Client.Preferences.UI
             };
 
             #endregion Gender
+
+            // WL-ERPStatus-Start
+            #region ERPStatus
+
+            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-ask"), (int) ErpStatus.Ask);
+            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-ooc"), (int) ErpStatus.CheckOOC);
+            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-no"), (int) ErpStatus.No);
+            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes"), (int) ErpStatus.Yes);
+            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes-dom"), (int) ErpStatus.YesDom);
+            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes-sub"), (int) ErpStatus.YesSub);
+            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes-switch"), (int) ErpStatus.YesSwitch);
+
+            CERPStatusButton.OnItemSelected += args =>
+            {
+                CERPStatusButton.SelectId(args.Id);
+
+                Profile = Profile?.WithErpStatus((ErpStatus) args.Id);
+                IsDirty = true;
+            };
+
+            #endregion
+            // WL-ERPStatus-End
 
             // Corvax-TTS-Start
             #region Voice
@@ -1029,6 +1052,18 @@ namespace Content.Client.Preferences.UI
             CSpeciesButton.Select(_speciesList.FindIndex(x => x.ID == Profile.Species));
         }
 
+        // WL-ERPStatus-Start
+        private void UpdateERPStatus()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            CERPStatusButton.Select((int) Profile.ErpStatus);
+        }
+        // WL-ERPStatus-End
+
         private void UpdateGenderControls()
         {
             if (Profile == null)
@@ -1195,6 +1230,7 @@ namespace Content.Client.Preferences.UI
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpecies();
+            UpdateERPStatus(); // WL-ERPStatus
             UpdateClothingControls();
             UpdateBackpackControls();
             UpdateAgeEdit();
