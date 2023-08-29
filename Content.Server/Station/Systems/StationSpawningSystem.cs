@@ -1,4 +1,4 @@
-﻿using Content.Server._WL.CharacterInformation;
+using Content.Server._WL.CharacterInformation;
 using Content.Server.Access.Systems;
 using Content.Server.DetailExaminable;
 using Content.Server.Hands.Systems;

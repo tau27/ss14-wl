@@ -1,3 +1,12 @@
 character-information-ui-title = Информация о персонаже
 character-information-ui-flavor-text = Описание персонажа:
 character-information-ui-ooc-text = OOC заметки:
+character-information-ui-erp-status = ERP статус:
+character-information-ui-erp-status-ask = Спроашивать перед любым ERP.
+character-information-ui-erp-status-ooc = Смотреть OOC заметки.
+character-information-ui-erp-status-no = Отказ от ERP.
+character-information-ui-erp-status-yes = Согласие на ERP.
+character-information-ui-erp-status-yes-dom = Согласие на ERP. Предпочитает доминант.
+character-information-ui-erp-status-yes-sub = Согласие на ERP. Предпочитает сабмиссив.
+character-information-ui-erp-status-yes-switch = Согласие на ERP. Предпочитает свитч.
+character-information-ui-erp-status-unknown = Неизвестно.

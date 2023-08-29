@@ -323,6 +323,7 @@ namespace Content.Server.Database
         public List<Job> Jobs { get; } = new();
         public List<Antag> Antags { get; } = new();
         public List<Trait> Traits { get; } = new();
+        public DbErpStatus ErpStatus { get; set; } // WL-ERPStatus
 
         [Column("pref_unavailable")] public DbPreferenceUnavailableMode PreferenceUnavailable { get; set; }
 
@@ -967,4 +968,18 @@ namespace Content.Server.Database
         public DateTime? DeletedAt { get; set; }
         public bool Seen { get; set; }
     }
+
+    // WL-ERP-Start
+    public enum DbErpStatus
+    {
+        // These enum values HAVE to match the ones in ErpStatus in Content.Shared
+        Ask = 0,
+        CheckOOC,
+        No,
+        Yes,
+        YesDom,
+        YesSub,
+        YesSwitch,
+    }
+    // WL-ERP-End
 }

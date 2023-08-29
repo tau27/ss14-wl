@@ -765,6 +765,12 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("clothing");
 
+                    // WL-ERPStatus-Start
+                    b.Property<int>("ErpStatus")
+                        .HasColumnType("integer")
+                        .HasColumnName("erp_status");
+                    // WL-ERPStatus-End
+
                     b.Property<string>("EyeColor")
                         .IsRequired()
                         .HasColumnType("text")

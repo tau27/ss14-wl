@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Shared._WL.Preferences;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
@@ -226,6 +227,7 @@ namespace Content.Server.Database
                 backpack,
                 jobs,
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
+                (ErpStatus) profile.ErpStatus, // WL-ERPStatus
                 antags.ToList(),
                 traits.ToList()
             );
@@ -261,6 +263,7 @@ namespace Content.Server.Database
             profile.Markings = markings;
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
+            profile.ErpStatus = (DbErpStatus) humanoid.ErpStatus; // WL-ERPStatus
 
             profile.Jobs.Clear();
             profile.Jobs.AddRange(

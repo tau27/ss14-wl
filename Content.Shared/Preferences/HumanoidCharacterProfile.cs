@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using Content.Shared._WL.Preferences;
 using Content.Shared.CCVar;
 using Content.Shared.Corvax.TTS;
 using Content.Shared.GameTicking;
@@ -46,6 +47,7 @@ namespace Content.Shared.Preferences
             BackpackPreference backpack,
             Dictionary<string, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
+            ErpStatus erpStatus, // WL-ERPStatus
             List<string> antagPreferences,
             List<string> traitPreferences)
         {
@@ -62,6 +64,7 @@ namespace Content.Shared.Preferences
             Backpack = backpack;
             _jobPriorities = jobPriorities;
             PreferenceUnavailable = preferenceUnavailable;
+            ErpStatus = erpStatus; // WL-ERPStatus
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
         }
@@ -73,7 +76,7 @@ namespace Content.Shared.Preferences
             List<string> antagPreferences,
             List<string> traitPreferences)
             : this(other.Name, other.FlavorText, other.OocText, other.Species, other.Voice, other.Age, other.Sex, other.Gender, other.Appearance, other.Clothing, other.Backpack,
-                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences)
+                jobPriorities, other.PreferenceUnavailable, other.ErpStatus, antagPreferences, traitPreferences)
         {
         }
 
@@ -97,10 +100,11 @@ namespace Content.Shared.Preferences
             BackpackPreference backpack,
             IReadOnlyDictionary<string, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
+            ErpStatus erpStatus, // WL-ERPStatus
             IReadOnlyList<string> antagPreferences,
             IReadOnlyList<string> traitPreferences)
             : this(name, flavortext, ooctext, species, voice, age, sex, gender, appearance, clothing, backpack, new Dictionary<string, JobPriority>(jobPriorities),
-                preferenceUnavailable, new List<string>(antagPreferences), new List<string>(traitPreferences))
+                preferenceUnavailable, erpStatus, new List<string>(antagPreferences), new List<string>(traitPreferences))
         {
         }
 
@@ -126,6 +130,7 @@ namespace Content.Shared.Preferences
                 {SharedGameTicker.FallbackOverflowJob, JobPriority.High}
             },
             PreferenceUnavailableMode.SpawnAsOverflow,
+            ErpStatus.Ask, // WL-ERPStatus
             new List<string>(),
             new List<string>())
         {
@@ -155,6 +160,7 @@ namespace Content.Shared.Preferences
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High}
                 },
                 PreferenceUnavailableMode.SpawnAsOverflow,
+                ErpStatus.Ask, // WL-ERPStatus
                 new List<string>(),
                 new List<string>());
         }
@@ -202,7 +208,7 @@ namespace Content.Shared.Preferences
                 new Dictionary<string, JobPriority>
                 {
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High},
-                }, PreferenceUnavailableMode.StayInLobby, new List<string>(), new List<string>());
+                }, PreferenceUnavailableMode.StayInLobby, ErpStatus.Ask, new List<string>(), new List<string>());
         }
 
         public string Name { get; private set; }
@@ -230,6 +236,7 @@ namespace Content.Shared.Preferences
         public IReadOnlyList<string> AntagPreferences => _antagPreferences;
         public IReadOnlyList<string> TraitPreferences => _traitPreferences;
         public PreferenceUnavailableMode PreferenceUnavailable { get; private set; }
+        public ErpStatus ErpStatus { get; private set; } // WL-ERPStatus
 
         public HumanoidCharacterProfile WithName(string name)
         {
@@ -311,6 +318,13 @@ namespace Content.Shared.Preferences
         {
             return new(this) { PreferenceUnavailable = mode };
         }
+
+        // WL-ERPStatus-Start
+        public HumanoidCharacterProfile WithErpStatus(ErpStatus status)
+        {
+            return new(this) { ErpStatus = status };
+        }
+        // WL-ERPStatus-End
 
         public HumanoidCharacterProfile WithAntagPreferences(IEnumerable<string> antagPreferences)
         {
