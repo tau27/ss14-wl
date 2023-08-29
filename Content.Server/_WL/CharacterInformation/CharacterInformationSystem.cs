@@ -1,0 +1,67 @@
+﻿using Content.Server.Examine;
+using Content.Server.Preferences.Managers;
+using Content.Shared._WL.CharacterInformation;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Preferences;
+using Content.Shared.Verbs;
+using Robust.Server.GameObjects;
+using Robust.Shared.Utility;
+
+namespace Content.Server._WL.CharacterInformation;
+
+public sealed class CharacterInformationSystem : EntitySystem
+{
+    [Dependency] private readonly ExamineSystem _examineSystem = default!;
+    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<CharacterInformationComponent, GetVerbsEvent<ExamineVerb>>(OnGetExamineVerbs);
+    }
+
+    private void OnGetExamineVerbs(EntityUid uid, CharacterInformationComponent component, GetVerbsEvent<ExamineVerb> args)
+    {
+        if (!TryComp(args.User, out ActorComponent? actor))
+            return;
+
+        if (Identity.Name(args.Target, EntityManager) != MetaData(args.Target).EntityName)
+            return;
+
+        var detailsRange = _examineSystem.IsInDetailsRange(args.User, args.Target);
+        var verb = new ExamineVerb
+        {
+            Act = () =>
+            {
+                _userInterfaceSystem.TryOpen(args.User, CharacterInformationUiKey.Key, actor.PlayerSession);
+                UpdateUI(args.User, args.Target);
+            },
+            Text = Loc.GetString("detail-examinable-verb-text"),
+            Category = VerbCategory.Examine,
+            Disabled = !detailsRange,
+            Message = detailsRange ? null : Loc.GetString("detail-examinable-verb-disabled"),
+            Icon = new SpriteSpecifier.Texture(new ("/Textures/Interface/VerbIcons/examine.svg.192dpi.png"))
+        };
+
+        args.Verbs.Add(verb);
+    }
+
+    private void UpdateUI(EntityUid uid, EntityUid targetUid)
+    {
+        if (!TryComp<CharacterInformationComponent>(targetUid, out var charInfo))
+            return;
+
+        var oocText = string.Empty;
+        if (TryComp<ActorComponent>(targetUid, out var actor)) // Enrich with private info if player control mob
+        {
+            var profile = (HumanoidCharacterProfile) _preferencesManager.GetPreferences(actor.PlayerSession.UserId).SelectedCharacter;
+            oocText = profile.OocText;
+        }
+
+        var charName = Identity.Name(uid, EntityManager);
+        var state = new CharacterInformationBuiState(targetUid, charName, charInfo.FlavorText, oocText);
+        _userInterfaceSystem.TrySetUiState(uid, CharacterInformationUiKey.Key, state);
+    }
+}

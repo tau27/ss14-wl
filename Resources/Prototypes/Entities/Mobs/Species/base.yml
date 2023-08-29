@@ -285,6 +285,8 @@
         type: HumanoidMarkingModifierBoundUserInterface
       - key: enum.StrippingUiKey.Key
         type: StrippableBoundUserInterface
+      - key: enum.CharacterInformationUiKey.Key # WL-CharacterInformation
+        type: CharacterInformationBoundUserInterface
   - type: Puller
   - type: Butcherable
     butcheringType: Spike # TODO human.
@@ -311,6 +313,7 @@
     price: 1500 # Kidnapping a living person and selling them for cred is a good move.
     deathPenalty: 0.01 # However they really ought to be living and intact, otherwise they're worth 100x less.
   - type: TTS # Corvax-TTS
+  - type: CharacterInformation # WL-CharacterInformation
   - type: ContentEye
   - type: SleepEmitSound
 
