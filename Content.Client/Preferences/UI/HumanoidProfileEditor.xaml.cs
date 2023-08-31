@@ -183,18 +183,18 @@ namespace Content.Client.Preferences.UI
             // WL-ERPStatus-Start
             #region ERPStatus
 
-            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-ask"), (int) ErpStatus.Ask);
-            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-ooc"), (int) ErpStatus.CheckOOC);
-            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-no"), (int) ErpStatus.No);
-            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes"), (int) ErpStatus.Yes);
-
-            CERPStatusButton.OnItemSelected += args =>
-            {
-                CERPStatusButton.SelectId(args.Id);
-
-                Profile = Profile?.WithErpStatus((ErpStatus) args.Id);
-                IsDirty = true;
-            };
+            // CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-ask"), (int) ErpStatus.Ask);
+            // CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-ooc"), (int) ErpStatus.CheckOOC);
+            // CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-no"), (int) ErpStatus.No);
+            // CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes"), (int) ErpStatus.Yes);
+            //
+            // CERPStatusButton.OnItemSelected += args =>
+            // {
+            //     CERPStatusButton.SelectId(args.Id);
+            //
+            //     Profile = Profile?.WithErpStatus((ErpStatus) args.Id);
+            //     IsDirty = true;
+            // };
 
             #endregion
             // WL-ERPStatus-End
@@ -1057,7 +1057,7 @@ namespace Content.Client.Preferences.UI
                 return;
             }
 
-            CERPStatusButton.Select((int) Profile.ErpStatus);
+            // CERPStatusButton.Select((int) Profile.ErpStatus);
         }
         // WL-ERPStatus-End
 

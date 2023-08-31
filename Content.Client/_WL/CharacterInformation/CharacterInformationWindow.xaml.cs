@@ -51,7 +51,7 @@ public sealed partial class CharacterInformationWindow : FancyWindow
                 _ => "character-information-ui-erp-status-unknown"
             });
 
-            ErpStatusText.SetMarkup($"[color={color}]{text}[/color]");
+            // ErpStatusText.SetMarkup($"[color={color}]{text}[/color]");
         }
 
         if (!string.IsNullOrEmpty(state.FlavorText))
