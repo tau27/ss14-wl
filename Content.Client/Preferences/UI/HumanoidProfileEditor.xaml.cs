@@ -187,9 +187,6 @@ namespace Content.Client.Preferences.UI
             CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-ooc"), (int) ErpStatus.CheckOOC);
             CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-no"), (int) ErpStatus.No);
             CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes"), (int) ErpStatus.Yes);
-            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes-dom"), (int) ErpStatus.YesDom);
-            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes-sub"), (int) ErpStatus.YesSub);
-            CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes-switch"), (int) ErpStatus.YesSwitch);
 
             CERPStatusButton.OnItemSelected += args =>
             {

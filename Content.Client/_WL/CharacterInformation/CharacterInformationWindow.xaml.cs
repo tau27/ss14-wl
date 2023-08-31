@@ -48,9 +48,6 @@ public sealed partial class CharacterInformationWindow : FancyWindow
                 ErpStatus.CheckOOC => "character-information-ui-erp-status-ooc",
                 ErpStatus.No => "character-information-ui-erp-status-no",
                 ErpStatus.Yes => "character-information-ui-erp-status-yes",
-                ErpStatus.YesDom => "character-information-ui-erp-status-yes-dom",
-                ErpStatus.YesSub => "character-information-ui-erp-status-yes-sub",
-                ErpStatus.YesSwitch => "character-information-ui-erp-status-yes-switch",
                 _ => "character-information-ui-erp-status-unknown"
             });
 

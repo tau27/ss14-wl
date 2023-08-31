@@ -6,7 +6,4 @@ character-information-ui-erp-status-ask = Спрашивать
 character-information-ui-erp-status-ooc = OOC заметки
 character-information-ui-erp-status-no = Нет
 character-information-ui-erp-status-yes = Да
-character-information-ui-erp-status-yes-dom = Да | Доминант
-character-information-ui-erp-status-yes-sub = Да | Сабмиссив
-character-information-ui-erp-status-yes-switch = Да | Свитч
 character-information-ui-erp-status-unknown = Неизвестно

@@ -10,7 +10,4 @@ public enum ErpStatus
     CheckOOC,
     No,
     Yes,
-    YesDom,
-    YesSub,
-    YesSwitch,
 }

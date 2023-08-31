@@ -977,9 +977,6 @@ namespace Content.Server.Database
         CheckOOC,
         No,
         Yes,
-        YesDom,
-        YesSub,
-        YesSwitch,
     }
     // WL-ERP-End
 }
