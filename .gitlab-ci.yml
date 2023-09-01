@@ -7,9 +7,9 @@ stages:
 test:
   stage: test
   retry: 2
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
   script:
-    - mkdir .git/hooks -p
-    - python3 RUN_THIS.py
     - dotnet restore
     - dotnet build --configuration Tools --no-restore /p:WarningsAsErrors=nullable /m
     - dotnet test --configuration Tools --no-build Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0
@@ -22,13 +22,13 @@ publish:
   interruptible: true
   only:
     - schedules
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
   except:
     variables:
       - ($SSH_PRIVATE_KEY == null || $SSH_REMOTE_IP == null || $SSH_USER == null)
   script:
     # TODO: Add secrets checkout
-    - mkdir .git/hooks -p
-    - python3 RUN_THIS.py
     - Tools/package_server_build.py -p win-x64 linux-x64 osx-x64 linux-arm64 > server_build.log
     - Tools/package_client_build.py > client_build.log
     - Tools/gen_build_info.py
