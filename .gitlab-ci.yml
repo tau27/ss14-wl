@@ -6,19 +6,17 @@ stages:
 
 test:
   stage: test
-  retry: 2
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
-    - dotnet restore
-    - dotnet build --configuration Tools --no-restore /p:WarningsAsErrors=nullable /m
+    - dotnet restore /clp:ErrorsOnly
+    - dotnet build --configuration Tools --no-restore /p:WarningsAsErrors=nullable /clp:ErrorsOnly /m
     - dotnet test --configuration Tools --no-build Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0
     - export DOTNET_gcServer=1
     - dotnet test --configuration Tools --no-build Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0
 
 publish:
   stage: publish
-  retry: 2
   interruptible: true
   only:
     - schedules
@@ -50,7 +48,6 @@ publish:
 
 publish-artifact:
   stage: publish
-  retry: 2
   interruptible: true
   except:
     - schedules
