@@ -1,0 +1,66 @@
+image: mcr.microsoft.com/dotnet/sdk:7.0
+
+stages:
+  - test
+  - publish
+
+test:
+  stage: test
+  retry: 2
+  script:
+    - mkdir .git/hooks -p
+    - python3 RUN_THIS.py
+    - dotnet restore
+    - dotnet build --configuration Tools --no-restore /p:WarningsAsErrors=nullable /m
+    - dotnet test --configuration Tools --no-build Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0
+    - export DOTNET_gcServer=1
+    - dotnet test --configuration Tools --no-build Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0
+
+publish:
+  stage: publish
+  retry: 2
+  interruptible: true
+  only:
+    - schedules
+  except:
+    variables:
+      - ($SSH_PRIVATE_KEY == null || $SSH_REMOTE_IP == null || $SSH_USER == null)
+  script:
+    # TODO: Add secrets checkout
+    - mkdir .git/hooks -p
+    - python3 RUN_THIS.py
+    - Tools/package_server_build.py -p win-x64 linux-x64 osx-x64 linux-arm64 > server_build.log
+    - Tools/package_client_build.py > client_build.log
+    - Tools/gen_build_info.py
+    - mkdir release/$CI_COMMIT_REF_NAME-$CI_COMMIT_SHA
+    - mv release/*.zip release/$CI_COMMIT_REF_NAME-$CI_COMMIT_SHA
+    - eval $(ssh-agent -s)
+    - ssh-add - <<< "${SSH_PRIVATE_KEY}"
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $SSH_REMOTE_IP >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - rsync -avz release/$CI_COMMIT_REF_NAME-$CI_COMMIT_SHA $SSH_USER@$SSH_REMOTE_IP:~/builds/builds/
+    - ssh $SSH_USER@$SSH_REMOTE_IP "~/push.ps1 $CI_COMMIT_REF_NAME-$CI_COMMIT_SHA $CI_COMMIT_REF_NAME"
+  artifacts:
+    name: "Build logs $CI_COMMIT_REF_NAME"
+    paths:
+      - server_build.log
+      - client_build.log
+
+publish-artifact:
+  stage: publish
+  retry: 2
+  interruptible: true
+  except:
+    - schedules
+  script:
+    - mkdir .git/hooks -p
+    - python3 RUN_THIS.py
+    # We create artifact only for Windows and x64 Linux, because almost noone uses OSX and Linux on arm for development among our contributors. This will save for us some amount of storage. You can just add osx-x64 or linux-arm64 if you really need it.
+    - Tools/package_server_build.py -p win-x64 linux-x64 --hybrid-acz > server_build.log
+  artifacts:
+    name: "$CI_COMMIT_SHA"
+    paths:
+      - release
+      - server_build.log
