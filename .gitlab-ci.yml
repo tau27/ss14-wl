@@ -58,13 +58,15 @@ publish-artifact:
   interruptible: true
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
-    GIT_SUBMODULE_DEPTH: 1 # Fetch RT tags
   except:
     - schedules
   script:
     - apt-get update -y && apt-get install python3 libfreetype6 -y
     - mkdir .git/hooks -p
     - python3 RUN_THIS.py
+    - cd RobustToolbox
+    - git fetch --depth=1
+    - cd ..
     # We create artifact only for Windows and x64 Linux, because almost noone uses OSX and Linux on arm for development among our contributors. This will save for us some amount of storage. You can just add osx-x64 or linux-arm64 if you really need it.
     - Tools/package_server_build.py -p win-x64 linux-x64 --hybrid-acz > server_build.log
   artifacts:
