@@ -6,6 +6,7 @@ stages:
 
 test:
   stage: test
+  retry: 2
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
