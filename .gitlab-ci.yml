@@ -58,6 +58,7 @@ publish-artifact:
   interruptible: true
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_DEPTH: 1 # Fetch RT tags
   except:
     - schedules
   script:
