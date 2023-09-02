@@ -26,7 +26,6 @@ publish-prod:
     - schedules
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
-    GIT_SUBMODULE_DEPTH: 1
   except:
     variables:
       - ($SSH_PRIVATE_KEY == null || $SSH_REMOTE_IP == null || $SSH_USER == null)
@@ -34,6 +33,9 @@ publish-prod:
     - apt-get update -y && apt-get install python3 libfreetype6 -y
     - mkdir .git/hooks -p
     - python3 RUN_THIS.py
+    - cd RobustToolbox
+    - git fetch --depth=1
+    - cd ..
     # TODO: Add secrets checkout
     - Tools/package_server_build.py -p win-x64 linux-x64 osx-x64 linux-arm64 > server_build.log
     - Tools/package_client_build.py > client_build.log
