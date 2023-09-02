@@ -30,7 +30,7 @@ publish-prod:
     variables:
       - ($SSH_PRIVATE_KEY == null || $SSH_REMOTE_IP == null || $SSH_USER == null)
   script:
-    - apt-get update -y && apt-get install python3 libfreetype6 -y
+    - apt-get update -y && apt-get install python3 libfreetype6 openssh-client -y
     - mkdir .git/hooks -p
     - python3 RUN_THIS.py
     - cd RobustToolbox
