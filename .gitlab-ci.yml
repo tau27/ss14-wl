@@ -9,7 +9,7 @@ test:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
-    - apt-get update -y && apt-get install python3 -y
+    - apt-get update -y && apt-get install python3 libfreetype6 -y
     - mkdir .git/hooks -p
     - python3 RUN_THIS.py
     - dotnet restore /clp:ErrorsOnly
@@ -29,7 +29,7 @@ publish:
     variables:
       - ($SSH_PRIVATE_KEY == null || $SSH_REMOTE_IP == null || $SSH_USER == null)
   script:
-    - apt-get update -y && apt-get install python3 -y
+    - apt-get update -y && apt-get install python3 libfreetype6 -y
     - mkdir .git/hooks -p
     - python3 RUN_THIS.py
     # TODO: Add secrets checkout
