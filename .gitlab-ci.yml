@@ -10,7 +10,8 @@ test:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
     - apt-get update -y && apt-get install python3 -y
-    - python3 BuildChecker/git_helper.py
+    - mkdir .git/hooks -p
+    - python3 RUN_THIS.py
     - dotnet restore /clp:ErrorsOnly
     - dotnet build --configuration Tools --no-restore /p:WarningsAsErrors=nullable /clp:ErrorsOnly /m
     - dotnet test --configuration Tools --no-build Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0
@@ -29,6 +30,8 @@ publish:
       - ($SSH_PRIVATE_KEY == null || $SSH_REMOTE_IP == null || $SSH_USER == null)
   script:
     - apt-get update -y && apt-get install python3 -y
+    - mkdir .git/hooks -p
+    - python3 RUN_THIS.py
     # TODO: Add secrets checkout
     - Tools/package_server_build.py -p win-x64 linux-x64 osx-x64 linux-arm64 > server_build.log
     - Tools/package_client_build.py > client_build.log
