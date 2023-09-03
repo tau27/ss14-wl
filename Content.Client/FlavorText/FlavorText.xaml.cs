@@ -16,18 +16,18 @@ namespace Content.Client.FlavorText
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
 
-            // WL-OOCText-Start
             var loc = IoCManager.Resolve<ILocalizationManager>();
-            CFlavorTextInput.Placeholder = new Rope.Leaf(loc.GetString("flavor-tab-flavor-placeholder"));
+            CFlavorTextInput.Placeholder = new Rope.Leaf(loc.GetString("flavor-text-placeholder"));
+            CFlavorTextInput.OnKeyBindDown  += _ => FlavorTextChanged();
+            // WL-OOCText-Start
             COocTextInput.Placeholder = new Rope.Leaf(loc.GetString("flavor-tab-ooc-placeholder"));
-            CFlavorTextInput.OnKeyBindDown += _ => FlavorTextChanged();
             COocTextInput.OnKeyBindDown += _ => OocTextChanged();
             // WL-OOCText-End
         }
 
         public void FlavorTextChanged()
         {
-            OnFlavorTextChanged?.Invoke(Rope.Collapse(CFlavorTextInput.TextRope).Trim()); // WL-OOCText
+            OnFlavorTextChanged?.Invoke(Rope.Collapse(CFlavorTextInput.TextRope).Trim());
         }
 
         // WL-OOCText-Start
