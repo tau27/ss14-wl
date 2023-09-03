@@ -6,7 +6,7 @@
                 SetSize="600 400">
     <PanelContainer>
         <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#25252A" />
+            <graphics:StyleBoxFlat BackgroundColor="#141414" />
         </PanelContainer.PanelOverride>
         <BoxContainer Orientation="Vertical" Margin="4">
             <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
