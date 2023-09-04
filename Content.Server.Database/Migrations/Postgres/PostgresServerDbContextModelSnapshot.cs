@@ -765,11 +765,9 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("clothing");
 
-                    // WL-ERPStatus-Start
                     b.Property<int>("ErpStatus")
                         .HasColumnType("integer")
                         .HasColumnName("erp_status");
-                    // WL-ERPStatus-End
 
                     b.Property<string>("EyeColor")
                         .IsRequired()
@@ -806,16 +804,18 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("hair_name");
 
+                    b.Property<int>("Height")
+                        .HasColumnType("integer")
+                        .HasColumnName("height");
+
                     b.Property<JsonDocument>("Markings")
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
 
-                    // WL-OOCText-Start
                     b.Property<string>("OocText")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ooc_text");
-                    // WL-OOCText-End
 
                     b.Property<int>("PreferenceId")
                         .HasColumnType("integer")

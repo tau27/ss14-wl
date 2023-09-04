@@ -89,6 +89,13 @@
                                     <Control HorizontalExpand="True"/>
                                     <LineEdit Name="CAgeEdit" MinSize="40 0" HorizontalAlignment="Right" />
                                 </BoxContainer>
+                                <!-- WL-ERPStatus-Start -->
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-height-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <LineEdit Name="CHeightEdit" MinSize="40 0" HorizontalAlignment="Right" />
+                                </BoxContainer>
+                                <!-- WL-ERPStatus-End -->
                                 <!-- Species -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-species-label'}" />

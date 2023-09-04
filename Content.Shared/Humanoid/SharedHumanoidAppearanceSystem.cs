@@ -3,6 +3,7 @@ using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using System.Linq;
+using System.Numerics;
 using Content.Shared.Corvax.TTS;
 using Content.Shared.Decals;
 using Content.Shared.Preferences;
@@ -25,6 +26,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly MarkingManager _markingManager = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     [ValidatePrototypeId<SpeciesPrototype>]
     public const string DefaultSpecies = "Human";
@@ -37,6 +39,10 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         {Sex.Unsexed, "Myron"},
     };
     // Corvax-TTS-End
+    // WL-Height-Start
+    public const float MaxHeightScale = 1.1f;
+    public const float MinHeightScale = 0.9f;
+    // WL-Height-End
 
     public override void Initialize()
     {
@@ -77,6 +83,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
             component.Sex,
             component.Gender,
             component.Age,
+            component.Height, // WL-Height
             component.Species,
             component.SkinColor,
             component.EyeColor,
@@ -355,12 +362,15 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         }
 
         humanoid.Age = profile.Age;
+        humanoid.Height = profile.Height; // WL-Height
         // Corvax-SpeakerColor-Start
         const string paletteId = "Material";
         var colors = _prototypeManager.Index<ColorPalettePrototype>(paletteId).Colors.Values.ToArray();
         var colorIdx = Math.Abs(profile.Name.GetHashCode() % colors.Length);
         humanoid.SpeakerColor = colors[colorIdx];
         // Corvax-SpeakerColor-End
+
+        ApplyHeight(uid, humanoid); // WL-Height
 
         Dirty(humanoid);
     }
@@ -443,4 +453,16 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         comp.VoicePrototypeId = voiceId;
     }
     // Corvax-TTS-End
+
+    // WL-Height-Start
+    public void ApplyHeight(EntityUid uid, HumanoidAppearanceComponent humanoid)
+    {
+        if (!_prototypeManager.TryIndex<SpeciesPrototype>(humanoid.Species, out var speciesProto))
+            return;
+
+        EnsureComp<ScaleVisualsComponent>(uid);
+        var scale = MinHeightScale + (humanoid.Height - speciesProto.MinHeight) * (MaxHeightScale - MinHeightScale) / (speciesProto.MaxHeight - speciesProto.MinHeight);
+        _appearance.SetData(uid, ScaleVisuals.Scale, new Vector2(scale));
+    }
+    // WL-Height-End
 }

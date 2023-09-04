@@ -54,6 +54,7 @@ namespace Content.Tests.Server.Preferences
                 "Human",
                 "Eugene", // Corvax-TTS
                 21,
+                165,
                 Sex.Male,
                 Gender.Epicene,
                 new HumanoidCharacterAppearance(

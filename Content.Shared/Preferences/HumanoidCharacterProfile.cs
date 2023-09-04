@@ -40,6 +40,7 @@ namespace Content.Shared.Preferences
             string species,
             string voice, // Corvax-TTS
             int age,
+            int height,
             Sex sex,
             Gender gender,
             HumanoidCharacterAppearance appearance,
@@ -56,7 +57,8 @@ namespace Content.Shared.Preferences
             OocText = ooctext; // WL-OOCText
             Species = species;
             Voice = voice; // Corvax-TTS
-            Age = age;
+            Age = age; // WL-Height
+            Height = height;
             Sex = sex;
             Gender = gender;
             Appearance = appearance;
@@ -75,7 +77,7 @@ namespace Content.Shared.Preferences
             Dictionary<string, JobPriority> jobPriorities,
             List<string> antagPreferences,
             List<string> traitPreferences)
-            : this(other.Name, other.FlavorText, other.OocText, other.Species, other.Voice, other.Age, other.Sex, other.Gender, other.Appearance, other.Clothing, other.Backpack,
+            : this(other.Name, other.FlavorText, other.OocText, other.Species, other.Voice, other.Age, other.Height, other.Sex, other.Gender, other.Appearance, other.Clothing, other.Backpack,
                 jobPriorities, other.PreferenceUnavailable, other.ErpStatus, antagPreferences, traitPreferences)
         {
         }
@@ -93,6 +95,7 @@ namespace Content.Shared.Preferences
             string species,
             string voice, // Corvax-TTS
             int age,
+            int height, // WL-Height
             Sex sex,
             Gender gender,
             HumanoidCharacterAppearance appearance,
@@ -103,7 +106,7 @@ namespace Content.Shared.Preferences
             ErpStatus erpStatus, // WL-ERPStatus
             IReadOnlyList<string> antagPreferences,
             IReadOnlyList<string> traitPreferences)
-            : this(name, flavortext, ooctext, species, voice, age, sex, gender, appearance, clothing, backpack, new Dictionary<string, JobPriority>(jobPriorities),
+            : this(name, flavortext, ooctext, species, voice, age, height, sex, gender, appearance, clothing, backpack, new Dictionary<string, JobPriority>(jobPriorities),
                 preferenceUnavailable, erpStatus, new List<string>(antagPreferences), new List<string>(traitPreferences))
         {
         }
@@ -120,6 +123,7 @@ namespace Content.Shared.Preferences
             SharedHumanoidAppearanceSystem.DefaultSpecies,
             SharedHumanoidAppearanceSystem.DefaultVoice, // Corvax-TTS
                 18,
+                165, // WL-Height
                 Sex.Male,
                 Gender.Male,
                new HumanoidCharacterAppearance(),
@@ -143,6 +147,9 @@ namespace Content.Shared.Preferences
         /// <returns>Humanoid character profile with default settings.</returns>
         public static HumanoidCharacterProfile DefaultWithSpecies(string species = SharedHumanoidAppearanceSystem.DefaultSpecies)
         {
+            var speciesPrototype = IoCManager.Resolve<IPrototypeManager>().Index<SpeciesPrototype>(species);
+            var middleHeight = (speciesPrototype.MinHeight + speciesPrototype.MaxHeight) / 2;
+
             return new(
                 "John Doe",
                 "",
@@ -150,6 +157,7 @@ namespace Content.Shared.Preferences
                 species,
                 SharedHumanoidAppearanceSystem.DefaultVoice, // Corvax-TTS
                 18,
+                middleHeight, // WL-Height
                 Sex.Male,
                 Gender.Male,
                 HumanoidCharacterAppearance.DefaultWithSpecies(species),
@@ -187,10 +195,12 @@ namespace Content.Shared.Preferences
 
             var sex = Sex.Unsexed;
             var age = 18;
+            var height = 165; // WL-Height
             if (prototypeManager.TryIndex<SpeciesPrototype>(species, out var speciesPrototype))
             {
                 sex = random.Pick(speciesPrototype.Sexes);
                 age = random.Next(speciesPrototype.MinAge, speciesPrototype.OldAge); // people don't look and keep making 119 year old characters with zero rp, cap it at middle aged
+                height = random.Next(speciesPrototype.MinHeight, speciesPrototype.MaxHeight); // WL-Height
             }
 
             // Corvax-TTS-Start
@@ -204,7 +214,7 @@ namespace Content.Shared.Preferences
 
             var name = GetName(species, gender);
 
-            return new HumanoidCharacterProfile(name, "", "", species, voiceId, age, sex, gender, HumanoidCharacterAppearance.Random(species, sex), ClothingPreference.Jumpsuit, BackpackPreference.Backpack,
+            return new HumanoidCharacterProfile(name, "", "", species, voiceId, age, height, sex, gender, HumanoidCharacterAppearance.Random(species, sex), ClothingPreference.Jumpsuit, BackpackPreference.Backpack,
                 new Dictionary<string, JobPriority>
                 {
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High},
@@ -219,6 +229,8 @@ namespace Content.Shared.Preferences
 
         [DataField("age")]
         public int Age { get; private set; }
+
+        [DataField("height")] public int Height { get; private set; } // WL-Height
 
         [DataField("sex")]
         public Sex Sex { get; private set; }
@@ -259,6 +271,13 @@ namespace Content.Shared.Preferences
         {
             return new(this) { Age = age };
         }
+
+        // WL-Height-Start
+        public HumanoidCharacterProfile WithHeight(int height)
+        {
+            return new(this) { Height = height };
+        }
+        // WL-Height-End
 
         public HumanoidCharacterProfile WithSex(Sex sex)
         {
@@ -386,6 +405,7 @@ namespace Content.Shared.Preferences
             if (maybeOther is not HumanoidCharacterProfile other) return false;
             if (Name != other.Name) return false;
             if (Age != other.Age) return false;
+            if (Height != other.Height) return false; // WL-Height
             if (Sex != other.Sex) return false;
             if (Gender != other.Gender) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
@@ -417,6 +437,7 @@ namespace Content.Shared.Preferences
 
             // ensure the species can be that sex and their age fits the founds
             var age = Age;
+            var height = Height; // WL-Height
             if (speciesPrototype != null)
             {
                 if (!speciesPrototype.Sexes.Contains(sex))
@@ -424,6 +445,7 @@ namespace Content.Shared.Preferences
                     sex = speciesPrototype.Sexes[0];
                 }
                 age = Math.Clamp(Age, speciesPrototype.MinAge, speciesPrototype.MaxAge);
+                height = Math.Clamp(Height, speciesPrototype.MinHeight, speciesPrototype.MaxHeight); // WL-Height
             }
 
             var gender = Gender switch
@@ -538,6 +560,7 @@ namespace Content.Shared.Preferences
             FlavorText = flavortext;
             OocText = oocText; // WL-OOCText
             Age = age;
+            Height = height; // WL-Height
             Sex = sex;
             Gender = gender;
             Appearance = appearance;
@@ -599,6 +622,11 @@ namespace Content.Shared.Preferences
                     Appearance,
                     Clothing,
                     Backpack
+                ),
+                HashCode.Combine(
+                    Height, // WL-Height
+                    ErpStatus, // WL-ERPStatus
+                    Voice // Corvax-TTS
                 ),
                 PreferenceUnavailable,
                 _jobPriorities,
