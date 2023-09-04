@@ -29,8 +29,9 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         var identity = Identity.Entity(uid, EntityManager);
         var species = GetSpeciesRepresentation(component.Species).ToLower();
         var age = GetAgeRepresentation(component.Species, component.Age);
+        var height = GetHeightRepresentation(component.Species, component.Height); // WL-Height
 
-        args.PushText(Loc.GetString("humanoid-appearance-component-examine", ("user", identity), ("age", age), ("species", species)));
+        args.PushText(Loc.GetString("humanoid-appearance-component-examine", ("user", identity), ("age", age), ("height", height), ("species", species)));
     }
 
     // this was done enough times that it only made sense to do it here
@@ -54,6 +55,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         targetHumanoid.SkinColor = sourceHumanoid.SkinColor;
         targetHumanoid.EyeColor = sourceHumanoid.EyeColor;
         targetHumanoid.Age = sourceHumanoid.Age;
+        targetHumanoid.Height = sourceHumanoid.Height; // WL-Height
         SetSex(target, sourceHumanoid.Sex, false, targetHumanoid);
         targetHumanoid.CustomBaseLayers = new(sourceHumanoid.CustomBaseLayers);
         targetHumanoid.MarkingSet = new(sourceHumanoid.MarkingSet);
@@ -203,4 +205,23 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
 
         return Loc.GetString("identity-age-old");
     }
+
+    // WL-Height-Start
+    public string GetHeightRepresentation(string species, int height)
+    {
+        if (!_prototypeManager.TryIndex<SpeciesPrototype>(species, out var speciesPrototype))
+        {
+            Logger.Error("Tried to get height representation of species that couldn't be indexed: " + species);
+            return Loc.GetString("identity-height-medium");
+        }
+
+        if (height < speciesPrototype.ShortHeight)
+            return Loc.GetString("identity-height-short");
+
+        if (height < speciesPrototype.MediumHeight)
+            return Loc.GetString("identity-height-medium");
+
+        return Loc.GetString("identity-height-tall");
+    }
+    // WL-Height-End
 }

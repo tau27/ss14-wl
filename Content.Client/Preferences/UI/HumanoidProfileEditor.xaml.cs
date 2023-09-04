@@ -60,6 +60,7 @@ namespace Content.Client.Preferences.UI
         private readonly JobRequirementsManager _requirements;
 
         private LineEdit _ageEdit => CAgeEdit;
+        private LineEdit _heightEdit => CHeightEdit; // WL-Height
         private LineEdit _nameEdit => CNameEdit;
         private TextEdit _flavorTextEdit = null!;
         private TextEdit _oocTextEdit = null!; // WL-OOCText
@@ -164,6 +165,20 @@ namespace Content.Client.Preferences.UI
             };
 
             #endregion Age
+
+            // WL-Height-Start
+            #region Height
+
+            _heightEdit.OnTextChanged += args =>
+            {
+                if (!int.TryParse(args.Text, out var newHeight))
+                    return;
+
+                SetCharHeight(newHeight);
+            };
+
+            #endregion Height
+            // WL-Height-End
 
             #region Gender
 
@@ -815,6 +830,14 @@ namespace Content.Client.Preferences.UI
             IsDirty = true;
         }
 
+        // WL-Height-Start
+        private void SetCharHeight(int newHeight)
+        {
+            Profile = Profile?.WithHeight(newHeight);
+            IsDirty = true;
+        }
+        // WL-Height-End
+
         private void SetSex(Sex newSex)
         {
             Profile = Profile?.WithSex(newSex);
@@ -935,6 +958,13 @@ namespace Content.Client.Preferences.UI
         {
             _ageEdit.Text = Profile?.Age.ToString() ?? "";
         }
+
+        // WL-Height-Start
+        private void UpdateHeightEdit()
+        {
+            _heightEdit.Text = Profile?.Height.ToString() ?? "";
+        }
+        // WL-Height-End
 
         private void UpdateSexControls()
         {
@@ -1222,6 +1252,7 @@ namespace Content.Client.Preferences.UI
             UpdateClothingControls();
             UpdateBackpackControls();
             UpdateAgeEdit();
+            UpdateHeightEdit(); // WL-Height
             UpdateEyePickers();
             UpdateSaveButton();
             UpdateJobPriorities();

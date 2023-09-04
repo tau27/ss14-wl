@@ -211,6 +211,7 @@ namespace Content.Server.Database
                 profile.Species,
                 voice, // Corvax-TTS
                 profile.Age,
+                profile.Height, // WL-Heights
                 sex,
                 gender,
                 new HumanoidCharacterAppearance
@@ -250,6 +251,7 @@ namespace Content.Server.Database
             profile.Species = humanoid.Species;
             profile.Voice = humanoid.Voice; // Corvax-TTS
             profile.Age = humanoid.Age;
+            profile.Height = humanoid.Height; // WL-Height
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();
             profile.HairName = appearance.HairStyleId;

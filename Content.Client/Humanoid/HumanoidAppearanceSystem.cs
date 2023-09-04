@@ -37,6 +37,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         component.Sex = state.Sex;
         component.Species = state.Species;
         component.Age = state.Age;
+        component.Height = state.Height; // WL-Height
         component.SkinColor = state.SkinColor;
         component.EyeColor = state.EyeColor;
         component.SpeakerColor = state.SpeakerColor; // Corvax-SpeakerColor
@@ -48,6 +49,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         UpdateLayers(component, sprite);
 
         ApplyMarkingSet(uid, state.Markings, component, sprite);
+        ApplyHeight(uid, component); // WL-Height
 
         sprite[sprite.LayerMapReserveBlank(HumanoidVisualLayers.Eyes)].Color = state.EyeColor;
     }
@@ -207,6 +209,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             profile.Sex,
             profile.Gender,
             profile.Age,
+            profile.Height, // WL-Height
             profile.Species,
             profile.Appearance.SkinColor,
             profile.Appearance.EyeColor,

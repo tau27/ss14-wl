@@ -307,6 +307,7 @@ namespace Content.Server.Database
         public string FlavorText { get; set; } = null!;
         public string OocText { get; set; } = null!; // WL-OOCText
         public int Age { get; set; }
+        public int Height { get; set; } // WL-Height
         public string Sex { get; set; } = null!;
         public string Gender { get; set; } = null!;
         public string Species { get; set; } = null!;

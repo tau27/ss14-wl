@@ -31,6 +31,11 @@ public sealed partial class HumanoidAppearanceComponent : Component
     [DataField("age")]
     [ViewVariables] public int Age = 18;
 
+    // WL-Height-Start
+    [DataField("height")]
+    [ViewVariables] public int Height = 165;
+    // WL-Height-End
+
     /// <summary>
     ///     Any custom base layers this humanoid might have. See:
     ///     limb transplants (potentially), robotic arms, etc.
@@ -108,6 +113,7 @@ public sealed partial class HumanoidAppearanceState : ComponentState
     public readonly Sex Sex;
     public readonly Gender Gender;
     public readonly int Age = 18;
+    public readonly int Height = 165; // WL-Height
     public readonly string Species;
     public readonly Color SkinColor;
     public readonly Color EyeColor;
@@ -121,6 +127,7 @@ public sealed partial class HumanoidAppearanceState : ComponentState
         Sex sex,
         Gender gender,
         int age,
+        int height, // WL-Height
         string species,
         Color skinColor,
         Color eyeColor,
@@ -133,6 +140,7 @@ public sealed partial class HumanoidAppearanceState : ComponentState
         Sex = sex;
         Gender = gender;
         Age = age;
+        Height = height;
         Species = species;
         SkinColor = skinColor;
         EyeColor = eyeColor;
