@@ -74,6 +74,8 @@ public sealed partial class CharacterInformationWindow : FancyWindow
         }
         else
         {
+            Separator.Visible = true;
+            TextScroll.Visible = true;
             RootWindow.MinSize = new Vector2(700, 400);
             RootWindow.SetSize = new Vector2(700, 400);
         }
