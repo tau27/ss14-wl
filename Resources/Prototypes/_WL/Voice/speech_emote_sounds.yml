@@ -1,0 +1,8 @@
+# species
+- type: emoteSounds
+  id: UnisexAkula
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: AkulaScreams

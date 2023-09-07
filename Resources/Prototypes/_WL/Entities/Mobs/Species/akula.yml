@@ -20,6 +20,11 @@
       spawned:
         - id: FoodMeatHuman
           amount: 5
+    - type: Vocal
+      sounds:
+        Male: UnisexAkula
+        Female: UnisexAkula
+        Unsexed: UnisexAkula
 
 - type: entity
   save: false
