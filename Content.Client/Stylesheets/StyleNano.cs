@@ -84,23 +84,23 @@ namespace Content.Client.Stylesheets
 
         public static readonly Color PanelDark = Color.FromHex("#0a0a0a");
 
-        public static readonly Color NanoGold = Color.FromHex("#FFB841");
+        public static readonly Color NanoGold = Color.FromHex("#9051A8");
         public static readonly Color GoodGreenFore = Color.FromHex("#006400");
         public static readonly Color ConcerningOrangeFore = Color.FromHex("#99461d");
         public static readonly Color DangerousRedFore = Color.FromHex("#640000");
         public static readonly Color DisabledFore = Color.FromHex("#5A5A5A");
 
-        public static readonly Color ButtonColorDefault = Color.FromHex("#232323");
+        public static readonly Color ButtonColorDefault = Color.FromHex("#353535");
         public static readonly Color ButtonColorDefaultRed = Color.FromHex("#640000");
         public static readonly Color ButtonColorHovered = Color.FromHex("#2d2d2d");
         public static readonly Color ButtonColorHoveredRed = Color.FromHex("#960000");
-        public static readonly Color ButtonColorPressed = Color.FromHex("#0f0f0f");
-        public static readonly Color ButtonColorDisabled = Color.FromHex("#0f0f0f");
+        public static readonly Color ButtonColorPressed = Color.FromHex("#141414");
+        public static readonly Color ButtonColorDisabled = Color.FromHex("#141414");
 
-        public static readonly Color ButtonColorCautionDefault = Color.FromHex("#99461d");
-        public static readonly Color ButtonColorCautionHovered = Color.FromHex("#cc5b27");
-        public static readonly Color ButtonColorCautionPressed = Color.FromHex("#662e13");
-        public static readonly Color ButtonColorCautionDisabled = Color.FromHex("#33170a");
+        public static readonly Color ButtonColorCautionDefault = Color.FromHex("#9051A8");
+        public static readonly Color ButtonColorCautionHovered = Color.FromHex("#a261ba");
+        public static readonly Color ButtonColorCautionPressed = Color.FromHex("#3e164d");
+        public static readonly Color ButtonColorCautionDisabled = Color.FromHex("#403445");
 
         public static readonly Color ButtonColorGoodDefault = Color.FromHex("#006400");
         public static readonly Color ButtonColorGoodHovered = Color.FromHex("#009600");
@@ -1322,7 +1322,7 @@ namespace Content.Client.Stylesheets
 
                 Element<PanelContainer>().Class("WindowHeadingBackground")
                     .Prop("panel", new StyleBoxTexture(BaseButtonOpenLeft) { Padding = default })
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#0f0f0f")),
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#141414")),
 
                 Element<PanelContainer>().Class("WindowHeadingBackgroundLight")
                     .Prop("panel", new StyleBoxTexture(BaseButtonOpenLeft) { Padding = default }),
@@ -1330,7 +1330,7 @@ namespace Content.Client.Stylesheets
                 //The lengths you have to go through to change a background color smh
                 Element<PanelContainer>().Class("PanelBackgroundBaseDark")
                     .Prop("panel", new StyleBoxTexture(BaseButtonOpenBoth) { Padding = default })
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#0f0f0f")),
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#141414")),
 
                 Element<PanelContainer>().Class("PanelBackgroundLight")
                     .Prop("panel", new StyleBoxTexture(BaseButtonOpenBoth) { Padding = default })

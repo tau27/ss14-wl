@@ -13,15 +13,15 @@ namespace Content.Client.Stylesheets
     {
         public static readonly Color SpaceRed = Color.FromHex("#960000");
 
-        public static readonly Color ButtonColorDefault = Color.FromHex("#232323");
+        public static readonly Color ButtonColorDefault = Color.FromHex("#353535");
         public static readonly Color ButtonColorHovered = Color.FromHex("#2d2d2d");
-        public static readonly Color ButtonColorPressed = Color.FromHex("#0f0f0f");
-        public static readonly Color ButtonColorDisabled = Color.FromHex("#0f0f0f");
+        public static readonly Color ButtonColorPressed = Color.FromHex("#141414");
+        public static readonly Color ButtonColorDisabled = Color.FromHex("#141414");
 
         public static readonly Color ButtonColorCautionDefault = Color.FromHex("#640000");
         public static readonly Color ButtonColorCautionHovered = Color.FromHex("#960000");
-        public static readonly Color ButtonColorCautionPressed = Color.FromHex("#0f0f0f");
-        public static readonly Color ButtonColorCautionDisabled = Color.FromHex("#0f0f0f");
+        public static readonly Color ButtonColorCautionPressed = Color.FromHex("#141414");
+        public static readonly Color ButtonColorCautionDisabled = Color.FromHex("#141414");
 
         public override Stylesheet Stylesheet { get; }
 
