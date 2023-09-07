@@ -94,8 +94,8 @@ namespace Content.Client.Stylesheets
         public static readonly Color ButtonColorDefaultRed = Color.FromHex("#640000");
         public static readonly Color ButtonColorHovered = Color.FromHex("#2d2d2d");
         public static readonly Color ButtonColorHoveredRed = Color.FromHex("#960000");
-        public static readonly Color ButtonColorPressed = Color.FromHex("#141414");
-        public static readonly Color ButtonColorDisabled = Color.FromHex("#141414");
+        public static readonly Color ButtonColorPressed = Color.FromHex("#0C0C0C");
+        public static readonly Color ButtonColorDisabled = Color.FromHex("#282828");
 
         public static readonly Color ButtonColorCautionDefault = Color.FromHex("#9051A8");
         public static readonly Color ButtonColorCautionHovered = Color.FromHex("#a261ba");
@@ -412,7 +412,7 @@ namespace Content.Client.Stylesheets
             var itemListItemBackgroundDisabled = new StyleBoxFlat {BackgroundColor = Color.FromHex("#0a0a0a")};
             itemListItemBackgroundDisabled.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
             itemListItemBackgroundDisabled.SetContentMarginOverride(StyleBox.Margin.Horizontal, 4);
-            var itemListItemBackground = new StyleBoxFlat {BackgroundColor = Color.FromHex("#0f0f0f")};
+            var itemListItemBackground = new StyleBoxFlat {BackgroundColor = Color.FromHex("#141414")};
             itemListItemBackground.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
             itemListItemBackground.SetContentMarginOverride(StyleBox.Margin.Horizontal, 4);
             var itemListItemBackgroundTransparent = new StyleBoxFlat {BackgroundColor = Color.Transparent};
@@ -994,7 +994,7 @@ namespace Content.Client.Stylesheets
                         new StyleBoxFlat {BackgroundColor = Color.FromHex("#0a0a0a")}),
                     new StyleProperty(Tree.StylePropertyItemBoxSelected, new StyleBoxFlat
                     {
-                        BackgroundColor = Color.FromHex("#0f0f0f"),
+                        BackgroundColor = Color.FromHex("#141414"),
                         ContentMarginLeftOverride = 4
                     })
                 }),
