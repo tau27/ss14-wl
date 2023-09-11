@@ -57,7 +57,7 @@ public sealed class CharacterInformationSystem : EntitySystem
         if (TryComp<ActorComponent>(targetUid, out var actor)) // Enrich with private info if player control mob
             profile = (HumanoidCharacterProfile) _preferencesManager.GetPreferences(actor.PlayerSession.UserId).SelectedCharacter;
 
-        var charName = Identity.Name(uid, EntityManager);
+        var charName = Identity.Name(targetUid, EntityManager);
         var state = new CharacterInformationBuiState(targetUid, charName, charInfo.FlavorText, profile?.OocText, profile?.ErpStatus);
         _userInterfaceSystem.TrySetUiState(uid, CharacterInformationUiKey.Key, state);
     }
