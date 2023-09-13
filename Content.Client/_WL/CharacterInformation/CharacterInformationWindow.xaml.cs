@@ -12,11 +12,14 @@ namespace Content.Client._WL.CharacterInformation;
 [GenerateTypedNameReferences]
 public sealed partial class CharacterInformationWindow : FancyWindow
 {
+    [Dependency] private readonly IEntityManager _entity = default!;
+
     private float _accumulatedTime;
 
     public CharacterInformationWindow()
     {
         RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -29,7 +32,7 @@ public sealed partial class CharacterInformationWindow : FancyWindow
 
     public void UpdateState(CharacterInformationBuiState state)
     {
-        CharSprite.SetEntity(state.Uid);
+        CharSprite.SetEntity(_entity.GetEntity(state.Uid));
         Name.SetMarkup($"[bold]{state.CharacterName}[/bold]");
 
         if (state.ErpStatus != null)
