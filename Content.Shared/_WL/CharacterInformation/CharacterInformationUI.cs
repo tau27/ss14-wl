@@ -12,14 +12,14 @@ public enum CharacterInformationUiKey : byte
 [Serializable, NetSerializable]
 public sealed class CharacterInformationBuiState : BoundUserInterfaceState
 {
-    public EntityUid Uid;
+    public NetEntity Uid;
     public string CharacterName;
     public string FlavorText;
     public string? OocText;
     public ErpStatus? ErpStatus;
 
     public CharacterInformationBuiState(
-        EntityUid uid,
+        NetEntity uid,
         string characterName,
         string flavorText,
         string? oocText,

@@ -58,7 +58,7 @@ public sealed class CharacterInformationSystem : EntitySystem
             profile = (HumanoidCharacterProfile) _preferencesManager.GetPreferences(actor.PlayerSession.UserId).SelectedCharacter;
 
         var charName = Identity.Name(targetUid, EntityManager);
-        var state = new CharacterInformationBuiState(targetUid, charName, charInfo.FlavorText, profile?.OocText, profile?.ErpStatus);
+        var state = new CharacterInformationBuiState(GetNetEntity(targetUid), charName, charInfo.FlavorText, profile?.OocText, profile?.ErpStatus);
         _userInterfaceSystem.TrySetUiState(uid, CharacterInformationUiKey.Key, state);
     }
 }
