@@ -33,6 +33,9 @@
     RLeg: MobArachnidRLeg
     LFoot: MobArachnidLFoot
     RFoot: MobArachnidRFoot
+    Groin: MobHumanoidAnyMarking # WL-Underwear
+    Breast: MobHumanoidAnyMarking # WL-Underwear
+    Foots: MobHumanoidAnyMarking # WL-Underwear
 
 - type: humanoidBaseSprite
   id: MobArachnidEyes
@@ -62,6 +65,15 @@
       required: true
       defaultMarkings: [ ArachnidCheliceraeDownwards ]
     Chest:
+      points: 1
+      required: false
+    Underwear: # WL-Underwear
+      points: 1
+      required: false
+    Undershirt: # WL-Underwear
+      points: 1
+      required: false
+    Socks: # WL-Underwear
       points: 1
       required: false
 

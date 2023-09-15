@@ -10,6 +10,8 @@ namespace Content.Shared.Humanoid
         Hair,
         FacialHair,
         Chest,
+        Groin, // WL-Underwear
+        Breast, // WL-Underwear
         Head,
         Snout,
         HeadSide, // side parts (i.e., frills)
@@ -23,6 +25,7 @@ namespace Content.Shared.Humanoid
         LLeg,
         RFoot,
         LFoot,
+        Foots, // WL-Underwear
         Handcuffs,
         StencilMask,
         Ensnare,
