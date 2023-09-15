@@ -30,6 +30,9 @@
     RLeg: MobReptilianRLeg
     LFoot: MobReptilianLFoot
     RFoot: MobReptilianRFoot
+    Groin: MobHumanoidAnyMarking # WL-Underwear
+    Breast: MobHumanoidAnyMarking # WL-Underwear
+    Foots: MobHumanoidAnyMarking # WL-Underwear
 
 - type: markingPoints
   id: MobReptilianMarkingLimits
@@ -53,6 +56,15 @@
       points: 1
       required: false
     HeadSide:
+      points: 1
+      required: false
+    Underwear: # WL-Underwear
+      points: 1
+      required: false
+    Undershirt: # WL-Underwear
+      points: 1
+      required: false
+    Socks: # WL-Underwear
       points: 1
       required: false
 

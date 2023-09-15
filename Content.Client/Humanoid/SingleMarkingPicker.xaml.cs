@@ -100,6 +100,8 @@ public sealed partial class SingleMarkingPicker : BoxContainer
     private string? _species;
     private List<Marking>? _markings;
 
+    public List<Marking>? Markings => _markings; // WL-Underwear
+
     private int PointsLeft
     {
         get

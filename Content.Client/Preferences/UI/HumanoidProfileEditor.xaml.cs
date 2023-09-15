@@ -80,6 +80,9 @@ namespace Content.Client.Preferences.UI
         private SingleMarkingPicker _hairPicker => CHairStylePicker;
         private SingleMarkingPicker _facialHairPicker => CFacialHairPicker;
         private EyeColorPicker _eyesPicker => CEyeColorPicker;
+        private SingleMarkingPicker _underwearPicker => CUnderwearPicker; // WL-Underwear
+        private SingleMarkingPicker _undershirtPicker => CUndershirtPicker; // WL-Underwear
+        private SingleMarkingPicker _socksPicker => CSocksPicker; // WL-Underwear
 
         private TabContainer _tabContainer => CTabContainer;
         private BoxContainer _jobList => CJobList;
@@ -107,6 +110,10 @@ namespace Content.Client.Preferences.UI
         public int CharacterSlot;
         public HumanoidCharacterProfile? Profile;
         private MarkingSet _markingSet = new(); // storing this here feels iffy but a few things need it this high up
+
+        private Marking? _underwearMarking; // WL-Underwear
+        private Marking? _undershirtMarking; // WL-Underwear
+        private Marking? _socksMarking; // WL-Underwear
 
         public event Action<HumanoidCharacterProfile, int>? OnProfileChanged;
 
@@ -358,6 +365,200 @@ namespace Content.Client.Preferences.UI
             };
 
             #endregion Hair
+
+            // WL-Underwear-Start
+            #region Underwear
+
+            _underwearPicker.OnMarkingSelect += m =>
+            {
+                if (Profile is null)
+                    return;
+
+                if (!_markingManager.Markings.TryGetValue(m.id, out var marking))
+                    return;
+
+                if (_underwearMarking != null)
+                    Profile.Appearance.Markings.Remove(_underwearMarking);
+
+                _underwearMarking = marking.AsMarking();
+                Profile.Appearance.Markings.Add(_underwearMarking);
+
+                IsDirty = true;
+            };
+            _underwearPicker.OnColorChanged += m =>
+            {
+                if (Profile is null)
+                    return;
+
+                var idx = Profile.Appearance.Markings.IndexOf(m.marking);
+                if (idx > -1)
+                    Profile.Appearance.Markings[idx] = m.marking;
+
+                IsDirty = true;
+            };
+            _underwearPicker.OnSlotAdd += () =>
+            {
+                if (Profile is null)
+                    return;
+
+                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Underwear, Profile.Species).Keys
+                    .FirstOrDefault();
+
+                if (string.IsNullOrEmpty(defaultMarkingId))
+                    return;
+
+                if (!_markingManager.Markings.TryGetValue(defaultMarkingId, out var defaultMarking))
+                    return;
+
+                _underwearMarking = defaultMarking.AsMarking();
+                Profile.Appearance.Markings.Add(_underwearMarking);
+
+                UpdateUnderwearPicker();
+                IsDirty = true;
+            };
+            _underwearPicker.OnSlotRemove += _ =>
+            {
+                if (Profile is null)
+                    return;
+
+                if (_underwearMarking != null)
+                    Profile.Appearance.Markings.Remove(_underwearMarking);
+                _underwearMarking = null;
+
+                UpdateUnderwearPicker();
+                IsDirty = true;
+            };
+
+            #endregion
+
+            #region Undershirt
+
+            _undershirtPicker.OnMarkingSelect += m =>
+            {
+                if (Profile is null)
+                    return;
+
+                if (!_markingManager.Markings.TryGetValue(m.id, out var marking))
+                    return;
+
+                if (_undershirtMarking != null)
+                    Profile.Appearance.Markings.Remove(_undershirtMarking);
+
+                _undershirtMarking = marking.AsMarking();
+                Profile.Appearance.Markings.Add(_undershirtMarking);
+
+                IsDirty = true;
+            };
+            _undershirtPicker.OnColorChanged += m =>
+            {
+                if (Profile is null)
+                    return;
+
+                var idx = Profile.Appearance.Markings.IndexOf(m.marking);
+                if (idx > -1)
+                    Profile.Appearance.Markings[idx] = m.marking;
+
+                IsDirty = true;
+            };
+            _undershirtPicker.OnSlotAdd += () =>
+            {
+                if (Profile is null)
+                    return;
+
+                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Undershirt, Profile.Species).Keys
+                    .FirstOrDefault();
+
+                if (string.IsNullOrEmpty(defaultMarkingId))
+                    return;
+
+                if (!_markingManager.Markings.TryGetValue(defaultMarkingId, out var defaultMarking))
+                    return;
+
+                _undershirtMarking = defaultMarking.AsMarking();
+                Profile.Appearance.Markings.Add(_undershirtMarking);
+
+                UpdateUndershirtPicker();
+                IsDirty = true;
+            };
+            _undershirtPicker.OnSlotRemove += _ =>
+            {
+                if (Profile is null)
+                    return;
+
+                if (_undershirtMarking != null)
+                    Profile.Appearance.Markings.Remove(_undershirtMarking);
+                _undershirtMarking = null;
+
+                UpdateUndershirtPicker();
+                IsDirty = true;
+            };
+
+            #endregion
+
+            #region Socks
+
+            _socksPicker.OnMarkingSelect += m =>
+            {
+                if (Profile is null)
+                    return;
+
+                if (!_markingManager.Markings.TryGetValue(m.id, out var marking))
+                    return;
+
+                if (_socksMarking != null)
+                    Profile.Appearance.Markings.Remove(_socksMarking);
+
+                _socksMarking = marking.AsMarking();
+                Profile.Appearance.Markings.Add(_socksMarking);
+
+                IsDirty = true;
+            };
+            _socksPicker.OnColorChanged += m =>
+            {
+                if (Profile is null)
+                    return;
+
+                var idx = Profile.Appearance.Markings.IndexOf(m.marking);
+                if (idx > -1)
+                    Profile.Appearance.Markings[idx] = m.marking;
+
+                IsDirty = true;
+            };
+            _socksPicker.OnSlotAdd += () =>
+            {
+                if (Profile is null)
+                    return;
+
+                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Socks, Profile.Species).Keys
+                    .FirstOrDefault();
+
+                if (string.IsNullOrEmpty(defaultMarkingId))
+                    return;
+
+                if (!_markingManager.Markings.TryGetValue(defaultMarkingId, out var defaultMarking))
+                    return;
+
+                _socksMarking = defaultMarking.AsMarking();
+                Profile.Appearance.Markings.Add(_socksMarking);
+
+                UpdateSocksPicker();
+                IsDirty = true;
+            };
+            _socksPicker.OnSlotRemove += _ =>
+            {
+                if (Profile is null)
+                    return;
+
+                if (_socksMarking != null)
+                    Profile.Appearance.Markings.Remove(_socksMarking);
+                _socksMarking = null;
+
+                UpdateSocksPicker();
+                IsDirty = true;
+            };
+
+            #endregion
+            // WL-Underwear-End
 
             #region Clothing
 
@@ -1100,6 +1301,65 @@ namespace Content.Client.Preferences.UI
                 1);
         }
 
+        // WL-Underwear-Start
+        private void UpdateUnderwearPicker()
+        {
+            if (Profile == null)
+                return;
+
+            _underwearMarking = Profile.Appearance.Markings.FirstOrDefault(m =>
+                _markingManager.Markings.TryGetValue(m.MarkingId, out var marking) &&
+                marking.MarkingCategory == MarkingCategories.Underwear);
+
+            var markings = new List<Marking>();
+            if (_underwearMarking != null)
+                markings.Add(_underwearMarking);
+
+            _underwearPicker.UpdateData(
+                markings,
+                Profile.Species,
+                1);
+        }
+
+        private void UpdateUndershirtPicker()
+        {
+            if (Profile == null)
+                return;
+
+            _undershirtMarking = Profile.Appearance.Markings.FirstOrDefault(m =>
+                _markingManager.Markings.TryGetValue(m.MarkingId, out var marking) &&
+                marking.MarkingCategory == MarkingCategories.Undershirt);
+
+            var markings = new List<Marking>();
+            if (_undershirtMarking != null)
+                markings.Add(_undershirtMarking);
+
+            _undershirtPicker.UpdateData(
+                markings,
+                Profile.Species,
+                1);
+        }
+
+        private void UpdateSocksPicker()
+        {
+            if (Profile == null)
+                return;
+
+            _socksMarking = Profile.Appearance.Markings.FirstOrDefault(m =>
+                _markingManager.Markings.TryGetValue(m.MarkingId, out var marking) &&
+                marking.MarkingCategory == MarkingCategories.Socks);
+
+            var markings = new List<Marking>();
+            if (_socksMarking != null)
+                markings.Add(_socksMarking);
+
+            _socksPicker.UpdateData(
+                markings,
+                Profile.Species,
+                1);
+        }
+        // WL-Underwear-End
+
         private void UpdateCMarkingsHair()
         {
             if (Profile == null)
@@ -1203,6 +1463,9 @@ namespace Content.Client.Preferences.UI
         public void UpdateControls()
         {
             if (Profile is null) return;
+            _underwearMarking = null; // WL-Underwear
+            _undershirtMarking = null; // WL-Underwear
+            _socksMarking = null; // WL-Underwear
             UpdateNameEdit();
             UpdateFlavorTextEdit();
             UpdateOocTextEdit(); // WL-OOCText
@@ -1226,6 +1489,9 @@ namespace Content.Client.Preferences.UI
             UpdateHairPickers();
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
+            UpdateUnderwearPicker(); // WL-Underwear
+            UpdateUndershirtPicker(); // WL-Underwear
+            UpdateSocksPicker(); // WL-Underwear
 
             _preferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
         }

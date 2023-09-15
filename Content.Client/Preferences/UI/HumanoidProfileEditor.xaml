@@ -5,7 +5,7 @@
          xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls">
     <BoxContainer Orientation="Horizontal">
         <!-- Left side -->
-        <BoxContainer Orientation="Vertical" Margin="10 10 10 10">
+        <BoxContainer Orientation="Vertical" Margin="10 10 10 10" MinWidth="900">
             <!-- Middle container -->
             <BoxContainer Orientation="Horizontal" SeparationOverride="10">
                 <!-- Name box-->
@@ -135,6 +135,13 @@
                                 <Label Text="{Loc 'humanoid-profile-editor-eyes-label'}" />
                                 <humanoid:EyeColorPicker Name="CEyeColorPicker" />
                             </BoxContainer>
+                            <!-- WL-Underwear-Start -->
+                            <BoxContainer Margin="10" Orientation="Horizontal">
+                                <humanoid:SingleMarkingPicker Name="CUnderwearPicker" Category="Underwear" />
+                                <humanoid:SingleMarkingPicker Name="CUndershirtPicker" Category="Undershirt" />
+                                <humanoid:SingleMarkingPicker Name="CSocksPicker" Category="Socks" />
+                            </BoxContainer>
+                            <!-- WL-Underwear-End -->
                         </BoxContainer>
                     </ScrollContainer>
                 </BoxContainer>
