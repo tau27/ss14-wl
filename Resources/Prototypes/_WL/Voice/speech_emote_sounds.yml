@@ -6,3 +6,15 @@
   sounds:
     Scream:
       collection: AkulaScreams
+
+- type: emoteSounds
+  id: UnisexFelinid
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FelinidScream
+      params:
+        volume: -15
+    Meows:
+      collection: FelinidLaugh

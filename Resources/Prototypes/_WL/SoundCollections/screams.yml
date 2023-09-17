@@ -2,3 +2,15 @@
   id: AkulaScreams
   files:
     - /Audio/_WL/Voice/Akula/akulascream_1.ogg
+
+- type: soundCollection
+  id: FelinidScream
+  files:
+    - /Audio/_WL/Voice/Felinid/cathiss.ogg
+
+- type: soundCollection
+  id: FelinidLaugh
+  files:
+    - /Audio/_WL/Voice/Felinid/catmur.ogg
+    - /Audio/_WL/Voice/Felinid/catmur2.ogg
+    - /Audio/_WL/Voice/Felinid/catmur3.ogg
