@@ -1,7 +1,7 @@
 - type: entity
   save: false
   name: Urist McFish
-  parent: BaseMobOrganic
+  parent: BaseMobSpeciesOrganic
   id: BaseMobAkula
   abstract: true
   components: # TODO: Give species uniq features
