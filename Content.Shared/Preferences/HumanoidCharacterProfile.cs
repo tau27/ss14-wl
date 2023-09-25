@@ -502,19 +502,9 @@ namespace Content.Shared.Preferences
                 flavortext = FormattedMessage.RemoveMarkup(FlavorText);
             }
 
-            // WL-OOCText-Start
-            string oocText;
-            if (OocText.Length > MaxDescLength)
-            {
-                oocText = FormattedMessage.RemoveMarkup(OocText)[..MaxDescLength];
-            }
-            else
-            {
-                oocText = FormattedMessage.RemoveMarkup(OocText);
-            }
-            // WL-OOCText-End
+            var oocText = OocText.Length > MaxDescLength ? FormattedMessage.RemoveMarkup(OocText)[..MaxDescLength] : FormattedMessage.RemoveMarkup(OocText); // WL-OOCText
 
-            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, sponsorMarkings);
+            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex, sponsorMarkings);
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {

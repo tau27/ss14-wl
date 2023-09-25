@@ -256,8 +256,6 @@
     - RatvarianLanguage
     - PressureImmunity
     - Muted
-    - ForcedSleep
-    - TemporaryBlindness
     - Pacified
     - StaminaModifier
   - type: Blindable
