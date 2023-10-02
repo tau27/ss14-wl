@@ -86,3 +86,11 @@
   color: "#2ed2fd"
   # long range since otherwise it'd defeat the point of a handheld radio independent of telecomms
   longRange: true
+
+- type: radioChannel # WL - Kidan
+  id: hitin
+  name: Хитин
+  keycode: 'Х'
+  frequency: 4944
+  color: "#cc7722"
+  longRange: true
