@@ -14,3 +14,9 @@
     - /Audio/_WL/Voice/Felinid/catmur.ogg
     - /Audio/_WL/Voice/Felinid/catmur2.ogg
     - /Audio/_WL/Voice/Felinid/catmur3.ogg
+
+- type: soundCollection
+  id: KidanSoundM
+  files:
+    - /Audio/_WL/Voice/Kidan/scream_1.ogg
+    - /Audio/_WL/Voice/Kidan/scream_2.ogg
