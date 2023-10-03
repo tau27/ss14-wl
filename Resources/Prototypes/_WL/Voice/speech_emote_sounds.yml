@@ -8,16 +8,41 @@
       collection: AkulaScreams
 
 - type: emoteSounds
-  id: UnisexFelinid
+  id: MaleFelinid
   params:
     variation: 0.125
   sounds:
     Scream:
-      collection: FelinidScream
-      params:
-        volume: -15
-#    Meows:
-#      collection: FelinidLaugh
+      collection: MaleScreams
+    Laugh:
+      collection: MaleLaugh
+    Snore:
+      collection: Snores
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+
+- type: emoteSounds
+  id: FemaleFelinid
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FemaleScreams
+    Laugh:
+      collection: FemaleLaugh
+    Snore:
+      collection: Snores
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+
 - type: emoteSounds
   id: FemaleKidan
   params:
@@ -25,7 +50,7 @@
   sounds:
     Scream:
       collection: KidanSoundM
-      
+
 - type: emoteSounds
   id: MaleKidan
   params:
