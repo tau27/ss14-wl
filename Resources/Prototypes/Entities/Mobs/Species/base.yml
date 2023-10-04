@@ -192,6 +192,7 @@
   - type: CreamPied
   - type: Stripping
   - type: Strippable
+    handDelay: 2 # WL delay reduction
   - type: UserInterface
     interfaces:
       - key: enum.VoiceMaskUIKey.Key
