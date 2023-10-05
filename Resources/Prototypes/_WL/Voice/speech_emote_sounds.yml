@@ -1,11 +1,39 @@
 # species
 - type: emoteSounds
-  id: UnisexAkula
+  id: MaleAkula
   params:
     variation: 0.125
   sounds:
     Scream:
       collection: AkulaScreams
+    Laugh:
+      collection: MaleLaugh
+    Snore:
+      collection: Snores
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+
+- type: emoteSounds
+  id: FemaleAkula
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: AkulaScreams
+    Laugh:
+      collection: FemaleLaugh
+    Snore:
+      collection: Snores
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
 
 - type: emoteSounds
   id: MaleFelinid
@@ -13,11 +41,11 @@
     variation: 0.125
   sounds:
     Scream:
-      collection: MaleScreams
+      collection: CatScreams
     Laugh:
       collection: MaleLaugh
     Snore:
-      collection: Snores
+      collection: CatPurr
     Whistle:
       collection: Whistles
     Sigh:
@@ -31,11 +59,11 @@
     variation: 0.125
   sounds:
     Scream:
-      collection: FemaleScreams
+      collection: CatScreams
     Laugh:
       collection: FemaleLaugh
     Snore:
-      collection: Snores
+      collection: CatPurr
     Whistle:
       collection: Whistles
     Sigh:
@@ -50,6 +78,16 @@
   sounds:
     Scream:
       collection: KidanSoundM
+    Laugh:
+      collection: FemaleLaugh
+    Snore:
+      collection: Snores
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
 
 - type: emoteSounds
   id: MaleKidan
@@ -58,3 +96,13 @@
   sounds:
     Scream:
       collection: KidanSoundM
+    Laugh:
+      collection: MaleLaugh
+    Snore:
+      collection: Snores
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry

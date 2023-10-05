@@ -18,9 +18,9 @@
           amount: 5
     - type: Vocal
       sounds:
-        Male: UnisexAkula
-        Female: UnisexAkula
-        Unsexed: UnisexAkula
+        Male: MaleAkula
+        Female: FemaleAkula
+        Unsexed: MaleAkula
 
 - type: entity
   save: false
