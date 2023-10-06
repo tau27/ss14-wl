@@ -6,7 +6,7 @@
     head:
       part: HeadVulpkanin
       connections:
-      - torso
+        - torso
       organs:
         brain: OrganHumanBrain
         eyes: OrganHumanEyes
@@ -19,18 +19,18 @@
         liver: OrganAnimalLiver
         kidneys: OrganHumanKidneys
       connections:
-      - left arm
-      - right arm
-      - left leg
-      - right leg
+        - left arm
+        - right arm
+        - left leg
+        - right leg
     right arm:
       part: RightArmVulpkanin
       connections:
-      - right hand
+        - right hand
     left arm:
       part: LeftArmVulpkanin
       connections:
-      - left hand
+        - left hand
     right hand:
       part: RightHandVulpkanin
     left hand:
@@ -38,11 +38,11 @@
     right leg:
       part: RightLegVulpkanin
       connections:
-      - right foot
+        - right foot
     left leg:
       part: LeftLegVulpkanin
       connections:
-      - left foot
+        - left foot
     right foot:
       part: RightFootVulpkanin
     left foot:
