@@ -44,7 +44,8 @@
       required: false
     Tail:
       points: 1
-      required: false
+      required: true
+      defaultMarkings: [ VulpkaninesTail ]
     Snout:
       points: 1
       required: false

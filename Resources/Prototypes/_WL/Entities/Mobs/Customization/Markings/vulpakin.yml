@@ -1,0 +1,8 @@
+- type: marking
+  id: VulpkaninesTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanines]
+  sprites:
+    - sprite: _WL/Mobs/Customization/vulpakin_parts.rsi
+      state: vulp_tail

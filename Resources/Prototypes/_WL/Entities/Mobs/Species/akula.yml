@@ -5,6 +5,8 @@
   id: BaseMobAkula
   abstract: true
   components: # TODO: Give species uniq features
+    - type: HumanoidAppearance
+      species: Akula
     - type: Hunger
     - type: Icon
       sprite: _WL/Mobs/Species/Akula/parts.rsi
