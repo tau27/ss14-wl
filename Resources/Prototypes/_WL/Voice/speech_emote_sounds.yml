@@ -106,3 +106,39 @@
       collection: MaleSigh
     Crying:
       collection: MaleCry
+
+- type: emoteSounds
+  id: FemaleTayar
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: TayarSoundF
+    Laugh:
+      collection: FemaleLaugh
+    Snore:
+      collection: CatPurr
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+      
+- type: emoteSounds
+  id: MaleTayar
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: TayarSoundM
+    Laugh:
+      collection: MaleLaugh
+    Snore:
+      collection: CatPurr
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry

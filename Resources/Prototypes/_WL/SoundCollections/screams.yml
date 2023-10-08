@@ -14,3 +14,15 @@
   files:
     - /Audio/_WL/Voice/Kidan/scream_1.ogg
     - /Audio/_WL/Voice/Kidan/scream_2.ogg
+
+- type: soundCollection
+  id: TayarSoundF
+  files:
+    - /Audio/_WL/Voice/Tayar/fscream_1.ogg
+    - /Audio/_WL/Voice/Tayar/fscream_2.ogg
+
+- type: soundCollection
+  id: TayarSoundM
+  files:
+    - /Audio/_WL/Voice/Tayar/mscream_1.ogg
+    - /Audio/_WL/Voice/Tayar/mscream_2.ogg
