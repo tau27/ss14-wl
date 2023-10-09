@@ -12,9 +12,6 @@
     - type: Icon
       sprite: _WL/Mobs/Species/Vulpakin/parts.rsi
       state: vulp_full
-    - type: Body
-      prototype: Vulpkanin
-      requiredLegs: 2
 
 - type: entity
   save: false
