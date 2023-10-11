@@ -41,6 +41,7 @@
   - type: Perishable
   - type: CanEscapeInventory
     baseResistTime: 1
+  - type: MultiHandedItem
 
 - type: entity
   save: false
