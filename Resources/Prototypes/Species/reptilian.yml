@@ -26,10 +26,10 @@
     RArm: MobReptilianRArm
     LHand: MobReptilianLHand
     RHand: MobReptilianRHand
-    LLeg: MobReptilianLLeg
-    RLeg: MobReptilianRLeg
-    LFoot: MobReptilianLFoot
-    RFoot: MobReptilianRFoot
+    LLeg: MobReptilianLLegDigi # Corvax-Digitigrade
+    RLeg: MobReptilianRLegDigi # Corvax-Digitigrade
+    LFoot: MobReptilianLFootDigi # Corvax-Digitigrade
+    RFoot: MobReptilianRFootDigi # Corvax-Digitigrade
     Groin: MobHumanoidAnyMarking # WL-Underwear
     Breast: MobHumanoidAnyMarking # WL-Underwear
     Foots: MobHumanoidAnyMarking # WL-Underwear
