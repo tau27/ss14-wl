@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Corvax.TTS;
@@ -352,7 +353,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         humanoid.SpeakerColor = colors[colorIdx];
         // Corvax-SpeakerColor-End
 
-        ApplyHeight(uid, humanoid); // WL-Height
+        ApplyHeight(humanoid); // WL-Height
 
         Dirty(humanoid);
     }
@@ -437,14 +438,14 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     // Corvax-TTS-End
 
     // WL-Height-Start
-    public void ApplyHeight(EntityUid uid, HumanoidAppearanceComponent humanoid)
+    public void ApplyHeight(HumanoidAppearanceComponent humanoid)
     {
-        if (!_prototypeManager.TryIndex<SpeciesPrototype>(humanoid.Species, out var speciesProto))
+        if (!_prototypeManager.TryIndex(humanoid.Species, out var speciesProto))
             return;
 
-        EnsureComp<ScaleVisualsComponent>(uid);
+        EnsureComp<ScaleVisualsComponent>(humanoid.Owner);
         var scale = MinHeightScale + (humanoid.Height - speciesProto.MinHeight) * (MaxHeightScale - MinHeightScale) / (speciesProto.MaxHeight - speciesProto.MinHeight);
-        _appearance.SetData(uid, ScaleVisuals.Scale, new Vector2(scale));
+        _appearance.SetData(humanoid.Owner, ScaleVisuals.Scale, new Vector2(scale));
     }
     // WL-Height-End
 }
