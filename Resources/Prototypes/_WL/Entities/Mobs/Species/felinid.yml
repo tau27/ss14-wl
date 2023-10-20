@@ -37,7 +37,7 @@
     soundHit:
       path: /Audio/Effects/hit_kick.ogg
   - type: Stamina
-    excess: 60
+    critThreshold: 60
   - type: Perishable
   - type: CanEscapeInventory
     baseResistTime: 1
@@ -68,10 +68,6 @@
       types:
         Asphyxiation: -1.5
   - type: Alerts
-    sounds:
-      Male: MaleFelinid
-      Female: FemaleFelinid
-      Unsexed: MaleFelinid
   - type: Actions
   - type: Eye
   - type: CameraRecoil
