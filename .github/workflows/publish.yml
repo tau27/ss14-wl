@@ -69,14 +69,12 @@ jobs:
       run: |
         mkdir "release/${{ github.sha }}"
         mv release/*.zip "release/${{ github.sha }}"
-        pwd
-        ls
 
     - name: Upload files to mothership
       uses: burnett01/rsync-deployments@5.2
       with:
         switches: -avzr --ignore-existing
-        path: "release/${{ github.sha }}"
+        path: "${{ github.workspace }}/release/${{ github.sha }}"
         remote_path: ${{ secrets.BUILDS_PATH }}
         remote_host: ${{ secrets.BUILDS_HOST }}
         remote_user: ${{ secrets.BUILDS_USERNAME }}
