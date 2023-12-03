@@ -10,10 +10,13 @@
   - type: Hunger
     baseDecayRate: 0.032
   - type: Item
-    size: Huge
+    size: Ginormous
+  - type: Sprite
+    sprite: _WL/Mobs/Species/Murine/parts.rsi
+    state: full
+  - type: MultiHandedItem
   - type: CanEscapeInventory
     baseResistTime: 1
-  - type: MultiHandedItem
   - type: Vocal
     sounds:
       Male: Mouse
