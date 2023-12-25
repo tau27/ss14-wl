@@ -163,16 +163,11 @@ public sealed partial class ClimbSystem : VirtualController
          if (args.Handled)
              return;
 
-
          var canVault = args.User == args.Dragged
              ? CanVault(component, args.User, uid, out _)
              : CanVault(component, args.User, args.Dragged, uid, out _);
 
          args.CanDrop = canVault;
-
-         if (!HasComp<HandsComponent>(args.User))
-             args.CanDrop = false;
-
          args.Handled = true;
      }
 
@@ -194,7 +189,9 @@ public sealed partial class ClimbSystem : VirtualController
 
      private void OnClimbableDragDrop(EntityUid uid, ClimbableComponent component, ref DragDropTargetEvent args)
      {
-         if (args.Handled)
+         // definitely a better way to check if two entities are equal
+         // but don't have computer access and i have to do this without syntax
+         if (args.Handled || args.User != args.Dragged && !HasComp<HandsComponent>(args.User))
              return;
 
          TryClimb(args.User, args.Dragged, uid, out _, component);

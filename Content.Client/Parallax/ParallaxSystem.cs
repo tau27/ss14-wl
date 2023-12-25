@@ -24,13 +24,14 @@ public sealed class ParallaxSystem : SharedParallaxSystem
     {
         base.Initialize();
         _overlay.AddOverlay(new ParallaxOverlay());
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnReload);
+        _protoManager.PrototypesReloaded += OnReload;
+
         SubscribeLocalEvent<ParallaxComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
     }
 
     private void OnReload(PrototypesReloadedEventArgs obj)
     {
-        if (!obj.WasModified<ParallaxPrototype>())
+        if (!obj.ByType.ContainsKey(typeof(ParallaxPrototype)))
             return;
 
         _parallax.UnloadParallax(Fallback);
@@ -47,6 +48,7 @@ public sealed class ParallaxSystem : SharedParallaxSystem
     {
         base.Shutdown();
         _overlay.RemoveOverlay<ParallaxOverlay>();
+        _protoManager.PrototypesReloaded -= OnReload;
     }
 
     private void OnAfterAutoHandleState(EntityUid uid, ParallaxComponent component, ref AfterAutoHandleStateEvent args)

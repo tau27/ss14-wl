@@ -774,14 +774,13 @@
   - type: Sprite
     layers:
     - state: green
-    - state: quartz_crab
+    - state: quartzcrab
       sprite: Mobs/Elemental/orecrab.rsi
   - type: RandomSpawner
     prototypes:
       - MobUraniumCrab
       - MobIronCrab
       - MobQuartzCrab
-      - MobSilverCrab
 
 - type: entity
   name: luminous person spawner

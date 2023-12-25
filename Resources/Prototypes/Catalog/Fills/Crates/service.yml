@@ -76,7 +76,6 @@
     - id: ClothingUniformJumpskirtJanimaid
     - id: ClothingNeckCloakVoid
     - id: RevolverCapGun
-    - id: BarberScissors
 
 - type: entity
   id: CrateServiceCustomSmokable

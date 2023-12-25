@@ -36,8 +36,6 @@
       - !type:PlaySoundBehavior
         sound:
           collection: GlassBreak
-          params:
-            volume: -4
       - !type:SpawnEntitiesBehavior
         spawn:
           ShardGlass:
@@ -81,7 +79,7 @@
       glass:
         reagents:
         - ReagentId: Silicon
-          Quantity: 10
+          Quantity: 22
 
 - type: entity
   parent: SheetGlass
@@ -159,8 +157,6 @@
       - !type:PlaySoundBehavior
         sound:
           collection: GlassBreak
-          params:
-            volume: -4
       - !type:SpawnEntitiesBehavior
         spawn:
           ShardGlassReinforced:
@@ -187,11 +183,11 @@
       rglass:
         reagents:
         - ReagentId: Silicon
-          Quantity: 10
+          Quantity: 22
         - ReagentId: Iron
-          Quantity: 4.5
+          Quantity: 11
         - ReagentId: Carbon
-          Quantity: 0.5
+          Quantity: 1
 
 - type: entity
   parent: SheetGlassBase
@@ -235,8 +231,6 @@
       - !type:PlaySoundBehavior
         sound:
           collection: GlassBreak
-          params:
-            volume: -4
       - !type:SpawnEntitiesBehavior
         spawn:
           ShardGlassPlasma:
@@ -263,7 +257,7 @@
       pglass:
         reagents:
         - ReagentId: Silicon
-          Quantity: 10
+          Quantity: 22
         - ReagentId: Plasma
           Quantity: 10
 
@@ -301,13 +295,13 @@
       rpglass:
         reagents:
         - ReagentId: Silicon
-          Quantity: 10
+          Quantity: 22
         - ReagentId: Plasma
           Quantity: 10
         - ReagentId: Iron
-          Quantity: 4.5
+          Quantity: 11
         - ReagentId: Carbon
-          Quantity: 0.5
+          Quantity: 1
 
 - type: entity
   parent: SheetRPGlass
@@ -363,8 +357,6 @@
       - !type:PlaySoundBehavior
         sound:
           collection: GlassBreak
-          params:
-            volume: -4
       - !type:SpawnEntitiesBehavior
         spawn:
           ShardGlassUranium:
@@ -379,7 +371,7 @@
       uglass:
         reagents:
         - ReagentId: Silicon
-          Quantity: 10
+          Quantity: 22
         - ReagentId: Uranium
           Quantity: 10
 
@@ -428,13 +420,13 @@
       ruglass:
         reagents:
         - ReagentId: Silicon
-          Quantity: 10
+          Quantity: 22
         - ReagentId: Uranium
           Quantity: 10
         - ReagentId: Iron
-          Quantity: 4.5
+          Quantity: 11
         - ReagentId: Carbon
-          Quantity: 0.5
+          Quantity: 1
 - type: entity
   parent: SheetRUGlass
   id: SheetRUGlass1

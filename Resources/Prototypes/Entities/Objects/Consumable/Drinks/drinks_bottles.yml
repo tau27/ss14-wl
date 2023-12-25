@@ -410,15 +410,13 @@
   name: water bottle
   description: Simple clean water of unknown origin. You think that maybe you dont want to know it.
   components:
-  - type: Item
-    size: Small
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 30
+        maxVol: 50
         reagents:
         - ReagentId: Water
-          Quantity: 30
+          Quantity: 50
   - type: Drink
   - type: Sprite
     sprite: Objects/Consumable/Drinks/waterbottle.rsi

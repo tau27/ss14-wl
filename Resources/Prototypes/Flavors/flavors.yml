@@ -868,8 +868,3 @@
   id: punishment
   flavorType: Complex
   description: flavor-complex-punishment
-
-- type: flavor
-  id: holy
-  flavorType: Base
-  description: flavor-base-holy

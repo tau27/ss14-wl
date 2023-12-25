@@ -55,7 +55,7 @@
         Plasma: danger # everything below is usually bad
         Tritium: danger
         WaterVapor: stationWaterVapor
-        Ammonia: stationAmmonia
+        Miasma: stationMiasma
         NitrousOxide: stationNO
         Frezon: danger
     - type: Tag

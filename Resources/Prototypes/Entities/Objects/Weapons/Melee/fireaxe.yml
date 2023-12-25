@@ -19,14 +19,15 @@
       types:
         # axes are kinda like sharp hammers, you know?
         Blunt: 5
-        Slash: 10
-        Structural: 10
+        Slash: 13
+        Structural: 7
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Slash: 10
-        Structural: 40
+        Blunt: 2.5
+        Slash: 10.5
+        Structural: 60
   - type: Item
     size: Ginormous
   - type: Clothing
@@ -42,10 +43,6 @@
   - type: Prying
   - type: UseDelay
     delay: 1
-  - type: StealTarget
-    stealGroup: FireAxe
-  - type: IgniteOnMeleeHit
-    fireStacks: -4
 
 - type: entity
   id: FireAxeFlaming

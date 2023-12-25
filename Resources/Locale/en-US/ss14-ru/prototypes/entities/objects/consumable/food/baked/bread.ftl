@@ -62,5 +62,3 @@ ent-FoodBreadMoldySlice = moldy bread slice
     .desc = Entire stations have been ripped apart over arguing whether this is still good to eat.
 ent-FoodBreadTwoSlice = two slice
     .desc = Classy.
-ent-MobBreadDog = bread dog
-    .desc = It's a bread. It's a dog. It's a... breaddog?

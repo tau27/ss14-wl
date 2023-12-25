@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Shared.Movement.Components;
 using Content.Shared.Physics;
 using Content.Shared.Salvage;
 using Robust.Shared.Map;
@@ -39,7 +38,6 @@ public sealed class RestrictedRangeSystem : SharedRestrictedRangeSystem
             collisionLayer: (int) (CollisionGroup.HighImpassable | CollisionGroup.Impassable | CollisionGroup.LowImpassable),
             body: boundaryPhysics);
         _physics.WakeBody(boundaryUid, body: boundaryPhysics);
-        AddComp<BoundaryComponent>(boundaryUid);
         return boundaryUid;
     }
 }

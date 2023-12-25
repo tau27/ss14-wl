@@ -26,7 +26,6 @@ namespace Content.Server.Fluids.EntitySystems;
 public sealed partial class PuddleSystem
 {
     [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
 
     private void InitializeSpillable()
     {
@@ -184,10 +183,6 @@ public sealed partial class PuddleSystem
 
         if (solution.Volume == FixedPoint2.Zero)
             return;
-
-        if (_entityManager.HasComponent<PreventSpillerComponent>(args.User))
-            return;
-
 
         Verb verb = new()
         {

@@ -416,7 +416,6 @@
     - HandLabeler
     - Lighter
     - DrinkShaker
-    - Syringe
 
 - type: entity
   id: BorgModuleMusique

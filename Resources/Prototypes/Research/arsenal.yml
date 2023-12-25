@@ -14,8 +14,6 @@
   # These are roundstart but not replenishable for salvage
   - WeaponCrusher
   - WeaponCrusherDagger
-  # This is not roundstart since its a direct upgrade
-  - WeaponCrusherGlaive
 
 - type: technology
   id: DraconicMunitions
@@ -88,24 +86,22 @@
   - MagazineBoxRifleRubber
 
 - type: technology
-  id: UraniumMunitions
-  name: research-technology-uranium-munitions
+  id: PracticeAmmunition
+  name: research-technology-practice-ammunition
   icon:
-    sprite: Objects/Materials/Sheets/other.rsi
-    state: uranium
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
+    state: practice
   discipline: Arsenal
   tier: 1
-  cost: 7500
+  cost: 2000
   recipeUnlocks:
-  - ShellShotgunUranium
-  - CartridgePistolUranium
-  - CartridgeMagnumUranium
-  - CartridgeLightRifleUranium
-  - CartridgeRifleUranium
-  - MagazineBoxPistolUranium
-  - MagazineBoxMagnumUranium
-  - MagazineBoxLightRifleUranium
-  - MagazineBoxRifleUranium
+  - ShellShotgunPractice
+  - MagazineBoxPistolPractice
+  - MagazineBoxMagnumPractice
+  - MagazineBoxLightRiflePractice
+  - MagazineBoxRiflePractice
+  - WeaponLaserCarbinePractice
+  - WeaponDisablerPractice
 
 # Tier 2
 
@@ -143,7 +139,6 @@
   tier: 2
   cost: 8000
   recipeUnlocks:
-  - ClothingEyesGlassesSecurity
   - Truncheon
   - TelescopicShield
   - HoloprojectorSecurity
@@ -161,15 +156,3 @@
   cost: 15000
   recipeUnlocks:
   - WeaponAdvancedLaser
-
-- type: technology
-  id: ExperimentalBatteryAmmo
-  name: research-technology-experimental-battery-ammo
-  icon:
-    sprite: Objects/Weapons/Guns/Battery/svalinn.rsi
-    state: icon
-  discipline: Arsenal
-  tier: 3
-  cost: 15000
-  recipeUnlocks:
-  - WeaponLaserSvalinn

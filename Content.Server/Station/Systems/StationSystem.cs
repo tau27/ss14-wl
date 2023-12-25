@@ -331,7 +331,7 @@ public sealed class StationSystem : EntitySystem
         if (!string.IsNullOrEmpty(name))
             _metaData.SetEntityName(mapGrid, name);
 
-        var stationMember = EnsureComp<StationMemberComponent>(mapGrid);
+        var stationMember = AddComp<StationMemberComponent>(mapGrid);
         stationMember.Station = station;
         stationData.Grids.Add(mapGrid);
 

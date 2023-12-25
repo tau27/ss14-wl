@@ -28,8 +28,6 @@
   abstract: true
   description: A small plastic pack with condiments to put on your food.
   components:
-  - type: Item
-    size: Tiny
   - type: Drink
     solution: food
     refillable: false
@@ -39,7 +37,7 @@
   # Since this one is closed, the only way to insert liquid is with a syringe.
   - type: InjectableSolution
     solution: food
-  # Note NOT refillable.
+  # Note NOT refillable. 
   # It be a shame if it turned out ALL drinks were ALWAYS refillable.... ffs.
   # Well its fixed now, but I want to share my pain.
   - type: SolutionContainerManager
@@ -55,9 +53,6 @@
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50
-  - type: Tag
-    tags:
-      - Packet
 
 - type: entity
   parent: BaseFoodCondimentPacket
@@ -449,9 +444,6 @@
       visible: true
   - type: Icon
     state: bottle-enzyme
-  - type: Tag
-    tags:
-      - Enzyme
 
 - type: entity
   parent: BaseFoodCondimentBottle
@@ -560,8 +552,6 @@
   name: empty shaker
   description: A shaker used to store and dispense spices.
   components:
-  - type: Item
-    size: Tiny
   - type: Drink
     solution: food
   - type: SolutionContainerManager
@@ -609,9 +599,6 @@
     state: shaker-salt
   - type: Icon
     state: shaker-salt
-  - type: Tag
-    tags:
-      - SaltShaker
 
 - type: entity
   parent: BaseFoodShaker
@@ -629,6 +616,3 @@
     state: shaker-pepper
   - type: Icon
     state: shaker-pepper
-  - type: Tag
-    tags:
-      - PepperShaker

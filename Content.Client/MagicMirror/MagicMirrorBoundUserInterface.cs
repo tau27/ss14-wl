@@ -64,16 +64,5 @@ public sealed class MagicMirrorBoundUserInterface : BoundUserInterface
 
         _window.UpdateState(data);
     }
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        if (!disposing)
-            return;
-
-        if (_window != null)
-            _window.OnClose -= Close;
-
-        _window?.Dispose();
-    }
 }
 

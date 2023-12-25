@@ -34,7 +34,7 @@ public sealed class LungSystem : EntitySystem
     private void OnGotEquipped(EntityUid uid, BreathToolComponent component, GotEquippedEvent args)
     {
 
-        if ((args.SlotFlags & component.AllowedSlots) == 0) return;
+        if ((args.SlotFlags & component.AllowedSlots) != component.AllowedSlots) return;
         component.IsFunctional = true;
 
         if (TryComp(args.Equipee, out InternalsComponent? internals))
@@ -53,18 +53,22 @@ public sealed class LungSystem : EntitySystem
 
     private void OnMaskToggled(Entity<BreathToolComponent> ent, ref ItemMaskToggledEvent args)
     {
-        if (args.IsToggled || args.IsEquip)
+        // toggle breath tool connection (skip during equip since that is handled in LungSystem)
+        if (args.IsEquip)
         {
-            _atmos.DisconnectInternals(ent.Comp);
-        }
-        else
-        {
-            ent.Comp.IsFunctional = true;
-
-            if (TryComp(args.Wearer, out InternalsComponent? internals))
+            if (args.IsToggled)
             {
-                ent.Comp.ConnectedInternalsEntity = args.Wearer;
-                _internals.ConnectBreathTool((args.Wearer, internals), ent);
+                _atmos.DisconnectInternals(ent.Comp);
+            }
+            else
+            {
+                ent.Comp.IsFunctional = true;
+
+                if (TryComp(args.Wearer, out InternalsComponent? internals))
+                {
+                    ent.Comp.ConnectedInternalsEntity = args.Wearer;
+                    _internals.ConnectBreathTool((args.Wearer, internals), ent);
+                }
             }
         }
     }

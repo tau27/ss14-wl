@@ -31,7 +31,7 @@ public sealed class RandomGiftSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        _prototype.PrototypesReloaded += OnPrototypesReloaded;
         SubscribeLocalEvent<RandomGiftComponent, MapInitEvent>(OnGiftMapInit);
         SubscribeLocalEvent<RandomGiftComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RandomGiftComponent, ExaminedEvent>(OnExamined);
@@ -80,8 +80,7 @@ public sealed class RandomGiftSystem : EntitySystem
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs obj)
     {
-        if (obj.WasModified<EntityPrototype>())
-            BuildIndex();
+        BuildIndex();
     }
 
     private void BuildIndex()

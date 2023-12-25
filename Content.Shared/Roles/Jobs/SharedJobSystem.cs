@@ -22,14 +22,19 @@ public abstract class SharedJobSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReload);
+        _protoManager.PrototypesReloaded += OnProtoReload;
         SetupTrackerLookup();
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        _protoManager.PrototypesReloaded -= OnProtoReload;
     }
 
     private void OnProtoReload(PrototypesReloadedEventArgs obj)
     {
-        if (obj.WasModified<JobPrototype>())
-            SetupTrackerLookup();
+        SetupTrackerLookup();
     }
 
     private void SetupTrackerLookup()

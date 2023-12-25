@@ -27,12 +27,10 @@ public partial class NavMapControl : MapGridControl
     [Dependency] private readonly IEntityManager _entManager = default!;
     private readonly SharedTransformSystem _transformSystem = default!;
 
-    public EntityUid? Owner;
     public EntityUid? MapUid;
 
     // Actions
     public event Action<NetEntity?>? TrackedEntitySelectedAction;
-    public event Action<DrawingHandleScreen>? PostWallDrawingAction;
 
     // Tracked data
     public Dictionary<EntityCoordinates, (bool Visible, Color Color)> TrackedCoordinates = new();
@@ -47,12 +45,10 @@ public partial class NavMapControl : MapGridControl
     protected float UpdateTime = 1.0f;
     protected float MaxSelectableDistance = 10f;
     protected float RecenterMinimum = 0.05f;
-    protected float MinDragDistance = 5f;
 
     // Local variables
     private Vector2 _offset;
     private bool _draggin;
-    private Vector2 _startDragPosition = default!;
     private bool _recentering = false;
     private readonly Font _font;
     private float _updateTimer = 0.25f;
@@ -172,29 +168,21 @@ public partial class NavMapControl : MapGridControl
         base.KeyBindDown(args);
 
         if (args.Function == EngineKeyFunctions.Use)
-        {
-            _startDragPosition = args.PointerLocation.Position;
             _draggin = true;
-        }
     }
 
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
         base.KeyBindUp(args);
 
-        if (args.Function == EngineKeyFunctions.Use)
-            _draggin = false;
-
         if (TrackedEntitySelectedAction == null)
             return;
 
         if (args.Function == EngineKeyFunctions.Use)
         {
-            if (_xform == null || _physics == null || TrackedEntities.Count == 0)
-                return;
+            _draggin = false;
 
-            // If the cursor has moved a significant distance, exit
-            if ((_startDragPosition - args.PointerLocation.Position).Length() > MinDragDistance)
+            if (_xform == null || _physics == null || TrackedEntities.Count == 0)
                 return;
 
             // Get the clicked position
@@ -360,9 +348,6 @@ public partial class NavMapControl : MapGridControl
             }
         }
 
-        if (PostWallDrawingAction != null)
-            PostWallDrawingAction.Invoke(handle);
-
         // Beacons
         if (_beacons.Pressed)
         {
@@ -460,7 +445,7 @@ public partial class NavMapControl : MapGridControl
         }
     }
 
-    protected virtual void UpdateNavMap()
+    private void UpdateNavMap()
     {
         if (_navMap == null || _grid == null)
             return;

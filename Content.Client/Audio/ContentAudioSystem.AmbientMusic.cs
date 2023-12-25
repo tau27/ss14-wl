@@ -67,7 +67,7 @@ public sealed partial class ContentAudioSystem
         _nextAudio = TimeSpan.MaxValue;
 
         SetupAmbientSounds();
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReload);
+        _proto.PrototypesReloaded += OnProtoReload;
         _state.OnStateChanged += OnStateChange;
         // On round end summary OR lobby cut audio.
         SubscribeNetworkEvent<RoundEndMessageEvent>(OnRoundEndMessage);
@@ -86,14 +86,21 @@ public sealed partial class ContentAudioSystem
     private void ShutdownAmbientMusic()
     {
         _configManager.UnsubValueChanged(CCVars.AmbientMusicVolume, AmbienceCVarChanged);
+        _proto.PrototypesReloaded -= OnProtoReload;
         _state.OnStateChanged -= OnStateChange;
         _ambientMusicStream = _audio.Stop(_ambientMusicStream);
     }
 
     private void OnProtoReload(PrototypesReloadedEventArgs obj)
     {
-        if (obj.WasModified<AmbientMusicPrototype>() || obj.WasModified<RulesPrototype>())
-            SetupAmbientSounds();
+        if (!obj.ByType.ContainsKey(typeof(AmbientMusicPrototype)) &&
+            !obj.ByType.ContainsKey(typeof(RulesPrototype)))
+        {
+            return;
+        }
+
+        _ambientSounds.Clear();
+        SetupAmbientSounds();
     }
 
     private void OnStateChange(StateChangedEventArgs obj)
@@ -107,7 +114,6 @@ public sealed partial class ContentAudioSystem
 
     private void SetupAmbientSounds()
     {
-        _ambientSounds.Clear();
         foreach (var ambience in _proto.EnumeratePrototypes<AmbientMusicPrototype>())
         {
             var tracks = _ambientSounds.GetOrNew(ambience.ID);

@@ -37,7 +37,7 @@
     attackRate: 0.75
     damage:
       types:
-        Slash: 16
+        Slash: 33
   - type: Item
     size: Normal
   - type: Clothing
@@ -65,15 +65,15 @@
     damage:
       types:
         Blunt: 10
-        Slash: 10
-        Structural: 5
+        Slash: 20
+        Structural: 3
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: 5
-        Slash: 5
-        Structural: 10
+        Blunt: 4
+        Slash: 12
+        Structural: 30
   - type: Item
     size: Ginormous
   - type: Clothing

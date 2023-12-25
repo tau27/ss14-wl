@@ -4,7 +4,6 @@ using Content.Server.NodeContainer.NodeGroups;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Maps;
-using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
@@ -406,10 +405,9 @@ namespace Content.Server.Atmos.EntitySystems
 
             var time = _gameTiming.CurTime;
             var number = 0;
-            var ev = new AtmosDeviceUpdateEvent(RealAtmosTime());
             while (atmosphere.CurrentRunAtmosDevices.TryDequeue(out var device))
             {
-                RaiseLocalEvent(device, ref ev);
+                RaiseLocalEvent(device, new AtmosDeviceUpdateEvent(RealAtmosTime()));
                 device.Comp.LastProcess = time;
 
                 if (number++ < LagCheckIterations)
@@ -450,15 +448,6 @@ namespace Content.Server.Atmos.EntitySystems
                 var ent = _currentRunAtmosphere[_currentRunAtmosphereIndex];
                 var (owner, atmosphere) = ent;
                 TryComp(owner, out GasTileOverlayComponent? visuals);
-
-                if (!TryComp(owner, out TransformComponent? x)
-                    || x.MapUid == null
-                    || TerminatingOrDeleted(x.MapUid.Value)
-                    || x.MapID == MapId.Nullspace)
-                {
-                    Log.Error($"Attempted to process atmos without a map? Entity: {ToPrettyString(owner)}. Map: {ToPrettyString(x?.MapUid)}. MapId: {x?.MapID}");
-                    continue;
-                }
 
                 if (atmosphere.LifeStage >= ComponentLifeStage.Stopping || Paused(owner) || !atmosphere.Simulated)
                     continue;

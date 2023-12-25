@@ -126,13 +126,6 @@
       proto: OreTin
 
 - type: salvageLoot
-  id: OreCoal
-  guaranteed: true
-  loots:
-    - !type:BiomeMarkerLoot
-      proto: OreCoal
-
-- type: salvageLoot
   id: OreQuartz
   guaranteed: true
   loots:

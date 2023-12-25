@@ -14,15 +14,7 @@
   supportedTypes:
     - Heat
     - Shock
-
-- type: damageContainer
-  id: StructuralInorganic
-  supportedGroups:
-  - Brute
-  supportedTypes:
-  - Heat
-  - Shock
-  - Structural
+    - Structural # this probably should be in separate container
 
 - type: damageContainer
   id: Silicon

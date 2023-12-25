@@ -5,7 +5,6 @@ using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.Utility;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared.Damage
 {
@@ -16,7 +15,7 @@ namespace Content.Shared.Damage
     ///     The actual damage information is stored in <see cref="DamageDict"/>. This class provides
     ///     functions to apply resistance sets and supports basic math operations to modify this dictionary.
     /// </remarks>
-    [DataDefinition, Serializable, NetSerializable]
+    [DataDefinition]
     public sealed partial class DamageSpecifier : IEquatable<DamageSpecifier>
     {
         // These exist solely so the wiki works. Please do not touch them or use them.

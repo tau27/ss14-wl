@@ -611,6 +611,3 @@
       tags:
         - DroneUsable
         - Mop
-    - type: CleansForensics
-    - type: Fiber
-      fiberColor: fibers-white

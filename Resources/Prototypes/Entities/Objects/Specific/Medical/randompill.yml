@@ -37,15 +37,11 @@
     - Pax
     - Tricordrazine
     - SodiumPolyacrylate
-    - Fresium
   - quantity: 20
     weight: 5
     reagents:
     - SpaceDrugs
-  - quantity: 10
-    weight: 5
-    reagents:
-    - Amatoxin
+    - Toxin
 
 - type: entity
   name: strange pill

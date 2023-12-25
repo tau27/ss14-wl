@@ -10,8 +10,8 @@ using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Construction.Components;
 using Content.Server.Gravity;
-using Content.Server.Item;
 using Content.Server.Power.Components;
+using Content.Server.Tools.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Gravity;
@@ -164,7 +164,7 @@ public abstract partial class InteractionTest
 
         // spawn and pick up the new item
         var item = await SpawnEntity(entity, SEntMan.GetCoordinates(PlayerCoords));
-        ItemToggleComponent? itemToggle = null;
+        WelderComponent? welder = null;
 
         await Server.WaitPost(() =>
         {
@@ -173,16 +173,14 @@ public abstract partial class InteractionTest
             Assert.That(HandSys.TryPickup(playerEnt, item, Hands.ActiveHand, false, false, Hands));
 
             // turn on welders
-            if (enableWelder && SEntMan.TryGetComponent(item, out itemToggle) && !itemToggle.Activated)
-            {
-                Assert.That(ItemToggleSys.TryActivate(item, playerEnt, itemToggle: itemToggle));
-            }
+            if (enableWelder && SEntMan.TryGetComponent(item, out welder) && !welder.Lit)
+                Assert.That(ToolSys.TryTurnWelderOn(item, playerEnt, welder));
         });
 
         await RunTicks(1);
         Assert.That(Hands.ActiveHandEntity, Is.EqualTo(item));
-        if (enableWelder && itemToggle != null)
-            Assert.That(itemToggle.Activated);
+        if (enableWelder && welder != null)
+            Assert.That(welder.Lit);
 
         return item;
     }

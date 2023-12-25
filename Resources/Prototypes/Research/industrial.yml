@@ -13,7 +13,6 @@
   - MiningDrill
   - BorgModuleMining
   - OreProcessorMachineCircuitboard
-  - OreBagOfHolding
 
 - type: technology
   id: AdvancedPowercells
@@ -124,6 +123,20 @@
   - BorgModuleGrapplingGun
 
 - type: technology
+  id: RapidConstruction
+  name: research-technology-rapid-construction
+  icon:
+    sprite: Objects/Tools/rcd.rsi
+    state: icon
+  discipline: Industrial
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - RCD
+  - RCDAmmo
+  - BorgModuleRCD
+
+- type: technology
   id: Shuttlecraft
   name: research-technology-shuttlecraft
   icon:
@@ -180,7 +193,6 @@
     - PowerDrill
     - JawsOfLife
     - BorgModuleAdvancedTool
-    - BorgModuleRCD
 
 # Tier 3
 

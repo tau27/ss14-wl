@@ -39,7 +39,6 @@ namespace Content.Server.Atmos.EntitySystems
 
         private const float TimerDelay = 0.5f;
         private float _timer = 0f;
-        private const float MinimumSoundValvePressure = 10.0f;
 
         public override void Initialize()
         {
@@ -179,8 +178,7 @@ namespace Content.Server.Atmos.EntitySystems
             var strength = removed.TotalMoles * MathF.Sqrt(removed.Temperature);
             var dir = _random.NextAngle().ToWorldVec();
             _throwing.TryThrow(gasTank, dir * strength, strength);
-            if (gasTank.Comp.OutputPressure >= MinimumSoundValvePressure)
-                _audioSys.PlayPvs(gasTank.Comp.RuptureSound, gasTank);
+            _audioSys.PlayPvs(gasTank.Comp.RuptureSound, gasTank);
         }
 
         private void ToggleInternals(Entity<GasTankComponent> ent)

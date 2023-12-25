@@ -1,4 +1,4 @@
-﻿using Content.Server.Atmos.Rotting;
+﻿using Content.Server.Atmos.Miasma;
 using Content.Server.Chat.Systems;
 using Content.Server.DoAfter;
 using Content.Server.Electrocution;
@@ -77,8 +77,7 @@ public sealed class DefibrillatorSystem : EntitySystem
 
     private void OnPowerCellSlotEmpty(EntityUid uid, DefibrillatorComponent component, ref PowerCellSlotEmptyEvent args)
     {
-        if (!TerminatingOrDeleted(uid))
-            TryDisable(uid, component);
+        TryDisable(uid, component);
     }
 
     private void OnAfterInteract(EntityUid uid, DefibrillatorComponent component, AfterInteractEvent args)
@@ -140,7 +139,6 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         component.Enabled = false;
         _appearance.SetData(uid, ToggleVisuals.Toggled, false);
-
         _audio.PlayPvs(component.PowerOffSound, uid);
         return true;
     }

@@ -1,10 +1,7 @@
 using System.Linq;
 using System.Text.Json.Serialization;
-using Content.Server.Body.Components;
-using Content.Shared.Body.Prototypes;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.GuideGenerator;
 
@@ -32,7 +29,7 @@ public sealed class ReagentEntry
     public List<string> Recipes { get; } = new();
 
     [JsonPropertyName("metabolisms")]
-    public Dictionary<ProtoId<MetabolismGroupPrototype>, ReagentEffectsEntry>? Metabolisms { get; }
+    public Dictionary<string, ReagentEffectsEntry>? Metabolisms { get; }
 
     public ReagentEntry(ReagentPrototype proto)
     {

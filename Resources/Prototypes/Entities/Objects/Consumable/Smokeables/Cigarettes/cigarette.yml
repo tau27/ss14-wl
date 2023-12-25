@@ -59,11 +59,6 @@
     solutions:
       smokable:
         maxVol: 20
-  - type: Tag
-    tags:
-      - Cigarette
-      - Trash
-      - Burnt
 
 - type: entity
   id: CigaretteSyndicate

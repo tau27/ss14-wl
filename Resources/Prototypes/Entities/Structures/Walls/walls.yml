@@ -28,8 +28,8 @@
   - type: PlacementReplacement
     key: walls
   - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallic
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -502,20 +502,17 @@
   - type: Construction
     graph: Girder
     node: reinforcedWall
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallicStrong
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 600
+        damage: 1200 #excess damage (nuke?). avoid computational cost of spawning entities.
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
-        damage: 400
+        damage: 600
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -560,9 +557,6 @@
     sprite: Structures/Walls/riveted.rsi
   - type: Icon
     sprite: Structures/Walls/riveted.rsi
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallicStrong
   - type: Destructible
     thresholds:
     - trigger:
@@ -683,7 +677,7 @@
     state: state0
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: StructuralMetallic
+    damageModifierSet: StrongMetallic
   - type: Physics
     bodyType: Static
   - type: Reflect
@@ -726,6 +720,8 @@
           path: /Audio/Effects/metalbreak.ogg
       - !type:DoActsBehavior
         acts: ["Destruction"]
+    destroySound:
+      path: /Audio/Effects/metalbreak.ogg
   - type: Construction
     graph: Girder
     node: diagonalshuttleWall
@@ -801,13 +797,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 400
+        damage: 600
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 300
       behaviors:
       - !type:PlaySoundBehavior
         sound:

@@ -34,8 +34,6 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: StealTarget
-    stealGroup: AnimalIan
 
 - type: entity
   name: Old Ian
@@ -240,8 +238,6 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: StealTarget
-    stealGroup: AnimalBingus
 
 - type: entity
   name: McGriff
@@ -305,8 +301,6 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: StealTarget
-    stealGroup: AnimalMcGriff
 
 - type: entity
   name: Paperwork
@@ -404,8 +398,6 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: StealTarget
-    stealGroup: AnimalWalter
 
 - type: entity
   name: Morty
@@ -428,50 +420,6 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: StealTarget
-    stealGroup: AnimalMorty
-
-- type: entity
-  name: Morty
-  parent: MobPossumMorty
-  id: MobPossumMortyOld
-  suffix: Old sprite
-  components:
-  - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Animals/possum_old.rsi
-    layers:
-    - map: [ "enum.DamageStateVisualLayers.Base" ]
-      state: possum_old
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: possum_old
-      Dead:
-        Base: possum_dead_old
-
-- type: entity
-  name: Poppy # the Safety Possum
-  parent: MobPossumMorty
-  id: MobPossumPoppy
-  description: It's an opossum, a small scavenging marsupial. It's wearing appropriate personal protective equipment.
-  components:
-  - type: Grammar
-    attributes:
-      proper: true
-      gender: female
-  - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Animals/possum.rsi
-    layers:
-    - map: [ "enum.DamageStateVisualLayers.Base" ]
-      state: poppy
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: poppy
-      Dead:
-        Base: poppy_dead
 
 - type: entity
   name: Morticia
@@ -544,8 +492,6 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: StealTarget
-    stealGroup: AnimalRenault
 
 - type: entity
   name: Hamlet
@@ -586,8 +532,6 @@
     - CannotSuicide
     - Hamster
     - VimPilot
-  - type: StealTarget
-    stealGroup: AnimalHamlet
 
 - type: entity
   name: Shiva
@@ -663,8 +607,6 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: StealTarget
-    stealGroup: AnimalShiva
 
 - type: entity
   name: Willow
@@ -763,8 +705,6 @@
     attributes:
       proper: true
       gender: female
-  - type: StealTarget
-    stealGroup: AnimalSmile
   - type: TTS # Corvax-TTS
     voice: Dryad
 
@@ -801,5 +741,3 @@
     attributes:
       proper: true
       gender: male
-  - type: StealTarget
-    stealGroup: AnimalPunPun

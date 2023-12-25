@@ -14,10 +14,6 @@
   id: OreSpaceQuartz
   oreEntity: SpaceQuartz1
 
-- type: ore
-  id: OreCoal
-  oreEntity: Coal1
-
 # Medium yields
 - type: ore
   id: OreGold
@@ -49,10 +45,6 @@
   oreEntity: MobIronCrab
 
 - type: ore
-  id: OreSilverCrab
-  oreEntity: MobSilverCrab
-
-- type: ore
   id: OreUraniumCrab
   oreEntity: MobUraniumCrab
 
@@ -66,7 +58,6 @@
   id: RandomOreDistributionStandard
   weights:
     OreSteel: 10
-    OreCoal: 10
     OreSpaceQuartz: 8
     OreGold: 2
     OrePlasma: 4
@@ -80,5 +71,4 @@
   weights:
     OreQuartzCrab: 5
     OreIronCrab: 5
-    OreUraniumCrab: 2
-    OreSilverCrab: 3
+    OreUraniumCrab: 3

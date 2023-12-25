@@ -1,4 +1,3 @@
-using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -8,8 +7,7 @@ namespace Content.Shared.Alert;
 public abstract class AlertsSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-
-    private FrozenDictionary<AlertType, AlertPrototype> _typeToAlert = default!;
+    private readonly Dictionary<AlertType, AlertPrototype> _typeToAlert = new();
 
     public IReadOnlyDictionary<AlertKey, AlertState>? GetActiveAlerts(EntityUid euid)
     {
@@ -172,8 +170,9 @@ public abstract class AlertsSystem : EntitySystem
         SubscribeLocalEvent<AlertsComponent, PlayerAttachedEvent>(OnPlayerAttached);
 
         SubscribeNetworkEvent<ClickAlertEvent>(HandleClickAlert);
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(HandlePrototypesReloaded);
+
         LoadPrototypes();
+        _prototypeManager.PrototypesReloaded += HandlePrototypesReloaded;
     }
 
     protected virtual void HandleComponentShutdown(EntityUid uid, AlertsComponent component, ComponentShutdown args)
@@ -186,25 +185,29 @@ public abstract class AlertsSystem : EntitySystem
         RaiseLocalEvent(uid, new AlertSyncEvent(uid), true);
     }
 
+    public override void Shutdown()
+    {
+        _prototypeManager.PrototypesReloaded -= HandlePrototypesReloaded;
+
+        base.Shutdown();
+    }
+
     private void HandlePrototypesReloaded(PrototypesReloadedEventArgs obj)
     {
-        if (obj.WasModified<AlertPrototype>())
-            LoadPrototypes();
+        LoadPrototypes();
     }
 
     protected virtual void LoadPrototypes()
     {
-        var dict = new Dictionary<AlertType, AlertPrototype>();
+        _typeToAlert.Clear();
         foreach (var alert in _prototypeManager.EnumeratePrototypes<AlertPrototype>())
         {
-            if (!dict.TryAdd(alert.AlertType, alert))
+            if (!_typeToAlert.TryAdd(alert.AlertType, alert))
             {
                 Log.Error("Found alert with duplicate alertType {0} - all alerts must have" +
                           " a unique alerttype, this one will be skipped", alert.AlertType);
             }
         }
-
-        _typeToAlert = dict.ToFrozenDictionary();
     }
 
     /// <summary>

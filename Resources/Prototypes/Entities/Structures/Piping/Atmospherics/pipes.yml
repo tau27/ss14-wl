@@ -34,8 +34,6 @@
       - !type:PlaySoundBehavior
         sound:
           path: /Audio/Effects/metalbreak.ogg
-          params:
-            volume: -8
       - !type:SpawnEntitiesBehavior
         spawn:
           GasPipeBroken:

@@ -1,4 +1,3 @@
-using System.Collections.Frozen;
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components;
@@ -8,7 +7,6 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.Chemistry.Reaction
 {
@@ -24,22 +22,23 @@ namespace Content.Shared.Chemistry.Reaction
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
         /// <summary>
-        /// A cache of all reactions indexed by at most ONE of their required reactants.
-        /// I.e., even if a reaction has more than one reagent, it will only ever appear once in this dictionary.
+        ///     A cache of all existant chemical reactions indexed by one of their
+        ///     required reactants.
         /// </summary>
-        private FrozenDictionary<string, List<ReactionPrototype>> _reactionsSingle = default!;
-
-        /// <summary>
-        ///     A cache of all reactions indexed by one of their required reactants.
-        /// </summary>
-        private FrozenDictionary<string, List<ReactionPrototype>> _reactions = default!;
+        private IDictionary<string, List<ReactionPrototype>> _reactions = default!;
 
         public override void Initialize()
         {
             base.Initialize();
 
             InitializeReactionCache();
-            SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+            _prototypeManager.PrototypesReloaded += OnPrototypesReloaded;
+        }
+
+        public override void Shutdown()
+        {
+            base.Shutdown();
+            _prototypeManager.PrototypesReloaded -= OnPrototypesReloaded;
         }
 
         /// <summary>
@@ -47,27 +46,34 @@ namespace Content.Shared.Chemistry.Reaction
         /// </summary>
         private void InitializeReactionCache()
         {
-            // Construct single-reaction dictionary.
-            var dict = new Dictionary<string, List<ReactionPrototype>>();
-            foreach(var reaction in _prototypeManager.EnumeratePrototypes<ReactionPrototype>())
-            {
-                // For this dictionary we only need to cache based on the first reagent.
-                var reagent = reaction.Reactants.Keys.First();
-                var list = dict.GetOrNew(reagent);
-                list.Add(reaction);
-            }
-            _reactionsSingle = dict.ToFrozenDictionary();
+            _reactions = new Dictionary<string, List<ReactionPrototype>>();
 
-            dict.Clear();
-            foreach(var reaction in _prototypeManager.EnumeratePrototypes<ReactionPrototype>())
+            var reactions = _prototypeManager.EnumeratePrototypes<ReactionPrototype>();
+            foreach(var reaction in reactions)
             {
-                foreach (var reagent in reaction.Reactants.Keys)
-                {
-                    var list = dict.GetOrNew(reagent);
-                    list.Add(reaction);
-                }
+                CacheReaction(reaction);
             }
-            _reactions = dict.ToFrozenDictionary();
+        }
+
+        /// <summary>
+        ///     Caches a reaction by its first required reagent.
+        ///     Used to build the reaction cache.
+        /// </summary>
+        /// <param name="reaction">A reaction prototype to cache.</param>
+        private void CacheReaction(ReactionPrototype reaction)
+        {
+            var reagents = reaction.Reactants.Keys;
+            foreach(var reagent in reagents)
+            {
+                if(!_reactions.TryGetValue(reagent, out var cache))
+                {
+                    cache = new List<ReactionPrototype>();
+                    _reactions.Add(reagent, cache);
+                }
+
+                cache.Add(reaction);
+                return; // Only need to cache based on the first reagent.
+            }
         }
 
         /// <summary>
@@ -76,8 +82,20 @@ namespace Content.Shared.Chemistry.Reaction
         /// <param name="eventArgs">The set of modified prototypes.</param>
         private void OnPrototypesReloaded(PrototypesReloadedEventArgs eventArgs)
         {
-            if (eventArgs.WasModified<ReactionPrototype>())
-                InitializeReactionCache();
+            if (!eventArgs.ByType.TryGetValue(typeof(ReactionPrototype), out var set))
+                return;
+
+            foreach (var (reactant, cache) in _reactions)
+            {
+                cache.RemoveAll((reaction) => set.Modified.ContainsKey(reaction.ID));
+                if (cache.Count == 0)
+                    _reactions.Remove(reactant);
+            }
+
+            foreach (var prototype in set.Modified.Values)
+            {
+                CacheReaction((ReactionPrototype) prototype);
+            }
         }
 
         /// <summary>
@@ -94,8 +112,7 @@ namespace Content.Shared.Chemistry.Reaction
             {
                 lowestUnitReactions = FixedPoint2.Zero;
                 return false;
-            }
-            if (solution.Temperature > reaction.MaximumTemperature)
+            } else if(solution.Temperature > reaction.MaximumTemperature)
             {
                 lowestUnitReactions = FixedPoint2.Zero;
                 return false;
@@ -109,7 +126,7 @@ namespace Content.Shared.Chemistry.Reaction
             }
 
             var attempt = new ReactionAttemptEvent(reaction, solution);
-            RaiseLocalEvent(owner, attempt);
+            RaiseLocalEvent(owner, attempt, false);
             if (attempt.Cancelled)
             {
                 lowestUnitReactions = FixedPoint2.Zero;
@@ -267,7 +284,7 @@ namespace Content.Shared.Chemistry.Reaction
             SortedSet<ReactionPrototype> reactions = new();
             foreach (var reactant in solution.Contents)
             {
-                if (_reactionsSingle.TryGetValue(reactant.Reagent.Prototype, out var reactantReactions))
+                if (_reactions.TryGetValue(reactant.Reagent.Prototype, out var reactantReactions))
                     reactions.UnionWith(reactantReactions);
             }
 
@@ -279,7 +296,7 @@ namespace Content.Shared.Chemistry.Reaction
                     return;
             }
 
-            Log.Error($"{nameof(Solution)} {owner} could not finish reacting in under {MaxReactionIterations} loops.");
+            Logger.Error($"{nameof(Solution)} {owner} could not finish reacting in under {MaxReactionIterations} loops.");
         }
     }
 

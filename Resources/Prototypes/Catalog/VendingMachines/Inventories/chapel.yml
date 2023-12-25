@@ -18,7 +18,6 @@
     ClothingHeadsetService: 2
     BoxCandle: 2
     BoxCandleSmall: 2
-    Urn: 5
   emaggedInventory:
     ClothingOuterArmorCult: 1
     ClothingHeadHelmetCult: 1
@@ -26,4 +25,5 @@
     ClothingHeadHatHoodCulthood: 3
     ClothingShoesCult: 4
     BedsheetCult: 4
+    BibleNecronomicon: 1
     ClothingNeckScarfStripedBlack: 3

@@ -1,3 +1,4 @@
+using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.Warps;
 using Content.Shared.Pinpointer;
@@ -31,7 +32,7 @@ public sealed class NavMapSystem : SharedNavMapSystem
         SubscribeLocalEvent<StationGridAddedEvent>(OnStationInit);
         SubscribeLocalEvent<NavMapComponent, ComponentStartup>(OnNavMapStartup);
         SubscribeLocalEvent<NavMapComponent, ComponentGetState>(OnGetState);
-        SubscribeLocalEvent<GridSplitEvent>(OnNavMapSplit);
+        SubscribeLocalEvent<NavMapComponent, GridSplitEvent>(OnNavMapSplit);
 
         SubscribeLocalEvent<NavMapBeaconComponent, ComponentStartup>(OnNavMapBeaconStartup);
         SubscribeLocalEvent<NavMapBeaconComponent, AnchorStateChangedEvent>(OnNavMapBeaconAnchor);
@@ -83,7 +84,7 @@ public sealed class NavMapSystem : SharedNavMapSystem
         RefreshGrid(component, grid);
     }
 
-    private void OnNavMapSplit(ref GridSplitEvent args)
+    private void OnNavMapSplit(EntityUid uid, NavMapComponent component, ref GridSplitEvent args)
     {
         var gridQuery = GetEntityQuery<MapGridComponent>();
 
@@ -93,7 +94,7 @@ public sealed class NavMapSystem : SharedNavMapSystem
             RefreshGrid(newComp, gridQuery.GetComponent(grid));
         }
 
-        RefreshGrid(Comp<NavMapComponent>(args.Grid), gridQuery.GetComponent(args.Grid));
+        RefreshGrid(component, gridQuery.GetComponent(uid));
     }
 
     private void RefreshGrid(NavMapComponent component, MapGridComponent grid)
@@ -200,6 +201,7 @@ public sealed class NavMapSystem : SharedNavMapSystem
     private void RefreshTile(MapGridComponent grid, NavMapComponent component, NavMapChunk chunk, Vector2i tile)
     {
         var relative = SharedMapSystem.GetChunkRelative(tile, ChunkSize);
+
         var existing = chunk.TileData;
         var flag = GetFlag(relative);
 

@@ -137,7 +137,7 @@ public sealed class SuitSensorSystem : EntitySystem
                 sensor.StationId = stationUid;
             }
 
-            RecursiveSensor(child, stationUid, sensorQuery, xformQuery);
+            RecursiveSensor(child.Value, stationUid, sensorQuery, xformQuery);
         }
     }
 

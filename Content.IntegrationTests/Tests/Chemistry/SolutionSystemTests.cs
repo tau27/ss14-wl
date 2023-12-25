@@ -26,22 +26,22 @@ public sealed class SolutionSystemTests
 
 - type: reagent
   id: TestReagentA
-  name: reagent-name-nothing
-  desc: reagent-desc-nothing
-  physicalDesc: reagent-physical-desc-nothing
+  name: nah
+  desc: nah
+  physicalDesc: nah
 
 - type: reagent
   id: TestReagentB
-  name: reagent-name-nothing
-  desc: reagent-desc-nothing
-  physicalDesc: reagent-physical-desc-nothing
+  name: nah
+  desc: nah
+  physicalDesc: nah
 
 - type: reagent
   id: TestReagentC
   specificHeat: 2.0
-  name: reagent-name-nothing
-  desc: reagent-desc-nothing
-  physicalDesc: reagent-physical-desc-nothing
+  name: nah
+  desc: nah
+  physicalDesc: nah
 ";
     [Test]
     public async Task TryAddTwoNonReactiveReagent()

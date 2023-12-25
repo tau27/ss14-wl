@@ -364,7 +364,8 @@ namespace Content.Server.GameTicking
 
                 if (TryGetEntity(mind.OriginalOwnedEntity, out var entity))
                 {
-                    _pvsOverride.AddGlobalOverride(GetNetEntity(entity.Value), recursive: true);
+                    // Temporarily disabled to test if this causes issues on live servers
+                    // _pvsOverride.AddGlobalOverride(GetNetEntity(entity.Value), recursive: true);
                 }
 
                 var roles = _roles.MindGetAllRoles(mindId);

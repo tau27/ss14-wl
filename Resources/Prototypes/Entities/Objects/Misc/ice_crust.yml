@@ -21,8 +21,6 @@
     - type: Clickable
     - type: Transform
       anchored: true
-    - type: Tag
-      tags: [ Ice ]
     - type: Physics
     - type: Fixtures
       fixtures:

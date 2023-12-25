@@ -215,8 +215,6 @@
           path: /Audio/Effects/Vehicle/vehiclestartup.ogg
           params:
             volume: -3
-  - type: StealTarget
-    stealGroup: VehicleSecway
 
 - type: entity
   parent: BaseVehicleRideable
