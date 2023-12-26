@@ -1,2 +1,2 @@
 ent-MobHumanoidKidan = Урист МакКидан
-  .desc = { ent-BaseMobHumanoidKidan.desc }
+    .desc = { ent-BaseMobHumanoidKidan.desc }

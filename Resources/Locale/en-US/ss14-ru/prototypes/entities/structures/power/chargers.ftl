@@ -1,5 +1,6 @@
-ent-BaseRecharger = { ent-BaseMachinePowered }
-  .desc = { ent-BaseMachinePowered.desc }
+ent-BaseRecharger = { ent-['BaseMachinePowered', 'ConstructibleMachine'] }
+
+  .desc = { ent-['BaseMachinePowered', 'ConstructibleMachine'].desc }
 ent-BaseItemRecharger = { ent-BaseRecharger }
     .desc = { ent-BaseRecharger.desc }
 ent-PowerCellRecharger = cell recharger

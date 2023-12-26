@@ -10,7 +10,6 @@ marking-UnderwearMaleCommie = Боксеры коммуниста
 marking-UnderwearMaleBriefs = Брифы
 marking-UnderwearMaleBoxers = Боксеры
 marking-UnderwearMaleAssblastusa = Боксеры свободы
-
 # Female
 marking-UnderwearFemaleUk = Бикини Великобритания
 marking-UnderwearFemaleThong = Стринги

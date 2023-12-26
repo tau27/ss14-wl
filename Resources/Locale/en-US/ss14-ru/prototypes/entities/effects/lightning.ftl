@@ -10,5 +10,3 @@ ent-SuperchargedLightning = supercharged lightning
     .desc = { ent-ChargedLightning.desc }
 ent-HyperchargedLightning = hypercharged lightning
     .desc = { ent-ChargedLightning.desc }
-ent-RainbowLightning = rainbow lightning
-    .desc = { ent-ChargedLightning.desc }
