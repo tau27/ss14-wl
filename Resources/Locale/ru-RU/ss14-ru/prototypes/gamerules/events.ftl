@@ -53,6 +53,8 @@ ent-SpiderClownSpawn = { ent-BaseGameRule }
 
 
 
+
+
 #    .desc = { ent-BaseGameRule.desc }
 
 #ent-LoneOpsSpawn = { ent-BaseGameRule }

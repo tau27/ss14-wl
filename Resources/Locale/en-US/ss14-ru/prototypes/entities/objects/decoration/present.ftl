@@ -6,10 +6,10 @@ ent-Present = { ent-['PresentBase', 'BaseStorageItem'] }
   .desc = { ent-['PresentBase', 'BaseStorageItem'].desc }
 ent-PresentRandomUnsafe = { ent-['PresentBase', 'BaseItem'] }
 
-  .suffix = Filled Unsafe
+  .suffix = Filled, any item
   .desc = { ent-['PresentBase', 'BaseItem'].desc }
 ent-PresentRandomInsane = { ent-PresentRandomUnsafe }
-    .suffix = Filled Insane
+    .suffix = Filled, any entity
     .desc = { ent-PresentRandomUnsafe.desc }
 ent-PresentRandom = { ent-['PresentBase', 'BaseItem'] }
 
