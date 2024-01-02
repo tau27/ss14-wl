@@ -1,33 +1,22 @@
 ent-PartHumanoidKidan = Kidan body part
-
-  .desc = { ent-['BaseItem', 'BasePart'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }
 ent-TorsoHumanoidKidan = Kidan torso
-
-  .desc = { ent-['PartHumanoidKidan', 'BaseTorso'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }
 ent-HeadHumanoidKidan = Kidan head
-
-  .desc = { ent-['PartHumanoidKidan', 'BaseHead'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }
 ent-LeftArmHumanoidKidan = left Kidan arm
-
-  .desc = { ent-['PartHumanoidKidan', 'BaseLeftArm'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }
 ent-RightArmHumanoidKidan = right Kidan arm
-
-  .desc = { ent-['PartHumanoidKidan', 'BaseRightArm'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }
 ent-LeftHandHumanoidKidan = left Kidan hand
-
-  .desc = { ent-['PartHumanoidKidan', 'BaseLeftHand'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }
 ent-RightHandHumanoidKidan = right Kidan hand
-
-  .desc = { ent-['PartHumanoidKidan', 'BaseRightHand'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }
 ent-LeftLegHumanoidKidan = left Kidan leg
-
-  .desc = { ent-['PartHumanoidKidan', 'BaseLeftLeg'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }
 ent-RightLegHumanoidKidan = right Kidan leg
-
-  .desc = { ent-['PartHumanoidKidan', 'BaseRightLeg'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }
 ent-LeftFootHumanoidKidan = left Kidan foot
-
-  .desc = { ent-['PartHumanoidKidan', 'BaseLeftFoot'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }
 ent-RightFootHumanoidKidan = right Kidan foot
-
-  .desc = { ent-['PartHumanoidKidan', 'BaseRightFoot'].desc }
+  .desc = { ent-PartHumanoidKidan.desc }

@@ -1,33 +1,22 @@
 ent-PartHumanoidTajara = tajara body part
-
-  .desc = { ent-['BaseItem', 'BasePart'].desc }
+  .desc = { ent-BasePart.desc }
 ent-TorsoHumanoidTajara = Tajara torso
-
-  .desc = { ent-['PartHumanoidTajara', 'BaseTorso'].desc }
+  .desc = { ent-PartHumanoidTajara.desc }
 ent-HeadHumanoidTajara = Tajara head
-
-  .desc = { ent-['PartHumanoidTajara', 'BaseHead'].desc }
+  .desc = { ent-PartHumanoidTajara.desc }
 ent-LeftArmHumanoidTajara = left Tajara arm
-
-  .desc = { ent-['PartHumanoidTajara', 'BaseLeftArm'].desc }
+  .desc = { ent-PartHumanoidTajara.desc }
 ent-RightArmHumanoidTajara = right Tajara arm
-
-  .desc = { ent-['PartHumanoidTajara', 'BaseRightArm'].desc }
+  .desc = { ent-PartHumanoidTajara.desc }
 ent-LeftHandHumanoidTajara = left Tajara hand
-
-  .desc = { ent-['PartHumanoidTajara', 'BaseLeftHand'].desc }
+  .desc = { ent-PartHumanoidTajara.desc }
 ent-RightHandHumanoidTajara = right Tajara hand
-
-  .desc = { ent-['PartHumanoidTajara', 'BaseRightHand'].desc }
+  .desc = { ent-PartHumanoidTajara.desc }
 ent-LeftLegHumanoidTajara = left Tajara leg
-
-  .desc = { ent-['PartHumanoidTajara', 'BaseLeftLeg'].desc }
+  .desc = { ent-PartHumanoidTajara.desc }
 ent-RightLegHumanoidTajara = right Tajara leg
-
-  .desc = { ent-['PartHumanoidTajara', 'BaseRightLeg'].desc }
+  .desc = { ent-PartHumanoidTajara.desc }
 ent-LeftFootHumanoidTajara = left Tajara foot
-
-  .desc = { ent-['PartHumanoidTajara', 'BaseLeftFoot'].desc }
+  .desc = { ent-PartHumanoidTajara.desc }
 ent-RightFootHumanoidTajara = right Tajara foot
-
-  .desc = { ent-['PartHumanoidTajara', 'BaseRightFoot'].desc }
+  .desc = { ent-PartHumanoidTajara.desc }

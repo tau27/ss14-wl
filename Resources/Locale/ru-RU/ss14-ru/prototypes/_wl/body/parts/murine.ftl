@@ -1,33 +1,22 @@
 ent-PartHumanoidMurine = базовая конечность мурина
-
-  .desc = { ent-['BaseItem', 'BasePart'].desc }
+  .desc = { ent-BasePart.desc }
 ent-TorsoHumanoidMurine = торс мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseTorso'].desc }
+  .desc = { ent-PartHumanoidMurine.desc }
 ent-HeadHumanoidMurine = голова мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseHead'].desc }
+  .desc = { ent-PartHumanoidMurine.desc }
 ent-LeftArmHumanoidMurine = левая рука мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseLeftArm'].desc }
+  .desc = { ent-PartHumanoidMurine.desc }
 ent-RightArmHumanoidMurine = правая рука мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseRightArm'].desc }
+  .desc = { ent-PartHumanoidMurine.desc }
 ent-LeftHandHumanoidMurine = левая ладонь мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseLeftHand'].desc }
+  .desc = { ent-PartHumanoidMurine.desc }
 ent-RightHandHumanoidMurine = правая ладонь мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseRightHand'].desc }
+  .desc = { ent-PartHumanoidMurine.desc }
 ent-LeftLegHumanoidMurine = левая нога мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseLeftLeg'].desc }
+  .desc = { ent-PartHumanoidMurine.desc }
 ent-RightLegHumanoidMurine = правая нога мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseRightLeg'].desc }
+  .desc = { ent-PartHumanoidMurine.desc }
 ent-LeftFootHumanoidMurine = левая стопа мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseLeftFoot'].desc }
+  .desc = { ent-PartHumanoidMurine.desc }
 ent-RightFootHumanoidMurine = правая стопа мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseRightFoot'].desc }
+  .desc = { ent-PartHumanoidMurine.desc }

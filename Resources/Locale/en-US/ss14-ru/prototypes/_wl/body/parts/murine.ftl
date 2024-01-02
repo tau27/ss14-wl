@@ -1,33 +1,22 @@
-ent-PartHumanoidMurine = базовая конечность мурина
-
-  .desc = { ent-['BaseItem', 'BasePart'].desc }
-ent-TorsoHumanoidMurine = торс мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseTorso'].desc }
-ent-HeadHumanoidMurine = голова мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseHead'].desc }
-ent-LeftArmHumanoidMurine = левая рука мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseLeftArm'].desc }
-ent-RightArmHumanoidMurine = правая рука мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseRightArm'].desc }
-ent-LeftHandHumanoidMurine = левая ладонь мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseLeftHand'].desc }
-ent-RightHandHumanoidMurine = правая ладонь мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseRightHand'].desc }
-ent-LeftLegHumanoidMurine = левая нога мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseLeftLeg'].desc }
-ent-RightLegHumanoidMurine = правая нога мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseRightLeg'].desc }
-ent-LeftFootHumanoidMurine = левая стопа мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseLeftFoot'].desc }
-ent-RightFootHumanoidMurine = правая стопа мурина
-
-  .desc = { ent-['PartHumanoidMurine', 'BaseRightFoot'].desc }
+ent-PartHumanoidMurine = murine body part
+  .desc = { ent-BasePart.desc }
+ent-TorsoHumanoidMurine = murine torso
+  .desc = { ent-PartHumanoidMurine.desc }
+ent-HeadHumanoidMurine = murine head
+  .desc = { ent-PartHumanoidMurine.desc }
+ent-LeftArmHumanoidMurine = left murine arm
+  .desc = { ent-PartHumanoidMurine.desc }
+ent-RightArmHumanoidMurine =  right murine arm
+  .desc = { ent-PartHumanoidMurine.desc }
+ent-LeftHandHumanoidMurine = left murine hand
+  .desc = { ent-PartHumanoidMurine.desc }
+ent-RightHandHumanoidMurine = right murine hand
+  .desc = { ent-PartHumanoidMurine.desc }
+ent-LeftLegHumanoidMurine = left murine leg
+  .desc = { ent-PartHumanoidMurine.desc }
+ent-RightLegHumanoidMurine = right murine leg
+  .desc = { ent-PartHumanoidMurine.desc }
+ent-LeftFootHumanoidMurine = left murine foot
+  .desc = { ent-PartHumanoidMurine.desc }
+ent-RightFootHumanoidMurine = right murine foot
+  .desc = { ent-PartHumanoidMurine.desc }

@@ -1,33 +1,22 @@
 ent-PartAkula = akula body part
-
-  .desc = { ent-['BaseItem', 'BasePart'].desc }
+  .desc = { ent-BasePart.desc }
 ent-TorsoAkula = akula torso
-
-  .desc = { ent-['PartAkula', 'BaseTorso'].desc }
+  .desc = { ent-PartAkula.desc }
 ent-HeadAkula = akula head
-
-  .desc = { ent-['PartAkula', 'BaseHead'].desc }
+  .desc = { ent-PartAkula.desc }
 ent-LeftArmAkula = left akula arm
-
-  .desc = { ent-['PartAkula', 'BaseLeftArm'].desc }
+  .desc = { ent-PartAkula.desc }
 ent-RightArmAkula = right akula arm
-
-  .desc = { ent-['PartAkula', 'BaseRightArm'].desc }
+  .desc = { ent-PartAkula.desc }
 ent-LeftHandAkula = left akula hand
-
-  .desc = { ent-['PartAkula', 'BaseLeftHand'].desc }
+  .desc = { ent-PartAkula.desc }
 ent-RightHandAkula = right akula hand
-
-  .desc = { ent-['PartAkula', 'BaseRightHand'].desc }
+  .desc = { ent-PartAkula.desc }
 ent-LeftLegAkula = left akula leg
-
-  .desc = { ent-['PartAkula', 'BaseLeftLeg'].desc }
+  .desc = { ent-PartAkula.desc }
 ent-RightLegAkula = right akula leg
-
-  .desc = { ent-['PartAkula', 'BaseRightLeg'].desc }
+  .desc = { ent-PartAkula.desc }
 ent-LeftFootAkula = left akula foot
-
-  .desc = { ent-['PartAkula', 'BaseLeftFoot'].desc }
+  .desc = { ent-PartAkula.desc }
 ent-RightFootAkula = right akula foot
-
-  .desc = { ent-['PartAkula', 'BaseRightFoot'].desc }
+  .desc = { ent-PartAkula.desc }
