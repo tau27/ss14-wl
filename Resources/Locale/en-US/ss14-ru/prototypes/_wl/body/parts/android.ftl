@@ -1,32 +1,22 @@
 ent-PartAndroid = android body part
     .desc = { ent-BasePart.desc }
-ent-TorsoAndroid = туловище андроида
-
-  .desc = { ent-['PartAndroid', 'BaseTorso'].desc }
-ent-HeadAndroid = голова андроида
-
-  .desc = { ent-['PartAndroid', 'BaseHead'].desc }
-ent-LeftArmAndroid = левая рука андроида
-
-  .desc = { ent-['PartAndroid', 'BaseLeftArm'].desc }
-ent-RightArmAndroid = правая рука андроида
-
-  .desc = { ent-['PartAndroid', 'BaseRightArm'].desc }
-ent-LeftHandAndroid = левая ладонь андроида
-
-  .desc = { ent-['PartAndroid', 'BaseLeftHand'].desc }
-ent-RightHandAndroid = правая ладонь андроида
-
-  .desc = { ent-['PartAndroid', 'BaseRightHand'].desc }
-ent-LeftLegAndroid = левая нога андроида
-
-  .desc = { ent-['PartAndroid', 'BaseLeftLeg'].desc }
-ent-RightLegAndroid = правая нога андроида
-
-  .desc = { ent-['PartAndroid', 'BaseRightLeg'].desc }
-ent-LeftFootAndroid = левая стопа андроида
-
-  .desc = { ent-['PartAndroid', 'BaseLeftFoot'].desc }
-ent-RightFootAndroid = правая стопа андроида
-
-  .desc = { ent-['PartAndroid', 'BaseRightFoot'].desc }
+ent-TorsoAndroid = android body
+  .desc = { ent-PartAndroid.desc }
+ent-HeadAndroid = android head
+  .desc = { ent-PartAndroid.desc }
+ent-LeftArmAndroid = left android arm
+  .desc = { ent-PartAndroid.desc }
+ent-RightArmAndroid = right android arm
+  .desc = { ent-PartAndroid.desc }
+ent-LeftHandAndroid = left android hand
+  .desc = { ent-PartAndroid.desc }
+ent-RightHandAndroid = right android hand
+  .desc = { ent-PartAndroid.desc }
+ent-LeftLegAndroid = left android foot
+  .desc = { ent-PartAndroid.desc }
+ent-RightLegAndroid = right android leg
+  .desc = { ent-PartAndroid.desc }
+ent-LeftFootAndroid = left android foot
+  .desc = { ent-PartAndroid.desc }
+ent-RightFootAndroid = right android foot
+  .desc = { ent-PartAndroid.desc }
