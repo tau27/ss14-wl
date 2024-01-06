@@ -71,3 +71,5 @@
         prob: 0.1
       - id: BookBusido # Corvax-Books
         prob: 0.1
+      - id: BookAME # Corvax-WL-Books
+        prob: 0.3
