@@ -391,32 +391,32 @@
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: NOTICEOFLIQUIDATIONRecipe
-  result: NOTICEOFLIQUIDATION
+  id: NoticeOfLiquidationRecipe
+  result: NoticeOfLiquidation
   completetime: 1
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: BUSINESSDEALRecipe
-  result: BUSINESSDEAL
+  id: BusinessDealRecipe
+  result: BusinessDeal
   completetime: 1
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: NOTEBEGINNINGMILITARYACTIONSRecipe
-  result: NOTEBEGINNINGMILITARYACTIONS
+  id: NoteBeginningMilitaryActionsRecipe
+  result: NoteBeginningMilitaryActions
   completetime: 1
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: REPORTACCOMPLISHMENTGOALSRecipe
-  result: REPORTACCOMPLISHMENTGOALS
+  id: ReportAccomplishmentGoalsRecipe
+  result: ReportAccomplishmentGoals
   completetime: 1
   applyMaterialDiscount: false
   materials:

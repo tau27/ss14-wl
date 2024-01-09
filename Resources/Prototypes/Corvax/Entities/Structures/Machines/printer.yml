@@ -75,10 +75,10 @@
       - StatementHealtheRecipe
   - type: EmagLatheRecipes
     emagStaticRecipes:
-        - NOTICEOFLIQUIDATIONRecipe
-        - BUSINESSDEALRecipe
-        - NOTEBEGINNINGMILITARYACTIONSRecipe
-        - REPORTACCOMPLISHMENTGOALSRecipe
+        - NoticeOfLiquidationRecipe
+        - BusinessDealRecipe
+        - NoteBeginningMilitaryActionsRecipe
+        - ReportAccomplishmentGoalsRecipe
   - type: Fixtures
     fixtures:
       fix1:

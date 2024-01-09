@@ -1054,7 +1054,7 @@ doc-text-printer-StatementHealth =
     =============================================
                                 ⠀[italic]Место для печатей[/italic]
 
-doc-text-printer-NOTICEOFLIQUIDATION =
+doc-text-printer-NoticeOfLiquidation =
    ⠀[color=#B50F1D] ███░██████░███[/color]
    ⠀[color=#B50F1D] █░░░██░░░░░░░█[/color]    [head=3]Бланк документа[/head]
    ⠀[color=#B50F1D] █░░░░████░░░░█[/color]             [head=3]Syndicate[/head]
@@ -1074,7 +1074,7 @@ doc-text-printer-NOTICEOFLIQUIDATION =
     =============================================
                                 ⠀[italic]Место для печатей[/italic]
 
-doc-text-printer-BUSINESSDEAL =
+doc-text-printer-BusinessDeal =
    ⠀[color=#B50F1D] ███░██████░███[/color]
    ⠀[color=#B50F1D] █░░░██░░░░░░░█[/color]    [head=3]Бланк документа[/head]
    ⠀[color=#B50F1D] █░░░░████░░░░█[/color]             [head=3]Syndicate[/head]
@@ -1095,7 +1095,7 @@ doc-text-printer-BUSINESSDEAL =
     =============================================
                                 ⠀[italic]Место для печатей[/italic]
 
-doc-text-printer-NOTEBEGINNINGMILITARYACTIONS =
+doc-text-printer-NoteBeginningMilitaryActions =
    ⠀[color=#B50F1D] ███░██████░███[/color]
    ⠀[color=#B50F1D] █░░░██░░░░░░░█[/color]    [head=3]Бланк документа[/head]
    ⠀[color=#B50F1D] █░░░░████░░░░█[/color]             [head=3]Syndicate[/head]
@@ -1115,7 +1115,7 @@ doc-text-printer-NOTEBEGINNINGMILITARYACTIONS =
     =============================================
                                 ⠀[italic]Место для печатей[/italic]
 
-doc-text-printer-REPORTACCOMPLISHMENTGOALS =
+doc-text-printer-ReportAccomplishmentGoals =
    ⠀[color=#B50F1D] ███░██████░███[/color]
    ⠀[color=#B50F1D] █░░░██░░░░░░░█[/color]    [head=3]Бланк документа[/head]
    ⠀[color=#B50F1D] █░░░░████░░░░█[/color]             [head=3]Syndicate[/head]

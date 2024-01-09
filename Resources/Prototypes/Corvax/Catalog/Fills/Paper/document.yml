@@ -443,37 +443,37 @@
 
 - type: entity
   parent: Paper
-  id: NOTICEOFLIQUIDATION
+  id: NoticeOfLiquidation
   name: УвЕдОмЛеНиЕ о ЛиКвИдАцИи
   description: Напечатано на принтере
   components:
     - type: Paper
-      content: doc-text-printer-NOTICEOFLIQUIDATION
+      content: doc-text-printer-NoticeOfLiquidation
 
 - type: entity
   parent: Paper
-  id: BUSINESSDEAL
+  id: BusinessDeal
   name: ДеЛоВаЯ сДеЛкА
   description: Напечатано на принтере
   components:
     - type: Paper
-      content: doc-text-printer-BUSINESSDEAL
+      content: doc-text-printer-BusinessDeal
 
 - type: entity
   parent: Paper
-  id: NOTEBEGINNINGMILITARYACTIONS
+  id: NoteBeginningMilitaryActions
   name: НоТа О нАчАлЕ вОеНнЫх ДеЙсТвИй
   description: Напечатано на принтере
   components:
     - type: Paper
-      content: doc-text-printer-NOTEBEGINNINGMILITARYACTIONS
+      content: doc-text-printer-NoteBeginningMilitaryActions
 
 - type: entity
   parent: Paper
-  id: REPORTACCOMPLISHMENTGOALS
+  id: ReportAccomplishmentGoals
   name: ОтЧёТ о ВыПоЛнЕнИи ЦеЛеЙ
   description: Напечатано на принтере
   components:
     - type: Paper
-      content: doc-text-printer-REPORTACCOMPLISHMENTGOALS
+      content: doc-text-printer-ReportAccomplishmentGoals
 
