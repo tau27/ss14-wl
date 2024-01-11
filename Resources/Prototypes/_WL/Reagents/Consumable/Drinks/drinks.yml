@@ -19,6 +19,9 @@
         amount: 0.15
       - !type:HealthChange
         conditions:
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
         - !type:ReagentThreshold
           min: 7
         damage:

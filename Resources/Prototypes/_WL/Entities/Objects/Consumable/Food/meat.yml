@@ -72,3 +72,28 @@
             Quantity: 10
           - ReagentId: Vitamin
             Quantity: 5
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodPemmican
+  name: "пеммикан"
+  description: "Высококопитательный малогабаритный брикет."
+  components:
+  - type: FlavorProfile
+    flavors:
+      - lyrran6
+  - type: Food
+    transferAmount: 5
+  - type: Sprite
+    sprite: _WL/Entities/Objects/Consumable/Food/cischi.rsi
+    state: pemmican
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 7
+        - ReagentId: Vitamin
+          Quantity: 3
+  - type: Item

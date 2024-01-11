@@ -31,19 +31,20 @@
         conditions:
         - !type:OrganType
           type: Cischi
-      - !type:MovespeedModifier
-        walkSpeedModifier: 0.85
-        sprintSpeedModifier: 0.85
-        conditions:
-        - !type:OrganType
-          type: Cischi
-          shouldHave: true
+      #- !type:MovespeedModifier
+      #  conditions:
+      #  - !type:ReagentThreshold
+      #    reagent: Oxygen
+      #    min: 0.1
+      #  - !type:OrganType
+      #    type: Cischi
+      #  walkSpeedModifier: 0.85
+      #  sprintSpeedModifier: 0.85
       - !type:SatiateHunger
         factor: -0.005
         conditions:
         - !type:OrganType
           type: Cischi
-          shouldHave: true
       # WL Cischi species end
       # Convert Oxygen into CO2.
       - !type:ModifyLungGas
@@ -173,6 +174,8 @@
         - !type:OrganType
           type: Plant
         # WL Cischi species start
+      - !type:Oxygenate
+        conditions:
         - !type:OrganType
           type: Cischi
         # WL Cischi species end
@@ -202,6 +205,8 @@
           type: Plant
           shouldHave: false
         # WL Cischi species start
+      - !type:Oxygenate # carbon dioxide displaces oxygen from the bloodstream, causing asphyxiation
+        conditions:
         - !type:OrganType
           type: Cischi
           shouldHave: false

@@ -2,17 +2,14 @@
   save: false
   name: Урист МакЛистик
   parent: BaseMobSpeciesOrganic
-  description: "*шелестит*"
   id: MobCischi
   components:
+  - type: Hunger
+  - type: Thirst
   - type: HumanoidAppearance
     species: Cischi
   - type: Damageable
     damageModifierSet: Cischi
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 4.9
-  - type: NoSlip
   - type: Inventory
     templateId: cischi
     speciesId: digi

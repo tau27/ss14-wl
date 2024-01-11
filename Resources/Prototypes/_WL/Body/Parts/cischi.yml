@@ -100,6 +100,8 @@
       partType: Leg
       symmetry: Left
     - type: MovementBodyPart
+      walkSpeed : 2
+      sprintSpeed : 4.9
 
 - type: entity
   id: RightLegCischi
@@ -113,6 +115,8 @@
       partType: Leg
       symmetry: Right
     - type: MovementBodyPart
+      walkSpeed : 2
+      sprintSpeed : 4.9
 
 - type: entity
   id: LeftFootCischi
