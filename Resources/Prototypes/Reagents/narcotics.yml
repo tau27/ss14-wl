@@ -267,14 +267,14 @@
   - !type:PlantAdjustHealth
     amount: -5
   metabolisms:
-   Cischi:
-     effects:
-     - !type:HealthChange
-       damage:
-         groups:
-           Toxin: -0.25
-           Brute: -0.25
-           Burn: -0.25
+    Cischi:
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Toxin: -0.25
+            Brute: -0.25
+            Burn: -0.25
 
 # TODO: Replace these nonstandardized effects with generic brain damage
 - type: reagent
