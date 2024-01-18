@@ -8,6 +8,11 @@
   markingLimits: MobCischiMarkingLimits
   dollPrototype: MobCischiDummy
   skinColoration: Hues
+  maleFirstNames: names_cischi_first
+  femaleFirstNames: names_cischi_first
+  maleLastNames: names_cischi_last_male
+  femaleLastNames: names_cischi_last_female
+  naming: TheFirstofLast
 
 - type: speciesBaseSprites
   id: MobCischiSprites
