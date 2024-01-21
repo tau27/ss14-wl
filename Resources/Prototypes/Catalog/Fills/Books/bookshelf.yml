@@ -67,7 +67,6 @@
         prob: 0.1
       - id: BookJourney
         prob: 0.1
- это временно, мне лень искать решение, чтобы проверка прошла
       - id: BookInspiration
         prob: 0.1
       - id: BookBusido # Corvax-Books
@@ -99,4 +98,4 @@
       - id: BookChemicalCompendium
         orGroup: BookPool
       - id: BookAME # Corvax-WL-Books
-        prob: 0.3
+        orGroup: BookPool
