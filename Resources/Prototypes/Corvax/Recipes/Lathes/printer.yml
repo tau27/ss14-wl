@@ -1,423 +1,566 @@
 - type: latheRecipe
-  id: ReportStationRecipe
-  result: ReportStation
-  completetime: 1
+  id: PrintedDocumentReportStationRecipe
+  result: PrintedDocumentReportStation
+  category: Reports
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ReporDepartmentRecipe
-  result: ReporDepartment
-  completetime: 1
+  id: PrintedDocumentReportOnEliminationOfViolationsRecipe
+  result: PrintedDocumentReportOnEliminationOfViolations
+  category: Reports
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ReportEmployeePerformanceRecipe
-  result: ReportEmployeePerformance
-  completetime: 1
+  id: PrintedDocumentReporDepartmentRecipe
+  result: PrintedDocumentReporDepartment
+  category: Reports
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ReportOnTheChaptersMeetingRecipe
-  result: ReportOnTheChaptersMeeting
-  completetime: 1
+  id: PrintedDocumentReportEmployeePerformanceRecipe
+  result: PrintedDocumentReportEmployeePerformance
+  category: Reports
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: InternalAffairsAgentsReportRecipe
-  result: InternalAffairsAgentsReport
-  completetime: 1
+  id: PrintedDocumentReportOnTheChaptersMeetingRecipe
+  result: PrintedDocumentReportOnTheChaptersMeeting
+  category: Reports
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ConditionReportRecipe
-  result: ConditionReport
-  completetime: 1
+  id: PrintedDocumentInternalAffairsAgentsReportRecipe
+  result: PrintedDocumentInternalAffairsAgentsReport
+  category: Reports
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ReportStudyObjectRecipe
-  result: ReportStudyObject
-  completetime: 1
+  id: PrintedDocumentConditionReportRecipe
+  result: PrintedDocumentConditionReport
+  category: Reports
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: DisposalReportRecipe
-  result: DisposalReport
-  completetime: 1
+  id: PrintedDocumentReportStudyObjectRecipe
+  result: PrintedDocumentReportStudyObject
+  category: Reports
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ApplicationAppointmentInterimRecipe
-  result: ApplicationAppointmentInterim
-  completetime: 1
+  id: PrintedDocumentExperimentReportRecipe
+  result: PrintedDocumentExperimentReport
+  category: Reports
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ApplicationEmploymentRecipe
-  result: ApplicationEmployment
-  completetime: 1
+  id: PrintedDocumentDisposalReportRecipe
+  result: PrintedDocumentDisposalReport
+  category: Reports
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: LetterResignationRecipe
-  result: LetterResignation
-  completetime: 1
+  id: PrintedDocumentApplicationAppointmentInterimRecipe
+  result: PrintedDocumentApplicationAppointmentInterim
+  category: Statements
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ApplicationAccessRecipe
-  result: ApplicationAccess
-  completetime: 1
+  id: PrintedDocumentApplicationEmploymentRecipe
+  result: PrintedDocumentApplicationEmployment
+  category: Statements
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ApplicationEquipmentRecipe
-  result: ApplicationEquipment
-  completetime: 1
+  id: PrintedDocumentLetterResignationRecipe
+  result: PrintedDocumentLetterResignation
+  category: Statements
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: EvacuationShuttleRequestRecipe
-  result: EvacuationShuttleRequest
-  completetime: 1
+  id: PrintedDocumentApplicationAccessRecipe
+  result: PrintedDocumentApplicationAccess
+  category: Statements
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ShuttleRegistrationRequestRecipe
-  result: ShuttleRegistrationRequest
-  completetime: 1
+  id: PrintedDocumentApplicationEquipmentRecipe
+  result: PrintedDocumentApplicationEquipment
+  category: Statements
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: RequestCallMembersCentralCommitteeDSORecipe
-  result: RequestCallMembersCentralCommitteeDSO
-  completetime: 1
+  id: PrintedDocumentAppealRecipe
+  result: PrintedDocumentAppeal
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: RequestChangeSalaryRecipe
-  result: RequestChangeSalary
-  completetime: 1
+  id: PrintedDocumentEvacuationShuttleRequestRecipe
+  result: PrintedDocumentEvacuationShuttleRequest
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: RequestNonListedEmploymentRecipe
-  result: RequestNonListedEmployment
-  completetime: 1
+  id: PrintedDocumentShuttleRegistrationRequestRecipe
+  result: PrintedDocumentShuttleRegistrationRequest
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: RequestDocumentsRecipe
-  result: RequestDocuments
-  completetime: 1
+  id: PrintedDocumentRequestCallMembersCentralCommitteeDSORecipe
+  result: PrintedDocumentRequestCallMembersCentralCommitteeDSO
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: RequestEuthanasiaRecipe
-  result: RequestEuthanasia
-  completetime: 1
+  id: PrintedDocumentRequestRequestToEstablishThreatLevelRecipe
+  result: PrintedDocumentRequestRequestToEstablishThreatLevel
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: RequestConstructionWorkRecipe
-  result: RequestConstructionWork
-  completetime: 1
+  id: PrintedDocumentRequestChangeSalaryRecipe
+  result: PrintedDocumentRequestChangeSalary
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: RequestModernizationRecipe
-  result: RequestModernization
-  completetime: 1
+  id: PrintedDocumentRequestForNonlistedEmploymentRecipe
+  result: PrintedDocumentRequestForNonlistedEmployment
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ComplaintViolationLaborRulesRecipe
-  result: ComplaintViolationLaborRules
-  completetime: 1
+  id: PrintedDocumentRequestForPromotionRecipe
+  result: PrintedDocumentRequestForPromotion
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ComplaintОffenseRecipe
-  result: ComplaintОffense
-  completetime: 1
+  id: PrintedDocumentRequestDocumentsRecipe
+  result: PrintedDocumentRequestDocuments
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: PermissionEquipmentRecipe
-  result: PermissionEquipment
-  completetime: 1
+  id: PrintedDocumentRequestEuthanasiaRecipe
+  result: PrintedDocumentRequestEuthanasia
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: SearchPermissionRecipe
-  result: SearchPermission
-  completetime: 1
+  id: PrintedDocumentRequestConstructionWorkRecipe
+  result: PrintedDocumentRequestConstructionWork
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: PermissionWeaponsRecipe
-  result: PermissionWeapons
-  completetime: 1
+  id: PrintedDocumentRequestModernizationRecipe
+  result: PrintedDocumentRequestModernization
+  category: InquiriesAndAppeals
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: PrescriptionDrugAuthorizationRecipe
-  result: PrescriptionDrugAuthorization
-  completetime: 1
+  id: PrintedDocumentComplaintViolationLaborRulesRecipe
+  result: PrintedDocumentComplaintViolationLaborRules
+  category: Complaintst
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: PermissionDisposeBodyRecipe
-  result: PermissionDisposeBody
-  completetime: 1
+  id: PrintedDocumentComplaintOffenseRecipe
+  result: PrintedDocumentComplaintOffense
+  category: Complaintst
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ConstructionPermitRecipe
-  result: ConstructionPermit
-  completetime: 1
+  id: PrintedDocumentPermissionEquipmentRecipe
+  result: PrintedDocumentPermissionEquipment
+  category: Permissions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: OrderDismissalRecipe
-  result: OrderDismissal
-  completetime: 1
+  id: PrintedDocumentPermissionToTravelInCaseOfThreatRecipe
+  result: PrintedDocumentPermissionToTravelInCaseOfThreat
+  category: Permissions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: OrderDeprivationAccessRecipe
-  result: OrderDeprivationAccess
-  completetime: 1
+  id: PrintedDocumentSearchPermissionRecipe
+  result: PrintedDocumentSearchPermission
+  category: Permissions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: OrderEncouragementRecipe
-  result: OrderEncouragement
-  completetime: 1
+  id: PrintedDocumentPermissionToCarryWeaponsRecipe
+  result: PrintedDocumentPermissionToCarryWeapons
+  category: Permissions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: OrderParolePrisonerRecipe
-  result: OrderParolePrisoner
-  completetime: 1
+  id: PrintedDocumentPrescriptionDrugAuthorizationRecipe
+  result: PrintedDocumentPrescriptionDrugAuthorization
+  category: Permissions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: OrderRecognizingSentienceCreatureRecipe
-  result: OrderRecognizingSentienceCreature
-  completetime: 1
+  id: PrintedDocumentPermissionDisposeBodyRecipe
+  result: PrintedDocumentPermissionDisposeBody
+  category: Permissions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: OrderMedicalInterventionRecipe
-  result: OrderMedicalIntervention
-  completetime: 1
+  id: PrintedDocumentConstructionPermitRecipe
+  result: PrintedDocumentConstructionPermit
+  category: Permissions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ProductManufacturingOrderRecipe
-  result: ProductManufacturingOrder
-  completetime: 1
+  id: PrintedDocumentPermissionToExtendMarriageRecipe
+  result: PrintedDocumentPermissionToExtendMarriage
+  category: Permissions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: OrderPurchaseResourcesEquipmentRecipe
-  result: OrderPurchaseResourcesEquipment
-  completetime: 1
+  id: PrintedDocumentOrderDismissalRecipe
+  result: PrintedDocumentOrderDismissal
+  category: OrdersAndInstructions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: OrderingSpecialEquipmentRecipe
-  result: OrderingSpecialEquipment
-  completetime: 1
+  id: PrintedDocumentOrderDeprivationAccessRecipe
+  result: PrintedDocumentOrderDeprivationAccess
+  category: OrdersAndInstructions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: OrderPurchaseWeaponsRecipe
-  result: OrderPurchaseWeapons
-  completetime: 1
+  id: PrintedDocumentOrderEncouragementRecipe
+  result: PrintedDocumentOrderEncouragement
+  category: OrdersAndInstructions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: CertificateRecipe
-  result: Certificate
-  completetime: 1
+  id: PrintedDocumentOrderParolePrisonerRecipe
+  result: PrintedDocumentOrderParolePrisoner
+  category: OrdersAndInstructions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: CertificateAdvancedTrainingRecipe
-  result: CertificateAdvancedTraining
-  completetime: 1
+  id: PrintedDocumentOrderRecognizingSentienceCreatureRecipe
+  result: PrintedDocumentOrderRecognizingSentienceCreature
+  category: OrdersAndInstructions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: CertificateOffenseRecipe
-  result: CertificateOffense
-  completetime: 1
+  id: PrintedDocumentOrderMedicalInterventionRecipe
+  result: PrintedDocumentOrderMedicalIntervention
+  category: OrdersAndInstructions
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: DeathCertificateRecipe
-  result: DeathCertificate
-  completetime: 1
+  id: PrintedDocumentProductManufacturingOrderRecipe
+  result: PrintedDocumentProductManufacturingOrder
+  category: Orders
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: MarriageCertificateRecipe
-  result: MarriageCertificate
-  completetime: 1
+  id: PrintedDocumentOrderPurchaseResourcesEquipmentRecipe
+  result: PrintedDocumentOrderPurchaseResourcesEquipment
+  category: Orders
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: DivorceCertificateRecipe
-  result: DivorceCertificate
-  completetime: 1
+  id: PrintedDocumentOrderingSpecialEquipmentRecipe
+  result: PrintedDocumentOrderingSpecialEquipment
+  category: Orders
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ClosingIndictmentRecipe
-  result: ClosingIndictment
-  completetime: 1
+  id: PrintedDocumentOrderPurchaseWeaponsRecipe
+  result: PrintedDocumentOrderPurchaseWeapons
+  category: Orders
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: SentenceRecipe
-  result: Sentence
-  completetime: 1
+  id: PrintedDocumentCertificateRecipe
+  result: PrintedDocumentCertificate
+  category: Evidence
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: StatementHealtheRecipe
-  result: StatementHealth
-  completetime: 1
+  id: PrintedDocumentCertificateAdvancedTrainingRecipe
+  result: PrintedDocumentCertificateAdvancedTraining
+  category: Evidence
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: NoticeOfLiquidationRecipe
-  result: NoticeOfLiquidation
-  completetime: 1
+  id: PrintedDocumentCertificateOffenseRecipe
+  result: PrintedDocumentCertificateOffense
+  category: Evidence
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: BusinessDealRecipe
-  result: BusinessDeal
-  completetime: 1
+  id: PrintedDocumentDeathCertificateRecipe
+  result: PrintedDocumentDeathCertificate
+  category: Evidence
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: NoteBeginningMilitaryActionsRecipe
-  result: NoteBeginningMilitaryActions
-  completetime: 1
+  id: PrintedDocumentMarriageCertificateRecipe
+  result: PrintedDocumentMarriageCertificate
+  category: Evidence
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100
 
 - type: latheRecipe
-  id: ReportAccomplishmentGoalsRecipe
-  result: ReportAccomplishmentGoals
-  completetime: 1
+  id: PrintedDocumentDivorceCertificateRecipe
+  result: PrintedDocumentDivorceCertificate
+  category: Evidence
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    SheetPrinter: 100
+
+- type: latheRecipe
+  id: PrintedDocumentClosingIndictmentRecipe
+  result: PrintedDocumentClosingIndictment
+  category: ConclusionsAndDecisions
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    SheetPrinter: 100
+
+- type: latheRecipe
+  id: PrintedDocumentSentenceRecipe
+  result: PrintedDocumentSentence
+  category: ConclusionsAndDecisions
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    SheetPrinter: 100
+
+- type: latheRecipe
+  id: PrintedDocumentJudgmentRecipe
+  result: PrintedDocumentJudgment
+  category: ConclusionsAndDecisions
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    SheetPrinter: 100
+
+- type: latheRecipe
+  id: PrintedDocumentStatementHealtheRecipe
+  result: PrintedDocumentStatementHealth
+  category: ConclusionsAndDecisions
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    SheetPrinter: 100
+
+- type: latheRecipe
+  id: PrintedDocumentDecisionToStartTrialRecipe
+  result: PrintedDocumentDecisionToStartTrial
+  category: ConclusionsAndDecisions
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    SheetPrinter: 100
+
+- type: latheRecipe
+  id: PrintedDocumentErrorLoadingFormHeaderRecipe
+  result: PrintedDocumentErrorLoadingFormHeader
+  category: ErrorDocument
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    SheetPrinter: 100
+
+- type: latheRecipe
+  id: PrintedDocumentNoticeOfLiquidationRecipe
+  result: PrintedDocumentNoticeOfLiquidation
+  category: ErrorDocument
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    SheetPrinter: 100
+
+- type: latheRecipe
+  id: PrintedDocumentBusinessDealRecipe
+  result: PrintedDocumentBusinessDeal
+  category: ErrorDocument
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    SheetPrinter: 100
+
+- type: latheRecipe
+  id: PrintedDocumentNoteBeginningMilitaryActionsRecipe
+  result: PrintedDocumentNoteBeginningMilitaryActions
+  category: ErrorDocument
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    SheetPrinter: 100
+
+- type: latheRecipe
+  id: PrintedDocumentReportAccomplishmentGoalsRecipe
+  result: PrintedDocumentReportAccomplishmentGoals
+  category: ErrorDocument
+  completetime: 2
   applyMaterialDiscount: false
   materials:
     SheetPrinter: 100

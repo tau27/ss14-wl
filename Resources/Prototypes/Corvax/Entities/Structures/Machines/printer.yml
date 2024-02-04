@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseLathe
   id: PrinterDoc
-  name: принтер документов
-  description: Уникальная разработка Nanotrasen.
+  name: document printer
+  description: Bureaucratic perfection. Stores a database of all Nanotrasen documents, and lets you print them as long as you have paper.
   components:
   - type: Sprite
     sprite: Corvax/Structures/Machines/printer.rsi
@@ -20,65 +20,77 @@
   - type: Transform
     noRot: false
   - type: Machine
+    board: PrinterDocMachineCircuitboard
   - type: Lathe
     producingSound: /Audio/Machines/scanning.ogg
     idleState: icon
     runningState: building
     staticRecipes:
-      - ReportStationRecipe
-      - ReporDepartmentRecipe
-      - ReportEmployeePerformanceRecipe
-      - ReportOnTheChaptersMeetingRecipe
-      - InternalAffairsAgentsReportRecipe
-      - ConditionReportRecipe
-      - ReportStudyObjectRecipe
-      - DisposalReportRecipe
-      - ApplicationAppointmentInterimRecipe
-      - ApplicationEmploymentRecipe
-      - LetterResignationRecipe
-      - ApplicationAccessRecipe
-      - ApplicationEquipmentRecipe
-      - EvacuationShuttleRequestRecipe
-      - ShuttleRegistrationRequestRecipe
-      - RequestCallMembersCentralCommitteeDSORecipe
-      - RequestChangeSalaryRecipe
-      - RequestNonListedEmploymentRecipe
-      - RequestDocumentsRecipe
-      - RequestEuthanasiaRecipe
-      - RequestConstructionWorkRecipe
-      - RequestModernizationRecipe
-      - ComplaintViolationLaborRulesRecipe
-      - PermissionEquipmentRecipe
-      - SearchPermissionRecipe
-      - PermissionWeaponsRecipe
-      - PrescriptionDrugAuthorizationRecipe
-      - PermissionDisposeBodyRecipe
-      - ConstructionPermitRecipe
-      - OrderDismissalRecipe
-      - OrderDeprivationAccessRecipe
-      - OrderEncouragementRecipe
-      - OrderParolePrisonerRecipe
-      - OrderRecognizingSentienceCreatureRecipe
-      - OrderMedicalInterventionRecipe
-      - ProductManufacturingOrderRecipe
-      - OrderPurchaseResourcesEquipmentRecipe
-      - OrderingSpecialEquipmentRecipe
-      - OrderPurchaseWeaponsRecipe
-      - CertificateRecipe
-      - CertificateAdvancedTrainingRecipe
-      - CertificateOffenseRecipe
-      - DeathCertificateRecipe
-      - MarriageCertificateRecipe
-      - DivorceCertificateRecipe
-      - ClosingIndictmentRecipe
-      - SentenceRecipe
-      - StatementHealtheRecipe
+      - PrintedDocumentReportStationRecipe
+      - PrintedDocumentReportOnEliminationOfViolationsRecipe
+      - PrintedDocumentReporDepartmentRecipe
+      - PrintedDocumentReportEmployeePerformanceRecipe
+      - PrintedDocumentReportOnTheChaptersMeetingRecipe
+      - PrintedDocumentInternalAffairsAgentsReportRecipe
+      - PrintedDocumentConditionReportRecipe
+      - PrintedDocumentReportStudyObjectRecipe
+      - PrintedDocumentExperimentReportRecipe
+      - PrintedDocumentDisposalReportRecipe
+      - PrintedDocumentApplicationAppointmentInterimRecipe
+      - PrintedDocumentApplicationEmploymentRecipe
+      - PrintedDocumentLetterResignationRecipe
+      - PrintedDocumentApplicationAccessRecipe
+      - PrintedDocumentApplicationEquipmentRecipe
+      - PrintedDocumentAppealRecipe
+      - PrintedDocumentEvacuationShuttleRequestRecipe
+      - PrintedDocumentShuttleRegistrationRequestRecipe
+      - PrintedDocumentRequestCallMembersCentralCommitteeDSORecipe
+      - PrintedDocumentRequestRequestToEstablishThreatLevelRecipe
+      - PrintedDocumentRequestChangeSalaryRecipe
+      - PrintedDocumentRequestForNonlistedEmploymentRecipe
+      - PrintedDocumentRequestForPromotionRecipe
+      - PrintedDocumentRequestDocumentsRecipe
+      - PrintedDocumentRequestEuthanasiaRecipe
+      - PrintedDocumentRequestConstructionWorkRecipe
+      - PrintedDocumentRequestModernizationRecipe
+      - PrintedDocumentComplaintViolationLaborRulesRecipe
+      - PrintedDocumentComplaintOffenseRecipe
+      - PrintedDocumentPermissionEquipmentRecipe
+      - PrintedDocumentPermissionToTravelInCaseOfThreatRecipe
+      - PrintedDocumentSearchPermissionRecipe
+      - PrintedDocumentPermissionToCarryWeaponsRecipe
+      - PrintedDocumentPrescriptionDrugAuthorizationRecipe
+      - PrintedDocumentPermissionDisposeBodyRecipe
+      - PrintedDocumentConstructionPermitRecipe
+      - PrintedDocumentPermissionToExtendMarriageRecipe
+      - PrintedDocumentOrderDismissalRecipe
+      - PrintedDocumentOrderDeprivationAccessRecipe
+      - PrintedDocumentOrderEncouragementRecipe
+      - PrintedDocumentOrderParolePrisonerRecipe
+      - PrintedDocumentOrderRecognizingSentienceCreatureRecipe
+      - PrintedDocumentOrderMedicalInterventionRecipe
+      - PrintedDocumentProductManufacturingOrderRecipe
+      - PrintedDocumentOrderPurchaseResourcesEquipmentRecipe
+      - PrintedDocumentOrderingSpecialEquipmentRecipe
+      - PrintedDocumentOrderPurchaseWeaponsRecipe
+      - PrintedDocumentCertificateRecipe
+      - PrintedDocumentCertificateAdvancedTrainingRecipe
+      - PrintedDocumentCertificateOffenseRecipe
+      - PrintedDocumentDeathCertificateRecipe
+      - PrintedDocumentMarriageCertificateRecipe
+      - PrintedDocumentDivorceCertificateRecipe
+      - PrintedDocumentClosingIndictmentRecipe
+      - PrintedDocumentSentenceRecipe
+      - PrintedDocumentJudgmentRecipe
+      - PrintedDocumentStatementHealtheRecipe
+      - PrintedDocumentDecisionToStartTrialRecipe
   - type: EmagLatheRecipes
     emagStaticRecipes:
-        - NoticeOfLiquidationRecipe
-        - BusinessDealRecipe
-        - NoteBeginningMilitaryActionsRecipe
-        - ReportAccomplishmentGoalsRecipe
+        - PrintedDocumentErrorLoadingFormHeaderRecipe
+        - PrintedDocumentNoticeOfLiquidationRecipe
+        - PrintedDocumentBusinessDealRecipe
+        - PrintedDocumentNoteBeginningMilitaryActionsRecipe
+        - PrintedDocumentReportAccomplishmentGoalsRecipe
   - type: Fixtures
     fixtures:
       fix1:
@@ -95,6 +107,4 @@
       tags:
       - Document
     storage:
-      SheetPrinter: 1000
-
-
+      SheetPrinter: 0
