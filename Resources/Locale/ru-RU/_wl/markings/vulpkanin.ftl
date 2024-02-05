@@ -1,4 +1,4 @@
-marking-VulpTail = Вульпканин, Лиса
-marking-OtieTail = Вульпканин, Охотничья собака
-marking-MessyTail = Вульпканин, Растрепанный
-marking-FluffyTail = Вульпканин, Пушистый
+marking-VulpTail = Лисий хвост (альтернативный)
+marking-OtieTail = Охотничий хвост
+marking-MessyTail = Растрепанный хвост
+marking-FluffyTail = Пушистый хвост
