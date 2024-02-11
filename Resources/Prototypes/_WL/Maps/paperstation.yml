@@ -20,6 +20,7 @@
           availableJobs:
             CargoTechnician: [ 3, 3 ]
             Passenger: [ -1, -1 ]
+            Borg: [ 2, 2 ]
             Bartender: [ 1, 1 ]
             Botanist: [ 3, 3 ]
             Chef: [ 1, 2 ]
@@ -30,7 +31,7 @@
             IAA: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             ChiefEngineer: [ 1, 1 ]
-            StationEngineer: [ 4, 4 ]
+            StationEngineer: [ 5, 5 ]
             ChiefMedicalOfficer: [ 1, 1 ]
             MedicalDoctor: [ 3, 3 ]
             Chemist: [ 2, 2 ]
