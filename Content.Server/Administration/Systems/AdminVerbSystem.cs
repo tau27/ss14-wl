@@ -517,7 +517,8 @@ namespace Content.Server.Administration.Systems
 
             var eui = _openSolutionUis[session] = new EditSolutionsEui(uid);
             _euiManager.OpenEui(eui, session);
-            eui.StateDirty();
+
+           eui.StateDirty();
         }
 
         public void OnEditSolutionsEuiClosed(ICommonSession session)
