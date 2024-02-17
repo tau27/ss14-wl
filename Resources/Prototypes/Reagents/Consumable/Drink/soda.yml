@@ -5,7 +5,7 @@
   desc: reagent-desc-cola
   physicalDesc: reagent-physical-desc-fizzy
   flavor: soda
-  color: "#422912"
+  color: "#6c2828"
   recognizable: true
 
 - type: reagent
@@ -135,7 +135,7 @@
   desc: reagent-desc-space-mountain-wind
   physicalDesc: reagent-physical-desc-fizzy
   flavor: sodacitrus
-  color: "#102000"
+  color: "#a6fa5a"
 
 - type: reagent
   id: SpaceUp
@@ -144,7 +144,7 @@
   desc: reagent-desc-space-up
   physicalDesc: reagent-physical-desc-fizzy
   flavor: spaceup
-  color: "#00FF00"
+  color: "#e3e3e37d"
 
 - type: reagent
   id: Starkist

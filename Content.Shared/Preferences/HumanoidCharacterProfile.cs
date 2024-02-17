@@ -132,7 +132,7 @@ namespace Content.Shared.Preferences
                new HumanoidCharacterAppearance(),
             ClothingPreference.Jumpsuit,
             BackpackPreference.Backpack,
-            SpawnPriorityPreference.Arrivals,
+            SpawnPriorityPreference.None,
             new Dictionary<string, JobPriority>
             {
                 {SharedGameTicker.FallbackOverflowJob, JobPriority.High}
@@ -167,7 +167,7 @@ namespace Content.Shared.Preferences
                 HumanoidCharacterAppearance.DefaultWithSpecies(species),
                 ClothingPreference.Jumpsuit,
                 BackpackPreference.Backpack,
-                SpawnPriorityPreference.Arrivals,
+                SpawnPriorityPreference.None,
                 new Dictionary<string, JobPriority>
                 {
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High}
@@ -219,7 +219,7 @@ namespace Content.Shared.Preferences
 
             var name = GetName(species, gender);
 
-            return new HumanoidCharacterProfile(name, "", "", species, voiceId, age, height, sex, gender, HumanoidCharacterAppearance.Random(species, sex), ClothingPreference.Jumpsuit, BackpackPreference.Backpack, SpawnPriorityPreference.Arrivals,
+            return new HumanoidCharacterProfile(name, "", "", species, voiceId, age, height, sex, gender, HumanoidCharacterAppearance.Random(species, sex), ClothingPreference.Jumpsuit, BackpackPreference.Backpack, SpawnPriorityPreference.None,
                 new Dictionary<string, JobPriority>
                 {
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High},
@@ -548,9 +548,10 @@ namespace Content.Shared.Preferences
 
             var spawnPriority = SpawnPriority switch
             {
+                SpawnPriorityPreference.None => SpawnPriorityPreference.None,
                 SpawnPriorityPreference.Arrivals => SpawnPriorityPreference.Arrivals,
                 SpawnPriorityPreference.Cryosleep => SpawnPriorityPreference.Cryosleep,
-                _ => SpawnPriorityPreference.Arrivals // Invalid enum values.
+                _ => SpawnPriorityPreference.None // Invalid enum values.
             };
 
             var priorities = new Dictionary<string, JobPriority>(JobPriorities
@@ -651,5 +652,9 @@ namespace Content.Shared.Preferences
                 _traitPreferences
             );
         }
-    }
+
+
+
+
+}
 }
