@@ -1,10 +1,10 @@
 - type: gameMap
-  id: PaperStation
-  mapName: 'Paper Station'
+  id: CorvaxPaper
+  mapName: 'CorvaxPaper'
   mapPath: /Maps/corvax_wl_paperstation.yml
   minPlayers: 14
   stations:
-    PaperStation:
+    CorvaxPaper:
       stationProto: StandardNanotrasenStation
       components:
         - type: StationNameSetup
