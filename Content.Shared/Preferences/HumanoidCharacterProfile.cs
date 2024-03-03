@@ -463,13 +463,11 @@ namespace Content.Shared.Preferences
             };
 
             // ensure the species can be that sex and their age fits the founds
-            var age = Age;
-            var height = Height; // WL-Height
+            var age = Math.Clamp(Age, speciesPrototype.MinAge, speciesPrototype.MaxAge);
+            var height = Math.Clamp(Height, speciesPrototype.MinHeight, speciesPrototype.MaxHeight); // WL-Height
+
             if (!speciesPrototype.Sexes.Contains(sex))
                 sex = speciesPrototype.Sexes[0];
-
-            var age = Math.Clamp(Age, speciesPrototype.MinAge, speciesPrototype.MaxAge);
-            height = Math.Clamp(Height, speciesPrototype.MinHeight, speciesPrototype.MaxHeight); // WL-Height
 
             var gender = Gender switch
             {
