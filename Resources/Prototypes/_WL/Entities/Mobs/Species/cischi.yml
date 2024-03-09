@@ -23,6 +23,12 @@
       types:
         Bloodloss:
           -1.0
+  - type: SolutionRegeneration
+    solution: chemicals
+    generated:
+      reagents:
+      - ReagentId: Cryoxadone
+        Quantity: 0.1
   - type: Temperature
     heatDamageThreshold: 295.15
     coldDamageThreshold: 233.15
