@@ -120,9 +120,14 @@
           types:
             Asphyxiation: 1
 # WL species end
-      # Cant be added until I add metabolism effects on reagent removal
-      #- !type:AdjustAlert
-      #  alertType: Toxins
+      # We need a metabolism effect on reagent removal
+      - !type:AdjustAlert
+        alertType: Toxins
+        conditions:
+          - !type:ReagentThreshold
+            min: 1.5
+        clear: True
+        time: 5
   reactiveEffects:
     Flammable:
       methods: [ Touch ]
@@ -161,9 +166,14 @@
           types:
             Radiation:
               1
-      # Cant be added until I add metabolism effects on reagent removal
-      #- !type:AdjustAlert
-      #  alertType: Toxins
+      # We need a metabolism effect on reagent removal
+      - !type:AdjustAlert
+        alertType: Toxins
+        conditions:
+          - !type:ReagentThreshold
+            min: 1.5
+        clear: True
+        time: 5
 
 - type: reagent
   id: CarbonDioxide
@@ -218,7 +228,7 @@
           shouldHave: false
         # WL Cischi species end
         factor: -4
-      # Cant be added until I add metabolism effects on reagent removal
+      # We need a metabolism effect on reagent removal
       #- !type:AdjustAlert
       #  alertType: CarbonDioxide
 
