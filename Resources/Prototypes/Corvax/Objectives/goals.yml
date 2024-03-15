@@ -15,7 +15,7 @@
   text: station-goal-artifacts
 
 - type: stationGoal
-  id: StationGoalStorage
+  id: StationGoalBank
   text: station-goal-bank
 
 - type: stationGoal
@@ -34,13 +34,10 @@
   id: StationGoalTesla
   text: station-goal-tesla
 
+# Corvax WL start
 - type: stationGoal
   id: StationGoalXeno
   text: station-goal-xeno
-
-- type: stationGoal
-  id: StationGoalArea
-  text: station-goal-area
 
 - type: stationGoal
   id: StationGoalBureaucraticError
@@ -50,18 +47,19 @@
   id: StationGoalMuseum
   text: station-goal-museum
 
-- type: stationGoal
-  id: StationGoalCombat
-  text: station-goal-combat
+#- type: stationGoal
+#  id: StationGoalCombat
+#  text: station-goal-combat
 
 - type: stationGoal
-  id: StationGoalSpaceArtifacts
-  text: station-goal-space-artifacts
+  id: StationGoalSpaceAnomalies
+  text: station-goal-space-anomalies
 
 - type: stationGoal
   id: StationGoalLabor
   text: station-goal-labor
 
-- type: stationGoal
-  id: StationGoalLectures
-  text: station-goal-lectures
+#- type: stationGoal
+#  id: StationGoalLectures
+#  text: station-goal-lectures
+# Corvax WL end
