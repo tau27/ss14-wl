@@ -55,11 +55,12 @@ namespace Content.Server.Corvax.StationGoal
                     continue;
 
                 var stationId = StationIdRegex.Match(meta.EntityName).Groups[1].Value;
-                Console.Write(stationId);
+                string stationValue = string.IsNullOrEmpty(stationId) ? "???" : stationId;
+                DateTime dateValue = DateTime.Now.AddYears(1000);
+                string dateString = dateValue.ToString("dd.MM.yyyy");
                 var printout = new FaxPrintout(
-                    Loc.GetString(goal.Text,
-                        ("date", DateTime.Now.AddYears(1000).ToString("dd.MM.yyyy")),
-                        ("station", string.IsNullOrEmpty(stationId) ? "???" : stationId)),
+                    Loc.GetString(goal.Text.Replace("{ $station }", stationValue).Replace("{ $date }", dateString),
+                        ("date", DateTime.Now.AddYears(1000).ToString("dd.MM.yyyy"))),
                     Loc.GetString("station-goal-fax-paper-name"),
                     null,
                     "paper_stamp-centcom",
