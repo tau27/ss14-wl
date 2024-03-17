@@ -503,7 +503,7 @@ namespace Content.Server.Administration.Systems
             }
 
             // Wl-height
-            if (EntityManager.HasComponent<HumanoidAppearanceComponent>(args.Target))
+            if (_adminManager.IsAdmin(player) && EntityManager.HasComponent<HumanoidAppearanceComponent>(args.Target))
             {
                 Verb verb = new()
                 {
