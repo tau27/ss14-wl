@@ -503,7 +503,8 @@ namespace Content.Server.Administration.Systems
                 args.Verbs.Add(verb);
             }
 
-            // Wl-height
+            // Wl-height start
+            // Change Height
             if (_adminManager.IsAdmin(player) && EntityManager.HasComponent<HumanoidAppearanceComponent>(args.Target))
             {
                 Verb verb = new()
@@ -524,6 +525,7 @@ namespace Content.Server.Administration.Systems
                 };
                 args.Verbs.Add(verb);
             }
+            // Wl-height end
         }
 
         #region SolutionsEui
