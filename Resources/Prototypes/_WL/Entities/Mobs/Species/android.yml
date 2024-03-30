@@ -133,7 +133,7 @@
   - type: Butcherable
     butcheringType: Spike
     spawned:
-      - id: Plastic
+      - id: SheetPlastic
         amount: 5
   - type: Repairable
     damage:
