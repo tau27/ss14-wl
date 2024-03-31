@@ -26,3 +26,10 @@
   files:
     - /Audio/_WL/Voice/Tajara/mscream_1.ogg
     - /Audio/_WL/Voice/Tajara/mscream_2.ogg
+
+- type: soundCollection
+  id: GolemScream
+  files:
+    - /Audio/_WL/Voice/Golem/scream_1.ogg
+    - /Audio/_WL/Voice/Golem/scream_2.ogg
+    - /Audio/_WL/Voice/Golem/scream_3.ogg
