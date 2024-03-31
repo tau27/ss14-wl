@@ -1,0 +1,151 @@
+- type: entity
+  id: BaseGolemOrgan
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _WL/Mobs/Species/Golem/organs.rsi
+  - type: Organ
+
+- type: entity
+  id: OrganGolemCore
+  parent: BaseGolemOrgan
+  name: искра
+  description: "Тюрьма для души"
+  components:
+  - type: Instrument
+    allowPercussion: false
+    handheld: false
+    bank: 1
+    program: 52 # микрофон на 1 режиме
+  - type: UserInterface
+    interfaces:
+    - key: enum.InstrumentUiKey.Key
+      type: InstrumentBoundUserInterface
+  - type: Sprite
+    layers:
+    - state: core-off
+      map: ["fire"]
+  - type: ToggleableGhostRole
+  #  sprite: Objects/Fun/pai.rsi
+  #  layers:
+  #  - state: pai-base
+  #  - state: pai-off-overlay
+  #    shader: unshaded
+  #    map: ["screen"]
+  - type: Input
+    context: "human"
+  - type: GolemCore # Играет музыку
+    midiActionId: "ActionGolemCorePlayMidi"
+  - type: Examiner
+  - type: DoAfter
+  - type: Actions
+  - type: TypingIndicator
+    proto: golem
+  - type: TTS # Corvax-TTS
+    voice: Gollum
+  - type: Speech
+    speechVerb: Moth
+    speechSounds: Tenor
+    # This has to be installed because otherwise they're not "alive",
+    #  so they can ghost and come back.
+    # Note that the personal AI never "dies".
+  - type: MobState
+    allowedStates:
+      - Alive
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableGhostRoleVisuals.Status:
+        fire:
+          Off: { state: core-off }
+          On: { state: core-on }
+  - type: Tag
+    tags:
+    - MindTransferTarget
+  - type: MobMover
+  - type: InputMover
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 0.15
+    baseSprintSpeed: 0.3
+
+- type: entity
+  id: ActionGolemCorePlayMidi
+  name: Play MIDI
+  description: Open your portable MIDI interface to soothe your owner.
+  noSpawn: true
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    icon: Objects/Fun/Instruments/microphone.rsi/icon.png
+    event: !type:OpenUiActionEvent
+      key: enum.InstrumentUiKey.Key
+
+- type: entity
+  id: OrganGolemFurnace
+  name: печь
+  parent: BaseHeaterMachine
+  description: "Излучает уют и даже можно использовать для готовки если зафиксировать"
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Dynamic
+  - type: Sprite
+    sprite: _WL/Mobs/Species/Golem/organs.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    layers:
+    - state: stomach-off
+    - map: ["enum.EntityHeaterVisuals.Setting"]
+      visible: false
+  - type: Organ
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - Ore
+      - Trash
+      - Wooden
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 20
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 5
+  - type: Metabolizer
+    maxReagents: 2
+    metabolizerTypes: [Golem]
+    updateFrequency: 0.5
+    removeEmpty: true
+    groups:
+    - id: Alcohol
+      rateModifier: 0.1
+    - id: Food
+    - id: Drink
+    - id: Medicine
+    - id: Poison
+  - type: ApcPowerReceiver
+    needsPower: false
+  - type: EntityHeater
+    power: 1200
+  - type: ExtensionCableReceiver
+  - type: LightningTarget
+    priority: 1
+  - type: ItemPlacer
+    maxEntities: 1
+    whitelist:
+      components:
+      - Temperature
+  - type: PlaceableSurface
+  - type: GenericVisualizer
+    visuals:
+      enum.EntityHeaterVisuals.Setting:
+        enum.EntityHeaterVisuals.Setting:
+          Off: { visible: false }
+          Low: { visible: true, state: stomach-on }
+          Medium: { visible: true, state: stomach-on }
+          High: { visible: true, state: stomach-on }
+  - type: Appearance
