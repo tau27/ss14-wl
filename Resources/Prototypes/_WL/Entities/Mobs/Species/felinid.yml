@@ -27,7 +27,7 @@
         Slash: 5
   - type: Thieving
     stealthy: true
-    stripTimeReduction: 0.25
+    stripTimeReduction: 2
   - type: Speech
     speechSounds: Alto
   - type: DamageOnHighSpeedImpact
