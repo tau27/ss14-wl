@@ -7,6 +7,8 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Robust.Shared.Utility;
+using Content.Shared._WL.Store;
+using Content.Shared.Store;
 
 namespace Content.Shared.Store;
 
@@ -17,11 +19,11 @@ namespace Content.Shared.Store;
 /// </summary>
 [Serializable, NetSerializable]
 [Virtual, DataDefinition]
-public partial class ListingData : IEquatable<ListingData>, ICloneable
+public partial class ListingData : IEquatable<ListingData>
 {
     [ViewVariables]
     [IdDataField]
-    public string ID { get; private set; } = default!;
+    public string ID { get; private set; } = string.Empty;
 
     /// <summary>
     /// The name of the listing. If empty, uses the entity's name (if present)
@@ -52,7 +54,14 @@ public partial class ListingData : IEquatable<ListingData>, ICloneable
     /// </summary>
     [NonSerialized]
     [DataField("conditions", serverOnly: true)]
-    public List<ListingCondition>? Conditions;
+    public List<ListingCondition>? Conditions = new List<ListingCondition>(); // Используйте скобки () // инициализация полем по умолчанию
+
+    /// <summary>
+    /// Sets a new value for each currency in the dictionary after purchase.
+    /// </summary>
+    [NonSerialized]
+    [DataField("priceModifyFunctions", serverOnly: true, customTypeSerializer: typeof(PrototypeIdDictionarySerializer<PriceModify, CurrencyPrototype>))]
+    public Dictionary<string, PriceModify> PriceModifyFunctions = new();
 
     /// <summary>
     /// The icon for the listing. If null, uses the icon for the entity or action.
@@ -95,11 +104,9 @@ public partial class ListingData : IEquatable<ListingData>, ICloneable
     /// <summary>
     /// The event that is broadcast when the listing is purchased.
     /// </summary>
-    [DataField("productEvent")]
-    public object? ProductEvent;
-
-    [DataField]
-    public bool RaiseProductEventOnUser;
+    [NonSerialized]
+    [DataField("productEvents")]
+    public List<object> ProductEvents = new();
 
     /// <summary>
     /// used internally for tracking how many times an item was purchased.
@@ -123,7 +130,6 @@ public partial class ListingData : IEquatable<ListingData>, ICloneable
             Description != listing.Description ||
             ProductEntity != listing.ProductEntity ||
             ProductAction != listing.ProductAction ||
-            ProductEvent?.GetType() != listing.ProductEvent?.GetType() ||
             RestockTime != listing.RestockTime)
             return false;
 
@@ -150,7 +156,7 @@ public partial class ListingData : IEquatable<ListingData>, ICloneable
     /// DON'T BE DUMB AND MODIFY THE PROTOTYPES
     /// </summary>
     /// <returns>A unique copy of the listing data.</returns>
-    public object Clone()
+    public ListingData Clone()
     {
         return new ListingData
         {
@@ -158,7 +164,7 @@ public partial class ListingData : IEquatable<ListingData>, ICloneable
             Name = Name,
             Description = Description,
             Categories = Categories,
-            Cost = Cost,
+            Cost = new Dictionary<string, FixedPoint2>(Cost),
             Conditions = Conditions,
             Icon = Icon,
             Priority = Priority,
@@ -166,9 +172,10 @@ public partial class ListingData : IEquatable<ListingData>, ICloneable
             ProductAction = ProductAction,
             ProductUpgradeID = ProductUpgradeID,
             ProductActionEntity = ProductActionEntity,
-            ProductEvent = ProductEvent,
+            ProductEvents = ProductEvents,
             PurchaseAmount = PurchaseAmount,
             RestockTime = RestockTime,
+            PriceModifyFunctions = new Dictionary<string, PriceModify>(PriceModifyFunctions)
         };
     }
 }
