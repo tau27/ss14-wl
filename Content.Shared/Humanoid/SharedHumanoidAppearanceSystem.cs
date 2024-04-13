@@ -449,7 +449,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     // WL-Height-Start
     public void ApplyHeight(HumanoidAppearanceComponent humanoid)
     {
-        if (!_prototypeManager.TryIndex(humanoid.Species, out var speciesProto))
+        if (!_proto.TryIndex(humanoid.Species, out var speciesProto))
             return;
 
         EnsureComp<ScaleVisualsComponent>(humanoid.Owner);
@@ -495,7 +495,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     // WL-Height-Start
     public string GetHeightRepresentation(string species, int height)
     {
-        if (!_prototypeManager.TryIndex<SpeciesPrototype>(species, out var speciesPrototype))
+        if (!_proto.TryIndex<SpeciesPrototype>(species, out var speciesPrototype))
         {
             Logger.Error("Tried to get height representation of species that couldn't be indexed: " + species);
             return Loc.GetString("identity-height-medium");
