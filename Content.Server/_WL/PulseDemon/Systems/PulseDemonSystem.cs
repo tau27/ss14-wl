@@ -51,7 +51,7 @@ public sealed partial class PulseDemonSystem : EntitySystem
     #endregion
 
     private const string MarkerCablePrototypeID = "MarkerCable";
-    private const string HijackAPCsObjective = "HijackAPCsObjective";
+    //private const string HijackAPCsObjective = "HijackAPCsObjective";
 
     public const string EnergyCurrencyPrototype = "Energy";
 
@@ -116,10 +116,10 @@ public sealed partial class PulseDemonSystem : EntitySystem
         UpdateCablesAroundDemon(transformComp);
         UpdateWallsAroundDemon(transformComp);
 
-        if (!_mind.TryGetMind(demonUid, out var mindId, out var mindComp))
-            return;
-
-        _mind.TryAddObjective(mindId, mindComp, HijackAPCsObjective);
+        //if (!_mind.TryGetMind(demonUid, out var mindId, out var mindComp))
+        //    return;
+        //
+        //_mind.TryAddObjective(mindId, mindComp, HijackAPCsObjective);
     }
 
     private void OnChargeChange(EntityUid uid, PulseDemonComponent component, ChargeChangedEvent args)
