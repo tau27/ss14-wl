@@ -1,4 +1,3 @@
-using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
 using Content.Shared._WL.PulseDemon;
 using Content.Shared.Radio.Components;
@@ -11,6 +10,7 @@ public sealed partial class EncryptionKeyHolderAction : ElectromagneticTamperAct
     public override bool Action(ElectromagneticTamperActionArgs args)
     {
         var _entityManager = args.EntityManager;
+        var _random = IoCManager.Resolve<IRobustRandom>();
 
         if (!_entityManager.TryGetComponent<EncryptionKeyHolderComponent>(args.TargetUid, out var encryptKeyHolder))
             return false;
@@ -18,7 +18,7 @@ public sealed partial class EncryptionKeyHolderAction : ElectromagneticTamperAct
         if (!_entityManager.TryGetComponent<ActiveRadioComponent>(args.DemonUid, out var activeRadioComp))
             activeRadioComp = _entityManager.AddComponent<ActiveRadioComponent>(args.DemonUid);
 
-        var channel = args.RobustRandom.Pick/*AndTake*/(encryptKeyHolder.Channels);
+        var channel = _random.Pick/*AndTake*/(encryptKeyHolder.Channels);
 
         activeRadioComp.Channels.Add(channel);
 

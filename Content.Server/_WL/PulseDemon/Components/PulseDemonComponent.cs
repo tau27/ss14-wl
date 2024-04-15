@@ -31,13 +31,6 @@ public sealed partial class PulseDemonComponent : Component
     public List<string> ParticlesPrototypes = ["EffectSparks2", "EffectSparks", "EffectSparks3"];
 
     /// <summary>
-    /// The sound played when particles spawn
-    /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
-    [DataField("particlesSound")]
-    public SoundSpecifier ParticlesSound = new SoundCollectionSpecifier("sparks");
-
-    /// <summary>
     /// The interval after which the particles try to spawn
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]

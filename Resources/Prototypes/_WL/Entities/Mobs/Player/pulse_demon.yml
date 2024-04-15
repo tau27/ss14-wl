@@ -116,6 +116,7 @@
     onElectromagneticTamperActions:
     - !type:EncryptionKeyHolderAction
     - !type:VendingMachineAction
+    - !type:SiliconLawBound
   - type: Store
     refundAllowed: false
     balance:

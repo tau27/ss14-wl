@@ -41,15 +41,15 @@
   noSpawn: true
   components:
   - type: EntityTargetAction
-    useDelay: 40
     priority: 1
+    range: 2.3
     whitelist:
       tags:
-       - HijackedDevice
-    range: 1
+      - Machine
+      - CanPilot #Для боргов
     deselectOnMiss: true
-    checkCanAccess: true
-    checkCanInteract: true
+    checkCanAccess: false
+    checkCanInteract: false
     repeat: false
     itemIconStyle: BigAction
     canTargetSelf: false

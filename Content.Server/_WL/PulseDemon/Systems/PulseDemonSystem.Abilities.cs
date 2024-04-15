@@ -15,6 +15,9 @@ using Content.Server.Power.NodeGroups;
 using Content.Shared.Emag.Components;
 using Content.Shared.Access.Components;
 using Content.Server._WL.PulseDemon.Components;
+using Content.Shared.Silicons.Laws.Components;
+using Content.Shared.Emag.Systems;
+
 
 namespace Content.Server._WL.PulseDemon.Systems;
 
@@ -28,6 +31,7 @@ public sealed partial class PulseDemonSystem
     [Dependency] private readonly EmpSystem _emp = default!;
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
+    [Dependency] private readonly EmagSystem _emag = default!;
 
 
     private const string PulseDemonExplosionType = "ElectricExplosion";
@@ -69,17 +73,20 @@ public sealed partial class PulseDemonSystem
         if (comp.OnElectromagneticTamperActions == null)
             return;
 
-        if (!TryComp<HijackedByPulseDemonComponent>(args.Target, out var hijackComp))
+        if (!TryComp<HijackedByPulseDemonComponent>(args.Target, out var hijackComp) &&
+            !TryComp<SiliconLawProviderComponent>(args.Target, out _))
         {
             var message = Loc.GetString("pulse-demon-not-hijacked");
             _popup.PopupCursor(message, uid, Shared.Popups.PopupType.Medium);
+            args.Handled = false;
             return;
         }
 
-        if (hijackComp.Used)
+        if (hijackComp?.Used == true)
         {
             var message = Loc.GetString("pulse-demon-already-hijacked");
             _popup.PopupCursor(message, uid, Shared.Popups.PopupType.Medium);
+            args.Handled = false;
             return;
         }
 
@@ -88,23 +95,22 @@ public sealed partial class PulseDemonSystem
 
         foreach (var action in comp.OnElectromagneticTamperActions)
         {
-            if (!action.Action(new ElectromagneticTamperActionArgs(uid, args.Target, EntityManager, _random, _gameTiming)))
+            if (!action.Action(new ElectromagneticTamperActionArgs(uid, args.Target, EntityManager)))
                 continue;
 
             CheckEnergyAndDealBatteryDamage(pulseDemonBattery, args.Cost);
 
-            hijackComp.Used = true;
+            var actions = _action.GetActions(args.Performer)
+                .Where(act => act.Comp.BaseEvent is PulseDemonElectromagneticTamperActionEvent);
+            _action.RemoveAction(actions.FirstOrNull()?.Id);
+
+            if (hijackComp != null)
+                hijackComp.Used = true;
+
             args.Handled = true;
 
             break;
         }
-
-        if (!TryComp<ApcPowerReceiverComponent>(args.Target, out var apcPowerComp) ||
-            !apcPowerComp.Powered ||
-            apcPowerComp.PowerDisabled)
-            return;
-
-        apcPowerComp.PowerDisabled = true;
     }
     #endregion
 
@@ -305,7 +311,7 @@ public sealed partial class PulseDemonSystem
         }
 
         EnsureComp<HijackedByPulseDemonComponent>(args.Target.Value);
-        EnsureComp<EmaggedComponent>(args.Target.Value);
+        _emag.DoEmagEffect(uid, args.Target.Value);
 
         accessComp.AccessKeys.Clear();
         accessComp.AccessLists.Clear();

@@ -1,6 +1,4 @@
 using JetBrains.Annotations;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._WL.PulseDemon;
 
@@ -10,9 +8,9 @@ public abstract partial class ElectromagneticTamperAction
 {
     /// <summary>
     /// Performs an action after applying the Electromagnetic Tamper Action, depending on the target.
-    /// <see cref="PulseDemon.Systems.PulseDemonSystem.OnElectromagneticTamper">
+    /// see PulseDemonSystem.Abilities.OnElectromagneticTamperAction.
     /// </summary>
     public abstract bool Action(ElectromagneticTamperActionArgs args);
 }
 
-public readonly record struct ElectromagneticTamperActionArgs(EntityUid DemonUid, EntityUid TargetUid, IEntityManager EntityManager, IRobustRandom RobustRandom, IGameTiming GameTiming);
+public readonly record struct ElectromagneticTamperActionArgs(EntityUid DemonUid, EntityUid TargetUid, IEntityManager EntityManager);

@@ -21,6 +21,8 @@ using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
 using Robust.Shared.Map;
+using Content.Shared._WL.PulseDemon;
+using Content.Shared.Actions;
 
 namespace Content.Server._WL.PulseDemon.Systems;
 

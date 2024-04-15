@@ -267,7 +267,7 @@
   id: PulseDemonElectromagneticTamper
   name: Перенастройка техники
   priority: 14
-  description: Позволяет взаимодействовать со взломанной техникой. Результат зависит от типа техники. Внимание, после перенастройки техника выключается.
+  description: Позволяет взаимодействовать со взломанной техникой. Результат зависит от типа техники.
   productAction: PulseDemonActionElectromagneticTamper
   productEvents:
   - !type:PulseDemonShopPurchaseEvent
@@ -275,9 +275,6 @@
     Energy: 10000
   categories:
   - PulseDemonAbilities
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
 
 
 ##Characteristics
