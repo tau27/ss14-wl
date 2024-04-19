@@ -10,6 +10,7 @@
   id: BaseMobAndroid
   abstract: true
   components:
+  - type: ZombieImmune
   - type: Flashable
   - type: Barotrauma
     damage:
