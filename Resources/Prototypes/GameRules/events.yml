@@ -546,12 +546,9 @@
   id: IonStorm
   components:
   - type: StationEvent
-    weight: 1000000 #10
+    weight: 10
     reoccurrenceDelay: 20
     duration: 1
-    spawnConfig:
-      standartConfig:
-        minPlayers: 20
   - type: IonStormRule
 
 - type: entity
