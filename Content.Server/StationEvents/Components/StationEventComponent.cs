@@ -139,10 +139,6 @@ public sealed partial class EventPlayersConfiguration
             .Any(config => jobNsessions
                 .Any(jobNsession => jobNsession.Key.Equals(config.Key) && (jobNsession.Value > config.Value.MaxPlayers || jobNsession.Value < config.Value.MinPlayers)));
 
-        foreach (var item in jobNsessions)
-        {
-            Logger.Debug($"{item.Key} {item.Value}");
-        }
         return jobConfigPassed;
     }
 
