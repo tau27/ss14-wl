@@ -62,7 +62,7 @@
     startAnnouncement: station-event-bureaucratic-error-announcement
     spawnConfig:
       standartConfig:
-        minPlayers: 25
+        minPlayers: 20
     weight: 5
     duration: 1
   - type: BureaucraticErrorRule
@@ -87,7 +87,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 5 # Corvax WL adjustments
+    weight: 5 # Corvax WL changes
     duration: 1
     spawnConfig:
       standartConfig:
@@ -101,13 +101,13 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 5
+    weight: 4
     duration: 1
-    earliestStart: 45
+    earliestStart: 60 # Corvax WL changes
     reoccurrenceDelay: 60
     spawnConfig:
       standartConfig:
-        minPlayers: 20
+        minPlayers: 25
   - type: RandomSpawnRule
     prototype: SpawnPointGhostDragon
 
@@ -117,13 +117,13 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 10
+    weight: 5
     duration: 1
-    earliestStart: 30
+    earliestStart: 45 # Corvax WL changes
     reoccurrenceDelay: 60
     spawnConfig:
       standartConfig:
-        minPlayers: 40
+        minPlayers: 30
   - type: NinjaSpawnRule
 
 - type: entity
@@ -225,10 +225,10 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     startDelay: 10
-    earliestStart: 30
+    earliestStart: 45
     spawnConfig:
       standartConfig:
-        minPlayers: 35
+        minPlayers: 25
     weight: 5
     duration: 50
   - type: VentCrittersRule
@@ -255,7 +255,7 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     startDelay: 10
-    weight: 5
+    weight: 7.5 # Corvax WL changes
     duration: 50
   - type: VentCrittersRule
     entries:
@@ -333,9 +333,9 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 8
+    weight: 2.5 # Corvax WL changes
     duration: 1
-    earliestStart: 30
+    earliestStart: 60
     spawnConfig:
       standartConfig:
         minPlayers: 20
@@ -375,8 +375,8 @@
     earliestStart: 15
     spawnConfig:
       standartConfig:
-        minPlayers: 15
-    weight: 5
+        minPlayers: 10
+    weight: 7.5
     duration: 60
   - type: VentCrittersRule
     entries:
@@ -424,7 +424,7 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     startDelay: 10
-    earliestStart: 20
+    earliestStart: 30
     spawnConfig:
       standartConfig:
         minPlayers: 15
@@ -445,7 +445,7 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     startDelay: 10
-    earliestStart: 20
+    earliestStart: 30
     spawnConfig:
       standartConfig:
         minPlayers: 15
@@ -550,12 +550,12 @@
     startAnnouncement: station-event-immovable-rod-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    weight: 5
+    weight: 2.5
     duration: 1
     earliestStart: 45
     spawnConfig:
       standartConfig:
-        minPlayers: 20
+        minPlayers: 25
   - type: ImmovableRodRule
     rodPrototypes:
     - id: ImmovableRodKeepTilesStill
