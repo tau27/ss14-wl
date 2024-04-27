@@ -135,8 +135,6 @@ namespace Content.Shared.Preferences
                 Sex.Male,
                 Gender.Male,
                new HumanoidCharacterAppearance(),
-            ClothingPreference.Jumpsuit,
-            BackpackPreference.Backpack,
             SpawnPriorityPreference.None,
             new Dictionary<string, JobPriority>
             {

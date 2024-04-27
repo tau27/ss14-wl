@@ -34,20 +34,6 @@ using Direction = Robust.Shared.Maths.Direction;
 
 namespace Content.Client.Preferences.UI
 {
-    public sealed class HighlightedContainer : PanelContainer
-    {
-        public HighlightedContainer()
-        {
-            PanelOverride = new StyleBoxFlat()
-            {
-                BackgroundColor = Color.FromHex("#191919"),
-                ContentMarginTopOverride = 10,
-                ContentMarginBottomOverride = 10,
-                ContentMarginLeftOverride = 10,
-                ContentMarginRightOverride = 10
-            };
-        }
-    }
 
     [GenerateTypedNameReferences]
     public sealed partial class HumanoidProfileEditor : BoxContainer
@@ -60,7 +46,7 @@ namespace Content.Client.Preferences.UI
         private LineEdit _ageEdit => CAgeEdit;
         private LineEdit _heightEdit => CHeightEdit; // WL-Height
         private LineEdit _nameEdit => CNameEdit;
-        private TextEdit? _flavorTextEdit;
+        private TextEdit _flavorTextEdit = null!;
         private TextEdit _oocTextEdit = null!; // WL-OOCText
         private Button _nameRandomButton => CNameRandomize;
         private Button _randomizeEverythingButton => CRandomizeEverything;
@@ -202,7 +188,7 @@ namespace Content.Client.Preferences.UI
             //     CERPStatusButton.SelectId(args.Id);
             //
             //     Profile = Profile?.WithErpStatus((ErpStatus) args.Id);
-            //     IsDirty = true;
+            //     SetDirty();
             // };
 
             #endregion
@@ -378,7 +364,7 @@ namespace Content.Client.Preferences.UI
                 _underwearMarking = marking.AsMarking();
                 Profile.Appearance.Markings.Add(_underwearMarking);
 
-                IsDirty = true;
+                SetDirty();
             };
             _underwearPicker.OnColorChanged += m =>
             {
@@ -389,7 +375,7 @@ namespace Content.Client.Preferences.UI
                 if (idx > -1)
                     Profile.Appearance.Markings[idx] = m.marking;
 
-                IsDirty = true;
+                SetDirty();
             };
             _underwearPicker.OnSlotAdd += () =>
             {
@@ -409,7 +395,7 @@ namespace Content.Client.Preferences.UI
                 Profile.Appearance.Markings.Add(_underwearMarking);
 
                 UpdateUnderwearPicker();
-                IsDirty = true;
+                SetDirty();
             };
             _underwearPicker.OnSlotRemove += _ =>
             {
@@ -421,7 +407,7 @@ namespace Content.Client.Preferences.UI
                 _underwearMarking = null;
 
                 UpdateUnderwearPicker();
-                IsDirty = true;
+                SetDirty();
             };
 
             #endregion
@@ -442,7 +428,7 @@ namespace Content.Client.Preferences.UI
                 _undershirtMarking = marking.AsMarking();
                 Profile.Appearance.Markings.Add(_undershirtMarking);
 
-                IsDirty = true;
+                SetDirty();
             };
             _undershirtPicker.OnColorChanged += m =>
             {
@@ -453,7 +439,7 @@ namespace Content.Client.Preferences.UI
                 if (idx > -1)
                     Profile.Appearance.Markings[idx] = m.marking;
 
-                IsDirty = true;
+                SetDirty();
             };
             _undershirtPicker.OnSlotAdd += () =>
             {
@@ -473,7 +459,7 @@ namespace Content.Client.Preferences.UI
                 Profile.Appearance.Markings.Add(_undershirtMarking);
 
                 UpdateUndershirtPicker();
-                IsDirty = true;
+                SetDirty();
             };
             _undershirtPicker.OnSlotRemove += _ =>
             {
@@ -485,7 +471,7 @@ namespace Content.Client.Preferences.UI
                 _undershirtMarking = null;
 
                 UpdateUndershirtPicker();
-                IsDirty = true;
+                SetDirty();
             };
 
             #endregion
@@ -506,7 +492,7 @@ namespace Content.Client.Preferences.UI
                 _socksMarking = marking.AsMarking();
                 Profile.Appearance.Markings.Add(_socksMarking);
 
-                IsDirty = true;
+                SetDirty();
             };
             _socksPicker.OnColorChanged += m =>
             {
@@ -517,7 +503,7 @@ namespace Content.Client.Preferences.UI
                 if (idx > -1)
                     Profile.Appearance.Markings[idx] = m.marking;
 
-                IsDirty = true;
+                SetDirty();
             };
             _socksPicker.OnSlotAdd += () =>
             {
@@ -537,7 +523,7 @@ namespace Content.Client.Preferences.UI
                 Profile.Appearance.Markings.Add(_socksMarking);
 
                 UpdateSocksPicker();
-                IsDirty = true;
+                SetDirty();
             };
             _socksPicker.OnSlotRemove += _ =>
             {
@@ -549,38 +535,11 @@ namespace Content.Client.Preferences.UI
                 _socksMarking = null;
 
                 UpdateSocksPicker();
-                IsDirty = true;
+                SetDirty();
             };
 
             #endregion
             // WL-Underwear-End
-
-            #region Clothing
-
-            _clothingButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-jumpsuit"), (int) ClothingPreference.Jumpsuit);
-            _clothingButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-jumpskirt"), (int) ClothingPreference.Jumpskirt);
-
-            _clothingButton.OnItemSelected += args =>
-            {
-                _clothingButton.SelectId(args.Id);
-                SetClothing((ClothingPreference) args.Id);
-            };
-
-            #endregion Clothing
-
-            #region Backpack
-
-            _backpackButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-backpack"), (int) BackpackPreference.Backpack);
-            _backpackButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-satchel"), (int) BackpackPreference.Satchel);
-            _backpackButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-duffelbag"), (int) BackpackPreference.Duffelbag);
-
-            _backpackButton.OnItemSelected += args =>
-            {
-                _backpackButton.SelectId(args.Id);
-                SetBackpack((BackpackPreference) args.Id);
-            };
-
-            #endregion Backpack
 
             #region SpawnPriority
 
@@ -773,7 +732,6 @@ namespace Content.Client.Preferences.UI
                 guidebookController.ToggleGuidebook(dict, includeChildren:true, selected: page);
             }
         }
-
         private void OnDummyUpdate(EntityUid value)
         {
             _previewSpriteView.SetEntity(value);
@@ -808,7 +766,6 @@ namespace Content.Client.Preferences.UI
                     SetDirty();
                 };
             }
-
         }
 
         private void UpdateRoleRequirements()
@@ -944,7 +901,7 @@ namespace Content.Client.Preferences.UI
                 return;
 
             Profile = Profile.WithOocText(content);
-            IsDirty = true;
+            SetDirty();
         }
         // WL-OOCText-End
 
@@ -1148,7 +1105,6 @@ namespace Content.Client.Preferences.UI
 
                 _preferencesManager.UpdateCharacter(Profile, CharacterSlot);
                 OnProfileChanged?.Invoke(Profile, CharacterSlot);
-                _needUpdatePreview = true;
             }
         }
 
@@ -1565,8 +1521,6 @@ namespace Content.Client.Preferences.UI
             UpdateSkinColor();
             UpdateSpecies();
             UpdateERPStatus(); // WL-ERPStatus
-            UpdateClothingControls();
-            UpdateBackpackControls();
             UpdateSpawnPriorityControls();
             UpdateAgeEdit();
             UpdateHeightEdit(); // WL-Height
