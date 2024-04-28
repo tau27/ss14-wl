@@ -47,7 +47,7 @@ public sealed partial class StoreListingControl : Control
             return false;
 
         var stationTime = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
-        if (_data.RestockTime > stationTime)
+        if (TimeSpan.FromSeconds(_data.RestockTime) > stationTime)
             return false;
 
         return true;
@@ -56,9 +56,10 @@ public sealed partial class StoreListingControl : Control
     private void UpdateBuyButtonText()
     {
         var stationTime = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
-        if (_data.RestockTime > stationTime)
+        var restockTime = TimeSpan.FromSeconds(_data.RestockTime);
+        if (restockTime > stationTime)
         {
-            var timeLeftToBuy = stationTime - _data.RestockTime;
+            var timeLeftToBuy = stationTime - restockTime;
             StoreItemBuyButton.Text =  timeLeftToBuy.Duration().ToString(@"mm\:ss");
         }
         else
@@ -72,7 +73,7 @@ public sealed partial class StoreListingControl : Control
         var name = ListingLocalisationHelpers.GetLocalisedNameOrEntityName(_data, _prototype);
 
         var stationTime = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
-        if (_data.RestockTime > stationTime)
+        if (TimeSpan.FromSeconds(_data.RestockTime) > stationTime)
         {
             name += Loc.GetString("store-ui-button-out-of-stock");
         }

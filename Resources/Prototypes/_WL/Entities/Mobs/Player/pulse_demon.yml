@@ -94,8 +94,8 @@
     energy: 2
   - type: UserInterface
     interfaces:
-    - key: enum.StoreUiKey.Key
-      type: StoreBoundUserInterface
+     enum.StoreUiKey.Key:
+       type: StoreBoundUserInterface
   - type: Emoting
   - type: Speech
     speechSounds: Spark

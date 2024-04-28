@@ -205,7 +205,7 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      - key: enum.CharacterInformationUiKey.Key # WL-CharacterInformation
+      enum.CharacterInformationUiKey.Key: # WL-CharacterInformation
         type: CharacterInformationBoundUserInterface
   - type: Puller
   - type: Speech
