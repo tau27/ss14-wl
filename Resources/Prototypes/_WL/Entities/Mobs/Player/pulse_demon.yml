@@ -49,7 +49,6 @@
   - type: Clickable
   - type: StatusEffects
     allowed:
-    - Stun
     - Corporeal
   - type: Physics
     bodyType: KinematicController
