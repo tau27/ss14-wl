@@ -161,18 +161,23 @@
     fitsInCharger: true
   - type: PowerCellDraw
     drawRate: 1
+  - type: LockedWiresPanel
+  - type: WiresPanel
   - type: BorgChassis
     maxModules: 0
     hasMindState: light
     noMindState: light
+  - type: Android
   - type: ItemSlots
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHyper
         disableEject: true
-        locked: true
+        locked: false
         insertOnInteract: true
+  - type: InteractionPopup
+    successChance: 0
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot { }
