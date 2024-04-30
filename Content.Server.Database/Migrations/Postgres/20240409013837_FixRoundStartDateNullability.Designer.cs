@@ -738,10 +738,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("age");
 
-                    b.Property<int>("ErpStatus")
-                        .HasColumnType("integer")
-                        .HasColumnName("erp_status");
-
                     b.Property<string>("Backpack")
                         .IsRequired()
                         .HasColumnType("text")

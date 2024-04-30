@@ -141,15 +141,15 @@ public sealed partial class EventPlayersConfiguration
 
         return jobConfigPassed;
     }
+}
 
-    [UsedImplicitly]
-    [DataDefinition]
-    public sealed partial class MinMaxPlayers
-    {
-        [DataField]
-        public int MinPlayers = 0;
+[UsedImplicitly]
+[DataDefinition]
+public sealed partial class MinMaxPlayers
+{
+    [DataField]
+    public int MinPlayers = 0;
 
-        [DataField]
-        public int MaxPlayers = 150;
-    }
+    [DataField]
+    public int MaxPlayers = 350;
 }

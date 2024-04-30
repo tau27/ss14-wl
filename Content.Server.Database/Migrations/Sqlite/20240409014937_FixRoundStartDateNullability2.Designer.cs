@@ -691,10 +691,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("age");
 
-                    b.Property<int>("ErpStatus")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("erp_status");
-
                     b.Property<string>("Backpack")
                         .IsRequired()
                         .HasColumnType("TEXT")
