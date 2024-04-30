@@ -172,7 +172,7 @@ public sealed class EventManagerSystem : EntitySystem
             return false;
         }
 
-        if (!stationEvent.SpawnConfiguration.IsEventPassed(_playerManager, _job, _mind))
+        if (stationEvent.SpawnConfiguration?.IsEventPassed(_playerManager, _job, _mind) == false)
         {
             return false;
         }

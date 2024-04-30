@@ -78,7 +78,7 @@ public sealed partial class StationEventComponent : Component
     ///     To avoid running deadly events with low-pop
     /// </remarks>
     [DataField("spawnConfig")]
-    public EventPlayersConfiguration SpawnConfiguration;
+    public EventPlayersConfiguration? SpawnConfiguration = null;
 
     /// <summary>
     ///     How many times this even can occur in a single round
