@@ -1091,21 +1091,17 @@ namespace Content.Client.Preferences.UI
             if (Profile == null)
                 return;
 
-            _preferencesManager.UpdateCharacter(Profile, CharacterSlot);
-            OnProfileChanged?.Invoke(Profile, CharacterSlot);
             // Reset profile to default.
             UserInterfaceManager.GetUIController<LobbyUIController>().UpdateProfile();
-            if (Profile != null)
-            {
-                // WL-OOCText-Start: Event OnKeyBindDown is not work as expected
-                Profile = Profile
-                    .WithFlavorText(Rope.Collapse(_flavorTextEdit.TextRope).Trim())
-                    .WithOocText(Rope.Collapse(_oocTextEdit.TextRope).Trim());
-                // WL-OOCText-End
 
-                _preferencesManager.UpdateCharacter(Profile, CharacterSlot);
-                OnProfileChanged?.Invoke(Profile, CharacterSlot);
-            }
+            // WL-OOCText-Start: Event OnKeyBindDown is not work as expected
+            Profile = Profile
+                .WithFlavorText(Rope.Collapse(_flavorTextEdit.TextRope).Trim())
+                .WithOocText(Rope.Collapse(_oocTextEdit.TextRope).Trim());
+            // WL-OOCText-End
+
+            _preferencesManager.UpdateCharacter(Profile, CharacterSlot);
+            OnProfileChanged?.Invoke(Profile, CharacterSlot);
         }
 
         private bool IsDirty
