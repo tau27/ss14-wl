@@ -10,6 +10,10 @@ namespace Content.Server.Database.Migrations.Sqlite
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "erp_status",
+                table: "profile");
+
             migrationBuilder.AddColumn<int>(
                 name: "erp_status",
                 table: "profile",
