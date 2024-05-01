@@ -1205,7 +1205,8 @@
   - type: CreamPied
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
-    normalState: Monkey_burning
+    normalState: monkey_small_fire # Corvax WL /tg/ resprite
+    alternateState: monkey_big_fire # Corvax WL /tg/ resprite
   - type: InteractionPopup
     successChance: 0.9
     interactSuccessString: petting-success-monkey
@@ -1304,10 +1305,6 @@
   - type: GhostTakeoverAvailable
   - type: Loadout
     prototypes: [SyndicateOperativeGearMonkey]
-  - type: FireVisuals
-    sprite: Mobs/Effects/onfire.rsi
-    normalState: monkey_small_fire # Corvax WL /tg/ resprite
-    alternateState: monkey_big_fire # Corvax WL /tg/ resprite
 
 - type: entity
   id: MobMonkeySyndicateAgent
