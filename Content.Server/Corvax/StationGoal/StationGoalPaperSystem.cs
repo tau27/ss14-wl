@@ -142,9 +142,9 @@ namespace Content.Server.Corvax.StationGoal
         private T? PickRandomGoalByWeight<T>(IDictionary<T, float> values)
         {
             var factor = _random.NextFloat();
-            Logger.Debug(factor.ToString());
+
             var maxSum = values.Sum(x => x.Value) * factor;
-            Logger.Debug(maxSum.ToString());
+
             var cumulative = 0f;
 
             for (var i = 0; i < values.Count - 1; i++)
@@ -157,7 +157,7 @@ namespace Content.Server.Corvax.StationGoal
                 if (cumulative >= maxSum)
                     return pair.Key;
             }
-            Logger.Debug($"cumul {cumulative} sum {maxSum}");
+
             Logger.Error("Fail when selecting a random station goal");
             return default;
         }
