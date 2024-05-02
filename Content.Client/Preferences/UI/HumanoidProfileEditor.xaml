@@ -54,13 +54,13 @@
                         <!-- appearanceList -->
                         <BoxContainer Orientation="Vertical">
                             <BoxContainer Margin="10" Orientation="Vertical" HorizontalExpand="True">
-                                <!-- WL-ERPStatus-Start -->
+                                <!-- WL-Height-Start -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-height-label'}" />
                                     <Control HorizontalExpand="True"/>
                                     <LineEdit Name="CHeightEdit" MinSize="40 0" HorizontalAlignment="Right" />
                                 </BoxContainer>
-                                <!-- WL-ERPStatus-End -->
+                                <!-- WL-Height-End -->
                                 <!-- Species -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-species-label'}" />
@@ -70,13 +70,6 @@
                                                    ToolTip="{Loc 'humanoid-profile-editor-guidebook-button-tooltip'}"/>
                                     <OptionButton Name="CSpeciesButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
-                                <!-- WL-ERPStatus-Start -->
-                                <!-- <BoxContainer HorizontalExpand="True"> -->
-                                <!--     <Label Text="{Loc 'humanoid-profile-editor-erpstatus-label'}" /> -->
-                                <!--     <Control HorizontalExpand="True"/> -->
-                                <!--     <OptionButton Name="CERPStatusButton" HorizontalAlignment="Right" /> -->
-                                <!-- </BoxContainer> -->
-                                <!-- WL-ERPStatus-End -->
                                 <!-- Age -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-age-label'}" />
