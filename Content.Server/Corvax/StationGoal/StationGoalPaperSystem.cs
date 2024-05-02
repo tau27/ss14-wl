@@ -8,6 +8,7 @@ using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Shared._WL.StationGoal;
 
 namespace Content.Server.Corvax.StationGoal
 {

@@ -1,4 +1,4 @@
-- type: stationGoalConfiguration
+- type: StationGoalConfiguration
   id: StationGoalConfig
   minGoals: 4
   maxGoals: 6

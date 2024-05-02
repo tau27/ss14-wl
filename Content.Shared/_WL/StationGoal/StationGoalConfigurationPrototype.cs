@@ -1,9 +1,9 @@
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.Corvax.StationGoal
+namespace Content.Shared._WL.StationGoal
 {
     [DataDefinition]
-    [Serializable, Prototype("stationGoalConfiguration")]
+    [Serializable, Prototype("StationGoalConfiguration")]
     public sealed partial class StationGoalConfigurationPrototype : IPrototype
     {
         [ViewVariables]
