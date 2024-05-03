@@ -118,7 +118,7 @@
   - type: Metabolizer
     maxReagents: 2
     metabolizerTypes: [Golem]
-    updateFrequency: 0.5
+    updateInterval: 0.5
     removeEmpty: true
     groups:
     - id: Alcohol

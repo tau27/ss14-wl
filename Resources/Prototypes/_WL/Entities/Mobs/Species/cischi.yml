@@ -49,7 +49,9 @@
     normalBodyTemperature: 283.15
     thermalRegulationTemperatureThreshold: 5
   - type: Barotrauma
-    highPressureMultiplier: 2
+    damage:
+      types:
+        Blunt: 0.3
   - type: Respirator
     damage:
       types:
