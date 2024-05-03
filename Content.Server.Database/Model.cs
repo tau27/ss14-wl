@@ -362,7 +362,6 @@ namespace Content.Server.Database
         public List<Job> Jobs { get; } = new();
         public List<Antag> Antags { get; } = new();
         public List<Trait> Traits { get; } = new();
-        public DbErpStatus ErpStatus { get; set; } // WL-ERPStatus
 
         public List<ProfileRoleLoadout> Loadouts { get; } = new();
 
@@ -1103,15 +1102,4 @@ namespace Content.Server.Database
         /// </summary>
         public bool Dismissed { get; set; }
     }
-
-    // WL-ERP-Start
-    public enum DbErpStatus
-    {
-        // These enum values HAVE to match the ones in ErpStatus in Content.Shared
-        Ask = 0,
-        CheckOOC,
-        No,
-        Yes,
-    }
-    // WL-ERP-End
 }
