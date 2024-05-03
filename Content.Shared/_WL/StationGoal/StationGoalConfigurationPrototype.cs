@@ -1,9 +1,11 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._WL.StationGoal
 {
     [DataDefinition]
-    [Serializable, Prototype("StationGoalConfiguration")]
+    [Serializable, NetSerializable]
+    [Prototype("stationGoalConfiguration")]
     public sealed partial class StationGoalConfigurationPrototype : IPrototype
     {
         [ViewVariables]

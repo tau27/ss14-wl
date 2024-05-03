@@ -108,7 +108,7 @@ namespace Content.Server.Corvax.StationGoal
 
             var allGoals = _prototypeManager.EnumeratePrototypes<StationGoalPrototype>();
 
-            var amount = _random.Next(config.MinGoals, config.MinGoals + 1);
+            var amount = _random.Next(config.MinGoals, config.MaxGoals + 1);
             var pickedGoals = PickRandomGoalByWeight(allGoals, amount);
 
             foreach (var goal in pickedGoals)
@@ -130,8 +130,11 @@ namespace Content.Server.Corvax.StationGoal
 
             while (selected < amount)
             {
-                var chosenGoal = PickRandomGoalByWeight(goalsCopy)
-                    ?? throw new NullReferenceException($"{nameof(StationGoalPaperSystem)}: 'chosenGoal' at 'PickRandomGoalByWeight(List<StationGoalPrototype>, int)' was null");
+                var chosenGoal = PickRandomGoalByWeight(goalsCopy);
+
+                if (chosenGoal == null)
+                    break;
+
                 toReturn.Add(chosenGoal);
                 goalsCopy.RemoveAll(x => x.ID == chosenGoal.ID);
                 selected++;
@@ -144,19 +147,16 @@ namespace Content.Server.Corvax.StationGoal
         {
             var factor = _random.NextFloat();
 
-            var maxSum = values.Sum(x => x.Value) * factor;
+            var maxSum = values.Values.Sum() * factor;
 
             var cumulative = 0f;
 
-            for (var i = 0; i < values.Count - 1; i++)
+            foreach (var (key, weight) in values)
             {
-                var pair = values.ElementAt(i);
-                var weight = pair.Value;
-
                 cumulative += weight;
 
                 if (cumulative >= maxSum)
-                    return pair.Key;
+                    return key;
             }
 
             Logger.Error("Fail when selecting a random station goal");
