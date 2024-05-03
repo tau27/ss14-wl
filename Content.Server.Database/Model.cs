@@ -380,6 +380,8 @@ namespace Content.Server.Database
 
         public string JobName { get; set; } = null!;
         public DbJobPriority Priority { get; set; }
+
+        public string JobSubnames { get; set; } = null!;
     }
 
     public enum DbJobPriority

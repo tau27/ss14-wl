@@ -264,7 +264,8 @@ namespace Content.Server.Database
                 (ErpStatus) profile.ErpStatus, // WL-ERPStatus
                 antags.ToList(),
                 traits.ToList(),
-                loadouts
+                loadouts,
+                profile.Jobs.ToDictionary(x => x.JobName, x => x.JobSubnames)
             );
         }
 
@@ -304,7 +305,17 @@ namespace Content.Server.Database
             profile.Jobs.AddRange(
                 humanoid.JobPriorities
                     .Where(j => j.Value != JobPriority.Never)
-                    .Select(j => new Job {JobName = j.Key, Priority = (DbJobPriority) j.Value})
+                    .Select(j =>
+                    {
+                        humanoid.JobSubnames.TryGetValue(j.Key, out var subname);
+
+                        return new Job
+                        {
+                            JobName = j.Key,
+                            Priority = (DbJobPriority) j.Value,
+                            JobSubnames = subname ?? "Unknown"
+                        };
+                    })
             );
 
             profile.Antags.Clear();

@@ -545,6 +545,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("job_name");
 
+                    b.Property<string>("JobSubnames")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("job_subnames");
+
                     b.Property<int>("Priority")
                         .HasColumnType("INTEGER")
                         .HasColumnName("priority");

@@ -73,7 +73,8 @@ namespace Content.IntegrationTests.Tests.Preferences
                 ErpStatus.Ask, // WL-ERPStatus
                 new List<string> (),
                 new List<string>(),
-                new Dictionary<string, RoleLoadout>()
+                new Dictionary<string, RoleLoadout>(),
+                new()
             );
         }
 
