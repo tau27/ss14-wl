@@ -8,6 +8,8 @@
     duration: 1
     earliestStart: 70
     reoccurrenceDelay: 90
-    minimumPlayers: 20
+    spawnConfig:
+       standartConfig:
+         minPlayers: 20
   - type: PulseDemonSpawnRule
     prototype: SpawnPointPulseDemon
