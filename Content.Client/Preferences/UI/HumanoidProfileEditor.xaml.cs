@@ -8,7 +8,6 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Guidebook;
-using Content.Shared._WL.Preferences;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.GameTicking;
@@ -174,25 +173,6 @@ namespace Content.Client.Preferences.UI
             };
 
             #endregion Gender
-
-            // WL-ERPStatus-Start
-            #region ERPStatus
-
-            // CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-ask"), (int) ErpStatus.Ask);
-            // CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-ooc"), (int) ErpStatus.CheckOOC);
-            // CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-no"), (int) ErpStatus.No);
-            // CERPStatusButton.AddItem(Loc.GetString("humanoid-profile-editor-preference-erpstatus-yes"), (int) ErpStatus.Yes);
-            //
-            // CERPStatusButton.OnItemSelected += args =>
-            // {
-            //     CERPStatusButton.SelectId(args.Id);
-            //
-            //     Profile = Profile?.WithErpStatus((ErpStatus) args.Id);
-            //     SetDirty();
-            // };
-
-            #endregion
-            // WL-ERPStatus-End
 
             // Corvax-TTS-Start
             #region Voice
@@ -1295,18 +1275,6 @@ namespace Content.Client.Preferences.UI
             CSpeciesButton.Select(_speciesList.FindIndex(x => x.ID == Profile.Species));
         }
 
-        // WL-ERPStatus-Start
-        private void UpdateERPStatus()
-        {
-            if (Profile == null)
-            {
-                return;
-            }
-
-            // CERPStatusButton.Select((int) Profile.ErpStatus);
-        }
-        // WL-ERPStatus-End
-
         private void UpdateGenderControls()
         {
             if (Profile == null)
@@ -1542,7 +1510,6 @@ namespace Content.Client.Preferences.UI
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpecies();
-            UpdateERPStatus(); // WL-ERPStatus
             UpdateSpawnPriorityControls();
             UpdateAgeEdit();
             UpdateHeightEdit(); // WL-Height
