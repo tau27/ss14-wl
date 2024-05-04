@@ -6,6 +6,7 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: AndroidChargeTarget
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -9
