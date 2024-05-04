@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Server.Fax;
+using Content.Shared.Fax.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Paper;
@@ -84,6 +85,7 @@ namespace Content.Server.Corvax.StationGoal
                 var printout = new FaxPrintout(
                     goalContent,
                     Loc.GetString("station-goal-fax-paper-name"),
+                    null,
                     null,
                     "paper_stamp-centcom",
                     new List<StampDisplayInfo>
