@@ -856,10 +856,11 @@
       - !type:HealthChange
         damage:
           types:
-            Posion: -1
             Heat: -0.33
             Shock: -0.33
             Cold: -0.33
+          groups:
+            Toxin: -1
 
 - type: reagent
   id: Leporazine
@@ -1551,6 +1552,7 @@
           types:
             Radiation: -2
             Poison: -1
+          groups:
             Brute: 1
       - !type:HealthChange
         conditions:
