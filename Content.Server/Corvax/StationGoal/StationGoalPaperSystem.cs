@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Server.Fax;
+using Content.Shared.Fax.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Paper;
@@ -37,6 +38,8 @@ namespace Content.Server.Corvax.StationGoal
             ПРИКАЗ О НАЗНАЧЕНИИ ЦЕЛИ
             ═════════════════════════════════════════
             Дата: { $date }
+
+            Уважаемое командование станции, задачами Вашей смены являются:
 
             """;
 
@@ -83,6 +86,7 @@ namespace Content.Server.Corvax.StationGoal
                     goalContent,
                     Loc.GetString("station-goal-fax-paper-name"),
                     null,
+                    null,
                     "paper_stamp-centcom",
                     new List<StampDisplayInfo>
                     {
@@ -110,11 +114,14 @@ namespace Content.Server.Corvax.StationGoal
 
             var amount = _random.Next(config.MinGoals, config.MaxGoals + 1);
             var pickedGoals = PickRandomGoalByWeight(allGoals, amount);
+            StationGoalPrototype goalsTotal = new StationGoalPrototype();
 
             foreach (var goal in pickedGoals)
             {
-                SendStationGoal(goal);
+                goalsTotal.Text = goalsTotal.Text + "     " + goal.Text;
             }
+
+            SendStationGoal(goalsTotal);
         }
 
         public StationGoalPrototype? PickRandomGoalByWeight(IList<StationGoalPrototype> goals)

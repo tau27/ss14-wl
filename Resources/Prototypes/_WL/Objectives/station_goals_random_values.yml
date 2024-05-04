@@ -66,8 +66,8 @@
 - type: weightedRandom
   id: StationGoalRandomArtifactVerb
   weights:
-    добыча: 1
-    покупка: 1
+    Добыча: 1
+    Покупка: 1
 
 - type: weightedRandom
   id: StationGoalRandomServiceCrate

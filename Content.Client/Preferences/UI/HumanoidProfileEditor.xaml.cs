@@ -1000,7 +1000,6 @@ namespace Content.Client.Preferences.UI
             CharacterSlot = _preferencesManager.Preferences.SelectedCharacterIndex;
 
             UpdateAntagRequirements();
-            UpdateRoleRequirements();
             UpdateControls();
             ShowClothes.Pressed = true;
         }
