@@ -430,6 +430,7 @@
         damage:
           types:
             Cellular: -0.01
+          groups:
             Brute: -0.02
             Burn: -0.02
             Toxin: -0.02

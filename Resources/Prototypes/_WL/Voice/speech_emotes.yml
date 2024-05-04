@@ -1,5 +1,6 @@
 - type: emote
   id: Meow
+  name: Meow
   category: Vocal
   chatMessages: [мурчит.]
   chatTriggers:
