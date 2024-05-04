@@ -32,54 +32,53 @@ public sealed class PresetIdCardSystem : EntitySystem
     {
         SubscribeLocalEvent<PresetIdCardComponent, MapInitEvent>(OnMapInit);
 
-        SubscribeLocalEvent<RulePlayerJobsAssignedEvent>(PlayerJobsAssigned);
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(PlayerJobsAssigned);
     }
 
-    private void PlayerJobsAssigned(RulePlayerJobsAssignedEvent ev)
+    private void PlayerJobsAssigned(PlayerSpawnCompleteEvent ev)
     {
         // Go over all ID cards and make sure they're correctly configured for extended access.
 
-        foreach (var player in ev.Players)
+        var player = ev.Player;
+
+        if (player.AttachedEntity == null)
+            return;
+
+        if (!TryComp<ContainerManagerComponent>(player.AttachedEntity.Value, out var containersComp))
+            return;
+
+        if (!_container.TryGetContainer(player.AttachedEntity.Value, IDItemSlot, out var idContainer, containersComp))
+            return;
+
+        foreach (var containedEntity in idContainer.ContainedEntities)
         {
-            if (player.AttachedEntity == null)
+            var station = _stationSystem.GetOwningStation(containedEntity);
+
+            // If we're not on an extended access station, the ID is already configured correctly from MapInit.
+            if (station == null || !Comp<StationJobsComponent>(station.Value).ExtendedAccess)
                 continue;
 
-            if (!TryComp<ContainerManagerComponent>(player.AttachedEntity.Value, out var containersComp))
-                continue;
+            EntityUid? card = null;
+            PresetIdCardComponent? preset = null;
 
-            if (!_container.TryGetContainer(player.AttachedEntity.Value, IDItemSlot, out var idContainer))
-                continue;
-
-            foreach (var containedEntity in idContainer.ContainedEntities)
+            if (TryComp<PresetIdCardComponent>(containedEntity, out var presedIdCard))
             {
-                var station = _stationSystem.GetOwningStation(containedEntity);
-
-                // If we're not on an extended access station, the ID is already configured correctly from MapInit.
-                if (station == null || !Comp<StationJobsComponent>(station.Value).ExtendedAccess)
-                    return;
-
-                EntityUid? card = null;
-                PresetIdCardComponent? preset = null;
-
-                if (TryComp<PresetIdCardComponent>(containedEntity, out var presedIdCard))
-                {
-                    card = containedEntity;
-                    preset = presedIdCard;
-                }
-                else if (TryComp<PdaComponent>(containedEntity, out var pdaComp)
-                    && pdaComp.ContainedId != null
-                    && TryComp<PresetIdCardComponent>(pdaComp.ContainedId, out var pdaContainedPresetCard))
-                {
-                    card = pdaComp.ContainedId;
-                    preset = pdaContainedPresetCard;
-                }
-
-                if (card == null || preset == null)
-                    continue;
-
-                SetupIdAccess(card.Value, preset, true, player);
-                SetupIdName(card.Value, preset);
+                card = containedEntity;
+                preset = presedIdCard;
             }
+            else if (TryComp<PdaComponent>(containedEntity, out var pdaComp)
+                && pdaComp.ContainedId != null
+                && TryComp<PresetIdCardComponent>(pdaComp.ContainedId, out var pdaContainedPresetCard))
+            {
+                card = pdaComp.ContainedId;
+                preset = pdaContainedPresetCard;
+            }
+
+            if (card == null || preset == null)
+                continue;
+
+            SetupIdAccess(card.Value, preset, true, player);
+            SetupIdName(card.Value, preset);
         }
     }
 
