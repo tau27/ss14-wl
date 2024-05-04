@@ -38,6 +38,8 @@ namespace Content.Server.Corvax.StationGoal
             ═════════════════════════════════════════
             Дата: { $date }
 
+            Уважаемое командование станции, задачами Вашей смены являются:
+
             """;
 
         private static readonly string BaseEndOfGoal =
@@ -110,11 +112,14 @@ namespace Content.Server.Corvax.StationGoal
 
             var amount = _random.Next(config.MinGoals, config.MaxGoals + 1);
             var pickedGoals = PickRandomGoalByWeight(allGoals, amount);
+            StationGoalPrototype goalsTotal = new StationGoalPrototype();
 
             foreach (var goal in pickedGoals)
             {
-                SendStationGoal(goal);
+                goalsTotal.Text = goalsTotal.Text + "     " + goal.Text;
             }
+
+            SendStationGoal(goalsTotal);
         }
 
         public StationGoalPrototype? PickRandomGoalByWeight(IList<StationGoalPrototype> goals)
