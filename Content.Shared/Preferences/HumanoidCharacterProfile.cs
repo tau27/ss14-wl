@@ -87,7 +87,7 @@ namespace Content.Shared.Preferences
             Dictionary<string, RoleLoadout> loadouts,
             Dictionary<string, string> jobSubnames)
             : this(other.Name, other.FlavorText, other.OocText, other.Species, other.Voice, other.Age, other.Height, other.Sex, other.Gender, other.Appearance, other.SpawnPriority,
-                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, new())
+                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, jobSubnames)
         {
         }
 
@@ -121,7 +121,7 @@ namespace Content.Shared.Preferences
             Dictionary<string, RoleLoadout> loadouts,
             Dictionary<string, string> jobSubnames)
             : this(name, flavortext, ooctext, species, voice, age, height, sex, gender, appearance, spawnPriority, new Dictionary<string, JobPriority>(jobPriorities),
-                preferenceUnavailable, new List<string>(antagPreferences), new List<string>(traitPreferences), new Dictionary<string, RoleLoadout>(loadouts), new())
+                preferenceUnavailable, new List<string>(antagPreferences), new List<string>(traitPreferences), new Dictionary<string, RoleLoadout>(loadouts), jobSubnames)
         {
         }
 

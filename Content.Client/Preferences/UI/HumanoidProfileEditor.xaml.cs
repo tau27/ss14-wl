@@ -863,11 +863,14 @@ namespace Content.Client.Preferences.UI
                         if (!isSilent)
                             SetDirty();
                     };
-
-                    if (Profile?.JobSubnames.TryGetValue(job.ID, out var subname) == true && !string.IsNullOrEmpty(subname) && subname != "Unknown"/*мде*/)
-                        continue;
-                    else Profile = Profile?.WithJobSubname(job.ID, job.LocalizedName);
                 }
+            }
+
+            foreach (var selector in _jobPriorities)
+            {
+                if (Profile?.JobSubnames.TryGetValue(selector.Job.ID, out var subname) == true && !string.IsNullOrEmpty(subname) && subname != "Unknown"/*мде*/)
+                    continue;
+                else Profile = Profile?.WithJobSubname(selector.Job.ID, selector.Job.LocalizedName);
             }
 
             if (Profile is not null)
