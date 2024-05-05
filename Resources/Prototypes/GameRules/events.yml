@@ -7,6 +7,9 @@
     weight: 10
     startDelay: 30
     duration: 35
+    spawnConfig:
+      standartConfig:
+        minPlayers: 5 # Corvax WL
     startAudio: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/flux.ogg
       params:
