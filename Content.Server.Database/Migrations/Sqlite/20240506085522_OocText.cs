@@ -10,21 +10,36 @@ namespace Content.Server.Database.Migrations.Sqlite
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "backpack",
-                table: "profile");
+            //migrationBuilder.DropColumn(
+            //    name: "backpack",
+            //    table: "profile");
 
             //migrationBuilder.RenameColumn(
             //    name: "clothing",
             //    table: "profile",
             //    newName: "ooc_text");
 
+            migrationBuilder.DropColumn(
+                name: "height",
+                table: "profile");
+
+            migrationBuilder.DropColumn(
+                name: "ooc_text",
+                table: "profile");
+
             migrationBuilder.AddColumn<int>(
                 name: "height",
                 table: "profile",
                 type: "INTEGER",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 140);
+
+            migrationBuilder.AddColumn<int>(
+                name: "ooc_text",
+                table: "profile",
+                type: "TEXT",
+                nullable: false,
+                defaultValue: "");
 
             //migrationBuilder.CreateTable(
             //    name: "profile_role_loadout",
@@ -107,7 +122,10 @@ namespace Content.Server.Database.Migrations.Sqlite
             //    name: "profile_loadout_group");
 
             //migrationBuilder.DropTable(
-            //    name: "profile_role_loadout");
+            //    name: "profile_role_loadout
+            migrationBuilder.DropColumn(
+                name: "ooc_text",
+                table: "profile");
 
             migrationBuilder.DropColumn(
                 name: "height",
