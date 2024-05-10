@@ -5,6 +5,14 @@
   playTimeTracker: JobBoxer
   startingGear: BoxerGear
   icon: "JobIconBoxer"
+  subnames:
+  - кикбоксер
+  - каратист
+  - дзюдоист
+  - самбист
+  - айкидока
+  - сумоист
+  - тхэквондист
   supervisors: job-supervisors-hop
   access:
   - Service
