@@ -1,9 +1,8 @@
-using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Content.Server.Database.Migrations.Postgres
+namespace Content.Server.Database.Migrations.Sqlite
 {
     /// <inheritdoc />
     public partial class JobSubname : Migration
@@ -11,19 +10,15 @@ namespace Content.Server.Database.Migrations.Postgres
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "erp_status",
-                table: "profile");
-
             migrationBuilder.CreateTable(
                 name: "job_subname",
                 columns: table => new
                 {
-                    job_subname_id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    profile_id = table.Column<int>(type: "integer", nullable: false),
-                    job_name = table.Column<string>(type: "text", nullable: false),
-                    subname = table.Column<string>(type: "text", nullable: false)
+                    job_subname_id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    profile_id = table.Column<int>(type: "INTEGER", nullable: false),
+                    job_name = table.Column<string>(type: "TEXT", nullable: false),
+                    subname = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,13 +43,6 @@ namespace Content.Server.Database.Migrations.Postgres
         {
             migrationBuilder.DropTable(
                 name: "job_subname");
-
-            migrationBuilder.AddColumn<int>(
-                name: "erp_status",
-                table: "profile",
-                type: "integer",
-                nullable: false,
-                defaultValue: 0);
         }
     }
 }

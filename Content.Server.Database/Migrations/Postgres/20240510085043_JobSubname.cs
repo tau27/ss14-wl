@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Content.Server.Database.Migrations.Sqlite
+namespace Content.Server.Database.Migrations.Postgres
 {
     /// <inheritdoc />
     public partial class JobSubname : Migration
@@ -14,11 +15,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                 name: "job_subname",
                 columns: table => new
                 {
-                    job_subname_id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    profile_id = table.Column<int>(type: "INTEGER", nullable: false),
-                    job_name = table.Column<string>(type: "TEXT", nullable: false),
-                    subname = table.Column<string>(type: "TEXT", nullable: false)
+                    job_subname_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    profile_id = table.Column<int>(type: "integer", nullable: false),
+                    job_name = table.Column<string>(type: "text", nullable: false),
+                    subname = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
