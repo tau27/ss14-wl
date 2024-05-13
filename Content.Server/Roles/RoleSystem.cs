@@ -73,18 +73,9 @@ public sealed class RoleSystem : SharedRoleSystem
         if (entity == null)
             return null;
 
-        if (_playMan.TryGetSessionByEntity(entity.Value, out var session))
-        {
-            var genericProfile = _servPrefMan.GetSelectedProfilesForPlayers([session.UserId]).FirstOrNull()?.Value;
+        _playMan.TryGetSessionByEntity(entity.Value, out var session);
 
-            if (genericProfile != null
-                && genericProfile is HumanoidCharacterProfile certainProfile)
-            {
-                return certainProfile;
-            }
-        }
-
-        return null;
+        return GetProfileBySession(session);
     }
 
     public HumanoidCharacterProfile? GetProfileBySession(ICommonSession? session)
@@ -92,15 +83,9 @@ public sealed class RoleSystem : SharedRoleSystem
         if (session == null)
             return null;
 
-        var genericProfile = _servPrefMan.GetSelectedProfilesForPlayers([session.UserId]).FirstOrNull()?.Value;
+        var genericProfile = _servPrefMan.GetPreferencesOrNull(session.UserId)?.SelectedCharacter;
 
-        if (genericProfile != null
-            && genericProfile is HumanoidCharacterProfile certainProfile)
-        {
-            return certainProfile;
-        }
-
-        return null;
+        return genericProfile as HumanoidCharacterProfile;
     }
 
     public string? GetSubnameByEntity(EntityUid entity, string jobId)

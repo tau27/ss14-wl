@@ -29,7 +29,7 @@ namespace Content.Server.Database.Migrations.Postgres
                         column: x => x.profile_id,
                         principalTable: "profile",
                         principalColumn: "profile_id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateIndex(
