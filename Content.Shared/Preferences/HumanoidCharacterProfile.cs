@@ -36,6 +36,7 @@ namespace Content.Shared.Preferences
         private readonly Dictionary<string, JobPriority> _jobPriorities;
         private readonly List<string> _antagPreferences;
         private readonly List<string> _traitPreferences;
+        private readonly Dictionary<string, string> _jobSubnames;
 
         public IReadOnlyDictionary<string, RoleLoadout> Loadouts => _loadouts;
 
@@ -58,7 +59,8 @@ namespace Content.Shared.Preferences
             PreferenceUnavailableMode preferenceUnavailable,
             List<string> antagPreferences,
             List<string> traitPreferences,
-            Dictionary<string, RoleLoadout> loadouts)
+            Dictionary<string, RoleLoadout> loadouts,
+            Dictionary<string, string> jobSubnames)
         {
             Name = name;
             FlavorText = flavortext;
@@ -76,6 +78,7 @@ namespace Content.Shared.Preferences
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
+            _jobSubnames = jobSubnames;
         }
 
         /// <summary>Copy constructor but with overridable references (to prevent useless copies)</summary>
@@ -84,15 +87,21 @@ namespace Content.Shared.Preferences
             Dictionary<string, JobPriority> jobPriorities,
             List<string> antagPreferences,
             List<string> traitPreferences,
-            Dictionary<string, RoleLoadout> loadouts)
+            Dictionary<string, RoleLoadout> loadouts,
+            Dictionary<string, string> jobSubnames)
             : this(other.Name, other.FlavorText, other.OocText, other.Species, other.Voice, other.Age, other.Height, other.Sex, other.Gender, other.Appearance, other.SpawnPriority,
-                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts)
+                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, jobSubnames)
         {
         }
 
         /// <summary>Copy constructor</summary>
         private HumanoidCharacterProfile(HumanoidCharacterProfile other)
-            : this(other, new Dictionary<string, JobPriority>(other.JobPriorities), new List<string>(other.AntagPreferences), new List<string>(other.TraitPreferences), new Dictionary<string, RoleLoadout>(other.Loadouts))
+            : this(other,
+                  new Dictionary<string, JobPriority>(other.JobPriorities),
+                  new List<string>(other.AntagPreferences),
+                  new List<string>(other.TraitPreferences),
+                  new Dictionary<string, RoleLoadout>(other.Loadouts),
+                  new(other.JobSubnames))
         {
         }
 
@@ -112,9 +121,10 @@ namespace Content.Shared.Preferences
             PreferenceUnavailableMode preferenceUnavailable,
             IReadOnlyList<string> antagPreferences,
             IReadOnlyList<string> traitPreferences,
-            Dictionary<string, RoleLoadout> loadouts)
+            Dictionary<string, RoleLoadout> loadouts,
+            Dictionary<string, string> jobSubnames)
             : this(name, flavortext, ooctext, species, voice, age, height, sex, gender, appearance, spawnPriority, new Dictionary<string, JobPriority>(jobPriorities),
-                preferenceUnavailable, new List<string>(antagPreferences), new List<string>(traitPreferences), new Dictionary<string, RoleLoadout>(loadouts))
+                preferenceUnavailable, new List<string>(antagPreferences), new List<string>(traitPreferences), new Dictionary<string, RoleLoadout>(loadouts), jobSubnames)
         {
         }
 
@@ -142,7 +152,8 @@ namespace Content.Shared.Preferences
             PreferenceUnavailableMode.SpawnAsOverflow,
             new List<string>(),
             new List<string>(),
-            new Dictionary<string, RoleLoadout>())
+            new Dictionary<string, RoleLoadout>(),
+            new())
         {
         }
 
@@ -175,7 +186,8 @@ namespace Content.Shared.Preferences
                 PreferenceUnavailableMode.SpawnAsOverflow,
                 new List<string>(),
                 new List<string>(),
-                new Dictionary<string, RoleLoadout>());
+                new Dictionary<string, RoleLoadout>(),
+                new());
         }
 
         // TODO: This should eventually not be a visual change only.
@@ -233,7 +245,7 @@ namespace Content.Shared.Preferences
                 new Dictionary<string, JobPriority>
                 {
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High},
-                }, PreferenceUnavailableMode.StayInLobby, new List<string>(), new List<string>(), new Dictionary<string, RoleLoadout>());
+                }, PreferenceUnavailableMode.StayInLobby, new List<string>(), new List<string>(), new Dictionary<string, RoleLoadout>(), new());
         }
 
         public string Name { get; private set; }
@@ -259,6 +271,7 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterAppearance Appearance { get; private set; }
         public SpawnPriorityPreference SpawnPriority { get; private set; }
         public IReadOnlyDictionary<string, JobPriority> JobPriorities => _jobPriorities;
+        public IReadOnlyDictionary<string, string> JobSubnames => _jobSubnames;
         public IReadOnlyList<string> AntagPreferences => _antagPreferences;
         public IReadOnlyList<string> TraitPreferences => _traitPreferences;
         public PreferenceUnavailableMode PreferenceUnavailable { get; private set; }
@@ -326,7 +339,17 @@ namespace Content.Shared.Preferences
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<string, JobPriority>> jobPriorities)
         {
-            return new(this, new Dictionary<string, JobPriority>(jobPriorities), _antagPreferences, _traitPreferences, _loadouts);
+            return new(this, new Dictionary<string, JobPriority>(jobPriorities), _antagPreferences, _traitPreferences, _loadouts, _jobSubnames);
+        }
+
+        public HumanoidCharacterProfile WithJobSubname(string jobId, string subname)
+        {
+            var dict = new Dictionary<string, string>(_jobSubnames);
+
+            if (!dict.TryAdd(jobId, subname))
+                dict[jobId] = subname;
+
+            return new(this, _jobPriorities, _antagPreferences, _traitPreferences, _loadouts, dict);
         }
 
         public HumanoidCharacterProfile WithJobPriority(string jobId, JobPriority priority)
@@ -340,7 +363,7 @@ namespace Content.Shared.Preferences
             {
                 dictionary[jobId] = priority;
             }
-            return new(this, dictionary, _antagPreferences, _traitPreferences, _loadouts);
+            return new(this, dictionary, _antagPreferences, _traitPreferences, _loadouts, _jobSubnames);
         }
 
         public HumanoidCharacterProfile WithPreferenceUnavailable(PreferenceUnavailableMode mode)
@@ -350,7 +373,7 @@ namespace Content.Shared.Preferences
 
         public HumanoidCharacterProfile WithAntagPreferences(IEnumerable<string> antagPreferences)
         {
-            return new(this, _jobPriorities, new List<string>(antagPreferences), _traitPreferences, _loadouts);
+            return new(this, _jobPriorities, new List<string>(antagPreferences), _traitPreferences, _loadouts, _jobSubnames);
         }
 
         public HumanoidCharacterProfile WithAntagPreference(string antagId, bool pref)
@@ -371,7 +394,7 @@ namespace Content.Shared.Preferences
                 }
             }
 
-            return new(this, _jobPriorities, list, _traitPreferences, _loadouts);
+            return new(this, _jobPriorities, list, _traitPreferences, _loadouts, _jobSubnames);
         }
 
         public HumanoidCharacterProfile WithTraitPreference(string traitId, bool pref)
@@ -393,7 +416,7 @@ namespace Content.Shared.Preferences
                     list.Remove(traitId);
                 }
             }
-            return new(this, _jobPriorities, _antagPreferences, list, _loadouts);
+            return new(this, _jobPriorities, _antagPreferences, list, _loadouts, _jobSubnames);
         }
 
         public string Summary =>
@@ -665,7 +688,7 @@ namespace Content.Shared.Preferences
             }
 
             copied[loadout.Role] = loadout.Clone();
-            return new(this, _jobPriorities, _antagPreferences, _traitPreferences, copied);
+            return new(this, _jobPriorities, _antagPreferences, _traitPreferences, copied, _jobSubnames);
         }
 
         public RoleLoadout GetLoadoutOrDefault(string id, IEntityManager entManager, IPrototypeManager protoManager)
