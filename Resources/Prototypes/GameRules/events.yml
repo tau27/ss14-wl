@@ -4,7 +4,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 10
+    weight: 8
     startDelay: 30
     duration: 35
     spawnConfig:
@@ -22,7 +22,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 5
+    weight: 8
     startDelay: 30
     duration: 35
     startAudio: # Corvax-Announcements
@@ -37,7 +37,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 1
+    weight: 2
     reoccurrenceDelay: 5
     earliestStart: 1
     duration: 1
@@ -49,7 +49,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 10
+    weight: 7
     duration: 1
     spawnConfig:
       standartConfig:
@@ -66,7 +66,7 @@
     spawnConfig:
       standartConfig:
         minPlayers: 20
-    weight: 5
+    weight: 3
     duration: 1
   - type: BureaucraticErrorRule
 
@@ -90,7 +90,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 5 # Corvax WL changes
+    weight: 5
     duration: 1
     spawnConfig:
       standartConfig:
@@ -104,7 +104,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 2.5
+    weight: 6.5
     duration: 1
     earliestStart: 60 # Corvax WL changes
     reoccurrenceDelay: 60
@@ -120,7 +120,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 5
+    weight: 6
     duration: 1
     earliestStart: 45 # Corvax WL changes
     reoccurrenceDelay: 60
@@ -144,15 +144,16 @@
   - type: RandomSpawnRule
     prototype: MobRevenant
 
-- type: entity
-  id: FalseAlarm
-  parent: BaseGameRule
-  noSpawn: true
-  components:
-  - type: StationEvent
-    weight: 15
-    duration: 1
-  - type: FalseAlarmRule
+# disabled until event is rewritten to be more interesting
+#- type: entity
+#  id: FalseAlarm
+#  parent: BaseGameRule
+#  noSpawn: true
+#  components:
+#  - type: StationEvent
+#    weight: 15
+#    duration: 1
+#  - type: FalseAlarmRule
 
 - type: entity
   id: GasLeak
@@ -166,12 +167,13 @@
       params:
         volume: -4
     endAnnouncement: station-event-gas-leak-end-announcement
+    weight: 8
     endAudio:
       path: /Audio/Announcements/gasleak_end.ogg # Corvax-Announcements
       params:
         volume: -4
     earliestStart: 10
-    spawnConfig:
+    spawnConfig: # Corvax WL
       standartConfig:
         minPlayers: 5
     weight: 10
@@ -188,7 +190,7 @@
     spawnConfig:
       standartConfig:
         minPlayers: 15
-    weight: 5
+    weight: 7
     startDelay: 50
     duration: 240
   - type: KudzuGrowthRule
@@ -233,6 +235,8 @@
       standartConfig:
         minPlayers: 25
     weight: 5
+    earliestStart: 15
+    weight: 6
     duration: 50
   - type: VentCrittersRule
     entries:
@@ -246,7 +250,7 @@
       prob: 0.001
     specialEntries:
     - id: SpawnPointGhostRatKing
-      prob: 0.005
+      prob: 0.001
 
 - type: entity
   id: CockroachMigration
@@ -273,7 +277,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 10
+    weight: 5
     startAnnouncement: station-event-power-grid-check-start-announcement
     endAnnouncement: station-event-power-grid-check-end-announcement
     startAudio:
@@ -291,8 +295,9 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 10
+    weight: 6
     duration: 1
+    maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
     startAudio:
       path: /Audio/Announcements/sentience.ogg # Corvax-Announcements
       params:
@@ -305,7 +310,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 10
+    weight: 8
     startAnnouncement: station-event-solar-flare-start-announcement
     endAnnouncement: station-event-solar-flare-end-announcement
     startAudio: # Corvax-Announcements
@@ -349,33 +354,6 @@
     startDelay: 50
     duration: 60
   - type: VentClogRule
-
-- type: entity
-  id: VentCritters
-  parent: BaseGameRule
-  noSpawn: true
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
-    startAudio:
-      path: /Audio/Announcements/attention.ogg
-    startDelay: 10
-    earliestStart: 15
-    spawnConfig:
-      standartConfig:
-        minPlayers: 10
-    weight: 7.5
-    duration: 60
-  - type: VentCrittersRule
-    entries:
-    - id: MobMouse
-      prob: 0.02
-    - id: MobMouse1
-      prob: 0.02
-    - id: MobMouse2
-      prob: 0.02
-    - id: MobMouseCancer
-      prob: 0.001
 
 - type: entity
   id: SlimesSpawn
@@ -436,8 +414,8 @@
     earliestStart: 30
     spawnConfig:
       standartConfig:
-        minPlayers: 15
-    weight: 1
+        minPlayers: 20
+    weight: 1.5
     duration: 60
   - type: VentCrittersRule
     entries:
@@ -535,6 +513,65 @@
       max: 2
       playerRatio: 10
       mindComponents:
+      - type: InitialInfectedRole
+        prototype: InitialInfected
+
+#- type: entity
+#  id: LoneOpsSpawn
+#  parent: BaseGameRule
+#  noSpawn: true
+#  components:
+#  - type: StationEvent
+#    earliestStart: 35
+#    weight: 5.5
+#    minimumPlayers: 20
+#    duration: 1
+#  - type: LoadMapRule
+#    preloadedGrid: ShuttleStriker
+#  - type: NukeopsRule
+#    roundEndBehavior: Nothing
+#  - type: AntagSelection
+#    definitions:
+#    - spawnerPrototype: SpawnPointLoneNukeOperative
+#      min: 1
+#      max: 1
+#      pickPlayer: false
+#      startingGear: SyndicateLoneOperativeGearFull
+#      components:
+#      - type: NukeOperative
+#      - type: RandomMetadata
+#        nameSegments:
+#        - SyndicateNamesPrefix
+#        - SyndicateNamesNormal
+#      - type: NpcFactionMember
+#        factions:
+#        - Syndicate
+#      mindComponents:
+#      - type: NukeopsRole
+#        prototype: Nukeops
+
+- type: entity
+  id: SleeperAgentsRule
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+  - type: StationEvent
+    earliestStart: 25
+    weight: 8
+    minimumPlayers: 15
+    reoccurrenceDelay: 30
+    startAnnouncement: station-event-communication-interception
+    startAudio:
+      path: /Audio/Announcements/intercept.ogg
+  - type: AlertLevelInterceptionRule
+  - type: TraitorRule
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ Traitor ]
+      min: 1
+      max: 2
+      playerRatio: 10
+      mindComponents:
       - type: TraitorRole
         prototype: Traitor
 
@@ -544,9 +581,10 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 10
+    weight: 7
     duration: 150
     maxDuration: 300
+    reoccurrenceDelay: 30
   - type: MassHallucinationsRule
     minTimeBetweenIncidents: 0.1
     maxTimeBetweenIncidents: 300
@@ -560,12 +598,12 @@
 #   noSpawn: true
 #   components:
 #   - type: StationEvent
-#     endAnnouncement: station-event-immovable-rod-start-announcement
-#     endAudio:
+#     startAnnouncement: station-event-immovable-rod-start-announcement
+#     startAudio:
 #       path: /Audio/Announcements/attention.ogg
-#     weight: 5
-#     duration: 25
-#     earliestStart: 45
+#     weight: 3.5
+#     duration: 1
+#     earliestStart: 30
 #     spawnConfig:
 #       standartConfig:
 #         minPlayers: 25
@@ -602,7 +640,7 @@
   id: IonStorm
   components:
   - type: StationEvent
-    weight: 10
+    weight: 8
     reoccurrenceDelay: 20
     duration: 1
   - type: IonStormRule
@@ -617,5 +655,6 @@
     spawnConfig:
       standartConfig:
         minPlayers: 20
+      maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
     weight: 5
   - type: MobReplacementRule
