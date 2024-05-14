@@ -176,7 +176,6 @@
     spawnConfig: # Corvax WL
       standartConfig:
         minPlayers: 5
-    weight: 10
     startDelay: 20
   - type: GasLeakRule
 
@@ -234,8 +233,6 @@
     spawnConfig:
       standartConfig:
         minPlayers: 25
-    weight: 5
-    earliestStart: 15
     weight: 6
     duration: 50
   - type: VentCrittersRule
