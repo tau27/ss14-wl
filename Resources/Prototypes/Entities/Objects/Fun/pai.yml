@@ -11,6 +11,7 @@
     handheld: false
     bank: 1
     program: 2
+  - type: BorgBrain
   - type: UserInterface
     interfaces:
       enum.InstrumentUiKey.Key:
