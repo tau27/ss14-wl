@@ -10,6 +10,9 @@
     flavors:
       - sweet
   - type: Food
+    utensil: 
+      - Spoon
+      - Fork
   - type: Sprite
     sprite: Objects/Consumable/Food/Baked/cake.rsi
   - type: SolutionContainerManager
@@ -34,6 +37,9 @@
     flavors:
       - sweet
   - type: Food
+    utensil: 
+      - Spoon
+      - Fork
   - type: SolutionContainerManager
     solutions:
       food:
