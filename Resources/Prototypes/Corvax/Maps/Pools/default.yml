@@ -3,8 +3,7 @@
   maps:
   - CorvaxDelta
   - CorvaxAvrite
-  # Corvax WL
-  #- CorvaxSilly
+  - CorvaxSilly
   - CorvaxOutpost
   - CorvaxAstra
   - CorvaxGelta
@@ -26,4 +25,5 @@
   - Saltern
   - Train
   - Packed
-  - Reach
+# Corvax WL
+#  - Reach
