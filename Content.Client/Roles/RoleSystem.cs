@@ -1,4 +1,4 @@
-using Content.Client.Preferences;
+using Content.Client.Lobby;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 
