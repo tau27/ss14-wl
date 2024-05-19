@@ -8,6 +8,7 @@
   - официант
   - стюард
   - сервисный ассистент
+  - крупье
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
   canBeAntag: true # Corvax-MRP: Available not only for newbies
