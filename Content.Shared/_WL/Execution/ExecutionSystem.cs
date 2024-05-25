@@ -120,7 +120,7 @@ public sealed class ExecutionSystem : EntitySystem
     {
         // Use suicide.
         if (victim == attacker)
-            return false;
+            return true;
 
         // No point executing someone if they can't take damage
         if (!TryComp<DamageableComponent>(victim, out _))
@@ -177,10 +177,30 @@ public sealed class ExecutionSystem : EntitySystem
 
             // TODO: This should just be an event or something instead to get this.
             // TODO: Handle clumsy.
-            _gunSystem.AttemptShoot(args.User, uid, gun, new EntityCoordinates(victim, 0, 0));
+            // TODO: Сделать проверку на закрытый затвор, пустой магазин, пустой барабан револьвера и т.п., мне лень пока :р
 
-            internalMsg = DefaultCompleteInternalGunExecutionMessage;
-            externalMsg = DefaultCompleteExternalGunExecutionMessage;
+            //if (TryComp(uid, out ChamberMagazineAmmoProviderComponent? chamberMagazineComp) && chamberMagazineComp != null)
+            //{
+            //    if (chamberMagazineComp.BoltClosed.GetValueOrDefault(true) == false)
+            //    {
+            //        clumsyShot = true;
+            //    }
+            //}
+            //if (_gunSystem.CanShoot(gun) == false)
+            //    clumsyShot = true;
+
+            if (clumsyShot)
+            {
+                internalMsg = "execution-popup-gun-empty";
+                externalMsg = "execution-popup-gun-empty";
+            }
+            else
+            {
+                internalMsg = DefaultCompleteInternalGunExecutionMessage;
+                externalMsg = DefaultCompleteExternalGunExecutionMessage;
+            }
+
+            _gunSystem.AttemptShoot(args.User, uid, gun, new EntityCoordinates(victim, 0, 0));
 
             args.Handled = true;
         }
@@ -219,9 +239,9 @@ public sealed class ExecutionSystem : EntitySystem
 
         if (TryComp<ProjectileComponent>(args.FiredProjectiles[0], out ProjectileComponent? projectile))
         {
-            projectile.Damage *= 100;
+            var bonus = projectile.Damage * comp.DamageModifier - projectile.Damage;
+            projectile.Damage += bonus;
         }
-
     }
 
     private void ShowExecutionInternalPopup(string locString,
