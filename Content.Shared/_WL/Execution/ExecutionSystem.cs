@@ -34,6 +34,8 @@ public sealed class ExecutionSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gunSystem = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatSystem = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _meleeSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
 
 
     // TODO: Still needs more cleaning up.
@@ -140,6 +142,9 @@ public sealed class ExecutionSystem : EntitySystem
         if (victim != attacker && _actionBlockerSystem.CanInteract(victim, null))
             return false;
 
+        if (Transform(attacker).Coordinates.InRange(_entityManager, _transformSystem, Transform(victim).Coordinates, 0.1f))
+            return false;
+
         // All checks passed
         return true;
     }
@@ -195,7 +200,7 @@ public sealed class ExecutionSystem : EntitySystem
             else
             {
                 //This number is set, because Vector2(NaN, NaN) not equal Vector(Nan, Nan) ¯\_(ツ)_/¯
-                _gunSystem.AttemptShoot(attacker, uid, gun, new EntityCoordinates(victim, 0.01984f, -0.00634f));
+                _gunSystem.AttemptShoot(attacker, uid, gun, new EntityCoordinates(victim, 0, 0));
             }
             args.Handled = true;
         }
