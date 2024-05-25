@@ -86,7 +86,6 @@
   - type: GuideHelp
     guides:
     - Security
-  - type: Execution
 
 - type: entity
   name: truncheon

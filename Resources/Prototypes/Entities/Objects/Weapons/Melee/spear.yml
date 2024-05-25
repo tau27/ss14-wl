@@ -111,6 +111,7 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     fillBaseName: spear
+  - type: Execution
 
 - type: entity
   name: reinforced spear

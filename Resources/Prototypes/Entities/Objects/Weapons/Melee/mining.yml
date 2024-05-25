@@ -11,6 +11,7 @@
     color: "#ffeead"
     enabled: false
     radius: 4
+  - type: Execution
 
 - type: entity
   parent: BaseWeaponCrusher

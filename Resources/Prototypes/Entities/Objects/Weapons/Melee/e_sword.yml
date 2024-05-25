@@ -102,6 +102,7 @@
       jobRequired:
         - SalvageSpecialist
 # Corvax-HiddenDesc-End
+  - type: Execution
         
 - type: entity
   name: pen

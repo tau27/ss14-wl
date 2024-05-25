@@ -61,7 +61,6 @@
       storagebase: !type:Container
         ents: []
       gas_tank: !type:ContainerSlot
-  - type: Execution
 
 - type: entity
   name: pie cannon
@@ -104,6 +103,7 @@
     containers:
       storagebase: !type:Container
         ents: []
+  - type: Execution
 
 # shoots bullets instead of throwing them, no other changes
 - type: entity
