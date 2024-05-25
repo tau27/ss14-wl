@@ -200,7 +200,7 @@ public sealed class ExecutionSystem : EntitySystem
             else
             {
                 //This number is set, because Vector2(NaN, NaN) not equal Vector(Nan, Nan) ¯\_(ツ)_/¯
-                _gunSystem.AttemptShoot(attacker, uid, gun, new EntityCoordinates(victim, 0, 0));
+                _gunSystem.AttemptShoot(attacker, uid, gun, new EntityCoordinates(victim, 0.01984f, -0.00451f));
             }
             args.Handled = true;
         }
@@ -238,13 +238,13 @@ public sealed class ExecutionSystem : EntitySystem
         }
 
         float staminaDamage = 0;
-        if (TryComp(args.FiredProjectiles[0], out StaminaDamageOnCollideComponent staminaDamageOnCollide))
+        if (TryComp(args.FiredProjectiles[0], out StaminaDamageOnCollideComponent? staminaDamageOnCollide))
         {
             staminaDamage = staminaDamageOnCollide.Damage * comp.DamageModifier;
             staminaDamageOnCollide.Damage *= staminaDamage;
         }
 
-        if (TryComp(args.FiredProjectiles[0], out ProjectileComponent projectile))
+        if (TryComp(args.FiredProjectiles[0], out ProjectileComponent? projectile))
         {
             if(projectile.Damage.GetTotal() * comp.DamageModifier > staminaDamage)
                 projectile.Damage *= comp.DamageModifier;
