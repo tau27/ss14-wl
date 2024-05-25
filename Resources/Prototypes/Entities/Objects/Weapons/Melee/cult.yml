@@ -21,7 +21,9 @@
     slots:
     - back
   - type: DisarmMalus
+# White-List components
   - type: Execution
+# White-List components end
 
 - type: entity
   name: eldritch blade
@@ -46,7 +48,9 @@
     slots:
     - back
   - type: DisarmMalus
+# White-List components
   - type: Execution
+# White-List components end
 
 - type: entity
   name: unholy halberd
@@ -87,4 +91,6 @@
     - back
   - type: UseDelay
     delay: 1
+# White-List components
   - type: Execution
+# White-List components end

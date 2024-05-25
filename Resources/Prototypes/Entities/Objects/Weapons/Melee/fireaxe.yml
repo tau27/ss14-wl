@@ -8,7 +8,6 @@
     tags:
     - FireAxe
   - type: Sharp
-  - type: Execution
   - type: Sprite
     sprite: Objects/Weapons/Melee/fireaxe.rsi
     state: icon
@@ -48,6 +47,9 @@
     stealGroup: FireAxe
   - type: IgniteOnMeleeHit
     fireStacks: -4
+# White-List components
+  - type: Execution
+# White-List components
 
 - type: entity
   id: FireAxeFlaming

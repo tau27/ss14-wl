@@ -7,7 +7,6 @@
     tags:
     - Knife
   - type: Sharp
-  - type: Execution
   - type: Utensil
     types:
       - Knife
@@ -45,6 +44,9 @@
   - type: GuideHelp
     guides:
     - Chef
+# White-List components
+  - type: Execution
+# White-List components end
 
 - type: entity
   name: butcher's cleaver
