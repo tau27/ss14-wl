@@ -18,6 +18,7 @@ using Robust.Shared.Map;
 using Content.Shared.Projectiles;
 using System.Threading;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Damage.Components;
 
 namespace Content.Shared.Execution;
 
@@ -52,8 +53,6 @@ public sealed class ExecutionSystem : EntitySystem
         SubscribeLocalEvent<ExecutionComponent, GetVerbsEvent<UtilityVerb>>(OnGetInteractionsVerbs);
         SubscribeLocalEvent<ExecutionComponent, ExecutionDoAfterEvent>(OnExecutionDoAfter);
         SubscribeLocalEvent<ExecutionComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
-        //SubscribeLocalEvent<ExecutionComponent, ProjectileHitEvent>(OnGetProjectileHit);
-        //SubscribeLocalEvent<ExecutionComponent, GunShotEvent>(OnGunShot);
         SubscribeLocalEvent<ExecutionComponent, AmmoShotEvent>(OnAmmoShot);
 
     }
@@ -106,8 +105,6 @@ public sealed class ExecutionSystem : EntitySystem
             {
                 BreakOnMove = true,
                 BreakOnHandChange = true,
-                //BreakOnTargetMove = true,
-                //BreakOnUserMove = true,
                 BreakOnDamage = true,
                 NeedHand = true
             };
@@ -179,16 +176,6 @@ public sealed class ExecutionSystem : EntitySystem
             // TODO: Handle clumsy.
             // TODO: Сделать проверку на закрытый затвор, пустой магазин, пустой барабан револьвера и т.п., мне лень пока :р
 
-            //if (TryComp(uid, out ChamberMagazineAmmoProviderComponent? chamberMagazineComp) && chamberMagazineComp != null)
-            //{
-            //    if (chamberMagazineComp.BoltClosed.GetValueOrDefault(true) == false)
-            //    {
-            //        clumsyShot = true;
-            //    }
-            //}
-            //if (_gunSystem.CanShoot(gun) == false)
-            //    clumsyShot = true;
-
             if (clumsyShot)
             {
                 internalMsg = "execution-popup-gun-empty";
@@ -200,8 +187,14 @@ public sealed class ExecutionSystem : EntitySystem
                 externalMsg = DefaultCompleteExternalGunExecutionMessage;
             }
 
-            _gunSystem.AttemptShoot(args.User, uid, gun, new EntityCoordinates(victim, 0, 0));
-
+            if(attacker == victim)
+            {
+                _gunSystem.AttemptShoot(uid, gun);
+            }
+            else
+            {
+                _gunSystem.AttemptShoot(attacker, uid, gun, new EntityCoordinates(victim, 0, 0));
+            }
             args.Handled = true;
         }
 
@@ -225,22 +218,27 @@ public sealed class ExecutionSystem : EntitySystem
             return;
         }
 
-        var bonus = melee.Damage * execComp.DamageModifier - melee.Damage;
-        args.Damage += bonus;
+        args.Damage *= execComp.DamageModifier;
     }
 
     private void OnAmmoShot(EntityUid uid, ExecutionComponent comp, ref AmmoShotEvent args)
     {
-        if (/*!TryComp<ExecutionComponent>(uid, out var execComp) ||*/
-            !comp.Executing)
+        if (!comp.Executing)
         {
             return;
         }
 
-        if (TryComp<ProjectileComponent>(args.FiredProjectiles[0], out ProjectileComponent? projectile))
+        float staminaDamage = 0;
+        if (TryComp(args.FiredProjectiles[0], out StaminaDamageOnCollideComponent staminaDamageOnCollide))
         {
-            var bonus = projectile.Damage * comp.DamageModifier - projectile.Damage;
-            projectile.Damage += bonus;
+            staminaDamage = staminaDamageOnCollide.Damage * comp.DamageModifier;
+            staminaDamageOnCollide.Damage *= staminaDamage;
+        }
+
+        if (TryComp(args.FiredProjectiles[0], out ProjectileComponent projectile))
+        {
+            if(projectile.Damage.GetTotal() * comp.DamageModifier > staminaDamage)
+                projectile.Damage *= comp.DamageModifier;
         }
     }
 
