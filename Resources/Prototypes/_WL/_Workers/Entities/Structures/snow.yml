@@ -7,6 +7,11 @@
     snap:
     - Wall
   components:
+  - type: Damageable
+  - type: Gatherable
+    whitelist:
+      tags:
+      - Shovel
   - type: FloorOccluder
   - type: SmoothEdge
   - type: IconSmooth
@@ -17,7 +22,7 @@
   - type: SyncSprite
   - type: Clickable
   - type: Sprite
-    color: "#FFFFFFBB"
+    color: "#FFFFFF"
     sprite: Structures/Walls/rock.rsi
     layers:
       - state: rock_snow
