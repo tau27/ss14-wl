@@ -432,6 +432,9 @@
     tags:
       - PlushieSharkBlue
       - Payload
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: PlushieSharkBlue
@@ -448,6 +451,9 @@
     tags:
       - PlushieSharkPink
       - Payload
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: PlushieSharkBlue
@@ -464,6 +470,9 @@
     tags:
       - PlushieSharkGrey
       - Payload
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: BasePlushie
@@ -520,6 +529,9 @@
       path: /Audio/Effects/bite.ogg
     angle: 0
     animation: WeaponArcBite # Rrrr!
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: PlushieCarp
@@ -529,6 +541,9 @@
   components:
   - type: Sprite
     state: magicplush
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: PlushieCarp
@@ -543,6 +558,9 @@
     energy: 2
   - type: RgbLightController
     layers: [ 0 ]
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: PlushieCarp
@@ -552,6 +570,9 @@
   components:
   - type: Sprite
     state: holoplush
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: BasePlushie
