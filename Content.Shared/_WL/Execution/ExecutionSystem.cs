@@ -35,6 +35,7 @@ public sealed class ExecutionSystem : EntitySystem
     [Dependency] private readonly SharedCombatModeSystem _combatSystem = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _meleeSystem = default!;
 
+
     // TODO: Still needs more cleaning up.
     private const string DefaultInternalMeleeExecutionMessage = "execution-popup-melee-initial-internal";
     private const string DefaultExternalMeleeExecutionMessage = "execution-popup-melee-initial-external";
@@ -174,7 +175,7 @@ public sealed class ExecutionSystem : EntitySystem
 
             // TODO: This should just be an event or something instead to get this.
             // TODO: Handle clumsy.
-            // TODO: Сделать проверку на закрытый затвор, пустой магазин, пустой барабан револьвера и т.п., мне лень пока :р
+            // TODO: Make check on open rifleBolt, empty mag, empty revolver and etc
 
             if (clumsyShot)
             {
@@ -193,7 +194,8 @@ public sealed class ExecutionSystem : EntitySystem
             }
             else
             {
-                _gunSystem.AttemptShoot(attacker, uid, gun, new EntityCoordinates(victim, 0, 0));
+                //This number is set, because Vector2(NaN, NaN) not equal Vector(Nan, Nan) ¯\_(ツ)_/¯
+                _gunSystem.AttemptShoot(attacker, uid, gun, new EntityCoordinates(victim, 0.01984f, -0.00634f));
             }
             args.Handled = true;
         }
@@ -219,6 +221,8 @@ public sealed class ExecutionSystem : EntitySystem
         }
 
         args.Damage *= execComp.DamageModifier;
+        comp.Executing = false;
+
     }
 
     private void OnAmmoShot(EntityUid uid, ExecutionComponent comp, ref AmmoShotEvent args)
@@ -239,7 +243,9 @@ public sealed class ExecutionSystem : EntitySystem
         {
             if(projectile.Damage.GetTotal() * comp.DamageModifier > staminaDamage)
                 projectile.Damage *= comp.DamageModifier;
+
         }
+        comp.Executing = false;
     }
 
     private void ShowExecutionInternalPopup(string locString,
