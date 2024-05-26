@@ -48,8 +48,6 @@ public sealed class ExecutionSystem : EntitySystem
         SubscribeLocalEvent<ExecutionComponent, ExecutionDoAfterEvent>(OnExecutionDoAfter);
         SubscribeLocalEvent<ExecutionComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<ExecutionComponent, AmmoShotEvent>(OnAmmoShot);
-        //SubscribeLocalEvent<ExecutionComponent, GunShotEvent>(OnGunShot);
-        //SubscribeLocalEvent<ExecutionComponent, HitScanEvent>();
 
     }
 
@@ -271,26 +269,6 @@ public sealed class ExecutionSystem : EntitySystem
         }
         comp.Executing = false;
     }
-
-    //private void OnGunShot(EntityUid uid, ExecutionComponent comp, ref GunShotEvent args)
-    //{
-    //    if (!comp.Executing || args.Ammo.Count == 0)
-    //    {
-    //        return;
-    //    }
-
-    //    if (args.Ammo[0].Shootable is HitscanPrototype hitscan)
-    //    {
-
-
-    //        //hitscan.StaminaDamage *= comp.DamageModifier;
-
-    //        //if (hitscan.Damage != null && hitscan.Damage.GetTotal() * comp.DamageModifier > hitscan.StaminaDamage)
-    //        //    hitscan.Damage *= comp.DamageModifier;
-
-    //        //comp.Executing = false;
-    //    }
-    //}
 
     private void ShowExecutionInternalPopup(string locString,
         EntityUid attacker, EntityUid victim, EntityUid weapon, bool predict = true)
