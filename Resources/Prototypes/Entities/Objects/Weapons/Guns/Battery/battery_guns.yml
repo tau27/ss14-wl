@@ -241,6 +241,10 @@
     fireCost: 62.5
   - type: StaticPrice
     price: 300
+# White-List components
+  - type: Execution
+    damageModifier: 0
+# White-List components End
 
 - type: entity
   name: pulse pistol
