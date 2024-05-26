@@ -19,8 +19,9 @@ using Content.Shared.Projectiles;
 using System.Threading;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Damage.Components;
+using Content.Shared.Weapons.Ranged;
 
-namespace Content.Shared.Execution;
+namespace Content.Shared._WL.Execution;
 
 /// <summary>
 ///     Verb for violently murdering cuffed creatures.
@@ -36,17 +37,7 @@ public sealed class ExecutionSystem : EntitySystem
     [Dependency] private readonly SharedMeleeWeaponSystem _meleeSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
-
-
-    // TODO: Still needs more cleaning up.
-    private const string DefaultInternalMeleeExecutionMessage = "execution-popup-melee-initial-internal";
-    private const string DefaultExternalMeleeExecutionMessage = "execution-popup-melee-initial-external";
-    private const string DefaultCompleteInternalMeleeExecutionMessage = "execution-popup-melee-complete-internal";
-    private const string DefaultCompleteExternalMeleeExecutionMessage = "execution-popup-melee-complete-external";
-    private const string DefaultInternalGunExecutionMessage = "execution-popup-gun-initial-internal";
-    private const string DefaultExternalGunExecutionMessage = "execution-popup-gun-initial-external";
-    private const string DefaultCompleteInternalGunExecutionMessage = "execution-popup-gun-complete-internal";
-    private const string DefaultCompleteExternalGunExecutionMessage = "execution-popup-gun-complete-external";
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -57,6 +48,8 @@ public sealed class ExecutionSystem : EntitySystem
         SubscribeLocalEvent<ExecutionComponent, ExecutionDoAfterEvent>(OnExecutionDoAfter);
         SubscribeLocalEvent<ExecutionComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<ExecutionComponent, AmmoShotEvent>(OnAmmoShot);
+        //SubscribeLocalEvent<ExecutionComponent, GunShotEvent>(OnGunShot);
+        //SubscribeLocalEvent<ExecutionComponent, HitScanEvent>();
 
     }
 
@@ -89,13 +82,13 @@ public sealed class ExecutionSystem : EntitySystem
             return;
 
         // TODO: This should just be on the weapons as a single execution message.
-        var defaultExecutionInternal = DefaultInternalMeleeExecutionMessage;
-        var defaultExecutionExternal = DefaultExternalMeleeExecutionMessage;
+        var defaultExecutionInternal = comp.DefaultInternalMeleeExecutionMessage;
+        var defaultExecutionExternal = comp.DefaultExternalMeleeExecutionMessage;
 
         if (HasComp<GunComponent>(weapon))
         {
-            defaultExecutionExternal = DefaultInternalGunExecutionMessage;
-            defaultExecutionInternal = DefaultExternalGunExecutionMessage;
+            defaultExecutionExternal = comp.DefaultInternalGunExecutionMessage;
+            defaultExecutionInternal = comp.DefaultExternalGunExecutionMessage;
         }
 
         var internalMsg = defaultExecutionInternal;
@@ -171,8 +164,34 @@ public sealed class ExecutionSystem : EntitySystem
         if (TryComp(uid, out MeleeWeaponComponent? melee))
         {
             _meleeSystem.AttemptLightAttack(attacker, weapon, melee, victim);
-            internalMsg = DefaultCompleteInternalMeleeExecutionMessage;
-            externalMsg = DefaultCompleteExternalMeleeExecutionMessage;
+            internalMsg = component.DefaultCompleteInternalMeleeExecutionMessage;
+            externalMsg = component.DefaultCompleteExternalMeleeExecutionMessage;
+        }
+        // TODO: Fcking shit code by GunSystem and HitscanPrototype
+        else if (TryComp(uid, out HitscanBatteryAmmoProviderComponent? hitscanBatteryAmmo) &&
+                 hitscanBatteryAmmo.Shots != 0 &&
+                 TryComp(uid, out GunComponent? laserGun))
+        {
+            DamageSpecifier damageSpecifier = new DamageSpecifier()
+            {
+                DamageDict = new Dictionary<string, FixedPoint.FixedPoint2>()
+                {
+                    { "Heat", component.DamageModifier * 10f }
+                }
+            };
+
+            if (attacker == victim)
+            {
+                _gunSystem.AttemptShoot(uid, laserGun);
+                _damageable.TryChangeDamage(victim, damageSpecifier, origin: attacker);
+            }
+            else  //This number is set, because Vector2(NaN, NaN) not equal Vector(Nan, Nan) ¯\_(ツ)_/¯
+            {
+                _gunSystem.AttemptShoot(attacker, uid, laserGun, new EntityCoordinates(victim, 0.01984f, -0.00451f));
+                _damageable.TryChangeDamage(victim, damageSpecifier, origin: attacker);
+            }
+
+            args.Handled = true;
         }
         else if (TryComp(uid, out GunComponent? gun))
         {
@@ -189,8 +208,8 @@ public sealed class ExecutionSystem : EntitySystem
             }
             else
             {
-                internalMsg = DefaultCompleteInternalGunExecutionMessage;
-                externalMsg = DefaultCompleteExternalGunExecutionMessage;
+                internalMsg = component.DefaultCompleteInternalGunExecutionMessage;
+                externalMsg = component.DefaultCompleteExternalGunExecutionMessage;
             }
 
             if(attacker == victim)
@@ -232,7 +251,7 @@ public sealed class ExecutionSystem : EntitySystem
 
     private void OnAmmoShot(EntityUid uid, ExecutionComponent comp, ref AmmoShotEvent args)
     {
-        if (!comp.Executing)
+        if (!comp.Executing || args.FiredProjectiles.Count == 0)
         {
             return;
         }
@@ -252,6 +271,26 @@ public sealed class ExecutionSystem : EntitySystem
         }
         comp.Executing = false;
     }
+
+    //private void OnGunShot(EntityUid uid, ExecutionComponent comp, ref GunShotEvent args)
+    //{
+    //    if (!comp.Executing || args.Ammo.Count == 0)
+    //    {
+    //        return;
+    //    }
+
+    //    if (args.Ammo[0].Shootable is HitscanPrototype hitscan)
+    //    {
+
+
+    //        //hitscan.StaminaDamage *= comp.DamageModifier;
+
+    //        //if (hitscan.Damage != null && hitscan.Damage.GetTotal() * comp.DamageModifier > hitscan.StaminaDamage)
+    //        //    hitscan.Damage *= comp.DamageModifier;
+
+    //        //comp.Executing = false;
+    //    }
+    //}
 
     private void ShowExecutionInternalPopup(string locString,
         EntityUid attacker, EntityUid victim, EntityUid weapon, bool predict = true)
