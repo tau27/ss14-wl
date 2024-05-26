@@ -183,7 +183,7 @@ public sealed class ExecutionSystem : EntitySystem
                 _gunSystem.AttemptShoot(uid, laserGun);
                 _damageable.TryChangeDamage(victim, damageSpecifier, origin: attacker);
             }
-            else  //This number is set, because Vector2(NaN, NaN) not equal Vector(Nan, Nan) ¯\_(ツ)_/¯
+            else  //This number is set, because two Vectors with x0 y0 make Vector(NaN, Nan) direction, and this pass NaN value check... ¯\_(ツ)_/¯
             {
                 _gunSystem.AttemptShoot(attacker, uid, laserGun, new EntityCoordinates(victim, 0.01984f, -0.00451f));
                 _damageable.TryChangeDamage(victim, damageSpecifier, origin: attacker);
@@ -216,7 +216,7 @@ public sealed class ExecutionSystem : EntitySystem
             }
             else
             {
-                //This number is set, because Vector2(NaN, NaN) not equal Vector(Nan, Nan) ¯\_(ツ)_/¯
+                //This number is set, because two Vectors with x0 y0 make Vector(NaN, Nan) direction, and this pass NaN value check... ¯\_(ツ)_/¯
                 _gunSystem.AttemptShoot(attacker, uid, gun, new EntityCoordinates(victim, 0.01984f, -0.00451f));
             }
             args.Handled = true;
