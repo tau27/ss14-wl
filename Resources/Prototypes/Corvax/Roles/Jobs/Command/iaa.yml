@@ -10,6 +10,8 @@
     department: Security
     time: 36000
   startingGear: IAAGear
+  subnames:
+  - кадровый агент
   icon: "JobIconIAA"
   supervisors: job-supervisors-centcom
   canBeAntag: false
