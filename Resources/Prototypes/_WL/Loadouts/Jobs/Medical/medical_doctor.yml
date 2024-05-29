@@ -7,3 +7,12 @@
   id: MedicalStethoscope
   equipment:
     neck: ClothingNeckStethoscope
+
+- type: loadout
+  id: MedicalShoesColorBrown
+  equipment: MedicalShoesColorBrown
+
+- type: startingGear
+  id: MedicalShoesColorBrown
+  equipment:
+    neck: ClothingShoesColorBrown

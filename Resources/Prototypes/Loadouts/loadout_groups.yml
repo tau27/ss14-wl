@@ -1085,6 +1085,7 @@
   loadouts:
   - WhiteShoes
   - MedicalWinterBoots
+  - MedicalShoesColorBrown # WL-Changes
 
 - type: loadoutGroup
   id: MedicalDoctorPDA
