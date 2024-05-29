@@ -16,3 +16,13 @@
   id: MedicalShoesColorBrown
   equipment:
     neck: ClothingShoesColorBrown
+
+- type: loadout
+  id: BoxFolderClipboard
+  equipment: BoxFolderClipboard
+
+- type: startingGear
+  id: BoxFolderClipboard
+  storage:
+    back: 
+    - BoxFolderClipboard

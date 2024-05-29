@@ -348,6 +348,7 @@
   - Glasses
   - Trinkets
   - Inventory # Corvax-Loadouts
+  - Utility # WL-Changes
 
 - type: roleLoadout
   id: JobMedicalDoctor
@@ -364,6 +365,7 @@
   - Trinkets
   - Inventory # Corvax-Loadouts
   - MedicalDoctorNeck # WL-Changes
+  - Utility # WL-Changes
 
 - type: roleLoadout
   id: JobMedicalIntern
@@ -373,6 +375,7 @@
   - Glasses
   - Trinkets
   - Inventory # Corvax-Loadouts
+  - Utility # WL-Changes
 
 - type: roleLoadout
   id: JobChemist

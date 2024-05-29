@@ -4,3 +4,11 @@
   minLimit: 0
   loadouts:
   - MedicalStethoscope
+
+- type: loadoutGroup
+  id: Utility
+  name: Служебное
+  minLimit: 0
+  maxLimit: 3
+  loadouts:
+  - BoxFolderClipboard
