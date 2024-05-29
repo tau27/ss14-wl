@@ -1,0 +1,9 @@
+#Neck
+- type: loadout
+  id: MedicalStethoscope
+  equipment: MedicalStethoscope
+
+- type: startingGear
+  id: MedicalStethoscope
+  equipment:
+    neck: ClothingNeckStethoscope

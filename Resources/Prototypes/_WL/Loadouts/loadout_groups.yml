@@ -1,0 +1,6 @@
+- type: loadoutGroup
+  id: MedicalDoctorNeck
+  name: "Врач, шея"
+  minLimit: 0
+  loadouts:
+  - MedicalStethoscope

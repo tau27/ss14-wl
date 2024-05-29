@@ -363,6 +363,7 @@
   - Glasses
   - Trinkets
   - Inventory # Corvax-Loadouts
+  - MedicalDoctorNeck # WL-Changes
 
 - type: roleLoadout
   id: JobMedicalIntern
