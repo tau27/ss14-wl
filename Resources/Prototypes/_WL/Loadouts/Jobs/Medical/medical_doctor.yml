@@ -15,7 +15,7 @@
 - type: startingGear
   id: MedicalShoesColorBrown
   equipment:
-    neck: ClothingShoesColorBrown
+    shoes: ClothingShoesColorBrown
 
 - type: loadout
   id: BoxFolderClipboard
