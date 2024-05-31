@@ -41,7 +41,6 @@ public sealed class RandomHumanoidSystem : EntitySystem
             throw new ArgumentException("Could not get random humanoid settings");
 
         var profile = HumanoidCharacterProfile.Random(prototype.SpeciesBlacklist);
-        Logger.Debug($"WWWWWWWA  {profile.Voice}");
         var speciesProto = _prototypeManager.Index<SpeciesPrototype>(profile.Species);
         var humanoid = EntityManager.CreateEntityUninitialized(speciesProto.Prototype, coordinates);
 
