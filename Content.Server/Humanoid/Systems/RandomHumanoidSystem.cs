@@ -1,5 +1,7 @@
+using Content.Server.Corvax.TTS;
 using Content.Server.Humanoid.Components;
 using Content.Server.RandomMetadata;
+using Content.Shared.Corvax.TTS;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Robust.Shared.Map;
@@ -23,7 +25,7 @@ public sealed class RandomHumanoidSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RandomHumanoidSpawnerComponent, MapInitEvent>(OnMapInit,
-            after: new []{ typeof(RandomMetadataSystem) });
+            after: [typeof(RandomMetadataSystem), typeof(TTSSystem)]);
     }
 
     private void OnMapInit(EntityUid uid, RandomHumanoidSpawnerComponent component, MapInitEvent args)
@@ -39,6 +41,7 @@ public sealed class RandomHumanoidSystem : EntitySystem
             throw new ArgumentException("Could not get random humanoid settings");
 
         var profile = HumanoidCharacterProfile.Random(prototype.SpeciesBlacklist);
+        Logger.Debug($"WWWWWWWA  {profile.Voice}");
         var speciesProto = _prototypeManager.Index<SpeciesPrototype>(profile.Species);
         var humanoid = EntityManager.CreateEntityUninitialized(speciesProto.Prototype, coordinates);
 
@@ -58,6 +61,10 @@ public sealed class RandomHumanoidSystem : EntitySystem
         }
 
         EntityManager.InitializeAndStartEntity(humanoid);
+
+        // WL-Changes-start
+        EnsureComp<TTSComponent>(humanoid).VoicePrototypeId = profile.Voice;
+        // WL-Changes-end
 
         return humanoid;
     }
