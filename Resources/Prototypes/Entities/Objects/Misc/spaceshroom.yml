@@ -80,6 +80,10 @@
 - type: weightedRandomFillSolution
   id: RandomFillSpaceshroom
   fills:
+  - quantity: 3
+    weight: 0.2
+    reagents:
+    - JuiceThatMakesYouWeh
   - quantity: 10
     weight: 10
     reagents:
