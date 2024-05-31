@@ -2,7 +2,7 @@
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitDSS
   name: тактический комбинезон ДСБ
-  description: Стильный и до предела удобный тактический комбинезон, выполненный в тонах Департамента Службы Безопасности.s
+  description: Стильный и до предела удобный тактический комбинезон, выполненный в тонах Департамента Службы Безопасности.
   components:
   - type: Sprite
     sprite: _WL/Clothing/Uniforms/Jumpsuit/dss.rsi
