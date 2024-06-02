@@ -4,7 +4,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
-
+using Content.Shared.Alert;
 
 namespace Content.Server._WL.PulseDemon.Components;
 
@@ -129,4 +129,10 @@ public sealed partial class PulseDemonComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)]
     public float SpeedLevel = 1;
+
+    [DataField]
+    public ProtoId<AlertPrototype> WithoutElectricityWarning = "WithoutElectricityWarning";
+
+    [DataField]
+    public ProtoId<AlertPrototype> ElectricityAlert = "Electricity";
 }

@@ -93,11 +93,11 @@ public sealed partial class PulseDemonSystem : EntitySystem
 
             if (CheckPoweredCablesOnDemon(transform))
             {
-                _alerts.ClearAlert(uid, AlertType.WithoutElectricityWarning);
+                _alerts.ClearAlert(uid, pulseDemonComp.WithoutElectricityWarning);
                 continue;
             }
 
-            _alerts.ShowAlert(uid, AlertType.WithoutElectricityWarning);
+            _alerts.ShowAlert(uid, pulseDemonComp.WithoutElectricityWarning);
 
             var factor = transform.Coordinates.GetTileRef(EntityManager, _map) == null
                 ? WithoutTurfDamageFactor
@@ -133,7 +133,7 @@ public sealed partial class PulseDemonSystem : EntitySystem
             _store.UpdateUserInterface(uid, uid, store);
         }
 
-        _alerts.ShowAlert(uid, AlertType.Electricity, (short) Math.Clamp(Math.Round(args.Charge / args.MaxCharge * 20), 0, 20));
+        _alerts.ShowAlert(uid, component.ElectricityAlert, (short) Math.Clamp(Math.Round(args.Charge / args.MaxCharge * 20), 0, 20));
 
         if (args.Charge <= 0)
             QueueDel(uid);
@@ -319,7 +319,7 @@ public sealed partial class PulseDemonSystem : EntitySystem
     private void InitializeComponentFields(EntityUid demonUid, PulseDemonComponent component)
     {
         var battery = Comp<BatteryComponent>(demonUid);
-        _alerts.ShowAlert(demonUid, AlertType.Electricity, (short) Math.Round(battery.CurrentCharge / battery.MaxCharge * 20));
+        _alerts.ShowAlert(demonUid, component.ElectricityAlert, (short) Math.Round(battery.CurrentCharge / battery.MaxCharge * 20));
 
         component.NextParticlesSpawnTime = TimeSpan.FromSeconds(component.ParticlesSpawnInterval);
     }
