@@ -71,7 +71,7 @@
   noSpawn: true
   components:
     - type: StationEvent
-      weight: 4
+      weight: 6
       startDelay: 10
       duration: 120
       spawnConfig:

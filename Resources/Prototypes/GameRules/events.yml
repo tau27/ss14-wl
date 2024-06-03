@@ -37,7 +37,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 2
+    weight: 1
     reoccurrenceDelay: 5
     earliestStart: 1
     duration: 1
@@ -66,7 +66,7 @@
     spawnConfig:
       standartConfig:
         minPlayers: 20
-    weight: 3
+    weight: 5
     duration: 1
   - type: BureaucraticErrorRule
 
@@ -104,7 +104,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 6.5
+    weight: 5
     duration: 1
     earliestStart: 60 # Corvax WL changes
     reoccurrenceDelay: 60
@@ -120,7 +120,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 6
+    weight: 5
     duration: 1
     earliestStart: 45 # Corvax WL changes
     reoccurrenceDelay: 60
@@ -135,7 +135,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 7.5
+    weight: 5
     duration: 1
     earliestStart: 45
     spawnConfig:
@@ -274,7 +274,7 @@
   noSpawn: true
   components:
   - type: StationEvent
-    weight: 5
+    weight: 6
     startAnnouncement: station-event-power-grid-check-start-announcement
     endAnnouncement: station-event-power-grid-check-end-announcement
     startAudio:
@@ -347,7 +347,7 @@
     spawnConfig:
       standartConfig:
         minPlayers: 15
-    weight: 5
+    weight: 6
     startDelay: 50
     duration: 60
   - type: VentClogRule
@@ -366,7 +366,7 @@
     spawnConfig:
       standartConfig:
         minPlayers: 15
-    weight: 5
+    weight: 6
     duration: 60
   - type: VentCrittersRule
     entries:
@@ -391,7 +391,7 @@
     spawnConfig:
       standartConfig:
         minPlayers: 15
-    weight: 5
+    weight: 6
     duration: 60
   - type: VentCrittersRule
     entries:
@@ -453,41 +453,41 @@
 #      - type: InitialInfectedRole
 #        prototype: InitialInfected
 
-- type: entity
-  noSpawn: true
-  parent: BaseNukeopsRule
-  id: LoneOpsSpawn
-  components:
-  - type: StationEvent
-    earliestStart: 35
-    weight: 5.5
-    spawnConfig:
-      standartConfig:
-        minPlayers: 20
-    duration: 1
-  - type: LoadMapRule
-    preloadedGrid: ShuttleStriker
-  - type: NukeopsRule
-    roundEndBehavior: Nothing
-  - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointLoneNukeOperative
-      min: 1
-      max: 1
-      pickPlayer: false
-      startingGear: SyndicateLoneOperativeGearFull
-      components:
-      - type: NukeOperative
-      - type: RandomMetadata
-        nameSegments:
-        - SyndicateNamesPrefix
-        - SyndicateNamesNormal
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      mindComponents:
-      - type: NukeopsRole
-        prototype: Nukeops
+#  - type: entity
+#   noSpawn: true
+#   parent: BaseNukeopsRule
+#   id: LoneOpsSpawn
+#   components:
+#   - type: StationEvent
+#     earliestStart: 35
+#     weight: 5.5
+#     spawnConfig:
+#       standartConfig:
+#         minPlayers: 20
+#     duration: 1
+#   - type: LoadMapRule
+#     preloadedGrid: ShuttleStriker
+#   - type: NukeopsRule
+#     roundEndBehavior: Nothing
+#   - type: AntagSelection
+#     definitions:
+#     - spawnerPrototype: SpawnPointLoneNukeOperative
+#       min: 1
+#       max: 1
+#       pickPlayer: false
+#       startingGear: SyndicateLoneOperativeGearFull
+#       components:
+#       - type: NukeOperative
+#       - type: RandomMetadata
+#         nameSegments:
+#         - SyndicateNamesPrefix
+#         - SyndicateNamesNormal
+#       - type: NpcFactionMember
+#         factions:
+#         - Syndicate
+#       mindComponents:
+#       - type: NukeopsRole
+#         prototype: Nukeops
 
 - type: entity
   noSpawn: true
@@ -496,7 +496,7 @@
   components:
   - type: StationEvent
     earliestStart: 30
-    weight: 8
+    weight: 5
     maxOccurrences: 1 # can only happen once per round
     spawnConfig:
       standartConfig:
@@ -514,40 +514,6 @@
       mindComponents:
       - type: InitialInfectedRole
         prototype: InitialInfected
-
-#- type: entity
-#  id: LoneOpsSpawn
-#  parent: BaseGameRule
-#  noSpawn: true
-#  components:
-#  - type: StationEvent
-#    earliestStart: 35
-#    weight: 5.5
-#    minimumPlayers: 20
-#    duration: 1
-#  - type: LoadMapRule
-#    preloadedGrid: ShuttleStriker
-#  - type: NukeopsRule
-#    roundEndBehavior: Nothing
-#  - type: AntagSelection
-#    definitions:
-#    - spawnerPrototype: SpawnPointLoneNukeOperative
-#      min: 1
-#      max: 1
-#      pickPlayer: false
-#      startingGear: SyndicateLoneOperativeGearFull
-#      components:
-#      - type: NukeOperative
-#      - type: RandomMetadata
-#        nameSegments:
-#        - SyndicateNamesPrefix
-#        - SyndicateNamesNormal
-#      - type: NpcFactionMember
-#        factions:
-#        - Syndicate
-#      mindComponents:
-#      - type: NukeopsRole
-#        prototype: Nukeops
 
 - type: entity
   id: MassHallucinations
