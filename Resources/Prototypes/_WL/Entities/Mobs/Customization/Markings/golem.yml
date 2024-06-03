@@ -16,6 +16,15 @@
   - sprite: _WL/Mobs/Customization/golem_parts.rsi
     state: head_curled
 
+- type: marking
+  id: GolemThorns
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Golem]
+  sprites:
+  - sprite: _WL/Mobs/Customization/golem_parts.rsi
+    state: torso_thorns
+
 #- type: marking
 #  id: GolemMale
 #  bodyPart: Chest

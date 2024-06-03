@@ -18,6 +18,10 @@
         {
             "name": "torso_male",
             "directions": 4
+        },
+        {
+            "name": "torso_thorns",
+            "directions": 4
         }
     ]
 }
