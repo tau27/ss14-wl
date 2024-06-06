@@ -1,11 +1,13 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server.Actions;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Components;
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
+using Content.Shared._WL.CCVars;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Eye;
@@ -21,6 +23,7 @@ using Content.Shared.Roles.Jobs;
 using Content.Shared.Storage.Components;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -31,7 +34,7 @@ namespace Content.Server.Ghost
 {
     public sealed class GhostSystem : SharedGhostSystem
     {
-        [Dependency] private readonly SharedActionsSystem _actions = default!;
+        [Dependency] private readonly ActionsSystem _actions = default!;
         [Dependency] private readonly SharedEyeSystem _eye = default!;
         [Dependency] private readonly FollowerSystem _followerSystem = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -47,6 +50,13 @@ namespace Content.Server.Ghost
         [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
         [Dependency] private readonly RoleSystem _role = default!;
         [Dependency] private readonly MetaDataSystem _metaData = default!;
+
+        //WL-ReturnToLobby-start
+        [Dependency] private readonly IConfigurationManager _confMan = default!;
+
+        public TimeSpan GhostReturnToLobbyButtonCooldown { get; private set; }
+            = TimeSpan.FromSeconds(WLCVars.GhostReturnToLobbyButtonCooldown.DefaultValue);
+        //WL-ReturnToLobby-end
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -81,7 +91,43 @@ namespace Content.Server.Ghost
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
+
+            //WL-ReturnToLobby-start
+            SubscribeLocalEvent<GhostComponent, GoLobbyActionEvent>(OnReturnToLobby);
+
+            Subs.CVar(_confMan, WLCVars.GhostReturnToLobbyButtonCooldown,
+                (newValue) => GhostReturnToLobbyButtonCooldown = TimeSpan.FromSeconds(newValue));
+            //WL-ReturnToLobby-end
         }
+
+        //WL-ReturnToLobby-start
+        public override void Update(float frameTime)
+        {
+            base.Update(frameTime);
+
+            var query = EntityQueryEnumerator<GhostComponent, ActionsComponent>();
+            while (query.MoveNext(out var uid, out var ghostComp, out var actionsComp))
+            {
+                if (ghostComp.WasGivenReturnButtonAction)
+                    continue;
+
+                if (ghostComp.TimeOfDeath + GhostReturnToLobbyButtonCooldown > _gameTiming.CurTime)
+                    continue;
+
+                ghostComp.WasGivenReturnButtonAction = true;
+
+                _actions.AddAction(uid, ref ghostComp.ReturnToLobbyActionEntity, ghostComp.ReturnToLobbyAction, component: actionsComp);
+            }
+        }
+
+        private void OnReturnToLobby(EntityUid ghost, GhostComponent component, GoLobbyActionEvent args)
+        {
+            if (!_playerManager.TryGetSessionByEntity(ghost, out var session))
+                return;
+
+            _ticker.Respawn(session);
+        }
+        //WL-ReturnToLobby-end
 
         private void OnGhostHearingAction(EntityUid uid, GhostComponent component, ToggleGhostHearingActionEvent args)
         {

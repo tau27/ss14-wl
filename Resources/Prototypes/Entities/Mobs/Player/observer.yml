@@ -53,6 +53,18 @@
     tags:
     - BypassInteractionRangeChecks
 
+# WL-Changes-start
+- type: entity
+  id: ActionGhostReturnToLobby
+  name: Вернуться в лобби
+  noSpawn: true
+  components:
+  - type: InstantAction
+    icon: Interface/eject.png
+    checkCanInteract: false
+    event: !type:GoLobbyActionEvent
+# WL-Changes-end
+
 - type: entity
   id: ActionGhostBoo
   name: Boo!

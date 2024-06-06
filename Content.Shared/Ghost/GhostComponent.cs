@@ -50,6 +50,16 @@ public sealed partial class GhostComponent : Component
     [DataField("booMaxTargets"), ViewVariables(VVAccess.ReadWrite)]
     public int BooMaxTargets = 3;
 
+    //WL-ReturnToLobby-start
+    [DataField]
+    public EntProtoId ReturnToLobbyAction = "ActionGhostReturnToLobby";
+
+    [DataField]
+    public EntityUid? ReturnToLobbyActionEntity;
+
+    public bool WasGivenReturnButtonAction = false;
+    //WL-ReturnToLobby-end
+
     // TODO: instead of this funny stuff just give it access and update in system dirtying when needed
     [ViewVariables(VVAccess.ReadWrite)]
     public bool CanGhostInteract
@@ -104,3 +114,5 @@ public sealed partial class ToggleGhostHearingActionEvent : InstantActionEvent {
 public sealed partial class ToggleGhostVisibilityToAllEvent : InstantActionEvent { }
 
 public sealed partial class BooActionEvent : InstantActionEvent { }
+
+public sealed partial class GoLobbyActionEvent : InstantActionEvent { }
