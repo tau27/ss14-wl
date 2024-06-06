@@ -57,6 +57,7 @@
 - type: entity
   id: ActionGhostReturnToLobby
   name: Вернуться в лобби
+  description: "[color=red]СТРОГО ЗАПРЕЩАЕТСЯ[/color] заходить за персонажей, которые уже были в раунде. Если вы стали свидетелем оного, то смело пишите жалобу используя правило 4."
   noSpawn: true
   components:
   - type: InstantAction
