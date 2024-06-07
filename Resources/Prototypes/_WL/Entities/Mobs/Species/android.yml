@@ -37,6 +37,9 @@
         Bloodloss:
           -1.05
     chemicalMaxVolume: 250
+    maxBleedAmount: 1.0
+    bloodRefreshAmount: 0.0
+    bleedReductionAmount: 0.0
   - type: Reactive
     groups:
       Flammable: [ Touch ]
@@ -73,7 +76,7 @@
       - Pacified
       - StaminaModifier
       - TemporaryBlindness
-  - type: Blindable
+  #- type: Blindable
   - type: Icon
     sprite: _WL/Mobs/Species/Android/parts.rsi
     state: full
