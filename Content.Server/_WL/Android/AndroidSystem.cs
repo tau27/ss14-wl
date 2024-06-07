@@ -1,4 +1,5 @@
 using Content.Server.DoAfter;
+using Content.Server.Mind;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.PowerCell;
@@ -6,6 +7,7 @@ using Content.Server.Traits.Assorted;
 using Content.Shared._WL.Android;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.DoAfter;
+using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
@@ -82,11 +84,17 @@ namespace Content.Server._WL.Android
 
         private void OnSleepBegin(EntityUid android, AndroidComponent comp, StatusEffectAddedEvent args)
         {
+            if (!args.Key.Equals(ForcedSleepStatusEffect))
+                return;
+
             EnsureComp<ForcedSleepingComponent>(android);
         }
 
         private void OnSleepEnd(EntityUid android, AndroidComponent comp, StatusEffectEndedEvent args)
         {
+            if (!args.Key.Equals(ForcedSleepStatusEffect))
+                return;
+
             RemComp<ForcedSleepingComponent>(android);
         }
 
