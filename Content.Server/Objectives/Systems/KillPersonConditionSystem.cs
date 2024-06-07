@@ -106,7 +106,7 @@ public sealed class KillPersonConditionSystem : EntitySystem
             return 1f;
 
         // dead is success
-        if (_mind.IsCharacterDeadIc(mind))
+        if (_mind.IsCharacterDeadPhysically(mind)) //WL-Changes: IsCharacterDeadIc --> IsCharacterDeadPhysically, если задача убить, то надо убить, от зомби инфекции можно излечиться.
             return 1f;
 
         // if the target has to be dead dead then don't check evac stuff
