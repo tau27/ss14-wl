@@ -306,7 +306,7 @@
           type: Slime
         ratios:
           NitrousOxide: 1.0
-          Nitrogen: -1.0
+          Nitrogen: -0.25
 # WL android species start
       - !type:ModifyLungGas
         conditions:
