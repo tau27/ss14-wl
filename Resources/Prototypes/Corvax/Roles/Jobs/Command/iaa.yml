@@ -12,6 +12,7 @@
   startingGear: IAAGear
   subnames:
   - кадровый агент
+  - ревизор
   icon: "JobIconIAA"
   supervisors: job-supervisors-centcom
   canBeAntag: false
