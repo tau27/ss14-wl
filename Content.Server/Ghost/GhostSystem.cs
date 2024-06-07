@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Server.Actions;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Components;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
@@ -12,6 +13,7 @@ using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Eye;
 using Content.Shared.Follower;
+using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -25,6 +27,7 @@ using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -56,6 +59,8 @@ namespace Content.Server.Ghost
 
         public TimeSpan GhostReturnToLobbyButtonCooldown { get; private set; }
             = TimeSpan.FromSeconds(WLCVars.GhostReturnToLobbyButtonCooldown.DefaultValue);
+
+        private readonly Dictionary<NetUserId, TimeSpan> _cachedSessionsDeathTime = new();
         //WL-ReturnToLobby-end
 
         private EntityQuery<GhostComponent> _ghostQuery;
@@ -94,6 +99,11 @@ namespace Content.Server.Ghost
 
             //WL-ReturnToLobby-start
             SubscribeLocalEvent<GhostComponent, GoLobbyActionEvent>(OnReturnToLobby);
+            SubscribeLocalEvent<GhostComponent, MindAddedMessage>(OnMindAdded);
+
+            SubscribeLocalEvent<GhostRoleComponent, TakeGhostRoleEvent>(OnGhostRoleTaked);
+
+            SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => _cachedSessionsDeathTime.Clear());
 
             Subs.CVar(_confMan, WLCVars.GhostReturnToLobbyButtonCooldown,
                 (newValue) => GhostReturnToLobbyButtonCooldown = TimeSpan.FromSeconds(newValue));
@@ -105,13 +115,15 @@ namespace Content.Server.Ghost
         {
             base.Update(frameTime);
 
-            var query = EntityQueryEnumerator<GhostComponent, ActionsComponent>();
-            while (query.MoveNext(out var uid, out var ghostComp, out var actionsComp))
+            var query = EntityQueryEnumerator<GhostComponent, ActionsComponent, ActorComponent>();
+            while (query.MoveNext(out var uid, out var ghostComp, out var actionsComp, out var actorComp))
             {
                 if (ghostComp.WasGivenReturnButtonAction)
                     continue;
 
-                if (ghostComp.TimeOfDeath + GhostReturnToLobbyButtonCooldown > _gameTiming.CurTime)
+                var deathTime = _cachedSessionsDeathTime[actorComp.PlayerSession.UserId];
+
+                if (deathTime + GhostReturnToLobbyButtonCooldown > _gameTiming.CurTime)
                     continue;
 
                 ghostComp.WasGivenReturnButtonAction = true;
@@ -126,6 +138,21 @@ namespace Content.Server.Ghost
                 return;
 
             _ticker.Respawn(session);
+            _cachedSessionsDeathTime.Remove(session.UserId);
+        }
+
+        private void OnMindAdded(EntityUid ghost, GhostComponent component, MindAddedMessage args)
+        {
+            var user = args.Mind.Comp.UserId;
+            if (user == null)
+                return;
+
+            _cachedSessionsDeathTime.TryAdd(user.Value, _gameTiming.CurTime);
+        }
+
+        private void OnGhostRoleTaked(EntityUid entity, GhostRoleComponent component, ref TakeGhostRoleEvent args)
+        {
+            _cachedSessionsDeathTime.Remove(args.Player.UserId);
         }
         //WL-ReturnToLobby-end
 
