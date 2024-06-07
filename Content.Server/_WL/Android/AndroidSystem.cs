@@ -5,6 +5,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.PowerCell;
 using Content.Server.Traits.Assorted;
 using Content.Shared._WL.Android;
+using Content.Shared._WL.Light.Events;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.DoAfter;
 using Content.Shared.Mind;
@@ -43,6 +44,8 @@ namespace Content.Server._WL.Android
             SubscribeLocalEvent<AndroidComponent, StatusEffectEndedEvent>(OnSleepEnd);
 
             SubscribeLocalEvent<AndroidComponent, MobStateChangedEvent>(OnMobstateChanged);
+
+            SubscribeLocalEvent<AndroidComponent, BeforeDealHeatDamageFromLightBulbEvent>(OnGetLightBulb);
         }
 
         public override void Update(float frameTime)
@@ -70,6 +73,11 @@ namespace Content.Server._WL.Android
 
                 _powerCell.SetPowerCellDrawEnabled(uid, true, powerCellDrawComp);
             }
+        }
+
+        private void OnGetLightBulb(EntityUid android, AndroidComponent comp, BeforeDealHeatDamageFromLightBulbEvent args)
+        {
+            args.Cancel();
         }
 
         private void OnMobstateChanged(EntityUid android, AndroidComponent comp, MobStateChangedEvent args)

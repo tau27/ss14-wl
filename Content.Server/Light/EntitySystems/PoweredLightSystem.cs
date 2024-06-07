@@ -24,6 +24,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
+using Content.Shared._WL.Light.Events;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -110,31 +111,40 @@ namespace Content.Server.Light.EntitySystems
             var userUid = args.User;
             if (EntityManager.TryGetComponent(bulbUid.Value, out LightBulbComponent? lightBulb))
             {
-                // get users heat resistance
-                var res = int.MinValue;
-                if (_inventory.TryGetSlotEntity(userUid, "gloves", out var slotEntity) &&
-                    TryComp<GloveHeatResistanceComponent>(slotEntity, out var gloves))
-                {
-                    res = gloves.HeatResistance;
-                }
+                //WL-Changes-start
+                var ev = new BeforeDealHeatDamageFromLightBulbEvent(uid);
+                RaiseLocalEvent(userUid, ev);
 
-                // check heat resistance against user
-                var burnedHand = light.CurrentLit && res < lightBulb.BurningTemperature;
-                if (burnedHand)
+                if (!ev.Cancelled)
                 {
-                    var damage = _damageableSystem.TryChangeDamage(userUid, light.Damage, origin: userUid);
+                    //WL-Changes-end
 
-                    // If damage is null then the entity could not take heat damage so they did not get burned.
-                    if (damage != null)
+                    // get users heat resistance
+                    var res = int.MinValue;
+                    if (_inventory.TryGetSlotEntity(userUid, "gloves", out var slotEntity) &&
+                        TryComp<GloveHeatResistanceComponent>(slotEntity, out var gloves))
                     {
+                        res = gloves.HeatResistance;
+                    }
 
-                        var burnMsg = Loc.GetString("powered-light-component-burn-hand");
-                        _popupSystem.PopupEntity(burnMsg, uid, userUid);
-                        _adminLogger.Add(LogType.Damaged, $"{ToPrettyString(args.User):user} burned their hand on {ToPrettyString(args.Target):target} and received {damage.GetTotal():damage} damage");
-                        _audio.PlayEntity(light.BurnHandSound, Filter.Pvs(uid), uid, true);
+                    // check heat resistance against user
+                    var burnedHand = light.CurrentLit && res < lightBulb.BurningTemperature;
+                    if (burnedHand)
+                    {
+                        var damage = _damageableSystem.TryChangeDamage(userUid, light.Damage, origin: userUid);
 
-                        args.Handled = true;
-                        return;
+                        // If damage is null then the entity could not take heat damage so they did not get burned.
+                        if (damage != null)
+                        {
+
+                            var burnMsg = Loc.GetString("powered-light-component-burn-hand");
+                            _popupSystem.PopupEntity(burnMsg, uid, userUid);
+                            _adminLogger.Add(LogType.Damaged, $"{ToPrettyString(args.User):user} burned their hand on {ToPrettyString(args.Target):target} and received {damage.GetTotal():damage} damage");
+                            _audio.PlayEntity(light.BurnHandSound, Filter.Pvs(uid), uid, true);
+
+                            args.Handled = true;
+                            return;
+                        }
                     }
                 }
             }
