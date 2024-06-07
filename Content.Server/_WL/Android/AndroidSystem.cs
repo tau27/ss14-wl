@@ -6,6 +6,7 @@ using Content.Server.Traits.Assorted;
 using Content.Shared._WL.Android;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.DoAfter;
+using Content.Shared.Mobs;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.StatusEffect;
@@ -38,6 +39,8 @@ namespace Content.Server._WL.Android
             SubscribeLocalEvent<AndroidComponent, AndroidChargeEvent>(OnDoAfter);
             SubscribeLocalEvent<AndroidComponent, StatusEffectAddedEvent>(OnSleepBegin);
             SubscribeLocalEvent<AndroidComponent, StatusEffectEndedEvent>(OnSleepEnd);
+
+            SubscribeLocalEvent<AndroidComponent, MobStateChangedEvent>(OnMobstateChanged);
         }
 
         public override void Update(float frameTime)
@@ -54,11 +57,27 @@ namespace Content.Server._WL.Android
                     continue;
                 }
 
-                if (!powerCellDrawComp.CanDraw || powerCellDrawComp.Drawing)
+                if (!powerCellDrawComp.CanDraw)
+                {
+                    _powerCell.SetPowerCellDrawEnabled(uid, false, powerCellDrawComp);
+                    continue;
+                }
+
+                if (powerCellDrawComp.Drawing)
                     continue;
 
                 _powerCell.SetPowerCellDrawEnabled(uid, true, powerCellDrawComp);
             }
+        }
+
+        private void OnMobstateChanged(EntityUid android, AndroidComponent comp, MobStateChangedEvent args)
+        {
+            if (!TryComp<PowerCellDrawComponent>(android, out var powerCellDrawComp))
+                return;
+
+            if (args.NewMobState == MobState.Dead)
+                powerCellDrawComp.CanDraw = false;
+            else powerCellDrawComp.CanDraw = true;
         }
 
         private void OnSleepBegin(EntityUid android, AndroidComponent comp, StatusEffectAddedEvent args)
