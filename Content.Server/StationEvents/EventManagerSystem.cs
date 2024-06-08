@@ -178,7 +178,7 @@ public sealed class EventManagerSystem : EntitySystem
             return false;
         }
 
-        if (stationEvent.SpawnConfiguration?.IsEventPassed(_playerManager, _job, _mind) == false)
+        if (stationEvent.SpawnConfiguration?.IsEventPassed(EntityManager, _job, _mind, playerCount) == false)
         {
             return false;
         }

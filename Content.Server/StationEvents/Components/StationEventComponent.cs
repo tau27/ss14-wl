@@ -1,5 +1,6 @@
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
+using Content.Shared.Mind;
 using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Server.Player;
@@ -71,6 +72,7 @@ public sealed partial class StationEventComponent : Component
     [DataField]
     public TimeSpan? MaxDuration;
 
+    //WL-Changes-start
     /// <summary>
     ///     Содержит настройки ивента, связанные с количеством игроков/должностей.
     /// </summary>
@@ -79,6 +81,7 @@ public sealed partial class StationEventComponent : Component
     /// </remarks>
     [DataField("spawnConfig")]
     public EventPlayersConfiguration? SpawnConfiguration = null;
+    //WL-Changes-end
 
     /// <summary>
     ///     How many times this even can occur in a single round
@@ -111,35 +114,34 @@ public sealed partial class EventPlayersConfiguration
     [DataField(customTypeSerializer: typeof(PrototypeIdDictionarySerializer<MinMaxPlayers, JobPrototype>))]
     public Dictionary<string, MinMaxPlayers> JobConfig = new();
 
-
-    public bool IsEventPassed(IPlayerManager playerMan, JobSystem jobSystem, MindSystem mindSystem)
+    public bool IsEventPassed(IEntityManager entMan, JobSystem jobSystem, MindSystem mindSystem, int playerCount)
     {
-        if (playerMan.PlayerCount < StandartConfig.MinPlayers
-            || playerMan.PlayerCount > StandartConfig.MaxPlayers)
+        if (playerCount < StandartConfig.MinPlayers
+            || playerCount > StandartConfig.MaxPlayers)
             return false;
 
-        var jobNsessions = new Dictionary<string, int>();
-
-        var sessions = playerMan.Sessions
-            .Where(session => !session.ClientSide && session.Status == SessionStatus.InGame);
-
-        foreach (var session in sessions)
+        if (JobConfig.Count > 0)
         {
-            if (!mindSystem.TryGetMind(session, out var mindId, out _))
-                continue;
+            var jobNsessions = new Dictionary<string, int>();
 
-            if (!jobSystem.MindTryGetJobName(mindId, out var jobName))
-                continue;
+            var minds = entMan.EntityQueryEnumerator<MindComponent>();
 
-            if (!jobNsessions.TryAdd(jobName, 1))
-                jobNsessions[jobName] += 1;
+            while (minds.MoveNext(out var mindId, out var mindComponent))
+            {
+                if (!jobSystem.MindTryGetJob(mindId, out _, out var jobProto))
+                    continue;
+
+                if (!jobNsessions.TryAdd(jobProto.ID, 1))
+                    jobNsessions[jobProto.ID] += 1;
+            }
+
+            var jobConfigPassed = !JobConfig
+                .Any(config => jobNsessions
+                    .Any(jobNsession => jobNsession.Key.Equals(config.Key) && (jobNsession.Value > config.Value.MaxPlayers || jobNsession.Value < config.Value.MinPlayers)));
+
+            return jobConfigPassed;
         }
-
-        var jobConfigPassed = !JobConfig
-            .Any(config => jobNsessions
-                .Any(jobNsession => jobNsession.Key.Equals(config.Key) && (jobNsession.Value > config.Value.MaxPlayers || jobNsession.Value < config.Value.MinPlayers)));
-
-        return jobConfigPassed;
+        else return true;
     }
 }
 
