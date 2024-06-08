@@ -38,7 +38,7 @@
   components:
   - type: StationEvent
     weight: 1
-    reoccurrenceDelay: 5
+    reoccurrenceDelay: 120
     earliestStart: 1
     duration: 1
   - type: BluespaceLockerRule
@@ -580,7 +580,7 @@
   id: IonStorm
   components:
   - type: StationEvent
-    weight: 8
+    weight: 7
     reoccurrenceDelay: 20
     duration: 1
   - type: IonStormRule
