@@ -230,7 +230,7 @@
         - !type:OrganType
           type: Biorobotic
           shouldHave: false
-        amount: 4
+        amount: 0.5
 # WL android species end
     Drink:
       effects:

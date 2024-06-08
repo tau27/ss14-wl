@@ -16,3 +16,11 @@
       effects:
       - !type:SatiateThirst
         factor: 2
+    Medicine:
+      effects:
+      - !type:ModifyBloodLevel
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        amount: 0.5
