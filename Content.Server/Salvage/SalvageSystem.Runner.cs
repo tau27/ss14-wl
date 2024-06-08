@@ -104,7 +104,25 @@ public sealed partial class SalvageSystem
         Announce(args.MapUid, Loc.GetString("salvage-expedition-announcement-countdown-minutes", ("duration", (component.EndTime - _timing.CurTime).Minutes)));
 
         if (component.DungeonLocation != Vector2.Zero)
-            Announce(args.MapUid, Loc.GetString("salvage-expedition-announcement-dungeon", ("direction", component.DungeonLocation.GetDir())));
+        {
+            //WL-Changes-start
+            var dirLoc = component.DungeonLocation.GetDir() switch
+            {
+                Direction.Invalid => "XXX",
+                Direction.South => "юге",
+                Direction.SouthEast => "юго-востоке",
+                Direction.East => "востоке",
+                Direction.NorthEast => "северо-востоке",
+                Direction.North => "севере",
+                Direction.NorthWest => "северо-западе",
+                Direction.West => "западе",
+                Direction.SouthWest => "юго-западе",
+                _ => "XXX"
+            };
+            //WL-Changes-end
+
+            Announce(args.MapUid, Loc.GetString("salvage-expedition-announcement-dungeon", ("direction", /*WL-Changes-start*/ dirLoc /*WL-Changes-end*/)));
+        }
 
         component.Stage = ExpeditionStage.Running;
         Dirty(args.MapUid, component);
