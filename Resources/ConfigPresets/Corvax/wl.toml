@@ -8,6 +8,7 @@ map_rotation = true
 role_timers = false
 peaceful_end = false
 cryo_sleep_rejoining = true
+secret_weight_prototype = "Secret"
 
 [atmos]
 space_wind = true
@@ -26,7 +27,7 @@ flavor_text = true
 punctuation = true
 
 [salvage]
-expedition_duration = 1200.0
+expedition_duration = 900.0
 
 [shuttle]
 auto_call_time = 0
