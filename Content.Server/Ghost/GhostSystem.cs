@@ -100,6 +100,7 @@ namespace Content.Server.Ghost
             //WL-ReturnToLobby-start
             SubscribeLocalEvent<GhostComponent, GoLobbyActionEvent>(OnReturnToLobby);
             SubscribeLocalEvent<GhostComponent, MindAddedMessage>(OnMindAdded);
+            SubscribeLocalEvent<GhostComponent, PlayerAttachedEvent>(OnAttached);
 
             SubscribeLocalEvent<GhostRoleComponent, TakeGhostRoleEvent>(OnGhostRoleTaked);
 
@@ -121,7 +122,8 @@ namespace Content.Server.Ghost
                 if (ghostComp.WasGivenReturnButtonAction)
                     continue;
 
-                var deathTime = _cachedSessionsDeathTime[actorComp.PlayerSession.UserId];
+                if (!_cachedSessionsDeathTime.TryGetValue(actorComp.PlayerSession.UserId, out var deathTime))
+                    continue;
 
                 if (deathTime + GhostReturnToLobbyButtonCooldown > _gameTiming.CurTime)
                     continue;
@@ -139,6 +141,14 @@ namespace Content.Server.Ghost
 
             _ticker.Respawn(session);
             _cachedSessionsDeathTime.Remove(session.UserId);
+        }
+
+        private void OnAttached(EntityUid entity, GhostComponent component, PlayerAttachedEvent args)
+        {
+            if (!_playerManager.TryGetSessionByEntity(entity, out var session))
+                return;
+
+            _cachedSessionsDeathTime.TryAdd(session.UserId, _gameTiming.CurTime);
         }
 
         private void OnMindAdded(EntityUid ghost, GhostComponent component, MindAddedMessage args)
