@@ -222,16 +222,6 @@
             Poison: 1
       - !type:FlammableReaction
         multiplier: 0.4
-# WL android species start
-    Medicine:
-      effects:
-      - !type:ModifyBloodLevel
-        conditions:
-        - !type:OrganType
-          type: Biorobotic
-          shouldHave: false
-        amount: 0.5
-# WL android species end
     Drink:
       effects:
       - !type:HealthChange
