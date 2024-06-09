@@ -6,7 +6,8 @@
   subnames:
   - электрик
   - механик
-  - специалист по двигателям
+  - реакторный техник
+  - инженер-структурщик
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
