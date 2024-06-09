@@ -56,7 +56,7 @@ public sealed partial class TraitorRuleComponent : Component
     ///     Path to antagonist alert sound.
     /// </summary>
     [DataField]
-    public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
+    public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier(/*WL-Changes-start*/"/Audio/_WL/Ambience/Antag/tatoralert2.ogg"/*WL-Changes-end*/);
 
     /// <summary>
     /// The amount of codewords that are selected.
