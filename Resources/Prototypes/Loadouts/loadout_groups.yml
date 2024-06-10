@@ -869,6 +869,7 @@
   loadouts:
   - WardenHead
   - WardenBeret
+  - WardenBlueHatAlt # WL-Changes
 
 - type: loadoutGroup
   id: WardenJumpsuit
@@ -883,6 +884,7 @@
   loadouts:
   - WardenCoat
   - WardenArmoredWinterCoat
+  - WardenBlueCoat # WL-Changes
 
 - type: loadoutGroup
   id: SecurityHead
