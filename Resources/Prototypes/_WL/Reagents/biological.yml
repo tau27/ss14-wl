@@ -22,5 +22,5 @@
         conditions:
         - !type:OrganType
           type: Biorobotic
-          shouldHave: false
-        amount: 0.5
+          shouldHave: true
+        amount: 1
