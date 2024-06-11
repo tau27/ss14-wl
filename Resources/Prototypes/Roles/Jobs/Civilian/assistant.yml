@@ -8,6 +8,7 @@
   - юрист
   - фрилансер
   - экипаж вне службы
+  - турист
   playTimeTracker: JobPassenger
   startingGear: PassengerGear
   icon: "JobIconPassenger"

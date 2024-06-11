@@ -3,6 +3,8 @@
   name: job-name-mime
   description: job-description-mime
   playTimeTracker: JobMime
+  subnames:
+  - пантомимист
   requirements:
   - !type:OverallPlaytimeRequirement
       time: 90000 #25 hrs # Corvax-RoleTime

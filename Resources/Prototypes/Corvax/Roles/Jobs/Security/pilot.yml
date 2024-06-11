@@ -2,6 +2,8 @@
   id: Pilot
   name: job-name-pilot
   playTimeTracker: JobPilot
+  subnames:
+  - космический патрульный
   requirements:
   - !type:DepartmentTimeRequirement
     department: Security
