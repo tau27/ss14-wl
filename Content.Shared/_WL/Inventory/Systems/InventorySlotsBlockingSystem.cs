@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
-namespace Content.Shared._WL.Inventory
+namespace Content.Shared._WL.Inventory.Systems
 {
     public sealed partial class InventorySlotsBlockingSystem : EntitySystem
     {
