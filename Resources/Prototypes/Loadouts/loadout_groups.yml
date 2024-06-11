@@ -337,6 +337,7 @@
   minLimit: 0
   loadouts:
   - JanitorWintercoat
+  - JanitoralLightreflectJacket # WL-Changes
 
 - type: loadoutGroup
   id: BotanistHead

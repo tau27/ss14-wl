@@ -1,0 +1,8 @@
+- type: loadout
+  id: JanitoralLightreflectJacket
+  equipment: JanitoralLightreflectJacket
+
+- type: startingGear
+  id: JanitoralLightreflectJacket
+  equipment:
+    outerClothing: ClothingOuterVestHazard
