@@ -151,6 +151,7 @@
         Shock: -10
         Caustic: -10
         Asphyxiation: -10
+        Bloodloss: -10
     fuelCost: 5
     doAfterDelay: 3
   - type: Speech
