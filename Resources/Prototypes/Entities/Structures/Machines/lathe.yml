@@ -270,6 +270,8 @@
     dynamicRecipes:
       - PowerDrill
       - MiningDrill
+      - BioTube # WL android species
+      - TiriumPack # WL android species
       - AnomalyScanner
       - AnomalyLocator
       - AnomalyLocatorWide
@@ -544,8 +546,6 @@
     staticRecipes:
     - MMI
     - PositronicBrain
-    - BioTube # WL android species
-    - TiriumPack # WL android species
     - SciFlash
     - BorgModuleCable
     - BorgModuleFireExtinguisher
