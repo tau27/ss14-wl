@@ -5,7 +5,6 @@
   playTimeTracker: JobDetective
   subnames:
   - криминалист
-  - судмедэксперт
   - сыщик
   - следователь
   requirements:
