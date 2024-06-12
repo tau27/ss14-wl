@@ -8,10 +8,15 @@
   markingLimits: MobGolemMarkingLimits
   dollPrototype: MobGolemDummy
   skinColoration: Hues
-  maleFirstNames: names_golem_first
-  femaleFirstNames: names_golem_first
-  maleLastNames: names_golem_last
-  femaleLastNames: names_golem_last
+  naming:
+    Male:
+    - names_golem_first
+    - " "
+    - names_golem_last
+    Female:
+    - names_golem_first
+    - " "
+    - names_golem_last
   sexes:
   - Unsexed
 

@@ -4,10 +4,6 @@
   roundStart: true
   prototype: MobFelinid
   sprites: MobHumanSprites
-  maleFirstNames: names_first_male
-  femaleFirstNames: names_first_female
-  maleLastNames: names_last_male
-  femaleLastNames: names_last_female
   markingLimits: MobFelinidMarkingLimits
   dollPrototype: MobFelinidDummy
   skinColoration: HumanToned

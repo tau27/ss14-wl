@@ -1,3 +1,4 @@
+using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
@@ -89,22 +90,29 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField(required: true)]
     public HumanoidSkinColor SkinColoration { get; private set; }
 
-    [DataField]
-    public string MaleFirstNames { get; private set; } = "names_first_male";
+    //WL-Changes-start
+
+    //[DataField]
+    //public string MaleFirstNames { get; private set; } = "names_first_male";
+
+    //[DataField]
+    //public string FemaleFirstNames { get; private set; } = "names_first_female";
+
+    //// Corvax-LastnameGender-Start: Split lastname field by gender
+    //[DataField]
+    //public string MaleLastNames { get; private set; } = "names_last_male";
+
+    //[DataField]
+    //public string FemaleLastNames { get; private set; } = "names_last_female";
+    //// Corvax-LastnameGender-End
 
     [DataField]
-    public string FemaleFirstNames { get; private set; } = "names_first_female";
-
-    // Corvax-LastnameGender-Start: Split lastname field by gender
-    [DataField]
-    public string MaleLastNames { get; private set; } = "names_last_male";
-
-    [DataField]
-    public string FemaleLastNames { get; private set; } = "names_last_female";
-    // Corvax-LastnameGender-End
-
-    [DataField]
-    public SpeciesNaming Naming { get; private set; } = SpeciesNaming.FirstLast;
+    public Dictionary<Gender, List<string>> Naming { get; private set; } = new()
+    {
+        { Gender.Male, new() { "names_first_male", " ", "names_last_male" } },
+        { Gender.Female, new() { "names_first_female", " ", "names_last_female" } }
+    };
+    //WL-Changes-end
 
     [DataField]
     public List<Sex> Sexes { get; private set; } = new() { Sex.Male, Sex.Female };
@@ -167,10 +175,3 @@ public sealed partial class SpeciesPrototype : IPrototype
     public string GuideBookIcon = "SpeciesInfoDefault";
 }
 
-public enum SpeciesNaming : byte
-{
-    First,
-    FirstLast,
-    FirstDashFirst,
-    TheFirstofLast,
-}

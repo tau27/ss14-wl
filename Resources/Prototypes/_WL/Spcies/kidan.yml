@@ -8,9 +8,15 @@
   markingLimits: MobHumanMarkingLimits
   dollPrototype: MobHumanoidKidanDummy
   skinColoration: Hues
-  maleFirstNames: names_reptilian_male 
-  femaleFirstNames: names_reptilian_female
-  naming: FirstDashFirst
+  naming:
+    Male:
+    - names_reptilian_male 
+    - "-"
+    - names_reptilian_male 
+    Female:
+    - names_reptilian_female
+    - "-"
+    - names_reptilian_female
  
 - type: speciesBaseSprites
   id: MobHumanoidKidanSprites
