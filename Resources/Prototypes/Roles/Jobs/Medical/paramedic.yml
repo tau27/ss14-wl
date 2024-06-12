@@ -3,8 +3,6 @@
   name: job-name-paramedic
   description: job-description-paramedic
   playTimeTracker: JobParamedic
-  subnames:
-  - фельдшер
   requirements:
     - !type:RoleTimeRequirement
       role: JobMedicalDoctor
