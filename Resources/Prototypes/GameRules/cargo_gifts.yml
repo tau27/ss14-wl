@@ -39,7 +39,6 @@
   components:
     - type: StationEvent
       weight: 3 # Corvax WL changes
-      startDelay: 10
       duration: 240
       spawnConfig:
         standartConfig:
@@ -61,7 +60,6 @@
   components:
     - type: StationEvent
       weight: 5
-      startDelay: 10
       duration: 240
       earliestStart: 45 # Corvax WL changes
       spawnConfig:
@@ -86,7 +84,6 @@
   components:
     - type: StationEvent
       weight: 6
-      startDelay: 10
       duration: 120
       spawnConfig:
         standartConfig:
@@ -111,7 +108,6 @@
   components:
     - type: StationEvent
       weight: 6
-      startDelay: 10
       duration: 120
       spawnConfig:
         standartConfig:
@@ -133,7 +129,6 @@
   components:
     - type: StationEvent
       weight: 8
-      startDelay: 10
       duration: 120
       earliestStart: 30 # Corvax WL changes
       spawnConfig:
@@ -157,7 +152,6 @@
   components:
     - type: StationEvent
       weight: 4
-      startDelay: 10
       duration: 120
       earliestStart: 30 # Corvax WL changes
       spawnConfig:
@@ -181,7 +175,6 @@
   components:
     - type: StationEvent
       weight: 4
-      startDelay: 10
       duration: 120
       earliestStart: 30 # Corvax WL changes
       spawnConfig:
@@ -203,7 +196,6 @@
   components:
     - type: StationEvent
       weight: 3
-      startDelay: 10
       duration: 120
       earliestStart: 30 # Corvax WL changes
       spawnConfig:
@@ -226,7 +218,6 @@
   components:
     - type: StationEvent
       weight: 4
-      startDelay: 10
       duration: 120
       earliestStart: 30 # Corvax WL changes
       spawnConfig:

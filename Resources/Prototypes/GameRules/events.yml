@@ -38,13 +38,13 @@
   components:
   - type: StationEvent
     weight: 8
-    startDelay: 30
     duration: 35
     spawnConfig:
       standartConfig:
         minPlayers: 5 # Corvax WL
-    startAudio: # Corvax-Announcements
-      path: /Audio/Corvax/Announcements/flux.ogg
+    startAnnouncementColor: "#18abf5"
+    startAudio:
+      path: /Audio/Corvax/Announcements/flux.ogg # Corvax-Announcements
       params:
         volume: -4
   - type: AnomalySpawnRule
@@ -142,14 +142,30 @@
   components:
   - type: StationEvent
     weight: 5
-    duration: 1
-    earliestStart: 60 # Corvax WL changes
+    earliestStart: 120
     reoccurrenceDelay: 60
     spawnConfig:
       standartConfig:
         minPlayers: 25
-  - type: RandomSpawnRule
-    prototype: SpawnPointGhostDragon
+  - type: AntagRandomSpawn
+  - type: AntagSpawner
+    prototype: MobDragon
+  - type: AntagObjectives
+    objectives:
+    - CarpRiftsObjective
+    - DragonSurviveObjective
+  - type: AntagSelection
+    agentName: dragon-round-end-agent-name
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDragon
+      min: 1
+      max: 1
+      pickPlayer: false
+      mindComponents:
+      - type: DragonRole
+        prototype: Dragon
+      - type: RoleBriefing
+        briefing: dragon-role-briefing
 
 - type: entity
   parent: BaseGameRule
@@ -175,22 +191,22 @@
     weight: 5
     duration: 1
     earliestStart: 45
+    reoccurrenceDelay: 90
     spawnConfig:
       standartConfig:
         minPlayers: 20
   - type: RandomSpawnRule
     prototype: MobRevenant
 
-# disabled until event is rewritten to be more interesting
-#- type: entity
-#  id: FalseAlarm
-#  parent: BaseGameRule
-#  noSpawn: true
-#  components:
-#  - type: StationEvent
-#    weight: 15
-#    duration: 1
-#  - type: FalseAlarmRule
+- type: entity
+  id: FalseAlarm
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+  - type: StationEvent
+    weight: 10
+    duration: 1
+  - type: FalseAlarmRule
 
 - type: entity
   id: GasLeak
@@ -213,7 +229,6 @@
     spawnConfig: # Corvax WL
       standartConfig:
         minPlayers: 5
-    startDelay: 20
   - type: GasLeakRule
 
 - type: entity
@@ -257,19 +272,40 @@
 - type: entity
   id: MouseMigration
   parent: BaseStationEventShortDelay
-  noSpawn: true
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    startDelay: 10
-    earliestStart: 45
+    earliestStart: 15
+    weight: 7.5
+    duration: 50
+  - type: VentCrittersRule
+    entries:
+    - id: MobMouse
+      prob: 0.02
+    - id: MobMouse1
+      prob: 0.02
+    - id: MobMouse2
+      prob: 0.02
+    - id: MobMouseCancer
+      prob: 0.001
+
+- type: entity
+  id: KingRatMigration
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 15
+    weight: 6
+    reoccurrenceDelay: 60
+    duration: 50
     spawnConfig:
       standartConfig:
-        minPlayers: 25
-    weight: 6
-    duration: 50
+        minPlayers: 15
   - type: VentCrittersRule
     entries:
     - id: MobMouse
@@ -328,7 +364,7 @@
   - type: StationEvent
     weight: 6
     duration: 1
-    maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
+    maxOccurrences: 2 # this event has diminishing returns on interesting-ness, so we cap it
     startAudio:
       path: /Audio/Announcements/sentience.ogg # Corvax-Announcements
       params:
@@ -382,7 +418,6 @@
       standartConfig:
         minPlayers: 15
     weight: 6
-    startDelay: 50
     duration: 60
   - type: VentClogRule
 
@@ -419,7 +454,6 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    startDelay: 10
     earliestStart: 30
     spawnConfig:
       standartConfig:
@@ -440,7 +474,6 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    startDelay: 10
     earliestStart: 30
     spawnConfig:
       standartConfig:
@@ -545,8 +578,8 @@
       max: 2
       playerRatio: 10
       mindComponents:
-      - type: InitialInfectedRole
-        prototype: InitialInfected
+      - type: TraitorRole
+        prototype: Traitor
 
 - type: entity
   id: MassHallucinations
