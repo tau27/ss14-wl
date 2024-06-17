@@ -26,3 +26,6 @@
   equipment:
     ears: ClothingHeadsetMedical
     belt: ClothingBeltMedicalFilled
+  storage:
+    back:
+    - BoxSurvivalMedical

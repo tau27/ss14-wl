@@ -20,3 +20,6 @@
     shoes: ClothingShoesColorWhite
     id: ZookeeperPDA
     ears: ClothingHeadsetService
+  storage:
+    back:
+    - BoxSurvival

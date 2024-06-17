@@ -25,3 +25,6 @@
     ears: ClothingHeadsetService
     shoes: ClothingShoesColorRed
     belt: ClothingBeltChampion
+  storage:
+    back:
+    - BoxSurvival
