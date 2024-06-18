@@ -681,6 +681,7 @@
   name: loadout-group-atmospheric-technician-outerclothing
   minLimit: 0
   loadouts:
+  - StationEngineerLightreflectJacket # WL-Changes
   - AtmosphericTechnicianWintercoat
 
 - type: loadoutGroup
