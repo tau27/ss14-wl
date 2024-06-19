@@ -1,0 +1,39 @@
+- type: reagent
+  id: Berryshake
+  name: ягодный милкшейк
+  parent: BaseDrink
+  desc: Почему он такой розовый? Ягодно-молочное великолепие с взбитыми сливками для будущих диабетиков. Клянусь, он полезен, в нём ягоды!
+  physicalDesc: светло-розовое
+  flavor: berryshake
+  color: "#f2999d"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+  metamorphicSprite:
+    sprite: _WL/Objects/Consumable/Drinks/berryshake.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+
+- type: reagent
+  id: Chocoshake
+  name: шоколадный милкшейк
+  parent: BaseDrink
+  desc: Спидран по получению диабета. Пафосный какао с взбитыми сливками. Даже февинид не устоит певед этим напитком UwU
+  physicalDesc: шоколадное
+  flavor: chocoshake
+  color: "#664300"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+  metamorphicSprite:
+    sprite: _WL/Objects/Consumable/Drinks/chocoshake.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
