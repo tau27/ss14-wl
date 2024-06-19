@@ -1,9 +1,9 @@
 - type: reagent
   id: Berryshake
-  name: ягодный милкшейк
+  name: reagent-name-berryshake
   parent: BaseDrink
-  desc: Почему он такой розовый? Ягодно-молочное великолепие с взбитыми сливками для будущих диабетиков. Клянусь, он полезен, в нём ягоды!
-  physicalDesc: светло-розовое
+  desc: reagent-desc-berryshake
+  physicalDesc: reagent-physicalDesc-berryshake
   flavor: berryshake
   color: "#f2999d"
   metabolisms:
@@ -20,10 +20,10 @@
 
 - type: reagent
   id: Chocoshake
-  name: шоколадный милкшейк
+  name: reagent-name-chocoshake
   parent: BaseDrink
-  desc: Спидран по получению диабета. Пафосный какао с взбитыми сливками. Даже февинид не устоит певед этим напитком UwU
-  physicalDesc: шоколадное
+  desc: reagent-desc-chocoshake
+  physicalDesc: reagent-physicalDesc-chocoshake
   flavor: chocoshake
   color: "#664300"
   metabolisms:
