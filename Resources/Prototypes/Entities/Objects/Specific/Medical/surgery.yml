@@ -237,10 +237,10 @@
   - type: Tool
     qualities:
       - Sawing
+    speedModifier: 1.5
 # White-List components
   - type: Execution
 # White-List components End
-    speedModifier: 1.5
 
 - type: entity
   name: advanced circular saw
