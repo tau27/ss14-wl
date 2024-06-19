@@ -263,7 +263,7 @@
   - type: Tool
     qualities:
       - Sawing
+    speedModifier: 2.0
 # White-List components
   - type: Execution
 # White-List components End
-    speedModifier: 2.0
