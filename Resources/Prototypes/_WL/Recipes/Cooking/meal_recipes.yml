@@ -1,0 +1,9 @@
+- type: microwaveMealRecipe
+  id: RecipeEchpochmak
+  name: echpochmak recipe
+  result: FoodEchpochmak
+  time: 5
+  solids:
+    FoodMeatMeatball: 1
+    FoodDough: 1
+    FoodOnionSlice: 1
