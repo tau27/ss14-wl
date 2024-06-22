@@ -15,9 +15,6 @@
       uiWindowPos: 0,1
       strippingWindowPos: 0,2
       displayName: Jumpsuit
-      blocks:
-      - OUTERCLOTHING
-      - IDCARD
     - name: gloves
       slotTexture: gloves
       slotFlags: GLOVES
