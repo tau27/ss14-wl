@@ -16,7 +16,7 @@
       strippingWindowPos: 0,2
       displayName: Jumpsuit
       blocks:
-      - INNERCLOTHING
+      - OUTERCLOTHING
       - IDCARD
     - name: gloves
       slotTexture: gloves
