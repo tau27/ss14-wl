@@ -26,7 +26,10 @@ public sealed class PulseDemonSpawnRule : StationEventSystem<PulseDemonSpawnRule
                 if (station == null)
                     return false;
 
-                return !HasComp<StationCentcommComponent>(station.Value);
+                //if (HasComp<StationCentcommComponent>(station.Value))
+                //    return false;
+
+                return true;
             })
             .ToList();
 
