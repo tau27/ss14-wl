@@ -7,14 +7,6 @@
       state: verybadlycut
 
 - type: marking
-  id: HumanHairHugeafro
-  bodyPart: Hair
-  markingCategory: Hair
-  sprites:
-    - sprite: _WL/Mobs/Customization/human_hair.rsi
-      state: hugeafro
-
-- type: marking
   id: HumanHairPonytail8
   bodyPart: Hair
   markingCategory: Hair
