@@ -534,6 +534,13 @@ public abstract partial class SharedGunSystem : EntitySystem
     {
         public List<(NetCoordinates coordinates, Angle angle, SpriteSpecifier Sprite, float Distance)> Sprites = new();
     }
+
+#region WL
+    public void SetTarget(GunComponent component, EntityUid target)
+    {
+        component.Target = target;
+    }
+#endregion
 }
 
 /// <summary>
