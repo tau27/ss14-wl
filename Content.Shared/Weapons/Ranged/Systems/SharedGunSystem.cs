@@ -535,12 +535,12 @@ public abstract partial class SharedGunSystem : EntitySystem
         public List<(NetCoordinates coordinates, Angle angle, SpriteSpecifier Sprite, float Distance)> Sprites = new();
     }
 
-#region WL
+//WL-Developers-start
     public void SetTarget(GunComponent component, EntityUid target)
     {
         component.Target = target;
     }
-#endregion
+//WL-Developers-end
 }
 
 /// <summary>
