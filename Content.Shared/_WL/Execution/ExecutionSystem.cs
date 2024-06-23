@@ -184,6 +184,7 @@ public sealed class ExecutionSystem : EntitySystem
             }
             else  //This number is set, because two Vectors with x0 y0 make Vector(NaN, Nan) direction, and this pass NaN value check... ¯\_(ツ)_/¯
             {
+                _gunSystem.SetTarget(laserGun, victim);
                 _gunSystem.AttemptShoot(attacker, uid, laserGun, new EntityCoordinates(victim, 0.01984f, -0.00451f));
                 _damageable.TryChangeDamage(victim, damageSpecifier, origin: attacker);
             }
