@@ -122,7 +122,7 @@ public sealed class ExecutionSystem : EntitySystem
             return false;
 
         // You're not allowed to execute dead people (no fun allowed)
-        if (_mobStateSystem.IsDead(victim, mobState))
+        if (_mobStateSystem.IsAlive(victim, mobState) == false)
             return false;
 
         // You must be able to attack people to execute
@@ -228,8 +228,8 @@ public sealed class ExecutionSystem : EntitySystem
 
         if (internalMsg != null && externalMsg != null)
         {
-            ShowExecutionInternalPopup(internalMsg, attacker, victim, uid);
-            ShowExecutionExternalPopup(externalMsg, attacker, victim, uid);
+            //ShowExecutionInternalPopup(internalMsg, attacker, victim, uid);
+            //ShowExecutionExternalPopup(externalMsg, attacker, victim, uid);
         }
     }
 
