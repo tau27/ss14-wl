@@ -7,7 +7,7 @@
   components:
   - type: HandTeleporter
     firstPortalPrototype: InvisPortalBase
-    secondPortalPrototype: InvisPortalBase
+    secondPortalPrototype: InvisPortalArrive
     portalCreationDelay: 0
     newPortalSound: /Audio/Machines/beep.ogg
     clearPortalsSound: /Audio/Machines/button.ogg
@@ -20,8 +20,8 @@
   suffix: Бездна, АДМИНАБУЗ, НЕ МАППИТЬ
   components:
   - type: HandTeleporter
-    firstPortalPrototype: InvisPortalChasm
-    secondPortalPrototype: InvisPortalChasm
+    firstPortalPrototype: InvisPortalChasmDepart
+    secondPortalPrototype: InvisPortalArrive
     portalCreationDelay: 0
     newPortalSound: /Audio/Machines/beep.ogg
     clearPortalsSound: /Audio/Machines/button.ogg
