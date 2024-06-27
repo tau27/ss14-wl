@@ -29,7 +29,7 @@
     arrivalSound: /Audio/Effects/falling.ogg # звук прибытия (при выходе)
 
 - type: entity
-  id: 4
+  id: InvisPortalArrive
   name: decoy portal
   parent: MarkerBase
   components:
