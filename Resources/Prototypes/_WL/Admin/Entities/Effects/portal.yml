@@ -38,5 +38,5 @@
     layers:
       - state: green
       - sprite: Effects/portal.rsi
-        state: portal-red
+        state: portal-blue
 
