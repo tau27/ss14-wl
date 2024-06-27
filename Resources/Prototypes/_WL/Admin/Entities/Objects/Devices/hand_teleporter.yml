@@ -3,7 +3,7 @@
   parent: HandTeleporter
   name: админское портальное устройство Н
   description: Как обычный, но круче. Делает невидимые порталы. Пропишите showmarkers чтобы увидеть их. Если вы не админ верните ближайшему админу.
-  suffix: Стелс, Не маппить
+  suffix: Стелс, АДМИНАБУЗ, НЕ МАППИТЬ
   components:
   - type: HandTeleporter
     firstPortalPrototype: InvisPortalBase
@@ -17,7 +17,7 @@
   parent: HandTeleporter
   name: админское портальное устройство НБ
   description: Как обычный, но круче. Делает невидимые порталы со звуком падения. Пропишите showmarkers чтобы увидеть их. Если вы не админ верните ближайшему админу.
-  suffix: Бездна, Не маппить
+  suffix: Бездна, АДМИНАБУЗ, НЕ МАППИТЬ
   components:
   - type: HandTeleporter
     firstPortalPrototype: InvisPortalChasm
