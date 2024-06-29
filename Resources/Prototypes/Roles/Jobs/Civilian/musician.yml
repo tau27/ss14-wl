@@ -25,11 +25,10 @@
 - type: startingGear
   id: MusicianGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitMusician
     eyes: ClothingEyesGlassesSunglasses
     shoes: ClothingShoesBootsLaceup
     id: MusicianPDA
     ears: ClothingHeadsetService
-  storage:
-    back:
-    - BoxSurvival
+  #storage:
+    #back:
+    #- Stuff
