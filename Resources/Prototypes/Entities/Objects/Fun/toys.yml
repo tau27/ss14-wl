@@ -953,6 +953,9 @@
   - type: ContainerContainer
     containers:
       revolver-ammo: !type:Container
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: RevolverCapGun
@@ -969,6 +972,9 @@
         - CartridgeMagnum
         - SpeedLoaderMagnum
     proto: CartridgeMagnumAP
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: BaseItem
