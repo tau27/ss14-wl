@@ -359,3 +359,6 @@
       jobRequired:
         - SalvageSpecialist
 # Corvax-HiddenDesc-End
+# White-List components
+  - type: Execution
+# White-List components End

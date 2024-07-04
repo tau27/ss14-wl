@@ -1245,6 +1245,9 @@
         path: /Audio/Weapons/eblademiss.ogg
         params:
           variation: 0.125
+# White-List components
+    - type: Execution
+# White-List components End
 
 - type: entity
   parent: BasePlushie

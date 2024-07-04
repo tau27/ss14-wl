@@ -75,6 +75,9 @@
       - Screwing
     useSound:
       collection: Screwdriver
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   name: captain's fountain pen
