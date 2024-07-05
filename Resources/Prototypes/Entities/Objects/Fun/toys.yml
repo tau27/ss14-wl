@@ -953,6 +953,9 @@
   - type: ContainerContainer
     containers:
       revolver-ammo: !type:Container
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: RevolverCapGun
@@ -969,6 +972,9 @@
         - CartridgeMagnum
         - SpeedLoaderMagnum
     proto: CartridgeMagnumAP
+# White-List components
+  - type: Execution
+# White-List components End
 
 - type: entity
   parent: BaseItem
@@ -1239,6 +1245,9 @@
         path: /Audio/Weapons/eblademiss.ogg
         params:
           variation: 0.125
+# White-List components
+    - type: Execution
+# White-List components End
 
 - type: entity
   parent: BasePlushie
