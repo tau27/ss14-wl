@@ -75,6 +75,7 @@
       - Pacified
       - StaminaModifier
       - TemporaryBlindness
+      - Flashed
   #- type: Blindable
   - type: Icon
     sprite: _WL/Mobs/Species/Android/parts.rsi
@@ -128,7 +129,7 @@
   - type: MeleeWeapon
     hidden: true
     soundHit:
-      collection: Punch
+      collection: MetalThud
     angle: 30
     animation: WeaponArcFist
     attackRate: 1
