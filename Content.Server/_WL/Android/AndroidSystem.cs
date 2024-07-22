@@ -64,14 +64,11 @@ namespace Content.Server._WL.Android
 
                 if (!powerCellDrawComp.CanDraw)
                 {
-                    _powerCell.SetPowerCellDrawEnabled(uid, false, powerCellDrawComp);
+                    _powerCell.SetDrawEnabled((uid, powerCellDrawComp), false);
                     continue;
                 }
 
-                if (powerCellDrawComp.Drawing)
-                    continue;
-
-                _powerCell.SetPowerCellDrawEnabled(uid, true, powerCellDrawComp);
+                _powerCell.SetDrawEnabled((uid, powerCellDrawComp), true);
             }
         }
 
