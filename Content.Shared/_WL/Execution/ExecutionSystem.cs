@@ -126,6 +126,10 @@ public sealed class ExecutionSystem : EntitySystem
         if (!_actionBlockerSystem.CanAttack(attacker, victim))
             return false;
 
+        // The victim must be incapacitated to be executed
+        if (victim != attacker && _actionBlockerSystem.CanInteract(victim, null))
+            return false;
+
         if (Transform(attacker).Coordinates.InRange(_entityManager, _transformSystem, Transform(victim).Coordinates, 0.1f))
             return false;
 
