@@ -99,18 +99,20 @@
     duration: 1
   - type: BureaucraticErrorRule
 
-- type: entity
-  id: ClericalError
-  parent: BaseGameRule
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-clerical-error-announcement
-    spawnConfig:
-      standartConfig:
-        minPlayers: 15
-    weight: 5
-    duration: 1
-  - type: ClericalErrorRule
+#WL-Changes-start
+# - type: entity
+  # id: ClericalError
+  # parent: BaseGameRule
+  # components:
+  # - type: StationEvent
+    # startAnnouncement: station-event-clerical-error-announcement
+    # spawnConfig:
+      # standartConfig:
+        # minPlayers: 15
+    # weight: 5
+    # duration: 1
+  # - type: ClericalErrorRule
+#WL-Changes-end
 
 - type: entity
   parent: BaseGameRule
