@@ -9,13 +9,14 @@ PUBLISH_TOKEN = os.environ["PUBLISH_TOKEN"]
 ARTIFACT_ID = os.environ["ARTIFACT_ID"]
 GITHUB_REPOSITORY = os.environ["GITHUB_REPOSITORY"]
 VERSION = os.environ['GITHUB_SHA']
+FORK_ID = os.environ['FORK_ID']
 
 #
 # CONFIGURATION PARAMETERS
 # Forks should change these to publish to their own infrastructure.
 #
-ROBUST_CDN_URL = "https://cdn.station14.ru/"
-FORK_ID = "syndicate-wl"
+
+ROBUST_CDN_URL = "https://ncdn.station14.ru/"
 
 def main():
     print("Fetching artifact URL from API...")
