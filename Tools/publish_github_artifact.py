@@ -16,7 +16,7 @@ FORK_ID = os.environ['FORK_ID']
 # Forks should change these to publish to their own infrastructure.
 #
 
-ROBUST_CDN_URL = "https://ncdn.station14.ru/"
+ROBUST_CDN_URL = "https://cdn.station14.ru/"
 
 def main():
     print("Fetching artifact URL from API...")
@@ -48,10 +48,7 @@ def get_artifact_url() -> str:
     return resp.headers["Location"]
 
 def get_engine_version() -> str:
-    proc = subprocess.run(["git", "describe","--tags", "--abbrev=0"], stdout=subprocess.PIPE, cwd="RobustToolbox", check=True, encoding="UTF-8")
-    tag = proc.stdout.strip()
-    assert tag.startswith("v")
-    return tag[1:] # Cut off v prefix.
+    return "229.0.0"
 
 
 if __name__ == '__main__':
