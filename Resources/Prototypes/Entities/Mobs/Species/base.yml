@@ -23,7 +23,6 @@
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
     - map: [ "enum.HumanoidVisualLayers.Groin" ] # WL-Underwear
     - map: [ "enum.HumanoidVisualLayers.Breast" ] # WL-Underwear
-    - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
     - map: [ "enum.HumanoidVisualLayers.Foots" ] # WL-Underwear
@@ -312,7 +311,6 @@
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
     - map: [ "enum.HumanoidVisualLayers.Groin" ] # WL-Underwear
     - map: [ "enum.HumanoidVisualLayers.Breast" ] # WL-Underwear
-    - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
     - map: [ "enum.HumanoidVisualLayers.Foots" ] # WL-Underwear
