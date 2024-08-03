@@ -76,6 +76,7 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+<<<<<<< HEAD
       - map: [ "enum.HumanoidVisualLayers.Groin" ] # WL-Underwear
       - map: [ "enum.HumanoidVisualLayers.Breast" ] # WL-Underwear
       - shader: StencilClear
@@ -88,6 +89,9 @@
         sprite: Mobs/Customization/masking_helpers.rsi
         state: unisex_full
         visible: false
+=======
+      - map: [ "jumpsuit" ]
+>>>>>>> upstream/master
       - map: [ "enum.HumanoidVisualLayers.LHand" ]
       - map: [ "enum.HumanoidVisualLayers.RHand" ]
       - map: [ "enum.HumanoidVisualLayers.Foots" ] # WL-Underwear
@@ -121,11 +125,27 @@
         sprite: "Effects/creampie.rsi"
         state: "creampie_moth"
         visible: false
+  - type: Inventory
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+
 
 - type: entity
   parent: BaseSpeciesDummy
   id: MobMothDummy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: HumanoidAppearance
     species: Moth
+  - type: Inventory
+    femaleDisplacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: jumpsuit-female
+

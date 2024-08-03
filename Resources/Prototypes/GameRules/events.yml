@@ -163,10 +163,10 @@
   id: NinjaSpawn
   components:
   - type: StationEvent
-    weight: 5
-    duration: 1
+    weight: 6
+    duration: null
     earliestStart: 45 # Corvax WL changes
-    reoccurrenceDelay: 60
+    reoccurrenceDelay: 20
     spawnConfig:
       standartConfig:
         minPlayers: 30
