@@ -332,6 +332,48 @@ namespace Content.Shared.CCVar
         public static readonly CVarDef<bool> BypassBunkerWhitelist =
             CVarDef.Create("game.panic_bunker.whitelisted_can_bypass", true, CVar.SERVERONLY);
 
+        /*
+         * TODO: Remove baby jail code once a more mature gateway process is established. This code is only being issued as a stopgap to help with potential tiding in the immediate future.
+         */
+
+        /// <summary>
+        /// Whether the baby jail is currently enabled.
+        /// </summary>
+        public static readonly CVarDef<bool> BabyJailEnabled  =
+            CVarDef.Create("game.baby_jail.enabled", false, CVar.NOTIFY | CVar.REPLICATED | CVar.SERVER);
+
+        /// <summary>
+        /// Show reason of disconnect for user or not.
+        /// </summary>
+        public static readonly CVarDef<bool> BabyJailShowReason =
+            CVarDef.Create("game.baby_jail.show_reason", false, CVar.SERVERONLY);
+
+        /// <summary>
+        /// Maximum age of the account (from server's PoV, so from first-seen date) in minutes that can access baby
+        /// jailed servers.
+        /// </summary>
+        public static readonly CVarDef<int> BabyJailMaxAccountAge =
+            CVarDef.Create("game.baby_jail.max_account_age", 1440, CVar.SERVERONLY);
+
+        /// <summary>
+        /// Maximum overall played time allowed to access baby jailed servers.
+        /// </summary>
+        public static readonly CVarDef<int> BabyJailMaxOverallMinutes =
+            CVarDef.Create("game.baby_jail.max_overall_minutes", 120, CVar.SERVERONLY);
+
+        /// <summary>
+        /// A custom message that will be used for connections denied due to the baby jail.
+        /// If not empty, then will overwrite <see cref="BabyJailShowReason"/>
+        /// </summary>
+        public static readonly CVarDef<string> BabyJailCustomReason =
+            CVarDef.Create("game.baby_jail.custom_reason", string.Empty, CVar.SERVERONLY);
+
+        /// <summary>
+        /// Allow bypassing the baby jail if the user is whitelisted.
+        /// </summary>
+        public static readonly CVarDef<bool> BypassBabyJailWhitelist =
+            CVarDef.Create("game.baby_jail.whitelisted_can_bypass", true, CVar.SERVERONLY);
+
         /// <summary>
         /// Make people bonk when trying to climb certain objects like tables.
         /// </summary>
@@ -1452,6 +1494,13 @@ namespace Content.Shared.CCVar
         /// </summary>
         public static readonly CVarDef<bool> GodmodeArrivals =
             CVarDef.Create("shuttle.godmode_arrivals", false, CVar.SERVERONLY);
+
+        /// <summary>
+        /// If a grid is split then hide any smaller ones under this mass (kg) from the map.
+        /// This is useful to avoid split grids spamming out labels.
+        /// </summary>
+        public static readonly CVarDef<int> HideSplitGridsUnder =
+            CVarDef.Create("shuttle.hide_split_grids_under", 30, CVar.SERVERONLY);
 
         /// <summary>
         /// Whether to automatically spawn escape shuttles.
