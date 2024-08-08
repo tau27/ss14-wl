@@ -207,6 +207,7 @@
     - CanPilot
     - FootstepSound
     - DoorBumpOpener
+  - type: StandFallCrouch
 
 - type: entity
   save: false
