@@ -13,6 +13,8 @@
     - !type:DepartmentTimeRequirement
       department: Science
       time: 18000 #5 hrs # Corvax-RoleTime
+    - !type:AgeRequirement
+      minAge: 25
   startingGear: ScientistGear
   icon: "JobIconScientist"
   supervisors: job-supervisors-rd

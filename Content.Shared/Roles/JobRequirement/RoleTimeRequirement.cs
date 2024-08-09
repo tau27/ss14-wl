@@ -1,8 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.CCVar;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles.Jobs;
 using JetBrains.Annotations;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -13,6 +15,13 @@ namespace Content.Shared.Roles;
 [Serializable, NetSerializable]
 public sealed partial class RoleTimeRequirement : JobRequirement
 {
+    //WL-Changes-start
+    public override IReadOnlyList<CVarValueWrapper>? CheckingCVars => new List<CVarValueWrapper>()
+    {
+        (CCVars.GameRoleTimers, true)
+    };
+    //WL-Changes-end
+
     /// <summary>
     /// What particular role they need the time requirement with.
     /// </summary>

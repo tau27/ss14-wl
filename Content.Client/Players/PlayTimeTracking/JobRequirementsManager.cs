@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Client.Lobby;
 using Content.Shared.CCVar;
 using Content.Shared.Players;
@@ -6,6 +7,7 @@ using Content.Shared.Players.JobWhitelist;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Microsoft.CodeAnalysis;
 using Robust.Client;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;
@@ -121,12 +123,25 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     {
         reason = null;
 
-        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
+        if (requirements == null /*WL-Changes-start*//*|| !_cfg.GetCVar(CCVars.GameRoleTimers)*//*WL-Changes-end*/)
             return true;
 
         var reasons = new List<string>();
         foreach (var requirement in requirements)
         {
+            //WL-Changes-start
+            if (requirement.CheckingCVars != null)
+            {
+                if (!requirement.CheckingCVars
+                    .ToList()
+                    .TrueForAll(req =>
+                {
+                    return _cfg.GetCVar(req.CVar) == req.Value;
+                }))
+                    continue;
+            }
+            //WL-Changes-end
+
             if (requirement.Check(_entManager, _prototypes, profile, _roles, out var jobReason))
                 continue;
 

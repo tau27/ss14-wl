@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   id: Captain
   name: job-name-captain
   description: job-description-captain
@@ -19,7 +19,7 @@
     - !type:OverallPlaytimeRequirement
       time: 504000 #140 hrs # Corvax-RoleTime
     - !type:AgeRequirement
-      requiredAge: 20
+      minAge: 35
   weight: 20
   startingGear: CaptainGear
   icon: "JobIconCaptain"

@@ -4,6 +4,9 @@
   description: job-description-zookeeper
   playTimeTracker: JobZookeeper
   startingGear: ZookeeperGear
+  requirements:
+    - !type:AgeRequirement
+      minAge: 22
   subnames:
   - ветеринар
   icon: "JobIconZookeeper"

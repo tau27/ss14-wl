@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.CCVar;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using JetBrains.Annotations;
@@ -12,6 +13,13 @@ namespace Content.Shared.Roles;
 [Serializable, NetSerializable]
 public sealed partial class OverallPlaytimeRequirement : JobRequirement
 {
+    //WL-Changes-start
+    public override IReadOnlyList<CVarValueWrapper>? CheckingCVars => new List<CVarValueWrapper>()
+    {
+        (CCVars.GameRoleTimers, true)
+    };
+    //WL-Changes-end
+
     /// <inheritdoc cref="DepartmentTimeRequirement.Time"/>
     [DataField(required: true)]
     public TimeSpan Time;

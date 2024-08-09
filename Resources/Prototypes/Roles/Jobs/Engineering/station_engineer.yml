@@ -12,6 +12,8 @@
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 18000 #5 hrs # Corvax-RoleTime
+    - !type:AgeRequirement
+      minAge: 25
   startingGear: StationEngineerGear
   icon: "JobIconStationEngineer"
   supervisors: job-supervisors-ce

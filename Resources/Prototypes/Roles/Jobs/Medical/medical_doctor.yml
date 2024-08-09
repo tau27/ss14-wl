@@ -12,6 +12,8 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 7200 #2 hrs # Corvax-RoleTime
+    - !type:AgeRequirement
+      minAge: 26
   startingGear: DoctorGear
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo

@@ -12,6 +12,8 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 36000 #10 hrs # Corvax-RoleTime
+    - !type:AgeRequirement
+      minAge: 22
   startingGear: SecurityOfficerGear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-hos

@@ -13,6 +13,8 @@
       department: Engineering
       time: 36000 #10 hrs # Corvax-RoleTime
       inverted: true # stop playing intern if you're good at engineering!
+    - !type:AgeRequirement
+      minAge: 20
   startingGear: TechnicalAssistantGear
   icon: "JobIconTechnicalAssistant"
   supervisors: job-supervisors-engineering

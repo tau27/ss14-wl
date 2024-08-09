@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._WL.CCVars;
 using Content.Shared.Preferences;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -14,8 +15,18 @@ namespace Content.Shared.Roles;
 [Serializable, NetSerializable]
 public sealed partial class AgeRequirement : JobRequirement
 {
-    [DataField(required: true)]
-    public int RequiredAge;
+    //WL-Changes-start
+    public override IReadOnlyList<CVarValueWrapper>? CheckingCVars => new List<CVarValueWrapper>()
+    {
+        (WLCVars.IsAgeCheckNeeded, true)
+    };
+
+    [DataField]
+    public int? MinAge;
+
+    [DataField]
+    public int? MaxAge;
+    //WL-Changes-end
 
     public override bool Check(IEntityManager entManager,
         IPrototypeManager protoManager,
@@ -28,22 +39,20 @@ public sealed partial class AgeRequirement : JobRequirement
         if (profile is null) //the profile could be null if the player is a ghost. In this case we don't need to block the role selection for ghostrole
             return true;
 
-        if (!Inverted)
+        //WL-Changes-start
+        if (MinAge != null && profile.Age < MinAge)
         {
             reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("role-timer-age-to-young",
-                ("age", RequiredAge)));
-
-            if (profile.Age <= RequiredAge)
-                return false;
+                ("age", MinAge)));
+            return false;
         }
-        else
+        if (MaxAge != null && profile.Age > MaxAge)
         {
             reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("role-timer-age-to-old",
-                ("age", RequiredAge)));
-
-            if (profile.Age >= RequiredAge)
-                return false;
+                ("age", MaxAge)));
+            return false;
         }
+        //WL-Changes-end
 
         return true;
     }

@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Preferences;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -42,10 +43,22 @@ public abstract partial class JobRequirement
     [DataField]
     public bool Inverted;
 
+    public virtual IReadOnlyList<CVarValueWrapper>? CheckingCVars => null;
+
     public abstract bool Check(
         IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,
         IReadOnlyDictionary<string, TimeSpan> playTimes,
         [NotNullWhen(false)] out FormattedMessage? reason);
+
+    //WL-Changes-start
+    public readonly record struct CVarValueWrapper(CVarDef<bool> CVar, bool Value)
+    {
+        public static implicit operator CVarValueWrapper((CVarDef<bool> CVar, bool Value) tuple)
+        {
+            return new CVarValueWrapper(tuple.CVar, tuple.Value);
+        }
+    }
+    //WL-Changes-end
 }

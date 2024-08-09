@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.CCVar;
 using Content.Shared.Preferences;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -11,6 +12,13 @@ namespace Content.Shared.Roles;
 [Serializable, NetSerializable]
 public sealed partial class DepartmentTimeRequirement : JobRequirement
 {
+    //WL-Changes-start
+    public override IReadOnlyList<CVarValueWrapper>? CheckingCVars => new List<CVarValueWrapper>()
+    {
+        (CCVars.GameRoleTimers, true)
+    };
+    //WL-Changes-end
+
     /// <summary>
     /// Which department needs the required amount of time.
     /// </summary>
