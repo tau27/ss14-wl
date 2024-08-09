@@ -221,6 +221,7 @@
     - FootstepSound
     - DoorBumpOpener
   - type: CharacterInformation # WL-CharacterInformation
+  - type: StandFallCrouch # WL-Developers-Changes
 
 - type: entity
   save: false
