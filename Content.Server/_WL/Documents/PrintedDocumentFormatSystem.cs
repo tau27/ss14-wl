@@ -30,6 +30,7 @@ namespace Content.Server._WL.Documents
 
         //No public api babe
         //>:3c
+        //:despair:
 
         private void OnMapInit(EntityUid document, PrintedDocumentFormatComponent comp, MapInitEvent args)
         {
