@@ -6,6 +6,9 @@
     species:
     - SlimePerson
     - Vox
+    #WL-Changes-start
+    - Android
+    #WL-Changes-end
 
 - type: loadoutEffectGroup
   id: OxygenBreather
@@ -18,6 +21,15 @@
     - Human
     - Moth
     - Reptilian
+    #WL-Changes-start
+    - Akula
+    - Cischi
+    - Felinid
+    - Golem
+    - HumanoidKidanes
+    - Murine
+    - Tajara
+    #WL-Changes-end
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVox

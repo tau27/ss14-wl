@@ -7,31 +7,34 @@ namespace Content.Shared._WL.Stand_Fall_Crouch
     [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
     public sealed partial class StandFallCrouchComponent : Component
     {
-        [DataField("StandFallToggleAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
         public string StandFallToggleAction = "ActionToggleFall";
 
         [DataField, AutoNetworkedField]
         public EntityUid? StandFallToggleActionEntity;
 
-        [/*ViewVariables(VVAccess.ReadWrite), */DataField("isWantStay"), AutoNetworkedField]
+        [/*ViewVariables(VVAccess.ReadWrite), */DataField, AutoNetworkedField]
         public bool IsWantStay = true;
 
-        [DataField("walkModifier")/*, AutoNetworkedField/*, ViewVariables(VVAccess.ReadWrite)*/]
+        [DataField/*, AutoNetworkedField/*, ViewVariables(VVAccess.ReadWrite)*/]
         public float WalkModifier = 0.1f;
 
-        [DataField("sprintModifier")/*, AutoNetworkedField/*, ViewVariables(VVAccess.ReadWrite)*/]
+        [DataField)/*, AutoNetworkedField/*, ViewVariables(VVAccess.ReadWrite)*/]
         public float SprintModifier = 0.2f;
 
-        [DataField("timeToPutDownSelf")]
+        [DataField]
         public float TimeToPutDownSelf = 0.15f;
-        [DataField("timeToPutDownOther")]
+
+        [DataField]
         public float TimeToPutDownOther = 2.0f;
-        [DataField("timeToStandUpSelf")]
+
+        [DataField]
         public float TimeToStandUpSelf = 1.25f;
-        [DataField("timeToStandUpOther")]
+
+        [DataField]
         public float TimeToStandUpOther = 3.5f;
 
-        [DataField("isCrawling"), AutoNetworkedField]
+        [DataField, AutoNetworkedField]
         public bool IsCrawling = false;
     }
 }
