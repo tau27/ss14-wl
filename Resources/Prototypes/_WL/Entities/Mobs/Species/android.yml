@@ -148,11 +148,11 @@
         Slash: -10
         Piercing: -10
         Heat: -10
-        Cold: -10
         Shock: -10
         Caustic: -10
         Asphyxiation: -10
         Bloodloss: -10
+        Radiation: -10
     fuelCost: 5
     bleedAmountReduce: -100
     doAfterDelay: 3
