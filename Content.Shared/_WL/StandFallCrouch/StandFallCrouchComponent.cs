@@ -1,15 +1,10 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._WL.Stand_Fall_Crouch
 {
-    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
     public sealed partial class StandFallCrouchComponent : Component
     {
         [DataField("StandFallToggleAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
@@ -36,6 +31,7 @@ namespace Content.Shared._WL.Stand_Fall_Crouch
         [DataField("timeToStandUpOther")]
         public float TimeToStandUpOther = 3.5f;
 
-        [DataField("isCrawling")] public bool IsCrawling = false;
+        [DataField("isCrawling"), AutoNetworkedField]
+        public bool IsCrawling = false;
     }
 }
