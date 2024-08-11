@@ -19,7 +19,7 @@ namespace Content.Shared._WL.Stand_Fall_Crouch
         [DataField/*, AutoNetworkedField/*, ViewVariables(VVAccess.ReadWrite)*/]
         public float WalkModifier = 0.1f;
 
-        [DataField)/*, AutoNetworkedField/*, ViewVariables(VVAccess.ReadWrite)*/]
+        [DataField/*, AutoNetworkedField/*, ViewVariables(VVAccess.ReadWrite)*/]
         public float SprintModifier = 0.2f;
 
         [DataField]

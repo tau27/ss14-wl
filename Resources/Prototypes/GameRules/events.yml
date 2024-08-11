@@ -655,7 +655,7 @@
   - type: StationEvent
     weight: 7
     reoccurrenceDelay: 20
-    duration: 1
+    duration: 60
   - type: IonStormRule
 
 - type: entity

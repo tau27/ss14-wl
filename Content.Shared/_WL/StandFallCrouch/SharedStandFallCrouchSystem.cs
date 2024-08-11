@@ -138,7 +138,8 @@ namespace Content.Shared._WL.StandFallCrouch
                 BreakOnMove = true,
                 BreakOnHandChange = true,
                 BreakOnDamage = true,
-                NeedHand = true
+                NeedHand = true,
+                Hidden = true
             };
 
             _doAfterSystem.TryStartDoAfter(doAfter);

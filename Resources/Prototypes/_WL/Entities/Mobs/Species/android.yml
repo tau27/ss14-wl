@@ -53,7 +53,7 @@
       methods: [Touch, Ingestion, Injection]
       effects:
       - !type:Electrocute
-        probability: 0.05
+        probability: 1
         electrocuteDamageScale: 1
       - !type:PopupMessage
         type: Local
@@ -167,7 +167,7 @@
     cellSlotId: cell_slot
     fitsInCharger: true
   - type: PowerCellDraw
-    drawRate: 0.8
+    drawRate: 0.5
   - type: LockedWiresPanel
   - type: WiresPanel
   - type: Android
@@ -179,12 +179,16 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellHyper
+        startingItem: PowerCellMedium
         disableEject: true
         locked: false
         insertOnInteract: true
   - type: InteractionPopup
     successChance: 0
+  - type: ItemToggle
+    activated: true
+    onUse: false
+    toggleLight: false
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot { }
