@@ -51,17 +51,15 @@ namespace Content.Server._WL.Android
             base.Initialize();
 
             SubscribeLocalEvent<AndroidChargeTargetComponent, GetVerbsEvent<AlternativeVerb>>(OnVerb);
-            SubscribeLocalEvent<AndroidComponent, AndroidChargeEvent>(OnDoAfter);
-            SubscribeLocalEvent<AndroidComponent, StatusEffectAddedEvent>(OnSleepBegin);
-            SubscribeLocalEvent<AndroidComponent, StatusEffectEndedEvent>(OnSleepEnd);
 
             SubscribeLocalEvent<GameRuleStartedEvent>(OnGameRuleStart);
             SubscribeLocalEvent<GameRuleEndedEvent>(OnGameRuleEnd);
 
+            SubscribeLocalEvent<AndroidComponent, AndroidChargeEvent>(OnDoAfter);
+            SubscribeLocalEvent<AndroidComponent, StatusEffectAddedEvent>(OnSleepBegin);
+            SubscribeLocalEvent<AndroidComponent, StatusEffectEndedEvent>(OnSleepEnd);
             SubscribeLocalEvent<AndroidComponent, MobStateChangedEvent>(OnMobstateChanged);
-
             SubscribeLocalEvent<AndroidComponent, BeforeDealHeatDamageFromLightBulbEvent>(OnGetLightBulb);
-
             SubscribeLocalEvent<AndroidComponent, RefreshMovementSpeedModifiersEvent>(OnModifiersRefresh);
         }
 
