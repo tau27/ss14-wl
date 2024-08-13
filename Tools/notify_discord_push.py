@@ -35,18 +35,12 @@ def main():
         members = response.json()
   
         for member in members:
-            member_api_url = member['url']
-            response = requests.get(member_api_url, headers=headers)
-            response.raise_for_status()
-
-            member_json = response.json()
-            member_name = member_json["name"]
-
+            member_name = member['login']
             if (member_name not in peoples):
                 peoples.append(str(member_name))
 
     for commit in COMMITS:
-        author = commit["author"]["name"]
+        author = commit["author"]["username"]
         if (author not in peoples):
             print(f"{author} не был найден среди участников вайтлист организаций: {peoples}!")
             continue
