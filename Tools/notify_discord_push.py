@@ -22,6 +22,10 @@ def main():
 
     content = ""
 
+    content_dict = {
+
+    }
+
     peoples = []
 
     # Получаем участников ВЛьских организаций, чтобы потом отсеивать 'не наши' коммиты. 
@@ -46,7 +50,17 @@ def main():
             continue
 
         message = commit['message']
-        content += f"{notify_discord.format_body(message)}\n"
+
+        if content_dict.get(author) == None:
+            content_dict[author] = []  
+
+        content_dict[author].append(f"{notify_discord.format_body(message)}\n")
+
+    for author, messages in content_dict.items():
+        message = str.join("", messages)
+        message += f"Автор изменений: {author}"
+
+        content += message + "\n"
 
     if content == "" or content.isspace():
         print("В тексте не найдено :cl: тега и элементов add/remove... и т.д.")
