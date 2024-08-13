@@ -73,7 +73,7 @@ def format_body(body: str) -> str:
 
 def format_authors(body: str, pr_url: str | None, pr_base_author: str) -> str:
     if (body == "" or body.isspace()):
-        return
+        return ""
 
     result = body
     authors = [pr_base_author]
