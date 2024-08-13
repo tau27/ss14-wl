@@ -10,14 +10,9 @@ on:
 jobs:
   pr_notify:
     runs-on: [self-hosted, linux]
-
     if: github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
-
     steps:
     - uses: actions/checkout@v3.6.0
-      with:
-        submodules: 'recursive'
-
     - name: Notify discord
       run: python Tools/notify_discord.py
       env:
@@ -27,14 +22,9 @@ jobs:
         PR_URL: ${{ github.event.pull_request.html_url }}
   push_notify:
     runs-on: [self-hosted, linux]
-
     if: github.event_name == 'push'
-
     steps:
     - uses: actions/checkout@v3.6.0
-      with:
-        submodules: 'recursive'
-
     - name: Notify discord
       run: python3 Tools/notify_discord_push.py
       env:
