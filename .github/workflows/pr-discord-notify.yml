@@ -9,7 +9,7 @@ on:
 
 jobs:
   pr_notify:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux]
 
     if: github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
 
@@ -26,7 +26,7 @@ jobs:
         PR_AUTHOR: ${{ github.event.pull_request.user.login }}
         PR_URL: ${{ github.event.pull_request.html_url }}
   push_notify:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux]
 
     if: github.event_name == 'push'
 
