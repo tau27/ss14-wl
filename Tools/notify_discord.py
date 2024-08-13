@@ -4,6 +4,7 @@ import requests
 import os
 import json
 import re
+from typing import Union
 
 PR_NOTIFY_WEBHOOK = os.getenv("PR_NOTIFY_WEBHOOK", "")
 PR_BODY = os.getenv("PR_BODY", "")
@@ -71,7 +72,7 @@ def format_body(body: str) -> str:
 
     return result
 
-def format_authors(body: str, pr_url: str | None, pr_base_author: str) -> str:
+def format_authors(body: str, pr_url: Union[str, None], pr_base_author: str) -> str:
     if (body == "" or body.isspace()):
         return ""
 
