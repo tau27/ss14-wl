@@ -36,7 +36,7 @@ jobs:
         submodules: 'recursive'
 
     - name: Notify discord
-      run: python Tools/notify_discord_push.py
+      run: Tools/notify_discord_push.py
       env:
         PR_NOTIFY_WEBHOOK: ${{ secrets.PR_NOTIFY_WEBHOOK }}
         COMMITS: ${{ toJson(github.event.commits) }}
