@@ -22,7 +22,7 @@ def main():
 
     content = ""
 
-    content_dict = {
+    content_dict: dict[str, list[str]] = {
 
     }
 
@@ -58,7 +58,7 @@ def main():
 
     for author, messages in content_dict.items():
         message = str.join("", messages)
-        message += f"Автор изменений: {author}"
+        message += f"Автор изменений: {author}\n"
 
         content += message + "\n"
 
