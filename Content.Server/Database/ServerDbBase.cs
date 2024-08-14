@@ -44,7 +44,10 @@ namespace Content.Server.Database
             var prefs = await db.DbContext
                 .Preference
                 .Include(p => p.Profiles).ThenInclude(h => h.Jobs)
+                //WL-Changes-start
                 .Include(p => p.Profiles).ThenInclude(h => h.JobSubnames)
+                .Include(p => p.Profiles).ThenInclude(h => h.JobUnblockings)
+                //WL-Changes-end
                 .Include(p => p.Profiles).ThenInclude(h => h.Antags)
                 .Include(p => p.Profiles).ThenInclude(h => h.Traits)
                 .Include(p => p.Profiles)
@@ -97,7 +100,10 @@ namespace Content.Server.Database
                 .Include(p => p.Preference)
                 .Where(p => p.Preference.UserId == userId.UserId)
                 .Include(p => p.Jobs)
+                //WL-Changes-start
                 .Include(p => p.JobSubnames)
+                .Include(p => p.JobUnblockings)
+                //WL-Changes-end
                 .Include(p => p.Antags)
                 .Include(p => p.Traits)
                 .Include(p => p.Loadouts)
@@ -186,7 +192,10 @@ namespace Content.Server.Database
 
         private static HumanoidCharacterProfile ConvertProfiles(Profile profile)
         {
+            //WL-Changes-start
             var jobSubnames = profile.JobSubnames.ToDictionary(x => x.JobName, x => x.Subname);
+            var jobUnblockings = profile.JobUnblockings.ToDictionary(k => k.JobName, v => v.ForceUnblocked);
+            //WL-Changes-end
 
             var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
@@ -271,7 +280,8 @@ namespace Content.Server.Database
                 jobSubnames,
                 antags.ToHashSet(),
                 traits.ToHashSet(),
-                loadouts
+                loadouts,
+                jobUnblockings
             );
         }
 
@@ -313,11 +323,19 @@ namespace Content.Server.Database
                     .Select(j => new Job() { JobName = j.Key, Priority = (DbJobPriority) j.Value })
             );
 
+            //WL-Changes-start
             profile.JobSubnames.Clear();
             profile.JobSubnames.AddRange(
                 humanoid.JobSubnames
                     .Select(js => new JobSubname() { JobName = js.Key, Subname = js.Value })
             );
+
+            profile.JobUnblockings.Clear();
+            profile.JobUnblockings.AddRange(
+                humanoid.JobUnblockings
+                    .Select(ju => new JobUnblocking() { JobName = ju.Key, ForceUnblocked = ju.Value })
+            );
+            //WL-Changes-end
 
             profile.Antags.Clear();
             profile.Antags.AddRange(

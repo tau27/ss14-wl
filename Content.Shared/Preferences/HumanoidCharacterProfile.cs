@@ -33,9 +33,13 @@ namespace Content.Shared.Preferences
         public const int MaxNameLength = 32;
         public const int MaxDescLength = 512 * 2; // WL-CharacterInfo: Increase
 
-
+        //WL-Changes-start
         [DataField]
         private Dictionary<string, string> _jobSubnames = new();
+
+        [DataField]
+        private Dictionary<string, bool> _jobUnblockings = new();
+        //WL-Changes-end
 
         /// <summary>
         /// Job preferences for initial spawn.
@@ -149,12 +153,18 @@ namespace Content.Shared.Preferences
             Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
 
+            //WL-Changes-start
             Dictionary<string, string> jobSubnames,
+            //WL-Changes-end
 
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
 
-            Dictionary<string, RoleLoadout> loadouts)
+            Dictionary<string, RoleLoadout> loadouts,
+            //WL-Changes-start
+            Dictionary<string, bool> jobUnblockings
+            //WL-Changes-end
+            )
         {
             Name = name;
             FlavorText = flavortext;
@@ -173,7 +183,11 @@ namespace Content.Shared.Preferences
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
 
+            //WL-Changes-start
             _jobSubnames = jobSubnames;
+
+            _jobUnblockings = jobUnblockings;
+            //WL-Changes-end
 
             var hasHighPrority = false;
             foreach (var (key, value) in _jobPriorities)
@@ -206,12 +220,13 @@ namespace Content.Shared.Preferences
                 other.SpawnPriority,
                 new Dictionary<ProtoId<JobPrototype>, JobPriority>(other.JobPriorities),
                 other.PreferenceUnavailable,
-                new Dictionary<string, string>(other.JobSubnames),
+                new Dictionary<string, string>(other.JobSubnames), //WL-Changs
 
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
 
-                new Dictionary<string, RoleLoadout>(other.Loadouts))
+                new Dictionary<string, RoleLoadout>(other.Loadouts),
+                new(other.JobUnblockings))
         {
         }
 
@@ -300,12 +315,13 @@ namespace Content.Shared.Preferences
             };
         }
 
+        //WL-Changes-start
         [DataField] public string OocText { get; private set; } = ""; // WL-OOCText
 
         [DataField("height")] public int Height { get; private set; } = 150; // WL-Height
-
         public IReadOnlyDictionary<string, string> JobSubnames => _jobSubnames;
-
+        public IReadOnlyDictionary<string, bool> JobUnblockings => _jobUnblockings;
+        //WL-Changes-end
 
         public HumanoidCharacterProfile WithName(string name)
         {
@@ -392,6 +408,7 @@ namespace Content.Shared.Preferences
             };
         }
 
+        //WL-Changes-start
         public HumanoidCharacterProfile WithJobSubname(string jobId, string subname)
         {
             var dict = new Dictionary<string, string>(_jobSubnames);
@@ -403,6 +420,19 @@ namespace Content.Shared.Preferences
                 _jobSubnames = dict
             };
         }
+
+        public HumanoidCharacterProfile WithJobUnblocking(string jobId, bool value)
+        {
+            var dict = new Dictionary<string, bool>(_jobUnblockings);
+
+            dict[jobId] = value;
+
+            return new(this)
+            {
+                _jobUnblockings = dict
+            };
+        }
+        //WL-Changes-end
 
         public HumanoidCharacterProfile WithJobPriority(ProtoId<JobPrototype> jobId, JobPriority priority)
         {
@@ -549,6 +579,7 @@ namespace Content.Shared.Preferences
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
             if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
             if (!_jobSubnames.SequenceEqual(other._jobSubnames)) return false; // WL-JobSubnames
+            if (!_jobUnblockings.SequenceEqual(other._jobUnblockings)) return false; // WL-Changes
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -818,9 +849,14 @@ namespace Content.Shared.Preferences
             hashCode.Add(Appearance);
             hashCode.Add((int) SpawnPriority);
             hashCode.Add((int) PreferenceUnavailable);
+
+            //WL-Changes-start
             hashCode.Add(_jobSubnames);
+            hashCode.Add(_jobUnblockings);
             hashCode.Add(Height);
             hashCode.Add(OocText);
+            //WL-Changes-end
+
             return hashCode.ToHashCode();
         }
 

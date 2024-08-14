@@ -11,7 +11,7 @@ using NpgsqlTypes;
 
 namespace Content.Server.Database
 {
-    public abstract class ServerDbContext : DbContext
+    public abstract /*WL-Changes-start*/partial/*WL-Changes-end*/ class ServerDbContext : DbContext
     {
         protected ServerDbContext(DbContextOptions options) : base(options)
         {
@@ -91,9 +91,15 @@ namespace Content.Server.Database
                 .HasIndex(j => new { j.ProfileId, j.JobName })
                 .IsUnique();
 
+            //WL-Changes-start
+            modelBuilder.Entity<JobUnblocking>()
+                .HasIndex(j => new { j.ProfileId, j.JobName })
+                .IsUnique();
+
             modelBuilder.Entity<JobSubname>()
                 .HasIndex(j => new { j.ProfileId, j.JobName })
                 .IsUnique();
+            //WL-Changes-end
 
             modelBuilder.Entity<AssignedUserId>()
                 .HasIndex(p => p.UserName)
@@ -356,6 +362,7 @@ namespace Content.Server.Database
 
     public class Profile
     {
+
         public int Id { get; set; }
         public int Slot { get; set; }
         [Column("char_name")] public string CharacterName { get; set; } = null!;
@@ -378,8 +385,9 @@ namespace Content.Server.Database
         public List<Job> Jobs { get; } = new();
         public List<Antag> Antags { get; } = new();
         public List<Trait> Traits { get; } = new();
-        public List<JobSubname> JobSubnames { get; } = new();
+        public List<JobSubname> JobSubnames { get; } = new(); //WL-Subnames
 
+        public List<JobUnblocking> JobUnblockings { get; } = new(); //WL-Changes
         public List<ProfileRoleLoadout> Loadouts { get; } = new();
 
         [Column("pref_unavailable")] public DbPreferenceUnavailableMode PreferenceUnavailable { get; set; }
@@ -398,6 +406,17 @@ namespace Content.Server.Database
         public DbJobPriority Priority { get; set; }
     }
 
+    //WL-Changes-start
+    public class JobUnblocking
+    {
+        public int Id { get; set; }
+        public Profile Profile { get; set; } = null!;
+        public int ProfileId { get; set; }
+
+        public string JobName { get; set; } = null!;
+        public bool ForceUnblocked { get; set; }
+    }
+
     public class JobSubname
     {
         public int Id { get; set; }
@@ -407,6 +426,7 @@ namespace Content.Server.Database
         public string JobName { get; set; } = null!;
         public string Subname { get; set; } = null!;
     }
+    //WL-Changes-start
 
     public enum DbJobPriority
     {
@@ -504,7 +524,7 @@ namespace Content.Server.Database
         /*
          * Insert extra data here like custom descriptions or colors or whatever.
          */
-    }
+}
 
     #endregion
 

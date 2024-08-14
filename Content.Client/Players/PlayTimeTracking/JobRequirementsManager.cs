@@ -116,10 +116,14 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     public bool CheckRoleRequirements(JobPrototype job, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         var reqs = _entManager.System<SharedRoleSystem>().GetJobRequirement(job);
-        return CheckRoleRequirements(reqs, profile, out reason);
+        return CheckRoleRequirements(reqs, profile, out reason, job);
     }
 
-    public bool CheckRoleRequirements(HashSet<JobRequirement>? requirements, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
+    public bool CheckRoleRequirements(
+        HashSet<JobRequirement>? requirements,
+        HumanoidCharacterProfile? profile,
+        [NotNullWhen(false)] out FormattedMessage? reason,
+        /*WL-Changes-start*/JobPrototype? job = null/*WL-Changes-end*/)
     {
         reason = null;
 
@@ -142,7 +146,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
             }
             //WL-Changes-end
 
-            if (requirement.Check(_entManager, _prototypes, profile, _roles, out var jobReason))
+            if (requirement.Check(_entManager, _prototypes, profile, job, _roles, out var jobReason))
                 continue;
 
             reasons.Add(jobReason.ToMarkup());

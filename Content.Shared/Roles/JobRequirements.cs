@@ -25,7 +25,7 @@ public static class JobRequirements
 
         foreach (var requirement in requirements)
         {
-            if (!requirement.Check(entManager, protoManager, profile, playTimes, out reason))
+            if (!requirement.Check(entManager, protoManager, profile, /*WL-Changes-start*/job/*WL-Changes-end*/, playTimes, out reason))
                 return false;
         }
 
@@ -49,6 +49,7 @@ public abstract partial class JobRequirement
         IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,
+        /*WL-Changes-start*/JobPrototype? job,/*WL-Changes-end*/
         IReadOnlyDictionary<string, TimeSpan> playTimes,
         [NotNullWhen(false)] out FormattedMessage? reason);
 

@@ -35,6 +35,7 @@ public sealed partial class RoleTimeRequirement : JobRequirement
     public override bool Check(IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,
+        /*WL-Changes-start*/JobPrototype? job,/*WL-Changes-end*/
         IReadOnlyDictionary<string, TimeSpan> playTimes,
         [NotNullWhen(false)] out FormattedMessage? reason)
     {

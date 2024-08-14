@@ -28,6 +28,7 @@ public sealed partial class JobRequirementLoadoutEffect : LoadoutEffect
         return Requirement.Check(collection.Resolve<IEntityManager>(),
             collection.Resolve<IPrototypeManager>(),
             profile,
+            /*WL-Changes-start*/null,/*WL-Changes-end*/
             playtimes,
             out reason);
     }

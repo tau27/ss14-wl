@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Shared._WL.CCVars;
 using Content.Shared.Preferences;
 using JetBrains.Annotations;
@@ -31,6 +32,7 @@ public sealed partial class AgeRequirement : JobRequirement
     public override bool Check(IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,
+        /*WL-Changes-start*/JobPrototype? job,/*WL-Changes-end*/
         IReadOnlyDictionary<string, TimeSpan> playTimes,
         [NotNullWhen(false)] out FormattedMessage? reason)
     {
@@ -40,17 +42,30 @@ public sealed partial class AgeRequirement : JobRequirement
             return true;
 
         //WL-Changes-start
-        if (MinAge != null && profile.Age < MinAge)
+        if (job is null)
+            return true;
+
+        var isNeeded = true;
+
+        if (profile.JobUnblockings.TryGetValue(job.ID, out var value))
         {
-            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("role-timer-age-to-young",
-                ("age", MinAge)));
-            return false;
+            isNeeded = !value;
         }
-        if (MaxAge != null && profile.Age > MaxAge)
+
+        if (isNeeded)
         {
-            reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("role-timer-age-to-old",
-                ("age", MaxAge)));
-            return false;
+            if (MinAge != null && profile.Age < MinAge)
+            {
+                reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("role-timer-age-to-young",
+                    ("age", MinAge)));
+                return false;
+            }
+            if (MaxAge != null && profile.Age > MaxAge)
+            {
+                reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("role-timer-age-to-old",
+                    ("age", MaxAge)));
+                return false;
+            }
         }
         //WL-Changes-end
 
