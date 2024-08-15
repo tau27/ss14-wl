@@ -115,4 +115,11 @@ public enum LogType
     /// Storage & entity-storage related interactions
     /// </summary>
     Storage = 93,
+
+    //WL-Changes-start
+    /// <summary>
+    /// Использование консольной ВЛ-команды
+    /// </summary>
+    WLCommand = 94,
+    //WL-Changes-end
 }

@@ -1,44 +1,44 @@
 using Content.Server.Administration;
+using Content.Server.Administration.Logs;
+using Content.Server.Database;
 using Content.Server.Preferences.Managers;
 using Content.Shared.Administration;
+using Content.Shared.Database;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Robust.Server.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Content.Server._WL.Administration.Commands
 {
     [AdminCommand(AdminFlags.QuestionnaireSpecialist)]
     public sealed partial class JobForceEnableCommand : LocalizedCommands
     {
-        [Dependency] private readonly IEntityManager _entMan = default!;
-        [Dependency] private readonly IPlayerManager _playMan = default!;
-        [Dependency] private readonly IServerPreferencesManager _prefMan = default!;
         [Dependency] private readonly IPrototypeManager _protoMan = default!;
+        [Dependency] private readonly IServerDbManager _serverDb = default!;
+        [Dependency] private readonly IAdminLogManager _adminLog = default!;
 
         public override string Command => "jobforceenable";
         public override string Description => "Позволяет насильно разблокировать проверку должности на возраст.";
         public override string Help => "jobforceenable <player_username> <character_name> <job_name> [True/False]";
 
-        public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+        public override async ValueTask<CompletionResult> GetCompletionAsync(IConsoleShell shell, string[] args, string argStr, CancellationToken cancel)
         {
-            if (args.Length == 1)
-            {
-                var players = _playMan.GetAllPlayerData();
-
-                return CompletionResult.FromHintOptions(players.Select(p => p.UserName), "<username>");
-            }
-            else if (args.Length == 2)
+            if (args.Length == 2)
             {
                 var username = args[0];
-                if (_playMan.TryGetUserId(username, out var user_id))
+
+                var user_id = await _serverDb.GetPlayerRecordByUserName(username, cancel);
+
+                if (user_id != null)
                 {
-                    var characters = _prefMan.GetPreferencesOrNull(user_id)?.Characters;
+                    var characters = await _serverDb.GetPlayerPreferencesAsync(user_id.UserId, cancel);
                     if (characters != null)
-                        return CompletionResult.FromHintOptions(characters.Select(c => c.Value.Name), "<character_name>");
+                        return CompletionResult.FromHintOptions(characters.Characters.Select(c => c.Value.Name), "<character_name>");
                 }
             }
             else if (args.Length == 3)
@@ -54,6 +54,7 @@ namespace Content.Server._WL.Administration.Commands
             return CompletionResult.Empty;
         }
 
+        //TODO: сделать проверку на наличие игрока в _cachedPlayers, поле PlayerManager, и обращаться к бд, только если его не было в этом поле.
         public override async void Execute(IConsoleShell shell, string argStr, string[] args)
         {
             try
@@ -77,13 +78,15 @@ namespace Content.Server._WL.Administration.Commands
                     return;
                 }
 
-                if (!_playMan.TryGetUserId(username, out var netUserId))
+                var net_user_id = (await _serverDb.GetPlayerRecordByUserName(username))?.UserId;
+
+                if (net_user_id == null)
                 {
                     shell.WriteError($"Игрока с никнеймом [color=yellow]{username}[/color] не найдено.");
                     return;
                 }
 
-                var characters = _prefMan.GetPreferencesOrNull(netUserId);
+                var characters = await _serverDb.GetPlayerPreferencesAsync(net_user_id.Value, CancellationToken.None);
                 if (characters == null)
                 {
                     shell.WriteError("Произошла неизвестная ошибка при получении профиля игрока!");
@@ -112,7 +115,17 @@ namespace Content.Server._WL.Administration.Commands
 
                     var newProfile = character_profile.WithJobUnblocking(job_id, value);
 
-                    await _prefMan.SetProfile(netUserId, character_slot.Value, newProfile);
+                    await _serverDb.SaveCharacterSlotAsync(net_user_id.Value, newProfile, character_slot.Value);
+
+                    //Логгирование
+                    var off_on_string = value
+                            ? "[color=red]выключил[/color]"
+                            : "[color=green]включил[/color]";
+
+                    _adminLog.Add(
+                        LogType.WLCommand, LogImpact.Medium, $"{shell.Player?.Name ?? "Неизвестный пользователь"} {off_on_string} проверку на возраст у " +
+                        $"персонажа {character_name} для долнжности {jobProto.LocalizedName} игрока {username}."
+                        );
                 }
                 else
                 {
@@ -120,13 +133,13 @@ namespace Content.Server._WL.Administration.Commands
 
                     if (character_profile.JobUnblockings.TryGetValue(job_id, out var value))
                         off_on_string = value
-                            ? "выключена"
-                            : "включена";
-                    else off_on_string = "включена";
+                            ? "[color=red]выключена[/color]"
+                            : "[color=green]включена[/color]";
+                    else off_on_string = "[color=green]включена[/color]";
 
                     var text = $"Для персонажа [color=green]{character_name}[/color] пользователя " +
                         $"[color=yellow]{username}[/color] в должности [color=gray]{jobProto.LocalizedName}[/color] " +
-                        $"проверка на возраст [color=blue]{off_on_string}[/color].";
+                        $"проверка на возраст {off_on_string}.";
 
                     shell.WriteLine(
                         FormattedMessage.FromMarkupOrThrow(text)
