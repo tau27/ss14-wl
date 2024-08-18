@@ -73,7 +73,7 @@ def create_archive() -> str:
         stdin=subprocess.PIPE, 
         stdout=subprocess.PIPE)
     
-    return parent_dir + build_name
+    return parent_dir + "/" + build_name
 
 def send_archive(url: str, path_to_file: str):
     with open(path_to_file, 'rb') as file:
