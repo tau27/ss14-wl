@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 
 import subprocess
-import paramiko
 import requests
 import os
 import hashlib
-from functools import partial
 
 ##GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 #PUBLISH_TOKEN = os.environ["PUBLISH_TOKEN"]
@@ -13,12 +11,8 @@ from functools import partial
 #VERSION = os.environ['GITHUB_SHA']
 #FORK_ID = os.environ['FORK_ID']
 
-LOCALE_PUBLIC_SSH_PORT = 22
 LOCALE_PUBLISH_TOKEN = "83ffff70-2a27-42a4-84a2-68c29d140545"
 LOCALE_USER_IP = "192.168.0.8"
-LOCALE_USER_PASSWORD = "любовь"
-LOCALE_USER_NAME = "Nn"
-LOCALE_USER_PUBLISH_PATH = "C:/Users/Nn/Desktop/publish_listener/work/"
 LOCALE_USER_LISTENER_PORT = 443
 
 ROBUST_CDN_URL = "https://cdn.station14.ru/"
@@ -30,13 +24,16 @@ def main():
     token = hashlib.sha256(random_bytes).hexdigest()
 
     print("Содержимое рабочего каталога пакуется в архив.")
-    create_archive()
-    print("Начинается выгрузка архива на удалённую машину.")
-    send_archive(LOCALE_USER_IP, LOCALE_PUBLIC_SSH_PORT, LOCALE_USER_NAME, LOCALE_USER_PASSWORD, LOCALE_USER_PUBLISH_PATH + f'{token}/{build_name}')
-    print("Выгрузка прошла успешно!")
+    path_to_archive = create_archive()
 
     url = f"http://{LOCALE_USER_IP}:{LOCALE_USER_LISTENER_PORT}/publish/work/{token}"
+
     archive = "/zip"
+    upload = "/upload"
+
+    print("Начинается выгрузка архива на удалённую машину.")
+    send_archive(url + upload, path_to_archive)
+
     '''
     print("Начинается отправка на cdn.")
     publish_data = {
@@ -64,7 +61,7 @@ def main():
 def get_engine_version() -> str:
     return "229.1.2"
 
-def create_archive():
+def create_archive() -> str:
     cur_dir = os.getcwd()
     parent_dir = os.path.dirname(cur_dir)
 
@@ -75,36 +72,18 @@ def create_archive():
         stderr=subprocess.PIPE, 
         stdin=subprocess.PIPE, 
         stdout=subprocess.PIPE)
+    
+    return parent_dir + build_name
 
-def send_archive(host: str, port: int, username: str, password: str, remote_path: str):
-    ssh = paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-    try:
-        print("Подключение...")
-        ssh.connect(
-            host, 
-            port, 
-            username, 
-            password=password
-            )
-        print("Подключение успешно!")
-        print("Выгрузка!")
-        sftp = ssh.open_sftp()
-        sftp.mkdir(remote_path)
-        sftp.put(f"../{build_name}", remote_path, partial(print_locale_publish_progress))
-    except Exception as e:
-        print(e)
-        sftp.close()
-        ssh.close()
-        raise e
-
-    sftp.close()
-    ssh.close()
-        
-
-def print_locale_publish_progress(uploaded_bytes: int, all_bytes: int):
-    print(f"Выгружено {uploaded_bytes} из {all_bytes} байт.")
+def send_archive(url: str, path_to_file: str):
+    with open(path_to_file, 'rb') as file:
+        files = {'file': file}
+        upload_head = {
+            "Authorization": f"Bearer {LOCALE_PUBLISH_TOKEN}",
+        }
+        response = requests.post(url, files=files, headers=upload_head)
+        response.raise_for_status()
+        print("Отправка прошла успешно!")
 
 if __name__ == '__main__':
     main()
