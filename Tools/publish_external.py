@@ -20,10 +20,6 @@ ROBUST_CDN_URL = "https://cdn.station14.ru/"
 build_name = "build.zip"
 
 def main():
-    response = requests.get(url="http://192.168.0.8:443/publish/work/debug/zip")
-    response.raise_for_status()
-    print(response)
-
     random_bytes = os.urandom(64)
     token = hashlib.sha256(random_bytes).hexdigest()
 
