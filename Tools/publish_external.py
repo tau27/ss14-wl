@@ -13,13 +13,13 @@ from functools import partial
 #VERSION = os.environ['GITHUB_SHA']
 #FORK_ID = os.environ['FORK_ID']
 
-LOCALE_PUBLIC_SSH_PORT = os.environ['LOCALE_PUBLIC_SSH_PORT']
-LOCALE_PUBLISH_TOKEN = os.environ['LOCALE_PUBLISH_TOKEN']
-LOCALE_USER_IP = os.environ['LOCALE_USER_IP']
-LOCALE_USER_PASSWORD = os.environ['LOCALE_USER_PASSWORD']
-LOCALE_USER_NAME = os.environ['LOCALE_USER_NAME']
-LOCALE_USER_PUBLISH_PATH = os.environ['LOCALE_USER_PUBLISH_PATH']
-LOCALE_USER_LISTENER_PORT = os.environ['LOCALE_USER_LISTENER_PORT']
+LOCALE_PUBLIC_SSH_PORT = 22
+LOCALE_PUBLISH_TOKEN = "83ffff70-2a27-42a4-84a2-68c29d140545"
+LOCALE_USER_IP = "192.168.0.8"
+LOCALE_USER_PASSWORD = "любовь"
+LOCALE_USER_NAME = "Nn"
+LOCALE_USER_PUBLISH_PATH = "C:/Users/Nn/Desktop/publish_listener/work/"
+LOCALE_USER_LISTENER_PORT = 443
 
 ROBUST_CDN_URL = "https://cdn.station14.ru/"
 
@@ -81,14 +81,15 @@ def send_archive(host: str, port: int, username: str, password: str, remote_path
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     try:
+        print("Подключение...")
         ssh.connect(
             host, 
             port, 
             username, 
-            password=password,
-            look_for_keys=False
+            password=password
             )
-        
+        print("Подключение успешно!")
+        print("Выгрузка!")
         sftp = ssh.open_sftp()
         sftp.mkdir(remote_path)
         sftp.put(f"../{build_name}", remote_path, partial(print_locale_publish_progress))
