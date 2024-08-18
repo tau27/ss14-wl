@@ -12,23 +12,23 @@ jobs:
       with:
         submodules: 'recursive'
 
-    # Corvax-Secrets-Start
-    - name: Setup secrets
-      env:
-        SSH_KEY: ${{ secrets.SECRETS_PRIVATE_KEY }}
-      if: ${{ env.SSH_KEY != '' }}
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SECRETS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        echo "HOST *" > ~/.ssh/config
-        echo "StrictHostKeyChecking no" >> ~/.ssh/config
-        git clone git@github.com:corvax-nexus/secrets.git Secrets
-        cp -R Secrets/Resources/Prototypes Resources/Prototypes/CorvaxSecrets
-        cp -R Secrets/Resources/ServerPrototypes Resources/Prototypes/CorvaxSecretsServer
-        cp -R Secrets/Resources/Locale Resources/Locale/ru-RU/corvax-secrets
-        cp -R Secrets/Resources/Textures Resources/Textures/CorvaxSecrets
-    # Corvax-Secrets-End
+    # # Corvax-Secrets-Start
+    # - name: Setup secrets
+      # env:
+        # SSH_KEY: ${{ secrets.SECRETS_PRIVATE_KEY }}
+      # if: ${{ env.SSH_KEY != '' }}
+      # run: |
+        # mkdir -p ~/.ssh
+        # echo "${{ secrets.SECRETS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        # chmod 600 ~/.ssh/id_rsa
+        # echo "HOST *" > ~/.ssh/config
+        # echo "StrictHostKeyChecking no" >> ~/.ssh/config
+        # git clone git@github.com:corvax-nexus/secrets.git Secrets
+        # cp -R Secrets/Resources/Prototypes Resources/Prototypes/CorvaxSecrets
+        # cp -R Secrets/Resources/ServerPrototypes Resources/Prototypes/CorvaxSecretsServer
+        # cp -R Secrets/Resources/Locale Resources/Locale/ru-RU/corvax-secrets
+        # cp -R Secrets/Resources/Textures Resources/Textures/CorvaxSecrets
+    # # Corvax-Secrets-End
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3.2.0
@@ -55,11 +55,11 @@ jobs:
     - name: Publish
       run: python3 publish_external.py
       env:
-        GITHUB_TOKEN: ${{ secrets.DEPLOY_ORG_TOKEN }}
-        PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
-        GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
-        FORK_ID: ${{ vars.FORK_ID }}
-        # WL-Changes: ext
+        # GITHUB_TOKEN: ${{ secrets.DEPLOY_ORG_TOKEN }}
+        # PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+        # GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
+        # FORK_ID: ${{ vars.FORK_ID }}
+
         LOCALE_PUBLIC_SSH_KEY: ###
         LOCALE_PUBLISH_TOKEN: ###
         LOCALE_USER_IP: ###
