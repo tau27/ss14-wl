@@ -53,7 +53,7 @@ jobs:
       run: dotnet run --project Content.Packaging client --no-wipe-release
 
     - name: Publish
-      run: python3 publish_external.py
+      run: python3 Tools/publish_external.py
       env:
         # GITHUB_TOKEN: ${{ secrets.DEPLOY_ORG_TOKEN }}
         # PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
