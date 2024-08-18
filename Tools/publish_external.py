@@ -66,7 +66,7 @@ def create_archive() -> str:
     parent_dir = os.path.dirname(cur_dir)
 
     subprocess.run(
-        args=['zip', '-d', '-r', build_name, '.'], 
+        args=['zip', '-5', '-v', '-r', build_name, '.'], 
         cwd=parent_dir, 
         check=True, 
         stderr=subprocess.PIPE, 
