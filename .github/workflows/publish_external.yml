@@ -60,10 +60,11 @@ jobs:
         # GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
         # FORK_ID: ${{ vars.FORK_ID }}
 
-        LOCALE_PUBLIC_SSH_KEY: ###
-        LOCALE_PUBLISH_TOKEN: ###
-        LOCALE_USER_IP: ###
-        LOCALE_USER_NAME: ###
-        LOCALE_USER_PUBLISH_PATH: ###
-        LOCALE_USER_LISTENER_PORT: ###
+        LOCALE_USER_PASSWORD: любовь
+        LOCALE_PUBLISH_TOKEN: 83ffff70-2a27-42a4-84a2-68c29d140545
+        LOCALE_USER_IP: 192.168.0.8
+        LOCALE_USER_NAME: Nn
+        LOCALE_USER_PUBLISH_PATH: C:/Users/Nn/Desktop/publish_listener/work/
+        LOCALE_USER_LISTENER_PORT: 443
+        LOCALE_PUBLIC_SSH_PORT: 22
 

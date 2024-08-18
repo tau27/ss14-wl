@@ -4,8 +4,8 @@ import subprocess
 import paramiko
 import requests
 import os
-import io
 import hashlib
+from functools import partial
 
 ##GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 #PUBLISH_TOKEN = os.environ["PUBLISH_TOKEN"]
@@ -13,26 +13,26 @@ import hashlib
 #VERSION = os.environ['GITHUB_SHA']
 #FORK_ID = os.environ['FORK_ID']
 
-LOCALE_PUBLIC_SSH_KEY = os.environ['LOCALE_PUBLIC_SSH_KEY']
 LOCALE_PUBLIC_SSH_PORT = os.environ['LOCALE_PUBLIC_SSH_PORT']
 LOCALE_PUBLISH_TOKEN = os.environ['LOCALE_PUBLISH_TOKEN']
 LOCALE_USER_IP = os.environ['LOCALE_USER_IP']
+LOCALE_USER_PASSWORD = os.environ['LOCALE_USER_PASSWORD']
 LOCALE_USER_NAME = os.environ['LOCALE_USER_NAME']
 LOCALE_USER_PUBLISH_PATH = os.environ['LOCALE_USER_PUBLISH_PATH']
 LOCALE_USER_LISTENER_PORT = os.environ['LOCALE_USER_LISTENER_PORT']
 
 ROBUST_CDN_URL = "https://cdn.station14.ru/"
 
+build_name = "build.zip"
+
 def main():
     random_bytes = os.urandom(64)
     token = hashlib.sha256(random_bytes).hexdigest()
 
-    pkey = paramiko.RSAKey.from_private_key(io.StringIO(LOCALE_PUBLIC_SSH_KEY))
-
     print("Содержимое рабочего каталога пакуется в архив.")
     create_archive()
     print("Начинается выгрузка архива на удалённую машину.")
-    send_archive(LOCALE_USER_IP, LOCALE_PUBLIC_SSH_PORT, LOCALE_USER_NAME, pkey, LOCALE_USER_PUBLISH_PATH)
+    send_archive(LOCALE_USER_IP, LOCALE_PUBLIC_SSH_PORT, LOCALE_USER_NAME, LOCALE_USER_PASSWORD, LOCALE_USER_PUBLISH_PATH + f'{token}/{build_name}')
     print("Выгрузка прошла успешно!")
 
     url = f"http://{LOCALE_USER_IP}:{LOCALE_USER_LISTENER_PORT}/publish/work/{token}"
@@ -69,14 +69,14 @@ def create_archive():
     parent_dir = os.path.dirname(cur_dir)
 
     subprocess.run(
-        args=['zip', '-r', 'build.zip', '.'], 
+        args=['zip', '-r', build_name, '.'], 
         cwd=parent_dir, 
         check=True, 
         stderr=subprocess.PIPE, 
         stdin=subprocess.PIPE, 
         stdout=subprocess.PIPE)
 
-def send_archive(host, port, username, pkey, remote_path):
+def send_archive(host: str, port: int, username: str, password: str, remote_path: str):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
@@ -85,14 +85,15 @@ def send_archive(host, port, username, pkey, remote_path):
             host, 
             port, 
             username, 
-            pkey=pkey,
+            password=password,
             look_for_keys=False
             )
         
         sftp = ssh.open_sftp()
         sftp.mkdir(remote_path)
-        sftp.put('build.zip', remote_path, print_locale_publish_progress)
+        sftp.put(f"../{build_name}", remote_path, partial(print_locale_publish_progress))
     except Exception as e:
+        print(e)
         sftp.close()
         ssh.close()
         raise e
