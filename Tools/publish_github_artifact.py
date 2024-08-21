@@ -48,7 +48,7 @@ def get_artifact_url() -> str:
     return resp.headers["Location"]
 
 def get_engine_version() -> str:
-    return "229.1.2"
+    return "230.0.1"
 
 
 if __name__ == '__main__':
