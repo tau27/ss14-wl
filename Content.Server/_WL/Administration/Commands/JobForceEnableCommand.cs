@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Content.Server._WL.Administration.Commands
 {
-    [AdminCommand(AdminFlags.QuestionnaireSpecialist)]
+    [AdminCommand(AdminFlags.MassBan)]
     public sealed partial class JobForceEnableCommand : LocalizedCommands
     {
         [Dependency] private readonly IPrototypeManager _protoMan = default!;
