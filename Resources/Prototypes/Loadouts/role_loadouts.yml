@@ -35,6 +35,7 @@
   - GroupTankHarness
   - PassengerJumpsuit
   - CommonBackpack
+  - PassengerNeck
   - PassengerFace
   - PassengerGloves
   - PassengerOuterClothing
@@ -361,6 +362,7 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
@@ -375,6 +377,7 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
@@ -390,6 +393,7 @@
   - SecurityBelt
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
@@ -405,6 +409,7 @@
   - SecurityShoes
   - SurvivalSecurity
   - Trinkets
+  - SecurityStar
   - GroupSpeciesBreathToolSecurity
 
 - type: roleLoadout
@@ -532,6 +537,7 @@
   groups:
   - Inventory # Corvax-Loadouts
   - GroupTankHarness
+  - PsychologistJumpsuit
   - MedicalBackpack
   - Glasses
   - Survival

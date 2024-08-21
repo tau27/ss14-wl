@@ -30,6 +30,7 @@
     - Murine
     - Tajara
     #WL-Changes-end
+    - Vulpkanin # Corvax-MRP
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVox

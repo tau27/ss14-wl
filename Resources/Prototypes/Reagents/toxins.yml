@@ -746,8 +746,8 @@
       - !type:GenericStatusEffect
         key: Pacified
         component: Pacified
-        refresh: false
         type: Add
+        time: 4
 # WL species start
         conditions:
         # Android
