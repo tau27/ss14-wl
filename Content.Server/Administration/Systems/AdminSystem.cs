@@ -34,6 +34,8 @@ using Robust.Shared.Player;
 using Content.Shared.Humanoid;
 using Content.Server.Roles.Jobs;
 using Content.Server.Roles;
+using Content.Server.Database;
+using Content.Server.Humanoid;
 
 namespace Content.Server.Administration.Systems;
 
@@ -55,6 +57,9 @@ public sealed class AdminSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    //WL-Changes-start
+    [Dependency] private readonly HumanoidAppearanceSystem _profile = default!;
+    //WL-Changes-end
 
     private readonly Dictionary<NetUserId, PlayerInfo> _playerList = new();
 
@@ -126,6 +131,51 @@ public sealed class AdminSystem : EntitySystem
             RaiseNetworkEvent(updateEv, admin.Channel);
         }
     }
+
+    //WL-Changes-start
+    public void EraseManifest(ICommonSession player)
+    {
+        var entity = player.AttachedEntity;
+        if (entity != null && !TerminatingOrDeleted(entity.Value))
+        {
+            foreach (var item in _inventory.GetHandOrInventoryEntities(entity.Value))
+            {
+                if (TryComp(item, out PdaComponent? pda) &&
+                    TryComp(pda.ContainedId, out StationRecordKeyStorageComponent? keyStorage) &&
+                    keyStorage.Key is { } key &&
+                    _stationRecords.TryGetRecord(key, out GeneralStationRecord? record))
+                {
+                    if (TryComp(entity, out DnaComponent? dna) &&
+                        dna.DNA != record.DNA)
+                    {
+                        continue;
+                    }
+
+                    if (TryComp(entity, out FingerprintComponent? fingerPrint) &&
+                        fingerPrint.Fingerprint != record.Fingerprint)
+                    {
+                        continue;
+                    }
+
+                    _stationRecords.RemoveRecord(key);
+                    Del(item);
+                }
+            }
+        }
+    }
+    // Corvax WL start
+    // WL-Height
+    public void HeightChange(EntityUid player, int value)
+    {
+        if (TryComp<HumanoidAppearanceComponent>(player, out var humanoid))
+        {
+            humanoid.Height = value;
+
+            _profile.ApplyHeight(humanoid);
+        }
+    }
+    // Corvax WL end
+    //WL-Changes-end
 
     public void UpdatePlayerList(ICommonSession player)
     {

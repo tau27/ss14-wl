@@ -50,7 +50,7 @@ public sealed class CharacterInfoSystem : EntitySystem
             }
 
             if (_jobs.MindTryGetJob(mindId, out _, out var jobProto))
-                jobTitle = _roles.GetSubnameByEntity(mindId, jobProto.ID) ?? jobProto.LocalizedName;
+                jobTitle = _roles.GetSubnameBySesssion(args.SenderSession, jobProto.ID) ?? jobProto.LocalizedName;
 
             // Get briefing
             briefing = _roles.MindGetBriefing(mindId);

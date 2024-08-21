@@ -34,7 +34,9 @@ public sealed class JobSystem : SharedJobSystem
         if (!MindTryGetJob(mindId, out _, out var prototype))
             return;
 
-        var jobName = _roles.GetSubnameByEntity(mindId, prototype.ID) ?? prototype.LocalizedName;
+        //WL-Changes-start
+        var jobName = _roles.GetSubnameBySesssion(session, prototype.ID) ?? prototype.LocalizedName;
+        //WL-Changes-end
 
         _chat.DispatchServerMessage(session, Loc.GetString("job-greet-introduce-job-name",
             ("jobName", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))));
