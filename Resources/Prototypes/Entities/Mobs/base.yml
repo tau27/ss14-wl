@@ -78,6 +78,17 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MeatLaserImpact
+#WL-Changes-start
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Cold
+        damage: 1500
+      behaviors:
+      - !type:FrozeBodyBehavior { }
+      - !type:PlaySoundBehavior
+        sound:
+          collection: FrozeEffects
+#WL-Changes-end
   - type: RadiationReceiver
   - type: Stamina
   - type: MobState
