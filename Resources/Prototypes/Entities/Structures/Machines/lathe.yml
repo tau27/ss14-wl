@@ -1052,6 +1052,10 @@
       - ClothingUniformJumpsuitWarden
       - ClothingUniformJumpskirtWarden
       - ClothingHeadHatParamedicsoft
+      # Corvax-WL recipes start
+      - ClothingHeadHatBeretCaptain
+      - ClothingHeadHatBeretHoP
+      # Corvax-WL recipes end
       # Winter outfits
       - ClothingOuterWinterCap
       - ClothingOuterWinterCE

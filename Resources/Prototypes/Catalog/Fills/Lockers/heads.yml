@@ -49,6 +49,10 @@
       - id: WeaponAntiqueLaser
       - id: JetpackCaptainFilled
       - id: MedalCase
+      # Corvax-WL start
+      - id: ClothingOuterCoatCaptainTrench
+      - id: ClothingHeadHatBeretCaptain
+      # Corvax-WL end
 
 - type: entity
   id: LockerCaptainFilled
@@ -75,6 +79,10 @@
       - id: WeaponAntiqueLaser
       - id: JetpackCaptainFilled
       - id: MedalCase
+      # Corvax-WL start
+      - id: ClothingOuterCoatCaptainTrench
+      - id: ClothingHeadHatBeretCaptain
+      # Corvax-WL end
       # Corvax-Resprite-Start
       - id: ClothingHeadCaptainHat
       - id: ClothingOuterCoatCaptain
@@ -104,6 +112,10 @@
       - id: RubberStampCaptain
       - id: JetpackCaptainFilled
       - id: MedalCase
+      # Corvax-WL start
+      - id: ClothingOuterCoatCaptainTrench
+      - id: ClothingHeadHatBeretCaptain
+      # Corvax-WL end
 
 - type: entity
   id: LockerHeadOfPersonnelFilled
@@ -135,6 +147,7 @@
       - id: ClothingOuterCoatHOP # Corvax-Resprite
       - id: AccessConfigurator
       - id: PrinterDocFlatpack # Corvax-Printer
+      - id: ClothingHeadHatBeretHoP # Corvax-WL
 
 - type: entity
   id: LockerChiefEngineerFilledHardsuit
