@@ -115,6 +115,10 @@ namespace Content.Client.Lobby
             _lateJoin?.Parent?.RemoveChild(_lateJoin);
             _lateJoin = new LateJoinGui();
             _lateJoin.OpenCentered();
+            _lateJoin.SelectedId += ((NetEntity ent, string id) _) =>
+            {
+                _lateJoin?.Parent?.RemoveChild(_lateJoin);
+            };
             //WL-Changes-end
         }
 

@@ -97,6 +97,10 @@ public sealed class RoleSystem : SharedRoleSystem
         if (!profile.JobSubnames.TryGetValue(jobId, out var subname))
             return null;
 
+        if (_prototypes.TryIndex<JobPrototype>(jobId, out var proto))
+            if (!proto.Subnames.Contains(subname))
+                return proto.LocalizedName;
+
         return subname;
     }
 
@@ -111,6 +115,10 @@ public sealed class RoleSystem : SharedRoleSystem
 
         if (!profile.JobSubnames.TryGetValue(jobId, out var subname))
             return null;
+
+        if (_prototypes.TryIndex<JobPrototype>(jobId, out var proto))
+            if (!proto.Subnames.Contains(subname))
+                return proto.LocalizedName;
 
         return subname;
     }
