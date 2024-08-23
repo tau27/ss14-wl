@@ -31,6 +31,10 @@ namespace Content.Client.Lobby
         protected override Type? LinkedScreenType { get; } = typeof(LobbyGui);
         public LobbyGui? Lobby;
 
+        //WL-Changes-start
+        private LateJoinGui? _lateJoin = null;
+        //WL-Changes-end
+
         protected override void Startup()
         {
             if (_userInterfaceManager.ActiveScreen == null)
@@ -77,6 +81,10 @@ namespace Content.Client.Lobby
             Lobby!.ReadyButton.OnToggled -= OnReadyToggled;
 
             Lobby = null;
+
+            //WL-Changes-start
+            _lateJoin = null;
+            //WL-Changes-end
         }
 
         public void SwitchState(LobbyGui.LobbyGuiState state)
@@ -89,6 +97,11 @@ namespace Content.Client.Lobby
         {
             SetReady(false);
             Lobby?.SwitchState(LobbyGui.LobbyGuiState.CharacterSetup);
+
+            //WL-Changes-start
+            _lateJoin?.Parent?.RemoveChild(_lateJoin);
+            _lateJoin = new LateJoinGui();
+            //WL-Changes-end
         }
 
         private void OnReadyPressed(BaseButton.ButtonEventArgs args)
@@ -98,7 +111,11 @@ namespace Content.Client.Lobby
                 return;
             }
 
-            new LateJoinGui().OpenCentered();
+            //WL-Changes-start
+            _lateJoin?.Parent?.RemoveChild(_lateJoin);
+            _lateJoin = new LateJoinGui();
+            _lateJoin.OpenCentered();
+            //WL-Changes-end
         }
 
         private void OnReadyToggled(BaseButton.ButtonToggledEventArgs args)
