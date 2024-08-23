@@ -17,7 +17,7 @@
   startingGear: ResearchAssistantGear
   icon: "JobIconResearchAssistant"
   supervisors: job-supervisors-science
-  canBeAntag: false
+  canBeAntag: true #false ##WL-Changes
   access:
   - Research
   - Maintenance
