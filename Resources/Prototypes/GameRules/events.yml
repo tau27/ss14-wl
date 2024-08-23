@@ -6,7 +6,7 @@
     - id: BluespaceArtifact
     - id: BluespaceLocker
     - id: BreakerFlip
-    - id: BureaucraticError
+    # - id: BureaucraticError
     - id: ClericalError
     - id: CockroachMigration
     - id: GasLeak
@@ -123,18 +123,18 @@
         minPlayers: 15
   - type: BreakerFlipRule
 
-- type: entity
-  id: BureaucraticError
-  parent: BaseGameRule
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-bureaucratic-error-announcement
-    spawnConfig:
-      standartConfig:
-        minPlayers: 20
-    weight: 5
-    duration: 1
-  - type: BureaucraticErrorRule
+# - type: entity
+  # id: BureaucraticError
+  # parent: BaseGameRule
+  # components:
+  # - type: StationEvent
+    # startAnnouncement: station-event-bureaucratic-error-announcement
+    # spawnConfig:
+      # standartConfig:
+        # minPlayers: 20
+    # weight: 5
+    # duration: 1
+  # - type: BureaucraticErrorRule
 
 #WL-Changes-start
 # - type: entity
