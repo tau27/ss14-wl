@@ -112,7 +112,7 @@
     earliestStart: 2
     spawnConfig:
       standartConfig:
-        minPlayers: 0
+        minPlayers: 25
   - type: MeteorSwarm
     announcement: null
     announcementSound: null
@@ -134,7 +134,7 @@
     weight: 22
     spawnConfig:
       standartConfig:
-        minPlayers: 0
+        minPlayers: 25
   - type: MeteorSwarm
     announcement: station-event-space-dust-start-announcement
     announcementSound: /Audio/Announcements/attention.ogg
