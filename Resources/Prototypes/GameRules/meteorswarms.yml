@@ -97,7 +97,9 @@
   - type: StationEvent
     reoccurrenceDelay: 1
     earliestStart: 12
-    minimumPlayers: 25
+    spawnConfig:
+      standartConfig:
+        minPlayers: 25
   - type: MeteorSwarm
     announcementSound: /Audio/Announcements/meteors_start.ogg # Corvax-Announcements
 
@@ -108,7 +110,9 @@
   - type: StationEvent
     weight: 44
     earliestStart: 2
-    minimumPlayers: 0
+    spawnConfig:
+      standartConfig:
+        minPlayers: 0
   - type: MeteorSwarm
     announcement: null
     announcementSound: null
@@ -128,7 +132,9 @@
   components:
   - type: StationEvent
     weight: 22
-    minimumPlayers: 0
+    spawnConfig:
+      standartConfig:
+        minPlayers: 0
   - type: MeteorSwarm
     announcement: station-event-space-dust-start-announcement
     announcementSound: /Audio/Announcements/attention.ogg
@@ -148,7 +154,9 @@
   components:
   - type: StationEvent
     weight: 18
-    minimumPlayers: 15
+    spawnConfig:
+      standartConfig:
+        minPlayers: 15
   - type: MeteorSwarm
     meteors:
       MeteorSmall: 7
@@ -208,7 +216,9 @@
     reoccurrenceDelay: 1
     duration: 1
     earliestStart: 30
-    minimumPlayers: 25
+    spawnConfig:
+      standartConfig:
+        minPlayers: 25
   - type: ImmovableRodRule
     rodPrototypes:
     - id: ImmovableRodKeepTilesStill
