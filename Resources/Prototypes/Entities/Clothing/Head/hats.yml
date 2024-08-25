@@ -507,6 +507,8 @@
     - state: icon-up
       map: ["foldedLayer"]
       visible: false
+  - type: TemperatureProtection # WL-modified
+    coefficient: 0.4
 
 
 - type: entity

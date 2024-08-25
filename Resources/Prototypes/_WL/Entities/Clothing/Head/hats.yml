@@ -12,3 +12,26 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretHoP
+  name: берет главы персонала
+  description: Синий берет. Пахнет бюрократией.
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Head/Hats/beret_hop.rsi
+  - type: Clothing
+    sprite: _WL/Clothing/Head/Hats/beret_hop.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretCaptain
+  name: берет капитана
+  description: Синий берет с золотым значком NT. Заставляет окружающих уважать вас, но не вызывает желания работать. Слава NT!
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Head/Hats/beret_captain.rsi
+  - type: Clothing
+    sprite: _WL/Clothing/Head/Hats/beret_captain.rsi
+

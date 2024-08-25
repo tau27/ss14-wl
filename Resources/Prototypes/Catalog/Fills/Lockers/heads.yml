@@ -29,6 +29,7 @@
       entity_storage: !type:NestedSelector
         tableId: LockerFillQuarterMaster
 
+
 # No laser table
 - type: entityTable
   id: LockerFillCaptainNoLaser
@@ -50,6 +51,10 @@
     - id: RubberStampCaptain
     - id: SpaceCash1000
     - id: WeaponDisabler
+    # WL-Developers-Changes-start
+    - id: ClothingOuterCoatCaptainTrench
+    - id: ClothingHeadHatBeretCaptain
+    # WL-Developers-Changes-end
     # Corvax-Resprite-Start
     - id: ClothingHeadCaptainHat
     - id: ClothingOuterCoatCaptain
@@ -138,6 +143,7 @@
     - id: WeaponDisabler
     - id: ClothingOuterCoatHOP # Corvax-Resprite
     - id: PrinterDocFlatpack # Corvax-Printer
+    - id: ClothingHeadHatBeretHoP # Corvax-WL
 
 - type: entity
   id: LockerHeadOfPersonnelFilled

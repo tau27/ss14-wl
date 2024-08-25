@@ -400,7 +400,7 @@
       - Captain
     - label: corvax-hidden-desc-EnergySword-cargo
       jobRequired:
-# Corvax-HiddenDesc-End
+  # Corvax-HiddenDesc-End
       - SalvageSpecialist
   # Corvax-HiddenDesc-End
 # White-List components

@@ -1063,7 +1063,9 @@
       # Corvax WL start
       - ClothingUniformJumpsuitDSS
       - ClothingHeadHatBeretDSS
-      # Corvax WL end
+      - ClothingHeadHatBeretCaptain
+      - ClothingHeadHatBeretHoP
+      # Corvax-WL end
       # Winter outfits
       - ClothingOuterWinterCap
       - ClothingOuterWinterCE
