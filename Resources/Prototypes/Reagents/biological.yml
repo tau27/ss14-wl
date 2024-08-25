@@ -223,6 +223,8 @@
         - !type:OrganType
           type: Golem
 # WL species end
+      - !type:ModifyBleedAmount
+        amount: -1.5
   # Just in case you REALLY want to water your plants
   plantMetabolism:
   - !type:PlantAdjustWater
