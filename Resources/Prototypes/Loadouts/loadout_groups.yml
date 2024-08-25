@@ -80,6 +80,10 @@
   loadouts:
   - CaptainHead
   - CaptainCap
+#WL-changes-start
+  - ClothingHeadCaptainHat
+  - ClothingHeadHatBeretCaptain
+#WL-changes-end
 
 - type: loadoutGroup
   id: CaptainJumpsuit
@@ -117,6 +121,10 @@
   loadouts:
   - CaptainOuterClothing
   - CaptainWintercoat
+#wl-Changes-Start
+  - ClothingOuterCoatCaptainTrench
+  - ClothingOuterCoatCaptain
+#wl-Changes-end
 
 - type: loadoutGroup
   id: HoPHead
@@ -124,6 +132,9 @@
   minLimit: 0
   loadouts:
   - HoPHead
+#WL-changes-start
+  - ClothingHeadHatBeretHoP
+#WL-changes-end
 
 - type: loadoutGroup
   id: HoPJumpsuit
