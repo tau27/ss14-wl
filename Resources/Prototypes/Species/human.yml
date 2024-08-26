@@ -42,7 +42,7 @@
   id: MobHumanMarkingLimits
   points:
     Special: # the cat ear joke
-      points: 1
+      points: 0
       required: false
     Hair:
       points: 1
