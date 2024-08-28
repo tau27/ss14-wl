@@ -5,6 +5,9 @@
   id: BaseMobAkula
   abstract: true
   components: # TODO: Give species uniq features
+    - type: Body
+      prototype: Akula
+      requiredLegs: 2
     - type: HumanoidAppearance
       species: Akula
     - type: Hunger
@@ -13,6 +16,10 @@
       state: full
     - type: Thirst
     - type: Perishable
+    - type: MeleeWeapon
+      soundHit:
+        collection: Punch
+      animation: WeaponArcClaw
     - type: Butcherable
       butcheringType: Spike
       spawned:

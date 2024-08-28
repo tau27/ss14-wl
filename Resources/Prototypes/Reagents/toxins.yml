@@ -53,9 +53,9 @@
         - !type:OrganType
           type: Golem
           shouldHave: false
-        # Golem
+        #Akula
         - !type:OrganType
-          type: Golem
+          type: Animal
           shouldHave: false
 # WL species end
         damage:
@@ -68,15 +68,30 @@
         - !type:OrganType
           type: Golem
           shouldHave: false
-        # Golem
+        #Akula
         - !type:OrganType
-          type: Golem
+          type: Animal
           shouldHave: false
 # WL species end
         type: Local
         visualType: MediumCaution
         messages: [ "generic-reagent-effect-burning-insides" ]
         probability: 0.33
+# WL species start
+    Food:
+      effects:
+      - !type:SatiateHunger
+        factor: -2
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        #Akula
+        - !type:OrganType
+          type: Animal
+          shouldHave: true
+# WL species end
 
 - type: reagent
   id: ChloralHydrate

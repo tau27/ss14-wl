@@ -13,11 +13,11 @@
     torso:
       part: TorsoAkula
       organs:
-        heart: OrganAnimalHeart
+        heart: OrganAkulaHeart
         lungs: OrganHumanLungs
-        stomach: OrganHumanStomach
+        stomach: OrganAnimalStomach
         liver: OrganAnimalLiver
-        kidneys: OrganHumanKidneys
+        kidneys: OrganAnimalKidneys
       connections:
         - left arm
         - right arm
