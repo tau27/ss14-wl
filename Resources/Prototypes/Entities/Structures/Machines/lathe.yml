@@ -639,6 +639,7 @@
     - HamtrLLeg
     - HamtrRLeg
     - VimHarness
+    - PersonalAIRecipe # WL-Changes
   - type: MaterialStorage
     whitelist:
       tags:
