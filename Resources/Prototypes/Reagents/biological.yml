@@ -38,6 +38,20 @@
           groups:
             Brute: -3
             Burn: -1.25
+# WL-Changes-start
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Akula
+        damage:
+          groups:
+            Brute: -0.2
+          types:
+            Poison: -0.125 ##Should be about what it was when it healed the toxin group
+            Heat: -0.095
+            Shock: -0.095
+            Cold: -0.095
+# WL-Changes-end
     Cischi:
        effects:
        - !type:HealthChange

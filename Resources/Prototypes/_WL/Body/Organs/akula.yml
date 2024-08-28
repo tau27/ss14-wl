@@ -6,7 +6,7 @@
   components:
   - type: Metabolizer
     maxReagents: 2
-    metabolizerTypes: [ Animal ]
+    metabolizerTypes: [ Animal, Akula ]
     groups:
     - id: Medicine
     - id: Poison
