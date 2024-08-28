@@ -109,6 +109,14 @@
   - type: Damageable
     damageContainer: BioRobotic
     damageModifierSet: BioRobotic
+  - type: Vocal
+    sounds:
+      Male: MaleHuman
+      Female: FemaleHuman
+      Unsexed: MaleHuman
+  - type: Emoting
+  - type: BodyEmotes
+    soundsId: GeneralBodyEmotes
   - type: Destructible
     thresholds:
       - trigger:
