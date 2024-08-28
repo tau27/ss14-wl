@@ -340,6 +340,14 @@
         conditions:
         - !type:OrganType
           type: Golem
+# WL-Changes-start
+    Poison:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Radiation: 1.5
+# WL-Changed-end
 
 - type: reagent
   id: Silicon
