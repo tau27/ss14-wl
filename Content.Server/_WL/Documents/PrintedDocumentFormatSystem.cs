@@ -1,10 +1,11 @@
+using Content.Server.GameTicking;
 using Content.Server.GuideGenerator.TextTools;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Server.Station.Systems;
 using Content.Shared.Hands;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Localizations;
+using Content.Shared.Interaction;
 using Content.Shared.Paper;
 using Content.Shared.Verbs;
 using Robust.Shared.Timing;
@@ -16,6 +17,7 @@ namespace Content.Server._WL.Documents
         [Dependency] private readonly PaperSystem _paper = default!;
         [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly IGameTiming _gameTime = default!;
+        [Dependency] private readonly GameTicker _gameTick = default!;
         [Dependency] private readonly JobSystem _job = default!;
         [Dependency] private readonly MindSystem _mind = default!;
 
@@ -26,6 +28,7 @@ namespace Content.Server._WL.Documents
             SubscribeLocalEvent<PrintedDocumentFormatComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<PrintedDocumentFormatComponent, GotEquippedHandEvent>(OnPick);
             SubscribeLocalEvent<PrintedDocumentFormatComponent, GetVerbsEvent<AlternativeVerb>>(OnVerb);
+            SubscribeLocalEvent<PrintedDocumentFormatComponent, InteractUsingEvent>(OnInteract, before: [typeof(PaperSystem)]);
         }
 
         //No public api babe
@@ -41,7 +44,7 @@ namespace Content.Server._WL.Documents
                 ? Name(station.Value)
                 : null;
 
-            var formattedDate = $"{_gameTime.CurTime.ToString(@"hh\:mm\:ss")} {DateTime.Now.AddYears(1000):dd.MM.yyyy}";
+            var formattedDate = $"{_gameTime.CurTime.Subtract(_gameTick.RoundStartTimeSpan).ToString(@"hh\:mm\:ss")} {DateTime.Now.AddYears(1000):dd.MM.yyyy}";
 
             var content = Loc.GetString(paperComp.Content)
                 .Replace(":DATE:", formattedDate)
@@ -68,6 +71,21 @@ namespace Content.Server._WL.Documents
         private void OnVerb(EntityUid document, PrintedDocumentFormatComponent comp, GetVerbsEvent<AlternativeVerb> args)
         {
             if (!args.CanInteract || !args.CanAccess)
+                return;
+
+            if (comp.Taken)
+                return;
+
+            var paperComp = EnsureComp<PaperComponent>(document);
+
+            comp.Taken = true;
+
+            ChangeContentWhenPickup((document, paperComp), args.User);
+        }
+
+        private void OnInteract(EntityUid document, PrintedDocumentFormatComponent comp, InteractUsingEvent args)
+        {
+            if (args.Handled)
                 return;
 
             if (comp.Taken)
