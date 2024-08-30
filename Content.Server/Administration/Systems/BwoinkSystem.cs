@@ -702,6 +702,159 @@ namespace Content.Server.Administration.Systems
                 .ToList();
         }
 
+        //WL-Changes-start
+        /// <summary>
+        /// КОПИЯ МЕТОДА <see cref="OnBwoinkTextMessage(BwoinkTextMessage, EntitySessionEventArgs)">
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="senderName"></param>
+        /// <param name="senderNetId"></param>
+        public async Task HandleDiscordAhelp(BwoinkTextMessage message, string senderName, NetUserId senderNetId)
+        {
+            _activeConversations[message.UserId] = DateTime.Now;
+
+            // TODO: Sanitize text?
+            // Confirm that this person is actually allowed to send a message here.
+            var personalChannel = senderNetId == message.UserId;
+
+            var senderAdminDb = await _dbManager.GetAdminDataForAsync(senderNetId);
+            if (senderAdminDb == null)
+                return;
+
+            var adminFlags = AdminFlagsHelper.NamesToFlags(senderAdminDb.AdminRank?.Flags.Select(f => f.Flag) ?? []);
+
+            var adminData = new AdminData()
+            {
+                Active = true,
+                Stealth = false,
+                Title = senderAdminDb.Title,
+                Flags = adminFlags
+            };
+
+            var senderAHelpAdmin = adminData.HasFlag(AdminFlags.Adminhelp);
+            var authorized = personalChannel || senderAHelpAdmin;
+            if (!authorized)
+            {
+                // Unauthorized bwoink (log?)
+                return;
+            }
+
+            var escapedText = FormattedMessage.EscapeText(message.Text);
+
+            string bwoinkText;
+            string adminPrefix = "";
+
+            //Getting an administrator position
+            if (_config.GetCVar(CCVars.AhelpAdminPrefix) && adminData is not null && adminData.Title is not null)
+            {
+                adminPrefix = $"[bold]\\[{adminData.Title}\\][/bold] ";
+            }
+
+            if (adminData is not null &&
+                adminFlags ==
+                AdminFlags.Adminhelp) // Mentor. Not full admin. That's why it's colored differently.
+            {
+                bwoinkText = $"[color=purple]{adminPrefix}{senderName}[/color]";
+            }
+            else if (adminData is not null && adminData.HasFlag(AdminFlags.Adminhelp))
+            {
+                bwoinkText = $"[color=red]{adminPrefix}{senderName}[/color]";
+            }
+            else
+            {
+                bwoinkText = $"{senderName}";
+            }
+
+            bwoinkText = $"{(message.PlaySound ? "" : "(S) ")}{bwoinkText}: {escapedText}";
+
+            // If it's not an admin / admin chooses to keep the sound then play it.
+            var playSound = !senderAHelpAdmin || message.PlaySound;
+            var msg = new BwoinkTextMessage(message.UserId, senderNetId, bwoinkText, playSound: playSound);
+
+            LogBwoink(msg);
+
+            var admins = GetTargetAdmins();
+
+            // Notify all admins
+            foreach (var channel in admins)
+            {
+                RaiseNetworkEvent(msg, channel);
+            }
+
+            string adminPrefixWebhook = "";
+
+            if (_config.GetCVar(CCVars.AhelpAdminPrefixWebhook) && adminData is not null && adminData.Title is not null)
+            {
+                adminPrefixWebhook = $"[bold]\\[{adminData.Title}\\][/bold] ";
+            }
+
+            // Notify player
+            if (_playerManager.TryGetSessionById(message.UserId, out var session))
+            {
+                if (!admins.Contains(session.Channel))
+                {
+                    // If _overrideClientName is set, we generate a new message with the override name. The admins name will still be the original name for the webhooks.
+                    if (_overrideClientName != string.Empty)
+                    {
+                        string overrideMsgText;
+                        // Doing the same thing as above, but with the override name. Theres probably a better way to do this.
+                        if (adminData is not null &&
+                            adminFlags ==
+                            AdminFlags.Adminhelp) // Mentor. Not full admin. That's why it's colored differently.
+                        {
+                            overrideMsgText = $"[color=purple]{adminPrefixWebhook}{_overrideClientName}[/color]";
+                        }
+                        else if (adminData is not null && adminData.HasFlag(AdminFlags.Adminhelp))
+                        {
+                            overrideMsgText = $"[color=red]{adminPrefixWebhook}{_overrideClientName}[/color]";
+                        }
+                        else
+                        {
+                            overrideMsgText = $"{senderName}"; // Not an admin, name is not overridden.
+                        }
+
+                        overrideMsgText = $"{(message.PlaySound ? "" : "(S) ")}{overrideMsgText}: {escapedText}";
+
+                        RaiseNetworkEvent(new BwoinkTextMessage(message.UserId,
+                                senderNetId,
+                                overrideMsgText,
+                                playSound: playSound),
+                            session.Channel);
+                    }
+                    else
+                        RaiseNetworkEvent(msg, session.Channel);
+                }
+            }
+
+            var sendsWebhook = _webhookUrl != string.Empty;
+            if (sendsWebhook)
+            {
+                if (!_messageQueues.ContainsKey(msg.UserId))
+                    _messageQueues[msg.UserId] = new Queue<string>();
+
+                var str = message.Text;
+                var unameLength = senderName.Length;
+
+                if (unameLength + str.Length + _maxAdditionalChars > DescriptionMax)
+                {
+                    str = str[..(DescriptionMax - _maxAdditionalChars - unameLength)];
+                }
+
+                var nonAfkAdmins = GetNonAfkAdmins();
+                var messageParams = new AHelpMessageParams(
+                    senderName,
+                    str,
+                    !personalChannel,
+                    _gameTicker.RoundDuration().ToString("hh\\:mm\\:ss"),
+                    _gameTicker.RunLevel,
+                    playedSound: playSound,
+                    noReceivers: nonAfkAdmins.Count == 0
+                );
+                _messageQueues[msg.UserId].Enqueue(GenerateAHelpMessage(messageParams));
+            }
+        }
+        //WL-Changes-end
+
         private static string GenerateAHelpMessage(AHelpMessageParams parameters)
         {
             var stringbuilder = new StringBuilder();

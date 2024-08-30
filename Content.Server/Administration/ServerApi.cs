@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
@@ -7,11 +7,12 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using Content.Server.Administration.Systems;
+using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
-using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Maps;
 using Content.Server.RoundEnd;
+using Content.Shared._WL.CCVars;
 using Content.Shared.Administration.Managers;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking.Components;
@@ -32,6 +33,10 @@ namespace Content.Server.Administration;
 public sealed partial class ServerApi : IPostInjectInit
 {
     private const string SS14TokenScheme = "SS14Token";
+
+    //WL-Changes-start
+    private const string WLAuthTokenScheme = "WLCorvaxToken"; //ихихихих
+    //WL-Changes-end
 
     private static readonly HashSet<string> PanicBunkerCVars =
     [
@@ -58,8 +63,16 @@ public sealed partial class ServerApi : IPostInjectInit
     [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
+    //WL-Changes-start
+    [Dependency] private readonly IServerDbManager _serverDb = default!;
+    //WL-Changes-end
 
-    private string _token = string.Empty;
+    private string _corvax_token = string.Empty;
+
+    //WL-Changes-start
+    private string _wl_token = string.Empty;
+    //WL-Changes-end
+
     private ISawmill _sawmill = default!;
 
     void IPostInjectInit.PostInject()
@@ -81,25 +94,90 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/force_preset", ActionForcePreset);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/set_motd", ActionForceMotd);
         RegisterActorHandler(HttpMethod.Patch, "/admin/actions/panic_bunker", ActionPanicPunker);
+
+        //WL-Changes-start
+        RegisterActorHandler(HttpMethod.Post, "/admin/actions/ahelp", ActionAhelp);
+        //wL-Changes-end
     }
 
     public void Initialize()
     {
-        _config.OnValueChanged(CCVars.AdminApiToken, UpdateToken, true);
+        _config.OnValueChanged(CCVars.AdminApiToken, UpdateCorvaxToken, true);
+
+        //WL-Changes-start
+        _config.OnValueChanged(WLCVars.WLApiToken, UpdateWLToken, true);
+        //WL-Changes-end
     }
 
     public void Shutdown()
     {
-        _config.UnsubValueChanged(CCVars.AdminApiToken, UpdateToken);
+        _config.UnsubValueChanged(CCVars.AdminApiToken, UpdateCorvaxToken);
+
+        //WL-Changes-start
+        _config.UnsubValueChanged(WLCVars.WLApiToken, UpdateWLToken);
+        //WL-Changes-end
     }
 
-    private void UpdateToken(string token)
+    private void UpdateCorvaxToken(string token)
     {
-        _token = token;
+        _corvax_token = token;
     }
 
+    //WL-Changes-start
+    private void UpdateWLToken(string token)
+    {
+        _wl_token = token;
+    }
+    //WL-Changes-end
 
     #region Actions
+
+    //WL-Changes-start
+    private async Task ActionAhelp(IStatusHandlerContext context, Actor actor)
+    {
+        var body = await ReadJson<AhelpBody>(context);
+        if (body == null)
+            return;
+
+        await RunOnMainThread(async () =>
+        {
+            var bwoink = _entitySystemManager.GetEntitySystem<BwoinkSystem>();
+            var ticker = _entitySystemManager.GetEntitySystem<GameTicker>();
+
+            var targetNetId = new NetUserId(body.TargetGuid);
+            var senderNetId = new NetUserId(actor.Guid);
+
+            if (!_playerManager.TryGetSessionById(targetNetId, out var session))
+            {
+                await RespondBadRequest(context, "Указанного guid игрока нет на сервере на данный момент.");
+                return;
+            }
+
+            var record = await _serverDb.GetPlayerRecordByUserId(senderNetId);
+
+            if (record == null)
+            {
+                await RespondBadRequest(context, "Неверный guid администратора.");
+                return;
+            }
+
+            if (record.LastSeenUserName.Equals(actor.Name) == false)
+            {
+                await RespondBadRequest(context, "Неверный логин администратора.");
+                return;
+            }
+
+            await bwoink.HandleDiscordAhelp(new(targetNetId, senderNetId, body.Message),
+                actor.Name,
+                record.UserId
+            );
+
+            _sawmill.Info($"Администратор под именем {actor.Name} дистанционно отправил сообщение \"{body.Message}\" игроку {session.Name}");
+
+            await RespondOk(context);
+        });
+    }
+    //WL-Changes-end
 
     /// <summary>
     ///     Changes the panic bunker settings.
@@ -545,22 +623,25 @@ public sealed partial class ServerApi : IPostInjectInit
         var authScheme = authHeaderValue[..spaceIndex];
         var authValue = authHeaderValue[spaceIndex..].Trim();
 
-        if (authScheme != SS14TokenScheme)
+        if (authScheme != SS14TokenScheme /*WL-Changes-start*/&& authScheme != WLAuthTokenScheme/*WL-Changes-end*/)
         {
             await RespondBadRequest(context, "Invalid Authorization scheme");
             return false;
         }
 
-        if (_token == "")
-        {
-            _sawmill.Debug("No authorization token set for admin API");
-        }
-        else if (CryptographicOperations.FixedTimeEquals(
+        //WL-Changes-start
+        if (!string.IsNullOrEmpty(_corvax_token))
+            if (CryptographicOperations.FixedTimeEquals(
                 Encoding.UTF8.GetBytes(authValue),
-                Encoding.UTF8.GetBytes(_token)))
-        {
-            return true;
-        }
+                Encoding.UTF8.GetBytes(_corvax_token)))
+                return true;
+
+        if (!string.IsNullOrEmpty(_wl_token))
+            if (CryptographicOperations.FixedTimeEquals(
+                Encoding.UTF8.GetBytes(authValue),
+                Encoding.UTF8.GetBytes(_wl_token)))
+                return true;
+        //WL-Changes-end
 
         await RespondError(
             context,
@@ -615,6 +696,14 @@ public sealed partial class ServerApi : IPostInjectInit
         public required Guid Guid { get; init; }
         public string? Reason { get; init; }
     }
+
+    //WL-Changes-start
+    private sealed class AhelpBody
+    {
+        public required Guid TargetGuid { get; init; }
+        public required string Message { get; init; }
+    }
+    //WL-Changes-end
 
     private sealed class GameRuleActionBody
     {
