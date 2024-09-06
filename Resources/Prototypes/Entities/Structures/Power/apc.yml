@@ -7,6 +7,7 @@
     mode: SnapgridCenter
   components:
   - type: AndroidChargeTarget
+  - type: StationAiWhitelist
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -9

@@ -2,6 +2,8 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Inventory;
 using Robust.Shared.Network;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.StepTrigger.Systems;
@@ -12,6 +14,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Utility;
 // WL Golem species start
 using Content.Shared.Damage;
@@ -36,6 +39,8 @@ public sealed class SlipperySystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IEntityManager _entity = default!;
     // WL Golem species end
+    [Dependency] private readonly SpeedModifierContactsSystem _speedModifier = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -43,9 +48,13 @@ public sealed class SlipperySystem : EntitySystem
         SubscribeLocalEvent<SlipperyComponent, StepTriggerAttemptEvent>(HandleAttemptCollide);
         SubscribeLocalEvent<SlipperyComponent, StepTriggeredOffEvent>(HandleStepTrigger);
         SubscribeLocalEvent<NoSlipComponent, SlipAttemptEvent>(OnNoSlipAttempt);
+        SubscribeLocalEvent<SlowedOverSlipperyComponent, SlipAttemptEvent>(OnSlowedOverSlipAttempt);
         SubscribeLocalEvent<ThrownItemComponent, SlipCausingAttemptEvent>(OnThrownSlipAttempt);
         // as long as slip-resistant mice are never added, this should be fine (otherwise a mouse-hat will transfer it's power to the wearer).
         SubscribeLocalEvent<NoSlipComponent, InventoryRelayedEvent<SlipAttemptEvent>>((e, c, ev) => OnNoSlipAttempt(e, c, ev.Args));
+        SubscribeLocalEvent<SlowedOverSlipperyComponent, InventoryRelayedEvent<SlipAttemptEvent>>((e, c, ev) => OnSlowedOverSlipAttempt(e, c, ev.Args));
+        SubscribeLocalEvent<SlowedOverSlipperyComponent, InventoryRelayedEvent<GetSlowedOverSlipperyModifierEvent>>(OnGetSlowedOverSlipperyModifier);
+        SubscribeLocalEvent<SlipperyComponent, EndCollideEvent>(OnEntityExit);
     }
 
     private void HandleStepTrigger(EntityUid uid, SlipperyComponent component, ref StepTriggeredOffEvent args)
@@ -63,13 +72,29 @@ public sealed class SlipperySystem : EntitySystem
 
     private static void OnNoSlipAttempt(EntityUid uid, NoSlipComponent component, SlipAttemptEvent args)
     {
-        args.Cancel();
+        args.NoSlip = true;
+    }
+
+    private void OnSlowedOverSlipAttempt(EntityUid uid, SlowedOverSlipperyComponent component, SlipAttemptEvent args)
+    {
+        args.SlowOverSlippery = true;
     }
 
     private void OnThrownSlipAttempt(EntityUid uid, ThrownItemComponent comp, ref SlipCausingAttemptEvent args)
     {
         args.Cancelled = true;
     }
+
+    private void OnGetSlowedOverSlipperyModifier(EntityUid uid, SlowedOverSlipperyComponent comp, ref InventoryRelayedEvent<GetSlowedOverSlipperyModifierEvent> args)
+    {
+        args.Args.SlowdownModifier *= comp.SlowdownModifier;
+    }
+
+    private void OnEntityExit(EntityUid uid, SlipperyComponent component, ref EndCollideEvent args)
+    {
+        if (HasComp<SpeedModifiedByContactComponent>(args.OtherEntity))
+            _speedModifier.AddModifiedEntity(args.OtherEntity);
+    } 
 
     private bool CanSlip(EntityUid uid, EntityUid toSlip)
     {
@@ -84,7 +109,10 @@ public sealed class SlipperySystem : EntitySystem
 
         var attemptEv = new SlipAttemptEvent();
         RaiseLocalEvent(other, attemptEv);
-        if (attemptEv.Cancelled)
+        if (attemptEv.SlowOverSlippery)
+            _speedModifier.AddModifiedEntity(other);
+
+        if (attemptEv.NoSlip)
             return;
 
         var attemptCausingEv = new SlipCausingAttemptEvent();
@@ -135,8 +163,12 @@ public sealed class SlipperySystem : EntitySystem
 /// <summary>
 ///     Raised on an entity to determine if it can slip or not.
 /// </summary>
-public sealed class SlipAttemptEvent : CancellableEntityEventArgs, IInventoryRelayEvent
+public sealed class SlipAttemptEvent : EntityEventArgs, IInventoryRelayEvent
 {
+    public bool NoSlip;
+
+    public bool SlowOverSlippery;
+
     public SlotFlags TargetSlots { get; } = SlotFlags.FEET;
 }
 
