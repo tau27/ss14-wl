@@ -4,7 +4,6 @@
   abstract: true
   description: Mobs without physical bodies
   components:
-  - type: CargoSellBlacklist
   - type: UserInterface
     interfaces:
       enum.CharacterInformationUiKey.Key: # WL-CharacterInformation
