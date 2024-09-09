@@ -709,7 +709,7 @@ namespace Content.Server.Administration.Systems
         /// <param name="message"></param>
         /// <param name="senderName"></param>
         /// <param name="senderNetId"></param>
-        public async Task HandleDiscordAhelp(BwoinkTextMessage message, string senderName, NetUserId senderNetId, bool check_admin)
+        public async Task<bool> HandleDiscordAhelp(BwoinkTextMessage message, string senderName, NetUserId senderNetId, bool check_admin)
         {
             _activeConversations[message.UserId] = DateTime.Now;
 
@@ -722,7 +722,7 @@ namespace Content.Server.Administration.Systems
             {
                 senderAdminDb = await _dbManager.GetAdminDataForAsync(senderNetId);
                 if (senderAdminDb == null)
-                    return;
+                    return false;
             }
 
             var adminFlags = AdminFlagsHelper.NamesToFlags(senderAdminDb?.AdminRank?.Flags.Select(f => f.Flag) ?? []);
@@ -740,7 +740,7 @@ namespace Content.Server.Administration.Systems
             if (!authorized)
             {
                 // Unauthorized bwoink (log?)
-                return;
+                return false;
             }
 
             var escapedText = FormattedMessage.EscapeText(message.Text);
@@ -856,6 +856,8 @@ namespace Content.Server.Administration.Systems
                 );
                 _messageQueues[msg.UserId].Enqueue(GenerateAHelpMessage(messageParams));
             }
+
+            return true;
         }
         //WL-Changes-end
 

@@ -105,7 +105,7 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/ahelp", ActionAhelp);
         RegisterHandler(HttpMethod.Post, "/player/actions/link/account", LinkDiscordAccount);
 
-        RegisterActorHandler(HttpMethod.Get, "/player/info/discord", GetLinkedAccount);
+        RegisterHandler(HttpMethod.Post, "/player/info/discord", GetLinkedAccount);
         //wL-Changes-end
     }
 
@@ -142,11 +142,15 @@ public sealed partial class ServerApi : IPostInjectInit
     #region Actions
 
     //WL-Changes-start
-    private async Task GetLinkedAccount(IStatusHandlerContext context, Actor actor)
+    private async Task GetLinkedAccount(IStatusHandlerContext context)
     {
+        var http_body = await ReadJson<InnerActor>(context);
+        if (http_body == null)
+            return;
+
         await RunOnMainThread(async () =>
         {
-            var linked = await _serverDb.GetPlayerByDiscordId(actor.DiscordId, default);
+            var linked = await _serverDb.GetPlayerByDiscordId(http_body.DiscordId, default);
             if (linked == null)
             {
                 await RespondError(context, ErrorCode.PlayerNotFound, HttpStatusCode.BadRequest, "Текущий аккаунт не привязан к игровому аккаунту!");
@@ -156,7 +160,7 @@ public sealed partial class ServerApi : IPostInjectInit
             var body = new
             {
                 Username = linked.LastSeenUserName,
-                Guid = actor.Record.UserId.UserId.ToString()
+                Guid = linked.UserId.UserId.ToString()
             };
 
             await context.RespondJsonAsync(body, HttpStatusCode.OK);
@@ -232,7 +236,7 @@ public sealed partial class ServerApi : IPostInjectInit
 
             var record = actor.Record;
 
-            await bwoink.HandleDiscordAhelp(new(session.UserId, senderNetId.UserId, body.Message),
+            var sent = await bwoink.HandleDiscordAhelp(new(session.UserId, senderNetId.UserId, body.Message),
                 record.LastSeenUserName,
                 record.UserId,
                 !actor.IsStuffBot
@@ -240,7 +244,7 @@ public sealed partial class ServerApi : IPostInjectInit
 
             _sawmill.Info($"Администратор {record.LastSeenUserName} дистанционно отправил сообщение \"{body.Message}\" игроку {session.Name}");
 
-            await RespondOk(context);
+            await (sent ? RespondOk(context) : RespondError(context, ErrorCode.BadRequest, HttpStatusCode.NotAcceptable, "Вы не являетесь администратором!"));
         });
     }
     //WL-Changes-end
