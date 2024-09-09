@@ -135,7 +135,7 @@ namespace Content.Shared._WL.StandFallCrouch
 
             var doAfter = new DoAfterArgs(EntityManager, attacker, duration, new StandFallDoAfterEvent(), victum, victum, attacker)
             {
-                BreakOnMove = true,
+                BreakOnMove = false,
                 BreakOnHandChange = true,
                 BreakOnDamage = true,
                 NeedHand = true,

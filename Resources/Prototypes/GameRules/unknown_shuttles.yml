@@ -35,6 +35,9 @@
     weight: 1.6
     reoccurrenceDelay: 120
     duration: 1
+    spawnConfig:
+      standartConfig:
+        minPlayers: 15
   - type: RuleGrids
   - type: LoadMapRule
 

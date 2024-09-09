@@ -109,6 +109,11 @@
   - type: Clothing
     sprite: Clothing/Shoes/Specific/galoshes.rsi
   - type: NoSlip
+  - type: SlowedOverSlippery
+    slowdownModifier: 1
+  - type: SpeedModifierContactCapClothing # Corvax-MRP
+    maxContactSprintSlowdown: 0.9
+    maxContactWalkSlowdown: 0.9
 
 - type: entity
   parent: [ClothingShoesBaseButcherable, BaseMajorContraband]

@@ -26,6 +26,7 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared._WL.Light.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Components;
+using Content.Shared.Power;
 
 namespace Content.Server.Light.EntitySystems
 {

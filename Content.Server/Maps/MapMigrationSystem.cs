@@ -37,12 +37,22 @@ public sealed class MapMigrationSystem : EntitySystem
             return;
 
         // Verify that all of the entries map to valid entity prototypes.
-        foreach (var node in mappings.Values)
+        foreach (var node in mappings.Value.CorvaxMigration.Values)
         {
             var newId = ((ValueDataNode) node).Value;
             if (!string.IsNullOrEmpty(newId) && newId != "null")
                 DebugTools.Assert(_protoMan.HasIndex<EntityPrototype>(newId), $"{newId} is not an entity prototype.");
         }
+
+        //WL-Changes-start
+        // Verify that all of the entries map to valid entity prototypes.
+        foreach (var node in mappings.Value.WLMigration.Values)
+        {
+            var newId = ((ValueDataNode)node).Value;
+            if (!string.IsNullOrEmpty(newId) && newId != "null")
+                DebugTools.Assert(_protoMan.HasIndex<EntityPrototype>(newId), $"{newId} is not an entity prototype.");
+        }
+        //WL-Changes-end
 #endif
     }
 
