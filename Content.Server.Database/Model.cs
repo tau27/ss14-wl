@@ -43,8 +43,28 @@ namespace Content.Server.Database
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
 
+        //WL-Changes-start
+        public DbSet<DiscordConnection> DiscordConnections { get; set; } = null!;
+        //WL-Changes-end
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //WL-Changes-start
+            modelBuilder.Entity<DiscordConnection>()
+                .HasIndex(c => c.UserGuid)
+                .IsUnique();
+
+            modelBuilder.Entity<DiscordConnection>()
+                .HasIndex(c => c.DiscordId)
+                .IsUnique();
+
+            modelBuilder.Entity<DiscordConnection>()
+                .Property(p => p.DiscordId)
+                .HasConversion(
+                    p => p.ToString(),
+                    p => ulong.Parse(p));
+            //WL-Changes-end
+
             modelBuilder.Entity<Preference>()
                 .HasIndex(p => p.UserId)
                 .IsUnique();
@@ -425,6 +445,13 @@ namespace Content.Server.Database
 
         public string JobName { get; set; } = null!;
         public string Subname { get; set; } = null!;
+    }
+
+    public class DiscordConnection
+    {
+        public int Id { get; set; }
+        public ulong DiscordId { get; set; }
+        public Guid UserGuid { get; set; }
     }
     //WL-Changes-start
 

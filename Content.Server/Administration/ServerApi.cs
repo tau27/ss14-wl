@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using Content.Server._WL.DiscordAuth;
 using Content.Server.Administration.Systems;
 using Content.Server.Database;
 using Content.Server.GameTicking;
@@ -24,6 +25,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Content.Server.Administration;
 
@@ -67,6 +69,10 @@ public sealed partial class ServerApi : IPostInjectInit
     [Dependency] private readonly IServerDbManager _serverDb = default!;
     //WL-Changes-end
 
+    //WL-Changes-start
+    private static readonly ulong[] SuffBotIds = [1227044346566541322];
+    //WL-Changes-end
+
     private string _corvax_token = string.Empty;
 
     //WL-Changes-start
@@ -97,6 +103,9 @@ public sealed partial class ServerApi : IPostInjectInit
 
         //WL-Changes-start
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/ahelp", ActionAhelp);
+        RegisterHandler(HttpMethod.Post, "/player/actions/link/account", LinkDiscordAccount);
+
+        RegisterActorHandler(HttpMethod.Get, "/player/info/discord", GetLinkedAccount);
         //wL-Changes-end
     }
 
@@ -133,6 +142,74 @@ public sealed partial class ServerApi : IPostInjectInit
     #region Actions
 
     //WL-Changes-start
+    private async Task GetLinkedAccount(IStatusHandlerContext context, Actor actor)
+    {
+        await RunOnMainThread(async () =>
+        {
+            var linked = await _serverDb.GetPlayerByDiscordId(actor.DiscordId, default);
+            if (linked == null)
+            {
+                await RespondError(context, ErrorCode.PlayerNotFound, HttpStatusCode.BadRequest, "Текущий аккаунт не привязан к игровому аккаунту!");
+                return;
+            }
+
+            var body = new
+            {
+                Username = linked.LastSeenUserName,
+                Guid = actor.Record.UserId.UserId.ToString()
+            };
+
+            await context.RespondJsonAsync(body, HttpStatusCode.OK);
+        });
+    }
+
+    private async Task LinkDiscordAccount(IStatusHandlerContext context)
+    {
+        var body = await ReadJson<LinkUserDiscordBody>(context);
+        if (body == null)
+            return;
+
+        await RunOnMainThread(async () =>
+        {
+            var auth = _entitySystemManager.GetEntitySystem<DiscordAuthSystem>();
+
+            var username = body.Login;
+            var discord_user_id = body.User;
+            var code = body.Code;
+
+            if (!_playerManager.TryGetSessionByUsername(username, out var session))
+            {
+                await RespondBadRequest(context, "Указанного игрока нет на сервере!");
+                return;
+            }
+
+            if (await _serverDb.IsLinkedToDiscord(session.UserId, default))
+            {
+                await RespondBadRequest(context, "Текущий игровой аккаунт уже привязан к дискорд-аккаунту!");
+                return;
+            }
+
+            var check_code = auth.GetUserCode(session.UserId);
+            if (check_code == null)
+            {
+                await RespondError(context, ErrorCode.PlayerNotFound, HttpStatusCode.InternalServerError, "Уникальный код указанного игрока равен <NULL>");
+                return;
+            }
+
+            if (!CryptographicOperations.FixedTimeEquals(Encoding.UTF8.GetBytes(check_code), Encoding.UTF8.GetBytes(code)))
+            {
+                await RespondBadRequest(context, "Указанный уникальный код недействителен!");
+                return;
+            }
+
+            await _serverDb.LinkPlayerDiscord(session.UserId, discord_user_id, default);
+
+            _sawmill.Info($"Игрок {session.Name} подключил к игровому аккаунту дискорд-аккаунт с ID {discord_user_id}.");
+
+            await RespondOk(context);
+        });
+    }
+
     private async Task ActionAhelp(IStatusHandlerContext context, Actor actor)
     {
         var body = await ReadJson<AhelpBody>(context);
@@ -144,35 +221,24 @@ public sealed partial class ServerApi : IPostInjectInit
             var bwoink = _entitySystemManager.GetEntitySystem<BwoinkSystem>();
             var ticker = _entitySystemManager.GetEntitySystem<GameTicker>();
 
-            var targetNetId = new NetUserId(body.TargetGuid);
-            var senderNetId = new NetUserId(actor.Guid);
+            var targetUsername = body.TargetUsername;
+            var senderNetId = actor.Record;
 
-            if (!_playerManager.TryGetSessionById(targetNetId, out var session))
+            if (!_playerManager.TryGetSessionByUsername(targetUsername, out var session))
             {
                 await RespondBadRequest(context, "Указанного guid игрока нет на сервере на данный момент.");
                 return;
             }
 
-            var record = await _serverDb.GetPlayerRecordByUserId(senderNetId);
+            var record = actor.Record;
 
-            if (record == null)
-            {
-                await RespondBadRequest(context, "Неверный guid администратора.");
-                return;
-            }
-
-            if (record.LastSeenUserName.Equals(actor.Name) == false)
-            {
-                await RespondBadRequest(context, "Неверный логин администратора.");
-                return;
-            }
-
-            await bwoink.HandleDiscordAhelp(new(targetNetId, senderNetId, body.Message),
-                actor.Name,
-                record.UserId
+            await bwoink.HandleDiscordAhelp(new(session.UserId, senderNetId.UserId, body.Message),
+                record.LastSeenUserName,
+                record.UserId,
+                !actor.IsStuffBot
             );
 
-            _sawmill.Info($"Администратор под именем {actor.Name} дистанционно отправил сообщение \"{body.Message}\" игроку {session.Name}");
+            _sawmill.Info($"Администратор {record.LastSeenUserName} дистанционно отправил сообщение \"{body.Message}\" игроку {session.Name}");
 
             await RespondOk(context);
         });
@@ -667,12 +733,33 @@ public sealed partial class ServerApi : IPostInjectInit
         Actor? actorData;
         try
         {
-            actorData = JsonSerializer.Deserialize<Actor>(actor);
-            if (actorData == null)
+            //WL-Changes-start
+            var innerActorData = JsonSerializer.Deserialize<InnerActor>(actor);
+            if (innerActorData == null)
             {
                 await RespondBadRequest(context, "Actor is null");
                 return null;
             }
+
+            if (SuffBotIds.Contains(innerActorData.DiscordId))
+            {
+                return new Actor()
+                {
+                    DiscordId = innerActorData.DiscordId,
+                    Record = new(new(Guid.Empty), DateTimeOffset.UnixEpoch, "STUFFBOT", DateTimeOffset.UtcNow, IPAddress.None, []),
+                    IsStuffBot = true
+                };
+            }
+
+            var record = await _serverDb.GetPlayerByDiscordId(innerActorData.DiscordId, default);
+            if (record == null)
+            {
+                await RespondBadRequest(context, "Текущий дискорд-аккаунт не привязан к игровому аккаунту!");
+                return null;
+            }
+
+            actorData = new() { Record = record, DiscordId = innerActorData.DiscordId, IsStuffBot = false };
+            //WL-Changes-end
         }
         catch (JsonException exception)
         {
@@ -687,8 +774,11 @@ public sealed partial class ServerApi : IPostInjectInit
 
     private sealed class Actor
     {
-        public required Guid Guid { get; init; }
-        public required string Name { get; init; }
+        //WL-Changes-start
+        public required PlayerRecord Record { get; init; }
+        public required ulong DiscordId { get; init; }
+        public required bool IsStuffBot { get; init; }
+        //WL-Changes-end
     }
 
     private sealed class KickActionBody
@@ -698,10 +788,22 @@ public sealed partial class ServerApi : IPostInjectInit
     }
 
     //WL-Changes-start
+    private sealed class InnerActor
+    {
+        public required ulong DiscordId { get; init; }
+    }
+
     private sealed class AhelpBody
     {
-        public required Guid TargetGuid { get; init; }
+        public required string TargetUsername { get; init; }
         public required string Message { get; init; }
+    }
+
+    private sealed class LinkUserDiscordBody
+    {
+        public required string Login { get; init; }
+        public required string Code { get; init; }
+        public required ulong User { get; init; }
     }
     //WL-Changes-end
 

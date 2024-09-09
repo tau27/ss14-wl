@@ -709,7 +709,7 @@ namespace Content.Server.Administration.Systems
         /// <param name="message"></param>
         /// <param name="senderName"></param>
         /// <param name="senderNetId"></param>
-        public async Task HandleDiscordAhelp(BwoinkTextMessage message, string senderName, NetUserId senderNetId)
+        public async Task HandleDiscordAhelp(BwoinkTextMessage message, string senderName, NetUserId senderNetId, bool check_admin)
         {
             _activeConversations[message.UserId] = DateTime.Now;
 
@@ -717,17 +717,21 @@ namespace Content.Server.Administration.Systems
             // Confirm that this person is actually allowed to send a message here.
             var personalChannel = senderNetId == message.UserId;
 
-            var senderAdminDb = await _dbManager.GetAdminDataForAsync(senderNetId);
-            if (senderAdminDb == null)
-                return;
+            var senderAdminDb = (Admin?)null;
+            if (check_admin)
+            {
+                senderAdminDb = await _dbManager.GetAdminDataForAsync(senderNetId);
+                if (senderAdminDb == null)
+                    return;
+            }
 
-            var adminFlags = AdminFlagsHelper.NamesToFlags(senderAdminDb.AdminRank?.Flags.Select(f => f.Flag) ?? []);
+            var adminFlags = AdminFlagsHelper.NamesToFlags(senderAdminDb?.AdminRank?.Flags.Select(f => f.Flag) ?? []);
 
             var adminData = new AdminData()
             {
                 Active = true,
                 Stealth = false,
-                Title = senderAdminDb.Title,
+                Title = senderAdminDb?.Title ?? "STUFF",
                 Flags = adminFlags
             };
 

@@ -1,52 +1,52 @@
-using Content.Shared._WL.CCVars;
 using Content.Shared._WL.DiscordAuth;
 using JetBrains.Annotations;
 using Robust.Client.Player;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Client._WL.DiscordAuth
 {
-    [UsedImplicitly]
     public sealed partial class ClientDiscordAuthSystem : SharedDiscordAuthSystem
     {
         [Dependency] private readonly IPlayerManager _playMan = default!;
-        [Dependency] private readonly IConfigurationManager _confMan = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
-
-        private TimeSpan _expirationTime = TimeSpan.FromSeconds(WLCVars.DiscordAuthTokensExpirationTime.DefaultValue);
-
-        private TimeSpan _expirationAccum = TimeSpan.Zero;
 
         private event Action<string>? OnTokenChanged;
 
         private string? _token;
+
+        private TimeSpan _expirationAccum = TimeSpan.Zero;
+        private TimeSpan? _expirationTime;
 
         public override void Initialize()
         {
             base.Initialize();
 
             SubscribeNetworkEvent<DiscordAuthTokenChangedEvent>(OnTokenChangedEvent);
+            SubscribeNetworkEvent<DiscordAuthExpirationTimeSyncEvent>((args) =>
+            {
+                _expirationAccum = args.ExpirationAccum;
+                _expirationTime = args.ExpirationTime;
+            });
 
             OnTokenChanged = (_) => { };
 
-            _expirationTime = TimeSpan.FromSeconds(_confMan.GetCVar(WLCVars.DiscordAuthTokensExpirationTime));
-            _confMan.OnValueChanged(WLCVars.DiscordAuthTokensExpirationTime, (value) => _expirationTime = TimeSpan.FromSeconds(value), true);
+            QueryCode();
+            QuerySync();
         }
 
         public override void Update(float frameTime)
         {
             base.Update(frameTime);
 
+            if (!_timing.IsFirstTimePredicted)
+                return;
+
             _expirationAccum += _timing.TickPeriod;
-
             if (_expirationAccum >= _expirationTime)
-            {
                 _expirationAccum = TimeSpan.Zero;
-
-                QueryCode();
-            }
         }
 
         private void OnTokenChangedEvent(DiscordAuthTokenChangedEvent args)
@@ -63,13 +63,11 @@ namespace Content.Client._WL.DiscordAuth
             OnTokenChanged += action;
         }
 
-        public TimeSpan GetExpirationTimeRemains()
-        {
-            return _expirationTime - _expirationAccum;
-        }
-
         public float GetExpirationTimeFraction(bool revert = true)
         {
+            if (_expirationTime == null)
+                return 0f;
+
             var fraction = _expirationAccum / _expirationTime;
 
             return (float)(revert
@@ -82,7 +80,15 @@ namespace Content.Client._WL.DiscordAuth
             if (_playMan?.LocalSession is not ICommonSession session)
                 return;
 
-            RaiseNetworkEvent(new DiscordAuthTokenQueryEvent(), session);
+            RaiseNetworkEvent(new DiscordAuthTokenQueryEvent());
+        }
+
+        public void QuerySync()
+        {
+            if (_playMan?.LocalSession is not ICommonSession session)
+                return;
+
+            RaiseNetworkEvent(new DiscordAuthExpirationTimeSyncEvent(TimeSpan.Zero, TimeSpan.Zero));
         }
 
         public string? GetUserCode()

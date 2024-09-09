@@ -11,5 +11,6 @@ namespace Content.Shared._WL.DiscordAuth
 {
     public abstract partial class SharedDiscordAuthSystem : EntitySystem
     {
+
     }
 }

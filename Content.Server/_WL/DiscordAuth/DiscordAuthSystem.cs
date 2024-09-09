@@ -6,6 +6,7 @@ using Robust.Shared.Timing;
 using System.Text;
 using Robust.Shared.Player;
 using Content.Shared._WL.DiscordAuth;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server._WL.DiscordAuth
 {
@@ -20,9 +21,16 @@ namespace Content.Server._WL.DiscordAuth
 
         private const string AllowedCodeSymbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_.,@#!?1234567890";
 
+        private TimeSpan _expirationTime = TimeSpan.FromSeconds(WLCVars.DiscordAuthTokensExpirationTime.DefaultValue);
+
+        private TimeSpan _expirationAccum = TimeSpan.Zero;
+
         public override void Initialize()
         {
             base.Initialize();
+
+            _expirationTime = TimeSpan.FromSeconds(_confMan.GetCVar(WLCVars.DiscordAuthTokensExpirationTime));
+            _confMan.OnValueChanged(WLCVars.DiscordAuthTokensExpirationTime, (value) => _expirationTime = TimeSpan.FromSeconds(value), true);
 
             SubscribeNetworkEvent<DiscordAuthTokenQueryEvent>((args, session) =>
             {
@@ -31,6 +39,11 @@ namespace Content.Server._WL.DiscordAuth
                     code = EnsureUser(user);
 
                 RaiseNetworkEvent(new DiscordAuthTokenChangedEvent(code, user), session.SenderSession);
+            });
+
+            SubscribeNetworkEvent<DiscordAuthExpirationTimeSyncEvent>((args, session) =>
+            {
+                RaiseNetworkEvent(new DiscordAuthExpirationTimeSyncEvent(_expirationAccum, _expirationTime), session.SenderSession);
             });
 
             _playersTokensKeys = new();
@@ -54,6 +67,31 @@ namespace Content.Server._WL.DiscordAuth
             };
         }
 
+        public override void Update(float frameTime)
+        {
+            base.Update(frameTime);
+
+            _expirationAccum += _timing.TickPeriod;
+            if (_expirationAccum >= _expirationTime)
+            {
+                _expirationAccum = TimeSpan.Zero;
+
+                foreach (var playerAndKey in _playersTokensKeys)
+                {
+                    var userId = playerAndKey.Key;
+
+                    if (!_playMan.TryGetSessionById(userId, out var session))
+                        continue;
+
+                    var token = EnsureUser(userId);
+
+                    var ev = new DiscordAuthTokenChangedEvent(token, userId);
+
+                    RaiseNetworkEvent(ev, session);
+                }
+            }
+        }
+
         private string EnsureUser(NetUserId userId)
         {
             var code = GenerateUCode();
@@ -71,15 +109,18 @@ namespace Content.Server._WL.DiscordAuth
         {
             var stb = new StringBuilder();
 
+            var symbols = AllowedCodeSymbols.ToCharArray();
+
             for (var i = 0; i < length; i++)
             {
-                var @char = _random.Pick(AllowedCodeSymbols.ToCharArray());
+                var @char = _random.Pick(symbols);
                 stb.Append(@char);
             }
 
             return stb.ToString();
         }
 
+        [return: NotNullIfNotNull(nameof(id))]
         public string? GetUserCode(NetUserId? id)
         {
             if (id == null)

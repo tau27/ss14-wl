@@ -5,6 +5,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -16,6 +17,7 @@ using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
+using FastAccessors;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
@@ -35,6 +37,57 @@ namespace Content.Server.Database
         {
             _opsLog = opsLog;
         }
+
+        //WL-Changes-start
+        #region Discord
+        public async Task<ulong?> GetPlayerDiscordId(Guid guid, CancellationToken token = default)
+        {
+            await using var db = await GetDb(token);
+
+            var connections = db.DbContext.DiscordConnections;
+
+            var discord_id = (await connections.FirstOrDefaultAsync(e => e.UserGuid == guid, cancellationToken: token))?.DiscordId;
+
+            return discord_id;
+        }
+
+        public async Task LinkPlayerDiscord(NetUserId userId, ulong discord_id, CancellationToken token = default)
+        {
+            await using var db = await GetDb(token);
+
+            var connections = db.DbContext.DiscordConnections;
+
+            if (await GetPlayerDiscordId(userId, token) != null)
+                return;
+
+            await connections.AddAsync(new DiscordConnection()
+            {
+                DiscordId = discord_id,
+                UserGuid = userId
+            }, token);
+
+            await db.DbContext.SaveChangesAsync(token);
+        }
+
+        public async Task<bool> IsLinkedToDiscord(NetUserId userId, CancellationToken token = default)
+        {
+            return await GetPlayerDiscordId(userId, token) != null;
+        }
+
+        public async Task<PlayerRecord?> GetPlayerByDiscordId(ulong discord_id, CancellationToken token = default)
+        {
+            await using var db = await GetDb(token);
+
+            var connections = db.DbContext.DiscordConnections;
+
+            var connection = await connections.FirstOrDefaultAsync(c => c.DiscordId == discord_id, token);
+            if (connection == null)
+                return null;
+
+            return await GetPlayerRecordByUserId(new(connection.UserGuid), token);
+        }
+        #endregion
+        //WL-Changes-end
 
         #region Preferences
         public async Task<PlayerPreferences?> GetPlayerPreferencesAsync(

@@ -1,7 +1,9 @@
+using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Client._WL.DiscordAuth
 {
+    [UsedImplicitly]
     public sealed class PlayerSessionInfoUIController : UIController, IOnSystemLoaded<ClientDiscordAuthSystem>
     {
         private PlayerSessionInfoWindow? _sessionInfoWindow;

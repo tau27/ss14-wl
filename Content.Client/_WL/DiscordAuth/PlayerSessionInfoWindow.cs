@@ -24,25 +24,29 @@ namespace Content.Client._WL.DiscordAuth
         {
             IoCManager.InjectDependencies(this);
 
+            VerticalExpand = true;
+            HorizontalExpand = true;
+            MinSize = new(800, 450);
+
             _discordAuth = auth;
 
-            SetSize = new(800, 450);
             Title = "Информация о сессии";
-
 
             var main_tab = new TabContainer()
             {
                 Access = Robust.Client.UserInterface.AccessLevel.Public,
-                Margin = new(10)
+                Margin = new(5, 40, 5, 5),
+                VerticalExpand = true,
+                HorizontalExpand = true
             };
             _mainTab = main_tab;
-
-            AddChild(main_tab);
 
             #region Discord
             var discord_tab = new BoxContainer()
             {
-                Orientation = BoxContainer.LayoutOrientation.Vertical
+                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                VerticalExpand = true,
+                HorizontalExpand = true
             };
 
             #region content
@@ -54,7 +58,9 @@ namespace Content.Client._WL.DiscordAuth
 
             var discord_content_box = new BoxContainer()
             {
-                Orientation = BoxContainer.LayoutOrientation.Vertical
+                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                VerticalExpand = true,
+                HorizontalExpand = true
             };
 
             var discord_content_box_title = new Label()
@@ -77,9 +83,9 @@ namespace Content.Client._WL.DiscordAuth
                 Margin = new(20, 0, 20, 0)
             };
 
-            var style_box = new StyleBoxFlat(Color.Gray);
+            var style_box = new StyleBoxFlat(Color.Black);
 
-            var token = _discordAuth.GetUserCode(_playMan.LocalUser);
+            var token = _discordAuth.GetUserCode();
             var discord_content_bot_ucode_value = new RichTextLabel()
             {
                 Text = token ?? "Unknown"
@@ -110,10 +116,10 @@ namespace Content.Client._WL.DiscordAuth
                 _clipboardMan.SetText(discord_content_bot_ucode_value.Text);
             };
 
-            discord_content_bot_ucode_value_panel.AddChild(discord_content_bot_ucode_value);
+            discord_content_bot_ucode_value.AddChild(discord_content_bot_ucode_value_panel);
 
             discord_content_bot_ucode_box.AddChild(discord_content_bot_ucode_title);
-            discord_content_bot_ucode_box.AddChild(discord_content_bot_ucode_value_panel);
+            discord_content_bot_ucode_box.AddChild(discord_content_bot_ucode_value);
 
             discord_content_box.AddChild(discord_content_box_title);
             discord_content_box.AddChild(discord_content_bot_ucode_box);
@@ -158,8 +164,13 @@ namespace Content.Client._WL.DiscordAuth
             discord_tab.AddChild(stripe_back);
             #endregion
 
-            AddTab(0, "Дискорд", discord_tab);
+            var discord_tab_box = new BoxContainer();
+            discord_tab_box.AddChild(discord_tab);
+
+            AddTab(0, "Дискорд", discord_tab_box);
             #endregion
+
+            AddChild(main_tab);
         }
 
         protected override void FrameUpdate(FrameEventArgs args)
