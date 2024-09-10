@@ -201,6 +201,9 @@
       - id: BackgammonBoard
       - id: ParchisBoard
       - id: CheckerBoard
+      - id: PokerCardBoxFilled # WL-economics
+      - id: ChipsCaseFilled # WL-economics
+      - id: TarotCardBox # WL-economics
       - id: ShipBattlemap
       - id: SnowBattlemap
       - id: SandBattlemap
