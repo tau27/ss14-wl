@@ -46,27 +46,10 @@
 - type: markingPoints
   id: MobGolemMarkingLimits
   points:
-    Head:
-      points: 1
-      required: false
-    Hair:
-      points: 0
-      required: false
-    FacialHair:
-      points: 0
-      required: false
-    Tail:
-      points: 0
-      required: false
-    Snout:
-      points: 0
-      required: false
-    HeadTop:
-      points: 0
-      required: false
     HeadSide:
-      points: 0
-      required: false
+      points: 1
+      required: true
+      defaultMarkings: [GolemBaseHead]
     Underwear: # WL-Underwear
       points: 1
       required: false
@@ -76,24 +59,33 @@
     Socks: # WL-Underwear
       points: 1
       required: false
+    Chest:
+      points: 2
+      required: false
+    Arms:
+      points: 4
+      required: false
+    Legs:
+      points: 4
+      required: false
 
 - type: humanoidBaseSprite
   id: MobGolemHeadMale
-  baseSprite:
-    sprite: _WL/Mobs/Species/Golem/parts.rsi
-    state: head
+  baseSprite: null
+    # sprite: _WL/Mobs/Species/Golem/parts.rsi
+    # state: head
 
 - type: humanoidBaseSprite
   id: MobGolemHeadFemale
-  baseSprite:
-    sprite: _WL/Mobs/Species/Golem/parts.rsi
-    state: head
+  baseSprite: null
+    # sprite: _WL/Mobs/Species/Golem/parts.rsi
+    # state: head
 
 - type: humanoidBaseSprite
   id: MobGolemHead
-  baseSprite:
-    sprite: _WL/Mobs/Species/Golem/parts.rsi
-    state: head
+  baseSprite: null
+    # sprite: _WL/Mobs/Species/Golem/parts.rsi
+    # state: head
 
 - type: humanoidBaseSprite
   id: MobGolemTorso
