@@ -3,7 +3,6 @@
 import os
 import json
 import notify_discord
-import requests
 
 COMMITS = json.loads(os.environ["COMMITS"])
 PR_NOTIFY_WEBHOOK = os.environ["PR_NOTIFY_WEBHOOK"]
@@ -11,10 +10,6 @@ DEVELOPER_GITHUB_TOKEN = os.environ["DEVELOPER_GITHUB_TOKEN"]
 
 # божи упаси(дебаг строка)
 def main():
-    headers = {
-        'Authorization': f'token {DEVELOPER_GITHUB_TOKEN}'
-    }
-
     content = ""
 
     content_dict: dict[str, list[str]] = {

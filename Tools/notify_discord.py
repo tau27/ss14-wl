@@ -47,13 +47,13 @@ def format_body(body: str) -> str:
         cl_type = match.group(1)
         message = match.group(2).capitalize().strip()
 
-        if cl_type == "add":
+        if cl_type == "wl-add":
             result += '🆕'
-        elif cl_type == "tweak":
+        elif cl_type == "wl-tweak":
             result += '🛠️'
-        elif cl_type == "fix":
+        elif cl_type == "wl-fix":
             result += '🐛'
-        elif cl_type == "remove":
+        elif cl_type == "wl-remove":
             result += '❌'
         elif cl_type == "debug":
             result += "pup_debug_string"
