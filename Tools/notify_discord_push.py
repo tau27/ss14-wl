@@ -11,11 +11,6 @@ DEVELOPER_GITHUB_TOKEN = os.environ["DEVELOPER_GITHUB_TOKEN"]
 
 # божи упаси(дебаг строка)
 def main():
-    organizations = [
-        'corvax-nexus',
-        'Wl-Developers',
-    ]
-
     headers = {
         'Authorization': f'token {DEVELOPER_GITHUB_TOKEN}'
     }
@@ -26,22 +21,7 @@ def main():
 
     }
 
-    peoples = []
-
-    # Получаем участников ВЛьских организаций, чтобы потом отсеивать 'не наши' коммиты. 
-    # А зачем нам коммиты основы или... оффов?? Незачем!
-    for org_name in organizations:
-        members_api_url = f'https://api.github.com/orgs/{org_name}/members'
-
-        response = requests.get(members_api_url, headers=headers)
-        response.raise_for_status()
-
-        members = response.json()
-  
-        for member in members:
-            member_name = member['login']
-            if (member_name not in peoples):
-                peoples.append(str(member_name))
+    peoples = ['Fanolli']
 
     for commit in COMMITS:
         author = commit["author"]["username"]

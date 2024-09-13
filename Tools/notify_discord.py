@@ -12,7 +12,7 @@ PR_AUTHOR = os.getenv("PR_AUTHOR", "")
 PR_URL = os.getenv("PR_URL", "")
 
 author_regex = r':cl:([ \S]*)'
-content_regex = r'-\s+(add|remove|fix|tweak): +(.*)'
+content_regex = r'-\s+(wl-add|wl-remove|wl-fix|wl-tweak): +(.*)'
 
 def main():
     content = format_body(PR_BODY)
