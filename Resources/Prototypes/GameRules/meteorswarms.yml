@@ -153,7 +153,7 @@
   id: GameRuleMeteorSwarmSmall
   components:
   - type: StationEvent
-    weight: 18
+    weight: 3
     spawnConfig:
       standartConfig:
         minPlayers: 15
@@ -167,7 +167,7 @@
   id: GameRuleMeteorSwarmMedium
   components:
   - type: StationEvent
-    weight: 10
+    weight: 2
   - type: MeteorSwarm
     meteors:
       MeteorSmall: 3
@@ -179,7 +179,7 @@
   id: GameRuleMeteorSwarmLarge
   components:
   - type: StationEvent
-    weight: 5
+    weight: 2
   - type: MeteorSwarm
     meteors:
       MeteorSmall: 2
@@ -212,7 +212,7 @@
     startAnnouncement: station-event-immovable-rod-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    weight: 3.5
+    weight: 0.01
     reoccurrenceDelay: 1
     duration: 1
     earliestStart: 30
