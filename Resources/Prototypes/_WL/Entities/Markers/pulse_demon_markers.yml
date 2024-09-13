@@ -27,7 +27,7 @@
   - type: Visibility
     layer: 4
   - type: Sprite
-    drawdepth: -4 #FloorTiles
+    drawdepth: -4 #FloorTile
     sprite: Structures/Power/Cables/lv_cable.rsi
     layers:
       - state: lvcable_0
