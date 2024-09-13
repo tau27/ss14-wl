@@ -86,6 +86,11 @@ entities:
   entities:
   - uid: 1
     components:
+#WL-Changes-start
+    - type: DayNight
+      fullCycle: 1200
+      ratio: 2, 1
+#WL-Changes-end
     - type: MetaData
       name: Pearl island
     - type: Transform

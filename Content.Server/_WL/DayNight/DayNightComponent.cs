@@ -19,7 +19,7 @@ namespace Content.Server._WL.DayNight
 
         [ViewVariables(VVAccess.ReadOnly)]
         [DataField("night")]
-        public string NightHex = "#121330FF";
+        public string NightHex = "#0f1026";
 
         [ViewVariables(VVAccess.ReadOnly)]
         public bool WasInit = false;
