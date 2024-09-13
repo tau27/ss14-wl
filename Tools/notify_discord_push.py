@@ -6,7 +6,6 @@ import notify_discord
 
 COMMITS = json.loads(os.environ["COMMITS"])
 PR_NOTIFY_WEBHOOK = os.environ["PR_NOTIFY_WEBHOOK"]
-DEVELOPER_GITHUB_TOKEN = os.environ["DEVELOPER_GITHUB_TOKEN"]
 
 # божи упаси(дебаг строка)
 def main():
@@ -16,7 +15,7 @@ def main():
 
     }
 
-    peoples = ['Fanolli']
+    peoples = ['Fanolli', 'mosleyos']
 
     for commit in COMMITS:
         author = commit["author"]["username"]
@@ -26,13 +25,18 @@ def main():
 
         message = commit['message']
 
-        if content_dict.get(author) == None:
-            content_dict[author] = []  
+        body = notify_discord.format_body(message)
 
-        content_dict[author].append(f"{notify_discord.format_body(message)}\n")
+        if (body == "" or body.isspace()):
+            continue
+
+        if content_dict.get(author) == None:
+            content_dict[author] = [body]  
+
+        content_dict[author].append(body)
 
     for author, messages in content_dict.items():
-        message = str.join("", messages)
+        message = str.join("\n", messages)
         message += f"Автор изменений: {author}\n"
 
         content += message + "\n"
