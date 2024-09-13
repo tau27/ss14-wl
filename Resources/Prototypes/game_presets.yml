@@ -6,7 +6,7 @@
   showInVote: false # secret
   description: survival-description
   rules:
-    - MeteorSwarmScheduler
+#   - MeteorSwarmScheduler
     - RampingStationEventScheduler
     - SpaceTrafficControlEventScheduler
     - SpaceTrafficControlFriendlyEventScheduler
@@ -78,7 +78,7 @@
   description: extended-description
   rules:
   - BasicStationEventScheduler
-  - MeteorSwarmScheduler
+  #- MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - BasicRoundstartVariation
 
@@ -114,7 +114,7 @@
   description: secret-description
   rules:
     - BasicStationEventScheduler
-    - MeteorSwarmScheduler
+   # - MeteorSwarmScheduler
     - SpaceTrafficControlEventScheduler
     - BasicRoundstartVariation
 
