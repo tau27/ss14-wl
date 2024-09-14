@@ -159,8 +159,8 @@ public sealed partial class ServerApi : IPostInjectInit
 
             var body = new
             {
-                Username = linked.LastSeenUserName,
-                Guid = linked.UserId.UserId.ToString()
+                Guid = linked.UserId.UserId.ToString(),
+                Username = linked.LastSeenUserName
             };
 
             await context.RespondJsonAsync(body, HttpStatusCode.OK);
