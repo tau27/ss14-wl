@@ -187,7 +187,13 @@ public sealed partial class ServerApi : IPostInjectInit
                 return;
             }
 
-            if (await _serverDb.IsLinkedToDiscord(session.UserId, default))
+            //if (await _serverDb.IsLinkedToDiscord(session.UserId, default))
+            //{
+            //    await RespondBadRequest(context, "Текущий игровой аккаунт уже привязан к дискорд-аккаунту!");
+            //    return;
+            //}
+
+            if (await _serverDb.GetPlayerDiscordId(session.UserId, default) != null)
             {
                 await RespondBadRequest(context, "Текущий игровой аккаунт уже привязан к дискорд-аккаунту!");
                 return;
