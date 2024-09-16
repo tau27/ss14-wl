@@ -51,14 +51,17 @@ namespace Content.Server.Database
             return discord_id;
         }
 
-        public async Task LinkPlayerDiscord(NetUserId userId, ulong discord_id, CancellationToken token = default)
+        public async Task<bool> LinkPlayerDiscord(NetUserId userId, ulong discord_id, CancellationToken token = default)
         {
             await using var db = await GetDb(token);
 
             var connections = db.DbContext.DiscordConnections;
 
             if (await GetPlayerDiscordId(userId, token) != null)
-                return;
+                return false;
+
+            if (await GetPlayerByDiscordId(discord_id, token) != null)
+                return false;
 
             await connections.AddAsync(new DiscordConnection()
             {
@@ -67,6 +70,8 @@ namespace Content.Server.Database
             }, token);
 
             await db.DbContext.SaveChangesAsync(token);
+
+            return true;
         }
 
         public async Task<bool> IsLinkedToDiscord(NetUserId userId, CancellationToken token = default)
