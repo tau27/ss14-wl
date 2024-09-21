@@ -7,7 +7,8 @@
   description: Используется для поглощения энергии.
   productAction: PulseDemonActionRemoteAbsorption
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   cost:
     Energy: 10000
   categories:
@@ -23,7 +24,8 @@
   productUpgradeID: PulseDemonDrain
   description: Улучшает способность Удалённое поглощение. Увеличивет дальность способности и скорость перезарядки.
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   icon:
     sprite: Interface/Actions/pulse_demon.rsi
     state: update
@@ -51,7 +53,8 @@
   description: Используется для перемещения в труднодоступные области(если там есть кабель).
   productAction: PulseDemonActionCableHop
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   cost:
     Energy: 15000
   categories:
@@ -67,7 +70,8 @@
   productUpgradeID: PulseDemonCableHop
   description: Улучшает способность Прыжок по кабелям. Увеличивая дальность способности и скорость перезарядки.
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   icon:
     sprite: Interface/Actions/pulse_demon.rsi
     state: update
@@ -95,7 +99,8 @@
   description: Позволяет вам спрятаться в проводах.
   productAction: PulseDemonActionHide
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   cost:
     Energy: 5000
   categories:
@@ -111,7 +116,8 @@
   productUpgradeID: PulseDemonHideInWires
   description: Улучшает способность Спрятаться. Уменьшается время перезарядки способности.
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   priceModifyFunctions:
     Energy: !type:LinearDependenceFunction
       coefM: 4000
@@ -139,7 +145,8 @@
   description: Позволяет на некоторое время покидать провода.
   productAction: PulseDemonActionSelfSustaining
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   cost:
     Energy: 25000
   categories:
@@ -155,7 +162,8 @@
   productUpgradeID: PulseDemonSelfSustaining
   description: Улучшает способность Независимое существование. Увеличивается продолжительность существования.
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   priceModifyFunctions:
     Energy: !type:LinearDependenceFunction
       coefM: 15000
@@ -183,7 +191,8 @@
   description: Создаёт мощный электромагнитный импульс. Не заденьте себя!
   productAction: PulseDemonActionEmp
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   cost:
     Energy: 15000
   categories:
@@ -199,7 +208,8 @@
   productUpgradeID: PulseDemonEmp
   description: Улучшает способность Электромагнитный импульс. Увеличивается радиус ЭМИ и сила ЭМИ.
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   priceModifyFunctions:
     Energy: !type:LinearDependenceFunction
       coefM: 10000
@@ -227,7 +237,8 @@
   description: Заставляет технику взорваться!
   productAction: PulseDemonActionOverloadMachine
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   cost:
     Energy: 20000
   categories:
@@ -247,7 +258,8 @@
       coefM: 10000
       coefB: 20000
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   icon:
     sprite: Interface/Actions/pulse_demon.rsi
     state: update
@@ -270,7 +282,8 @@
   description: Позволяет взаимодействовать со взломанной техникой. Результат зависит от типа техники.
   productAction: PulseDemonActionElectromagneticTamper
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
   cost:
     Energy: 10000
   categories:
@@ -293,9 +306,10 @@
       coefM: 7000
       coefB: 7000
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
-  - !type:PulseDemonShopUpgradeEvent
-    characteristicUpgrade: absorption
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
+    - !type:PulseDemonShopUpgradeEvent
+      characteristicUpgrade: absorption
   cost:
     Energy: 7000
   categories:
@@ -314,9 +328,10 @@
       coefM: 8000
       coefB: 8000
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
-  - !type:PulseDemonShopUpgradeEvent
-    characteristicUpgrade: hijackspeed
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
+    - !type:PulseDemonShopUpgradeEvent
+      characteristicUpgrade: hijackspeed
   cost:
     Energy: 8300
   categories:
@@ -335,9 +350,10 @@
       coefM: 9000
       coefB: 9000
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
-  - !type:PulseDemonShopUpgradeEvent
-    characteristicUpgrade: capacity
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
+    - !type:PulseDemonShopUpgradeEvent
+      characteristicUpgrade: capacity
   cost:
     Energy: 9000
   categories:
@@ -356,9 +372,10 @@
       coefM: 6000
       coefB: 6000
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
-  - !type:PulseDemonShopUpgradeEvent
-    characteristicUpgrade: endurance
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
+    - !type:PulseDemonShopUpgradeEvent
+      characteristicUpgrade: endurance
   cost:
     Energy: 6500
   categories:
@@ -377,9 +394,10 @@
       coefM: 8500
       coefB: 8500
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
-  - !type:PulseDemonShopUpgradeEvent
-    characteristicUpgrade: efficiency
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
+    - !type:PulseDemonShopUpgradeEvent
+      characteristicUpgrade: efficiency
   cost:
     Energy: 6000
   categories:
@@ -398,9 +416,10 @@
       coefM: 7000
       coefB: 5500
   productEvents:
-  - !type:PulseDemonShopPurchaseEvent
-  - !type:PulseDemonShopUpgradeEvent
-    characteristicUpgrade: speed
+  - events:
+    - !type:PulseDemonShopPurchaseEvent
+    - !type:PulseDemonShopUpgradeEvent
+      characteristicUpgrade: speed
   cost:
     Energy: 8700
   categories:

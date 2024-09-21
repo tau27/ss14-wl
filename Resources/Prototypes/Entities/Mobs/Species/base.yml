@@ -141,6 +141,7 @@
     - Flashed
     - RadiationProtection
     - Drowsiness
+    - Adrenaline
   - type: Body
     prototype: Human
     requiredLegs: 2
@@ -221,6 +222,7 @@
     - CanPilot
     - FootstepSound
     - DoorBumpOpener
+    - AnomalyHost
   - type: CharacterInformation # WL-CharacterInformation
   - type: StandFallCrouch # WL-Developers-Changes
 

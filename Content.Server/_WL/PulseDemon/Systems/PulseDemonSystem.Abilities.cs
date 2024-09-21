@@ -1,5 +1,4 @@
 using Content.Server.Emp;
-using Content.Server.Explosion.Components;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
 using Content.Server.Power.Components;
@@ -12,11 +11,11 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
 using Content.Server.Power.NodeGroups;
-using Content.Shared.Emag.Components;
 using Content.Shared.Access.Components;
 using Content.Server._WL.PulseDemon.Components;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Emag.Systems;
+using Content.Shared.Explosion.Components;
 
 
 namespace Content.Server._WL.PulseDemon.Systems;
@@ -32,7 +31,6 @@ public sealed partial class PulseDemonSystem
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
-
 
     private const string PulseDemonExplosionType = "ElectricExplosion";
 
@@ -169,7 +167,7 @@ public sealed partial class PulseDemonSystem
             return;
         }
 
-        _emp.EmpPulse(args.Target.ToMap(EntityManager), args.Radius, args.BatteryDamage, 5f);
+        _emp.EmpPulse(args.Target.ToMap(EntityManager, _transform), args.Radius, args.BatteryDamage, 5f);
         args.Handled = true;
     }
     #endregion

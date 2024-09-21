@@ -62,6 +62,7 @@ namespace Content.IntegrationTests.Tests
             "CorvaxPearl",
             "NanoStation", //WL-Changes
             "CorvaxTushkan",
+            "CorvaxGlacier",
             // Corvax-End
             "Dev",
             "TestTeg",
