@@ -74,7 +74,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.DEPLOY_ORG_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
-        ARTIFACT_ID: ${{ steps.artifact-upload-step.outputs.artifact-id }}
+        ARTIFACT_ID: ${{ steps.artifact-upload-step.outputs.artifact-url }}
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
         FORK_ID: ${{ vars.FORK_ID }}
 
