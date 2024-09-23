@@ -5,8 +5,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Threading;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using Content.Server._WL.DiscordAuth;
+using Content.Server.Administration.Logs;
 using Content.Server.Administration.Systems;
 using Content.Server.Database;
 using Content.Server.GameTicking;
@@ -14,10 +17,13 @@ using Content.Server.GameTicking.Presets;
 using Content.Server.Maps;
 using Content.Server.RoundEnd;
 using Content.Shared._WL.CCVars;
+using Content.Shared.Administration;
 using Content.Shared.Administration.Managers;
 using Content.Shared.CCVar;
+using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Prototypes;
+using Robust.Server;
 using Robust.Server.ServerStatus;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
@@ -67,10 +73,12 @@ public sealed partial class ServerApi : IPostInjectInit
     [Dependency] private readonly ILocalizationManager _loc = default!;
     //WL-Changes-start
     [Dependency] private readonly IServerDbManager _serverDb = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IBaseServer _baseServer = default!;
     //WL-Changes-end
 
     //WL-Changes-start
-    private static readonly ulong[] SuffBotIds = [1227044346566541322];
+    private static readonly ulong[] StuffBotIds = [1227044346566541322];
     //WL-Changes-end
 
     private string _corvax_token = string.Empty;
@@ -106,6 +114,8 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterHandler(HttpMethod.Post, "/player/actions/link/account", LinkDiscordAccount);
 
         RegisterHandler(HttpMethod.Post, "/player/info/discord", GetLinkedAccount);
+
+        RegisterActorHandler(HttpMethod.Patch, "/admin/actions/server/shutdown", ShutdownServer);
         //wL-Changes-end
     }
 
@@ -142,6 +152,22 @@ public sealed partial class ServerApi : IPostInjectInit
     #region Actions
 
     //WL-Changes-start
+    private async Task ShutdownServer(IStatusHandlerContext context, Actor actor)
+    {
+        await RunOnMainThread(async () =>
+        {
+            if (!await IsAdmin(actor.Record.UserId))
+            {
+                await RespondBadRequest(context, "Вы не являетесь администратором!");
+                return;
+            }
+
+            _adminLog.Add(LogType.WLHttpApi, LogImpact.Extreme, $"Администратор {actor.Record.LastSeenUserName} перезапустил сервер с помощью HTTP api.");
+
+            _baseServer.Shutdown("Сервер был перезапущен администратором!");
+        });
+    }
+
     private async Task GetLinkedAccount(IStatusHandlerContext context)
     {
         var http_body = await ReadJson<InnerActor>(context);
@@ -751,7 +777,7 @@ public sealed partial class ServerApi : IPostInjectInit
                 return null;
             }
 
-            if (SuffBotIds.Contains(innerActorData.DiscordId))
+            if (StuffBotIds.Contains(innerActorData.DiscordId))
             {
                 return new Actor()
                 {
@@ -779,6 +805,38 @@ public sealed partial class ServerApi : IPostInjectInit
 
         return actorData;
     }
+
+    //WL-Changes-start
+    public async Task<bool> IsAdmin(PlayerRecord record, CancellationToken cancel = default)
+    {
+        return await IsAdmin(record.UserId, cancel);
+    }
+
+    public async Task<bool> IsAdmin(NetUserId user, CancellationToken cancel = default)
+    {
+        var data = await _serverDb.GetAdminDataForAsync(user, cancel);
+        if (data == null)
+            return false;
+
+        return true;
+    }
+
+    public async Task<bool> CheckAdminFlags(PlayerRecord record, AdminFlags query_flags, CancellationToken cancel = default)
+    {
+        return await CheckAdminFlags(record.UserId, query_flags, cancel);
+    }
+
+    public async Task<bool> CheckAdminFlags(NetUserId userId, AdminFlags query_flags, CancellationToken cancel = default)
+    {
+        var data = await _serverDb.GetAdminDataForAsync(userId, cancel);
+        if (data == null)
+            return false;
+
+        var exist_flags = AdminFlagsHelper.NamesToFlags(data.Flags.ToDictionary(k => k.Flag, v => v.Negative));
+
+        return exist_flags.HasFlag(query_flags);
+    }
+    //WL-Changes-end
 
     #region From Client
 

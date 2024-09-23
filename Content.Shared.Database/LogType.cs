@@ -122,9 +122,16 @@ public enum LogType
     /// </summary>
     WLCommand = 94,
     //WL-Changes-end
-    
+
     /// <summary>
     /// A player got hit by an explosion and was dealt damage.
     /// </summary>
     ExplosionHit = 95,
+
+    //WL-Changes-start
+    /// <summary>
+    /// Успешное обращение к HTTP-api сервера.
+    /// </summary>
+    WLHttpApi = 96,
+    //WL-Changes-end
 }
