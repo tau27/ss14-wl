@@ -35,10 +35,6 @@
   background: /Textures/Corvax/LobbyScreens/jailbreak.png
 
 - type: lobbyBackground
-  id: Kosmologistika
-  background: /Textures/Corvax/LobbyScreens/kosmologistika.png
-
-- type: lobbyBackground
   id: LizardBar
   background: /Textures/Corvax/LobbyScreens/lizard-bar.png
 
