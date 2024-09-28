@@ -32,8 +32,8 @@ def main():
 
         if content_dict.get(author) == None:
             content_dict[author] = [body]  
-
-        content_dict[author].append(body)
+        else:
+            content_dict[author].append(body)
 
     for author, messages in content_dict.items():
         message = str.join("\n", messages)
