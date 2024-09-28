@@ -16,6 +16,8 @@ using Content.Server._WL.PulseDemon.Components;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Explosion.Components;
+using Content.Shared.Explosion;
+using Robust.Shared.Prototypes;
 
 
 namespace Content.Server._WL.PulseDemon.Systems;
@@ -32,8 +34,10 @@ public sealed partial class PulseDemonSystem
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
 
+    [ValidatePrototypeId<ExplosionPrototype>]
     private const string PulseDemonExplosionType = "ElectricExplosion";
 
+    [ValidatePrototypeId<EntityPrototype>]
     private const string PulseDemonExplosiveParticlePrototype = "EffectSparks4";
 
     private const float PulseDemonDoAfterDistanceThresholdRange = 50000f;

@@ -1063,7 +1063,7 @@
 - type: entity
   id: BaseChipsCase
   parent: [ BaseStorageItem, BaseBagOpenClose ]
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   abstract: true
   name: Кейс с фишками
   description: Большой кейс с разнообразными фишками. Всех по два!

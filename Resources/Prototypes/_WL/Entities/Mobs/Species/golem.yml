@@ -213,7 +213,7 @@
   name: Урист МакГолем
   id: MobGolemDummy
   parent: MobHumanDummy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: HumanoidAppearance
       species: Golem

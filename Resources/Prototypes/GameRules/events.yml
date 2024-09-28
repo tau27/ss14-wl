@@ -498,7 +498,7 @@
         prototype: InitialInfected
 
 #  - type: entity
-#   noSpawn: true
+#   categories: [ HideSpawnMenu ]
 #   parent: BaseNukeopsRule
 #   id: LoneOpsSpawn
 #   components:

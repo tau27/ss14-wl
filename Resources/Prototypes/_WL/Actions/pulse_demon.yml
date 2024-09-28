@@ -2,7 +2,7 @@
   id: PulseDemonActionShop
   name: Shop
   description: Opens the ability shop.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     icon: Interface/Actions/shop.png
@@ -12,7 +12,7 @@
   id: PulseDemonActionHijackAPC
   name: Hijack APC
   description: Allows you to hack APC to gain control over devices.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EntityTargetAction
     useDelay: 3
@@ -38,7 +38,7 @@
   id: PulseDemonActionElectromagneticTamper
   name: Electromagnetic Tamper
   description: Allows you to interact with machines and consoles, what happens depends on the machine.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EntityTargetAction
     priority: 1
@@ -66,7 +66,7 @@
   id: PulseDemonActionSelfSustaining
   name: Self-Sustaining
   description: Your power allows you to leave the wires for a while. If you do not make it back in time, then you will face an unenviable fate. It will cost 40000 units of energy.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     useDelay: 180
@@ -87,7 +87,7 @@
   name: Self-Sustaining II
   parent: PulseDemonActionSelfSustaining
   description: Your power allows you to leave the wires for a while. If you do not make it back in time, then you will face an unenviable fate. It will cost 30000 units of energy.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     useDelay: 150
@@ -100,7 +100,7 @@
   name: Self-Sustaining III
   parent: PulseDemonActionSelfSustaining
   description: You enter into the wires, which makes you invisible. Trying to drain energy or hijack APC will force you to get out of the wires. It will cost 20000 units of energy.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     useDelay: 120
@@ -113,7 +113,7 @@
   id: PulseDemonActionHide
   name: Hide
   description: You enter into the wires, which makes you invisible. Trying to drain energy or hijack APC will force you to get out of the wires.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     useDelay: 120
@@ -134,7 +134,7 @@
   name: Hide II
   parent: PulseDemonActionHide
   description: You enter into the wires, which makes you invisible. Trying to drain energy or hijack APC will force you to get out of the wires.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     useDelay: 100
@@ -147,7 +147,7 @@
   name: Hide III
   parent: PulseDemonActionHide
   description: You enter into the wires, which makes you invisible. Trying to drain energy or hijack APC will force you to get out of the wires.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     useDelay: 60
@@ -160,7 +160,6 @@
   id: PulseDemonActionAbsorption
   name: Absorption
   description: Drains the energy from the devices.
-  noSpawn: true
   components:
   - type: EntityTargetAction
     useDelay: 5
@@ -187,7 +186,6 @@
   name: Remote Absorption
   parent: PulseDemonActionAbsorption
   description: Drains energy from devices at a distance of 6 tiles.
-  noSpawn: true
   components:
   - type: EntityTargetAction
     event: !type:PulseDemonAbsorptionActionEvent
@@ -208,7 +206,6 @@
   name: Remote Absorption II
   parent: PulseDemonActionRemoteAbsorption
   description: Drains energy from devices at a distance of 7 tiles.
-  noSpawn: true
   components:
   - type: EntityTargetAction
     event: !type:PulseDemonAbsorptionActionEvent
@@ -224,7 +221,7 @@
   name: Remote Absorption III
   parent: PulseDemonActionRemoteAbsorption
   description: Drains energy from devices at a distance of 7.5 tiles.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EntityTargetAction
     event: !type:PulseDemonAbsorptionActionEvent
@@ -240,7 +237,7 @@
   name: Remote Absorption IIII
   parent: PulseDemonActionRemoteAbsorption
   description: Drains energy from devices at a distance of 8 tiles.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EntityTargetAction
     event: !type:PulseDemonAbsorptionActionEvent
@@ -256,7 +253,7 @@
   id: PulseDemonActionCableHop
   name: Cable jump
   description: Allows you to make a jump to an available cable within a radius of 4 tiles. It will cost 20,000 units of energy.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     checkCanAccess: false
@@ -282,7 +279,7 @@
   name: Cable jump II
   parent: PulseDemonActionCableHop
   description: Allows you to make a jump to an available cable within a radius of 5 tiles. It will cost 15,000 units of energy.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     event: !type:PulseDemonCableHopActionEvent
@@ -298,7 +295,7 @@
   name: Cable jump III
   parent: PulseDemonActionCableHop
   description: Allows you to make a jump to an available cable within a radius of 7 tiles. It will cost 13,000 units of energy.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     event: !type:PulseDemonCableHopActionEvent
@@ -314,7 +311,7 @@
   name: Cable jump IIII
   parent: PulseDemonActionCableHop
   description: Allows you to make a jump to an available cable within a radius of 8 tiles. It will cost 11,000 units of energy.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     event: !type:PulseDemonCableHopActionEvent
@@ -330,7 +327,7 @@
   id: PulseDemonActionEmp
   name: Emp
   description: Creates a powerful electromagnetic pulse. Don't hurt yourself!
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     checkCanAccess: false
@@ -356,7 +353,7 @@
   name: Emp II
   parent: PulseDemonActionEmp
   description: Creates a powerful electromagnetic pulse. Don't hurt yourself!
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     event: !type:PulseDemonEmpActionEvent
@@ -374,7 +371,7 @@
   name: Emp III
   parent: PulseDemonActionEmp
   description: Creates a powerful electromagnetic pulse. Don't hurt yourself!
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     event: !type:PulseDemonEmpActionEvent
@@ -392,7 +389,7 @@
   name: Emp IIII
   parent: PulseDemonActionEmp
   description: Creates a powerful electromagnetic pulse. Don't hurt yourself!
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     event: !type:PulseDemonEmpActionEvent
@@ -410,7 +407,7 @@
   id: PulseDemonActionOverloadMachine
   name: Overload machine
   description: Makes machinery explode. Don't blow yourself up!
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EntityTargetAction
     useDelay: 55
@@ -444,7 +441,7 @@
   name: Overload machine II
   parent: PulseDemonActionOverloadMachine
   description: Makes machinery explode. Don't blow yourself up!
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EntityTargetAction
     useDelay: 50
@@ -460,7 +457,7 @@
   name: Overload machine III
   parent: PulseDemonActionOverloadMachine
   description: Makes machinery explode. Don't blow yourself up!
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EntityTargetAction
     useDelay: 42
@@ -476,7 +473,7 @@
   name: Overload machine IIII
   parent: PulseDemonActionOverloadMachine
   description: Makes machinery explode. Don't blow yourself up!
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EntityTargetAction
     useDelay: 33

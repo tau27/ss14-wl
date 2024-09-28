@@ -76,7 +76,7 @@
   id: ActionGolemCorePlayMidi
   name: Play MIDI
   description: Open your portable MIDI interface to soothe your owner.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     checkCanInteract: false

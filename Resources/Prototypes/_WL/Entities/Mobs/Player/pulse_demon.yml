@@ -1,6 +1,7 @@
 ﻿- type: entity
   id: MobPulseDemon
   name: pulse demon
+  suffix: СЛОМАНО
   description: Run and hide before YOUR electricity becomes his next meal!
   components:
   - type: ArrivalsBlacklist

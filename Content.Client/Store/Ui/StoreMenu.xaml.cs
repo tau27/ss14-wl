@@ -211,7 +211,7 @@ public sealed partial class StoreMenu : DefaultWindow
             sb.Append(')');
             discountMessage = sb.ToString();
         }
-        else
+        else if (relativeModifiersSummary.Count == 1)
         {
             // if cost was modified - it should have diff relatively to original cost in 1 or more currency
             // ReSharper disable once GenericEnumeratorNotDisposed Dictionary enumerator doesn't require dispose
@@ -223,6 +223,7 @@ public sealed partial class StoreMenu : DefaultWindow
                 ("amount", (amount.ToString("P0")))
             );
         }
+        else return string.Empty;
 
         return discountMessage;
     }

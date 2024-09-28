@@ -21,7 +21,7 @@
   id: PulseDemonDrainUpgrade
   name: Улучшить Удалённое поглощение
   priority: 2
-  productUpgradeID: PulseDemonDrain
+  productUpgradeID: PulseDemonDrainUpgrade
   description: Улучшает способность Удалённое поглощение. Увеличивет дальность способности и скорость перезарядки.
   productEvents:
   - events:
@@ -288,7 +288,6 @@
     Energy: 10000
   categories:
   - PulseDemonAbilities
-
 
 ##Characteristics
 

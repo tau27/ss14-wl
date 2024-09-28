@@ -35,7 +35,7 @@
   name: Urist McHands
   parent: MobHumanDummy
   id: MobHumanoidKidanDummy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: A dummy Kidan meant to be used in character setup.
   components:
     - type: HumanoidAppearance

@@ -25,6 +25,10 @@ using Content.Shared.Store.Components;
 using Content.Shared.Ghost;
 using System.Threading.Tasks;
 using Content.Shared._WL.PulseDemon;
+using Content.Shared.Damage.Prototypes;
+using Robust.Shared.Prototypes;
+using Content.Server.Store.Systems;
+using Content.Shared.Store;
 
 namespace Content.Server._WL.PulseDemon.Systems;
 
@@ -53,9 +57,14 @@ public sealed partial class PulseDemonSystem : EntitySystem
         };
     #endregion
 
+    [ValidatePrototypeId<EntityPrototype>]
     private const string MarkerCablePrototypeID = "MarkerCable";
     //private const string HijackAPCsObjective = "HijackAPCsObjective";
 
+    [ValidatePrototypeId<DamageTypePrototype>]
+    private const string ShockDamageTypeId = "Shock";
+
+    [ValidatePrototypeId<CurrencyPrototype>]
     public const string EnergyCurrencyPrototype = "Energy";
 
     public const int InvisibleWallsLayer = 256;
@@ -155,7 +164,7 @@ public sealed partial class PulseDemonSystem : EntitySystem
         {
             var damageValue = damage.Value.Float() * component.DemonDamageModifier;
 
-            if (damage.Key == "Shock")
+            if (damage.Key == ShockDamageTypeId)
                 damageValue *= -1;
 
             DealBatteryDamage(battery, damageValue);
@@ -164,7 +173,8 @@ public sealed partial class PulseDemonSystem : EntitySystem
 
     private async void OnMove(EntityUid uid, PulseDemonComponent component, MoveEvent args)
     {
-        TimeBasedParticlesSpawn(uid, component, args);
+        if (!component.IsHiding)
+            TimeBasedParticlesSpawn(uid, component, args);
 
         if (!TryComp<TransformComponent>(uid, out var transform))
             return;
@@ -281,7 +291,7 @@ public sealed partial class PulseDemonSystem : EntitySystem
             if (!nodeComp.Nodes.TryGetValue("power", out var node) || node.NodeGroup == null)
                 continue;
 
-            var network = (IBasePowerNet) node.NodeGroup;
+            var network = (IBasePowerNet)node.NodeGroup;
 
             var statistic = _power.GetNetworkStatistics(network.NetworkNode);
 

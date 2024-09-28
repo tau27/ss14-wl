@@ -82,5 +82,5 @@
   name: Chischi Dummy
   parent: BaseMobCischi
   id: MobCischiDummy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: A dummy felinid meant to be used in character setup.
