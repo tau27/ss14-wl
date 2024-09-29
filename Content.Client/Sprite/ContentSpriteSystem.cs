@@ -3,7 +3,6 @@ using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Client.Administration.Managers;
-using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -24,14 +23,23 @@ public sealed class ContentSpriteSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IResourceManager _resManager = default!;
     [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    //WL-Changes-start
+    [Dependency] private readonly ILogManager _logMan = default!;
 
-    private ContentSpriteControl _control = new();
+    private ISawmill _sawmill = default!;
+    //WL-Changes-end
+
+    private readonly ContentSpriteControl<Rgba32> _control = new();
 
     public static readonly ResPath Exports = new ResPath("/Exports");
 
     public override void Initialize()
     {
         base.Initialize();
+
+        //WL-Changes-start
+        _sawmill = _logMan.GetSawmill("sprite.export");
+        //WL-Changes-end
 
         _resManager.UserData.CreateDir(Exports);
         _ui.RootControl.AddChild(_control);
@@ -74,10 +82,15 @@ public sealed class ContentSpriteSystem : EntitySystem
         await Task.WhenAll(tasks);
     }
 
+    //WL-Changes-start
     /// <summary>
     /// Exports the sprite for a particular direction.
     /// </summary>
-    public async Task Export(EntityUid entity, Direction direction, bool includeId = true, CancellationToken cancelToken = default)
+    public async Task Export(
+        EntityUid entity,
+        Direction direction,
+        Action<ContentSpriteControl<Rgba32>.QueueEntry, Image<Rgba32>> action,
+        CancellationToken cancelToken = default)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
@@ -103,10 +116,57 @@ public sealed class ContentSpriteSystem : EntitySystem
         var texture = _clyde.CreateRenderTarget(new Vector2i(size.X, size.Y), new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb), name: "export");
         var tcs = new TaskCompletionSource(cancelToken);
 
-        _control._queuedTextures.Enqueue((texture, direction, entity, includeId, tcs));
+        _control._queuedTextures.Enqueue((texture, direction, entity, tcs, action));
 
         await tcs.Task;
     }
+
+    /// <summary>
+    /// Сохраняет спрайт в директорию /Exports
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="direction"></param>
+    /// <param name="includeId"></param>
+    /// <param name="cancelToken"></param>
+    /// <returns></returns>
+    public async Task Export(
+        EntityUid entity,
+        Direction direction,
+        bool includeId = true,
+        CancellationToken cancelToken = default)
+    {
+        await Export(entity, direction, (ContentSpriteControl<Rgba32>.QueueEntry queued, Image<Rgba32> image) =>
+        {
+            var metadata = MetaData(queued.Entity);
+
+            ResPath fullFileName;
+
+            var filename = metadata.EntityName;
+
+            if (includeId)
+            {
+                fullFileName = Exports / $"{filename}-{queued.Direction}-{queued.Entity}.png";
+            }
+            else
+            {
+                fullFileName = Exports / $"{filename}-{queued.Direction}.png";
+            }
+
+            if (_resManager.UserData.Exists(fullFileName))
+            {
+                _sawmill.Info($"Found existing file {fullFileName} to replace.");
+                _resManager.UserData.Delete(fullFileName);
+            }
+
+            using var file =
+                _resManager.UserData.Open(fullFileName, FileMode.CreateNew, FileAccess.Write,
+                    FileShare.None);
+
+            image.SaveAsPng(file);
+            _sawmill.Info($"Saved screenshot to {fullFileName}");
+        }, cancelToken);
+    }
+    //WL-Changes-end
 
     private void GetVerbs(GetVerbsEvent<Verb> ev)
     {
@@ -130,18 +190,12 @@ public sealed class ContentSpriteSystem : EntitySystem
     /// This is horrible. I asked PJB if there's an easy way to render straight to a texture outside of the render loop
     /// and she also mentioned this as a bad possibility.
     /// </summary>
-    private sealed class ContentSpriteControl : Control
+    public sealed class ContentSpriteControl<T> : Control where T : unmanaged, IPixel<T>
     {
         [Dependency] private readonly IEntityManager _entManager = default!;
         [Dependency] private readonly ILogManager _logMan = default!;
-        [Dependency] private readonly IResourceManager _resManager = default!;
 
-        internal Queue<(
-            IRenderTexture Texture,
-            Direction Direction,
-            EntityUid Entity,
-            bool IncludeId,
-            TaskCompletionSource Tcs)> _queuedTextures = new();
+        internal Queue<QueueEntry> _queuedTextures = new();
 
         private ISawmill _sawmill;
 
@@ -165,7 +219,6 @@ public sealed class ContentSpriteSystem : EntitySystem
                     if (!_entManager.TryGetComponent(queued.Entity, out MetaDataComponent? metadata))
                         continue;
 
-                    var filename = metadata.EntityName;
                     var result = queued;
 
                     handle.RenderInRenderTarget(queued.Texture, () =>
@@ -174,33 +227,11 @@ public sealed class ContentSpriteSystem : EntitySystem
                             overrideDirection: result.Direction);
                     }, Color.Transparent);
 
-                    ResPath fullFileName;
-
-                    if (queued.IncludeId)
+                    queued.Texture.CopyPixelsToMemory<T>(image =>
                     {
-                        fullFileName = Exports / $"{filename}-{queued.Direction}-{queued.Entity}.png";
-                    }
-                    else
-                    {
-                        fullFileName = Exports / $"{filename}-{queued.Direction}.png";
-                    }
-
-                    queued.Texture.CopyPixelsToMemory<Rgba32>(image =>
-                    {
-                        if (_resManager.UserData.Exists(fullFileName))
-                        {
-                            _sawmill.Info($"Found existing file {fullFileName} to replace.");
-                            _resManager.UserData.Delete(fullFileName);
-                        }
-
-                        using var file =
-                            _resManager.UserData.Open(fullFileName, FileMode.CreateNew, FileAccess.Write,
-                                FileShare.None);
-
-                        image.SaveAsPng(file);
+                        queued.Action.Invoke(queued, image);
                     });
 
-                    _sawmill.Info($"Saved screenshot to {fullFileName}");
                     queued.Tcs.SetResult();
                 }
                 catch (Exception exc)
@@ -212,6 +243,39 @@ public sealed class ContentSpriteSystem : EntitySystem
 
                     queued.Tcs.SetException(exc);
                 }
+            }
+        }
+
+        public sealed class QueueEntry
+        {
+            public readonly IRenderTexture Texture;
+            public readonly Direction Direction;
+            public readonly EntityUid Entity;
+            public readonly TaskCompletionSource Tcs;
+            public readonly Action<QueueEntry, Image<T>> Action;
+
+            public QueueEntry(
+                IRenderTexture texture,
+                Direction direction,
+                EntityUid entity,
+                TaskCompletionSource tcs,
+                Action<QueueEntry, Image<T>> action)
+            {
+                Texture = texture;
+                Direction = direction;
+                Entity = entity;
+                Tcs = tcs;
+                Action = action;
+            }
+
+            public static implicit operator QueueEntry((
+                IRenderTexture Texture,
+                Direction Direction,
+                EntityUid Entity,
+                TaskCompletionSource Tcs,
+                Action<QueueEntry, Image<T>> Action) param)
+            {
+                return new QueueEntry(param.Texture, param.Direction, param.Entity, param.Tcs, param.Action);
             }
         }
     }

@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using Content.Server._WL.DiscordAuth;
+using Content.Server._WL.Poly;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Systems;
 using Content.Server.Database;
@@ -116,6 +117,8 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterHandler(HttpMethod.Post, "/player/info/discord", GetLinkedAccount);
 
         RegisterActorHandler(HttpMethod.Patch, "/admin/actions/server/shutdown", ShutdownServer);
+
+        RegisterHandler(HttpMethod.Get, "/admin/info/poly/random_message", PolyMessage);
         //wL-Changes-end
     }
 
@@ -152,16 +155,35 @@ public sealed partial class ServerApi : IPostInjectInit
     #region Actions
 
     //WL-Changes-start
+    private async Task PolyMessage(IStatusHandlerContext context)
+    {
+        var poly_system = _entitySystemManager.GetEntitySystem<PolySystem>();
+
+        var entry = poly_system.Pick();
+
+        if (entry == null)
+        {
+            await RespondError(
+                context,
+                ErrorCode.None,
+                HttpStatusCode.InternalServerError,
+                $"Поли ещё не выбрала подходящего сообщения! До готовности: {poly_system.HowLongBeforeReady()}");
+            return;
+        }
+
+        await context.RespondJsonAsync(entry.Value);
+    }
+
     private async Task ShutdownServer(IStatusHandlerContext context, Actor actor)
     {
+        if (!await IsAdmin(actor.Record.UserId))
+        {
+            await RespondBadRequest(context, "Вы не являетесь администратором!");
+            return;
+        }
+
         await RunOnMainThread(async () =>
         {
-            if (!await IsAdmin(actor.Record.UserId))
-            {
-                await RespondBadRequest(context, "Вы не являетесь администратором!");
-                return;
-            }
-
             _adminLog.Add(LogType.WLHttpApi, LogImpact.Extreme, $"Администратор {actor.Record.LastSeenUserName} перезапустил сервер с помощью HTTP api.");
 
             _baseServer.Shutdown("Сервер был перезапущен администратором!");

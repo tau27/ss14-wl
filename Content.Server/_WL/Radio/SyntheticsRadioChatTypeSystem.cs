@@ -1,4 +1,5 @@
 using Content.Server._WL.Radio.Events;
+using Content.Server.Chat.Systems;
 using Content.Shared.PAI;
 using Content.Shared.Silicons.Borgs.Components;
 
@@ -16,12 +17,12 @@ namespace Content.Server._WL.Radio
 
         private void OnPAIChatTypeTransform(EntityUid pai, PAIComponent _, TransformSpeakerChatTypeEvent ev)
         {
-            ev.ChatType = Chat.Systems.InGameICChatType.Speak;
+            ev.ChatType = InGameICChatType.Speak;
         }
 
         private void OnBorgChatTypeTransform(EntityUid borg, BorgChassisComponent _, TransformSpeakerChatTypeEvent ev)
         {
-            ev.ChatType = Chat.Systems.InGameICChatType.Speak;
+            ev.ChatType = InGameICChatType.Speak;
         }
     }
 }

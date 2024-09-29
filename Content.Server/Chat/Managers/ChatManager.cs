@@ -56,6 +56,10 @@ internal sealed partial class ChatManager : IChatManager
 
     private readonly Dictionary<NetUserId, ChatUser> _players = new();
 
+    //WL-Changes-start
+    public event Action<ChatMessage> OnAfterChatMessage = (msg) => { };
+    //WL-Changes-end
+
     public void Initialize()
     {
         IoCManager.Instance!.TryResolveType(out _sponsorsManager); // Corvax-Sponsors
@@ -314,6 +318,10 @@ internal sealed partial class ChatManager : IChatManager
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume);
         _netManager.ServerSendMessage(new MsgChatMessage() { Message = msg }, client);
 
+        //WL-Changes-start
+        OnAfterChatMessage.Invoke(msg);
+        //WL-Changes-end
+
         if (!recordReplay)
             return;
 
@@ -335,6 +343,10 @@ internal sealed partial class ChatManager : IChatManager
 
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume);
         _netManager.ServerSendToMany(new MsgChatMessage() { Message = msg }, clients);
+
+        //WL-Changes-start
+        OnAfterChatMessage.Invoke(msg);
+        //WL-Changes-end
 
         if (!recordReplay)
             return;
@@ -368,7 +380,11 @@ internal sealed partial class ChatManager : IChatManager
         user?.AddEntity(netSource);
 
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume);
+
         _netManager.ServerSendToAll(new MsgChatMessage() { Message = msg });
+        //WL-Changes-start
+        OnAfterChatMessage.Invoke(msg);
+        //WL-Changes-end
 
         if (!recordReplay)
             return;
