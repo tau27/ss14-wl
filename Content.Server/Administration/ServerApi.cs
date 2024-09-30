@@ -6,7 +6,6 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 using Content.Server._WL.DiscordAuth;
 using Content.Server._WL.Poly;
@@ -32,7 +31,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Content.Server.Administration;
 
@@ -119,6 +117,8 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterActorHandler(HttpMethod.Patch, "/admin/actions/server/shutdown", ShutdownServer);
 
         RegisterHandler(HttpMethod.Get, "/admin/info/poly/random_message", PolyMessage);
+
+        RegisterParameterizedHandler(HttpMethod.Get, $"/admin/info/poly/images/{{${Constants.PolyMapImage}}}.png", PolyImage);
         //wL-Changes-end
     }
 
@@ -163,15 +163,53 @@ public sealed partial class ServerApi : IPostInjectInit
 
         if (entry == null)
         {
+            var is_ready = poly_system.IsReadyToPick();
+            var how_long = poly_system.HowLongBeforeReady();
+
+            var msg = is_ready
+                ? "Поли ожидает подходящего сообщения!"
+                : $"Поли устала! До готовности: {how_long}";
+
             await RespondError(
                 context,
                 ErrorCode.None,
                 HttpStatusCode.InternalServerError,
-                $"Поли ещё не выбрала подходящего сообщения! До готовности: {poly_system.HowLongBeforeReady()}");
+                msg);
             return;
         }
 
         await context.RespondJsonAsync(entry.Value);
+    }
+
+    private async Task PolyImage(IStatusHandlerContext context, Dictionary<string, string> maps)
+    {
+        var poly_system = _entitySystemManager.GetEntitySystem<PolySystem>();
+
+        if (!maps.TryGetValue(Constants.PolyMapImage, out var map))
+        {
+            await RespondError(
+                context,
+                ErrorCode.None,
+                HttpStatusCode.InternalServerError,
+                "Ошибка при получении ссылки!");
+            return;
+        }
+
+        using var stream = poly_system.PickImage(map);
+
+        if (stream == null)
+        {
+            await RespondError(
+                context,
+                ErrorCode.None,
+                HttpStatusCode.InternalServerError,
+                "Изображение не было найдено!");
+            return;
+        }
+
+        await using var resp_stream = await context.RespondStreamAsync();
+
+        stream.CopyTo(resp_stream);
     }
 
     private async Task ShutdownServer(IStatusHandlerContext context, Actor actor)
@@ -990,4 +1028,11 @@ public sealed partial class ServerApi : IPostInjectInit
     }
 
     #endregion
+
+    //WL-Changes-start
+    private static class Constants
+    {
+        public const string PolyMapImage = "image";
+    }
+    //WL-Changes-end
 }

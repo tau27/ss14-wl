@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Client.Administration.Managers;
+using Content.Shared.Chat.TypingIndicator;
 using Content.Shared.Verbs;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -25,11 +26,12 @@ public sealed class ContentSpriteSystem : EntitySystem
     [Dependency] private readonly IUserInterfaceManager _ui = default!;
     //WL-Changes-start
     [Dependency] private readonly ILogManager _logMan = default!;
+    [Dependency] private readonly AppearanceSystem _appearance = default!;
 
     private ISawmill _sawmill = default!;
     //WL-Changes-end
 
-    private readonly ContentSpriteControl<Rgba32> _control = new();
+    private ContentSpriteControl<Rgba32> _control = default!;
 
     public static readonly ResPath Exports = new ResPath("/Exports");
 
@@ -39,6 +41,7 @@ public sealed class ContentSpriteSystem : EntitySystem
 
         //WL-Changes-start
         _sawmill = _logMan.GetSawmill("sprite.export");
+        _control = new(_appearance);
         //WL-Changes-end
 
         _resManager.UserData.CreateDir(Exports);
@@ -92,6 +95,8 @@ public sealed class ContentSpriteSystem : EntitySystem
         Action<ContentSpriteControl<Rgba32>.QueueEntry, Image<Rgba32>> action,
         CancellationToken cancelToken = default)
     {
+        const string speechPath = "/Textures/Effects/speech.rsi"; //Я ебал вычислять ЕБУЧИЕ TypingIndicator-ы СУКАААА. легче так
+
         if (!_timing.IsFirstTimePredicted)
             return;
 
@@ -101,12 +106,26 @@ public sealed class ContentSpriteSystem : EntitySystem
         // Don't want to wait for engine pr
         var size = Vector2i.Zero;
 
-        foreach (var layer in spriteComp.AllLayers)
+        var comp_scale = spriteComp.Scale;
+        var offset = spriteComp.Offset;
+
+        foreach (var layer_ in spriteComp.AllLayers)
         {
+            if (layer_ is not SpriteComponent.Layer layer)
+                continue;
+
             if (!layer.Visible)
                 continue;
 
-            size = Vector2i.ComponentMax(size, layer.PixelSize);
+            var pixel = layer.PixelSize;
+            var scale = layer.Scale;
+
+            var new_x = (int)MathF.Ceiling((float)pixel.X * scale.X * comp_scale.X + offset.X);
+            var new_y = (int)MathF.Ceiling((float)pixel.Y * scale.Y * comp_scale.Y + offset.Y);
+
+            var new_size = new Vector2i(new_x, new_y);
+
+            size = Vector2i.ComponentMax(size, new_size);
         }
 
         // Stop asserts
@@ -195,14 +214,22 @@ public sealed class ContentSpriteSystem : EntitySystem
         [Dependency] private readonly IEntityManager _entManager = default!;
         [Dependency] private readonly ILogManager _logMan = default!;
 
-        internal Queue<QueueEntry> _queuedTextures = new();
+        private readonly AppearanceSystem _appearance;
+
+        internal readonly Queue<QueueEntry> _queuedTextures;
+
+        private readonly Queue<QueueEntry> _defferedTextures;
 
         private ISawmill _sawmill;
 
-        public ContentSpriteControl()
+        public ContentSpriteControl(AppearanceSystem appearance)
         {
             IoCManager.InjectDependencies(this);
             _sawmill = _logMan.GetSawmill("sprite.export");
+
+            _appearance = appearance;
+            _queuedTextures = new();
+            _defferedTextures = new();
         }
 
         protected override void Draw(DrawingHandleScreen handle)
@@ -214,35 +241,75 @@ public sealed class ContentSpriteSystem : EntitySystem
                 if (queued.Tcs.Task.IsCanceled)
                     continue;
 
-                try
+                if (ShouldBeDeffered(queued))
                 {
-                    if (!_entManager.TryGetComponent(queued.Entity, out MetaDataComponent? metadata))
-                        continue;
-
-                    var result = queued;
-
-                    handle.RenderInRenderTarget(queued.Texture, () =>
-                    {
-                        handle.DrawEntity(result.Entity, result.Texture.Size / 2, Vector2.One, Angle.Zero,
-                            overrideDirection: result.Direction);
-                    }, Color.Transparent);
-
-                    queued.Texture.CopyPixelsToMemory<T>(image =>
-                    {
-                        queued.Action.Invoke(queued, image);
-                    });
-
-                    queued.Tcs.SetResult();
+                    _defferedTextures.Enqueue(queued);
+                    continue;
                 }
-                catch (Exception exc)
+
+                HandleQueue(queued, handle);
+            }
+
+            while (_defferedTextures.TryDequeue(out var dequeue))
+            {
+                if (dequeue.Tcs.Task.IsCanceled)
+                    continue;
+
+                if (ShouldBeDeffered(dequeue))
                 {
-                    queued.Texture.Dispose();
-
-                    if (!string.IsNullOrEmpty(exc.StackTrace))
-                        _sawmill.Fatal(exc.StackTrace);
-
-                    queued.Tcs.SetException(exc);
+                    _queuedTextures.Enqueue(dequeue);
+                    continue;
                 }
+
+                HandleQueue(dequeue, handle);
+            }
+        }
+
+        private bool ShouldBeDeffered(QueueEntry entry)
+        {
+            var entity = entry.Entity;
+
+            if (_appearance.TryGetData<TypingIndicatorState>(entity, TypingIndicatorVisuals.State, out var state))
+            {
+                if (state is not TypingIndicatorState.None)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void HandleQueue(QueueEntry queued, DrawingHandleScreen handle)
+        {
+            try
+            {
+                if (!_entManager.TryGetComponent(queued.Entity, out MetaDataComponent? metadata))
+                    return;
+
+                var result = queued;
+
+                handle.RenderInRenderTarget(queued.Texture, () =>
+                {
+                    handle.DrawEntity(result.Entity, result.Texture.Size / 2, Vector2.One, Angle.Zero,
+                        overrideDirection: result.Direction);
+                }, Color.Transparent);
+
+                queued.Texture.CopyPixelsToMemory<T>(image =>
+                {
+                    queued.Action.Invoke(queued, image);
+                });
+
+                queued.Tcs.SetResult();
+            }
+            catch (Exception exc)
+            {
+                queued.Texture.Dispose();
+
+                if (!string.IsNullOrEmpty(exc.StackTrace))
+                    _sawmill.Fatal(exc.StackTrace);
+
+                queued.Tcs.SetException(exc);
             }
         }
 

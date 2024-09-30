@@ -23,34 +23,40 @@ namespace Content.Client._WL.Poly
             SubscribeNetworkEvent<PolyServerQueryEvent>(OnServerQuery);
         }
 
-        private void OnServerQuery(PolyServerQueryEvent args)
+        private async void OnServerQuery(PolyServerQueryEvent args)
         {
             var ent = GetEntity(args.Entity);
 
-#pragma warning disable CS4014
-            _contentSpriteSystem.Export(ent, Direction.South, (queue, image) =>
+            try
             {
-                try
+                await _contentSpriteSystem.Export(ent, Direction.South, (queue, image) =>
                 {
-                    using var stream = new MemoryStream();
+                    try
+                    {
+                        //TODO: проверить захватывает ли GC потоки, кхм
+                        using var stream = new MemoryStream(1024);
 
-                    image.SaveAsPng(stream);
+                        image.SaveAsPng(stream);
 
-                    using var reader = new StreamReader(stream);
+                        stream.Position = 0;
+                        var str = Convert.ToBase64String(stream.GetBuffer());
 
-                    stream.Position = 0;
-                    var str = reader.ReadToEnd();
+                        var ev = new PolyClientResponseEvent(str, args.QueryId);
 
-                    var ev = new PolyClientResponseEvent(str, args.QueryId);
+                        _sawmill.Info($"Запрос от Поли успешно обработан! Сущность: {ToPrettyString(args.Entity)}");
 
-                    RaiseNetworkEvent(ev);
-                }
-                catch (Exception)
-                {
-                    _sawmill.Error("Неизвестная ошибка при рендере фотографии для Поли!");
-                }
-            });
-#pragma warning restore CS4014
+                        RaiseNetworkEvent(ev);
+                    }
+                    catch (Exception ex)
+                    {
+                        _sawmill.Error($"Неизвестная ошибка при рендере фотографии для Поли! {ex.Message}");
+                    }
+                });
+            }
+            catch (Exception exc)
+            {
+                _sawmill.Error($"Error: {exc.Message}");
+            }
         }
     }
 }

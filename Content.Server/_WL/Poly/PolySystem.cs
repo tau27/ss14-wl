@@ -12,6 +12,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.IO;
 using System.Linq;
 
 namespace Content.Server._WL.Poly
@@ -24,6 +25,9 @@ namespace Content.Server._WL.Poly
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly IConfigurationManager _configMan = default!;
         [Dependency] private readonly IPlayerManager _playMan = default!;
+        [Dependency] private readonly ILogManager _logMan = default!;
+
+        private ISawmill _sawmill = default!;
 
         private List<MessageEntry> _messages = default!;
 
@@ -33,6 +37,7 @@ namespace Content.Server._WL.Poly
         private bool _neededCleanup = false;
 
         private Dictionary<string, ChatMessage> _queriedEntities = default!;
+        private Dictionary<string, string?> _handledImages = default!;
 
         private const int MAX_QUERIES_PER_PLAYER = 20;
 
@@ -42,14 +47,15 @@ namespace Content.Server._WL.Poly
 
             _messages = new();
             _queriedEntities = new();
+            _handledImages = new();
+
+            _sawmill = _logMan.GetSawmill("poly.server");
 
             _readyToPick = _configMan.GetCVar(WLCVars.PolyNeededRoundEndCleanup);
             _chooseInterval = TimeSpan.FromSeconds(_configMan.GetCVar(WLCVars.PolyMessageChooseCooldown));
 
             Subs.CVar(_configMan, WLCVars.PolyMessageChooseCooldown, (new_value) => _chooseInterval = TimeSpan.FromSeconds(new_value), true);
             Subs.CVar(_configMan, WLCVars.PolyNeededRoundEndCleanup, (needed) => _neededCleanup = needed);
-
-            UpdatesOutsidePrediction = false;
 
             SubscribeLocalEvent<RoundRestartCleanupEvent>((_) =>
             {
@@ -76,8 +82,10 @@ namespace Content.Server._WL.Poly
                 if (!ShouldMessageBeChosen(msg))
                     return;
 
-                _readyToPick = false;
                 QueryAddMessage(msg);
+
+                ResetTimer();
+                _readyToPick = false;
             };
 
             _playMan.PlayerStatusChanged += (sender, args) =>
@@ -85,7 +93,7 @@ namespace Content.Server._WL.Poly
                 if (_playMan.Sessions.Length - 1 != 0)
                     return;
 
-                if (args.NewStatus != SessionStatus.Connected)
+                if (args.NewStatus is not SessionStatus.Connected or SessionStatus.InGame)
                     return;
 
                 HandleQueries();
@@ -103,7 +111,7 @@ namespace Content.Server._WL.Poly
 
             if (_time >= _chooseInterval)
             {
-                _time = TimeSpan.Zero;
+                ResetTimer();
                 _readyToPick = true;
             }
         }
@@ -121,19 +129,22 @@ namespace Content.Server._WL.Poly
         {
             var queried = args.QueryId;
 
-            if (!_queriedEntities.TryGetValue(queried, out var msg)) //Если событие было выслано всем клиентам, то каждый клиент отправит ответ,
-                return; //И тогда от каждого клиента добавится сообщение, эта проверка нужна, чтоб избежать этого
+            if (!_queriedEntities.TryGetValue(queried, out var msg))
+                return;
 
             _queriedEntities.Remove(queried);
 
-            var entry = MessageToEntry(msg, args.Stream);
+            var entry = MessageToEntry(msg, queried);
 
             _messages.Add(entry);
+            _handledImages.Add(queried, args.Stream);
         }
 
         private void HandleQueries()
         {
-            var sessions = _playMan.Sessions.ToDictionary(k => k, v => 0);
+            var sessions = _playMan.Sessions
+                .Where(s => s.Status == SessionStatus.InGame)
+                .ToDictionary(k => k, v => 0);
 
             if (sessions.Count == 0)
                 return;
@@ -143,11 +154,11 @@ namespace Content.Server._WL.Poly
             if (session_pair == null)
                 return;
 
+            var session = session_pair.Value.Key;
+            var queries = session_pair.Value.Value;
+
             foreach (var item in _queriedEntities)
             {
-                var session = session_pair.Value.Key;
-                var queries = session_pair.Value.Value;
-
                 if (queries > MAX_QUERIES_PER_PLAYER)
                 {
                     session_pair = PickSession();
@@ -179,6 +190,28 @@ namespace Content.Server._WL.Poly
         }
 
         #region Public
+        public void ResetTimer()
+        {
+            _time = TimeSpan.Zero;
+        }
+
+        public Stream? PickImage(string id)
+        {
+            if (!_handledImages.TryGetValue(id, out var stream_string) || stream_string == null)
+            {
+                _handledImages.Remove(id);
+                return null;
+            }
+
+            _handledImages.Remove(id);
+
+            var bytes = Convert.FromBase64String(stream_string);
+
+            var stream = new MemoryStream(bytes);
+
+            return stream;
+        }
+
         public void Clean()
         {
             _messages.Clear();
@@ -190,7 +223,7 @@ namespace Content.Server._WL.Poly
             return _readyToPick;
         }
 
-        public MessageEntry MessageToEntry(ChatMessage msg, string? pngBase64 = null)
+        public MessageEntry MessageToEntry(ChatMessage msg, string id)
         {
             var sender_ent = GetEntity(msg.SenderEntity);
 
@@ -201,7 +234,7 @@ namespace Content.Server._WL.Poly
                 SenderEntityName = Name(sender_ent),
                 RoundId = _ticker.RoundId,
                 IsRoundFlow = _ticker.RunLevel == GameRunLevel.InRound,
-                PngBase64 = pngBase64
+                ID = id
             };
         }
 
@@ -226,7 +259,7 @@ namespace Content.Server._WL.Poly
                 ChatChannel.Damage |
                 ChatChannel.Visual |
                 ChatChannel.Notifications |
-                ChatChannel.AdminRelated |
+                //ChatChannel.AdminRelated | //я всегда буду злодеем >:3
                 ChatChannel.Unspecified;
 
             if (unnecessary_flags.HasFlag(msg.Channel))
@@ -248,5 +281,5 @@ namespace Content.Server._WL.Poly
         string SenderEntityName,
         int RoundId,
         bool IsRoundFlow,
-        string? PngBase64 = null);
+        string ID);
 }
