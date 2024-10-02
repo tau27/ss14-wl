@@ -34,14 +34,14 @@ namespace Content.Client._WL.Poly
                     try
                     {
                         //TODO: проверить захватывает ли GC потоки, кхм
-                        using var stream = new MemoryStream(1024);
+                        using var stream = new MemoryStream(1024 * 14);
 
                         image.SaveAsPng(stream);
 
                         stream.Position = 0;
-                        var str = Convert.ToBase64String(stream.GetBuffer());
+                        var bytes = stream.GetBuffer();
 
-                        var ev = new PolyClientResponseEvent(str, args.QueryId);
+                        var ev = new PolyClientResponseEvent(bytes, args.QueryId);
 
                         _sawmill.Info($"Запрос от Поли успешно обработан! Сущность: {ToPrettyString(args.Entity)}");
 

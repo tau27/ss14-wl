@@ -18,10 +18,10 @@ namespace Content.Shared._WL.Poly.Events
     [Serializable, NetSerializable]
     public sealed partial class PolyClientResponseEvent : EntityEventArgs
     {
-        public readonly string? Stream;
+        public readonly byte[]? Stream;
         public readonly string QueryId;
 
-        public PolyClientResponseEvent(string? png_stream, string queryId)
+        public PolyClientResponseEvent(byte[]? png_stream, string queryId)
         {
             Stream = png_stream;
             QueryId = queryId;

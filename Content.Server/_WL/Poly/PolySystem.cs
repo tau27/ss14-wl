@@ -37,7 +37,7 @@ namespace Content.Server._WL.Poly
         private bool _neededCleanup = false;
 
         private Dictionary<string, ChatMessage> _queriedEntities = default!;
-        private Dictionary<string, string?> _handledImages = default!;
+        private Dictionary<string, byte[]?> _handledImages = default!;
 
         private const int MAX_QUERIES_PER_PLAYER = 20;
 
@@ -143,7 +143,7 @@ namespace Content.Server._WL.Poly
         private void HandleQueries()
         {
             var sessions = _playMan.Sessions
-                .Where(s => s.Status == SessionStatus.InGame)
+                .Where(s => s.Status is SessionStatus.InGame or SessionStatus.Connected)
                 .ToDictionary(k => k, v => 0);
 
             if (sessions.Count == 0)
@@ -195,9 +195,14 @@ namespace Content.Server._WL.Poly
             _time = TimeSpan.Zero;
         }
 
+        /// <summary>
+        /// Возвращаемый объект Stream должен быть явно очищен. Dispose()
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Stream - если изображение готово. Null - если нет.</returns>
         public Stream? PickImage(string id)
         {
-            if (!_handledImages.TryGetValue(id, out var stream_string) || stream_string == null)
+            if (!_handledImages.TryGetValue(id, out var bytes) || bytes == null)
             {
                 _handledImages.Remove(id);
                 return null;
@@ -205,11 +210,7 @@ namespace Content.Server._WL.Poly
 
             _handledImages.Remove(id);
 
-            var bytes = Convert.FromBase64String(stream_string);
-
-            var stream = new MemoryStream(bytes);
-
-            return stream;
+            return new MemoryStream(bytes, false);
         }
 
         public void Clean()
@@ -234,7 +235,8 @@ namespace Content.Server._WL.Poly
                 SenderEntityName = Name(sender_ent),
                 RoundId = _ticker.RoundId,
                 IsRoundFlow = _ticker.RunLevel == GameRunLevel.InRound,
-                ID = id
+                ID = id,
+                Type = (ushort)msg.Channel
             };
         }
 
@@ -281,5 +283,6 @@ namespace Content.Server._WL.Poly
         string SenderEntityName,
         int RoundId,
         bool IsRoundFlow,
-        string ID);
+        string ID,
+        ushort Type);
 }

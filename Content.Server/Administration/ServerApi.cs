@@ -172,9 +172,10 @@ public sealed partial class ServerApi : IPostInjectInit
 
             await RespondError(
                 context,
-                ErrorCode.None,
-                HttpStatusCode.InternalServerError,
+                ErrorCode.ServiceUnavailable,
+                HttpStatusCode.ServiceUnavailable,
                 msg);
+
             return;
         }
 
@@ -189,7 +190,7 @@ public sealed partial class ServerApi : IPostInjectInit
         {
             await RespondError(
                 context,
-                ErrorCode.None,
+                ErrorCode.ServiceUnavailable,
                 HttpStatusCode.InternalServerError,
                 "Ошибка при получении ссылки!");
             return;
@@ -201,7 +202,7 @@ public sealed partial class ServerApi : IPostInjectInit
         {
             await RespondError(
                 context,
-                ErrorCode.None,
+                ErrorCode.ServiceUnavailable,
                 HttpStatusCode.InternalServerError,
                 "Изображение не было найдено!");
             return;
@@ -976,6 +977,9 @@ public sealed partial class ServerApi : IPostInjectInit
         PlayerNotFound = 4,
         GameRuleNotFound = 5,
         BadRequest = 6,
+        //WL-Changes-start
+        ServiceUnavailable = 7
+        //WL-Changes-end
     }
 
     #endregion
