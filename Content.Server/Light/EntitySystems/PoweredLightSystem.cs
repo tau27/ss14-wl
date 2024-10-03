@@ -279,12 +279,12 @@ namespace Content.Server.Light.EntitySystems
                             var x = ((_random.Next() % 3) + (_random.Next() % 3)) / 2; // major seconds
                             var y = _random.Next(0, 10) / 10; // minor, so that our lamps will turn on more randomly
                             var f = x + y + 0.3; // major + minor + basetime
+                            _appearance.SetData(uid, PoweredLightVisuals.BulbState, PoweredLightState.On, appearance);
                             uid.SpawnTimer(TimeSpan.FromSeconds(f), () =>
                                 {
                                     SetLight(uid, true, lightBulb.Color, light, lightBulb.LightRadius, lightBulb.LightEnergy, lightBulb.LightSoftness);
-                                    _appearance.SetData(uid, PoweredLightVisuals.BulbState, PoweredLightState.On, appearance);
-                                    light.LastThunk = time;
                                     _audio.PlayEntity(light.TurnOnSound, Filter.Pvs(uid), uid, true, AudioParams.Default.WithVolume(-10f));
+                                    light.LastThunk = time;
                                 }
                             );
 
