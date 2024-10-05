@@ -21,7 +21,7 @@ The obligations of confidentiality under this Agreement do not apply to informat
 - Is independently developed by the Receiving Party without use of or reference to the Confidential Information of the Disclosing Party.
 
 ### 4. Duration
-This Agreement is effective upon the Receiving Party’s access to the repository and will remain in effect for the duration of the Receiving Party’s involvement with the project, and for [X] years after the termination of such involvement or access, whichever is later.
+This Agreement is effective upon the Receiving Party’s access to the repository and will remain in effect for the duration of the Receiving Party’s involvement with the project, and for 150 years after the termination of such involvement or access, whichever is later.
 
 ### 5. Return or Destruction of Confidential Information
 Upon request by the Disclosing Party, or upon the termination of access to the `/corvax-team/ss14-wl` repository, the Receiving Party agrees to promptly return or destroy all materials containing Confidential Information and any copies thereof.
@@ -33,7 +33,7 @@ Nothing in this Agreement is intended to grant the Receiving Party any rights in
 Any breach of this Agreement by the Receiving Party may result in irreparable harm to the Disclosing Party, and the Disclosing Party may seek injunctive relief or any other remedies available by law, including damages and legal fees.
 
 ### 8. Governing Law
-This Agreement shall be governed by and construed in accordance with the laws of [Jurisdiction]. Any disputes arising out of or relating to this Agreement shall be resolved in the courts of [Jurisdiction].
+This Agreement shall be governed by and construed in accordance with the laws of Russian Federation. Any disputes arising out of or relating to this Agreement shall be resolved in the courts of Russian Federation.
 
 ### 9. Entire Agreement
 This Agreement constitutes the entire understanding between the parties with respect to the subject matter hereof and supersedes all prior discussions, agreements, or understandings of any kind.
