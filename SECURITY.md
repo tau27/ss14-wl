@@ -1,8 +1,3 @@
-# Reporting a security vulnerability
-You can report a security vulnerability through Discord
+## Связь
 
-If you want to contact us through Discord, you can join [our server](https://discord.gg/cy6eKZME8H)
-and then **privately** message anyone with the `@Хост` or `@Заведующий WL` role.
-
-In either case, **do not publicly disclose the vulnerability until we explicitly give
-you permission to do so**.
+Для связи с владельцами организации corvax-team, вы можете перейти в наш [Discord-сервер](https://discord.gg/cy6eKZME8H) или отправить личное сообщение пользователю 'mosleyos' на GitHub или в дискорде '@_mosley_'. Также аналогично можете связаться с пользователем '@morty_mort' в Discord.
