@@ -12,6 +12,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Power;
 using Content.Shared.Radio;
+using Content.Shared.Chat;
 using Content.Shared.Radio.Components;
 using Robust.Shared.Prototypes;
 
@@ -214,7 +215,7 @@ public sealed class RadioDeviceSystem : EntitySystem
 
         var name = Loc.GetString("speech-name-relay",
             ("speaker", Name(uid)),
-            ("originalName", nameEv.Name));
+            ("originalName", nameEv.VoiceName));
 
         //WL-Changes-start
         var typeEv = new TransformSpeakerChatTypeEvent(args.MessageSource, InGameICChatType.Whisper);

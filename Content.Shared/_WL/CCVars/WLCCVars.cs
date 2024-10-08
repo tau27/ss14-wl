@@ -24,6 +24,18 @@ public sealed class WLCVars
         CVarDef.Create("game.is_age_check_needed", true, CVar.REPLICATED);
 
     /*
+     *  HTTP API
+     */
+    /// <summary>
+    /// Токен для авторизации htpp-запросов на api сервера.
+    /// </summary>
+    public static readonly CVarDef<string> WLApiToken =
+        CVarDef.Create(
+            "admin.wl_api_token", "",
+            CVar.SERVERONLY | CVar.CONFIDENTIAL,
+            "Строковой токен, использующийся для авторизации HTTP-запросов, отправленных на http API сервера.");
+
+    /*
      *  Discord
      */
     /// <summary>
