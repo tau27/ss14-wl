@@ -64,13 +64,13 @@ public sealed partial class ServerApi
         {
             var absolute_path = context.Url.AbsolutePath;
 
-            if (context.RequestMethod != method)
+            if (context.RequestMethod != method || !CheckPathes(absolute_path))
                 return false;
 
             if (!await CheckAccess(context))
                 return true;
 
-            var formatted_maps = CheckPathes(absolute_path, exactPath);
+            var formatted_maps = GetMapArguments(absolute_path, exactPath);
             if (formatted_maps.Count == 0)
                 return true;
 
@@ -79,7 +79,17 @@ public sealed partial class ServerApi
         });
     }
 
-    private static Dictionary<string, string> CheckPathes(string realPath, string predictedPath)
+    private static bool CheckPathes(string realPath)
+    {
+        var search_regex = ParametrSearchRegex();
+
+        if (search_regex.IsMatch(realPath))
+            return true;
+
+        return false;
+    }
+
+    private static Dictionary<string, string> GetMapArguments(string realPath, string predictedPath)
     {
         var search_regex = ParametrSearchRegex();
 
