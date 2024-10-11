@@ -1,7 +1,4 @@
-name: Publish
-
-concurrency:
-  group: publish
+name: Publish External
 
 on:
   workflow_dispatch:
