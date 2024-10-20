@@ -12,6 +12,16 @@
     - SlimePerson
     - Vulpkanin # Corvax
     - Vox
+#Corvax WhiteList
+    - Akula
+    - Android
+    - Cischi
+    - Felinid
+    - Golem
+    - Kidan
+    - Murine
+    - Tajara
+#Corvax WhiteList-End
 
 - type: guideEntry
   id: Arachnid
@@ -52,3 +62,45 @@
   id: Vox
   name: species-name-vox
   text: "/ServerInfo/Guidebook/Mobs/Vox.xml"
+
+#Corvax WhiteList
+- type: guideEntry
+  id: Akula
+  name: species-name-vox
+  text: "/ServerInfo/Guidebook/_WL/Mobs/Akula.xml"
+
+- type: guideEntry
+  id: Android
+  name: species-name-vox
+  text: "/ServerInfo/Guidebook/_WL/Mobs/Android.xml"
+
+- type: guideEntry
+  id: Cischi
+  name: species-name-vox
+  text: "/ServerInfo/Guidebook/_WL/Mobs/Cischi.xml"
+
+- type: guideEntry
+  id: Felinid
+  name: species-name-vox
+  text: "/ServerInfo/Guidebook/_WL/Mobs/Felinid.xml"
+
+- type: guideEntry
+  id: Golem
+  name: species-name-vox
+  text: "/ServerInfo/Guidebook/_WL/Mobs/Golem.xml"
+
+- type: guideEntry
+  id: Kidan
+  name: species-name-vox
+  text: "/ServerInfo/Guidebook/_WL/Mobs/Kidan.xml"
+
+- type: guideEntry
+  id: Murine
+  name: species-name-vox
+  text: "/ServerInfo/Guidebook/_WL/Mobs/Murine.xml"
+
+- type: guideEntry
+  id: Tajara
+  name: species-name-vox
+  text: "/ServerInfo/Guidebook/_WL/Mobs/Tajara.xml"
+#Corvax WhiteList-End
