@@ -1,7 +1,7 @@
 <Document>
   # Цисчи
   <Box>
-    <GuideEntityEmbed Entity="MobHumanDummy" Caption=""/>
+    <GuideEntityEmbed Entity="MobCischi" Caption=""/>
   </Box>
 \n
   Цисчи - раса гуманоидных, парнокопытных, люминесцентных существ с далёкой карликовой планеты-сироты Джедзира.\n
