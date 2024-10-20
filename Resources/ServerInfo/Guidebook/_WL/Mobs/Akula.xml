@@ -1,9 +1,20 @@
 <Document>
-  # Люди
+  # Акула
   <Box>
-    <GuideEntityEmbed Entity="MobHumanDummy" Caption=""/>
+    <GuideEntityEmbed Entity="MobAkula" Caption=""/>
+  </Box>
+\n
+   Это... Ходячие двуногие акулы\n
+  <Box>
+   <GuideEntityEmbed Entity="HolosignSecurity" Caption=""/>
+   <GuideEntityEmbed Entity="MobShark" Caption="Описание в процессе написания"/>
+   <GuideEntityEmbed Entity="HolosignSecurity" Caption=""/>
   </Box>
 
-  Человек разумный (Homo sapiens) – сильно распространённая раса в Галактике. Их родной дом - планета Земля, но они распространились на сотни световых лет от своего дома. Не имеют уникальных особенностей.
-
+    ## Расовые особенности
+    - Любят кровь
+    <GuideReagentEmbed Reagent="Blood"></GuideReagentEmbed>
+    <GuideReagentEmbed Reagent="InsectBlood"></GuideReagentEmbed>
+    <GuideReagentEmbed Reagent="CopperBlood"></GuideReagentEmbed>
+    <GuideReagentEmbed Reagent="AmmoniaBlood"></GuideReagentEmbed>
 </Document>
