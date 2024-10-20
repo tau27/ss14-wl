@@ -1,0 +1,47 @@
+- type: entity
+  save: false
+  name: Urist WhiteList Android
+  parent: BaseMobHuman
+  id: MobAndroid
+  
+- type: entity
+  save: false
+  name: Urist WhiteList Felinid
+  parent: BaseMobHuman
+  id: MobFelinid
+  
+- type: entity
+  save: false
+  name: Urist WhiteList Murine
+  parent: BaseMobHuman
+  id: MobHumanoidMurine
+  
+- type: entity
+  save: false
+  name: Urist WhiteList Golem
+  parent: BaseMobHuman
+  id: MobGolem
+  
+- type: entity
+  save: false
+  name: Urist WhiteList Kidan
+  parent: BaseMobHuman
+  id: MobHumanoidKidan
+  
+- type: entity
+  save: false
+  name: Urist WhiteList Tajara
+  parent: BaseMobHuman
+  id: MobHumanoidTajara
+  
+- type: entity
+  save: false
+  name: Urist WhiteList Akula
+  parent: BaseMobHuman
+  id: MobAkula
+  
+- type: entity
+  save: false
+  name: Urist WhiteList Cischi
+  parent: BaseMobHuman
+  id: MobCischi
