@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -30,6 +30,11 @@ namespace Content.Shared.Kitchen
 
         [DataField("time")]
         public uint CookTime { get; private set; } = 5;
+
+        //WL-Changes-start
+        [DataField]
+        public string Group = "Other";
+        //WL-Changes-end
 
         public string Name => Loc.GetString(_name);
 

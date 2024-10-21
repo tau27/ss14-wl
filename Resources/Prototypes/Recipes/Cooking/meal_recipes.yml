@@ -30,6 +30,7 @@
   id: RecipeAppendixBurger
   name: appendix burger recipe
   result: FoodBurgerAppendix
+  group: Burger
   time: 10
   solids:
     FoodBreadBun: 1
@@ -39,6 +40,7 @@
   id: RecipeBaconBurger
   name: bacon burger recipe
   result: FoodBurgerBacon
+  group: Burger
   time: 10
   solids:
     FoodBreadBun: 1
@@ -48,6 +50,7 @@
 - type: microwaveMealRecipe
   id: RecipeBaseballBurger
   name: baseball burger recipe
+  group: Burger
   result: FoodBurgerBaseball
   time: 10
   solids:
@@ -58,6 +61,7 @@
   id: RecipeBearger
   name: bearger recipe
   result: FoodBurgerBear
+  group: Burger
   time: 10
   solids:
     FoodBreadBun: 1
@@ -66,6 +70,7 @@
 - type: microwaveMealRecipe
   id: RecipeBigBiteBurger
   name: big bite burger recipe
+  group: Burger
   result: FoodBurgerBig
   time: 15
   solids:
@@ -78,6 +83,7 @@
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeBrainBurger
   name: brain burger recipe
+  group: Burger
   result: FoodBurgerBrain
   time: 10
   solids:
@@ -87,6 +93,7 @@
 - type: microwaveMealRecipe
   id: RecipeCatBurger
   name: cat burger recipe
+  group: Burger
   result: FoodBurgerCat
   time: 10
   solids:
@@ -97,6 +104,7 @@
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeCheeseburger
   name: cheeseburger recipe
+  group: Burger
   result: FoodBurgerCheese
   time: 10
   solids:
@@ -107,6 +115,7 @@
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeChickenSandwich
   name: chicken sandwich recipe
+  group: Burger
   result: FoodBurgerChicken
   time: 10
   reagents:
@@ -118,6 +127,7 @@
 - type: microwaveMealRecipe
   id: RecipeClownBurger
   name: clownburger recipe
+  group: Burger
   result: FoodBurgerClown
   time: 10
   solids:
@@ -127,6 +137,7 @@
 - type: microwaveMealRecipe
   id: RecipeCorgiBurger
   name: corgi burger recipe
+  group: Burger
   result: FoodBurgerCorgi
   time: 10
   solids:
@@ -136,6 +147,7 @@
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeCrabBurger
   name: crab burger recipe
+  group: Burger
   result: FoodBurgerCrab
   time: 10
   solids:
@@ -145,6 +157,7 @@
 - type: microwaveMealRecipe
   id: RecipeCrazyHamburger
   name: crazy hamburger recipe
+  group: Burger
   result: FoodBurgerCrazy
   time: 15
   reagents:
@@ -161,6 +174,7 @@
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeDuckBurger
   name: duck sandwich recipe
+  group: Burger
   result: FoodBurgerDuck
   time: 10
   solids:
@@ -171,6 +185,7 @@
 - type: microwaveMealRecipe
   id: RecipeEmpoweredBurger
   name: empowered burger recipe
+  group: Burger
   result: FoodBurgerEmpowered
   time: 10
   solids:
@@ -180,6 +195,7 @@
 - type: microwaveMealRecipe
   id: RecipeCarpBurger
   name: fillet-o-carp burger recipe
+  group: Burger
   result: FoodBurgerCarp
   time: 10
   solids:
@@ -190,6 +206,7 @@
 - type: microwaveMealRecipe
   id: RecipeFiveBurger
   name: five alarm burger recipe
+  group: Burger
   result: FoodBurgerFive
   time: 10
   solids:
@@ -200,6 +217,7 @@
 - type: microwaveMealRecipe
   id: RecipeGhostBurger
   name: ghost burger recipe
+  group: Burger
   result: FoodBurgerGhost
   time: 10
   solids:
@@ -209,6 +227,7 @@
 - type: microwaveMealRecipe
   id: RecipeHumanBurger
   name: human burger recipe
+  group: Burger
   result: FoodBurgerHuman
   time: 10
   solids:
@@ -218,6 +237,7 @@
 - type: microwaveMealRecipe
   id: RecipeJellyBurger
   name: jelly burger recipe
+  group: Burger
   result: FoodBurgerJelly
   time: 10
   solids:
@@ -228,6 +248,7 @@
   id: RecipeBurgerMcguffin
   name: McGuffin recipe
   result: FoodBurgerMcguffin
+  group: Burger
   time: 10
   solids:
     FoodBreadBun: 1
@@ -237,6 +258,7 @@
 - type: microwaveMealRecipe
   id: RecipeBurgerMcrib
   name: BBQ rib sandwich recipe
+  group: Burger
   result: FoodBurgerMcrib
   time: 10
   solids:
@@ -247,6 +269,7 @@
 - type: microwaveMealRecipe
   id: RecipeMimeBurger
   name: mime burger recipe
+  group: Burger
   result: FoodBurgerMime
   time: 10
   solids:
@@ -256,6 +279,7 @@
 - type: microwaveMealRecipe
   id: RecipePlainBurger
   name: plain burger recipe
+  group: Burger
   result: FoodBurgerPlain
   time: 10
   solids:
@@ -265,6 +289,7 @@
 - type: microwaveMealRecipe
   id: RecipeRatBurger
   name: rat burger recipe
+  group: Burger
   result: FoodBurgerRat
   time: 10
   solids:
@@ -275,6 +300,7 @@
   id: RecipeRobotBurger
   name: roburger recipe
   result: FoodBurgerRobot
+  group: Burger
   time: 10
   solids:
     FoodBreadBun: 1
@@ -284,6 +310,7 @@
 - type: microwaveMealRecipe
   id: RecipeSoylentBurger
   name: soylent burger recipe
+  group: Burger
   result: FoodBurgerSoy
   time: 10
   solids:
@@ -295,6 +322,7 @@
   id: RecipeSpellBurger
   name: spell burger recipe
   result: FoodBurgerSpell
+  group: Burger
   time: 10
   solids:
     FoodBreadBun: 1
@@ -303,6 +331,7 @@
 - type: microwaveMealRecipe
   id: RecipeSuperBiteBurger
   name: super bite burger recipe
+  group: Burger
   result: FoodBurgerSuper
   time: 25
   reagents:
@@ -317,6 +346,7 @@
 - type: microwaveMealRecipe
   id: RecipeTofuBurger
   name: tofu burger recipe
+  group: Burger
   result: FoodBurgerTofu
   time: 10
   solids:
@@ -326,6 +356,7 @@
 - type: microwaveMealRecipe
   id: RecipeXenoburger
   name: xenoburger recipe
+  group: Burger
   result: FoodBurgerXeno
   time: 10
   solids:
@@ -335,6 +366,7 @@
 - type: microwaveMealRecipe
   id: RecipeMothRoachburger
   name: mothroachburger recipe
+  group: Burger
   result: FoodBurgerMothRoach
   solids:
     FoodBreadBun: 1
@@ -345,6 +377,7 @@
 - type: microwaveMealRecipe
   id: RecipeBananaBread
   name: banana bread recipe
+  group: Bread
   result: FoodBreadBanana
   time: 15
   solids:
@@ -354,6 +387,7 @@
 - type: microwaveMealRecipe
   id: RecipeCornbread
   name: cornbread recipe
+  group: Bread
   result: FoodBreadCorn
   time: 10
   solids:
@@ -362,6 +396,7 @@
 - type: microwaveMealRecipe
   id: RecipeCreamCheeseBread
   name: cream cheese bread recipe
+  group: Bread
   result: FoodBreadCreamcheese
   time: 15
   reagents:
@@ -373,6 +408,7 @@
 - type: microwaveMealRecipe
   id: RecipeMeatBread
   name: meat bread recipe
+  group: Bread
   result: FoodBreadMeat
   time: 15
   solids:
@@ -383,6 +419,7 @@
 - type: microwaveMealRecipe
   id: RecipeMimanaBread
   name: mimana bread recipe
+  group: Bread
   result: FoodBreadMimana
   time: 15
   reagents:
@@ -393,6 +430,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBread
+  group: Bread
   name: bread recipe
   result: FoodBreadPlain
   time: 10
@@ -410,6 +448,7 @@
 - type: microwaveMealRecipe
   id: RecipeSausageBread
   name: sausage bread recipe
+  group: Bread
   result: FoodBreadSausage
   time: 15
   solids:
@@ -419,6 +458,7 @@
 - type: microwaveMealRecipe
   id: RecipeSpiderMeatBread
   name: spider meat bread recipe
+  group: Bread
   result: FoodBreadMeatSpider
   time: 15
   solids:
@@ -429,6 +469,7 @@
 - type: microwaveMealRecipe
   id: RecipeTofuBread
   name: tofu bread recipe
+  group: Bread
   result: FoodBreadTofu
   time: 15
   solids:
@@ -438,6 +479,7 @@
 - type: microwaveMealRecipe
   id: RecipeXenoMeatBread
   name: xeno meat bread recipe
+  group: Bread
   result: FoodBreadMeatXeno
   time: 15
   solids:
@@ -450,6 +492,7 @@
 - type: microwaveMealRecipe
   id: RecipeBaguette
   name: baguette recipe
+  group: Bread
   result: FoodBreadBaguette
   time: 15
   reagents:
@@ -474,6 +517,7 @@
 - type: microwaveMealRecipe
   id: RecipeButteredToast
   name: buttered toast recipe
+  group: Bread
   result: FoodBreadButteredToast
   time: 5
   solids:
@@ -483,6 +527,7 @@
 - type: microwaveMealRecipe
   id: RecipeFrenchToast
   name: french toast recipe
+  group: Bread
   result: FoodBreadFrenchToast
   time: 5
   reagents:
@@ -494,6 +539,7 @@
 - type: microwaveMealRecipe
   id: RecipeGarlicBread
   name: garlic bread slice recipe
+  group: Bread
   result: FoodBreadGarlicSlice
   time: 5
   solids:
@@ -503,6 +549,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeJellyToast
+  group: Bread
   name: jelly toast recipe
   result: FoodBreadJellySlice
   time: 5
@@ -512,6 +559,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMoldyBreadSlice
+  group: Bread
   name: moldy bread slice recipe
   result: FoodBreadMoldySlice
   time: 5
@@ -521,6 +569,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTwoBreadSlice
+  group: Bread
   name: two slice recipe
   result: FoodBreadTwoSlice
   time: 5
@@ -531,6 +580,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeOnionRings
+  group: Bread
   name: onion rings recipe
   result: FoodOnionRings
   time: 15
@@ -541,6 +591,7 @@
 - type: microwaveMealRecipe
   id: RecipeMargheritaPizza
   name: margherita pizza recipe
+  group: Pizza
   result: FoodPizzaMargherita
   time: 30
   solids:
@@ -551,6 +602,7 @@
 - type: microwaveMealRecipe
   id: RecipeMushroomPizza
   name: mushroom pizza recipe
+  group: Pizza
   result: FoodPizzaMushroom
   time: 30
   solids:
@@ -560,6 +612,7 @@
 - type: microwaveMealRecipe
   id: RecipeMeatPizza
   name: meat pizza recipe
+  group: Pizza
   result: FoodPizzaMeat
   time: 30
   solids:
@@ -571,6 +624,7 @@
 - type: microwaveMealRecipe
   id: RecipeVegetablePizza
   name: vegetable pizza recipe
+  group: Pizza
   result: FoodPizzaVegetable
   time: 30
   solids:
@@ -583,6 +637,7 @@
 - type: microwaveMealRecipe
   id: RecipeHawaiianPizza
   name: Hawaiian pizza recipe
+  group: Pizza
   result: FoodPizzaPineapple
   time: 30
   solids:
@@ -593,6 +648,7 @@
 - type: microwaveMealRecipe
   id: RecipeDankPizza
   name: dank pizza recipe
+  group: Pizza
   result: FoodPizzaDank
   time: 30
   solids:
@@ -604,6 +660,7 @@
 - type: microwaveMealRecipe
   id: RecipeDonkpocketPizza
   name: donk-pocket pizza recipe
+  group: Pizza
   result: FoodPizzaDonkpocket
   time: 30
   solids:
@@ -636,6 +693,7 @@
 - type: microwaveMealRecipe
   id: RecipeBoiledSpaghetti
   name: boiled spaghetti recipe
+  group: Italian
   result: FoodNoodlesBoiled
   time: 15
   reagents:
@@ -647,6 +705,7 @@
 - type: microwaveMealRecipe
   id: RecipePastaTomato
   name: pasta tomato recipe
+  group: Italian
   result: FoodNoodles
   time: 10
   solids:
@@ -656,6 +715,7 @@
 - type: microwaveMealRecipe
   id: RecipeMeatballSpaghetti
   name: spaghetti & meatballs recipe
+  group: Italian
   result: FoodNoodlesMeatball
   time: 10
   solids:
@@ -665,6 +725,7 @@
 - type: microwaveMealRecipe
   id: RecipeButterNoodles
   name: butter noodles recipe
+  group: Italian
   result: FoodNoodlesButter
   time: 10
   solids:
@@ -674,6 +735,7 @@
 - type: microwaveMealRecipe
   id: RecipeChowMein
   name: chow mein recipe
+  group: Italian
   result: FoodNoodlesChowmein
   time: 10
   reagents:
@@ -686,6 +748,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeOatmeal
+  group: Italian
   name: oatmeal recipe
   result: FoodOatmeal
   time: 15
@@ -697,6 +760,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBoiledRice
+  group: Italian
   name: boiled rice recipe
   result: FoodRiceBoiled
   time: 15
@@ -709,6 +773,7 @@
 - type: microwaveMealRecipe
   id: RecipeRicePudding
   name: rice pudding recipe
+  group: Italian
   result: FoodRicePudding
   time: 15
   reagents:
@@ -720,6 +785,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRicePork
+  group: Italian
   name: rice and pork recipe
   result: FoodRicePork
   time: 15
@@ -729,6 +795,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRiceGumbo
+  group: Italian
   name: black-eyed gumbo recipe
   result: FoodRiceGumbo
   time: 15
@@ -739,6 +806,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeEggRice
+  group: Italian
   name: egg-fried rice recipe
   result: FoodRiceEgg
   time: 15
@@ -750,6 +818,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCopypasta
+  group: Italian
   name: copypasta recipe
   result: FoodNoodlesCopy
   time: 10
@@ -760,6 +829,7 @@
 - type: microwaveMealRecipe
   id: RecipeBisque
   name: bisque recipe
+  group: Soup
   result: FoodSoupBisque
   time: 10
   reagents:
@@ -773,6 +843,7 @@
 - type: microwaveMealRecipe
   id: RecipeMeatballSoup
   name: meatball soup recipe
+  group: Soup
   result: FoodSoupMeatball
   time: 10
   reagents:
@@ -786,6 +857,7 @@
 - type: microwaveMealRecipe
   id: RecipeNettleSoup
   name: nettle soup recipe
+  group: Soup
   result: FoodSoupNettle
   time: 10
   reagents:
@@ -798,6 +870,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeEyeballSoup
+  group: Soup
   name: eyeball soup recipe
   result: FoodSoupEyeball
   time: 10
@@ -811,6 +884,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeAmanitaJelly
+  group: Soup
   name: amanita jelly recipe
   result: FoodJellyAmanita
   time: 10
@@ -822,6 +896,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeOnionSoup
+  group: Soup
   name: onion soup recipe
   result: FoodSoupOnion
   time: 10
@@ -834,6 +909,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMushroomSoup
+  group: Soup
   name: mushroom soup recipe
   result: FoodSoupMushroom
   time: 10
@@ -846,6 +922,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeStewSoup
+  group: Soup
   name: stew recipe
   result: FoodSoupStew
   time: 10
@@ -862,6 +939,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTomatoSoup
+  group: Soup
   name: tomato soup recipe
   result: FoodSoupTomato
   time: 10
@@ -873,6 +951,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTomatoBloodSoup
+  group: Soup
   name: tomato blood soup recipe
   result: FoodSoupTomatoBlood
   time: 10
@@ -884,6 +963,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWingFangChuSoup
+  group: Soup
   name: wing fang chu recipe
   result: FoodSoupWingFangChu
   time: 10
@@ -895,6 +975,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWingFangChuSoupSpider
+  group: Soup
   name: wing fang chu recipe
   result: FoodSoupWingFangChu
   time: 10
@@ -906,6 +987,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeVegetableSoup
+  group: Soup
   name: vegetable soup recipe
   result: FoodSoupVegetable
   time: 10
@@ -920,6 +1002,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeClownTearsSoup
+  group: Soup
   name: clown tears soup recipe
   result: FoodSoupClown
   time: 10
@@ -933,6 +1016,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMonkeysDelightSoup
+  group: Soup
   name: monkeys delight recipe
   result: FoodSoupMonkey
   time: 10
@@ -947,6 +1031,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBungoSoup
+  group: Soup
   name: bungo soup recipe
   result: FoodSoupBungo
   time: 10
@@ -986,6 +1071,7 @@
   id: RecipeAmanitaPie
   name: amanita pie recipe
   result: FoodPieAmanita
+  group: Pie
   time: 15
   solids:
     FoodDoughPie: 1
@@ -995,6 +1081,7 @@
 - type: microwaveMealRecipe
   id: RecipeApplePie
   name: apple pie recipe
+  group: Pie
   result: FoodPieApple
   time: 15
   solids:
@@ -1004,6 +1091,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBaklava
+  group: Pie
   name: baklava recipe
   result: FoodPieBaklava
   time: 15
@@ -1014,6 +1102,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBananaCreamPie
+  group: Pie
   name: banana cream pie recipe
   result: FoodPieBananaCream
   time: 15
@@ -1023,6 +1112,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
+  group: Pie
   id: RecipeBerryClafoutis
   name: berry clafoutis recipe
   result: FoodPieClafoutis
@@ -1044,6 +1134,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeFrostyPie
+  group: Pie
   name: frosty pie recipe
   result: FoodPieFrosty
   time: 15
@@ -1054,6 +1145,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeMeatPie
+  group: Pie
   name: meat pie recipe
   result: FoodPieMeat
   time: 15
@@ -1074,6 +1166,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeXenoPie
+  group: Pie
   name: xeno pie recipe
   result: FoodPieXeno
   time: 15
@@ -1087,6 +1180,7 @@
 - type: microwaveMealRecipe
   id: RecipeCocoTart
   name: chocolate lava tart recipe
+  group: Tart
   result: FoodTartCoco
   time: 15
   reagents:
@@ -1100,6 +1194,7 @@
 - type: microwaveMealRecipe
   id: RecipeGappleTart
   name: golden apple streusel tart recipe
+  group: Tart
   result: FoodTartGapple
   time: 15
   reagents:
@@ -1114,6 +1209,7 @@
 - type: microwaveMealRecipe
   id: RecipeGrapeTart
   name: grape tart recipe
+  group: Tart
   result: FoodTartGrape
   time: 15
   reagents:
@@ -1127,6 +1223,7 @@
 - type: microwaveMealRecipe
   id: RecipeMimeTart
   name: mime tart recipe
+  group: Tart
   result: FoodTartMime
   time: 15
   reagents:
@@ -1322,6 +1419,7 @@
 - type: microwaveMealRecipe
   id: RecipeAppleCake
   name: apple cake recipe
+  group: Cake
   result: FoodCakeApple
   time: 5
   solids:
@@ -1330,6 +1428,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCarrotCake
+  group: Cake
   name: carrot cake recipe
   result: FoodCakeCarrot
   time: 5
@@ -1340,6 +1439,7 @@
 - type: microwaveMealRecipe
   id: RecipeLemonCake
   name: lemon cake recipe
+  group: Cake
   result: FoodCakeLemon
   time: 5
   solids:
@@ -1349,6 +1449,7 @@
 - type: microwaveMealRecipe
   id: RecipeLemoonCake
   name: lemoon cake recipe
+  group: Cake
   result: FoodCakeLemoon
   time: 5
   solids:
@@ -1358,6 +1459,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeOrangeCake
+  group: Cake
   name: orange cake recipe
   result: FoodCakeOrange
   time: 5
@@ -1367,6 +1469,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBlueberryCake
+  group: Cake
   name: blueberry cake recipe
   result: FoodCakeBlueberry
   time: 5
@@ -1376,6 +1479,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeLimeCake
+  group: Cake
   name: lime cake recipe
   result: FoodCakeLime
   time: 5
@@ -1385,6 +1489,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCheeseCake
+  group: Cake
   name: cheese cake recipe
   result: FoodCakeCheese
   time: 5
@@ -1396,6 +1501,7 @@
 
 - type: microwaveMealRecipe
   id: RecipePumpkinCake
+  group: Cake
   name: pumpkin cake recipe
   result: FoodCakePumpkin
   time: 5
@@ -1405,6 +1511,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeClownCake
+  group: Cake
   name: clown cake recipe
   result: FoodCakeClown
   time: 5
@@ -1414,6 +1521,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCake
+  group: Cake
   name: cake recipe
   result: FoodCakePlain
   time: 15
@@ -1422,6 +1530,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBirthdayCake
+  group: Cake
   name: birthday cake recipe
   result: FoodCakeBirthday
   time: 5
@@ -1432,6 +1541,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeChocolateCake
+  group: Cake
   name: chocolate cake recipe
   result: FoodCakeChocolate
   time: 5
@@ -1441,6 +1551,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeBrainCake
+  group: Cake
   name: brain cake recipe
   result: FoodCakeBrain
   time: 15
@@ -1450,6 +1561,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSlimeCake
+  group: Cake
   name: slime cake recipe
   result: FoodCakeSlime
   time: 5
@@ -1460,6 +1572,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCatCake
+  group: Cake
   name: cat cake recipe
   result: MobCatCake
   time: 15
@@ -1511,6 +1624,7 @@
 - type: microwaveMealRecipe
   id: RecipeWarmDonkpocket
   name: warm donk pocket recipe
+  group: Donk
   result: FoodDonkpocketWarm
   time: 5
   solids:
@@ -1519,6 +1633,7 @@
 - type: microwaveMealRecipe
   id: RecipeWarmDankpocket
   name: warm dank pocket recipe
+  group: Donk
   result: FoodDonkpocketDankWarm
   time: 5
   solids:
@@ -1527,6 +1642,7 @@
 - type: microwaveMealRecipe
   id: RecipeWarmDonkpocketSpicy
   name: warm spicy donk-pocket recipe
+  group: Donk
   result: FoodDonkpocketSpicyWarm
   time: 5
   solids:
@@ -1535,6 +1651,7 @@
 - type: microwaveMealRecipe
   id: RecipeWarmDonkpocketTeriyaki
   name: warm teriyaki-pocket recipe
+  group: Donk
   result: FoodDonkpocketTeriyakiWarm
   time: 5
   solids:
@@ -1543,6 +1660,7 @@
 - type: microwaveMealRecipe
   id: RecipeWarmDonkpocketPizza
   name: warm pizza-pocket recipe
+  group: Donk
   result: FoodDonkpocketPizzaWarm
   time: 5
   solids:
@@ -1551,6 +1669,7 @@
 - type: microwaveMealRecipe
   id: RecipeDonkpocketHonk
   name: warm honk-pocket recipe
+  group: Donk
   result: FoodDonkpocketHonkWarm
   time: 5
   solids:
@@ -1559,6 +1678,7 @@
 - type: microwaveMealRecipe
   id: RecipeDonkpocketBerry
   name: warm berry-pocket recipe
+  group: Donk
   result: FoodDonkpocketBerryWarm
   time: 5
   solids:
@@ -1567,6 +1687,7 @@
 - type: microwaveMealRecipe
   id: RecipeDonkpocketStonk
   name: warm stonk-pocket recipe
+  group: Donk
   result: FoodDonkpocketStonkWarm
   time: 5
   solids:
@@ -1574,16 +1695,18 @@
 
 - type: microwaveMealRecipe
   id: RecipeDonkpocketCarp
+  group: Donk
   name: warm carp-pocket recipe
   result: FoodDonkpocketCarpWarm
   time: 5
   solids:
     FoodDonkpocketCarp: 1
 
-
+# Spicy
 - type: microwaveMealRecipe
   id: RecipeHotChili
   name: hot chili recipe
+  group: Spicy
   result: FoodSoupChiliHot
   time: 20
   solids:
@@ -1596,6 +1719,7 @@
 - type: microwaveMealRecipe
   id: RecipeColdChili
   name: cold chili recipe
+  group: Spicy
   result: FoodSoupChiliCold
   time: 5
   reagents:
@@ -1605,6 +1729,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeClownTears
+  group: Spicy
   name: clown's tears recipe
   result: FoodSoupClown
   time: 15
@@ -1616,6 +1741,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeChiliClown
+  group: Spicy
   name: chili con carnival recipe
   result: FoodSoupChiliClown
   time: 30
@@ -1630,6 +1756,7 @@
 - type: microwaveMealRecipe
   id: RecipeQueso
   name: queso recipe
+  group: Spicy
   result: FoodMealQueso
   time: 15
   #todo Add blackpepper
@@ -1641,6 +1768,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeRibs
+  group: Spicy
   name: BBQ ribs recipe
   result: FoodMealRibs
   time: 15
@@ -1652,6 +1780,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeEnchiladas
+  group: Spicy
   name: enchiladas recipe
   result: FoodMealEnchiladas
   time: 20
@@ -1663,6 +1792,7 @@
 # SALADS: These should be moved out of the microwave as soon as possible
 - type: microwaveMealRecipe
   id: RecipeHerbSalad
+  group: Salad
   name: herb salad recipe
   result: FoodSaladHerb
   time: 5
@@ -1674,6 +1804,7 @@
 - type: microwaveMealRecipe
   id: RecipeValidSalad
   name: valid salad recipe
+  group: Salad
   result: FoodSaladValid
   time: 5
   solids:
@@ -1684,6 +1815,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeColeslaw
+  group: Salad
   name: coleslaw recipe
   result: FoodSaladColeslaw
   time: 5
@@ -1696,6 +1828,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCaesarSalad
+  group: Salad
   name: caesar salad recipe
   result: FoodSaladCaesar
   time: 5
@@ -1710,6 +1843,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCitrusSalad
+  group: Salad
   name: citrus salad recipe
   result: FoodSaladCitrus
   time: 5
@@ -1721,6 +1855,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeKimchiSalad
+  group: Salad
   name: kimchi salad recipe
   result: FoodSaladKimchi
   time: 5
@@ -1734,6 +1869,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeFruitSalad
+  group: Salad
   name: fruit salad recipe
   result: FoodSaladFruit
   time: 5
@@ -1746,6 +1882,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeJungleSalad
+  group: Salad
   name: jungle salad recipe
   result: FoodSaladJungle
   time: 5
@@ -1758,6 +1895,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeWatermelonFruitBowlSalad
+  group: Salad
   name: watermelon fruit bowl recipe
   result: FoodSaladWatermelonFruitBowl
   time: 5
@@ -1781,6 +1919,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeDriedTobacco
+  group: Tabak
   name: dried tobacco leaves recipe
   result: LeavesTobaccoDried
   time: 10
@@ -1790,6 +1929,7 @@
 - type: microwaveMealRecipe
   id: RecipeDriedCannabis
   name: dried cannabis leaves recipe
+  group: Tabak
   result: LeavesCannabisDried
   time: 10
   solids:
@@ -1805,6 +1945,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTrashBakedBananaPeel
+  group: Tabak
   name: baked banana peel recipe
   result: TrashBakedBananaPeel
   time: 5
@@ -1875,6 +2016,7 @@
 
 - type: microwaveMealRecipe
   id: RecipePeaSoup
+  group: Soup
   name: pea soup recipe
   result: FoodSoupPea
   time: 10
@@ -1886,6 +2028,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeTacoShell
+  group: Taco
   name: taco shell recipe
   result: FoodTacoShell
   time: 5
