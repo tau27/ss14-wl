@@ -42,4 +42,8 @@
   <GuideReagentEmbed Reagent="DeathHorse"></GuideReagentEmbed>
   <GuideReagentEmbed Reagent="SpoonOfTar"></GuideReagentEmbed>
 
+  <GuideFoodRecipeEmbed Recipe="RecipeChickenTabaka"/>
+  <GuideFoodRecipeEmbed Recipe="RecipeCutletCischi"/>
+  <GuideFoodRecipeEmbed Recipe="RecipeOnionSliceCischi"/>
+  <GuideFoodRecipeEmbed Recipe="RecipeFoodPemmican"/>
 </Document>

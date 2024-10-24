@@ -39,6 +39,9 @@
     Минеральная паста лечит [color=green]15[/color] механического урона, по [color=green]6[/color] урона термических ожогов и обморожения и [color=green]10[/color] кислотных ожогов.
 
 
+  <GuideFoodRecipeEmbed Recipe="RecipeMineralOintment"/>
+  <GuideFoodRecipeEmbed Recipe="RecipeMineralPaste"/>
+
   ## Лечение реагентами
   Их усвоение и метаболизм реагентов отличается от стандартных рас, для этого лучше зайдите в раздел [color=yellow]Химические вещества[/color] и наберите в поиск [color=yellow]Голем[/color]
   Основные реагенты:
