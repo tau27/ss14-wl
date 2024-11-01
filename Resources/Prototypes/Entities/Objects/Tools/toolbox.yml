@@ -40,10 +40,10 @@
   description: A bright red toolbox, stocked with emergency tools.
   components:
   - type: Sprite
-    sprite: Objects/Tools/Toolboxes/toolbox_red.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_red.rsi #Corvax-WL-Changes
     state: icon
   - type: Item
-    sprite: Objects/Tools/Toolboxes/toolbox_red.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_red.rsi #Corvax-WL-Changes
 
 - type: entity
   name: mechanical toolbox
@@ -52,10 +52,10 @@
   description: A blue box, stocked with mechanical tools.
   components:
   - type: Sprite
-    sprite: Objects/Tools/Toolboxes/toolbox_blue.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_blue.rsi #Corvax-WL-Changes
     state: icon
   - type: Item
-    sprite: Objects/Tools/Toolboxes/toolbox_blue.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_blue.rsi #Corvax-WL-Changes
 
 - type: entity
   name: electrical toolbox
@@ -64,10 +64,10 @@
   description: A toolbox typically stocked with electrical gear.
   components:
   - type: Sprite
-    sprite: Objects/Tools/Toolboxes/toolbox_yellow.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_yellow.rsi #Corvax-WL-Changes
     state: icon
   - type: Item
-    sprite: Objects/Tools/Toolboxes/toolbox_yellow.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_yellow.rsi #Corvax-WL-Changes
 
 - type: entity
   name: electrical toolbox
@@ -107,10 +107,10 @@
   description: A toolbox typically stocked with artistic supplies.
   components:
   - type: Sprite
-    sprite: Objects/Tools/Toolboxes/toolbox_green.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_green.rsi #Corvax-WL-Changes
     state: icon
   - type: Item
-    sprite: Objects/Tools/Toolboxes/toolbox_green.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_green.rsi #Corvax-WL-Changes
 
 - type: entity
   name: suspicious toolbox
@@ -119,10 +119,10 @@
   description: A sinister looking toolbox filled with elite syndicate tools.
   components:
   - type: Sprite
-    sprite: Objects/Tools/Toolboxes/toolbox_syn.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_syn.rsi #Corvax-WL-Changes
     state: icon
   - type: Item
-    sprite: Objects/Tools/Toolboxes/toolbox_syn.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_syn.rsi #Corvax-WL-Changes
   - type: Storage
     maxItemSize: Huge
     grid:
@@ -139,10 +139,10 @@
   description: A solid gold toolbox. A rapper would kill for this.
   components:
   - type: Sprite
-    sprite: Objects/Tools/Toolboxes/toolbox_gold.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_gold.rsi #Corvax-WL-Changes
     state: icon
   - type: Item
-    sprite: Objects/Tools/Toolboxes/toolbox_gold.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_gold.rsi #Corvax-WL-Changes
 
 - type: entity
   id: ToolboxThief
@@ -151,7 +151,7 @@
   parent: [ BaseItem, BaseMinorContraband ]
   components:
   - type: Sprite
-    sprite: Objects/Tools/Toolboxes/toolbox_thief.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_thief.rsi #Corvax-WL-Changes
     state: icon
   - type: ThiefUndeterminedBackpack
     possibleSets:

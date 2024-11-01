@@ -51,7 +51,7 @@
 - type: cargoProduct
   id: EngineeringElectricalSupplies
   icon:
-    sprite: Objects/Tools/Toolboxes/toolbox_yellow.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_yellow.rsi #Corvax-WL-Changes
     state: icon
   product: CrateEngineeringElectricalSupplies
   cost: 4500
@@ -91,7 +91,7 @@
 - type: cargoProduct
   id: AirlockKit
   icon:
-    sprite: Objects/Tools/Toolboxes/toolbox_yellow.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_yellow.rsi #Corvax-WL-Changes
     state: icon
   product: CrateAirlockKit
   cost: 1100
