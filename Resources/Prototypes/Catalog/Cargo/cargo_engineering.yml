@@ -71,7 +71,7 @@
 - type: cargoProduct
   id: EngineeringJetpack
   icon:
-    sprite: Objects/Tanks/Jetpacks/blue.rsi
+    sprite: _WL/Objects/Tanks/Jetpacks/blue.rsi #Corvax-WL-Changes
     state: icon
   product: CrateEngineeringJetpack
   cost: 1000
@@ -81,7 +81,7 @@
 - type: cargoProduct
   id: EngineeringMiniJetpack
   icon:
-    sprite: Objects/Tanks/Jetpacks/mini.rsi
+    sprite: _WL/Objects/Tanks/Jetpacks/mini.rsi #Corvax-WL-Changes
     state: icon
   product: CrateEngineeringMiniJetpack
   cost: 750
