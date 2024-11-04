@@ -21,6 +21,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Damage.Systems;
@@ -45,6 +46,7 @@ namespace Content.Server.Light.EntitySystems
         [Dependency] private readonly PointLightSystem _pointLight = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly DamageOnInteractSystem _damageOnInteractSystem = default!;
+        [Dependency] private readonly IRobustRandom _random = default!; // Corvax-WL
 
         private static readonly TimeSpan ThunkDelay = TimeSpan.FromSeconds(2);
         public const string LightBulbContainer = "light_bulb";
@@ -269,14 +271,31 @@ namespace Content.Server.Light.EntitySystems
                 case LightBulbState.Normal:
                     if (powerReceiver.Powered && light.On)
                     {
-                        SetLight(uid, true, lightBulb.Color, light, lightBulb.LightRadius, lightBulb.LightEnergy, lightBulb.LightSoftness);
-                        _appearance.SetData(uid, PoweredLightVisuals.BulbState, PoweredLightState.On, appearance);
+                        // Corvax-WL-LightSystem start
+
                         var time = _gameTiming.CurTime;
                         if (time > light.LastThunk + ThunkDelay)
                         {
-                            light.LastThunk = time;
-                            _audio.PlayEntity(light.TurnOnSound, Filter.Pvs(uid), uid, true, AudioParams.Default.WithVolume(-10f));
+                            var x = ((_random.Next() % 3) + (_random.Next() % 3)) / 2; // major seconds
+                            var y = (float)_random.Next(0, 10) / 10; // minor, so that our lamps will turn on more randomly
+                            var f = x + y + 0.3; // major + minor + basetime
+                            _appearance.SetData(uid, PoweredLightVisuals.BulbState, PoweredLightState.On, appearance);
+                            uid.SpawnTimer(TimeSpan.FromSeconds(f), () =>
+                                {
+                                    SetLight(uid, true, lightBulb.Color, light, lightBulb.LightRadius, lightBulb.LightEnergy, lightBulb.LightSoftness);
+                                    _audio.PlayEntity(light.TurnOnSound, Filter.Pvs(uid), uid, true, AudioParams.Default.WithVolume(-10f));
+                                    light.LastThunk = time;
+                                }
+                            );
+
                         }
+                        else // if lamp was lit in previous <ThunkDelay> seconds, so that lamp wont go into cycle if not enough time has passed
+                        {
+                            SetLight(uid, true, lightBulb.Color, light, lightBulb.LightRadius, lightBulb.LightEnergy, lightBulb.LightSoftness);
+                            _appearance.SetData(uid, PoweredLightVisuals.BulbState, PoweredLightState.On, appearance);
+                        }
+
+                        // Corvax-WL-LightSystem end
                     }
                     else
                     {
