@@ -31,7 +31,7 @@ public sealed class JobSystem : SharedJobSystem
         if (!_mind.TryGetSession(mindId, out var session))
             return;
 
-        if (!MindTryGetJob(mindId, out _, out var prototype))
+        if (!MindTryGetJob(mindId, out var prototype))
             return;
 
         //WL-Changes-start
@@ -53,6 +53,6 @@ public sealed class JobSystem : SharedJobSystem
         if (MindHasJobWithId(mindId, jobPrototypeId))
             return;
 
-        _roles.MindAddRole(mindId, new JobComponent { Prototype = jobPrototypeId });
+        _roles.MindAddJobRole(mindId, null, false, jobPrototypeId);
     }
 }

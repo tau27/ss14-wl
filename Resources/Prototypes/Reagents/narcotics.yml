@@ -564,6 +564,9 @@
           type: Golem
           shouldHave: false
 # WL species end
+        type: Add
+        time: 10
+        refresh: false
 
 - type: reagent
   id: NorepinephricAcid

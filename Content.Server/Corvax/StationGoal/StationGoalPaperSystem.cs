@@ -2,11 +2,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Server.Fax;
 using Content.Server.GameTicking.Events;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Fax.Components;
-using Content.Server.Station.Systems;
-using Content.Shared.GameTicking;
 using Content.Shared.Paper;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
@@ -85,7 +82,7 @@ namespace Content.Server.Corvax.StationGoal
                 var stationId = StationIdRegex.Match(meta.EntityName).Groups[1].Value;
                 var stationString = string.IsNullOrEmpty(stationId) ? "???" : stationId;
 
-                var goalContent = FormatStringToGoalContent(BaseNTLogo + goal.Text + BaseEndOfGoal, stationString);
+                var goalContent = FormatStringToGoalContent(BaseNTLogo + Loc.GetString(goal.Text) + BaseEndOfGoal, stationString);
 
                 var printout = new FaxPrintout(
                     goalContent,
@@ -130,7 +127,7 @@ namespace Content.Server.Corvax.StationGoal
 
             foreach (var goal in pickedGoals)
             {
-                goalsTotal.Text = goalsTotal.Text + "     " + goal.Text;
+                goalsTotal.Text = Loc.GetString(goalsTotal.Text) + "     " + Loc.GetString(goal.Text);
             }
 
             SendStationGoal(goalsTotal);

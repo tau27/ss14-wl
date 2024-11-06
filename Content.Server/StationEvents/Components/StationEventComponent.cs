@@ -127,7 +127,7 @@ public sealed partial class EventPlayersConfiguration
 
             while (minds.MoveNext(out var mindId, out var mindComponent))
             {
-                if (!jobSystem.MindTryGetJob(mindId, out _, out var jobProto))
+                if (!jobSystem.MindTryGetJob(mindId, out var jobProto))
                     continue;
 
                 if (!jobNsessions.TryAdd(jobProto.ID, 1))
