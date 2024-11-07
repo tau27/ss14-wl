@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.Differencing;
 using Robust.Server.ServerStatus;
 
 namespace Content.Server.Administration;
@@ -64,13 +65,13 @@ public sealed partial class ServerApi
         {
             var absolute_path = context.Url.AbsolutePath;
 
-            if (context.RequestMethod != method)
+            if (context.RequestMethod != method || !CheckPathes(absolute_path, exactPath))
                 return false;
 
             if (!await CheckAccess(context))
                 return true;
 
-            var formatted_maps = CheckPathes(absolute_path, exactPath);
+            var formatted_maps = GetMapArguments(absolute_path, exactPath);
             if (formatted_maps.Count == 0)
                 return true;
 
@@ -79,7 +80,29 @@ public sealed partial class ServerApi
         });
     }
 
-    private static Dictionary<string, string> CheckPathes(string realPath, string predictedPath)
+    private static bool CheckPathes(string realPath, string predictedPath)
+    {
+        var search_regex = ParametrSearchRegex();
+
+        var is_match = search_regex.Matches(predictedPath)
+            .ToList()
+            .TrueForAll(match =>
+            {
+                if (!match.Success)
+                    return false;
+
+                var to_replace = match.Groups[1].Value;
+
+                var inner_regex = new Regex(predictedPath.Replace(to_replace, "(.*)"));
+                var inner_match = inner_regex.Match(realPath);
+
+                return inner_match.Success;
+            });
+
+        return is_match;
+    }
+
+    private static Dictionary<string, string> GetMapArguments(string realPath, string predictedPath)
     {
         var search_regex = ParametrSearchRegex();
 

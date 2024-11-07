@@ -9,19 +9,15 @@ using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.ServerUpdates;
-using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared.Chat;
-using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Roles;
 using Robust.Server;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -40,7 +36,6 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly IBanManager _banManager = default!;
         [Dependency] private readonly IBaseServer _baseServer = default!;
         [Dependency] private readonly IChatManager _chatManager = default!;
-        [Dependency] private readonly IConfigurationManager _configurationManager = default!;
         [Dependency] private readonly IConsoleHost _consoleHost = default!;
         [Dependency] private readonly IGameMapManager _gameMapManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -66,7 +61,6 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly SharedTransformSystem _transform = default!;
         [Dependency] private readonly UserDbDataManager _userDb = default!;
         [Dependency] private readonly MetaDataSystem _metaData = default!;
-        [Dependency] private readonly RoleSystem _roles = default!;
         [Dependency] private readonly ServerDbEntryManager _dbEntryManager = default!;
 
         [ViewVariables] private bool _initialized;

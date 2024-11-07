@@ -389,6 +389,14 @@
   - type: NonSpreaderZombie
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 0
 
 - type: entity
   name: glockroach
@@ -1400,8 +1408,7 @@
   components:
     # make the player a traitor once its taken
   - type: AutoTraitor
-    giveUplink: false
-    giveObjectives: false
+    profile: TraitorReinforcement
 
 - type: entity
   id: MobMonkeySyndicateAgentNukeops # Reinforcement exclusive to nukeops uplink
@@ -1425,11 +1432,14 @@
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
+    allowedEmotes: ['Thump']
   - type: Vocal
     sounds:
       Male: MaleReptilian
       Female: FemaleReptilian
       Unsexed: MaleReptilian
+  - type: BodyEmotes
+    soundsId: ReptilianBodyEmotes
   - type: TypingIndicator
     proto: lizard
   - type: InteractionPopup
@@ -1559,8 +1569,7 @@
   components:
     # make the player a traitor once its taken
   - type: AutoTraitor
-    giveUplink: false
-    giveObjectives: false
+    profile: TraitorReinforcement
 
 - type: entity
   id: MobKoboldSyndicateAgentNukeops # Reinforcement exclusive to nukeops uplink
@@ -3370,7 +3379,10 @@
   - type: NpcFactionMember
     factions:
     - Passive
-
+  - type: HTN
+    rootTask:
+      task: RuminantCompound
+      
 - type: entity
   name: diona nymph
   parent: [SimpleMobBase, StripableInventoryBase]

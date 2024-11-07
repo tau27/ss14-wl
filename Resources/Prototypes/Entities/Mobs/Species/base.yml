@@ -191,8 +191,6 @@
     handDelay: 2 # WL delay reduction
   - type: UserInterface
     interfaces:
-      enum.VoiceMaskUIKey.Key:
-        type: VoiceMaskBoundUserInterface
       enum.HumanoidMarkingModifierKey.Key:
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:

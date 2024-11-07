@@ -33,7 +33,7 @@ public sealed class WLCVars
         CVarDef.Create(
             "admin.wl_api_token", string.Empty,
             CVar.SERVERONLY | CVar.CONFIDENTIAL,
-            "Строковой токен, использующийся для авторизации HTTP-запросов, отправленных на API сервера.");
+            "Строковой токен, использующийся для авторизации HTTP-запросов, отправленных на http API сервера.");
 
     /*
      *  Discord

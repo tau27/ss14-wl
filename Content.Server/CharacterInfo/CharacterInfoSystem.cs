@@ -49,7 +49,7 @@ public sealed class CharacterInfoSystem : EntitySystem
                 objectives[issuer].Add(info.Value);
             }
 
-            if (_jobs.MindTryGetJob(mindId, out _, out var jobProto))
+            if (_jobs.MindTryGetJob(mindId, out var jobProto))
                 jobTitle = _roles.GetSubnameBySesssion(args.SenderSession, jobProto.ID) ?? jobProto.LocalizedName;
 
             // Get briefing

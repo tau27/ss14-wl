@@ -83,7 +83,7 @@
       - PosterContrabandBeachStarYamamoto
       - PosterContrabandHighEffectEngineering
       - PosterContrabandNuclearDeviceInformational
-      - PosterLegitEnlist # Corvax-Lore
+      #- PosterLegitEnlist # Corvax-Lore # WL-Changes
       - PosterContrabandRevolt
       - PosterContrabandRise
       - PosterContrabandMoth
@@ -150,7 +150,6 @@
       - PosterLegitPeriodicTable
       - PosterLegitRenault
       - PosterLegitNTTGC
-      # Corvax WL start
       - PosterLegitSafetyMothPoisoning
       - PosterLegitSafetyMothBoH
       - PosterLegitSafetyMothSmokey
@@ -160,5 +159,5 @@
       - PosterLegitSafetyMothEpi
       - PosterLegitSafetyMothHardhat
       - PosterLegitSafetyMothPiping
-      # Corvax WL end
+      - PosterLegitSafetyMothSSD
     chance: 1
