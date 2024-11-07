@@ -31,7 +31,7 @@ public sealed class WLCVars
     /// </summary>
     public static readonly CVarDef<string> WLApiToken =
         CVarDef.Create(
-            "admin.wl_api_token", "92132c05009d46c25ffa1d7263b8f24226abef8a7503ce7c26175b0f0e3db61dc82907a3bd7b72f8321206fc42576bb2896c9a937714d2cbf422d3507fc078492cedd3fa6300eb8fa75f4ceffe8577c6790bc0a93ea989e9cbc15e090dff97eb",
+            "admin.wl_api_token", string.Empty,
             CVar.SERVERONLY | CVar.CONFIDENTIAL,
             "Строковой токен, использующийся для авторизации HTTP-запросов, отправленных на API сервера.");
 
@@ -51,11 +51,75 @@ public sealed class WLCVars
     /// Интервал, через который Поли™ будет готова выбрать новое сообщение!
     /// </summary>
     public static readonly CVarDef<int> PolyMessageChooseCooldown =
-        CVarDef.Create("poly.choose_cooldown_time", 3600, CVar.SERVERONLY);
+        CVarDef.Create("poly.choose_cooldown_time", 3600, CVar.SERVERONLY,
+            "Интервал, через который Поли™ будет готова выбрать новое сообщение!");
 
     /// <summary>
     /// Нужна ли очистка выбранных Поли™ сообщений после РАУНДА.
     /// </summary>
     public static readonly CVarDef<bool> PolyNeededRoundEndCleanup =
-        CVarDef.Create("poly.round_end_cleanup", false, CVar.SERVERONLY);
+        CVarDef.Create("poly.round_end_cleanup", false, CVar.SERVERONLY,
+            "Нужна ли очистка выбранных Поли™ сообщений после РАУНДА.");
+
+    /*
+     * Chat Gpt
+     */
+    /// <summary>
+    /// Апи-ключ для авторизации запросов к ЭйАй.
+    /// </summary>
+    public static readonly CVarDef<string> GptApiKey =
+        CVarDef.Create("gpt.api_key", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL | CVar.SERVER);
+
+    /// <summary>
+    /// Ссылка, на которую будут отправляться запросы от клиента OpenAi.
+    /// </summary>
+    public static readonly CVarDef<string> GptQueriesEndpoint =
+        CVarDef.Create("gpt.endpoint", "https://api.proxyapi.ru/openai/v1/chat/completions", CVar.SERVERONLY | CVar.CONFIDENTIAL | CVar.SERVER);
+
+    /// <summary>
+    /// Работает(включен) ли ChatGptManager на данный момент.
+    /// </summary>
+    public static readonly CVarDef<bool> IsGptEnabled =
+        CVarDef.Create("gpt.enabled", true, CVar.REPLICATED);
+
+    /// <summary>
+    /// Чат-модель, которая будет использоваться для отправки запросов.
+    /// </summary>
+    public static readonly CVarDef<string> GptChatModel =
+        CVarDef.Create("gpt.chat_model", "gpt-4o-mini", CVar.SERVERONLY | CVar.CONFIDENTIAL | CVar.SERVER);
+
+    /// <summary>
+    /// Максимальное количество токенов, которое может вернуть в ответе на запрос ИИ.
+    /// </summary>
+    public static readonly CVarDef<int> GptMaxTokens =
+        CVarDef.Create("gpt.max_tokens", 250, CVar.SERVERONLY | CVar.SERVER);
+
+    /// <summary>
+    /// Путь, по которому можно получить баланс аккаунта.
+    /// </summary>
+    public static readonly CVarDef<string> GptBalanceMap =
+        CVarDef.Create("gpt.balance_map", "https://api.proxyapi.ru/proxyapi/balance", CVar.SERVERONLY | CVar.SERVER);
+
+    /*
+     * Central Command AI
+     */
+    /// <summary>
+    /// Максимальное количество запросов на ЦК в минуту, на которые будет дан ответ.
+    /// </summary>
+    public static readonly CVarDef<int> CCMaxQueriesPerMinute =
+        CVarDef.Create("central_command.max_queries_per_minute", 1, CVar.SERVERONLY | CVar.SERVER);
+
+    /// <summary>
+    /// Максимальное время ответа на факс.
+    /// В секундах.
+    /// </summary>
+    public static readonly CVarDef<int> CCMaxResponseTime =
+        CVarDef.Create("central_command.max_response_time", 800, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Минимальное время ответа на факс.
+    /// В секундах.
+    /// </summary>
+    public static readonly CVarDef<int> CCMinResponseTime =
+        CVarDef.Create("central_command.min_response_time", 300, CVar.SERVERONLY);
 }

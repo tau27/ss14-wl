@@ -1,0 +1,15 @@
+- type: ertConfig
+  id: Standart
+  entry:
+    Clowns:
+      shuttlePath: /Maps/Shuttles/dart.yml
+    Engineers:
+      shuttlePath: /Maps/Shuttles/dart.yml
+    Security:
+      shuttlePath: /Maps/Shuttles/dart.yml
+    Medical:
+      shuttlePath: /Maps/Shuttles/dart.yml
+    Janitors:
+      shuttlePath: /Maps/Shuttles/dart.yml
+    Chaplains:
+      shuttlePath: /Maps/Shuttles/dart.yml

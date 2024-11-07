@@ -2,8 +2,6 @@ using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
 using Content.Client.DebugMon;
-using Content.Client.Corvax.TTS;
-using Content.Client.Options;
 using Content.Client.Eui;
 using Content.Client.Fullscreen;
 using Content.Client.GhostKick;
@@ -37,6 +35,15 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
+using Robust.Shared.Reflection;
+using Robust.Shared.Serialization.Markdown.Sequence;
+using Robust.Shared.Serialization.Markdown;
+using Robust.Shared.Utility;
+using System.IO;
+using System.Linq;
+using YamlDotNet.RepresentationModel;
+using Robust.Shared.Serialization.Markdown.Value;
+using Robust.Shared.Serialization.Markdown.Mapping;
 
 namespace Content.Client.Entry
 {
@@ -123,6 +130,12 @@ namespace Content.Client.Entry
             _prototypeManager.RegisterIgnore("nukeopsRole");
             _prototypeManager.RegisterIgnore("stationGoal"); // Corvax-StationGoal
             _prototypeManager.RegisterIgnore("ghostRoleRaffleDecider");
+
+            foreach (var item in IgnorePrototypes())
+            {
+                _prototypeManager.RegisterIgnore(item);
+                Logger.Debug(item);
+            }
 
             _componentFactory.GenerateNetIds();
             _adminManager.Initialize();
@@ -220,5 +233,46 @@ namespace Content.Client.Entry
                 _debugMonitorManager.FrameUpdate();
             }
         }
+
+        //WL-Changes-start
+        private HashSet<string> IgnorePrototypes()
+        {
+            var sequence = new HashSet<string>();
+
+            foreach (var path in _resourceManager.ContentFindFiles("/"))
+            {
+                if (!path.CanonPath.Contains("_SERVER"))
+                    continue;
+
+                if (!_resourceManager.TryContentFileRead(path, out var stream))
+                    continue;
+
+                using var reader = new StreamReader(stream, EncodingHelpers.UTF8);
+                var documents = DataNodeParser.ParseYamlStream(reader);
+
+                if (documents == null)
+                    continue;
+
+                foreach (var document in documents)
+                {
+                    var seq = ((SequenceDataNode)document.Root).Sequence;
+
+                    foreach (var item in seq)
+                    {
+
+                        if (item is not MappingDataNode mapping_node)
+                            continue;
+
+                        if (!mapping_node.TryGet("type", out var node))
+                            continue;
+
+                        sequence.Add(node.ToString());
+                    }
+                }
+            }
+
+            return sequence;
+        }
+        //WL-Changes-end
     }
 }
