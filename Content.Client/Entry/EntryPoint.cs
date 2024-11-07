@@ -135,7 +135,6 @@ namespace Content.Client.Entry
             foreach (var item in IgnorePrototypes())
             {
                 _prototypeManager.RegisterIgnore(item);
-                Logger.Debug(item);
             }
 
             _componentFactory.GenerateNetIds();
