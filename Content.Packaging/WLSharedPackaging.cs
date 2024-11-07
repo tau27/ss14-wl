@@ -31,16 +31,13 @@ namespace Content.Packaging
                 var filename = Path.GetFileName(path);
 
                 var blacklisted_f = ignoreSet.Contains(filename);
-
-                var blacklisted_r = ignoreRegexes.Any(regex =>
-                {
-                    return regex.IsMatch(path);
-                });
+                var blacklisted_r = IsIgnoredByRegex(path);
 
                 if (blacklisted_r || blacklisted_f)
                     continue;
 
                 var targetPath = Path.Combine(targetDir, filename);
+
                 if (Directory.Exists(path))
                     CopyDirIntoZip(path, targetPath, pass);
                 else
@@ -57,12 +54,23 @@ namespace Content.Packaging
                 var relPath = Path.GetRelativePath(directory, file);
                 var zipPath = $"{basePath}/{relPath}";
 
+                if (IsIgnoredByRegex(file))
+                    continue;
+
                 if (Path.DirectorySeparatorChar != '/')
                     zipPath = zipPath.Replace(Path.DirectorySeparatorChar, '/');
 
                 // Console.WriteLine($"{directory}/{zipPath} -> /{zipPath}");
                 pass.InjectFileFromDisk(zipPath, file);
             }
+        }
+
+        private static bool IsIgnoredByRegex(string path)
+        {
+            return ContentClientIgnoredResources.Any(regex =>
+            {
+                return regex.IsMatch(path);
+            });
         }
     }
 }
