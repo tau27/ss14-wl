@@ -21,8 +21,11 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi.Functions
         public override JsonSchemeType ReturnType => JsonSchemeType.Object;
         public override LocId FallbackMessage => "gpt-command-made-notify-fallback";
 
-        public override string? Invoke(Arguments arguments)
+        public override string? Invoke(Arguments? arguments)
         {
+            if (arguments == null)
+                return null;
+
             if (!arguments.TryCaste<string>("text", out var text))
                 return null;
 

@@ -1,13 +1,13 @@
 using Content.Server._WL.ChatGpt.Elements.OpenAi;
 using Content.Server._WL.ChatGpt.Elements.OpenAi.Request;
 using Content.Server._WL.ChatGpt.Elements.OpenAi.Response;
+using Content.Server._WL.CVars;
 using Content.Shared._WL.CCVars;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -74,8 +74,8 @@ namespace Content.Server._WL.ChatGpt.Managers
         private void SetupCVars()
         {
             // Api key
-            _apiKey = _confMan.GetCVar(WLCVars.GptApiKey);
-            _confMan.OnValueChanged(WLCVars.GptApiKey, (value) => _apiKey = value, true);
+            _apiKey = _confMan.GetCVar(ServerWLCVars.GptApiKey);
+            _confMan.OnValueChanged(ServerWLCVars.GptApiKey, (value) => _apiKey = value, true);
 
             // Endpoint
             _endpoint = _confMan.GetCVar(WLCVars.GptQueriesEndpoint);

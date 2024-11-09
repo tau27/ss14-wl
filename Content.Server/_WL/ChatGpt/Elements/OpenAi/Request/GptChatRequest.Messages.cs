@@ -71,8 +71,15 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi.Request
         /// Инструмент.
         /// Используется для оповещения модель о том, что она выбрала какую-то функцию.
         /// </summary>
-        public sealed class Tool(string content) : GptChatMessage(ModelRole.ModelRoleType.Tool, content)
+        public sealed class Tool : GptChatMessage
         {
+            private static readonly string FallbackContent = "";
+
+            public Tool(string? content) : base(ModelRole.ModelRoleType.Tool, content ?? FallbackContent)
+            {
+                
+            }
+
             /// <summary>
             /// ID выбранной функции.
             /// Смотреть <see cref="Response.GptChoice.ChoiceMessage.ResponseToolCall.ID"/>.

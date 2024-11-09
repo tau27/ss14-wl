@@ -244,7 +244,7 @@ namespace Content.Client.Entry
         {
             var sequence = new HashSet<string>();
 
-#if !FULL_RELEASE && !RELEASE
+#if !FULL_RELEASE //&& !RELEASE
             foreach (var path in _resourceManager.ContentFindFiles("/"))
             {
                 try

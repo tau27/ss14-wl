@@ -23,8 +23,11 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi.Functions
         };
         public override LocId FallbackMessage => "gpt-command-spawn-ert-shuttle-fallback";
 
-        public override string? Invoke(Arguments arguments)
+        public override string? Invoke(Arguments? arguments)
         {
+            if (arguments == null)
+                return null;
+
             if (!arguments.TryCaste<string>("type", out var parsed))
                 return null;
 

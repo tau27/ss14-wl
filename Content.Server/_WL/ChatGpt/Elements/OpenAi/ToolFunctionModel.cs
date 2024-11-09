@@ -33,7 +33,7 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi
         /// </summary>
         /// <param name="arguments">Аргументы, переданные в эту функцию.</param>
         /// <returns>Строку-статус, который будет передан текстовой модели для понимания того, что она сделала.</returns>
-        public virtual string? Invoke(Arguments arguments) => null;
+        public virtual string? Invoke(Arguments? arguments) => null;
 
         /// <summary>
         /// Тип объекта, возвращаемый функцией.
@@ -209,8 +209,12 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi
                 return true;
             }
 
-            public static Arguments FromNode(JsonNode node)
+            [return: NotNullIfNotNull(nameof(node))]
+            public static Arguments? FromNode(JsonNode? node)
             {
+                if (node == null)
+                    return null;
+
                 return new Arguments(node);
             }
 

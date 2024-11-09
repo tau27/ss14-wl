@@ -56,8 +56,11 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi.Functions
             };
         }
 
-        public override string? Invoke(ToolFunctionModel.Arguments arguments)
+        public override string? Invoke(ToolFunctionModel.Arguments? arguments)
         {
+            if (arguments == null)
+                return null;
+
             if (!arguments.TryCaste<string>("level", out var level))
                 return null;
 

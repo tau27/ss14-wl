@@ -301,24 +301,18 @@ namespace Content.Server._WL.GameTicking.Round.CentralCommand.Systems
         {
             var chosen_tools = ToolFunctionModel.GiveChosenModels(called, tools);
 
-            var skip_sending = chosen_tools
-                .Where(e => e.Model is NoNeedAIAnswerFunction)
-                .Any();
+            var skip_sending = false;
 
             var messages = new List<GptChatMessage>();
 
             foreach (var (response, function) in chosen_tools)
             {
+                if (function is NoNeedAIAnswerFunction)
+                    skip_sending = true;
+
                 var arguments = response.Function.ParseArguments();
-                if (arguments == null)
-                    continue;
 
                 var content = function.Invoke(ToolFunctionModel.Arguments.FromNode(arguments));
-
-                DebugTools.AssertNotNull(content, "ccAiSys.handleToolResponse content was null");
-
-                if (content == null)
-                    continue;
 
                 var msg = new GptChatMessage.Tool(content)
                 {

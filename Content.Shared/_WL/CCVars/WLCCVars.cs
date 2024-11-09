@@ -65,12 +65,6 @@ public sealed class WLCVars
      * Chat Gpt
      */
     /// <summary>
-    /// Апи-ключ для авторизации запросов к ЭйАй.
-    /// </summary>
-    public static readonly CVarDef<string> GptApiKey =
-        CVarDef.Create("gpt.api_key", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL | CVar.SERVER);
-
-    /// <summary>
     /// Ссылка, на которую будут отправляться запросы от клиента OpenAi.
     /// </summary>
     public static readonly CVarDef<string> GptQueriesEndpoint =
