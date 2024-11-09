@@ -9,6 +9,7 @@ using Content.Server._WL.Ert;
 using Content.Server.AlertLevel;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
+using Content.Server.Clock;
 using Content.Server.Fax;
 using Content.Server.RoundEnd;
 using Content.Server.Station.Systems;
@@ -45,6 +46,7 @@ namespace Content.Server._WL.GameTicking.Round.CentralCommand.Systems
         [Dependency] private readonly ChatSystem _chat = default!;
         [Dependency] private readonly RoundEndSystem _roundEnd = default!;
         [Dependency] private readonly ErtSystem _ert = default!;
+        [Dependency] private readonly ClockSystem _clock = default!;
 
         private ISawmill _sawmill = default!;
 
@@ -154,6 +156,7 @@ namespace Content.Server._WL.GameTicking.Round.CentralCommand.Systems
 
             var alert_level_loc = _alertLevel.GetLevelLocString(alert_level);
 
+            //TODO: заменить на строки локализации
             var alert_message = new GptChatMessage.System($"У них на станции сейчас {alert_level_loc} код!");
             gpt_messages.Add(alert_message);
 
@@ -258,16 +261,16 @@ namespace Content.Server._WL.GameTicking.Round.CentralCommand.Systems
                 {
                     var tool_resp = await HandleToolResponse([.. tools], methods, proto);
 
-                    content = tool_resp.Message.Content;
+                    content = tool_resp?.Message.Content;
                 }
 
                 if (content == null)
                 {
-                    _sawmill.Error("Обработанная функция вернула <NULL>!");
+                    _sawmill.Warning("Обработанная функция вернула <NULL>!");
                     return;
                 }
 
-                var fax_content = NTLogo(DateTime.Now, content, Name(queue.Station));
+                var fax_content = NTLogo(DateTime.UtcNow, content, Name(queue.Station));
                 var fax = new FaxPrintout(
                     fax_content,
                     "Ответ от ЦК",
@@ -291,14 +294,18 @@ namespace Content.Server._WL.GameTicking.Round.CentralCommand.Systems
             }
         }
 
-        private async Task<GptChoice> HandleToolResponse(
+        private async Task<GptChoice?> HandleToolResponse(
             IEnumerable<GptChoice.ChoiceMessage.ResponseToolCall> called,
             IEnumerable<ToolFunctionModel> tools,
             AIChatPrototype proto)
         {
             var chosen_tools = ToolFunctionModel.GiveChosenModels(called, tools);
 
-            var messages = new List<GptChatMessage.Tool>();
+            var skip_sending = chosen_tools
+                .Where(e => e.Model is NoNeedAIAnswerFunction)
+                .Any();
+
+            var messages = new List<GptChatMessage>();
 
             foreach (var (response, function) in chosen_tools)
             {
@@ -321,6 +328,12 @@ namespace Content.Server._WL.GameTicking.Round.CentralCommand.Systems
                 messages.Add(msg);
             }
 
+            if (skip_sending)
+            {
+                _gptSys.AddToMemory(proto.ID, messages);
+                return null;
+            }
+
             var req = new GptChatRequest()
             {
                 Messages = messages.ToArray()
@@ -338,7 +351,8 @@ namespace Content.Server._WL.GameTicking.Round.CentralCommand.Systems
                 new SetAlertLevelFunction(_alertLevel, station, _protoMan), // Смена кодов
                 new MadeNotifyFunction(_chat, station),
                 new CallEvacShuttleFunction(_roundEnd),
-                new ERTSpawnShuttleFunction(_ert)
+                new ERTSpawnShuttleFunction(_ert),
+                new NoNeedAIAnswerFunction()
             };
 
             return list;

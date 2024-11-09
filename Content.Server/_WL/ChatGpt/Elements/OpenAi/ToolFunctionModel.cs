@@ -19,9 +19,9 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi
         public abstract LocId Description { get; }
 
         /// <summary>
-        /// Сообщени
+        /// Сообщение, использующееся для указания ИИ его действие.
         /// </summary>
-        public abstract LocId FallbackMessage { get; }
+        public virtual LocId FallbackMessage { get; }
 
         /// <summary>
         /// Аргументы метода.
@@ -33,7 +33,7 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi
         /// </summary>
         /// <param name="arguments">Аргументы, переданные в эту функцию.</param>
         /// <returns>Строку-статус, который будет передан текстовой модели для понимания того, что она сделала.</returns>
-        public abstract string? Invoke(Arguments arguments);
+        public virtual string? Invoke(Arguments arguments) => null;
 
         /// <summary>
         /// Тип объекта, возвращаемый функцией.

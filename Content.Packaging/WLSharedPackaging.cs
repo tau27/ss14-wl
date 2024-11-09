@@ -30,10 +30,9 @@ namespace Content.Packaging
 
                 var filename = Path.GetFileName(path);
 
-                var blacklisted_f = ignoreSet.Contains(filename);
-                var blacklisted_r = IsIgnoredByRegex(path);
+                var ignored = ignoreSet.Contains(filename) || IsIgnoredByRegex(path);
 
-                if (blacklisted_r || blacklisted_f)
+                if (ignored)
                     continue;
 
                 var targetPath = Path.Combine(targetDir, filename);

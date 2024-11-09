@@ -33,19 +33,11 @@ namespace Content.Server._WL.ChatGpt.Systems
 
         private const string SawmillId = "chat.gpt.sys";
 
-        private static readonly Gauge _inputTokens = Metrics.CreateGauge(
-            "gpt_input_tokens_count",
-            "Количество входящих токенов за весь раунд.");
-
-        private static readonly Gauge _outputTokens = Metrics.CreateGauge(
-            "gpt_output_tokens_count",
-            "Количество выходящих токенов за весь раунд.");
-
         private decimal _spentRubles = 0;
 
         private Dictionary<ProtoId<AIChatPrototype>, List<GptChatMessage>> _dialogues = default!;
 
-        private static readonly TimeSpan QueryTimeout = TimeSpan.FromMilliseconds(3000); //УБЕРИТЕ((((((((((((( пиздец
+        private static readonly TimeSpan QueryTimeout = TimeSpan.FromMilliseconds(9000); //УБЕРИТЕ((((((((((((( пиздец
 
         public override void Initialize()
         {
@@ -116,9 +108,6 @@ namespace Content.Server._WL.ChatGpt.Systems
 
             var resp = await _gpt.SendChatQueryAsync(req, methods, cancel);
 
-            _inputTokens.Inc(resp.Usage.InputTokens);
-            _outputTokens.Inc(resp.Usage.OutputTokens);
-
             if (proto.UseMemory)
             {
                 if (resp.Choices.Length == 0)
@@ -130,6 +119,12 @@ namespace Content.Server._WL.ChatGpt.Systems
             }
 
             return resp;
+        }
+
+        public void AddToMemory(ProtoId<AIChatPrototype> ai, List<GptChatMessage> msgs)
+        {
+            if (!_dialogues.TryAdd(ai, msgs))
+                _dialogues[ai].AddRange(msgs);
         }
 
         private void SetupMemory()
@@ -154,9 +149,6 @@ namespace Content.Server._WL.ChatGpt.Systems
             {
                 ClearMemory(item.Key);
             }
-
-            _inputTokens.Set(0);
-            _outputTokens.Set(0);
         }
 
         /// <summary>

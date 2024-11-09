@@ -36,14 +36,10 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
-using Robust.Shared.Reflection;
 using Robust.Shared.Serialization.Markdown.Sequence;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Utility;
 using System.IO;
-using System.Linq;
-using YamlDotNet.RepresentationModel;
-using Robust.Shared.Serialization.Markdown.Value;
 using Robust.Shared.Serialization.Markdown.Mapping;
 
 namespace Content.Client.Entry
@@ -132,11 +128,12 @@ namespace Content.Client.Entry
             _prototypeManager.RegisterIgnore("stationGoal"); // Corvax-StationGoal
             _prototypeManager.RegisterIgnore("ghostRoleRaffleDecider");
 
+            //WL-Changes-start
             foreach (var item in IgnorePrototypes())
             {
                 _prototypeManager.RegisterIgnore(item);
-                Logger.Debug(item);
             }
+            //WL-Changes-end
 
             _componentFactory.GenerateNetIds();
             _adminManager.Initialize();
@@ -247,37 +244,46 @@ namespace Content.Client.Entry
         {
             var sequence = new HashSet<string>();
 
+#if !FULL_RELEASE && !RELEASE
             foreach (var path in _resourceManager.ContentFindFiles("/"))
             {
-                if (!path.CanonPath.Contains("_SERVER"))
-                    continue;
-
-                if (!_resourceManager.TryContentFileRead(path, out var stream))
-                    continue;
-
-                using var reader = new StreamReader(stream, EncodingHelpers.UTF8);
-                var documents = DataNodeParser.ParseYamlStream(reader);
-
-                if (documents == null)
-                    continue;
-
-                foreach (var document in documents)
+                try
                 {
-                    var seq = ((SequenceDataNode)document.Root).Sequence;
+                    if (!path.CanonPath.Contains("_SERVER"))
+                        continue;
 
-                    foreach (var item in seq)
+                    if (!_resourceManager.TryContentFileRead(path, out var stream))
+                        continue;
+
+                    using var reader = new StreamReader(stream, EncodingHelpers.UTF8);
+                    var documents = DataNodeParser.ParseYamlStream(reader);
+
+                    if (documents == null)
+                        continue;
+
+                    foreach (var document in documents)
                     {
+                        var seq = ((SequenceDataNode)document.Root).Sequence;
 
-                        if (item is not MappingDataNode mapping_node)
-                            continue;
+                        foreach (var item in seq)
+                        {
 
-                        if (!mapping_node.TryGet("type", out var node))
-                            continue;
+                            if (item is not MappingDataNode mapping_node)
+                                continue;
 
-                        sequence.Add(node.ToString());
+                            if (!mapping_node.TryGet("type", out var node))
+                                continue;
+
+                            sequence.Add(node.ToString());
+                        }
                     }
                 }
+                catch
+                {
+                    continue;
+                }
             }
+#endif
 
             return sequence;
         }

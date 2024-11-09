@@ -2,11 +2,13 @@ namespace Content.Shared._WL.Ert
 {
     public enum ErtType
     {
-        Clowns,
+        //Clowns,
         Engineers,
         Security,
         Medical,
         Janitors,
-        Chaplains
+        Chaplains,
+        //DeathSquad,
+        //CBurn
     }
 }
