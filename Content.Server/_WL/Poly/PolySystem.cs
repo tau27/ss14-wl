@@ -143,7 +143,7 @@ namespace Content.Server._WL.Poly
         private void HandleQueries()
         {
             var sessions = _playMan.Sessions
-                .Where(s => s.Status is SessionStatus.InGame or SessionStatus.Connected)
+                .Where(s => s.Status == SessionStatus.InGame)
                 .ToDictionary(k => k, v => 0);
 
             if (sessions.Count == 0)
@@ -159,7 +159,7 @@ namespace Content.Server._WL.Poly
 
             foreach (var item in _queriedEntities)
             {
-                if (queries > MAX_QUERIES_PER_PLAYER)
+                if (queries >= MAX_QUERIES_PER_PLAYER)
                 {
                     session_pair = PickSession();
 
@@ -174,10 +174,9 @@ namespace Content.Server._WL.Poly
                 var id = item.Key;
 
                 var ev = new PolyServerQueryEvent(sender, id);
-
                 RaiseNetworkEvent(ev, session);
 
-                queries++;
+                sessions[session] = ++queries;
             }
 
             KeyValuePair<ICommonSession, int>? PickSession()
@@ -185,7 +184,15 @@ namespace Content.Server._WL.Poly
                 if (sessions.Count == 0)
                     return null;
 
-                return _random.Pick(sessions);
+                var pair = _random.Pick(sessions);
+
+                if (pair.Value >= MAX_QUERIES_PER_PLAYER)
+                {
+                    sessions.Remove(pair.Key);
+                    return PickSession();
+                }
+
+                return pair;
             }
         }
 
