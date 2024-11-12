@@ -137,17 +137,17 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi
             public string Type => _type.ToJsonSchemeString();
 
             /// <summary>
-            /// Описание аргумента.
+            /// Описание параметра.
             /// </summary>
             public LocId? Description { get; set; }
 
             /// <summary>
-            /// Набор константных значений аргумента.
+            /// Набор константных значений параметра.
             /// </summary>
-            public HashSet<T?>? Enum { get; set; }
+            public HashSet<object?>? Enum { get; set; }
 
             /// <summary>
-            /// Обязателен ли этот аргумент?
+            /// Обязателен ли этот параметра?
             /// </summary>
             public bool Required { get; set; } = true;
 
@@ -207,6 +207,11 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi
                 parsed = parsed_t;
 
                 return true;
+            }
+
+            public string Json()
+            {
+                return _node.ToJsonString();
             }
 
             [return: NotNullIfNotNull(nameof(node))]

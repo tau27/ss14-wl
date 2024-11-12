@@ -43,7 +43,7 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi.Functions
             {
                 ["level"] = new Parameter<string>()
                 {
-                    Enum = levels.ToHashSet() as HashSet<string?>,
+                    Enum = levels.Select(x => (object?)x).ToHashSet(),
                     Description = "gpt-command-set-alert-level-arg-level-desc",
                     Required = true
                 },

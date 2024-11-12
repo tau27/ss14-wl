@@ -11,6 +11,7 @@ using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Clock;
 using Content.Server.Fax;
+using Content.Server.GameTicking;
 using Content.Server.RoundEnd;
 using Content.Server.Station.Systems;
 using Content.Shared._WL.CCVars;
@@ -41,6 +42,7 @@ namespace Content.Server._WL.GameTicking.Round.CentralCommand.Systems
         [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
         [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private readonly GameTicker _ticker = default!;
         [Dependency] private readonly FaxSystem _fax = default!;
         [Dependency] private readonly ILogManager _log = default!;
         [Dependency] private readonly ChatSystem _chat = default!;
@@ -346,7 +348,8 @@ namespace Content.Server._WL.GameTicking.Round.CentralCommand.Systems
                 new MadeNotifyFunction(_chat, station),
                 new CallEvacShuttleFunction(_roundEnd),
                 new ERTSpawnShuttleFunction(_ert),
-                new NoNeedAIAnswerFunction()
+                new NoNeedAIAnswerFunction(),
+                new SpawnSuppliesFunction(_ticker, _protoMan)
             };
 
             return list;
