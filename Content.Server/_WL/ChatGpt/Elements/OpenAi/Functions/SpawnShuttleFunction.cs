@@ -17,7 +17,8 @@ namespace Content.Server._WL.ChatGpt.Elements.OpenAi.Functions
             {
                 Required = true,
                 Enum = Enum.GetNames(typeof(ErtType))?
-                    .ToHashSet() as HashSet<string?>,
+                    .Select(x => (object?)x)
+                    .ToHashSet(),
                 Description = "gpt-command-spawn-ert-shuttle-arg-level-desc"
             }
         };
