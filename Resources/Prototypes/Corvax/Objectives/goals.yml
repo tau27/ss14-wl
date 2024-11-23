@@ -127,6 +127,11 @@
   # department: [ Engineering ]
   # text: station-goal-bunker
 
+- type: stationGoal
+  id: Survive
+  text: station-goal-survive
+  maxPlayers: 40
+
 # Special goals
 
 - type: stationGoal

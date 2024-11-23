@@ -1,16 +1,17 @@
-using System.Linq;
-using System.Text.RegularExpressions;
 using Content.Server.Fax;
 using Content.Server.GameTicking.Events;
 using Content.Server.Station.Systems;
+using Content.Shared._WL.StationGoal;
 using Content.Shared.Fax.Components;
 using Content.Shared.Paper;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared._WL.StationGoal;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Content.Server.Corvax.StationGoal
 {
@@ -24,6 +25,7 @@ namespace Content.Server.Corvax.StationGoal
         [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly FaxSystem _fax = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
 
         private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$");
 

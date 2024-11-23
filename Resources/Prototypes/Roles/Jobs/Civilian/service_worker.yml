@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   id: ServiceWorker
   name: job-name-serviceworker
   description: job-description-serviceworker
@@ -11,7 +11,6 @@
   - крупье
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
-  canBeAntag: true # Corvax-MRP: Available not only for newbies
   access:
   - Service
   - Maintenance

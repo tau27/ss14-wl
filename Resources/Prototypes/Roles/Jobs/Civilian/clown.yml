@@ -9,7 +9,7 @@
   - юморист
   requirements:
   - !type:OverallPlaytimeRequirement
-      time: 90000 #25 hrs # Corvax-RoleTime
+      time: 3600 #1 hrs # Corvax-RoleTime
   startingGear: ClownGear
   icon: "JobIconClown"
   supervisors: job-supervisors-hop
@@ -20,7 +20,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Clumsy
-      clumsyDamage:
+      gunShootFailDamage:
         types: #literally just picked semi random valus. i tested this once and tweaked it.
           Blunt: 5
           Piercing: 4
