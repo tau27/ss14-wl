@@ -16,4 +16,20 @@
   <GuideEntityEmbed Entity="MobSlimePerson" Caption="Слаймолюд"/>
   </Box>
 
+  # Расы WhiteList
+  А в этом секторе Нанотразена вам могут попаться и такие виды
+
+  <Box>
+  <GuideEntityEmbed Entity="MobAndroid" Caption="Андроид"/>
+  <GuideEntityEmbed Entity="MobFelinid" Caption="Феленид"/>
+  <GuideEntityEmbed Entity="MobHumanoidMurine" Caption="Мурин"/>
+  <GuideEntityEmbed Entity="MobHumanoidKidan" Caption="Кидан"/>
+  </Box>
+  <Box>
+  <GuideEntityEmbed Entity="MobGolem" Caption="Голем"/>
+  <GuideEntityEmbed Entity="MobHumanoidTajara" Caption="Таяран"/>
+  <GuideEntityEmbed Entity="MobAkula" Caption="Акула"/>
+  <GuideEntityEmbed Entity="MobCischi" Caption="Цисчи"/>
+  </Box>
+
 </Document>

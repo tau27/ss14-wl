@@ -1124,8 +1124,8 @@
   id: SecurityCadetJumpsuit
   name: loadout-group-security-cadet-jumpsuit
   loadouts:
-  - SecGreyJumpsuit
-  - SecGreyJumpskirt
+  # - SecGreyJumpsuit
+  # - SecGreyJumpskirt
   - RedJumpsuit
   - RedJumpskirt
 

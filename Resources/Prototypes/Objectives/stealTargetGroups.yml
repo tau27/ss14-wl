@@ -60,7 +60,7 @@
   id: JetpackCaptainFilled
   name: steal-target-groups-jetpack-captain-filled
   sprite:
-    sprite: Objects/Tanks/Jetpacks/captain.rsi
+    sprite: _WL/Objects/Tanks/Jetpacks/captain.rsi #Corvax-WL-Changes
     state: icon
 
 - type: stealTargetGroup

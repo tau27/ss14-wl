@@ -51,7 +51,7 @@
 - type: cargoProduct
   id: EngineeringElectricalSupplies
   icon:
-    sprite: Objects/Tools/Toolboxes/toolbox_yellow.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_yellow.rsi #Corvax-WL-Changes
     state: icon
   product: CrateEngineeringElectricalSupplies
   cost: 4500
@@ -71,7 +71,7 @@
 - type: cargoProduct
   id: EngineeringJetpack
   icon:
-    sprite: Objects/Tanks/Jetpacks/blue.rsi
+    sprite: _WL/Objects/Tanks/Jetpacks/blue.rsi #Corvax-WL-Changes
     state: icon
   product: CrateEngineeringJetpack
   cost: 1000
@@ -81,7 +81,7 @@
 - type: cargoProduct
   id: EngineeringMiniJetpack
   icon:
-    sprite: Objects/Tanks/Jetpacks/mini.rsi
+    sprite: _WL/Objects/Tanks/Jetpacks/mini.rsi #Corvax-WL-Changes
     state: icon
   product: CrateEngineeringMiniJetpack
   cost: 750
@@ -91,7 +91,7 @@
 - type: cargoProduct
   id: AirlockKit
   icon:
-    sprite: Objects/Tools/Toolboxes/toolbox_yellow.rsi
+    sprite: _WL/Objects/Tools/Toolboxes/toolbox_yellow.rsi #Corvax-WL-Changes
     state: icon
   product: CrateAirlockKit
   cost: 1100

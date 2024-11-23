@@ -369,6 +369,7 @@
     tags:
     - Raw
     - Meat
+    - MeatDragon # WL tags
   - type: Sprite
     layers:
     - state: dragon
@@ -555,6 +556,7 @@
     tags:
     - Raw
     - Meat
+    - MeatXeno # Wl tags
   - type: Sprite
     state: xeno
   - type: SolutionContainerManager
