@@ -1,6 +1,6 @@
 advertisement-snack-1 = Попробуйте наш новый батончик с нугой!
 advertisement-snack-2 = В два раза больше калорий за полцены!
-advertisement-snack-3 = Самый здоровый!
+advertisement-snack-3 = Наслаждайтесь! Лучшее качество из всего Звёздного Конгломерата!
 advertisement-snack-4 = Шоколадные плитки со множеством наград!
 advertisement-snack-5 = Ммм! Так вкусно!
 advertisement-snack-6 = Боже мой, какой он сочный!
