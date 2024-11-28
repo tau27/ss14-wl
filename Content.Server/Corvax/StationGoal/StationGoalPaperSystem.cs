@@ -190,7 +190,7 @@ namespace Content.Server.Corvax.StationGoal
 
         public string FormatStringToGoalContent(string content, string station)
         {
-            var dateString = DateTime.Now.AddYears(1000).ToString("dd.MM.yyyy");
+            var dateString = DateTime.Now.AddYears(172).ToString("dd.MM.yyyy");
 
             var toReplace = new Dictionary<string, string>();
 
