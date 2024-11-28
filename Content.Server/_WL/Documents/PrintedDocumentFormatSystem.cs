@@ -44,7 +44,7 @@ namespace Content.Server._WL.Documents
                 ? Name(station.Value)
                 : null;
 
-            var formattedDate = $"{_gameTime.CurTime.Subtract(_gameTick.RoundStartTimeSpan).ToString(@"hh\:mm\:ss")} {DateTime.Now.AddYears(1000):dd.MM.yyyy}";
+            var formattedDate = $"{_gameTime.CurTime.Subtract(_gameTick.RoundStartTimeSpan).ToString(@"hh\:mm\:ss")} {DateTime.Now.AddYears(172):dd.MM.yyyy}";
 
             var content = Loc.GetString(paperComp.Content)
                 .Replace(":DATE:", formattedDate)
