@@ -38,26 +38,26 @@ public sealed partial class ExecutionComponent : Component
     [DataField]
     public string InternalGunExecutionMessage = "execution-popup-gun-initial-internal";
     [DataField]
-    public string tExternalGunExecutionMessage = "execution-popup-gun-initial-external";
+    public string ExternalGunExecutionMessage = "execution-popup-gun-initial-external";
     //[DataField]
     //public string CompleteInternalGunExecutionMessage = "execution-popup-gun-complete-internal";
     //[DataField]
     //public string CompleteExternalGunExecutionMessage = "execution-popup-gun-complete-external";
     [DataField]
-    public string InternalGunSuicideMessage = "suicide-popup-gun-initial-internal";
+    public string InternalGunSuicideMessage = "execution-popup-gun-initial-internal-self";
     [DataField]
-    public string ExternalGunSuicideMessage = "suicide-popup-gun-initial-external";
+    public string ExternalGunSuicideMessage = "execution-popup-gun-initial-external-self";
     //[DataField]
-    //public string  = "suicide-popup-gun-complete-internal";
+    //public string  = "execution-popup-gun-complete-internal-self";
     //[DataField]
-    //public string  = "suicide-popup-gun-complete-external";
+    //public string  = "execution-popup-gun-complete-external-self";
     [DataField]
-    public string InternalMeleeSuicideMessage = "suicide-popup-melee-initial-internal";
+    public string InternalMeleeSuicideMessage = "execution-popup-melee-initial-internal-self";
     [DataField]
-    public string ExternalMeleeSuicideMessage = "suicide-popup-melee-initial-external";
+    public string ExternalMeleeSuicideMessage = "execution-popup-melee-initial-external-self";
     //[DataField]
-    //public string  = "suicide-popup-melee-complete-internal";
+    //public string  = "execution-popup-melee-complete-internal-self";
     //[DataField]
-    //public string  = "suicide-popup-melee-complete-external";
+    //public string  = "execution-popup-melee-complete-external-self";
 
 }

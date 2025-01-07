@@ -20,6 +20,7 @@ using System.Threading;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Damage.Components;
 using Content.Shared.Weapons.Ranged;
+using Content.Shared.IdentityManagement;
 
 namespace Content.Shared._WL.Execution;
 
@@ -270,8 +271,7 @@ public sealed class ExecutionSystem : EntitySystem
         comp.Executing = false;
     }
 
-    private void ShowExecutionInternalPopup(string locString,
-        EntityUid attacker, EntityUid victim, EntityUid weapon, bool predict = true)
+    private void ShowExecutionInternalPopupOLD(string locString, EntityUid attacker, EntityUid victim, EntityUid weapon, bool predict = true)
     {
         if (predict)
         {
@@ -294,7 +294,41 @@ public sealed class ExecutionSystem : EntitySystem
         }
 
     }
+
+    private void ShowExecutionInternalPopup(string locString, EntityUid attacker, EntityUid victim, EntityUid weapon, bool predict = true)
+    {
+        if (predict)
+        {
+            _popupSystem.PopupClient(
+               Loc.GetString(locString, ("attacker", Identity.Entity(attacker, EntityManager)), ("victim", Identity.Entity(victim, EntityManager)), ("weapon", weapon)),
+               attacker,
+               attacker,
+               PopupType.MediumCaution
+               );
+        }
+        else
+        {
+            _popupSystem.PopupEntity(
+               Loc.GetString(locString, ("attacker", Identity.Entity(attacker, EntityManager)), ("victim", Identity.Entity(victim, EntityManager)), ("weapon", weapon)),
+               attacker,
+               attacker,
+               PopupType.MediumCaution
+               );
+        }
+    }
+
     private void ShowExecutionExternalPopup(string locString, EntityUid attacker, EntityUid victim, EntityUid weapon)
+    {
+        _popupSystem.PopupEntity(
+            Loc.GetString(locString, ("attacker", Identity.Entity(attacker, EntityManager)), ("victim", Identity.Entity(victim, EntityManager)), ("weapon", weapon)),
+            attacker,
+            Filter.PvsExcept(attacker),
+            true,
+            PopupType.MediumCaution
+            );
+    }
+
+    private void ShowExecutionExternalPopupOLD(string locString, EntityUid attacker, EntityUid victim, EntityUid weapon)
     {
         _popupSystem.PopupEntity(
             Loc.GetString(locString, ("attacker", attacker), ("victim", victim), ("weapon", weapon)),
@@ -329,7 +363,7 @@ public sealed class ExecutionSystem : EntitySystem
             else
             {
                 internalMessage = comp.InternalGunExecutionMessage;
-                externalMessage = comp.tExternalGunExecutionMessage;
+                externalMessage = comp.ExternalGunExecutionMessage;
             }
         }
     }
