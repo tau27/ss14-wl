@@ -36,7 +36,8 @@
   id: ClothingScarfBase
   components:
   - type: TemperatureProtection # WL-modified
-    coefficient: 0.4
+    heatingCoefficient: 1.01    # WL-modified
+    coolingCoefficient: 0.4     # WL-modified
   - type: Tag
     tags:
     - Scarf
