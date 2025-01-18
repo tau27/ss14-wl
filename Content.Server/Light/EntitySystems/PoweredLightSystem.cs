@@ -283,7 +283,7 @@ namespace Content.Server.Light.EntitySystems
                             uid.SpawnTimer(TimeSpan.FromSeconds(f), () =>
                                 {
                                     SetLight(uid, true, lightBulb.Color, light, lightBulb.LightRadius, lightBulb.LightEnergy, lightBulb.LightSoftness);
-                                    _audio.PlayEntity(light.TurnOnSound, Filter.Pvs(uid), uid, true, AudioParams.Default.WithVolume(-10f));
+                                    _audio.PlayPvs(light.TurnOnSound, uid, light.TurnOnSound.Params.AddVolume(-10f));
                                     light.LastThunk = time;
                                 }
                             );
