@@ -14,10 +14,10 @@
   copies: 3
 
 # The power of 3 clowns has proved too strong for the players and may need to be 1984ed.
-- type: preloadedGrid
-  id: Honki
-  path: /Maps/Shuttles/ShuttleEvent/honki.yml
-  copies: 1
+# - type: preloadedGrid
+#   id: Honki
+#   path: /Maps/Shuttles/ShuttleEvent/honki.yml
+#   copies: 1
 
 - type: preloadedGrid
   id: SyndieEvacPod
@@ -64,10 +64,10 @@
   path: /Maps/Shuttles/ShuttleEvent/incorporation.yml
   copies: 1
 
-- type: preloadedGrid
-  id: Instigator
-  path: /Maps/Shuttles/ShuttleEvent/instigator.yml
-  copies: 1
+# - type: preloadedGrid
+#   id: Instigator
+#   path: /Maps/Shuttles/ShuttleEvent/instigator.yml
+#   copies: 1
 
 - type: preloadedGrid
   id: Joe

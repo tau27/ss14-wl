@@ -7,7 +7,7 @@
     - id: UnknownShuttleCargoLost
     - id: UnknownShuttleTravelingCuisine
     - id: UnknownShuttleDisasterEvacPod
-    - id: UnknownShuttleHonki
+    # - id: UnknownShuttleHonki
     - id: UnknownShuttleNTQuark
     - id: UnknownShuttleCruiser
     - id: UnknownShuttleCryptid
@@ -33,7 +33,7 @@
     children:
     - id: LoneOpsSpawn
     - id: UnknownShuttleManOWar
-    - id: UnknownShuttleInstigator
+    # - id: UnknownShuttleInstigator
 
 # Shuttle Game Rules
 
@@ -83,15 +83,15 @@
     preloadedGrid: DisasterEvacPod
 
 # The power of 3 clowns proved too strong for the players and may need to be 1984'ed. Replace this with a more engaging clown shuttle.
-- type: entity
-  parent: BaseUnknownShuttleRule
-  id: UnknownShuttleHonki
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-unknown-shuttle-incoming #!!
-    weight: 2
-  - type: LoadMapRule
-    preloadedGrid: Honki
+# - type: entity
+#   parent: BaseUnknownShuttleRule
+#   id: UnknownShuttleHonki
+#   components:
+#   - type: StationEvent
+#     startAnnouncement: station-event-unknown-shuttle-incoming #!!
+#     weight: 2
+#   - type: LoadMapRule
+#     preloadedGrid: Honki
 
 - type: entity
   parent: BaseUnknownShuttleRule
@@ -174,16 +174,16 @@
   - type: LoadMapRule
     preloadedGrid: NTIncorporation
 
-- type: entity
-  id: UnknownShuttleInstigator
-  parent: BaseUnknownShuttleRule
-  components:
-  - type: StationEvent
-    startAnnouncement: null #dont nark on antags
-    weight: 1 #  lower because antags.
-    earliestStart: 50 # late to hopefully have enough ghosts to fill all roles quickly (3) and because antags
-  - type: LoadMapRule
-    preloadedGrid: Instigator
+# - type: entity
+#   id: UnknownShuttleInstigator
+#   parent: BaseUnknownShuttleRule
+#   components:
+#   - type: StationEvent
+#     startAnnouncement: null #dont nark on antags
+#     weight: 1 #  lower because antags.
+#     earliestStart: 50 # late to hopefully have enough ghosts to fill all roles quickly (3) and because antags
+#   - type: LoadMapRule
+#     preloadedGrid: Instigator
 
 - type: entity
   id: UnknownShuttleJoe
