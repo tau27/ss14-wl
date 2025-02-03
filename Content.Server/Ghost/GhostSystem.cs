@@ -46,7 +46,6 @@ namespace Content.Server.Ghost
     public sealed class GhostSystem : SharedGhostSystem
     {
         [Dependency] private readonly ActionsSystem _actions = default!;
-        [Dependency] private readonly SharedActionsSystem _actions = default!;
         [Dependency] private readonly IAdminLogManager _adminLog = default!;
         [Dependency] private readonly SharedEyeSystem _eye = default!;
         [Dependency] private readonly FollowerSystem _followerSystem = default!;

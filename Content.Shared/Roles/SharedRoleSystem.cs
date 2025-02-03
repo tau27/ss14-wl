@@ -23,7 +23,6 @@ public abstract class SharedRoleSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private JobRequirementOverridePrototype? _requirementOverride;
 

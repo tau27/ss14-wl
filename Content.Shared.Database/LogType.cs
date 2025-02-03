@@ -126,18 +126,17 @@ public enum LogType
     /// <summary>
     /// A player got hit by an explosion and was dealt damage.
     /// </summary>
-    ExplosionHit = 94,
+    ExplosionHit = 95,
 
     /// <summary>
     /// A ghost warped to an entity through the ghost warp menu.
     /// </summary>
-    GhostWarp = 95,
-    ExplosionHit = 95,
+    GhostWarp = 96,
 
     //WL-Changes-start
     /// <summary>
     /// Успешное обращение к HTTP-api сервера.
     /// </summary>
-    WLHttpApi = 96,
+    WLHttpApi = 97,
     //WL-Changes-end
 }

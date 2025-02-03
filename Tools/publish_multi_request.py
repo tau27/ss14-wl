@@ -69,7 +69,7 @@ def get_files_to_publish() -> Iterable[str]:
 
 def get_engine_version() -> str:
 ## ToRemove-start
-    return "237.1.0"
+    return "237.2.0"
 ## ToRemove-end
     proc = subprocess.run(["git", "describe","--tags", "--abbrev=0"], stdout=subprocess.PIPE, cwd="RobustToolbox", check=True, encoding="UTF-8")
     tag = proc.stdout.strip()

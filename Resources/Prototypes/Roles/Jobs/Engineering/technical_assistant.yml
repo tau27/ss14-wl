@@ -12,6 +12,7 @@
     - !type:DepartmentTimeRequirement
       department: Engineering
       inverted: true # stop playing intern if you're good at engineering!
+      time: 36000
     - !type:AgeRequirement
       minAge: 20
   startingGear: TechnicalAssistantGear

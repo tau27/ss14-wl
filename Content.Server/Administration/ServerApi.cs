@@ -843,7 +843,7 @@ public sealed partial class ServerApi : IPostInjectInit
                 return new Actor()
                 {
                     DiscordId = innerActorData.DiscordId,
-                    Record = new(new(Guid.Empty), DateTimeOffset.UnixEpoch, "STUFFBOT", DateTimeOffset.UtcNow, IPAddress.None, []),
+                    Record = new(new(Guid.Empty), DateTimeOffset.UnixEpoch, "STUFFBOT", DateTimeOffset.UtcNow, IPAddress.None, new([], HwidType.Modern)),
                     IsStuffBot = true
                 };
             }
