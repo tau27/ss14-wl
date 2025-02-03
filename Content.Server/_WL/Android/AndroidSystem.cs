@@ -186,8 +186,8 @@ namespace Content.Server._WL.Android
                 return;
 
             if (!HasComp<AndroidComponent>(args.User) ||
-                !_powerCell.TryGetBatteryFromSlot(args.User, out _, out var battery) ||
-                battery.IsFullyCharged)
+                !_powerCell.TryGetBatteryFromSlot(args.User, out var battery_ent, out var battery_comp) ||
+                _battery.IsFull(battery_ent.Value, battery_comp))
                 return;
 
             if (!TryComp<BatteryComponent>(args.Target, out var targetBattery) ||

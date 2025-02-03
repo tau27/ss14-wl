@@ -4,20 +4,18 @@
   description: job-description-research-assistant
   playTimeTracker: JobResearchAssistant
   subnames:
-  - лаборант
-  - студент-учёный
-  - научный клерк
+  - Male: лаборант
+  - Male: студент-учёный
+  - Male: научный клерк
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science
       time: 36000 #10 hrs # Corvax-RoleTime
       inverted: true # stop playing intern if you're good at science!
-    - !type:AgeRequirement
-      minAge: 20
   startingGear: ResearchAssistantGear
   icon: "JobIconResearchAssistant"
   supervisors: job-supervisors-science
-  canBeAntag: true #false ##WL-Changes
+  canBeAntag: true
   access:
   - Research
   - Maintenance

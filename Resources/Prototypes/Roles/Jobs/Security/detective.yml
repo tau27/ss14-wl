@@ -4,9 +4,9 @@
   description: job-description-detective
   playTimeTracker: JobDetective
   subnames:
-  - криминалист
-  - сыщик
-  - следователь
+  - Male: криминалист
+  - Male: сыщик
+  - Male: следователь
   requirements:
   - !type:DepartmentTimeRequirement
     department: Security

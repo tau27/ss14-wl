@@ -5,10 +5,10 @@
   playTimeTracker: JobServiceWorker
   startingGear: ServiceWorkerGear
   subnames:
-  - официант
-  - стюард
-  - сервисный ассистент
-  - крупье
+  - Male: официант
+  - Male: стюард
+  - Male: сервисный ассистент
+  - Male: крупье
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
   access:

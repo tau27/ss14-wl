@@ -4,7 +4,7 @@
   description: job-description-qm
   playTimeTracker: JobQuartermaster
   subnames:
-  - начальник снабжения
+  - Male: начальник снабжения
   requirements:
 #    - !type:RoleTimeRequirement
 #      role: JobCargoTechnician

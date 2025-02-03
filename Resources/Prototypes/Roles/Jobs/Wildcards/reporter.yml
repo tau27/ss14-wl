@@ -7,9 +7,9 @@
     - !type:AgeRequirement
       minAge: 22
   subnames:
-  - журналист
-  - корреспондент
-  - газетчик
+  - Male: журналист
+  - Male: корреспондент
+  - Male: газетчик
   startingGear: ReporterGear
   icon: "JobIconReporter"
   supervisors: job-supervisors-hop

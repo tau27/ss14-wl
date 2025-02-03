@@ -226,12 +226,6 @@ namespace Content.Server.GameTicking
 
             var jobPrototype = _prototypeManager.Index<JobPrototype>(jobId);
 
-            //WL-Changes-start
-            _role.MindAddJobRole(newMind, silent: silent, jobPrototype: jobId);
-            var jobName = _role.GetSubnameBySesssion(player, jobPrototype.ID) ??
-                _jobs.MindTryGetJobName(newMind);
-            //WL-Changes-end
-
             _playTimeTrackings.PlayerRolesChanged(player);
 
             var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, jobId, character);
@@ -239,6 +233,10 @@ namespace Content.Server.GameTicking
             var mob = mobMaybe!.Value;
 
             _mind.TransferTo(newMind, mob);
+
+            _role.MindAddJobRole(newMind, silent: silent, jobPrototype:jobId);
+            var jobName = _role.GetSubnameBySesssion(player, jobPrototype.ID) ??
+                _jobs.MindTryGetJobName(newMind); // WL-changes
 
             if (lateJoin && !silent)
             {

@@ -4,11 +4,11 @@
   description: job-description-scientist
   playTimeTracker: JobScientist
   subnames:
-  - робототехник
-  - ксеноархеолог
-  - аномалист
-  - ксенобиолог
-  - химик-исследователь
+  - Male: робототехник
+  - Male: ксеноархеолог
+  - Male: аномалист
+  - Male: ксенобиолог
+  - Male: химик-исследователь
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science

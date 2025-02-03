@@ -4,7 +4,7 @@
   description: job-description-cadet
   playTimeTracker: JobSecurityCadet
   subnames:
-  - рекрут СБ
+  - Male: рекрут СБ
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 36000 #10 hrs # Corvax-RoleTime
@@ -12,8 +12,6 @@
       department: Security
       time: 72000 #20 hrs # Corvax-RoleTime
       inverted: true # stop playing intern if you're good at security!
-    - !type:AgeRequirement
-      minAge: 20
   startingGear: SecurityCadetGear
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security

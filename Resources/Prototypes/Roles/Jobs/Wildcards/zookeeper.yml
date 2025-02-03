@@ -8,7 +8,7 @@
     - !type:AgeRequirement
       minAge: 22
   subnames:
-  - ветеринар
+  - Male: ветеринар
   icon: "JobIconZookeeper"
   supervisors: job-supervisors-hop
   access:

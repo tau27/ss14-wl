@@ -4,7 +4,7 @@
   description: job-description-pilot
   playTimeTracker: JobPilot
   subnames:
-  - космический патрульный
+  - Male: космический патрульный
   requirements:
   - !type:DepartmentTimeRequirement
     department: Security

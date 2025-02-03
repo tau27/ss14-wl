@@ -4,7 +4,7 @@
   description: job-description-bartender
   playTimeTracker: JobBartender
   subnames:
-  - бариста
+  - Male: бариста
   requirements:
     - !type:DepartmentTimeRequirement
       department: Civilian

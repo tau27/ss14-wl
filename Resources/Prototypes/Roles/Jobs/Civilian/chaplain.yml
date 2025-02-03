@@ -5,13 +5,13 @@
   playTimeTracker: JobChaplain
   startingGear: ChaplainGear
   subnames:
-  - капеллан
-  - монах
-  - мулла
-  - проповедник
-  - раввин
-  - клирик
-  - жрец
+  - Male: капеллан
+  - Male: монах
+  - Male: мулла
+  - Male: проповедник
+  - Male: раввин
+  - Male: клирик
+  - Male: жрец
   icon: "JobIconChaplain"
   supervisors: job-supervisors-hop
   access:

@@ -4,12 +4,12 @@
   description: job-description-chef
   playTimeTracker: JobChef
   subnames:
-  - су-шеф
-  - мясник
-  - кондитер
-  - пекарь
-  - повар
-  - кулинар
+  - Male: су-шеф
+  - Male: мясник
+  - Male: кондитер
+  - Male: пекарь
+  - Male: повар
+  - Male: кулинар
   requirements:
     - !type:DepartmentTimeRequirement
       department: Civilian

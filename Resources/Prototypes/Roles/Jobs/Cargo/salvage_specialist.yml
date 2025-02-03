@@ -4,10 +4,10 @@
   description: job-description-salvagespec
   playTimeTracker: JobSalvageSpecialist
   subnames:
-  - шахтёр
-  - старатель
-  - исследователь
-  - пилот-исследователь
+  - Male: шахтёр
+  - Male: старатель
+  - Male: исследователь
+  - Male: пилот-исследователь
   requirements:
     - !type:DepartmentTimeRequirement
       department: Cargo

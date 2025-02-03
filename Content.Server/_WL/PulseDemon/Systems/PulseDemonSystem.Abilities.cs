@@ -18,6 +18,7 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Explosion;
 using Robust.Shared.Prototypes;
+using Content.Server.Power.EntitySystems;
 
 
 namespace Content.Server._WL.PulseDemon.Systems;
@@ -429,7 +430,7 @@ public sealed partial class PulseDemonSystem
     /// <returns>True - if the target has energy left and the demon's energy is not full. False - if one of the previously mentioned conditions is not met</returns>
     private bool CheckTargetAndDemonEnergy(BatteryComponent demonBattery, BatteryComponent targetBattery)
     {
-        if (demonBattery.IsFullyCharged)
+        if (_battery.IsFull(demonBattery.Owner))
         {
             var popupMessage = Loc.GetString("pulse-demon-energy-volume-full");
             _popup.PopupCursor(popupMessage, demonBattery.Owner, Shared.Popups.PopupType.Medium);

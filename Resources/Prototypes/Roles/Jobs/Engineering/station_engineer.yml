@@ -4,10 +4,10 @@
   description: job-description-engineer
   playTimeTracker: JobStationEngineer
   subnames:
-  - электрик
-  - механик
-  - реакторный техник
-  - инженер-структурщик
+  - Male: электрик
+  - Male: механик
+  - Male: реакторный техник
+  - Male: инженер-структурщик
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering

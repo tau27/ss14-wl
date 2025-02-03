@@ -50,7 +50,7 @@ namespace Content.Client.Lobby.UI
 
         public readonly OptionButton? Options;
 
-        public SubnameSelector(JobPrototype job)
+        public SubnameSelector(JobPrototype job, Gender gender)
         {
             Job = job;
 
@@ -58,7 +58,7 @@ namespace Content.Client.Lobby.UI
             {
                 job.LocalizedName
             };
-            subnames.AddRange(job.Subnames.Order());
+            subnames.AddRange(job.GetSubnames(gender).Order());
 
             _subnames = subnames;
 
@@ -1269,7 +1269,8 @@ namespace Content.Client.Lobby.UI
                         SetDirty();
                     };
 
-                    var subnameSelector = new SubnameSelector(job);
+                    var gender = Profile?.Gender ?? Gender.Male;
+                    var subnameSelector = new SubnameSelector(job, gender);
 
                     subnameSelector.SubnameChanged += (id, subname, isSilent) =>
                     {
@@ -1283,7 +1284,7 @@ namespace Content.Client.Lobby.UI
 
                     if (Profile?.JobSubnames.TryGetValue(job.ID, out var subname) == true)
                     {
-                        if (job.Subnames.Contains(subname))
+                        if (job.GetSubnames(gender).Contains(subname))
                             subnameSelector.SelectItem(subname, true);
                         else subnameSelector.SelectItem(job.LocalizedName, true);
                     }

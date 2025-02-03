@@ -3,12 +3,12 @@
   name: job-name-passenger
   description: job-description-passenger
   subnames:
-  - ассистент
-  - художник
-  - юрист
-  - фрилансер
-  - экипаж вне службы
-  - турист
+  - Male: ассистент
+  - Male: художник
+  - Male: юрист
+  - Male: фрилансер
+  - Male: экипаж вне службы
+  - Male: турист
   playTimeTracker: JobPassenger
   startingGear: PassengerGear
   icon: "JobIconPassenger"

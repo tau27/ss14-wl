@@ -2,7 +2,9 @@ using Content.Shared.Access;
 using Content.Shared.Guidebook;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.StatusIcon;
+using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using System.Linq;
 
@@ -33,12 +35,33 @@ namespace Content.Shared.Roles
         [ViewVariables(VVAccess.ReadOnly)]
         public string LocalizedName => Loc.GetString(Name);
 
+        // WL-Changes-start
         /// <summary>
         ///     The possible names of this job.
         /// </summary>
         [ViewVariables(VVAccess.ReadOnly)]
         [DataField("subnames")]
-        public List<string> Subnames { get; private set; } = new();
+        public List<Dictionary<Gender, string>> Subnames { get; private set; } = new();
+
+        public List<string> GetSubnames(Gender gender = Gender.Male)
+        {
+            var list = new List<string>();
+
+            foreach (var subn in Subnames)
+            {
+                if (subn.Count == 0)
+                    continue;
+
+                if (!subn.TryGetValue(gender, out var name))
+                    name = subn.First().Value;
+
+                list.Add(name);
+            }
+
+            return list;
+        }
+
+        // WL-Changes-end
 
         /// <summary>
         ///     The name of this job as displayed to players.
@@ -123,6 +146,13 @@ namespace Content.Shared.Roles
         /// </summary>
         [DataField("jobEntity", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
         public string? JobEntity = null;
+
+        /// <summary>
+        /// Entity to use as a preview in the lobby/character editor.
+        /// Same restrictions as <see cref="JobEntity"/> apply.
+        /// </summary>
+        [DataField]
+        public EntProtoId? JobPreviewEntity = null;
 
         [DataField]
         public ProtoId<JobIconPrototype> Icon { get; private set; } = "JobIconUnknown";

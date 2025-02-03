@@ -591,34 +591,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("connection_log", (string)null);
                 });
 
-            modelBuilder.Entity("Content.Server.Database.DiscordConnection", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("discord_connections_id");
-
-                    b.Property<string>("DiscordId")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("discord_id");
-
-                    b.Property<Guid>("UserGuid")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("user_guid");
-
-                    b.HasKey("Id")
-                        .HasName("PK_discord_connections");
-
-                    b.HasIndex("DiscordId")
-                        .IsUnique();
-
-                    b.HasIndex("UserGuid")
-                        .IsUnique();
-
-                    b.ToTable("discord_connections", (string)null);
-                });
-
             modelBuilder.Entity("Content.Server.Database.Job", b =>
                 {
                     b.Property<int>("Id")
@@ -652,65 +624,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasFilter("priority = 3");
 
                     b.ToTable("job", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.JobSubname", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("job_subname_id");
-
-                    b.Property<string>("JobName")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("job_name");
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("profile_id");
-
-                    b.Property<string>("Subname")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("subname");
-
-                    b.HasKey("Id")
-                        .HasName("PK_job_subname");
-
-                    b.HasIndex("ProfileId", "JobName")
-                        .IsUnique();
-
-                    b.ToTable("job_subname", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.JobUnblocking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("job_unblocking_id");
-
-                    b.Property<bool>("ForceUnblocked")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("force_unblocked");
-
-                    b.Property<string>("JobName")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("job_name");
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("profile_id");
-
-                    b.HasKey("Id")
-                        .HasName("PK_job_unblocking");
-
-                    b.HasIndex("ProfileId", "JobName")
-                        .IsUnique();
-
-                    b.ToTable("job_unblocking", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.PlayTime", b =>
@@ -869,18 +782,9 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("hair_name");
 
-                    b.Property<int>("Height")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("height");
-
                     b.Property<byte[]>("Markings")
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
-
-                    b.Property<string>("OocText")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("ooc_text");
 
                     b.Property<int>("PreferenceId")
                         .HasColumnType("INTEGER")
@@ -912,11 +816,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("species");
-
-                    b.Property<string>("Voice")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("voice");
 
                     b.HasKey("Id")
                         .HasName("PK_profile");
@@ -1648,7 +1547,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasConstraintName("FK_connection_log_server_server_id");
 
-                    b.OwnsOne("Content.Server.Database.TypedHwid", "HWId", b1 =>
+                    b.OwnsOne("Content.Server.Database.ConnectionLog.HWId#Content.Server.Database.TypedHwid", "HWId", b1 =>
                         {
                             b1.Property<int>("ConnectionLogId")
                                 .HasColumnType("INTEGER")
@@ -1667,7 +1566,7 @@ namespace Content.Server.Database.Migrations.Sqlite
 
                             b1.HasKey("ConnectionLogId");
 
-                            b1.ToTable("connection_log");
+                            b1.ToTable("connection_log", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ConnectionLogId")
@@ -1691,33 +1590,9 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("Content.Server.Database.JobSubname", b =>
-                {
-                    b.HasOne("Content.Server.Database.Profile", "Profile")
-                        .WithMany("JobSubnames")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_job_subname_profile_profile_id");
-
-                    b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("Content.Server.Database.JobUnblocking", b =>
-                {
-                    b.HasOne("Content.Server.Database.Profile", "Profile")
-                        .WithMany("JobUnblockings")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_job_unblocking_profile_profile_id");
-
-                    b.Navigation("Profile");
-                });
-
             modelBuilder.Entity("Content.Server.Database.Player", b =>
                 {
-                    b.OwnsOne("Content.Server.Database.TypedHwid", "LastSeenHWId", b1 =>
+                    b.OwnsOne("Content.Server.Database.Player.LastSeenHWId#Content.Server.Database.TypedHwid", "LastSeenHWId", b1 =>
                         {
                             b1.Property<int>("PlayerId")
                                 .HasColumnType("INTEGER")
@@ -1736,7 +1611,7 @@ namespace Content.Server.Database.Migrations.Sqlite
 
                             b1.HasKey("PlayerId");
 
-                            b1.ToTable("player");
+                            b1.ToTable("player", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("PlayerId")
@@ -1840,7 +1715,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasForeignKey("RoundId")
                         .HasConstraintName("FK_server_ban_round_round_id");
 
-                    b.OwnsOne("Content.Server.Database.TypedHwid", "HWId", b1 =>
+                    b.OwnsOne("Content.Server.Database.ServerBan.HWId#Content.Server.Database.TypedHwid", "HWId", b1 =>
                         {
                             b1.Property<int>("ServerBanId")
                                 .HasColumnType("INTEGER")
@@ -1859,7 +1734,7 @@ namespace Content.Server.Database.Migrations.Sqlite
 
                             b1.HasKey("ServerBanId");
 
-                            b1.ToTable("server_ban");
+                            b1.ToTable("server_ban", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ServerBanId")
@@ -1917,7 +1792,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasForeignKey("RoundId")
                         .HasConstraintName("FK_server_role_ban_round_round_id");
 
-                    b.OwnsOne("Content.Server.Database.TypedHwid", "HWId", b1 =>
+                    b.OwnsOne("Content.Server.Database.ServerRoleBan.HWId#Content.Server.Database.TypedHwid", "HWId", b1 =>
                         {
                             b1.Property<int>("ServerRoleBanId")
                                 .HasColumnType("INTEGER")
@@ -1936,7 +1811,7 @@ namespace Content.Server.Database.Migrations.Sqlite
 
                             b1.HasKey("ServerRoleBanId");
 
-                            b1.ToTable("server_role_ban");
+                            b1.ToTable("server_role_ban", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ServerRoleBanId")
@@ -2074,10 +1949,6 @@ namespace Content.Server.Database.Migrations.Sqlite
             modelBuilder.Entity("Content.Server.Database.Profile", b =>
                 {
                     b.Navigation("Antags");
-
-                    b.Navigation("JobSubnames");
-
-                    b.Navigation("JobUnblockings");
 
                     b.Navigation("Jobs");
 

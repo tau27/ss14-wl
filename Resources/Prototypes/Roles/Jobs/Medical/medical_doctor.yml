@@ -4,10 +4,10 @@
   description: job-description-doctor
   playTimeTracker: JobMedicalDoctor
   subnames:
-  - хирург
-  - вирусолог
-  - генетик
-  - патологоанатом
+  - Male: хирург
+  - Male: вирусолог
+  - Male: генетик
+  - Male: патологоанатом
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical

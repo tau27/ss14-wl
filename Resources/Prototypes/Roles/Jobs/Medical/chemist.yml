@@ -4,8 +4,8 @@
   description: job-description-chemist
   playTimeTracker: JobChemist
   subnames:
-  - фармацевт
-  - химик-стажёр
+  - Male: фармацевт
+  - Male: химик-стажёр
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical

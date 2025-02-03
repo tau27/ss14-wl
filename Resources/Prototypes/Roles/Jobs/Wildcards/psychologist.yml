@@ -7,9 +7,9 @@
     - !type:AgeRequirement
       minAge: 27
   subnames:
-  - психиатр
-  - психотерапевт
-  - консультант
+  - Male: психиатр
+  - Male: психотерапевт
+  - Male: консультант
   startingGear: PsychologistGear
   icon: "JobIconPsychologist"
   supervisors: job-supervisors-cmo

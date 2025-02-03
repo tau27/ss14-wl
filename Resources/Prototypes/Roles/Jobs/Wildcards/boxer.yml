@@ -6,13 +6,13 @@
   startingGear: BoxerGear
   icon: "JobIconBoxer"
   subnames:
-  - кикбоксер
-  - каратист
-  - дзюдоист
-  - самбист
-  - айкидока
-  - сумоист
-  - тхэквондист
+  - Male: кикбоксер
+  - Male: каратист
+  - Male: дзюдоист
+  - Male: самбист
+  - Male: айкидока
+  - Male: сумоист
+  - Male: тхэквондист
   supervisors: job-supervisors-hop
   access:
   - Service
