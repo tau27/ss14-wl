@@ -65,6 +65,9 @@ namespace Content.IntegrationTests.Tests
             "CorvaxGlacier",
             "CorvaxAwesome",
             // Corvax-End
+            // WL_Workers_Mappull
+            "CorvaxAlpha",
+            // WL_Workers_Mappull-END
             "Dev",
             "TestTeg",
             "Fland",
