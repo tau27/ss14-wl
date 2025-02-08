@@ -1,21 +1,19 @@
-# Сделано мофкколом с любовью :D
-# Распространение карты вне Вайтлиста закончится тем, что я буду ругаться и обижаться
 # Special Map for Corvax - Whitelist
 - type: gameMap
   id: NanoStation
   mapName: 'NanoStation'
   mapPath: /Maps/nanostation.yml
-  minPlayers: 5
+  minPlayers: 0
   maxPlayers: 30
   stations:
     NanoStation:
       stationProto: StandardNanotrasenStation
       components:
         - type: StationNameSetup
-          mapNameTemplate: '{0} NanoStation {1}'
+          mapNameTemplate: '{0} Наностейшен {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
-            prefixCreator: '14'
+            prefixCreator: 'MFK'
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/Shuttles/nanostation_shuttle.yml
         - type: StationJobs
