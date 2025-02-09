@@ -46475,13 +46475,6 @@ entities:
     - type: Transform
       pos: -11.822876,2.8293457
       parent: 19613
-- proto: DresserCaptainFilled
-  entities:
-  - uid: 5457
-    components:
-    - type: Transform
-      pos: -36.5,-11.5
-      parent: 2
 - proto: CaptainIDCard
   entities:
   - uid: 5458
@@ -62561,6 +62554,13 @@ entities:
     - type: Transform
       pos: 11.5,-5.5
       parent: 19613
+- proto: DresserCaptainFilled
+  entities:
+  - uid: 5457
+    components:
+    - type: Transform
+      pos: -36.5,-11.5
+      parent: 2
 - proto: DresserChiefEngineerFilled
   entities:
   - uid: 7869
@@ -109919,6 +109919,12 @@ entities:
     - type: Transform
       pos: -47.5,-32.5
       parent: 2
+  - uid: 20590
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -27.50178,-53.006966
+      parent: 2
 - proto: SignDirectionalMed
   entities:
   - uid: 13731
@@ -113016,6 +113022,11 @@ entities:
     - type: Transform
       pos: -68.5,-31.5
       parent: 2
+  - uid: 20591
+    components:
+    - type: Transform
+      pos: -67.5,-29.5
+      parent: 2
 - proto: SpawnPointClown
   entities:
   - uid: 14237
@@ -113074,6 +113085,13 @@ entities:
     components:
     - type: Transform
       pos: -20.5,-26.5
+      parent: 2
+- proto: SpawnPointLibrarian
+  entities:
+  - uid: 20589
+    components:
+    - type: Transform
+      pos: -52.5,-52.5
       parent: 2
 - proto: SpawnPointMedicalDoctor
   entities:
@@ -113288,6 +113306,23 @@ entities:
     components:
     - type: Transform
       pos: -22.5,-15.5
+      parent: 2
+- proto: SpawnPointServiceWorker
+  entities:
+  - uid: 20586
+    components:
+    - type: Transform
+      pos: -33.5,-25.5
+      parent: 2
+  - uid: 20587
+    components:
+    - type: Transform
+      pos: -32.5,-32.5
+      parent: 2
+  - uid: 20588
+    components:
+    - type: Transform
+      pos: -28.5,-29.5
       parent: 2
 - proto: SpawnPointStationEngineer
   entities:
