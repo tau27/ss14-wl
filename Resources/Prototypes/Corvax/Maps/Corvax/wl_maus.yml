@@ -1,7 +1,7 @@
 - type: gameMap
   id: CorvaxMaus
   mapName: 'Maus Station'
-  mapPath: /Maps/Corvax/corvax_maus.yml
+  mapPath: /Maps/Corvax/wl_maus.yml
   maxRandomOffset: 0
   randomRotation: false
   minPlayers: 0
@@ -14,7 +14,7 @@
           mapNameTemplate: '{0} Маус {1}'
           nameGenerator:
            !type:NanotrasenNameGenerator
-            prefixCreator: "MG"
+            prefixCreator: "MGB"
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/Corvax/Shuttles/emergency_maus.yml
         - type: StationJobs

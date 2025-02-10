@@ -51,7 +51,6 @@ namespace Content.IntegrationTests.Tests
             "CorvaxOutpost",
             "CorvaxAstra",
             "CorvaxGelta",
-			"CorvaxMaus",
 			"CorvaxIshimura",
 			"CorvaxPaper",
 			"CorvaxCute",
@@ -60,13 +59,14 @@ namespace Content.IntegrationTests.Tests
             "CorvaxTerra",
             "CorvaxFrame",
             "CorvaxPearl",
-            "NanoStation",
             "CorvaxTushkan",
             "CorvaxGlacier",
             "CorvaxAwesome",
             // Corvax-End
             // WL_Workers_Mappull
             "CorvaxAlpha",
+            "NanoStation",
+			"CorvaxMaus",
             // WL_Workers_Mappull-END
             "Dev",
             "TestTeg",
