@@ -1,0 +1,35 @@
+- type: entity
+  id: ManualStorageSecuritySmall
+  parent: ManualStorageDefaultSmall
+  name: ManualStorageSecuritySmall
+  description: ManualStorageSecuritySmall
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Security/small.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Security/small.rsi
+
+- type: entity
+  id: ManualStorageSecurityBox
+  parent: ManualStorageDefaultBox
+  name: ManualStorageSecurityBox
+  description: ManualStorageSecurityBox
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Security/box.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Security/box.rsi
+
+- type: entity
+  id: ManualStorageSecurityBig
+  parent: ManualStorageDefaultBig
+  name: ManualStorageSecurityBig
+  description: ManualStorageSecurityBig
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Security/big.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Security/big.rsi

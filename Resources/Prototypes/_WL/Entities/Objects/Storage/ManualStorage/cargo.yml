@@ -1,0 +1,35 @@
+- type: entity
+  id: ManualStorageCargoSmall
+  parent: ManualStorageDefaultSmall
+  name: ManualStorageCargoSmall
+  description: ManualStorageCargoSmall
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Cargo/small.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Cargo/small.rsi
+
+- type: entity
+  id: ManualStorageCargoBox
+  parent: ManualStorageDefaultBox
+  name: ManualStorageCargoBox
+  description: ManualStorageCargoBox
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Cargo/box.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Cargo/box.rsi
+
+- type: entity
+  id: ManualStorageCargoBig
+  parent: ManualStorageDefaultBig
+  name: ManualStorageCargoBig
+  description: ManualStorageCargoBig
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Cargo/big.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Cargo/big.rsi

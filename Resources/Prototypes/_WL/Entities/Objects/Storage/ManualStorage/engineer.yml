@@ -1,0 +1,35 @@
+- type: entity
+  id: ManualStorageEngineerSmall
+  parent: ManualStorageDefaultSmall
+  name: ManualStorageEngineerSmall
+  description: ManualStorageEngineerSmall
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Engineer/small.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Engineer/small.rsi
+
+- type: entity
+  id: ManualStorageEngineerBox
+  parent: ManualStorageDefaultBox
+  name: ManualStorageEngineerBox
+  description: ManualStorageEngineerBox
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Engineer/box.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Engineer/box.rsi
+
+- type: entity
+  id: ManualStorageEngineerBig
+  parent: ManualStorageDefaultBig
+  name: ManualStorageEngineerBig
+  description: ManualStorageEngineerBig
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Engineer/big.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Engineer/big.rsi

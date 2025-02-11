@@ -1,0 +1,35 @@
+- type: entity
+  id: ManualStorageScienceSmall
+  parent: ManualStorageDefaultSmall
+  name: ManualStorageScienceSmall
+  description: ManualStorageScienceSmall
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Science/small.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Science/small.rsi
+
+- type: entity
+  id: ManualStorageScienceBox
+  parent: ManualStorageDefaultBox
+  name: ManualStorageScienceBox
+  description: ManualStorageScienceBox
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Science/box.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Science/box.rsi
+
+- type: entity
+  id: ManualStorageScienceBig
+  parent: ManualStorageDefaultBig
+  name: ManualStorageScienceBig
+  description: ManualStorageScienceBig
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Science/big.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Science/big.rsi

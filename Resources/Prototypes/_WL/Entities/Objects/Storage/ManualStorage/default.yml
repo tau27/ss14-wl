@@ -1,0 +1,61 @@
+- type: entity
+  id: ManualStorageDefaultSmall
+  parent: BaseManualStorage
+  name: ManualStorageDefaultSmall
+  description: ManualStorageDefaultSmall
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/default/small.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/default/small.rsi
+    size: Large
+    shape:
+    - 0,0,2,2
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,2
+
+- type: entity
+  id: ManualStorageDefaultBox
+  parent: BaseManualStorage
+  name: ManualStorageDefaultBox
+  description: ManualStorageDefaultBox
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/default/box.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/default/box.rsi
+    size: Ginormous
+    shape:
+    - 0,0,2,2
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,3,2
+  - type: MultiHandedItem
+
+- type: entity
+  id: ManualStorageDefaultBig
+  parent: BaseManualStorage
+  name: ManualStorageDefaultBig
+  description: ManualStorageDefaultBig
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/default/big.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/default/big.rsi
+    size: Ginormous
+    shape:
+    - 0,0,2,2
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,4,3
+  - type: MultiHandedItem
+  - type: HeldSpeedModifier
+    walkModifier: 0.6
+    sprintModifier: 0.6

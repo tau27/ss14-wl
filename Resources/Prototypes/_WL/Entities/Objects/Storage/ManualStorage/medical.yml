@@ -1,0 +1,35 @@
+- type: entity
+  id: ManualStorageMedicalSmall
+  parent: ManualStorageDefaultSmall
+  name: ManualStorageMedicalSmall
+  description: ManualStorageMedicalSmall
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Medical/small.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Medical/small.rsi
+
+- type: entity
+  id: ManualStorageMedicalBox
+  parent: ManualStorageDefaultBox
+  name: ManualStorageMedicalBox
+  description: ManualStorageMedicalBox
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Medical/box.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Medical/box.rsi
+
+- type: entity
+  id: ManualStorageMedicalBig
+  parent: ManualStorageDefaultBig
+  name: ManualStorageMedicalBig
+  description: ManualStorageMedicalBig
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Medical/big.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Medical/big.rsi
