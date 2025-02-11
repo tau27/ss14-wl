@@ -4,7 +4,9 @@
   description: job-description-passenger
   subnames:
   - Male: ассистент
+    Female: ассистентка
   - Male: художник
+    Female: художница
   - Male: юрист
   - Male: фрилансер
   - Male: экипаж вне службы

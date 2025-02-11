@@ -9,9 +9,11 @@
   - Male: монах
   - Male: мулла
   - Male: проповедник
+    Female: проповедница
   - Male: раввин
   - Male: клирик
   - Male: жрец
+    Female: жрица
   icon: "JobIconChaplain"
   supervisors: job-supervisors-hop
   access:

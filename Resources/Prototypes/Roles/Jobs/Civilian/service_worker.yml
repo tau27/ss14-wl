@@ -6,6 +6,7 @@
   startingGear: ServiceWorkerGear
   subnames:
   - Male: официант
+    Female: официантка
   - Male: стюард
   - Male: сервисный ассистент
   - Male: крупье
