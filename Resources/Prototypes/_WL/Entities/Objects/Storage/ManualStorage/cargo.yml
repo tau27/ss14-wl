@@ -1,8 +1,7 @@
 - type: entity
   id: ManualStorageCargoSmall
   parent: ManualStorageDefaultSmall
-  name: ManualStorageCargoSmall
-  description: ManualStorageCargoSmall
+  name: Small manual storage of the supply department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Cargo/small.rsi
@@ -13,8 +12,7 @@
 - type: entity
   id: ManualStorageCargoBox
   parent: ManualStorageDefaultBox
-  name: ManualStorageCargoBox
-  description: ManualStorageCargoBox
+  name: Average manual storage of the supply department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Cargo/box.rsi
@@ -25,8 +23,7 @@
 - type: entity
   id: ManualStorageCargoBig
   parent: ManualStorageDefaultBig
-  name: ManualStorageCargoBig
-  description: ManualStorageCargoBig
+  name: Big manual storage of the supply department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Cargo/big.rsi

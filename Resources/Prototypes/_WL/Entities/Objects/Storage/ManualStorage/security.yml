@@ -1,8 +1,7 @@
 - type: entity
   id: ManualStorageSecuritySmall
   parent: ManualStorageDefaultSmall
-  name: ManualStorageSecuritySmall
-  description: ManualStorageSecuritySmall
+  name: Small manual storage of the Security Department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Security/small.rsi
@@ -13,8 +12,7 @@
 - type: entity
   id: ManualStorageSecurityBox
   parent: ManualStorageDefaultBox
-  name: ManualStorageSecurityBox
-  description: ManualStorageSecurityBox
+  name: Average manual storage of the Security Department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Security/box.rsi
@@ -25,8 +23,7 @@
 - type: entity
   id: ManualStorageSecurityBig
   parent: ManualStorageDefaultBig
-  name: ManualStorageSecurityBig
-  description: ManualStorageSecurityBig
+  name: Big manual storage of the Security Department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Security/big.rsi

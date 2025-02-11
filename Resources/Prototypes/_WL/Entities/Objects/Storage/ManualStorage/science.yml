@@ -1,8 +1,7 @@
 - type: entity
   id: ManualStorageScienceSmall
   parent: ManualStorageDefaultSmall
-  name: ManualStorageScienceSmall
-  description: ManualStorageScienceSmall
+  name: Small manual storage of the RND
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Science/small.rsi
@@ -13,8 +12,7 @@
 - type: entity
   id: ManualStorageScienceBox
   parent: ManualStorageDefaultBox
-  name: ManualStorageScienceBox
-  description: ManualStorageScienceBox
+  name: Average manual storage of the RND
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Science/box.rsi
@@ -25,8 +23,7 @@
 - type: entity
   id: ManualStorageScienceBig
   parent: ManualStorageDefaultBig
-  name: ManualStorageScienceBig
-  description: ManualStorageScienceBig
+  name: Big manual storage of the RND
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Science/big.rsi

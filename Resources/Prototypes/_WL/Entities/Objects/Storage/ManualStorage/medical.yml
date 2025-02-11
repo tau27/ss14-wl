@@ -1,8 +1,7 @@
 - type: entity
   id: ManualStorageMedicalSmall
   parent: ManualStorageDefaultSmall
-  name: ManualStorageMedicalSmall
-  description: ManualStorageMedicalSmall
+  name: Small manual storage of the medical department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Medical/small.rsi
@@ -13,8 +12,7 @@
 - type: entity
   id: ManualStorageMedicalBox
   parent: ManualStorageDefaultBox
-  name: ManualStorageMedicalBox
-  description: ManualStorageMedicalBox
+  name: Average manual storage of the medical department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Medical/box.rsi
@@ -25,8 +23,7 @@
 - type: entity
   id: ManualStorageMedicalBig
   parent: ManualStorageDefaultBig
-  name: ManualStorageMedicalBig
-  description: ManualStorageMedicalBig
+  name: Big manual storage of the medical department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Medical/big.rsi

@@ -1,8 +1,7 @@
 - type: entity
   id: ManualStorageCommandSmall
   parent: ManualStorageDefaultSmall
-  name: ManualStorageCommandSmall
-  description: ManualStorageCommandSmall
+  name: Small manual storage of the command department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Command/small.rsi
@@ -17,8 +16,7 @@
 - type: entity
   id: ManualStorageCommandBox
   parent: ManualStorageDefaultBox
-  name: ManualStorageCommandBox
-  description: ManualStorageCommandBox
+  name: Average manual storage of the command department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Command/box.rsi
@@ -33,8 +31,7 @@
 - type: entity
   id: ManualStorageCommandBig
   parent: ManualStorageDefaultBig
-  name: ManualStorageCommandBig
-  description: ManualStorageCommandBig
+  name: Big manual storage of the command department
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/Command/big.rsi
