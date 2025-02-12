@@ -11,7 +11,6 @@
   - type: AccessReader
     access: [["Command"]]
   - type: Lock
-  - type: LockVisuals
 
 - type: entity
   id: ManualStorageCommandBox
@@ -26,7 +25,6 @@
   - type: AccessReader
     access: [["Command"]]
   - type: Lock
-  - type: LockVisuals
 
 - type: entity
   id: ManualStorageCommandBig
@@ -41,4 +39,3 @@
   - type: AccessReader
     access: [["Command"]]
   - type: Lock
-  - type: LockVisuals
