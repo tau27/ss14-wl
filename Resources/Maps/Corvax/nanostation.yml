@@ -5332,7 +5332,7 @@ entities:
       pos: -33.5,43.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -333.19263
+      secondsUntilStateChange: -381.55634
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -31574,7 +31574,7 @@ entities:
       pos: 63.5,10.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -138219.16
+      secondsUntilStateChange: -138267.52
       state: Opening
 - proto: FenceMetalStraight
   entities:
@@ -32339,7 +32339,7 @@ entities:
       pos: 22.5,12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -100310.49
+      secondsUntilStateChange: -100358.86
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -32767,7 +32767,7 @@ entities:
       pos: 44.5,27.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -79118.41
+      secondsUntilStateChange: -79166.77
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -32932,7 +32932,7 @@ entities:
       pos: 19.5,12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -52985.746
+      secondsUntilStateChange: -53034.11
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -48125,7 +48125,7 @@ entities:
       pos: 7.5,14.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -155126.45
+      secondsUntilStateChange: -155174.81
       state: Opening
   - uid: 1096
     components:
@@ -48143,7 +48143,7 @@ entities:
       pos: 55.5,39.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -81898.555
+      secondsUntilStateChange: -81946.92
       state: Opening
 - proto: HospitalCurtainsOpen
   entities:
@@ -57445,6 +57445,13 @@ entities:
     components:
     - type: Transform
       pos: 51.5,33.5
+      parent: 2
+- proto: SpawnPointPilot
+  entities:
+  - uid: 9384
+    components:
+    - type: Transform
+      pos: 45.5,50.5
       parent: 2
 - proto: SpawnPointPsychologist
   entities:
