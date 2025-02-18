@@ -2,7 +2,7 @@
 - type: gameMap
   id: NanoStation
   mapName: 'NanoStation'
-  mapPath: /Maps/nanostation.yml
+  mapPath: /Maps/Corvax/nanostation.yml
   minPlayers: 0
   maxPlayers: 30
   stations:
@@ -15,7 +15,7 @@
             !type:NanotrasenNameGenerator
             prefixCreator: 'MFK'
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/nanostation_shuttle.yml
+          emergencyShuttlePath: /Maps/Corvax/Shuttles/nanostation_shuttle.yml
         - type: StationJobs
           availableJobs:
             #service
