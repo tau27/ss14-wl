@@ -40,7 +40,7 @@
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 4, 5 ]
             HeadOfSecurity: [ 1, 1 ]
-            SecurityOfficer: [ 4, 4 ]
+            SecurityOfficer: [ 3, 3 ]
             Chaplain: [ 1, 1 ]
             Warden: [ 1, 1 ]
             Librarian: [ 1, 1 ]
