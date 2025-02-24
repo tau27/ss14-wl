@@ -1,0 +1,32 @@
+- type: entity
+  id: ManualStorageSecuritySmall
+  parent: ManualStorageDefaultSmall
+  name: Small manual storage of the Security Department
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Security/small.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Security/small.rsi
+
+- type: entity
+  id: ManualStorageSecurityBox
+  parent: ManualStorageDefaultBox
+  name: Average manual storage of the Security Department
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Security/box.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Security/box.rsi
+
+- type: entity
+  id: ManualStorageSecurityBig
+  parent: ManualStorageDefaultBig
+  name: Big manual storage of the Security Department
+  components:
+  - type: Sprite
+    sprite: _WL/Objects/Storage/ManualStorage/Security/big.rsi
+    state: icon
+  - type: Item
+    sprite: _WL/Objects/Storage/ManualStorage/Security/big.rsi
