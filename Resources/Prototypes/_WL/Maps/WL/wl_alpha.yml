@@ -2,7 +2,7 @@
 - type: gameMap
   id: CorvaxAlpha
   mapName: 'Alpha Station'
-  mapPath: /Maps/Corvax/wl_alpha.yml
+  mapPath: /Maps/WL/wl_alpha.yml
   maxRandomOffset: 0
   randomRotation: false
   minPlayers: 10

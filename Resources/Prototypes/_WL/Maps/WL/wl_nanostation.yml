@@ -1,12 +1,12 @@
 # Special Map for Corvax - Whitelist
 - type: gameMap
-  id: NanoStation
+  id: CorvaxNanoStation
   mapName: 'NanoStation'
-  mapPath: /Maps/Corvax/nanostation.yml
+  mapPath: /Maps/WL/wl_nanostation.yml
   minPlayers: 0
-  maxPlayers: 30
+  maxPlayers: 15
   stations:
-    NanoStation:
+    CorvaxNanoStation:
       stationProto: StandardNanotrasenStation
       components:
         - type: StationNameSetup
@@ -15,7 +15,7 @@
             !type:NanotrasenNameGenerator
             prefixCreator: 'MFK'
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Corvax/Shuttles/nanostation_shuttle.yml
+          emergencyShuttlePath: /Maps/WL/Shuttles/emergency_nanostation.yml
         - type: StationJobs
           availableJobs:
             #service

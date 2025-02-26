@@ -82,7 +82,7 @@ entities:
     - type: OccluderTree
     - type: LoadedMap
     - type: BecomesStation
-      id: NanoStation
+      id: CorvaxNanoStation
   - uid: 2
     components:
     - type: MetaData
