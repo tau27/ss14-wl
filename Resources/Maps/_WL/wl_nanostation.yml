@@ -86,7 +86,7 @@ entities:
   - uid: 2
     components:
     - type: MetaData
-      name: NanoStation
+      name: CorvaxNanoStation
     - type: Transform
       pos: -3.6479013,0.515625
       parent: 1
