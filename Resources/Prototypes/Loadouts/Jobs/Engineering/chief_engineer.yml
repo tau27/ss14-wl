@@ -36,8 +36,8 @@
     head: ClothingHeadHatHardhatWhite
 
 - type: loadout
-  id: ChiefEngineerBeret
-  startingGear: EngineeringBeret
+  id: ChiefEngineerBeretWL
+  startingGear: ClothingHeadHatBeretChiefEngineer
 
 # Neck
 - type: loadout
