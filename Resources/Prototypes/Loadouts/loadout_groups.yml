@@ -704,7 +704,7 @@
   minLimit: 0
   loadouts:
   - ChiefEngineerHead
-  - ChiefEngineerBeret
+  - EngineerBeret
   - ChiefEngineerBeretWL #WL Lyvsi engi resprite
 
 - type: loadoutGroup
@@ -757,6 +757,7 @@
   - StationEngineerHardhatOrange
   - StationEngineerHardhatRed
   - StationEngineerSeniorHardhat #WL Lyvsi engi resprite
+  - EngineeringBeret
   - StationEngineerSeniorBeret #WL Lyvsi engi resprite
 
 - type: loadoutGroup

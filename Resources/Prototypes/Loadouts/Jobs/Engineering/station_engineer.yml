@@ -40,6 +40,11 @@
     head: ClothingHeadHatHardhatRed
 
 - type: loadout
+  id: EngineeringBeret
+  equipment:
+    head: ClothingHeadHatBeretEngineering
+
+- type: loadout
   id: SeniorEngineerBeret
   startingGear: EngineeringBeret
   effects:
