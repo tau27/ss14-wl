@@ -6,7 +6,6 @@
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/default/small.rsi
-    state: icon
   - type: Item
     sprite: _WL/Objects/Storage/ManualStorage/default/small.rsi
     size: Large
@@ -25,7 +24,6 @@
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/default/box.rsi
-    state: icon
   - type: Item
     sprite: _WL/Objects/Storage/ManualStorage/default/box.rsi
     size: Ginormous
@@ -45,7 +43,6 @@
   components:
   - type: Sprite
     sprite: _WL/Objects/Storage/ManualStorage/default/big.rsi
-    state: icon
   - type: Item
     sprite: _WL/Objects/Storage/ManualStorage/default/big.rsi
     size: Ginormous
