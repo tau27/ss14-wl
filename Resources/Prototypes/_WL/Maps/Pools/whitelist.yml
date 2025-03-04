@@ -2,7 +2,7 @@
   id: WhitelistMapPool
   maps:
   # Highpop
-  - CorvaxAlpha # WL
+  - CorvaxWLAlpha # WL
   - CorvaxPilgrim
   - Bagel
   - Box
@@ -14,9 +14,9 @@
   - Amber
   - Marathon
   # Lowpop
-  - CorvaxNanoStation # WL
+  - CorvaxWLNanoStation # WL
   - CorvaxSilly
-  - CorvaxMaus # WL Reworked
+  - CorvaxWLMaus # WL Reworked
   - CorvaxTushkan
   - Omega
   - Packed

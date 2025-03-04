@@ -1,5 +1,5 @@
 - type: gameMap
-  id: CorvaxMaus
+  id: CorvaxWLMaus
   mapName: 'Maus Station'
   mapPath: /Maps/_WL/wl_maus.yml
   maxRandomOffset: 0

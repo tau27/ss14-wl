@@ -1,6 +1,6 @@
 # Special Map for Corvax - Whitelist
 - type: gameMap
-  id: CorvaxNanoStation
+  id: CorvaxWLNanoStation
   mapName: 'NanoStation'
   mapPath: /Maps/_WL/wl_nanostation.yml
   minPlayers: 0
