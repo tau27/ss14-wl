@@ -472,6 +472,15 @@
       ]
     },
     {
+        "name": "pda-ert_alt",
+        "delays": [
+          [
+            0.8,
+            0.8
+          ]
+        ]
+      },
+    {
       "name": "pda-cluwne",
       "delays": [
         [
