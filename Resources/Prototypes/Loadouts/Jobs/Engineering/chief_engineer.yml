@@ -40,13 +40,6 @@
   equipment:
     head: ClothingHeadHatBeretEngineering
 
-#WL Lyvsi engi resprite start
-- type: loadout
-  id: ChiefEngineerBeretWL
-  equipment:
-    head: ClothingHeadHatBeretChiefEngineer
-#WL Lyvsi engi resprite end
-
 # Neck
 - type: loadout
   id: ChiefEngineerCloak

@@ -8,4 +8,9 @@
   id: ChiefEngineerParadeUniformJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtChiefEngineerParade
+
+- type: loadout
+  id: ChiefEngineerBeretWL
+  equipment:
+    head: ClothingHeadHatBeretChiefEngineer
 #WL Lyvsi end
