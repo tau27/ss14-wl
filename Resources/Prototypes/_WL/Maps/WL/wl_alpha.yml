@@ -1,8 +1,8 @@
 # Special Map for Corvax - Whitelist
 - type: gameMap
-  id: CorvaxAlpha
+  id: CorvaxWLAlpha
   mapName: 'Alpha Station'
-  mapPath: /Maps/Corvax/wl_alpha.yml
+  mapPath: /Maps/_WL/wl_alpha.yml
   maxRandomOffset: 0
   randomRotation: false
   minPlayers: 10

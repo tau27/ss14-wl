@@ -1,10 +1,8 @@
 - type: gameMapPool
-  id: CorvaxMapPool
+  id: WhitelistMapPool
   maps:
   # Highpop
-  - CorvaxDelta
-  - CorvaxAvrite
-  - CorvaxAstra
+  - CorvaxWLAlpha # WL
   - CorvaxPilgrim
   - Bagel
   - Box
@@ -16,9 +14,10 @@
   - Amber
   - Marathon
   # Lowpop
+  - CorvaxWLNanoStation # WL
   - CorvaxSilly
-  - CorvaxWLMaus
+  - CorvaxWLMaus # WL Reworked
   - CorvaxTushkan
   - Omega
   - Packed
-  - CorvaxCute
+# - CorvaxCute

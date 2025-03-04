@@ -82,11 +82,11 @@ entities:
     - type: OccluderTree
     - type: LoadedMap
     - type: BecomesStation
-      id: NanoStation
+      id: CorvaxNanoStation
   - uid: 2
     components:
     - type: MetaData
-      name: NanoStation
+      name: CorvaxNanoStation
     - type: Transform
       pos: -3.6479013,0.515625
       parent: 1
@@ -3748,7 +3748,7 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: BecomesStation
-      id: NanoStation
+      id: CorvaxNanoStation
     - type: Joint
       joints:
         docking147753: !type:WeldJoint
@@ -51051,7 +51051,7 @@ entities:
   - uid: 317
     components:
     - type: MetaData
-      desc: Похоже это просто карта Saltern с наклеенной поверх скотчем бумажки "NanoStation".
+      desc: Похоже это просто карта Saltern, но с наклеенной поверх скотчем бумажки "NanoStation".
       name: Карта станции NanoStation
     - type: Transform
       rot: 1.5707963267948966 rad
