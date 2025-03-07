@@ -40,8 +40,8 @@
 - type: entity
   parent: ClothingHeadBase
   id: SeniorEngineerBeret
-  name: берет ведущего инженера
-  description: Под ней может скрываться сингулярность… ну или лысина, кто знает?
+  name: lead engineer
+  description: Underneath it may be a singularity... or baldness, who knows?
   components:
   - type: Sprite
     sprite: _WL/Clothing/Head/Hats/beret_senior_engineer.rsi

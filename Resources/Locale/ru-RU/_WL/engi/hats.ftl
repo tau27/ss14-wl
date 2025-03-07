@@ -3,3 +3,6 @@ ent-ClothingHeadHatBeretChiefEngineer = берет старшего инжене
 
 ent-ClothingEngineerCap = кепка инженера
     .desc = Не использовать в качестве предохранителя и не сувать в ДАМ вместо топлива.
+
+ent-SeniorEngineerBeret = берет ведущего инженера
+    .desc = Под ней может скрываться сингулярность… ну или лысина, кто знает?
