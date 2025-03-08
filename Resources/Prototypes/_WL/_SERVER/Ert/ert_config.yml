@@ -2,7 +2,7 @@
   id: Standart
   entry:
     # Clowns:
-      # shuttlePath: /Maps/Shuttles/dart.yml
+      # shuttlePath: /Maps/Shuttles/dart.ym
       # spawnPoint: RandomHumanoidSpawnerERTChaplain
     Engineers:
       shuttlePath: /Maps/_WL/Shuttles/dart.yml
