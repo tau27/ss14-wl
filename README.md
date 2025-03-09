@@ -27,9 +27,9 @@ Space Station 14 это ремейк SS13, который работает на 
 
 ## Лицензия
 
-Контент, внесенный в этот репозиторий после комита 4415cef2256338518b277e92d2b7067ce1cb695d лицензируется под GNU Affero General Public License version 3.0, если не указано иное. См. LICENSE-AGPLv3.txt. Контент, внесенный в этот репозиторий до комита 4415cef2256338518b277e92d2b7067ce1cb695d лицензируется под MIT, если не указано иное. См. LICENSE-MIT.TXT.
+Контент, внесенный в этот репозиторий после комита 706ef8bb6528606a4c76dfd0699fb4a8de8eb2b9 лицензируется под GNU Affero General Public License version 3.0, если не указано иное. См. LICENSE-AGPLv3.txt. Контент, внесенный в этот репозиторий до комита 4415cef2256338518b277e92d2b7067ce1cb695d лицензируется под MIT, если не указано иное. См. LICENSE-MIT.TXT.
 
-4415cef2256338518b277e92d2b7067ce1cb695d опубликован May 15, 2024, 19:42 AM GMT+3
+706ef8bb6528606a4c76dfd0699fb4a8de8eb2b9 опубликован March 09, 2025, 12:32 AM GMT+3
 
 Большинство ассетов лицензированы под [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), если не указано иное. Ассеты имеют свою лицензию и авторские права в файле метаданных. [Пример](https://github.com/space-syndicate/space-station-14/blob/master/Resources/Textures/Objects/Tools/crowbar.rsi/meta.json).
 
