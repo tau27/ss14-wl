@@ -397,7 +397,7 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
         // TODO: Need filter extensions or something don't blame me.
         _audio.PlayGlobal(audioFile, Filter.Broadcast(), true);
 
-        // Corvax WL
+        // WL_Workers_EmergencyShuttleDelayed
         // Schedule the halftime announcement
         var halfTime = _consoleAccumulator / 2;
         if (halfTime > 0)
@@ -414,7 +414,7 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
                 playDefaultSound: true);
             });
         }
-        // Corvax WL
+        // WL_Workers_EmergencyShuttleDelayed-END
     }
 
     private void OnStationInit(EntityUid uid, StationCentcommComponent component, MapInitEvent args)
