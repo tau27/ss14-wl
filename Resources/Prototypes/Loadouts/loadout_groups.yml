@@ -20,6 +20,7 @@
   - CigarCase
   - CigarGold
   - ClothingNeckLGBTPin
+  - ClothingNeckAllyPin
   - ClothingNeckAromanticPin
   - ClothingNeckAsexualPin
   - ClothingNeckBisexualPin
@@ -29,6 +30,7 @@
   - ClothingNeckNonBinaryPin
   - ClothingNeckPansexualPin
   - ClothingNeckOmnisexualPin
+  - ClothingNeckGenderqueerPin
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
@@ -1062,6 +1064,7 @@
   id: SecurityOuterClothing
   name: loadout-group-security-outerclothing
   loadouts:
+  - ArmorVestSec # Corvax
   - ArmorVest
   - ArmorVestSlim
   - SecurityOfficerWintercoat
@@ -1117,8 +1120,8 @@
   id: SecurityCadetJumpsuit
   name: loadout-group-security-cadet-jumpsuit
   loadouts:
-  # - SecGreyJumpsuit
-  # - SecGreyJumpskirt
+  # - SecurityJumpsuitGrey # Corvax-Resprite  # Corvax-Workers-lodautfix Litlogin
+  # - SecurityJumpskirtGrey # Corvax-Resprite # Corvax-Workers-lodautfix Litlogin
   - RedJumpsuit
   - RedJumpskirt
 

@@ -15,12 +15,10 @@
   - CorvaxPearl
   - Amber
   - Marathon
-  - CorvaxAlpha # WL
   # Lowpop
-  - NanoStation # WL
   - CorvaxSilly
-  - CorvaxMaus # WL Reworked
+  - CorvaxWLMaus
   - CorvaxTushkan
   - Omega
   - Packed
-# - CorvaxCute
+  - CorvaxCute
