@@ -1,4 +1,4 @@
-#WL lyvsi start engi resprite
+#WL Workers lyvsi start engi resprite
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadSeniorEngineerHardhat
@@ -9,4 +9,4 @@
     sprite: _WL/Clothing/Head/Hardhats/senior_engineer.rsi
   - type: Clothing
     sprite: _WL/Clothing/Head/Hardhats/senior_engineer.rsi
-#WL lyvsi end
+#WL Workers lyvsi end

@@ -1,4 +1,4 @@
-#WL Lyvsi start engi resprite
+#WL Workers Lyvsi start engi resprite
 - type: loadout
   id: StationEngineerSeniorHardhat
   equipment:
@@ -13,4 +13,4 @@
   id: EngineerCap
   equipment:
     head: ClothingEngineerCap
-#WL Lyvsi end
+#WL Workers Lyvsi end

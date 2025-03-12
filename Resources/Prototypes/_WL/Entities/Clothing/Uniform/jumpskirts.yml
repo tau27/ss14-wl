@@ -1,4 +1,4 @@
-#WL Lyvsi start engi resprite
+#WL Workers Lyvsi start engi resprite
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpskirtChiefEngineerParade
@@ -9,4 +9,4 @@
     sprite: _WL/Clothing/Uniforms/Jumpskirt/ce_parade.rsi
   - type: Clothing
     sprite: _WL/Clothing/Uniforms/Jumpskirt/ce_parade.rsi
-#WL Lyvsi end
+#WL Workers Lyvsi end

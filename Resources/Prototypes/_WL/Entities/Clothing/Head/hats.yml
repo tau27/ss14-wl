@@ -20,7 +20,7 @@
   - type: Clothing
     sprite: _WL/Clothing/Head/Hats/beret_captain.rsi
 
-#WL Lyvsi start
+#WL Workers Lyvsi start
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretChiefEngineer
@@ -64,4 +64,4 @@
   - type: Clothing
     sprite: _WL/Clothing/Head/Soft/engineeringsoft.rsi
 
-#WL Lyvsi end
+#WL Workers Lyvsi end

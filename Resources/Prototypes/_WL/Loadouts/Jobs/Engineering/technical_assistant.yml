@@ -1,6 +1,6 @@
-#WL Lyvsi start
+#WL Workers Lyvsi start
 - type: loadout
   id: EngineerAssistantJumpsuitCasual
   equipment:
     jumpsuit: ClothingUniformJumpsuitCasualEngineerAssistant
-#WL Lyvsi end
+#WL Workers Lyvsi end

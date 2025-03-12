@@ -1,4 +1,4 @@
-#WL Lyvsi start engi resprite
+#WL Workers Lyvsi start engi resprite
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpsuitChiefEngineerParade
@@ -17,7 +17,7 @@
   description: Designed for the assistant to show off his muscles.
   components:
   - type: Sprite
-    sprite: _WL/Clothing/Uniforms/Jumpsuit/engassistant.rsi 
+    sprite: _WL/Clothing/Uniforms/Jumpsuit/engassistant.rsi
   - type: Clothing
     sprite: _WL/Clothing/Uniforms/Jumpsuit/engassistant.rsi
-#WL Lyvsi end
+#WL Workers Lyvsi end
