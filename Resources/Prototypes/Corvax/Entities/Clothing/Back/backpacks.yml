@@ -30,7 +30,7 @@
   description: Technicially progressive backpack.
   components:
   - type: Sprite
-    sprite: _WL/Clothing/Back/Backpacks/ce.rsi #WL Lyvsi engi resprite
+    sprite: _WL/Clothing/Back/Backpacks/ce.rsi #WL Workers Lyvsi engi resprite
 
 - type: entity
   parent: ClothingBackpack
