@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, linux]
+    runs-on: [self-hosted, Linux, username:runner-0]
 
     steps:
 #    - name: Install dependencies
