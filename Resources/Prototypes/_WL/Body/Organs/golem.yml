@@ -29,7 +29,8 @@
     layers:
     - state: core-off
       map: ["fire"]
-  - type: ToggleableGhostRole
+  # TODO: Removed component to remake
+  # - type: ToggleableGhostRole
   #  sprite: Objects/Fun/pai.rsi
   #  layers:
   #  - state: pai-base
