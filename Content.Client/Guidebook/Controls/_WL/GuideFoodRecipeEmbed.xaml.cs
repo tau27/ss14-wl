@@ -127,6 +127,9 @@ public sealed partial class GuideFoodRecipeEmbed : BoxContainer, IDocumentTag, I
 
         foreach (var layer in spriteComp.AllLayers)
         {
+            if (!layer.RsiState.IsValid)
+                continue;
+
             var path = "";
             var state = "";
 
