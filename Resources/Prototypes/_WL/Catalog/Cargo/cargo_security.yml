@@ -4,6 +4,6 @@
     sprite: _WL/Clothing/Head/Helmets/secheavy.rsi
     state: icon
   product: CrateSecurityDSS
-  cost: 18000
+  cost: 12000
   category: cargoproduct-category-name-security
   group: market
