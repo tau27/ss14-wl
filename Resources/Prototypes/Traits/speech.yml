@@ -13,6 +13,7 @@
     - type: MothAccent
     - type: ReplacementAccent
       accent: dwarf
+    - type: OwOAccent
 
 # 1 Cost
 
