@@ -13,7 +13,7 @@
 - type: entity
   id: OrganGolemCore
   parent: BaseGolemOrgan
-  name: искра
+  name: Искра
   description: "Тюрьма для души"
   components:
   - type: Instrument
@@ -30,12 +30,11 @@
     - state: core-off
       map: ["fire"]
   - type: ToggleableGhostRole
-  #  sprite: Objects/Fun/pai.rsi
-  #  layers:
-  #  - state: pai-base
-  #  - state: pai-off-overlay
-  #    shader: unshaded
-  #    map: ["screen"]
+    roleName: golem-system-role-name
+    roleDescription: golem-system-role-description
+    roleRules: ghost-role-component-default-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar # Хз почему именно оно и что оно делает, но в ПИИ стоит то же самое
   - type: Input
     context: "human"
   - type: GolemCore # Играет музыку
@@ -47,15 +46,16 @@
     proto: golem
   - type: TTS # Corvax-TTS
     voice: Gollum
+  - type: Grammar
+    attributes:
+      proper: true
   - type: Speech
     speechVerb: Moth
     speechSounds: Tenor
-    # This has to be installed because otherwise they're not "alive",
-    #  so they can ghost and come back.
-    # Note that the personal AI never "dies".
   - type: MobState
     allowedStates:
       - Alive
+  - type: Emoting
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -109,6 +109,13 @@
       - Ore
       - Trash
       - Wooden
+      - ClothMade
+      - Paper
+      - Fruit
+      - ReptilianFood
+      - Meat
+      - Pill
+      - Crayon
   - type: SolutionContainerManager
     solutions:
       stomach:
@@ -130,6 +137,7 @@
     - id: Drink
     - id: Medicine
     - id: Poison
+    - id: Golem
   - type: ApcPowerReceiver
     needsPower: false
   - type: EntityHeater
