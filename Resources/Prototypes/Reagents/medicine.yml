@@ -294,6 +294,7 @@
         showInChat: false
         probability: 0.50
       - !type:Drunk
+      boozePower: 2
 
 - type: reagent
   id: Cryoxadone
@@ -795,6 +796,7 @@
         showInChat: false
         probability: 0.50
       - !type:Drunk
+      boozePower: 2
 
 - type: reagent
   id: Kelotane
@@ -1802,6 +1804,7 @@
         showInChat: false
         probability: 0.30
       - !type:Drunk
+      boozePower: 2
 
 - type: reagent
   id: Puncturase
@@ -1851,6 +1854,7 @@
         showInChat: false
         probability: 0.30
       - !type:Drunk
+      boozePower: 2
 
 - type: reagent
   id: Bruizine
@@ -1899,6 +1903,7 @@
         showInChat: false
         probability: 0.30
       - !type:Drunk
+        boozePower: 2
 
 - type: reagent
   id: Holywater
