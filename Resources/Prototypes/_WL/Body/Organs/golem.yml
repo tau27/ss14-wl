@@ -33,8 +33,16 @@
     roleName: golem-system-role-name
     roleDescription: golem-system-role-description
     roleRules: ghost-role-component-default-rules
+    examineTextMindPresent: golem-system-role-mind-present
+    examineTextMindSearching: golem-system-role-mind-searching
+    examineTextNoMind: golem-system-role-mind-off
+    beginSearchingText: golem-system-role-mind-searching-begin
     mindRoles:
-    - MindRoleGhostRoleFamiliar # Хз почему именно оно и что оно делает, но в ПИИ стоит то же самое
+    - MindRoleGhostRoleNeutral
+    wipeVerbText: golem-system-role-wipe
+    wipeVerbPopup: golem-system-role-wipe-popup
+    stopSearchVerbText: golem-system-role-search-stop
+    stopSearchVerbPopup: golem-system-role-search-stop-popup
   - type: Input
     context: "human"
   - type: GolemCore # Играет музыку
