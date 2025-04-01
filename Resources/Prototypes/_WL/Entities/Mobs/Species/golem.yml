@@ -1,5 +1,6 @@
 - type: entity
-  name: Урист МакГолем
+  save: false
+  name: Urist McGolem
   id: BaseMobGolem
   parent:
   - MobFlammable
@@ -36,6 +37,28 @@
     - type: FlashImmunity
     - type: Inventory
       speciesId: reptilian
+      femaleDisplacements:
+        jumpsuit:
+          sizeMaps:
+            32:
+              sprite: Corvax/Mobs/Species/displacement.rsi
+              state: jumpsuit-female
+        shoes:
+          sizeMaps:
+            32:
+              sprite: Corvax/Mobs/Species/displacement.rsi
+              state: shoes
+      displacements:
+        jumpsuit:
+          sizeMaps:
+            32:
+              sprite: Corvax/Mobs/Species/displacement.rsi
+              state: jumpsuit
+        shoes:
+          sizeMaps:
+            32:
+              sprite: Corvax/Mobs/Species/displacement.rsi
+              state: shoes
     - type: Puller
       needsHands: true
     - type: Bloodstream
@@ -219,7 +242,7 @@
 
 - type: entity
   save: false
-  name: Урист МакГолем
+  name: Golem Dummy
   id: MobGolemDummy
   parent: MobHumanDummy
   categories: [ HideSpawnMenu ]

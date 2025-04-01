@@ -13,7 +13,7 @@
 - type: entity
   id: OrganGolemCore
   parent: BaseGolemOrgan
-  name: искра
+  name: Искра
   description: "Тюрьма для души"
   components:
   - type: Instrument
@@ -29,14 +29,20 @@
     layers:
     - state: core-off
       map: ["fire"]
-  # TODO: Removed ToggleableGhostRole to remake
-  # - type: ToggleableGhostRole
-  #  sprite: Objects/Fun/pai.rsi
-  #  layers:
-  #  - state: pai-base
-  #  - state: pai-off-overlay
-  #    shader: unshaded
-  #    map: ["screen"]
+  - type: ToggleableGhostRole
+    roleName: golem-system-role-name
+    roleDescription: golem-system-role-description
+    roleRules: ghost-role-component-default-rules
+    examineTextMindPresent: golem-system-role-mind-present
+    examineTextMindSearching: golem-system-role-mind-searching
+    examineTextNoMind: golem-system-role-mind-off
+    beginSearchingText: golem-system-role-mind-searching-begin
+    mindRoles:
+    - MindRoleGhostRoleNeutral
+    wipeVerbText: golem-system-role-wipe
+    wipeVerbPopup: golem-system-role-wipe-popup
+    stopSearchVerbText: golem-system-role-search-stop
+    stopSearchVerbPopup: golem-system-role-search-stop-popup
   - type: Input
     context: "human"
   - type: GolemCore # Играет музыку
@@ -48,15 +54,16 @@
     proto: golem
   - type: TTS # Corvax-TTS
     voice: Gollum
+  - type: Grammar
+    attributes:
+      proper: true
   - type: Speech
     speechVerb: Moth
     speechSounds: Tenor
-    # This has to be installed because otherwise they're not "alive",
-    #  so they can ghost and come back.
-    # Note that the personal AI never "dies".
   - type: MobState
     allowedStates:
       - Alive
+  - type: Emoting
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -64,10 +71,9 @@
         fire:
           Off: { state: core-off }
           On: { state: core-on }
-  # TODO: Removed ToggleableGhostRole to remake
-  # - type: Tag
-  #   tags:
-  #   - MindTransferTarget
+  - type: Tag
+    tags:
+    - MindTransferTarget
   - type: MobMover
   - type: InputMover
   - type: MovementSpeedModifier
@@ -111,6 +117,13 @@
       - Ore
       - Trash
       - Wooden
+      - ClothMade
+      - Paper
+      - Fruit
+      - ReptilianFood
+      - Meat
+      - Pill
+      - Crayon
   - type: SolutionContainerManager
     solutions:
       stomach:
@@ -132,6 +145,7 @@
     - id: Drink
     - id: Medicine
     - id: Poison
+    - id: Golem
   - type: ApcPowerReceiver
     needsPower: false
   - type: EntityHeater
