@@ -5,27 +5,27 @@
   slots:
     head:
       part: HeadGolem
+      connections:
+      - torso
       organs:
         brain: OrganGolemCore
-      connections:
-        - torso
     torso:
       part: TorsoGolem
-      organs:
-        stomach: OrganGolemFurnace
       connections:
         - left arm
         - right arm
         - left leg
         - right leg
+      organs:
+        stomach: OrganGolemFurnace
     right arm:
       part: RightArmGolem
       connections:
-        - right hand
+      - right hand
     left arm:
       part: LeftArmGolem
       connections:
-        - left hand
+      - left hand
     right hand:
       part: RightHandGolem
     left hand:
@@ -33,11 +33,11 @@
     right leg:
       part: RightLegGolem
       connections:
-        - right foot
+      - right foot
     left leg:
       part: LeftLegGolem
       connections:
-        - left foot
+      - left foot
     right foot:
       part: RightFootGolem
     left foot:

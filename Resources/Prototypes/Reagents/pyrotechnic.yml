@@ -223,6 +223,8 @@
             Poison: 1
       - !type:FlammableReaction
         multiplier: 0.4
+# WL species start
+    # Golem
     Drink:
       effects:
       - !type:HealthChange
@@ -233,7 +235,15 @@
           groups:
             Brute: 0.2
       - !type:Drunk
-        boozePower: 1
+        conditions:
+        - !type:OrganType
+          type: Golem
+        boozePower: 3
+      - !type:SatiateHunger
+        conditions:
+        - !type:OrganType
+          type: Golem
+# WL species end
 
 - type: reagent
   id: Fluorosurfactant
