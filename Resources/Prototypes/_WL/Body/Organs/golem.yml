@@ -29,7 +29,8 @@
     layers:
     - state: core-off
       map: ["fire"]
-  - type: ToggleableGhostRole
+  # TODO: Removed ToggleableGhostRole to remake
+  # - type: ToggleableGhostRole
   #  sprite: Objects/Fun/pai.rsi
   #  layers:
   #  - state: pai-base
@@ -63,9 +64,10 @@
         fire:
           Off: { state: core-off }
           On: { state: core-on }
-  - type: Tag
-    tags:
-    - MindTransferTarget
+  # TODO: Removed ToggleableGhostRole to remake
+  # - type: Tag
+  #   tags:
+  #   - MindTransferTarget
   - type: MobMover
   - type: InputMover
   - type: MovementSpeedModifier
