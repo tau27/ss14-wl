@@ -229,6 +229,15 @@
     - type: GolemHeat
     - type: GolemAccent
     - type: AtmosExposed
+    # Костыльный компонент, не трогать, автотест требует наличия этого компонента
+    - type: Respirator
+      updateInterval: 9999999 # А вы знали, что големы могут задержать дыхание на 120 дней? :)))
+      damage:
+        types:
+          Asphyxiation: 0
+      damageRecovery:
+        types:
+          Asphyxiation: -100
 
 
 - type: entity

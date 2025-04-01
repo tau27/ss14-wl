@@ -811,8 +811,9 @@
   - type: Item
     size: Small
     heldPrefix: megaPrefix
-  - type: StaticPrice
-    price: 5
+  # TODO: Переделать фишки в материалы, что бы не было багов с ценами
+  # - type: StaticPrice
+  #   price: 5
   - type: Tag
     tags:
     - Chips
