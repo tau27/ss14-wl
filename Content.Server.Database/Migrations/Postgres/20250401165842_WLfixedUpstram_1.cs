@@ -13,7 +13,8 @@ namespace Content.Server.Database.Migrations.Postgres
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            //Duplicate column
+            //DO NOT UNCOMMIT THIS / Migration making duplicate code
+
             //migrationBuilder.AddColumn<int>(
             //    name: "height",
             //    table: "profile",
@@ -21,7 +22,6 @@ namespace Content.Server.Database.Migrations.Postgres
             //    nullable: false,
             //    defaultValue: 0);
 
-            //Duplicate column
             //migrationBuilder.AddColumn<string>(
             //    name: "ooc_text",
             //    table: "profile",
@@ -29,7 +29,6 @@ namespace Content.Server.Database.Migrations.Postgres
             //    nullable: false,
             //    defaultValue: "");
 
-            //Duplicate column
             //migrationBuilder.AddColumn<string>(
             //    name: "voice",
             //    table: "profile",
@@ -37,7 +36,6 @@ namespace Content.Server.Database.Migrations.Postgres
             //    nullable: false,
             //    defaultValue: "");
 
-            //Duplicate column
             //migrationBuilder.AddColumn<bool>(
             //    name: "deadminned",
             //    table: "admin",
@@ -45,7 +43,6 @@ namespace Content.Server.Database.Migrations.Postgres
             //    nullable: false,
             //    defaultValue: false);
 
-            //Duplicate column
             //migrationBuilder.AddColumn<bool>(
             //    name: "suspended",
             //    table: "admin",
@@ -164,27 +161,22 @@ namespace Content.Server.Database.Migrations.Postgres
             //migrationBuilder.DropTable(
             //    name: "job_unblocking");
 
-            //Duplicate column
             //migrationBuilder.DropColumn(
             //    name: "height",
             //    table: "profile");
 
-            //Duplicate column
             //migrationBuilder.DropColumn(
             //    name: "ooc_text",
             //    table: "profile");
 
-            //Duplicate column
             //migrationBuilder.DropColumn(
             //    name: "voice",
             //    table: "profile");
 
-            //Duplicate column
             //migrationBuilder.DropColumn(
             //    name: "deadminned",
             //    table: "admin");
 
-            //Duplicate column
             //migrationBuilder.DropColumn(
             //    name: "suspended",
             //    table: "admin");
