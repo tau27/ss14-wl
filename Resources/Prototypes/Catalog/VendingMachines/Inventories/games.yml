@@ -19,7 +19,7 @@
     BooksBag: 3
     #WL-changes-start
     ChipsCaseFilled: 2
-    PokerCardBoxFilled:
+    PokerCardBoxFilled: 2
     TarotCardBox: 2
     #WL-changes-end
   contrabandInventory:

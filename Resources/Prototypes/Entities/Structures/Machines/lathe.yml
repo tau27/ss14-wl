@@ -314,7 +314,6 @@
     - BorgModules
     - MechParts
     - MechEquipment
-    - PersonalAIRecipe # WL-Changes
   - type: MaterialStorage
     whitelist:
       tags:

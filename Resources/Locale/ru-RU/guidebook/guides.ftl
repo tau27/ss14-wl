@@ -64,7 +64,6 @@ guide-entry-survival = Выживание
 guide-entry-janitorial = Уборка станции
 guide-entry-bartender = Бармен
 guide-entry-chef = Шеф-повар
-guide-entry-foodrecipes = Готовка
 guide-entry-medical = Медицинский отдел
 guide-entry-medicaldoctor = Врач
 guide-entry-chemist = Химик
