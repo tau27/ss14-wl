@@ -33,12 +33,12 @@ namespace Content.Server.Corvax.StationGoal
 
         private static readonly string BaseNTLogo =
             """
-            [color=#1b487e]-----------------[/color]
-            [color=#1b487e]-----------------[/color]      [head=3]Бланк документа[/head]
-            [color=#1b487e]-----------------[/color]               [head=3]NanoTrasen[/head]
-            [color=#1b487e]-----------------[/color]    [bold]Station { $station } ЦК-КОМ[/bold]
-            [color=#1b487e]-----------------[/color]
-            =========================================
+            [color=#1b487e]███░███░░░░██░░░░[/color]
+            [color=#1b487e]░██░████░░░██░░░░[/color]      [head=3]Бланк документа[/head]
+            [color=#1b487e]░░█░██░██░░██░█░░[/color]               [head=3]NanoTrasen[/head]
+            [color=#1b487e]░░░░██░░██░██░██░[/color]    [bold]Station { $station } ЦК-КОМ[/bold]
+            [color=#1b487e]░░░░██░░░████░███[/color]
+            ═════════════════════════════════════════
             ПРИКАЗ О НАЗНАЧЕНИИ ЦЕЛИ
             =========================================
             Дата: { $date }
