@@ -390,7 +390,7 @@ namespace Content.Server.Administration.Systems
 
                 }
 
-                if (lawBoundComponent != null && target != null)
+                if (lawBoundComponent != null && target != null && _adminManager.HasAdminFlag(player, AdminFlags.Moderator))
                 {
                     args.Verbs.Add(new Verb()
                     {

@@ -5,6 +5,7 @@ using Content.Server.GameTicking;
 using Content.Server.Roles;
 using Content.Shared.CrewManifest;
 using Content.Shared.Access.Components;
+using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;

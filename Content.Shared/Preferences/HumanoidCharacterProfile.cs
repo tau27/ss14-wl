@@ -32,6 +32,7 @@ namespace Content.Shared.Preferences
 
         public const int MaxNameLength = 32;
         public const int MaxDescLength = 512 * 2; // WL-CharacterInfo: Increase
+        public const int MaxLoadoutNameLength = 32; // WL-Changes: Increase
 
         //WL-Changes-start
         [DataField]
@@ -159,8 +160,9 @@ namespace Content.Shared.Preferences
 
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
-
+            Dictionary<string, RoleLoadout> loadouts)
             Dictionary<string, RoleLoadout> loadouts,
+
             //WL-Changes-start
             Dictionary<string, bool> jobUnblockings
             //WL-Changes-end
@@ -172,7 +174,7 @@ namespace Content.Shared.Preferences
             Species = species;
             Voice = voice; // Corvax-TTS
             Age = age; // WL-Height
-            Height = height;
+            Height = height; // WL-Heigh
             Sex = sex;
             Gender = gender;
             Appearance = appearance;
@@ -204,29 +206,28 @@ namespace Content.Shared.Preferences
             }
         }
 
-
         /// <summary>Copy constructor</summary>
         public HumanoidCharacterProfile(HumanoidCharacterProfile other)
             : this(other.Name,
                 other.FlavorText,
-                other.OocText,
+                other.OocText, // WL-Heigh
                 other.Species,
                 other.Voice,
                 other.Age,
-                other.Height,
+                other.Height, // WL-Heigh
                 other.Sex,
                 other.Gender,
                 other.Appearance.Clone(),
                 other.SpawnPriority,
                 new Dictionary<ProtoId<JobPrototype>, JobPriority>(other.JobPriorities),
                 other.PreferenceUnavailable,
-                new Dictionary<string, string>(other.JobSubnames), //WL-Changs
+                new Dictionary<string, string>(other.JobSubnames), //WL-Changes
 
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
-
+                new Dictionary<string, RoleLoadout>(other.Loadouts))
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
-                new(other.JobUnblockings))
+                new(other.JobUnblockings)) // WL-Heigh
         {
         }
 
@@ -569,7 +570,7 @@ namespace Content.Shared.Preferences
             if (Height != other.Height) return false; // WL-Height
             if (OocText != other.OocText) return false; // WL-OocText
             if (Sex != other.Sex) return false;
-            if (FlavorText != other.FlavorText) return false;
+            if (FlavorText != other.FlavorText) return false; // WL-Changes
             if (Gender != other.Gender) return false;
             if (Species != other.Species) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
@@ -611,11 +612,12 @@ namespace Content.Shared.Preferences
             };
 
             // ensure the species can be that sex and their age fits the founds
-            var age = Math.Clamp(Age, speciesPrototype.MinAge, speciesPrototype.MaxAge);
             var height = Math.Clamp(Height, speciesPrototype.MinHeight, speciesPrototype.MaxHeight); // WL-Height
 
             if (!speciesPrototype.Sexes.Contains(sex))
                 sex = speciesPrototype.Sexes[0];
+
+            var age = Math.Clamp(Age, speciesPrototype.MinAge, speciesPrototype.MaxAge);
 
             var gender = Gender switch
             {
@@ -844,11 +846,11 @@ namespace Content.Shared.Preferences
             hashCode.Add(FlavorText);
             hashCode.Add(Species);
             hashCode.Add(Age);
-            hashCode.Add((int) Sex);
-            hashCode.Add((int) Gender);
+            hashCode.Add((int)Sex);
+            hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
-            hashCode.Add((int) SpawnPriority);
-            hashCode.Add((int) PreferenceUnavailable);
+            hashCode.Add((int)SpawnPriority);
+            hashCode.Add((int)PreferenceUnavailable);
 
             //WL-Changes-start
             hashCode.Add(_jobSubnames);
@@ -879,7 +881,6 @@ namespace Content.Shared.Preferences
             }
 
             copied[loadout.Role] = loadout.Clone();
-
             var profile = Clone();
             profile._loadouts = copied;
             return profile;

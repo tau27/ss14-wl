@@ -22,41 +22,40 @@ namespace Content.Server.Corvax.StationGoal
     {
         [Dependency] private readonly IPrototypeManager _proto = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly FaxSystem _fax = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-        private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$");
+        private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$"); #WL - Changes
 
         private static readonly Regex RandomValueInStringRegex = new(@"\{\{(.+?)\}\}");
 
         private static readonly string BaseNTLogo =
             """
-            [color=#1b487e]███░███░░░░██░░░░[/color]
-            [color=#1b487e]░██░████░░░██░░░░[/color]      [head=3]Бланк документа[/head]
-            [color=#1b487e]░░█░██░██░░██░█░░[/color]               [head=3]NanoTrasen[/head]
-            [color=#1b487e]░░░░██░░██░██░██░[/color]    [bold]Station { $station } ЦК-КОМ[/bold]
-            [color=#1b487e]░░░░██░░░████░███[/color]
-            ═════════════════════════════════════════
-            ПРИКАЗ О НАЗНАЧЕНИИ ЦЕЛИ
-            ═════════════════════════════════════════
-            Дата: { $date }
+            [color=#1b487e]-----------------[/color]
+            [color=#1b487e]-----------------[/color]      [head=3]����� ���������[/head]
+            [color=#1b487e]-----------------[/color]               [head=3]NanoTrasen[/head]
+            [color=#1b487e]-----------------[/color]    [bold]Station { $station } ��-���[/bold]
+            [color=#1b487e]-----------------[/color]
+            =========================================
+            ������ � ���������� ����
+            =========================================
+            ����: { $date }
 
-            Уважаемое командование станции, задачами Вашей смены являются:
+            ��������� ������������ �������, �������� ����� ����� ��������:
 
             """;
 
         private static readonly string BaseEndOfGoal =
             """
 
-            ═════════════════════════════════════════
-            [italic]Место для печатей[/italic]
+            =========================================
+            [italic]����� ��� �������[/italic]
             """;
 
         public override void Initialize()
         {
-            base.Initialize();
             SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         }
 
