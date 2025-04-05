@@ -244,10 +244,10 @@ public sealed partial class BorgSystem : SharedBorgSystem
 
         var containerEnt = container.Owner;
 
-        #WL-android species-start
+        // #WL-android species-start
         if (_tag.HasTag(containerEnt, "AndroidBodyTag")) // WL android species //
             return;
-        #WL-android species-end
+        // #WL-android species-end
 
         if (!TryComp<BorgChassisComponent>(containerEnt, out var chassisComponent) ||
             container.ID != chassisComponent.BrainContainerId)

@@ -160,7 +160,6 @@ namespace Content.Shared.Preferences
 
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
-            Dictionary<string, RoleLoadout> loadouts)
             Dictionary<string, RoleLoadout> loadouts,
 
             //WL-Changes-start
@@ -225,7 +224,6 @@ namespace Content.Shared.Preferences
 
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
-                new Dictionary<string, RoleLoadout>(other.Loadouts))
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
                 new(other.JobUnblockings)) // WL-Heigh
         {

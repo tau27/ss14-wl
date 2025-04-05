@@ -27,23 +27,23 @@ namespace Content.Server.Corvax.StationGoal
         [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-        private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$"); #WL - Changes
+        private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$"); //WL - Changes
 
         private static readonly Regex RandomValueInStringRegex = new(@"\{\{(.+?)\}\}");
 
         private static readonly string BaseNTLogo =
             """
             [color=#1b487e]-----------------[/color]
-            [color=#1b487e]-----------------[/color]      [head=3]Бланк документа[/head]
+            [color=#1b487e]-----------------[/color]      [head=3]Р‘Р»Р°РЅРє РґРѕРєСѓРјРµРЅС‚Р°[/head]
             [color=#1b487e]-----------------[/color]               [head=3]NanoTrasen[/head]
-            [color=#1b487e]-----------------[/color]    [bold]Station { $station } ЦК-КОМ[/bold]
+            [color=#1b487e]-----------------[/color]    [bold]Station { $station } Р¦Рљ-РљРћРњ[/bold]
             [color=#1b487e]-----------------[/color]
             =========================================
-            ПРИКАЗ О НАЗНАЧЕНИИ ЦЕЛИ
+            РџР РРљРђР— Рћ РќРђР—РќРђР§Р•РќРР Р¦Р•Р›Р
             =========================================
-            Дата: { $date }
+            Р”Р°С‚Р°: { $date }
 
-            Уважаемое командование станции, задачами Вашей смены являются:
+            РЈРІР°Р¶Р°РµРјРѕРµ РєРѕРјР°РЅРґРѕРІР°РЅРёРµ СЃС‚Р°РЅС†РёРё, Р·Р°РґР°С‡Р°РјРё Р’Р°С€РµР№ СЃРјРµРЅС‹ СЏРІР»СЏСЋС‚СЃСЏ:
 
             """;
 
@@ -51,7 +51,7 @@ namespace Content.Server.Corvax.StationGoal
             """
 
             =========================================
-            [italic]Место для печатей[/italic]
+            [italic]РњРµСЃС‚Рѕ РґР»СЏ РїРµС‡Р°С‚РµР№[/italic]
             """;
 
         public override void Initialize()

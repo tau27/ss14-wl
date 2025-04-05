@@ -55,12 +55,12 @@ public sealed class ContentSpriteSystem : EntitySystem
     {
         base.Shutdown();
 
-        foreach (var queued in _control.QueuedTextures)
+        foreach (var queued in _control._queuedTextures)
         {
             queued.Tcs.SetCanceled();
         }
 
-        _control.QueuedTextures.Clear();
+        _control._queuedTextures.Clear();
 
         _ui.RootControl.RemoveChild(_control);
     }
@@ -97,7 +97,7 @@ public sealed class ContentSpriteSystem : EntitySystem
         Action<ContentSpriteControl<Rgba32>.QueueEntry, Image<Rgba32>> action,
         CancellationToken cancelToken = default)
     {
-        const string speechPath = "/Textures/Effects/speech.rsi"; //Я ебал вычислять ЕБУЧИЕ TypingIndicator-ы СУКАААА. легче так
+        const string speechPath = "/Textures/Effects/speech.rsi"; //РЇ РµР±Р°Р» РІС‹С‡РёСЃР»СЏС‚СЊ Р•Р‘РЈР§РР• TypingIndicator-С‹ РЎРЈРљРђРђРђРђ. Р»РµРіС‡Рµ С‚Р°Рє
 
         if (!_timing.IsFirstTimePredicted)
             return;
@@ -143,7 +143,7 @@ public sealed class ContentSpriteSystem : EntitySystem
     }
 
     /// <summary>
-    /// Сохраняет спрайт в директорию /Exports
+    /// РЎРѕС…СЂР°РЅСЏРµС‚ СЃРїСЂР°Р№С‚ РІ РґРёСЂРµРєС‚РѕСЂРёСЋ /Exports
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="direction"></param>
