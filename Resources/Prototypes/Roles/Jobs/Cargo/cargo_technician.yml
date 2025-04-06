@@ -5,8 +5,8 @@
   playTimeTracker: JobCargoTechnician
   startingGear: CargoTechGear
   subnames:
-  - Male: работник склада
-  - Male: курьер
+  - Male: �������� ������
+  - Male: ������
   icon: "JobIconCargoTechnician"
   supervisors: job-supervisors-qm
   access:
@@ -14,9 +14,15 @@
   - Maintenance
   extendedAccess:
   - Salvage
+  #WL-changes-start
   requirements:
     - !type:AgeRequirement
       minAge: 18
+  #WL-changes-end
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: BoxingDay
+    prototype: BoxCardboard
 
 - type: startingGear
   id: CargoTechGear

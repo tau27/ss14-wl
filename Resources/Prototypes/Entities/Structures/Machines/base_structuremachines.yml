@@ -3,10 +3,12 @@
   parent: BaseStructure
   id: BaseMachine
   components:
+  - type: Animateable
+  #WL-changes-start
   - type: Tag
     tags:
       - Machine
-  - type: InteractionOutline
+  #WL-changes-end  - type: InteractionOutline
   - type: Anchorable
     delay: 2
   - type: Physics
@@ -60,6 +62,7 @@
   abstract: true
   id: ConstructibleMachine
   components:
+  - type: Animateable
   - type: Machine
   - type: ContainerContainer
     containers:

@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using Content.Server.Administration.Managers;
+using Content.Server.Administration.Systems;
 using Content.Server.GameTicking.Events;
 using Content.Server.Ghost;
 using Content.Server.Roles.Jobs;
@@ -30,6 +31,7 @@ namespace Content.Server.GameTicking
     {
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly JobSystem _jobs = default!;
+        [Dependency] private readonly AdminSystem _admin = default!;
 
         [ValidatePrototypeId<EntityPrototype>]
         public const string ObserverPrototypeName = "MobObserver";
@@ -237,6 +239,7 @@ namespace Content.Server.GameTicking
             _role.MindAddJobRole(newMind, silent: silent, jobPrototype:jobId);
             var jobName = _role.GetSubnameBySesssion(player, jobPrototype.ID) ??
                 _jobs.MindTryGetJobName(newMind); // WL-changes
+            _admin.UpdatePlayerList(player);
 
             if (lateJoin && !silent)
             {
@@ -426,7 +429,7 @@ namespace Content.Server.GameTicking
                 {
                     var gridXform = Transform(gridUid);
 
-                    return new EntityCoordinates(gridUid, Vector2.Transform(toMap.Position, gridXform.InvWorldMatrix));
+                    return new EntityCoordinates(gridUid, Vector2.Transform(toMap.Position, _transform.GetInvWorldMatrix(gridXform)));
                 }
 
                 return spawn;

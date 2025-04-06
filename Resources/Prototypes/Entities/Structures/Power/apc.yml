@@ -144,10 +144,16 @@
     priority: 1
   - type: StaticPrice
     price: 500
+  #WL-changes-start
   - type: Tag
     tags:
       - Apc
       - PulseDemonAbsorbable
+  #WL-changes-end
+  - type: GuideHelp
+    guides:
+    - VoltageNetworks
+    - Power
 
 # APC under construction
 - type: entity

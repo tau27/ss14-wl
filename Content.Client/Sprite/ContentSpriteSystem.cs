@@ -9,6 +9,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Shared.ContentPack;
+using Robust.Shared.Exceptions;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
@@ -24,6 +25,7 @@ public sealed class ContentSpriteSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IResourceManager _resManager = default!;
     [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private readonly IRuntimeLog _runtimeLog = default!;
     //WL-Changes-start
     [Dependency] private readonly ILogManager _logMan = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
@@ -192,13 +194,21 @@ public sealed class ContentSpriteSystem : EntitySystem
         if (!_adminManager.IsAdmin())
             return;
 
+        var target = ev.Target;
         Verb verb = new()
         {
             Text = Loc.GetString("export-entity-verb-get-data-text"),
             Category = VerbCategory.Debug,
-            Act = () =>
+            Act = async () =>
             {
-                Export(ev.Target);
+                try
+                {
+                    await Export(target);
+                }
+                catch (Exception e)
+                {
+                    _runtimeLog.LogException(e, $"{nameof(ContentSpriteSystem)}.{nameof(Export)}");
+                }
             },
         };
 
@@ -209,141 +219,227 @@ public sealed class ContentSpriteSystem : EntitySystem
     /// This is horrible. I asked PJB if there's an easy way to render straight to a texture outside of the render loop
     /// and she also mentioned this as a bad possibility.
     /// </summary>
-    public sealed class ContentSpriteControl<T> : Control where T : unmanaged, IPixel<T>
+    private sealed class ContentSpriteControl : Control
     {
         [Dependency] private readonly IEntityManager _entManager = default!;
         [Dependency] private readonly ILogManager _logMan = default!;
+        [Dependency] private readonly IResourceManager _resManager = default!;
 
-        private readonly AppearanceSystem _appearance;
-
-        internal readonly Queue<QueueEntry> _queuedTextures;
-
-        private readonly Queue<QueueEntry> _defferedTextures;
+        internal Queue<(
+            IRenderTexture Texture,
+            Direction Direction,
+            EntityUid Entity,
+            bool IncludeId,
+            TaskCompletionSource Tcs)> QueuedTextures = new();
 
         private ISawmill _sawmill;
 
-        public ContentSpriteControl(AppearanceSystem appearance)
+        public ContentSpriteControl()
         {
             IoCManager.InjectDependencies(this);
             _sawmill = _logMan.GetSawmill("sprite.export");
-
-            _appearance = appearance;
-            _queuedTextures = new();
-            _defferedTextures = new();
         }
 
         protected override void Draw(DrawingHandleScreen handle)
         {
             base.Draw(handle);
 
-            while (_queuedTextures.TryDequeue(out var queued))
+            while (QueuedTextures.TryDequeue(out var queued))
             {
                 if (queued.Tcs.Task.IsCanceled)
                     continue;
 
-                if (ShouldBeDeffered(queued))
+                try
                 {
-                    _defferedTextures.Enqueue(queued);
-                    continue;
+                    if (!_entManager.TryGetComponent(queued.Entity, out MetaDataComponent? metadata))
+                        continue;
+
+                    var filename = metadata.EntityName;
+                    var result = queued;
+
+                    handle.RenderInRenderTarget(queued.Texture, () =>
+                    {
+                        handle.DrawEntity(result.Entity, result.Texture.Size / 2, Vector2.One, Angle.Zero,
+                            overrideDirection: result.Direction);
+                    }, Color.Transparent);
+
+                    ResPath fullFileName;
+
+                    if (queued.IncludeId)
+                    {
+                        fullFileName = Exports / $"{filename}-{queued.Direction}-{queued.Entity}.png";
+                    }
+                    else
+                    {
+                        fullFileName = Exports / $"{filename}-{queued.Direction}.png";
+                    }
+
+                    queued.Texture.CopyPixelsToMemory<Rgba32>(image =>
+                    {
+                        if (_resManager.UserData.Exists(fullFileName))
+                        {
+                            _sawmill.Info($"Found existing file {fullFileName} to replace.");
+                            _resManager.UserData.Delete(fullFileName);
+                        }
+
+                        using var file =
+                            _resManager.UserData.Open(fullFileName, FileMode.CreateNew, FileAccess.Write,
+                                FileShare.None);
+
+                        image.SaveAsPng(file);
+                    });
+
+                    _sawmill.Info($"Saved screenshot to {fullFileName}");
+                    queued.Tcs.SetResult();
                 }
-
-                HandleQueue(queued, handle);
-            }
-
-            while (_defferedTextures.TryDequeue(out var dequeue))
-            {
-                if (dequeue.Tcs.Task.IsCanceled)
-                    continue;
-
-                if (ShouldBeDeffered(dequeue))
+                catch (Exception exc)
                 {
-                    _queuedTextures.Enqueue(dequeue);
-                    continue;
+                    queued.Texture.Dispose();
+
+                    if (!string.IsNullOrEmpty(exc.StackTrace))
+                        _sawmill.Fatal(exc.StackTrace);
+
+                    queued.Tcs.SetException(exc);
                 }
-
-                HandleQueue(dequeue, handle);
-            }
-        }
-
-        private bool ShouldBeDeffered(QueueEntry entry)
-        {
-            var entity = entry.Entity;
-
-            if (_appearance.TryGetData<TypingIndicatorState>(entity, TypingIndicatorVisuals.State, out var state))
-            {
-                if (state is not TypingIndicatorState.None)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private void HandleQueue(QueueEntry queued, DrawingHandleScreen handle)
-        {
-            try
-            {
-                if (!_entManager.TryGetComponent(queued.Entity, out MetaDataComponent? metadata))
-                    return;
-
-                var result = queued;
-
-                handle.RenderInRenderTarget(queued.Texture, () =>
-                {
-                    handle.DrawEntity(result.Entity, result.Texture.Size / 2, Vector2.One, Angle.Zero,
-                        overrideDirection: result.Direction);
-                }, Color.Transparent);
-
-                queued.Texture.CopyPixelsToMemory<T>(image =>
-                {
-                    queued.Action.Invoke(queued, image);
-                });
-
-                queued.Tcs.SetResult();
-            }
-            catch (Exception exc)
-            {
-                queued.Texture.Dispose();
-
-                if (!string.IsNullOrEmpty(exc.StackTrace))
-                    _sawmill.Fatal(exc.StackTrace);
-
-                queued.Tcs.SetException(exc);
-            }
-        }
-
-        public sealed class QueueEntry
-        {
-            public readonly IRenderTexture Texture;
-            public readonly Direction Direction;
-            public readonly EntityUid Entity;
-            public readonly TaskCompletionSource Tcs;
-            public readonly Action<QueueEntry, Image<T>> Action;
-
-            public QueueEntry(
-                IRenderTexture texture,
-                Direction direction,
-                EntityUid entity,
-                TaskCompletionSource tcs,
-                Action<QueueEntry, Image<T>> action)
-            {
-                Texture = texture;
-                Direction = direction;
-                Entity = entity;
-                Tcs = tcs;
-                Action = action;
-            }
-
-            public static implicit operator QueueEntry((
-                IRenderTexture Texture,
-                Direction Direction,
-                EntityUid Entity,
-                TaskCompletionSource Tcs,
-                Action<QueueEntry, Image<T>> Action) param)
-            {
-                return new QueueEntry(param.Texture, param.Direction, param.Entity, param.Tcs, param.Action);
             }
         }
     }
+
+public sealed class ContentSpriteControl<T> : Control where T : unmanaged, IPixel<T>
+{
+    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private readonly ILogManager _logMan = default!;
+
+    private readonly AppearanceSystem _appearance;
+
+    internal readonly Queue<QueueEntry> _queuedTextures;
+
+    private readonly Queue<QueueEntry> _defferedTextures;
+
+    private ISawmill _sawmill;
+
+    public ContentSpriteControl(AppearanceSystem appearance)
+    {
+        IoCManager.InjectDependencies(this);
+        _sawmill = _logMan.GetSawmill("sprite.export");
+
+        _appearance = appearance;
+        _queuedTextures = new();
+        _defferedTextures = new();
+    }
+
+    protected override void Draw(DrawingHandleScreen handle)
+    {
+        base.Draw(handle);
+
+        while (_queuedTextures.TryDequeue(out var queued))
+        {
+            if (queued.Tcs.Task.IsCanceled)
+                continue;
+
+            if (ShouldBeDeffered(queued))
+            {
+                _defferedTextures.Enqueue(queued);
+                continue;
+            }
+
+            HandleQueue(queued, handle);
+        }
+
+        while (_defferedTextures.TryDequeue(out var dequeue))
+        {
+            if (dequeue.Tcs.Task.IsCanceled)
+                continue;
+
+            if (ShouldBeDeffered(dequeue))
+            {
+                _queuedTextures.Enqueue(dequeue);
+                continue;
+            }
+
+            HandleQueue(dequeue, handle);
+        }
+    }
+
+    private bool ShouldBeDeffered(QueueEntry entry)
+    {
+        var entity = entry.Entity;
+
+        if (_appearance.TryGetData<TypingIndicatorState>(entity, TypingIndicatorVisuals.State, out var state))
+        {
+            if (state is not TypingIndicatorState.None)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void HandleQueue(QueueEntry queued, DrawingHandleScreen handle)
+    {
+        try
+        {
+            if (!_entManager.TryGetComponent(queued.Entity, out MetaDataComponent? metadata))
+                return;
+
+            var result = queued;
+
+            handle.RenderInRenderTarget(queued.Texture, () =>
+            {
+                handle.DrawEntity(result.Entity, result.Texture.Size / 2, Vector2.One, Angle.Zero,
+                    overrideDirection: result.Direction);
+            }, Color.Transparent);
+
+            queued.Texture.CopyPixelsToMemory<T>(image =>
+            {
+                queued.Action.Invoke(queued, image);
+            });
+
+            queued.Tcs.SetResult();
+        }
+        catch (Exception exc)
+        {
+            queued.Texture.Dispose();
+
+            if (!string.IsNullOrEmpty(exc.StackTrace))
+                _sawmill.Fatal(exc.StackTrace);
+
+            queued.Tcs.SetException(exc);
+        }
+    }
+
+    public sealed class QueueEntry
+    {
+        public readonly IRenderTexture Texture;
+        public readonly Direction Direction;
+        public readonly EntityUid Entity;
+        public readonly TaskCompletionSource Tcs;
+        public readonly Action<QueueEntry, Image<T>> Action;
+
+        public QueueEntry(
+            IRenderTexture texture,
+            Direction direction,
+            EntityUid entity,
+            TaskCompletionSource tcs,
+            Action<QueueEntry, Image<T>> action)
+        {
+            Texture = texture;
+            Direction = direction;
+            Entity = entity;
+            Tcs = tcs;
+            Action = action;
+        }
+
+        public static implicit operator QueueEntry((
+            IRenderTexture Texture,
+            Direction Direction,
+            EntityUid Entity,
+            TaskCompletionSource Tcs,
+            Action<QueueEntry, Image<T>> Action) param)
+        {
+            return new QueueEntry(param.Texture, param.Direction, param.Entity, param.Tcs, param.Action);
+        }
+    }
+}
 }

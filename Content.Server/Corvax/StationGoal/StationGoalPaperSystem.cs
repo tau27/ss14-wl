@@ -22,12 +22,12 @@ namespace Content.Server.Corvax.StationGoal
     {
         [Dependency] private readonly IPrototypeManager _proto = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly FaxSystem _fax = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-        private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$");
+        private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$"); //WL - Changes
 
         private static readonly Regex RandomValueInStringRegex = new(@"\{\{(.+?)\}\}");
 
@@ -40,7 +40,7 @@ namespace Content.Server.Corvax.StationGoal
             [color=#1b487e]░░░░██░░░████░███[/color]
             ═════════════════════════════════════════
             ПРИКАЗ О НАЗНАЧЕНИИ ЦЕЛИ
-            ═════════════════════════════════════════
+            =========================================
             Дата: { $date }
 
             Уважаемое командование станции, задачами Вашей смены являются:
@@ -50,13 +50,12 @@ namespace Content.Server.Corvax.StationGoal
         private static readonly string BaseEndOfGoal =
             """
 
-            ═════════════════════════════════════════
+            =========================================
             [italic]Место для печатей[/italic]
             """;
 
         public override void Initialize()
         {
-            base.Initialize();
             SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         }
 
