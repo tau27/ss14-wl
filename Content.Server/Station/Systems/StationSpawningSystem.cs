@@ -1,7 +1,6 @@
 using Content.Server._WL.CharacterInformation;
 using System.Linq;
 using Content.Server.Access.Systems;
-using Content.Server.DetailExaminable;
 using Content.Server.Humanoid;
 using Content.Server.IdentityManagement;
 using Content.Server.Mind.Commands;
@@ -11,6 +10,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
+using Content.Shared.DetailExaminable;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.PDA;

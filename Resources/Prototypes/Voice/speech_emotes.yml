@@ -321,6 +321,9 @@
   chatTriggers:
     - clap
     - claps their hands together
+    - claps her hands together
+    - claps his hands together
+    - claps its hands together
 
 - type: emote
   id: Snap
@@ -332,10 +335,12 @@
     - Hands
   blacklist:
     components:
-    - BorgChassis    # WL-Changes-start
-    #- BorgChassis
+    #WL-Changes-start
+    - BorgChassis
+    # chatMessages: ["chat-emote-msg-snap"]
     - BorgTransponder
-    # WL-Changes-end  chatMessages: ["chat-emote-msg-snap"] # snaps <{THEIR($ent)}> fingers?
+    # chatMessages: ["chat-emote-msg-snap"] # snaps <{THEIR($ent)}> fingers?
+    #WL-Changes-end
   chatTriggers:
     - snap
     - snaps
@@ -344,6 +349,9 @@
     - snap fingers
     - snaps fingers
     - snaps their fingers
+    - snaps her fingers
+    - snaps his fingers
+    - snaps its fingers
     - snapping fingers
     - snapped fingers
     # Corvax-Localization-Start
