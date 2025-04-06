@@ -33,3 +33,6 @@ auto_call_time = 0
 [hub]
 advertise = true
 tags = "lang:ru,rp:high,region:eu_e,tts"
+
+[worldgen]
+enabled = true
