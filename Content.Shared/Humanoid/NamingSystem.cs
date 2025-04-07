@@ -15,7 +15,6 @@ namespace Content.Shared.Humanoid
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-        public string GetName(string species, Gender? gender = null)
         public string GetName(string species, Gender gender = Gender.Male) //WL-Changes
         {
             // if they have an old species or whatever just fall back to human I guess?
