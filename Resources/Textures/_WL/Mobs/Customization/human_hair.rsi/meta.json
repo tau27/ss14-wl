@@ -38,6 +38,26 @@
     {
       "name": "allthefuzz",
       "directions": 4
+    },
+    {
+      "name": "pigtail",
+      "directions": 4
+    },
+    {
+      "name": "ponytail_long",
+      "directions": 4
+    },
+    {
+      "name": "ponytail_short",
+      "directions": 4
+    },
+    {
+      "name": "short_cute",
+      "directions": 4
+    },
+    {
+      "name": "short_cute2",
+      "directions": 4
     }
   ]
 }
