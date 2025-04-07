@@ -34,10 +34,10 @@ namespace Content.Shared.Kitchen
         [DataField("time")]
         public uint CookTime { get; private set; } = 5;
 
-        //WL-Changes-start
-        [DataField]
-        public string Group = "Other";
-        //WL-Changes-end
+        ////WL-Changes-start
+        //[DataField]
+        //public string Group = "Other";
+        ////WL-Changes-end
 
         public string Name => Loc.GetString(_name);
 
