@@ -10,16 +10,7 @@
   skinColoration: Hues
   maleFirstNames: NamesReptilianMale
   femaleFirstNames: NamesReptilianFemale
-  # naming:
-  #   Male:
-  #   - NamesReptilianMale
-  #   - "-"
-  #   - NamesReptilianMale
-  #   Female:
-  #   - NamesReptilianFemale
-  #   - "-"
-  #   - NamesReptilianFemale
-
+  naming: FirstDashFirst
 - type: speciesBaseSprites
   id: MobHumanoidKidanSprites
   sprites:

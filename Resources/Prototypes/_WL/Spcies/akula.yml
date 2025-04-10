@@ -8,15 +8,9 @@
   markingLimits: MobAkulaMarkingLimits
   dollPrototype: MobAkulaDummy
   skinColoration: Hues
-  naming:
-    Male:
-    - names_reptilian_male
-    - "-"
-    - names_reptilian_male
-    Female:
-    - names_reptilian_female
-    - "-"
-    - names_reptilian_female
+  maleFirstNames: NamesReptilianMale
+  femaleFirstNames: NamesReptilianFemale
+  naming: FirstDashFirst
 
 - type: speciesBaseSprites
   id: MobAkulaSprites
