@@ -1,7 +1,7 @@
 ﻿# Male
 - type: marking
   id: UnderwearMaleMidway
-  bodyPart: GroUndergarmentTopin
+  bodyPart: UndergarmentTop
   markingCategory: UndergarmentTop
   speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
   sexRestriction: Male
