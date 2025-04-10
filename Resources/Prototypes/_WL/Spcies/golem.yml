@@ -7,16 +7,11 @@
   defaultSkinTone: "#FFFFFF"
   markingLimits: MobGolemMarkingLimits
   dollPrototype: MobGolemDummy
+  maleFirstNames: NamesGolemFirst
+  femaleFirstNames: NamesGolemFirst
+  maleLastNames: NamesGolemLast
+  femaleLastNames: NamesGolemLast
   skinColoration: Hues
-  naming:
-    Male:
-    - names_golem_first
-    - " "
-    - names_golem_last
-    Female:
-    - names_golem_first
-    - " "
-    - names_golem_last
   sexes:
   - Unsexed
 
