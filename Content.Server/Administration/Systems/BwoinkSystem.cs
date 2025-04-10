@@ -793,7 +793,7 @@ namespace Content.Server.Administration.Systems
 
         //WL-Changes-start
         /// <summary>
-        ///  Œœ»ﬂ Ã≈“Œƒ¿ <see cref="OnBwoinkTextMessage(BwoinkTextMessage, EntitySessionEventArgs)">
+        /// –ö–û–ü–ò–Ø –ú–ï–¢–û–î–ê <see cref="OnBwoinkTextMessage(BwoinkTextMessage, EntitySessionEventArgs)">
         /// </summary>
         /// <param name="message"></param>
         /// <param name="senderName"></param>
@@ -950,7 +950,7 @@ namespace Content.Server.Administration.Systems
         }
         //WL-Changes-end
 
-        private static DiscordRelayedData GenerateAHelpMessage(AHelpMessageParams parameters)
+        private DiscordRelayedData GenerateAHelpMessage(AHelpMessageParams parameters)
         {
             var stringbuilder = new StringBuilder();
 
