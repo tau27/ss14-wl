@@ -248,12 +248,12 @@ public sealed partial class StoreSystem
                 HandleRefundComp(uid, component, upgradeActionId.Value);
         }
 
-        if (listing.ProductEvent != null)
+        if (listing.ProductEvents != null)
         {
             if (!listing.RaiseProductEventOnUser)
-                RaiseLocalEvent(listing.ProductEvent);
+                RaiseLocalEvent(listing.ProductEvents);
             else
-                RaiseLocalEvent(buyer, listing.ProductEvent);
+                RaiseLocalEvent(buyer, listing.ProductEvents);
         }
 
         if (listing.DisableRefund)
