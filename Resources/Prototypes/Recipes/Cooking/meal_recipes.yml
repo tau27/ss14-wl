@@ -832,7 +832,6 @@
 
 - type: microwaveMealRecipe
   id: RecipeRiceGumbo
-  group: Italian
   name: black-eyed gumbo recipe
   result: FoodRiceGumbo
   time: 15
@@ -1536,7 +1535,6 @@
 
 - type: microwaveMealRecipe
   id: RecipeCarrotCake
-  group: Cake
   name: carrot cake recipe
   result: FoodCakeCarrot
   time: 5
