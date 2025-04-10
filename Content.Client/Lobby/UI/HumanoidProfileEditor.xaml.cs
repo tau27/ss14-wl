@@ -493,7 +493,7 @@ namespace Content.Client.Lobby.UI
                 if (Profile is null)
                     return;
 
-                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Underwear, Profile.Species).Keys
+                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.UndergarmentBottom, Profile.Species).Keys
                     .FirstOrDefault();
 
                 if (string.IsNullOrEmpty(defaultMarkingId))
@@ -557,7 +557,7 @@ namespace Content.Client.Lobby.UI
                 if (Profile is null)
                     return;
 
-                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Undershirt, Profile.Species).Keys
+                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.UndergarmentTop, Profile.Species).Keys
                     .FirstOrDefault();
 
                 if (string.IsNullOrEmpty(defaultMarkingId))
@@ -1858,7 +1858,7 @@ namespace Content.Client.Lobby.UI
 
             _underwearMarking = Profile.Appearance.Markings.FirstOrDefault(m =>
                 _markingManager.Markings.TryGetValue(m.MarkingId, out var marking) &&
-                marking.MarkingCategory == MarkingCategories.Underwear);
+                marking.MarkingCategory == MarkingCategories.UndergarmentBottom);
 
             var markings = new List<Marking>();
             if (_underwearMarking != null)
@@ -1877,7 +1877,7 @@ namespace Content.Client.Lobby.UI
 
             _undershirtMarking = Profile.Appearance.Markings.FirstOrDefault(m =>
                 _markingManager.Markings.TryGetValue(m.MarkingId, out var marking) &&
-                marking.MarkingCategory == MarkingCategories.Undershirt);
+                marking.MarkingCategory == MarkingCategories.UndergarmentTop);
 
             var markings = new List<Marking>();
             if (_undershirtMarking != null)
