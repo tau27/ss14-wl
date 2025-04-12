@@ -7,7 +7,7 @@
     - id: BluespaceLocker
     - id: BreakerFlip
     # - id: BureaucraticError
-    - id: ClericalError
+    # - id: ClericalError - WL-changes
     - id: CockroachMigration
     - id: GasLeak
     - id: GreytideVirus
