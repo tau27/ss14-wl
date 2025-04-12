@@ -7,16 +7,11 @@
   defaultSkinTone: "#FFFFFF"
   markingLimits: MobGolemMarkingLimits
   dollPrototype: MobGolemDummy
+  maleFirstNames: NamesGolemFirst
+  femaleFirstNames: NamesGolemFirst
+  maleLastNames: NamesGolemLast
+  femaleLastNames: NamesGolemLast
   skinColoration: Hues
-  naming:
-    Male:
-    - names_golem_first
-    - " "
-    - names_golem_last
-    Female:
-    - names_golem_first
-    - " "
-    - names_golem_last
   sexes:
   - Unsexed
 
@@ -26,6 +21,8 @@
     Head: MobGolemHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobGolemTorso
     HeadTop: MobHumanoidAnyMarking
@@ -39,8 +36,6 @@
     RLeg: MobGolemRLeg
     LFoot: MobGolemLFoot
     RFoot: MobGolemRFoot
-    Groin: MobHumanoidAnyMarking # WL-Underwear
-    Breast: MobHumanoidAnyMarking # WL-Underwear
     Foots: MobHumanoidAnyMarking # WL-Underwear
 
 - type: markingPoints
@@ -50,10 +45,10 @@
       points: 1
       required: true
       defaultMarkings: [GolemBaseHead]
-    Underwear: # WL-Underwear
+    UndergarmentTop:
       points: 1
       required: false
-    Undershirt: # WL-Underwear
+    UndergarmentBottom:
       points: 1
       required: false
     Socks: # WL-Underwear

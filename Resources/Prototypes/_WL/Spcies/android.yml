@@ -14,6 +14,8 @@
     Head: MobAndroidHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobAndroidTorso
     HeadTop: MobHumanoidAnyMarking # Corvax-Sponsors
     Tail: MobHumanoidAnyMarking # Corvax-Sponsors
@@ -26,8 +28,6 @@
     RLeg: MobAndroidRLeg
     LFoot: MobAndroidLFoot
     RFoot: MobAndroidRFoot
-    Groin: MobHumanoidAnyMarking # WL-Underwear
-    Breast: MobHumanoidAnyMarking # WL-Underwear
     Foots: MobHumanoidAnyMarking # WL-Underwear
 
 - type: markingPoints
@@ -42,10 +42,10 @@
     Chest:
       points: 1
       required: false
-    Underwear: # WL-Underwear
+    UndergarmentTop:
       points: 1
       required: false
-    Undershirt: # WL-Underwear
+    UndergarmentBottom:
       points: 1
       required: false
     Socks: # WL-Underwear

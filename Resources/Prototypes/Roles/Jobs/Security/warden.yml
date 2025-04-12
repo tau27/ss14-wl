@@ -4,14 +4,15 @@
   description: job-description-warden
   playTimeTracker: JobWarden
   subnames:
-  - Male: РЅР°РґР·РёСЂР°С‚РµР»СЊ
-  - Male: СЃРµСЂР¶Р°РЅС‚ РѕС…СЂР°РЅС‹
+  - Male: надзиратель
+  - Male: сержант охраны
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
       time: 108000 #50 hrs # Corvax-RoleTime
     - !type:AgeRequirement
       minAge: 26
+  weight: 5
   startingGear: WardenGear
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos

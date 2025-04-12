@@ -131,6 +131,7 @@
 - type: entity
   name: raw carp fillet
   parent: FoodMeatBase
+  # MeatFish?...
   id: FoodMeatFish
   description: Your last words being "Wow, exotic!" are not worth it. The taste itself though? Maybe.
   components:
@@ -147,12 +148,8 @@
     solutions:
       food:
         reagents:
-        - ReagentId: Nutriment
+        - ReagentId: CarpoToxin
           Quantity: 5
-  - type: FoodSequenceElement
-    entries:
-      Burger: food-sequence-burger-content-carp
-      Taco: food-sequence-burger-content-carp
   - type: Extractable
     juiceSolution:
       reagents:
@@ -669,6 +666,9 @@
     - Meat
   - type: Sprite
     state: meatball
+  - type: Construction
+    graph: MeatMeatballCooked
+    node: start
 
 - type: entity
   name: slimeball
@@ -1183,6 +1183,9 @@
     entries:
       Burger: MeatBall
       Taco: MeatBall
+  - type: Construction
+    graph: MeatMeatballCooked
+    node: meatball cooked
 
 - type: entity
   name: boiled snail

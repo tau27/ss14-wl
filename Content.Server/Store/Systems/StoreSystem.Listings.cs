@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Mind;
 using Content.Shared.Store;
-using Content.Shared._WL.Store;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 
@@ -113,14 +113,14 @@ public sealed partial class StoreSystem
 
         foreach (var listing in listings)
         {
-            if (!ListingHasCategory(listing, categories)) continue;
+            if (!ListingHasCategory(listing, categories))
+                continue;
 
-            var args = new ListingConditionArgs(buyer, storeEntity, listing, EntityManager);
-            var conditionsMet = true;
-
-            // Если Conditions не инициализирован, считаем что все условия выполняются (это должно быть в соответствии с вашей логикой)
             if (listing.Conditions != null)
             {
+                var args = new ListingConditionArgs(GetBuyerMind(buyer), storeEntity, listing, EntityManager);
+                var conditionsMet = true;
+
                 foreach (var condition in listing.Conditions)
                 {
                     if (!condition.Condition(args))
@@ -129,14 +129,26 @@ public sealed partial class StoreSystem
                         break;
                     }
                 }
+
+                if (!conditionsMet)
+                    continue;
             }
 
-            if (conditionsMet)
-            {
-                // Возвращаем listing, если все условия выполнились
-                yield return listing;
-            }
+            yield return listing;
         }
+    }
+
+    /// <summary>
+    /// Returns the entity's mind entity, if it has one, to be used for listing conditions.
+    /// If it doesn't have one, or is a mind entity already, it returns itself.
+    /// </summary>
+    /// <param name="buyer">The buying entity.</param>
+    public EntityUid GetBuyerMind(EntityUid buyer)
+    {
+        if (!HasComp<MindComponent>(buyer) && _mind.TryGetMind(buyer, out var buyerMind, out var _))
+            return buyerMind;
+
+        return buyer;
     }
 
     /// <summary>

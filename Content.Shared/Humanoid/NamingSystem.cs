@@ -1,11 +1,9 @@
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Dataset;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Enums;
-using Content.Shared.Dataset;
-using Content.Shared.Random;
-using System.Text;
-using Content.Shared.Random.Helpers;
 
 namespace Content.Shared.Humanoid
 {
@@ -17,8 +15,7 @@ namespace Content.Shared.Humanoid
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-        //WL-Changes-start
-        public string GetName(string species, Gender gender = Gender.Male)
+        public string GetName(string species, Gender gender = Gender.Male) //WL-Changes
         {
             // if they have an old species or whatever just fall back to human I guess?
             // Some downstream is probably gonna have this eventually but then they can deal with fallbacks.
@@ -28,36 +25,56 @@ namespace Content.Shared.Humanoid
                 Log.Warning($"Unable to find species {species} for name, falling back to Human");
             }
 
-            if (speciesProto.Naming.TryGetValue(gender, out var list))
-                return GetName(list);
-            else
-                return GetName(speciesProto.Naming[Gender.Male]);
-        }
-
-        public string GetName(List<string> values)
-        {
-            var content = new StringBuilder();
-
-            foreach (var value in values)
+            switch (speciesProto.Naming)
             {
-                var dataset = _prototypeManager.TryIndex<DatasetPrototype>(value, out var datasetProto);
-                var weighted = _prototypeManager.TryIndex<WeightedRandomPrototype>(value, out var weightedProto);
-
-                if (dataset && weighted)
-                {
-                    Log.Error($"{nameof(NamingSystem)}: При выборе имени, ID '{value}' было найдено как в {nameof(DatasetPrototype)}, так и {nameof(WeightedRandomPrototype)}.");
-                    return "error";
-                }
-
-                if (datasetProto != null)
-                    content.Append(_random.Pick(datasetProto));
-                else if (weightedProto != null)
-                    content.Append(weightedProto.Pick(_random));
-                else content.Append(value);
+                case SpeciesNaming.First:
+                    return Loc.GetString("namepreset-first",
+                        ("first", GetFirstName(speciesProto, gender)));
+                case SpeciesNaming.TheFirstofLast:
+                    return Loc.GetString("namepreset-thefirstoflast",
+                        ("first", GetFirstName(speciesProto, gender)), ("last", GetLastName(speciesProto, gender))); // Corvax-LastnameGender
+                case SpeciesNaming.FirstDashFirst:
+                    return Loc.GetString("namepreset-firstdashfirst",
+                        ("first1", GetFirstName(speciesProto, gender)), ("first2", GetFirstName(speciesProto, gender)));
+                case SpeciesNaming.FirstLast:
+                default:
+                    return Loc.GetString("namepreset-firstlast",
+                        ("first", GetFirstName(speciesProto, gender)), ("last", GetLastName(speciesProto, gender))); // Corvax-LastnameGender
             }
-
-            return content.ToString();
         }
-        //WL-Changes-end
+
+        public string GetFirstName(SpeciesPrototype speciesProto, Gender? gender = null)
+        {
+            switch (gender)
+            {
+                case Gender.Male:
+                    return _random.Pick(_prototypeManager.Index<LocalizedDatasetPrototype>(speciesProto.MaleFirstNames));
+                case Gender.Female:
+                    return _random.Pick(_prototypeManager.Index<LocalizedDatasetPrototype>(speciesProto.FemaleFirstNames));
+                default:
+                    if (_random.Prob(0.5f))
+                        return _random.Pick(_prototypeManager.Index<LocalizedDatasetPrototype>(speciesProto.MaleFirstNames));
+                    else
+                        return _random.Pick(_prototypeManager.Index<LocalizedDatasetPrototype>(speciesProto.FemaleFirstNames));
+            }
+        }
+
+        // Corvax-LastnameGender-Start: Added custom gender split logic
+        public string GetLastName(SpeciesPrototype speciesProto, Gender? gender = null)
+        {
+            switch (gender)
+            {
+                case Gender.Male:
+                    return _random.Pick(_prototypeManager.Index<LocalizedDatasetPrototype>(speciesProto.MaleLastNames));
+                case Gender.Female:
+                    return _random.Pick(_prototypeManager.Index<LocalizedDatasetPrototype>(speciesProto.FemaleLastNames));
+                default:
+                    if (_random.Prob(0.5f))
+                        return _random.Pick(_prototypeManager.Index<LocalizedDatasetPrototype>(speciesProto.MaleLastNames));
+                    else
+                        return _random.Pick(_prototypeManager.Index<LocalizedDatasetPrototype>(speciesProto.FemaleLastNames));
+            }
+        }
+        // Corvax-LastnameGender-End
     }
 }

@@ -46,10 +46,10 @@
     HeadSide:
       points: 0
       required: false
-    Underwear: # WL-Underwear
+    UndergarmentTop:
       points: 1
       required: false
-    Undershirt: # WL-Underwear
+    UndergarmentBottom:
       points: 1
       required: false
     Socks: # WL-Underwear
@@ -64,6 +64,8 @@
     Chest: MobHumanoidTajaraTorso
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
@@ -76,8 +78,6 @@
     RLeg: MobHumanoidTajaraRLeg
     LFoot: MobHumanoidTajaraLFoot
     RFoot: MobHumanoidTajaraRFoot
-    Groin: MobHumanoidAnyMarking # WL-Underwear
-    Breast: MobHumanoidAnyMarking # WL-Underwear
     Foots: MobHumanoidAnyMarking # WL-Underwear
 
 - type: humanoidBaseSprite

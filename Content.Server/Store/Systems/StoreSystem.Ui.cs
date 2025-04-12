@@ -15,9 +15,7 @@ using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Content.Shared._WL.Store;
 using Robust.Shared.Prototypes;
-using System.IO;
 
 namespace Content.Server.Store.Systems;
 
@@ -148,7 +146,7 @@ public sealed partial class StoreSystem
         //condition checking because why not
         if (listing.Conditions != null)
         {
-            var args = new ListingConditionArgs(component.AccountOwner ?? buyer, uid, listing, EntityManager);
+            var args = new ListingConditionArgs(component.AccountOwner ?? GetBuyerMind(buyer), uid, listing, EntityManager);
             var conditionsMet = listing.Conditions.All(condition => condition.Condition(args));
 
             if (!conditionsMet)
@@ -166,9 +164,7 @@ public sealed partial class StoreSystem
         }
 
         if (!IsOnStartingMap(uid, component))
-            component.RefundAllowed = false;
-        else
-            component.RefundAllowed = true;
+            DisableRefund(uid, component);
 
         //subtract the cash
         foreach (var (currency, amount) in cost)
@@ -252,13 +248,12 @@ public sealed partial class StoreSystem
                 HandleRefundComp(uid, component, upgradeActionId.Value);
         }
 
-        //broadcast event
-        if (listing.ProductEvents?.Count > 0)
+        if (listing.ProductEvents != null)
         {
-            foreach (var product in listing.ProductEvents)
-                if (product.Events != null)
-                    foreach (var @event in product.Events)
-                        RaiseLocalEvent(uid, @event);
+            if (!listing.RaiseProductEventOnUser)
+                RaiseLocalEvent(listing.ProductEvents);
+            else
+                RaiseLocalEvent(buyer, listing.ProductEvents);
         }
 
         if (listing.DisableRefund)
@@ -272,24 +267,6 @@ public sealed partial class StoreSystem
             $"{ToPrettyString(buyer):player} purchased listing \"{ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, _proto)}\" from {ToPrettyString(uid)}");
 
         listing.PurchaseAmount++; //track how many times something has been purchased
-
-        if (listing.PriceModifyFunctions != null)
-        {
-            foreach (var currency in listing.PriceModifyFunctions)
-            {
-                if (listing.Cost.TryGetValue(currency.Key, out var value))
-                {
-                    var id = Path.GetRandomFileName();
-                    var new_dict = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>
-                    {
-                        [id] = currency.Value.Function(new PriceModifyArgs(listing.PurchaseAmount, value.Float()))
-                    };
-
-                    listing.AddCostModifier(currency.Key, new_dict);
-                }
-            }
-        }
-
         _audio.PlayEntity(component.BuySuccessSound, msg.Actor, uid); //cha-ching!
 
         var buyFinished = new StoreBuyFinishedEvent
@@ -355,12 +332,14 @@ public sealed partial class StoreSystem
 
         if (!IsOnStartingMap(uid, component))
         {
-            component.RefundAllowed = false;
+            DisableRefund(uid, component);
             UpdateUserInterface(buyer, uid, component);
         }
 
         if (!component.RefundAllowed || component.BoughtEntities.Count == 0)
             return;
+
+        _admin.Add(LogType.StoreRefund, LogImpact.Low, $"{ToPrettyString(buyer):player} has refunded their purchases from {ToPrettyString(uid):store}");
 
         for (var i = component.BoughtEntities.Count - 1; i >= 0; i--)
         {
@@ -379,6 +358,8 @@ public sealed partial class StoreSystem
             EntityManager.DeleteEntity(purchase);
         }
 
+        component.BoughtEntities.Clear();
+
         foreach (var (currency, value) in component.BalanceSpent)
         {
             component.Balance[currency] += value;
@@ -395,6 +376,7 @@ public sealed partial class StoreSystem
         component.BoughtEntities.Add(purchase);
         var refundComp = EnsureComp<StoreRefundComponent>(purchase);
         refundComp.StoreEntity = uid;
+        refundComp.BoughtTime = _timing.CurTime;
     }
 
     private bool IsOnStartingMap(EntityUid store, StoreComponent component)
