@@ -15,6 +15,8 @@
     Head: MobMurineHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobMurineTorso
     HeadTop: MobHumanoidAnyMarking
@@ -29,8 +31,6 @@
     RLeg: MobMurineRLeg
     LFoot: MobMurineLFoot
     RFoot: MobMurineRFoot
-    Groin: MobHumanoidAnyMarking # WL-Underwear
-    Breast: MobHumanoidAnyMarking # WL-Underwear
     Foots: MobHumanoidAnyMarking # WL-Underwear
 
 - type: markingPoints
@@ -56,10 +56,10 @@
     HeadSide:
       points: 0
       required: false
-    Underwear: # WL-Underwear
+    UndergarmentTop:
       points: 1
       required: false
-    Undershirt: # WL-Underwear
+    UndergarmentBottom:
       points: 1
       required: false
     Socks: # WL-Underwear

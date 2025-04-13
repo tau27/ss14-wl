@@ -8,23 +8,18 @@
   markingLimits: MobHumanMarkingLimits
   dollPrototype: MobHumanoidKidanDummy
   skinColoration: Hues
-  naming:
-    Male:
-    - names_reptilian_male 
-    - "-"
-    - names_reptilian_male 
-    Female:
-    - names_reptilian_female
-    - "-"
-    - names_reptilian_female
- 
+  maleFirstNames: NamesReptilianMale
+  femaleFirstNames: NamesReptilianFemale
+  naming: FirstDashFirst
 - type: speciesBaseSprites
   id: MobHumanoidKidanSprites
   sprites:
     Head: MobHumanoidKidanHead
     Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobHumanoidKidanTorso
-    HeadTop: MobHumanoidAnyMarking 
+    HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
     Eyes: MobHumanoidKidanEyes
@@ -36,8 +31,6 @@
     RLeg: MobHumanoidKidanRLeg
     LFoot: MobHumanoidKidanLFoot
     RFoot: MobHumanoidKidanRFoot
-    Groin: MobHumanoidAnyMarking # WL-Underwear
-    Breast: MobHumanoidAnyMarking # WL-Underwear
     Foots: MobHumanoidAnyMarking # WL-Underwear
 
 - type: humanoidBaseSprite
@@ -123,7 +116,7 @@
   baseSprite:
     sprite: _WL/Mobs/Species/Kidan/parts.rsi
     state: kidan_r_foot
-    
+
 - type: humanoidBaseSprite
   id: MobHumanoidKidanEyes
   baseSprite:

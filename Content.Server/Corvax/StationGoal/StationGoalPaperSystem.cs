@@ -1,8 +1,8 @@
 using Content.Server.Fax;
-using Content.Server.GameTicking.Events;
 using Content.Server.Station.Systems;
 using Content.Shared._WL.StationGoal;
 using Content.Shared.Fax.Components;
+using Content.Shared.GameTicking;
 using Content.Shared.Paper;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
@@ -22,45 +22,44 @@ namespace Content.Server.Corvax.StationGoal
     {
         [Dependency] private readonly IPrototypeManager _proto = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly FaxSystem _fax = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-        private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$");
+        private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$"); //WL - Changes
 
         private static readonly Regex RandomValueInStringRegex = new(@"\{\{(.+?)\}\}");
 
         private static readonly string BaseNTLogo =
             """
-            [color=#1b487e]███░███░░░░██░░░░[/color]
-            [color=#1b487e]░██░████░░░██░░░░[/color]      [head=3]Бланк документа[/head]
-            [color=#1b487e]░░█░██░██░░██░█░░[/color]               [head=3]NanoTrasen[/head]
-            [color=#1b487e]░░░░██░░██░██░██░[/color]    [bold]Station { $station } ЦК-КОМ[/bold]
-            [color=#1b487e]░░░░██░░░████░███[/color]
-            ═════════════════════════════════════════
-            ПРИКАЗ О НАЗНАЧЕНИИ ЦЕЛИ
-            ═════════════════════════════════════════
-            Дата: { $date }
+            [color=#1b487e]-----------------[/color]
+            [color=#1b487e]-----------------[/color]      [head=3]Áëàíê äîêóìåíòà[/head]
+            [color=#1b487e]-----------------[/color]               [head=3]NanoTrasen[/head]
+            [color=#1b487e]-----------------[/color]    [bold]Station { $station } ÖÊ-ÊÎÌ[/bold]
+            [color=#1b487e]-----------------[/color]
+            =========================================
+            ÏÐÈÊÀÇ Î ÍÀÇÍÀ×ÅÍÈÈ ÖÅËÈ
+            =========================================
+            Äàòà: { $date }
 
-            Уважаемое командование станции, задачами Вашей смены являются:
+            Óâàæàåìîå êîìàíäîâàíèå ñòàíöèè, çàäà÷àìè Âàøåé ñìåíû ÿâëÿþòñÿ:
 
             """;
 
         private static readonly string BaseEndOfGoal =
             """
 
-            ═════════════════════════════════════════
-            [italic]Место для печатей[/italic]
+            =========================================
+            [italic]Ìåñòî äëÿ ïå÷àòåé[/italic]
             """;
 
         public override void Initialize()
         {
-            base.Initialize();
-            SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
+            SubscribeLocalEvent<RoundStartedEvent>(OnRoundStarted);
         }
 
-        private void OnRoundStarting(RoundStartingEvent ev)
+        private void OnRoundStarted(RoundStartedEvent ev)
         {
             SendRandomStationGoalsWithConfig();
         }

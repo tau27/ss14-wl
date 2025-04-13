@@ -2,6 +2,7 @@
   id: RecipeMineralOintment
   name: mineral ointment recipe
   result: MineralOintment
+  group: Medical
   time: 30
   solids:
     Ointment: 1
@@ -13,6 +14,7 @@
   id: RecipeMineralPaste
   name: mineral paste recipe
   result: MineralPaste
+  group: Medical
   time: 30
   solids:
     Ointment: 1

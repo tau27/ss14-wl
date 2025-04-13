@@ -493,7 +493,7 @@ namespace Content.Client.Lobby.UI
                 if (Profile is null)
                     return;
 
-                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Underwear, Profile.Species).Keys
+                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.UndergarmentBottom, Profile.Species).Keys
                     .FirstOrDefault();
 
                 if (string.IsNullOrEmpty(defaultMarkingId))
@@ -557,7 +557,7 @@ namespace Content.Client.Lobby.UI
                 if (Profile is null)
                     return;
 
-                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Undershirt, Profile.Species).Keys
+                var defaultMarkingId = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.UndergarmentTop, Profile.Species).Keys
                     .FirstOrDefault();
 
                 if (string.IsNullOrEmpty(defaultMarkingId))
@@ -1162,7 +1162,7 @@ namespace Content.Client.Lobby.UI
 
             foreach (var department in departments)
             {
-                var departmentName = Loc.GetString($"department-{department.ID}");
+                var departmentName = Loc.GetString(department.Name);
 
                 if (!_jobCategories.TryGetValue(department.ID, out var category))
                 {
@@ -1361,6 +1361,13 @@ namespace Content.Client.Lobby.UI
             // Refresh the buttons etc.
             _loadoutWindow.RefreshLoadouts(roleLoadout, session, collection);
             _loadoutWindow.OpenCenteredLeft();
+
+            _loadoutWindow.OnNameChanged += name =>
+            {
+                roleLoadout.EntityName = name;
+                Profile = Profile.WithLoadout(roleLoadout);
+                SetDirty();
+            };
 
             _loadoutWindow.OnLoadoutPressed += (loadoutGroup, loadoutProto) =>
             {
@@ -1851,7 +1858,7 @@ namespace Content.Client.Lobby.UI
 
             _underwearMarking = Profile.Appearance.Markings.FirstOrDefault(m =>
                 _markingManager.Markings.TryGetValue(m.MarkingId, out var marking) &&
-                marking.MarkingCategory == MarkingCategories.Underwear);
+                marking.MarkingCategory == MarkingCategories.UndergarmentBottom);
 
             var markings = new List<Marking>();
             if (_underwearMarking != null)
@@ -1870,7 +1877,7 @@ namespace Content.Client.Lobby.UI
 
             _undershirtMarking = Profile.Appearance.Markings.FirstOrDefault(m =>
                 _markingManager.Markings.TryGetValue(m.MarkingId, out var marking) &&
-                marking.MarkingCategory == MarkingCategories.Undershirt);
+                marking.MarkingCategory == MarkingCategories.UndergarmentTop);
 
             var markings = new List<Marking>();
             if (_undershirtMarking != null)
