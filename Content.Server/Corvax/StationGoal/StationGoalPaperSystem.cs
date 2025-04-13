@@ -50,6 +50,11 @@ namespace Content.Server.Corvax.StationGoal
         private static readonly string BaseEndOfGoal =
             """
             
+            Примечания:
+            - Вы всегда имеете право вызвать эвакуационный шаттл, если:
+                - станция стала непригодной для пребывания
+
+
             ═════════════════════════════════════════
             [italic]Место для печатей[/italic]
             """;
