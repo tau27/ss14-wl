@@ -4,8 +4,8 @@
   description: job-description-warden
   playTimeTracker: JobWarden
   subnames:
-  - Male: надзиратель
-  - Male: сержант охраны
+  - Male: РЅР°РґР·РёСЂР°С‚РµР»СЊ
+  - Male: СЃРµСЂР¶Р°РЅС‚ РѕС…СЂР°РЅС‹
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
