@@ -34,16 +34,16 @@ namespace Content.Server.Corvax.StationGoal
         private static readonly string BaseNTLogo =
             """
             [color=#1b487e]-----------------[/color]
-            [color=#1b487e]-----------------[/color]      [head=3]Бланк документа[/head]
+            [color=#1b487e]-----------------[/color]      [head=3]ГЃГ«Г Г­ГЄ Г¤Г®ГЄГіГ¬ГҐГ­ГІГ [/head]
             [color=#1b487e]-----------------[/color]               [head=3]NanoTrasen[/head]
-            [color=#1b487e]-----------------[/color]    [bold]Station { $station } ЦК-КОМ[/bold]
+            [color=#1b487e]-----------------[/color]    [bold]Station { $station } Г–ГЉ-ГЉГЋГЊ[/bold]
             [color=#1b487e]-----------------[/color]
             =========================================
-            ПРИКАЗ О НАЗНАЧЕНИИ ЦЕЛИ
+            ГЏГђГ€ГЉГЂГ‡ ГЋ ГЌГЂГ‡ГЌГЂГ—Г…ГЌГ€Г€ Г–Г…Г‹Г€
             =========================================
-            Дата: { $date }
+            Г„Г ГІГ : { $date }
 
-            Уважаемое командование станции, задачами Вашей смены являются:
+            Г“ГўГ Г¦Г ГҐГ¬Г®ГҐ ГЄГ®Г¬Г Г­Г¤Г®ГўГ Г­ГЁГҐ Г±ГІГ Г­Г¶ГЁГЁ, Г§Г Г¤Г Г·Г Г¬ГЁ Г‚Г ГёГҐГ© Г±Г¬ГҐГ­Г» ГїГўГ«ГїГѕГІГ±Гї:
 
             """;
 
@@ -51,7 +51,7 @@ namespace Content.Server.Corvax.StationGoal
             """
 
             =========================================
-            [italic]Место для печатей[/italic]
+            [italic]ГЊГҐГ±ГІГ® Г¤Г«Гї ГЇГҐГ·Г ГІГҐГ©[/italic]
             """;
 
         public override void Initialize()
@@ -189,7 +189,7 @@ namespace Content.Server.Corvax.StationGoal
 
         public string FormatStringToGoalContent(string content, string station)
         {
-            var dateString = DateTime.Now.AddYears(1000).ToString("dd.MM.yyyy");
+            var dateString = DateTime.Now.AddYears(849).ToString("dd.MM.yyyy");
 
             var toReplace = new Dictionary<string, string>();
 
