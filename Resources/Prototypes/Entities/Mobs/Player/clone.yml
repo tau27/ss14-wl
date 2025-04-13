@@ -10,7 +10,8 @@
   id: BaseClone
   components:
   # general
-  - DetailExaminable
+  - CharacterInformation # WL-changes
+  # - DetailExaminable //WL-changes
   - Dna
   - Fingerprint
   - NpcFactionMember
