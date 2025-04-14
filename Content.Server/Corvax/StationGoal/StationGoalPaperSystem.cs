@@ -49,7 +49,7 @@ namespace Content.Server.Corvax.StationGoal
 
         private static readonly string BaseEndOfGoal =
             """
-            
+
             Примечания:
             - Вы всегда имеете право вызвать эвакуационный шаттл, если:
                 - станция стала непригодной для пребывания
@@ -193,7 +193,7 @@ namespace Content.Server.Corvax.StationGoal
 
         public string FormatStringToGoalContent(string content, string station)
         {
-            var dateString = DateTime.Now.AddYears(849).ToString("dd.MM.yyyy");
+            var dateString = DateTime.Now.AddYears(-1700).ToString("dd.MM.yyy");
 
             var toReplace = new Dictionary<string, string>();
 
