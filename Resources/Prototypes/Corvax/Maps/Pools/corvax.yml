@@ -8,9 +8,9 @@
   - CorvaxPilgrim # 40+
   - Box
 
-  # Semi-Highpop 25â€“65
+  # Semi-Highpop 25–65
   - Bagel
-  # Midpop 25â€“55
+  # Midpop 25–55
   - CorvaxPaper
   - CorvaxOutpost
   - CorvaxAwesome
@@ -18,9 +18,10 @@
   - Amber
   - Marathon
 
-  # Semi-Midpop 0â€“35
+  # Semi-Midpop 0–35
   - CorvaxMaus
-  # Lowpop 0â€“25
+  # Lowpop 0–25
+  - NanoStation
   - CorvaxSilly
   - CorvaxTushkan
   - Omega
