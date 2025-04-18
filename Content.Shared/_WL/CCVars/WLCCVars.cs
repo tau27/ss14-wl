@@ -108,12 +108,12 @@ public sealed class WLCVars
     /// В секундах.
     /// </summary>
     public static readonly CVarDef<int> CCMaxResponseTime =
-        CVarDef.Create("central_command.max_response_time", 800, CVar.SERVERONLY);
+        CVarDef.Create("central_command.max_response_time", 60, CVar.SERVERONLY);
 
     /// <summary>
     /// Минимальное время ответа на факс.
     /// В секундах.
     /// </summary>
     public static readonly CVarDef<int> CCMinResponseTime =
-        CVarDef.Create("central_command.min_response_time", 300, CVar.SERVERONLY);
+        CVarDef.Create("central_command.min_response_time", 60, CVar.SERVERONLY);
 }
