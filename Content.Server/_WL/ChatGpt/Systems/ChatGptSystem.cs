@@ -33,7 +33,7 @@ namespace Content.Server._WL.ChatGpt.Systems
 
         private const string SawmillId = "chat.gpt.sys";
 
-        private decimal _spentRubles = 0;
+        private decimal? _spentRubles = 0;
 
         private Dictionary<ProtoId<AIChatPrototype>, List<GptChatMessage>> _dialogues = default!;
 
@@ -67,7 +67,8 @@ namespace Content.Server._WL.ChatGpt.Systems
                     {
                         var now = await _gpt.GetBalanceAsync();
 
-                        args.AddLine(Loc.GetString("gpt-model-round-end-balance", ("spent", _spentRubles - now)));
+                        if (now.HasValue && _spentRubles.HasValue)
+                            args.AddLine(Loc.GetString("gpt-model-round-end-balance", ("spent", _spentRubles.Value - now.Value)));
 
                         _spentRubles = now;
                     }).Wait(QueryTimeout); //Я шатал асинхронный код
