@@ -137,7 +137,7 @@ namespace Content.Server._WL.ChatGpt.Managers
         /// Получает оставшееся количество рублей на счёте(((
         /// </summary>
         /// <returns></returns>
-        public async Task<decimal> GetBalanceAsync(CancellationToken cancel = default)
+        public async Task<decimal?> GetBalanceAsync(CancellationToken cancel = default)
         {
             using var http = new HttpRequestMessage(HttpMethod.Get, _balanceMap);
 
@@ -156,9 +156,9 @@ namespace Content.Server._WL.ChatGpt.Managers
             }
             catch (Exception ex)
             {
-                _sawmill.Error("Ошибка при получении баланса аккаунта ProxyAi!");
-                _sawmill.Error(ex.ToStringBetter());
-                throw;
+                _sawmill.Warning("Ошибка при получении баланса аккаунта ProxyAi!" + " " + "Bearer " + _apiKey);
+                _sawmill.Warning(ex.ToStringBetter());
+                return null;
             }
         }
 
