@@ -291,6 +291,7 @@
   - type: FireVisuals
     normalState: human_small_fire # Corvax WL /tg/ resprite
     alternateState: human_big_fire # Corvax WL /tg/ resprite
+  - type: MobCollision # WL-Changes: MobCollision works for players only
 
 - type: entity
   save: false
