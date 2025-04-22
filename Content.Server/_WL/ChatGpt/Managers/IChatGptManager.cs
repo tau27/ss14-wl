@@ -21,6 +21,6 @@ namespace Content.Server._WL.ChatGpt.Managers
 
         Task<string?> SendChatQuery(string prompt);
 
-        Task<decimal> GetBalanceAsync(CancellationToken cancel = default);
+        Task<decimal?> GetBalanceAsync(CancellationToken cancel = default);
     }
 }
