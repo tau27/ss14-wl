@@ -9,4 +9,8 @@ public sealed partial class CharacterInformationComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("flavorText")]
     public string FlavorText = string.Empty;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("oocText")]
+    public string OocText = string.Empty;
 }
