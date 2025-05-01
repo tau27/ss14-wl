@@ -28,9 +28,11 @@
     - Golem
     - HumanoidKidanes
     - Murine
-    - Tajara
     #WL-Changes-end
-    - Vulpkanin # Corvax-MRP
+    #Corvax-Species-Start
+    - Vulpkanin
+    - Tajaran
+    #Corvax-Species-End
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVox
