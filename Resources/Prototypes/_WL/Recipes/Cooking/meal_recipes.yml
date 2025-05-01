@@ -1,6 +1,6 @@
 - type: microwaveMealRecipe
   id: RecipeChickenTabaka
-  name: "цыплёнок табака"
+  name: "char-grilled chicken"
   group: Meat
   result: FoodChickenTabaka
   time: 30
@@ -11,7 +11,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeCutletCischi
-  name: "котлета по-цисчански"
+  name: "cischan cutlet"
   group: Meat
   result: FoodCutletCischi
   time: 15
@@ -24,7 +24,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeOnionSliceCischi
-  name: "луковые колечки"
+  name: "onion rings"
   result: FoodOnionSliceCischi
   time: 15
   reagents:
@@ -36,7 +36,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeFoodPemmican
-  name: "пеммикан"
+  name: "pemmican"
   result: FoodPemmican
   time: 30
   solids:

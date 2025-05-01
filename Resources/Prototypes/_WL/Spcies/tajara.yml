@@ -1,6 +1,6 @@
 - type: species
   id: Tajara
-  name: Таяра
+  name: species-name-tajara
   roundStart: true
   prototype: MobHumanoidTajara
   sprites: MobHumanoidTajaraSprites

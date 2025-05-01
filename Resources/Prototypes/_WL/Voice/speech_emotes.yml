@@ -2,7 +2,7 @@
   id: Meow
   name: Meow
   category: Vocal
-  chatMessages: [мурчит.]
+  chatMessages: [chat-emote-msg-meow]
   chatTriggers:
   - мяукает
   - мяу

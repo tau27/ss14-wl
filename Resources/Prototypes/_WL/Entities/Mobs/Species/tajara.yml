@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  name: Урист МакТаяр
+  name: Urist McTajara
   parent: BaseMobSpeciesOrganic
   id: BaseMobHumanoidTajara
   abstract: true
