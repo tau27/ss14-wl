@@ -8,7 +8,8 @@
   - type: Tag
     tags:
       - Machine
-  #WL-changes-end  - type: InteractionOutline
+  #WL-changes-end
+  - type: InteractionOutline
   - type: Anchorable
     delay: 2
   - type: Physics

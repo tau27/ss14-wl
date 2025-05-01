@@ -137,7 +137,7 @@ namespace Content.Server._WL.ChatGpt.Managers
         /// Получает оставшееся количество рублей на счёте(((
         /// </summary>
         /// <returns></returns>
-        public async Task<decimal> GetBalanceAsync(CancellationToken cancel = default)
+        public async Task<decimal?> GetBalanceAsync(CancellationToken cancel = default)
         {
             using var http = new HttpRequestMessage(HttpMethod.Get, _balanceMap);
 
@@ -156,9 +156,9 @@ namespace Content.Server._WL.ChatGpt.Managers
             }
             catch (Exception ex)
             {
-                _sawmill.Error("Ошибка при получении баланса аккаунта ProxyAi!");
-                _sawmill.Error(ex.ToStringBetter());
-                throw;
+                _sawmill.Warning("Ошибка при получении баланса аккаунта ProxyAi!" + " " + "Bearer " + _apiKey);
+                _sawmill.Warning(ex.ToStringBetter());
+                return null;
             }
         }
 
@@ -201,7 +201,7 @@ namespace Content.Server._WL.ChatGpt.Managers
                     var gpt_resp = JsonSerializer.Deserialize<GptChatResponse>(resp_string, SerializerOptions);
                     if (gpt_resp == null)
                     {
-                        _sawmill.Fatal("При десериализации ответа от модели произошла ошибка! Десериализованное значение равнялось NULL!");
+                        _sawmill.Error("При десериализации ответа от модели произошла ошибка! Десериализованное значение равнялось NULL!");
                         throw new HttpRequestException(resp_string, null, resp.StatusCode);
                     }
 
@@ -211,8 +211,8 @@ namespace Content.Server._WL.ChatGpt.Managers
                 }
                 catch (Exception ex)
                 {
-                    _sawmill.Fatal($"Ошибка при отправке запроса! Полученный ответ: {resp_string}");
-                    _sawmill.Fatal(ex.ToStringBetter());
+                    _sawmill.Error($"Ошибка при отправке запроса! Полученный ответ: {resp_string}");
+                    _sawmill.Error(ex.ToStringBetter());
                     throw;
                 }
 
@@ -226,7 +226,7 @@ namespace Content.Server._WL.ChatGpt.Managers
             }
             catch (Exception ex)
             {
-                _sawmill.Fatal(ex.ToStringBetter());
+                _sawmill.Error(ex.ToStringBetter());
                 throw;
             }
         }
