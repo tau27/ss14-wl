@@ -1,4 +1,5 @@
 ent-BaseMobHumanoidMurine = Урист МакМурин
     .desc = { ent-BaseMobSpeciesOrganic.desc }
-ent-MobHumanoidMurineDummy = Урист МакМурин
-    .desc = A dummy vulp meant to be used in character setup.
+
+ent-MobHumanoidMurineDummy = { ent-BaseSpeciesDummy }
+    .desc = { ent-BaseSpeciesDummy.desc }

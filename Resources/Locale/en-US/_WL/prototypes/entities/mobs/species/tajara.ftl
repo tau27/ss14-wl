@@ -1,4 +1,5 @@
-ent-BaseMobHumanoidTajara = Урист МакТаяр
+ent-BaseMobHumanoidTajara = Urist McTajara
     .desc = { ent-BaseMobSpeciesOrganic.desc }
-ent-MobHumanoidTajaraDummy = Urist McHands
-    .desc = A dummy Tajara meant to be used in character setup.
+
+ent-MobHumanoidTajaraDummy = { ent-BaseSpeciesDummy }
+    .desc = { ent-BaseSpeciesDummy.desc }

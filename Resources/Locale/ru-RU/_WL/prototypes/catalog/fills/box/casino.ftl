@@ -11,7 +11,7 @@ ent-BaseChipsCase = кейс с фишками
 ent-ChipsCase = { ent-BaseChipsCase }
     .desc = { ent-BaseChipsCase.desc }
 
-ent-ChipsCase = { ent-BaseChipsCase }
+ent-ChipsCaseFilled = { ent-BaseChipsCase }
     .desc = { ent-BaseChipsCase.desc }
     .suffix = Полный
 

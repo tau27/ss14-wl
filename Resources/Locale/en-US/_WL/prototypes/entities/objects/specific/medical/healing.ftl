@@ -1,12 +1,15 @@
-ent-BioTube = Био трубка
-    .desc = Заменяет андроидам вены.
-    .suffix = Полный
+ent-BioTube = bio tube
+    .desc = Replaces veins for androids.
+    .suffix = Full
+
 ent-BioTube1 = { ent-BioTube }
-    .suffix = Один
+    .suffix = One
     .desc = { ent-BioTube.desc }
-ent-TiriumPack = Пакет с тириумом
-    .desc = Поможет восстановить потеряную биожидкость.
-    .suffix = Полный
+
+ent-TiriumPack = thirium package
+    .desc = Will help restore lost biofluid.
+    .suffix = Full
+
 ent-TiriumPack1 = { ent-TiriumPack }
-    .suffix = Один
+    .suffix = One
     .desc = { ent-TiriumPack.desc }

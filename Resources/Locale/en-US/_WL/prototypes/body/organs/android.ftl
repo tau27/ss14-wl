@@ -1,5 +1,6 @@
 ent-BaseAndroidOrgan = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
+
 ent-OrganAndroidBrain = biosynthetic brain
     .desc = The source of perfect intelligence. Boop!
 

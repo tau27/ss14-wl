@@ -1,4 +1,5 @@
-ent-BaseMobAndroid = Urist McAndroid
+ent-BaseMobAndroid = Урист МакАндроид
     .desc = { ent-BaseMobSpeciesOrganic.desc }
-ent-MobAndroidDummy = Урист МакАндроид
-    .desc = A dummy android meant to be used in character setup.
+
+ent-MobAndroidDummy = { ent-BaseSpeciesDummy }
+    .desc = { ent-BaseSpeciesDummy.desc }

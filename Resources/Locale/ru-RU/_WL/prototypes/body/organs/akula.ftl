@@ -1,1 +1,1 @@
-ent-OrganAnimalHeart = сердце
+ent-OrganAkulaHeart = сердце

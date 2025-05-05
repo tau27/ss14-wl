@@ -1,2 +1,2 @@
-ent-MobHumanoidTajara = Урист МакТаяр
+ent-MobHumanoidTajara = Urist McTajara
   .desc = { ent-BaseMobHumanoidTajara.desc }
