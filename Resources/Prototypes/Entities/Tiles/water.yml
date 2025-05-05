@@ -12,7 +12,7 @@
     anchored: true
   - type: SyncSprite
   - type: Clickable
-  # WL Workers Animeted Start
+  # WL-Changes: Animated Water Start
   - type: Sprite
     sprite: _WL/Tiles/Planet/water.rsi
     drawdepth: BelowFloor
@@ -23,7 +23,7 @@
     additionalKeys:
     - walls
     base: water
-  # # WL Workers Animeted End
+  # # WL-Changes: Animated Water End
   - type: SolutionContainerManager
     solutions:
       pool:
