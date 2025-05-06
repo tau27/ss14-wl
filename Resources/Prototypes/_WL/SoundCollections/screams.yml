@@ -15,17 +15,17 @@
     - /Audio/_WL/Voice/Kidan/scream_1.ogg
     - /Audio/_WL/Voice/Kidan/scream_2.ogg
 
-- type: soundCollection
-  id: TajaraSoundF
-  files:
-    - /Audio/_WL/Voice/Tajara/fscream_1.ogg
-    - /Audio/_WL/Voice/Tajara/fscream_2.ogg
+# - type: soundCollection
+#   id: TajaraSoundF
+#   files:
+#     - /Audio/_WL/Voice/Tajara/fscream_1.ogg
+#     - /Audio/_WL/Voice/Tajara/fscream_2.ogg
 
-- type: soundCollection
-  id: TajaraSoundM
-  files:
-    - /Audio/_WL/Voice/Tajara/mscream_1.ogg
-    - /Audio/_WL/Voice/Tajara/mscream_2.ogg
+# - type: soundCollection
+#   id: TajaraSoundM
+#   files:
+#     - /Audio/_WL/Voice/Tajara/mscream_1.ogg
+#     - /Audio/_WL/Voice/Tajara/mscream_2.ogg
 
 - type: soundCollection
   id: GolemScream

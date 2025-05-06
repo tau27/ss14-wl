@@ -115,41 +115,41 @@
     Crying:
       collection: KidanCrying
 
-- type: emoteSounds
-  id: FemaleTajara
-  params:
-    variation: 0.125
-  sounds:
-    Scream:
-      collection: TajaraSoundF
-    Laugh:
-      collection: FemaleLaugh
-    Snore:
-      collection: CatPurr
-    Whistle:
-      collection: Whistles
-    Sigh:
-      collection: FemaleSigh
-    Crying:
-      collection: FemaleCry
+# - type: emoteSounds
+#   id: FemaleTajara
+#   params:
+#     variation: 0.125
+#   sounds:
+#     Scream:
+#       collection: TajaraSoundF
+#     Laugh:
+#       collection: FemaleLaugh
+#     Snore:
+#       collection: CatPurr
+#     Whistle:
+#       collection: Whistles
+#     Sigh:
+#       collection: FemaleSigh
+#     Crying:
+#       collection: FemaleCry
 
-- type: emoteSounds
-  id: MaleTajara
-  params:
-    variation: 0.125
-  sounds:
-    Scream:
-      collection: TajaraSoundM
-    Laugh:
-      collection: MaleLaugh
-    Snore:
-      collection: CatPurr
-    Whistle:
-      collection: Whistles
-    Sigh:
-      collection: MaleSigh
-    Crying:
-      collection: MaleCry
+# - type: emoteSounds
+#   id: MaleTajara
+#   params:
+#     variation: 0.125
+#   sounds:
+#     Scream:
+#       collection: TajaraSoundM
+#     Laugh:
+#       collection: MaleLaugh
+#     Snore:
+#       collection: CatPurr
+#     Whistle:
+#       collection: Whistles
+#     Sigh:
+#       collection: MaleSigh
+#     Crying:
+#       collection: MaleCry
 
 - type: emoteSounds
   id: UnisexGolem
