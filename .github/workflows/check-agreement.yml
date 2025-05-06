@@ -18,7 +18,7 @@ jobs:
 
       - name: Check if contributor agreement is accepted
         run: |
-          echo "By pushing commits or creating a pull request, you agree to the terms of the LICENSE, NDA, and CLA."
+          echo "By pushing commits or creating a pull request, you agree to the terms of the LICENSE and CLA."
           AGREED=$(git log -1 --pretty=%B | grep -i "^y$")
           if [ -z "$AGREED" ]; then
             echo "Commit message must include the letter 'y' to confirm agreement to the terms."
