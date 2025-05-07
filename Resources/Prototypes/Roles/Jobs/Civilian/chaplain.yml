@@ -23,6 +23,11 @@
   - !type:AddComponentSpecial
     components:
     - type: BibleUser #Lets them heal with bibles
+  # WL-Changes-AgeRequirement Start
+  requirements:
+    - !type:AgeRequirement
+      minAge: 22
+  # WL-Changes-AgeRequirement End
 
 - type: startingGear
   id: ChaplainGear

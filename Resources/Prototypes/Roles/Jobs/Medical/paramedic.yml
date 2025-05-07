@@ -10,7 +10,7 @@
     - !type:OverallPlaytimeRequirement
       time: 54000 # 15 hrs
     - !type:AgeRequirement
-      minAge: 20
+      minAge: 22 # WL-Changes-AgeRequirement
   startingGear: ParamedicGear
   icon: "JobIconParamedic"
   supervisors: job-supervisors-cmo
