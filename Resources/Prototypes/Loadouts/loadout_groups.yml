@@ -69,6 +69,7 @@
   minLimit: 0
   loadouts:
   - Glasses
+  - CheapSunglasses # WL-Changes
   - GlassesJamjar
   - GlassesJensen
 
