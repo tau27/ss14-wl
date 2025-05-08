@@ -15,7 +15,7 @@ public sealed class WLCVars
     /// Через сколько времени(в секундах) появится кнопка возвращения в лобби.
     /// </summary>
     public static readonly CVarDef<int> GhostReturnToLobbyButtonCooldown =
-        CVarDef.Create("ghost.return_to_lobby_button_cooldown", 10*60, CVar.SERVERONLY);
+        CVarDef.Create("ghost.return_to_lobby_button_cooldown", 600, CVar.SERVERONLY); //WL-changes  (10 minutes)
 
     /// <summary>
     /// Нужно ли проверять игрока на возраст при выборе роли.
