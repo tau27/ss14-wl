@@ -190,12 +190,13 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
             _metaSystem.SetEntityName(entity.Value, profile.Name);
 
             ////WL-changes-start
-            //if (profile.FlavorText != "" && _configurationManager.GetCVar(CCVars.FlavorText)) 
+            //if (profile.FlavorText != "" && _configurationManager.GetCVar(CCVars.FlavorText))
             //{
             //    AddComp<DetailExaminableComponent>(entity.Value).Content = profile.FlavorText;
             //}
 
             EnsureComp<CharacterInformationComponent>(entity.Value).FlavorText = profile.FlavorText; // WL-CharacterInformation
+            EnsureComp<CharacterInformationComponent>(entity.Value).OocText = profile.OocText;
             ////WL-changes-end
         }
 
