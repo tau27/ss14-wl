@@ -27,8 +27,8 @@ public sealed partial class AdminVerbSystem
     [ValidatePrototypeId<EntityPrototype>]
     private const string DefaultInitialInfectedRule = "Zombie";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultNukeOpRule = "LoneOpsSpawn";
+    // [ValidatePrototypeId<EntityPrototype>]
+    // private const string DefaultNukeOpRule = "LoneOpsSpawn";
 
     [ValidatePrototypeId<EntityPrototype>]
     private const string DefaultRevsRule = "Revolutionary";
@@ -102,20 +102,20 @@ public sealed partial class AdminVerbSystem
         };
         args.Verbs.Add(zombie);
 
-        var nukeOpName = Loc.GetString("admin-verb-text-make-nuclear-operative");
-        Verb nukeOp = new()
-        {
-            Text = nukeOpName,
-            Category = VerbCategory.Antag,
-            Icon = new SpriteSpecifier.Rsi(new("/Textures/Clothing/Head/Hardsuits/syndicate.rsi"), "icon"),
-            Act = () =>
-            {
-                _antag.ForceMakeAntag<NukeopsRuleComponent>(targetPlayer, DefaultNukeOpRule);
-            },
-            Impact = LogImpact.High,
-            Message = string.Join(": ", nukeOpName, Loc.GetString("admin-verb-make-nuclear-operative")),
-        };
-        args.Verbs.Add(nukeOp);
+        // var nukeOpName = Loc.GetString("admin-verb-text-make-nuclear-operative");
+        // Verb nukeOp = new()
+        // {
+        //     Text = nukeOpName,
+        //     Category = VerbCategory.Antag,
+        //     Icon = new SpriteSpecifier.Rsi(new("/Textures/Clothing/Head/Hardsuits/syndicate.rsi"), "icon"),
+        //     Act = () =>
+        //     {
+        //         _antag.ForceMakeAntag<NukeopsRuleComponent>(targetPlayer, DefaultNukeOpRule);
+        //     },
+        //     Impact = LogImpact.High,
+        //     Message = string.Join(": ", nukeOpName, Loc.GetString("admin-verb-make-nuclear-operative")),
+        // };
+        // args.Verbs.Add(nukeOp);
 
         var pirateName = Loc.GetString("admin-verb-text-make-pirate");
         Verb pirate = new()

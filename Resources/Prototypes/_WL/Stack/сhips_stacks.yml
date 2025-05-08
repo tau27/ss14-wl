@@ -4,7 +4,6 @@
   icon: Objects/Specific/Syndicate/telecrystal.rsi
   spawn: Chips10
   maxCount: 15
-  itemSize: 1
 
 - type: stack
   id: Chips25
@@ -12,7 +11,6 @@
   icon: Objects/Specific/Syndicate/telecrystal.rsi
   spawn: Chips25
   maxCount: 15
-  itemSize: 1
 
 - type: stack
   id: Chips50
@@ -20,7 +18,6 @@
   icon: Objects/Specific/Syndicate/telecrystal.rsi
   spawn: Chips50
   maxCount: 15
-  itemSize: 1
 
 - type: stack
   id: Chips100
@@ -28,7 +25,6 @@
   icon: Objects/Specific/Syndicate/telecrystal.rsi
   spawn: Chips100
   maxCount: 15
-  itemSize: 1
 
 - type: stack
   id: Chips250
@@ -36,7 +32,6 @@
   icon: Objects/Specific/Syndicate/telecrystal.rsi
   spawn: Chips250
   maxCount: 15
-  itemSize: 1
 
 - type: stack
   id: Chips500
@@ -44,7 +39,6 @@
   icon: Objects/Specific/Syndicate/telecrystal.rsi
   spawn: Chips500
   maxCount: 15
-  itemSize: 1
 
 - type: stack
   id: Chips2000
@@ -52,4 +46,3 @@
   icon: Objects/Specific/Syndicate/telecrystal.rsi
   spawn: Chips2000
   maxCount: 15
-  itemSize: 1

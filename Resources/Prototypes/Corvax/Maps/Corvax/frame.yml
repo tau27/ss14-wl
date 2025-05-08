@@ -51,6 +51,6 @@
             Clown: [ 1, 1 ]
             # silicon
             Borg: [ 1, 1 ]
-        - type: StationGoal
-          goals:
-          - FrameRepair
+        # - type: StationGoal
+        #   goals:
+        #   - FrameRepair

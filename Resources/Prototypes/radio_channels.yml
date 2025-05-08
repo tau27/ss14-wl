@@ -97,8 +97,8 @@
   longRange: true
 
 - type: radioChannel # WL - Kidan
-  id: hitin
-  name: Хитин
+  id: Hitin
+  name: chat-radio-hitin
   keycode: 'х'
   frequency: 4944
   color: "#cc7722"

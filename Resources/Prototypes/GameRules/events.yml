@@ -37,7 +37,7 @@
     - id: RevenantSpawn
     - id: SleeperAgents
     - id: ZombieOutbreak
-    - id: LoneOpsSpawn
+    # - id: LoneOpsSpawn
     - id: DerelictCyborgSpawn
     - id: WizardSpawn
 
@@ -263,7 +263,9 @@
     duration: null
     earliestStart: 20
     reoccurrenceDelay: 20
-    minimumPlayers: 15
+    spawnConfig:
+      standartConfig:
+        minPlayers: 15
   - type: ParadoxCloneRule
     objectiveBlacklist:
       tags:
@@ -314,7 +316,9 @@
     duration: 1
     earliestStart: 30
     reoccurrenceDelay: 60
-    minimumPlayers: 10
+    spawnConfig:
+      standartConfig:
+        minPlayers: 10
   - type: AntagSelection
     agentName: wizard-round-end-name
     definitions:
@@ -485,7 +489,9 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     earliestStart: 20
-    minimumPlayers: 15
+    spawnConfig:
+      standartConfig:
+        minPlayers: 15
     weight: 5
     duration: 60
   - type: VentCrittersRule
@@ -582,7 +588,9 @@
 #  - type: StationEvent
 #    earliestStart: 35
 #    weight: 5.5
-#    minimumPlayers: 20
+    # spawnConfig:
+    #   standartConfig:
+    #     minPlayers: 20
 #    duration: 1
 #  - type: RuleGrids
 #  - type: LoadMapRule
@@ -710,7 +718,9 @@
   - type: StationEvent
     earliestStart: 0
     duration: 1
-    minimumPlayers: 1
+    spawnConfig:
+      standartConfig:
+        minPlayers: 1
     maxOccurrences: 2
     weight: 10
   - type: RandomSpawnRule
