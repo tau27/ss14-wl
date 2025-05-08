@@ -101,19 +101,19 @@ public sealed class WLCVars
     /// Максимальное количество запросов на ЦК в минуту, на которые будет дан ответ.
     /// </summary>
     public static readonly CVarDef<int> CCMaxQueriesPerMinute =
-        CVarDef.Create("central_command.max_queries_per_minute", 1, CVar.SERVERONLY | CVar.SERVER);
+        CVarDef.Create("central_command.max_queries_per_minute", 6, CVar.SERVERONLY | CVar.SERVER);
 
     /// <summary>
     /// Максимальное время ответа на факс.
     /// В секундах.
     /// </summary>
     public static readonly CVarDef<int> CCMaxResponseTime =
-        CVarDef.Create("central_command.max_response_time", 800, CVar.SERVERONLY);
+        CVarDef.Create("central_command.max_response_time", 650, CVar.SERVERONLY); //It has normal distribution random where medium is 450 second (7.5 min)
 
     /// <summary>
     /// Минимальное время ответа на факс.
     /// В секундах.
     /// </summary>
     public static readonly CVarDef<int> CCMinResponseTime =
-        CVarDef.Create("central_command.min_response_time", 300, CVar.SERVERONLY);
+        CVarDef.Create("central_command.min_response_time", 250, CVar.SERVERONLY); //It has normal distribution random where medium is 450 second (7.5 min)
 }

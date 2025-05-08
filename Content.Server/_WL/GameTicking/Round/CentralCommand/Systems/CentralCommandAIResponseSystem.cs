@@ -116,7 +116,7 @@ namespace Content.Server._WL.GameTicking.Round.CentralCommand.Systems
 
             if (_respTime <= TimeSpan.Zero)
             {
-                _respTime = _random.Next(_minRespTime, _maxRespTime);
+                _respTime = (_random.Next(_minRespTime, _maxRespTime) + _random.Next(_minRespTime, _maxRespTime)) / 2;
 
                 try
                 {

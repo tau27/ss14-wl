@@ -125,7 +125,7 @@ public abstract partial class SharedStationAiSystem
            (!TryComp(ev.Target, out StationAiWhitelistComponent? whitelistComponent) ||
             !ValidateAi((ev.Actor, aiComp))))
         {
-            // Don't allow the AI to interact with anything that isn't powered. //WL-fixes, remove on upstream this please
+            // Don't allow the AI to interact with anything that isn't powered.
             if (!PowerReceiver.IsPowered(ev.Target))
             {
                 ShowDeviceNotRespondingPopup(ev.Actor);
@@ -133,7 +133,7 @@ public abstract partial class SharedStationAiSystem
                 return;
             }
 
-            // Don't allow the AI to interact with anything that it isn't allowed to (ex. AI wire is cut) //WL-fixes, remove on upstream this please
+            // Don't allow the AI to interact with anything that it isn't allowed to (ex. AI wire is cut)
             if (whitelistComponent is { Enabled: false })
             {
                 ShowDeviceNotRespondingPopup(ev.Actor);
@@ -173,7 +173,7 @@ public abstract partial class SharedStationAiSystem
         var verb = new AlternativeVerb
         {
             Text = isOpen ? Loc.GetString("ai-close") : Loc.GetString("ai-open"),
-            Act = () => 
+            Act = () =>
             {
                 if (isOpen)
                 {
