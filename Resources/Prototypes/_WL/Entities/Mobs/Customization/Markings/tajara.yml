@@ -2,7 +2,7 @@
   id: TajaraSnout
   bodyPart: Snout
   markingCategory: Snout
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_parts.rsi
     state: muzzle
@@ -13,7 +13,7 @@
   id: TajaraSnoutAlt
   bodyPart: Snout
   markingCategory: Snout
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_parts.rsi
     state: muzzle2
@@ -24,7 +24,7 @@
   id: TajaraHeadTiger
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_parts.rsi
     state: tiger_face
@@ -33,7 +33,7 @@
   id: TajaraHeadPatches
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_parts.rsi
     state: patch
@@ -42,7 +42,7 @@
   id: TajaraPatches
   bodyPart: RFoot
   markingCategory: Overlay
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_parts.rsi
     state: patch_s
@@ -51,7 +51,7 @@
   id: TajaraPoints
   bodyPart: RFoot
   markingCategory: Overlay
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_parts.rsi
     state: points_s
@@ -60,7 +60,7 @@
   id: TajaraHeadPoints
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_parts.rsi
     state: points
@@ -69,7 +69,7 @@
   id: TajaraTail
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_parts.rsi
     state: tajara_tail
@@ -78,7 +78,7 @@
   id: TajaraTailTiger
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_parts.rsi
     state: tajara_tail
@@ -89,7 +89,7 @@
   id: TajaraEars
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_parts.rsi
     state: tajara_ears_in
