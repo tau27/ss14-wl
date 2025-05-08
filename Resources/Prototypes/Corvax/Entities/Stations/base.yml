@@ -2,6 +2,7 @@
   id: BaseStationGoal
   abstract: true
   components:
+    # CorvaxWL-Changes start
     # - type: StationGoal
     #   goals:
     #   - Singularity
@@ -21,6 +22,7 @@
     #   - CellAI
     #   - Botany
     #   - Bunker
+    # CorvaxWL-Changes end
 
 - type: entity
   id: BaseStationSiliconLawNTDefault

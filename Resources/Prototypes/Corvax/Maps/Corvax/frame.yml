@@ -51,6 +51,8 @@
             Clown: [ 1, 1 ]
             # silicon
             Borg: [ 1, 1 ]
+        # CorvaxWL-Changes start
         # - type: StationGoal
         #   goals:
         #   - FrameRepair
+        # CorvaxWL-Changes end

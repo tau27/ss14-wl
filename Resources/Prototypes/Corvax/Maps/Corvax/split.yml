@@ -61,11 +61,13 @@
             # cargo
             SalvageSpecialist: [ 1, 1 ]
             CargoTechnician: [ 3, 3 ]
+        # CorvaxWL-Changes start
         # - type: StationGoal
         #   goals:
         #     - Artifacts
         #     - XenobiologyRepair
         #     - VirusologyAmbusol
+        # CorvaxWL-Changes end
     Payback:
       stationProto: NanotrasenStationNoArrivals
       components:
@@ -178,6 +180,7 @@
             Quartermaster: [ 1, 1 ]
             SalvageSpecialist: [ 3, 3 ]
             CargoTechnician: [ 3, 4 ]
+        # CorvaxWL-Changes start
         # - type: StationGoal
         #   goals:
         #     - Singularity
@@ -185,3 +188,4 @@
         #     - Zoo
         #     - MiningOutpost
         #     - Tesla
+        # CorvaxWL-Changes end

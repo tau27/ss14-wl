@@ -68,7 +68,7 @@
             # silicon
             StationAi: [ 1, 1 ]
             Borg: [ 1, 1 ]
-        # WL-Changes start
+        # CorvaxWL-Changes start
         # - type: StationGoal
         #   goals:
         #   - Singularity
@@ -86,4 +86,4 @@
         #   - ShuttleEmergency
         #   - Theatre
         #   - Botany
-        # WL-Changes eng
+        # CorvaxWL-Changes eng

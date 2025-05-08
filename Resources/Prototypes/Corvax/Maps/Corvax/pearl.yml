@@ -67,6 +67,7 @@
             # silicon
             Borg: [ 1, 1 ]
             StationAi: [ 1, 1 ]
+        # CorvaxWL-Changes start
         # - type: StationGoal
         #   goals:
         #   - SolarPanels
@@ -85,3 +86,4 @@
         #   - CellAI
         #   - Botany
         #   - Bunker
+        # CorvaxWL-Changes end

@@ -50,7 +50,7 @@
     weight: 1.6
     reoccurrenceDelay: 120
     duration: 1
-    spawnConfig:
+    spawnConfig: # CorvaxWL-Changes
       standartConfig:
         minPlayers: 15
   - type: RuleGrids
@@ -115,7 +115,7 @@
     startAnnouncement: null # It should be silent.
     weight: 1.6  # Hopefully this is uncommon enough, it needs to be uncommon enough that people wont waste time metaknowledging it.
     earliestStart: 45 # late to hopefully have enough ghosts to fill all roles quickly.
-    spawnConfig:
+    spawnConfig: # CorvaxWL-Changes
       standartConfig:
         minPlayers: 25
   - type: LoadMapRule

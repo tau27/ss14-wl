@@ -27,8 +27,10 @@ public sealed partial class AdminVerbSystem
     [ValidatePrototypeId<EntityPrototype>]
     private const string DefaultInitialInfectedRule = "Zombie";
 
+// CorvaxWL-start
     // [ValidatePrototypeId<EntityPrototype>]
     // private const string DefaultNukeOpRule = "LoneOpsSpawn";
+// CorvaxWL-end
 
     [ValidatePrototypeId<EntityPrototype>]
     private const string DefaultRevsRule = "Revolutionary";
@@ -102,6 +104,7 @@ public sealed partial class AdminVerbSystem
         };
         args.Verbs.Add(zombie);
 
+// CorvaxWL-start
         // var nukeOpName = Loc.GetString("admin-verb-text-make-nuclear-operative");
         // Verb nukeOp = new()
         // {
@@ -116,6 +119,7 @@ public sealed partial class AdminVerbSystem
         //     Message = string.Join(": ", nukeOpName, Loc.GetString("admin-verb-make-nuclear-operative")),
         // };
         // args.Verbs.Add(nukeOp);
+// CorvaxWL-end
 
         var pirateName = Loc.GetString("admin-verb-text-make-pirate");
         Verb pirate = new()

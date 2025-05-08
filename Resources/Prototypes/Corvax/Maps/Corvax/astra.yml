@@ -67,6 +67,7 @@
             # silicon
             StationAi: [ 1, 1 ]
             Borg: [ 2, 2 ]
+        # CorvaxWL-Changes start
         # - type: StationGoal
         #   goals:
         #   - Singularity
@@ -78,3 +79,4 @@
         #   - CellAI
         #   - VirusologyAmbusol
         #   - AstraRepair
+        # CorvaxWL-Changes end

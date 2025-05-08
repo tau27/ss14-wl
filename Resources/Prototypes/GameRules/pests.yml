@@ -51,7 +51,7 @@
     earliestStart: 15
     weight: 6
     duration: 50
-    spawnConfig:
+    spawnConfig: # CorvaxWL-Changes
       standartConfig:
         minPlayers: 15
   - type: VentCrittersRule
@@ -115,7 +115,7 @@
     earliestStart: 15
     weight: 6
     duration: 50
-    spawnConfig:
+    spawnConfig: # CorvaxWL-Changes
       standartConfig:
         minPlayers: 30
   - type: VentCrittersRule
