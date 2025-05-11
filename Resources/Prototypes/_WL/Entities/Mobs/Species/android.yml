@@ -218,14 +218,11 @@
 
 - type: entity
   save: false
-  name: Урист МакАндроид
+  name: Urist McAndroid
   description: A dummy android meant to be used in character setup.
   id: MobAndroidDummy
-  parent: MobHumanDummy
+  parent: BaseSpeciesDummy
   categories: [ HideSpawnMenu ]
   components:
   - type: HumanoidAppearance
     species: Android
-
-- type: Tag
-  id: AndroidBodyTag

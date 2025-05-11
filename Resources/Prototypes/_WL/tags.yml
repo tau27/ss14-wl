@@ -30,3 +30,6 @@
 
 - type: Tag
   id: TarotDeck
+
+- type: Tag
+  id: AndroidBodyTag

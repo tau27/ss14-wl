@@ -244,7 +244,7 @@
   save: false
   name: Golem Dummy
   id: MobGolemDummy
-  parent: MobHumanDummy
+  parent: BaseSpeciesDummy
   categories: [ HideSpawnMenu ]
   components:
     - type: HumanoidAppearance
