@@ -1,7 +1,7 @@
 - type: dungeonRoom
   id: MaintsRenga15x15a
   size: 15,15
-  atlas: Maps/_WL/Dungeon/maints_wlrenga
+  atlas: /Maps/_WL/Dungeon/maints_wlrenga
   offset: 0,0
   tags:
   - MaintsRenga
@@ -9,7 +9,7 @@
 - type: dungeonRoom
   id: MaintsRenga15x15c
   size: 15,15
-  atlas: Maps/_WL/Dungeon/maints_wlrenga
+  atlas: /Maps/_WL/Dungeon/maints_wlrenga
   offset: 16,0
   tags:
   - MaintsRenga
@@ -17,7 +17,7 @@
 - type: dungeonRoom
   id: MaintsRenga15x15b
   size: 15,15
-  atlas: Maps/_WL/Dungeon/maints_wlrenga
+  atlas: /Maps/_WL/Dungeon/maints_wlrenga
   offset: 0,16
   tags:
   - MaintsRenga
@@ -25,7 +25,7 @@
 - type: dungeonRoom
   id: MaintsRenga15x15d
   size: 15,15
-  atlas: Maps/_WL/Dungeon/maints_wlrenga
+  atlas: /Maps/_WL/Dungeon/maints_wlrenga
   offset: 16,16
   tags:
   - MaintsRenga
