@@ -25,7 +25,7 @@
   # Science
   - ManualStorageScienceSmallRecipe
   - ManualStorageScienceBoxRecipe
-      - ManualStorageScienceBigRecipe
+  - ManualStorageScienceBigRecipe
   # Command
   - ManualStorageCommandSmallRecipe
   - ManualStorageCommandBoxRecipe
