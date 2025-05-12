@@ -35,9 +35,16 @@
   equipment:
     head: ClothingHeadHatHardhatWhite
 
+#WL Workers Lyvsi engi resprite start
+#- type: loadout
+#  id: ChiefEngineerBeret
+#  startingGear: EngineeringBeret
+
 - type: loadout
-  id: ChiefEngineerBeret
-  startingGear: EngineeringBeret
+  id: EngineerBeret
+  equipment:
+    head: ClothingHeadHatBeretEngineering
+#WL Workers Lyvsi engi resprite end
 
 # Neck
 - type: loadout
