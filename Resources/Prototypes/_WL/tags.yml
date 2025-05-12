@@ -11,6 +11,9 @@
   id: Machine
 
 - type: Tag
+  id: MaintsRenga
+
+- type: Tag
   id: Console
 
 - type: Tag
