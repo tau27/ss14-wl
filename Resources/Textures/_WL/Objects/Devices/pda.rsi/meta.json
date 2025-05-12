@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "For corvax WL from baohe and warta",
+  "copyright": "For corvax WL from baohe and warta. Taken from tgstation at https://github.com/tgstation/tgstation/commit/59f2a4e10e5ba36033c9734ddebfbbdc6157472d pda-wizard recolour by Velken",
   "size": {
     "x": 32,
     "y": 32
@@ -528,6 +528,17 @@
     {
       "name": "equipped-IDCARD",
       "directions": 4
+    },
+	{
+      "name": "pda-wizard",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
     }
   ]
 }
