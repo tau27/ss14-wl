@@ -1,4 +1,4 @@
-ent-FloorWaterEntityNOAnim = вода
+ent-FloorWaterEntityNoAnim = вода
     .desc = Настоящий утолитель жажды.
     .suffix = Нет анимации
 
