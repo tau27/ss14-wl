@@ -1,5 +1,5 @@
 - type: entity
-  id: FloorWaterEntityNOAnim
+  id: FloorWaterEntityNoAnim
   name: water
   description: A real thirst quencher.
   suffix: "No anim water"
@@ -66,8 +66,8 @@
     - !type:ExtinguishReaction
 
 - type: entity
-  parent: FloorWaterEntityNOAnim
-  id: FloorAzureWaterEntityNOAnim
+  parent: FloorWaterEntityNoAnim
+  id: FloorAzureWaterEntityNoAnim
   name: azure water
   description: A real thirst quencher. Corals are not included!
   components:
