@@ -2,7 +2,7 @@
   id: FloorWaterEntityNoAnim
   name: water
   description: A real thirst quencher.
-  suffix: "No anim water"
+  suffix: "No animation"
   placement:
     mode: SnapgridCenter
     snap:
