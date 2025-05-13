@@ -2,7 +2,7 @@
   id: TajaraFacialHairGoateeFaded
   bodyPart: FacialHair
   markingCategory: FacialHair
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_facial_hairs.rsi
     state: goatee_faded
@@ -11,7 +11,7 @@
   id: TajaraFacialHairGoatee
   bodyPart: FacialHair
   markingCategory: FacialHair
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_facial_hairs.rsi
     state: goatee
@@ -20,7 +20,7 @@
   id: TajaraFacialHairMoustache
   bodyPart: FacialHair
   markingCategory: FacialHair
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_facial_hairs.rsi
     state: moustache
@@ -29,7 +29,7 @@
   id: TajaraFacialHairMutton
   bodyPart: FacialHair
   markingCategory: FacialHair
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_facial_hairs.rsi
     state: mutton
@@ -38,7 +38,7 @@
   id: TajaraFacialHairPencilstache
   bodyPart: FacialHair
   markingCategory: FacialHair
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_facial_hairs.rsi
     state: pencilstache
@@ -47,7 +47,7 @@
   id: TajaraFacialHairSideburns
   bodyPart: FacialHair
   markingCategory: FacialHair
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_facial_hairs.rsi
     state: sideburns
@@ -56,7 +56,7 @@
   id: TajaraFacialHairSmallstache
   bodyPart: FacialHair
   markingCategory: FacialHair
-  speciesRestriction: [Tajara]
+  speciesRestriction: [Tajaran]
   sprites:
   - sprite: _WL/Mobs/Customization/tajara_facial_hairs.rsi
     state: smallstache

@@ -1,0 +1,33 @@
+  # Workers-Manual-Storage-start: Litogin
+- type: latheRecipePack
+  id: ManualStorageStatic
+  recipes:
+  # Default
+  - ManualStorageDefaultSmallRecipe
+  - ManualStorageDefaultBoxRecipe
+  - ManualStorageDefaultBigRecipe
+  # Cargo
+  - ManualStorageCargoSmallRecipe
+  - ManualStorageCargoBoxRecipe
+  - ManualStorageCargoBigRecipe
+  # Engineer
+  - ManualStorageEngineerSmallRecipe
+  - ManualStorageEngineerBoxRecipe
+  - ManualStorageEngineerBigRecipe
+  # Medical
+  - ManualStorageMedicalSmallRecipe
+  - ManualStorageMedicalBoxRecipe
+  - ManualStorageMedicalBigRecipe
+  # Security
+  - ManualStorageSecuritySmallRecipe
+  - ManualStorageSecurityBoxRecipe
+  - ManualStorageSecurityBigRecipe
+  # Science
+  - ManualStorageScienceSmallRecipe
+  - ManualStorageScienceBoxRecipe
+  - ManualStorageScienceBigRecipe
+  # Command
+  - ManualStorageCommandSmallRecipe
+  - ManualStorageCommandBoxRecipe
+  - ManualStorageCommandBigRecipe
+  # WL-Workers-Manual-Storage-end: Litogin

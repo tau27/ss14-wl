@@ -11,7 +11,7 @@
     department: Security
     time: 36000
   - !type:AgeRequirement
-    minAge: 30
+    minAge: 27 # WL-Changes-AgeRequirement
   startingGear: IAAGear
   icon: "JobIconIAA"
   supervisors: job-supervisors-centcom

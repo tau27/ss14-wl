@@ -46,6 +46,13 @@
   - !type:GroupLoadoutEffect
     proto: SeniorEngineering
 
+#WL Workers Lyvsi engi resprite start
+- type: loadout
+  id: EngineeringBeret
+  equipment:
+    head: ClothingHeadHatBeretEngineering
+#WL Workers Lyvsi engi resprite end
+
 # Jumpsuit
 - type: loadout
   id: StationEngineerJumpsuit

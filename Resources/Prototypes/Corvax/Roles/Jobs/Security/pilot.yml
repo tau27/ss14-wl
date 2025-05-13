@@ -10,7 +10,7 @@
     department: Security
     time: 72000 #20 hrs
   - !type:AgeRequirement
-    minAge: 23
+    minAge: 22 # WL-Changes-AgeRequirement
   startingGear: PilotGear
   icon: "JobIconPilot"
   supervisors: job-supervisors-hos

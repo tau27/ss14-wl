@@ -5,7 +5,7 @@
   playTimeTracker: JobPsychologist
   requirements:
     - !type:AgeRequirement
-      minAge: 27
+      minAge: 22 # WL-Changes-AgeRequirement
   subnames:
   - Male: психиатр
   - Male: психотерапевт

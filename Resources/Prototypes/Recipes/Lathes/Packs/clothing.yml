@@ -93,6 +93,8 @@
   # Corvax WL start
   - ClothingUniformJumpsuitDSS
   - ClothingHeadHatBeretDSS
+  - ClothingHeadHatBeretCaptain
+  - ClothingHeadHatBeretHoP
   # Corvax-WL end
   - ClothingUniformJumpsuitDetective
   - ClothingUniformJumpskirtDetective

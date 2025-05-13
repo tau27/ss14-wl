@@ -130,6 +130,7 @@
     - ServiceStatic
     - PowerCellsStatic
     - ElectronicsStatic
+    - ManualStorageStatic
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SecurityAmmoStatic
