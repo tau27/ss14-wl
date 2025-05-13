@@ -2,6 +2,6 @@ ent-FloorWaterEntityNoAnim = вода
     .desc = Настоящий утолитель жажды.
     .suffix = Нет анимации
 
-ent-FloorAzureWaterEntityNOAnim = лазурная вода
+ent-FloorAzureWaterEntityNoAnim = лазурная вода
     .desc = Настоящий утолитель жажды.
     .suffix = Нет анимации
