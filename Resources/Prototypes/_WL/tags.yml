@@ -11,6 +11,9 @@
   id: Machine
 
 - type: Tag
+  id: MaintsRenga
+
+- type: Tag
   id: Console
 
 - type: Tag
@@ -33,3 +36,6 @@
 
 - type: Tag
   id: AndroidBodyTag
+
+- type: Tag
+  id: ManualStorage

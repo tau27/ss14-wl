@@ -18,7 +18,7 @@
 #    - !type:OverallPlaytimeRequirement
 #      time: 144000 #40 hrs
     - !type:AgeRequirement
-      minAge: 28
+      minAge: 24 # WL-Changes-AgeRequirement
   weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
