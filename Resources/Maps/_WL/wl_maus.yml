@@ -4,8 +4,8 @@ meta:
   engineVersion: 250.0.0
   forkId: syndicate-wl
   forkVersion: 6737f545a1ef1cf6e6c4d6f40a3fdf7a8f582eab
-  time: 05/13/2025 13:43:24
-  entityCount: 20617
+  time: 05/15/2025 14:13:37
+  entityCount: 20620
 maps:
 - 1
 grids:
@@ -113276,6 +113276,13 @@ entities:
     - type: Transform
       pos: -20.5,-26.5
       parent: 2
+- proto: SpawnPointLibrarian
+  entities:
+  - uid: 20618
+    components:
+    - type: Transform
+      pos: -55.5,-51.5
+      parent: 2
 - proto: SpawnPointMedicalDoctor
   entities:
   - uid: 14283
@@ -113489,6 +113496,18 @@ entities:
     components:
     - type: Transform
       pos: -22.5,-15.5
+      parent: 2
+- proto: SpawnPointServiceWorker
+  entities:
+  - uid: 20619
+    components:
+    - type: Transform
+      pos: -36.5,-26.5
+      parent: 2
+  - uid: 20620
+    components:
+    - type: Transform
+      pos: -35.5,-26.5
       parent: 2
 - proto: SpawnPointStationEngineer
   entities:
