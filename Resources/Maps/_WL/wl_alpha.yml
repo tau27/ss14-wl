@@ -92,7 +92,7 @@ entities:
     - type: Broadphase
     - type: OccluderTree
     - type: Parallax
-      parallax: Alpha
+      parallax: BlackHole
   - uid: 2
     components:
     - type: MetaData
