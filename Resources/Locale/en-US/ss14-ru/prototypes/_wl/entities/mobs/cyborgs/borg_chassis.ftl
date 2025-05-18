@@ -1,2 +1,2 @@
-ent-BorgChassisEngineer = science cyborg
+ent-BorgChassisScienceWL= science cyborg
     .desc = { ent-BorgChassisSelectable.desc }
