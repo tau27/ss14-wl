@@ -1,0 +1,26 @@
+- type: entity
+  parent: BaseFlatpack
+  id: ThrusterMediumFlatpack
+  name: medium thruster flatpack
+  description: A flatpack used for constructing a medium thruster.
+  components:
+  - type: Flatpack
+    entity: ThrusterMediumUnanchored
+
+- type: entity
+  parent: BaseFlatpack
+  id: ThrusterLargeFlatpack
+  name: large thruster flatpack
+  description: A flatpack used for constructing a large thruster.
+  components:
+  - type: Flatpack
+    entity: ThrusterLargeUnanchored
+
+- type: entity
+  parent: BaseFlatpack
+  id: ThrusterSmallFlatpack
+  name: small thruster flatpack
+  description: A flatpack used for constructing a small thruster.
+  components:
+  - type: Flatpack
+    entity: ThrusterSmallUnanchored
