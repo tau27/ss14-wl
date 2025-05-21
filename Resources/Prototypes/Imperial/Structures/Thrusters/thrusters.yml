@@ -86,6 +86,13 @@
   parent: [ BaseThruster, ConstructibleMachine ]
   components:
   - type: Thruster
+    baseThrust: 50
+    thrust: 50
+    damage:
+      types:
+        Heat: 25
+  - type: ApcPowerReceiver
+    powerLoad: 750
   - type: Machine
     board: ThrusterMachineCircuitboard
   - type: Sprite
