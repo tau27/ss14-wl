@@ -1,2 +1,2 @@
 ent-MobCischi = Урист МакЦисчи
-    .desc = { ent-BaseMobHumanoidCischi.desc }
+    .desc = { ent-BaseMobSpeciesOrganic.desc }

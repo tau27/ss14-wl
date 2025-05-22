@@ -1,2 +1,2 @@
 ent-MobGolem = Урист МакГолем
-    .desc = { ent-BaseMobHumanoidGolem.desc }
+    .desc = { ent-BaseMobSpeciesOrganic.desc }
