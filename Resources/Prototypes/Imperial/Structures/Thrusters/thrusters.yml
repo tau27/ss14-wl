@@ -1,6 +1,6 @@
 - type: entity
   id: ThrusterMedium
-  name: thrusterMedium
+  name: medium thruster
   parent: BaseThruster
   components:
   - type: Thruster
@@ -41,7 +41,7 @@
 
 - type: entity
   id: ThrusterLarge
-  name: thrusterLarge
+  name: large thruster
   parent: BaseThruster
   components:
   - type: Thruster
@@ -80,14 +80,23 @@
       offset: 0, 2.65625
 
 - type: entity
-  id: Thruster_small
+  id: ThrusterSmall
+  name: small thruster
+  description:
   parent: [ BaseThruster, ConstructibleMachine ]
   components:
   - type: Thruster
+    baseThrust: 50
+    thrust: 50
+    damage:
+      types:
+        Heat: 25
+  - type: ApcPowerReceiver
+    powerLoad: 750
   - type: Machine
     board: ThrusterMachineCircuitboard
   - type: Sprite
-    sprite: Imperial/Structures/Thrusters/thruster_small.rsi
+    sprite: Imperial/Structures/Thrusters/small.rsi
     layers:
     - state: base
       map: ["enum.ThrusterVisualLayers.Base"]
@@ -100,3 +109,27 @@
       shader: unshaded
       visible: false
       offset: 0, 1
+
+- type: entity
+  id: ThrusterMediumUnanchored
+  parent: ThrusterMedium
+  suffix: Unanchored
+  components:
+    - type: Transform
+      anchored: false
+
+- type: entity
+  id: ThrusterLargeUnanchored
+  parent: ThrusterLarge
+  suffix: Unanchored
+  components:
+    - type: Transform
+      anchored: false
+
+- type: entity
+  id: ThrusterSmallUnanchored
+  parent: ThrusterSmall
+  suffix: Unanchored
+  components:
+    - type: Transform
+      anchored: false
