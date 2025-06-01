@@ -1581,7 +1581,7 @@
   id: UplinkEVASyndie
   name: uplink-eva-syndie-name
   description: uplink-eva-syndie-desc
-  icon: { sprite: /Textures/Clothing/OuterClothing/Suits/eva_syndicate.rsi, state: icon }
+  icon: { sprite: /Textures/_WL/Clothing/OuterClothing/Suits/eva_syndicate.rsi, state: icon } # WL-Changes: resprite
   productEntity: ClothingBackpackDuffelSyndicateEVABundle
   discountCategory: rareDiscounts
   discountDownTo:

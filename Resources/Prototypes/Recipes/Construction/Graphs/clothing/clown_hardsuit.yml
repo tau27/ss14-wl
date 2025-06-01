@@ -12,7 +12,7 @@
             - tag: SuitEVA
               name: an EVA suit
               icon:
-                sprite: Clothing/OuterClothing/Suits/eva.rsi
+                sprite: _WL/Clothing/OuterClothing/Suits/eva.rsi # WL-Changes: resprite
                 state: icon
               doAfter: 1
             - tag: HelmetEVA
