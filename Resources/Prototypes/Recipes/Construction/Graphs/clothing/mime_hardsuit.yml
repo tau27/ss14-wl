@@ -18,7 +18,7 @@
             - tag: HelmetEVA
               name: an EVA helmet
               icon:
-                sprite: Clothing/Head/Helmets/eva.rsi
+                sprite: _WL/Clothing/Head/Helmets/eva.rsi # WL-Changes: resprite
                 state: icon
               doAfter: 1
             - tag: CrayonRed
