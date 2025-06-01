@@ -12,13 +12,13 @@
             - tag: SuitEVA
               name: an EVA suit
               icon:
-                sprite: Clothing/OuterClothing/Suits/eva.rsi
+                sprite: _WL/Clothing/OuterClothing/Suits/eva.rsi # WL-Changes: resprite
                 state: icon
               doAfter: 1
             - tag: HelmetEVA
               name: an EVA helmet
               icon:
-                sprite: Clothing/Head/Helmets/eva.rsi
+                sprite: _WL/Clothing/Head/Helmets/eva.rsi # WL-Changes: resprite
                 state: icon
               doAfter: 1
             - tag: CrayonPurple

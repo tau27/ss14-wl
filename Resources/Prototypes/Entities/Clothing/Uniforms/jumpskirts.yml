@@ -272,9 +272,9 @@
   description: It's got a plus on it, that's a good thing right?
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/paramedic.rsi
+    sprite: _WL/Clothing/Uniforms/Jumpskirt/paramedic.rsi # WL-Changes: resprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/paramedic.rsi
+    sprite: _WL/Clothing/Uniforms/Jumpskirt/paramedic.rsi # WL-Changes: resprite
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -473,9 +473,9 @@
   description: A dress for special occasions.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/capformaldress.rsi
+    sprite: _WL/Clothing/Uniforms/Jumpskirt/capformaldress.rsi # WL-Changes: resprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/capformaldress.rsi
+    sprite: _WL/Clothing/Uniforms/Jumpskirt/capformaldress.rsi # WL-Changes: resprite
 
 - type: entity
   parent: ClothingUniformSkirtBase
