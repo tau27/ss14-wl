@@ -47,7 +47,6 @@
     shape:
     - 0,0,0,2
   - type: DisarmMalus
-  - type: Execution # WL-Changes
 
 - type: entity
   name: machete
@@ -73,7 +72,6 @@
     shape:
     - 0,0,0,2
   - type: DisarmMalus
-  - type: Execution # WL-Changes
 
 #Longswords
 - type: entity
@@ -109,7 +107,6 @@
     weight: 0.0002 # 5,000 times less likely than 1 regular animal
   - type: PirateAccent
     # not putting a BlockMovement component here cause that's funny.
-- type: Execution # WL-Changes
 
 - type: entity
   name: katana
@@ -140,7 +137,6 @@
     - Back
     - Belt
   - type: DisarmMalus
-  - type: Execution # WL-Changes
 
 - type: entity
   name: energy katana
@@ -204,7 +200,6 @@
     - Back
     - SuitStorage #Bigger than the other swords, easier to strap to your suit.
   - type: DisarmMalus
-  - type: Execution # WL-Changes
 
 #Other/Weird
 - type: entity
@@ -237,4 +232,3 @@
     - type: Grammar
       attributes:
         proper: true
-    - type: Execution # WL-Changes
