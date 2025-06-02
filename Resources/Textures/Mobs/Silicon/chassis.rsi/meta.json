@@ -337,7 +337,6 @@
       "directions": 4
     },
     {
-<<<<<<< HEAD
       "name": "wl_scibot",
       "directions": 4
     },
@@ -352,7 +351,8 @@
     {
       "name": "wl_scibot_l",
       "directions": 4
-=======
+    },
+    {
       "name": "xenoborg_heavy",
       "directions": 4
     },
@@ -671,7 +671,6 @@
           0.1
         ]
       ]
->>>>>>> corvax/master
     }
   ]
 }
