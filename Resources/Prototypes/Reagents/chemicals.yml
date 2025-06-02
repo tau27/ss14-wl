@@ -173,7 +173,6 @@
   color: "#E6E6DA"
   physicalDesc: reagent-physical-desc-crystalline
   # WL-Changes-Start
-  slippery: false
   metabolisms:
     Food:
       effects:
