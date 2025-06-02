@@ -16,7 +16,14 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
   - type: Icon
     sprite: _WL/Structures/Machines/mixer.rsi # WL-Changes: resprite
-    state: mixer_loaded
+    state: mixer_empty
+  - type: ItemMapper
+    containerWhitelist: [beakerSlot]
+    mapLayers:
+      mixer_loaded:
+        whitelist:
+          components:
+          - FitsInDispenser
   - type: ChemMaster
     pillDosageLimit: 20
   - type: Physics
