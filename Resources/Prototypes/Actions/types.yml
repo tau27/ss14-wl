@@ -375,14 +375,15 @@
   name: standfallcrouch-action-name
   description: standfallcrouch-action-description
   components:
-  - type: InstantAction
+  - type: Action
     checkCanInteract: false
     checkConsciousness: false
     icon: _WL/Interface/Actions/StandFallCrawl/IconDownOn.png
     iconOn: _WL/Interface/Actions/StandFallCrawl/IconDownOff.png
     useDelay: 1.5
-    event: !type:ToggleStandCrouchActionEvent
     priority: -10
+  - type: InstantAction
+    event: !type:ToggleStandCrouchActionEvent
 #White-list Actions END
 
 - type: entity
