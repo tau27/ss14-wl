@@ -10739,86 +10739,6 @@ entities:
     - type: Transform
       pos: 91.507614,18.360023
       parent: 2
-- proto: ActionToggleInternals
-  entities:
-  - uid: 11
-    components:
-    - type: Transform
-      parent: 10
-    - type: InstantAction
-      container: 10
-  - uid: 16
-    components:
-    - type: Transform
-      parent: 15
-    - type: InstantAction
-      container: 15
-- proto: ActionToggleJetpack
-  entities:
-  - uid: 12
-    components:
-    - type: Transform
-      parent: 10
-    - type: InstantAction
-      container: 10
-  - uid: 17
-    components:
-    - type: Transform
-      parent: 15
-    - type: InstantAction
-      container: 15
-- proto: ActionToggleLight
-  entities:
-  - uid: 20
-    components:
-    - type: Transform
-      parent: 19
-    - type: InstantAction
-      container: 19
-  - uid: 22
-    components:
-    - type: Transform
-      parent: 21
-    - type: InstantAction
-      container: 21
-  - uid: 24
-    components:
-    - type: Transform
-      parent: 23
-    - type: InstantAction
-      container: 23
-  - uid: 26
-    components:
-    - type: Transform
-      parent: 25
-    - type: InstantAction
-      container: 25
-  - uid: 29
-    components:
-    - type: Transform
-      parent: 28
-    - type: InstantAction
-      container: 28
-  - uid: 34
-    components:
-    - type: Transform
-      parent: 33
-    - type: InstantAction
-      container: 33
-- proto: ActionToggleMagboots
-  entities:
-  - uid: 37
-    components:
-    - type: Transform
-      parent: 36
-    - type: InstantAction
-      container: 36
-  - uid: 41
-    components:
-    - type: Transform
-      parent: 40
-    - type: InstantAction
-      container: 40
 - proto: AirAlarm
   entities:
   - uid: 43
@@ -43656,8 +43576,6 @@ entities:
     - type: Transform
       pos: 17.415573,40.39855
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 20
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
@@ -43669,7 +43587,6 @@ entities:
           occludes: True
           ents:
           - 20
-    - type: ActionsContainer
 - proto: ClothingHeadHatPwig
   entities:
   - uid: 5867
@@ -44229,7 +44146,6 @@ entities:
       parent: 35
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: ContainerContainer
       containers:
         actions: !type:Container
@@ -44242,7 +44158,6 @@ entities:
       parent: 39
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: ContainerContainer
       containers:
         actions: !type:Container
@@ -55232,8 +55147,6 @@ entities:
     - type: Transform
       pos: 62.482605,49.7167
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 34
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
@@ -55245,7 +55158,6 @@ entities:
           occludes: True
           ents:
           - 34
-    - type: ActionsContainer
 - proto: FlashPayload
   entities:
   - uid: 7520
@@ -77115,7 +77027,6 @@ entities:
       toggleActionEntity: 12
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: ContainerContainer
       containers:
         actions: !type:Container
@@ -77133,7 +77044,6 @@ entities:
       toggleActionEntity: 17
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: ContainerContainer
       containers:
         actions: !type:Container
@@ -77339,8 +77249,6 @@ entities:
     - type: Transform
       pos: 50.424248,31.737879
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 22
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
@@ -77354,14 +77262,11 @@ entities:
           - 22
     - type: Physics
       canCollide: True
-    - type: ActionsContainer
   - uid: 23
     components:
     - type: Transform
       pos: 24.463417,-1.4738253
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 24
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
@@ -77375,7 +77280,6 @@ entities:
           - 24
     - type: Physics
       canCollide: True
-    - type: ActionsContainer
   - uid: 10607
     components:
     - type: Transform
@@ -77394,8 +77298,6 @@ entities:
     - type: Transform
       pos: 43.691933,51.671413
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 26
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
@@ -77409,7 +77311,6 @@ entities:
           - 26
     - type: Physics
       canCollide: True
-    - type: ActionsContainer
 - proto: LampGold
   entities:
   - uid: 5981
@@ -80144,7 +80045,6 @@ entities:
       toggleActionEntity: 29
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
 - proto: Pen
   entities:
   - uid: 10893
