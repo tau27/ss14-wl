@@ -58,7 +58,9 @@
     weight: 3 # WL-Changes
     duration: 240
     earliestStart: 60 # WL-Changes
-    minimumPlayers: 40
+    spawnConfig:
+      standartConfig:
+         minPlayers: 40 # Corvax WL changes
   - type: CargoGiftsRule
     description: cargo-gift-pizza-large
     dest: cargo-gift-dest-bar
@@ -205,7 +207,9 @@
     weight: 3
     duration: 120
     earliestStart: 30 # WL-Changes
-    minimumPlayers: 25 # WL-Changes
+    spawnConfig:
+      standartConfig:
+         minPlayers: 25 # Corvax WL changes
   - type: CargoGiftsRule
     description: cargo-gift-security-guns
     dest: cargo-gift-dest-sec
