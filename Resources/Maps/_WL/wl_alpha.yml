@@ -59907,17 +59907,6 @@ entities:
     - type: Transform
       pos: 115.4787,0.65953827
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 8536
   - uid: 8537
     components:
     - type: Transform

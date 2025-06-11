@@ -57259,17 +57259,6 @@ entities:
     - type: Transform
       pos: -21.44731,-16.209175
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 16669
 - proto: ClothingHeadHatSurgcapBlue
   entities:
   - uid: 6677
@@ -97830,17 +97819,9 @@ entities:
     - type: Transform
       parent: 4
     - type: GasTank
-      toggleActionEntity: 6
     - type: Jetpack
-      toggleActionEntity: 7
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 7
-          - 6
 - proto: JetpackMini
   entities:
   - uid: 12282

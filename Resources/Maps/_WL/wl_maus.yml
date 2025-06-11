@@ -53503,17 +53503,6 @@ entities:
     - type: Transform
       pos: -19.518435,23.734774
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 59
 - proto: ClothingHeadHatOutlawHat
   entities:
   - uid: 6547
@@ -54579,11 +54568,6 @@ entities:
     - type: Transform
       pos: -83.47811,-27.436897
       parent: 2
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 65
   - uid: 6771
     components:
     - type: Transform
@@ -62411,36 +62395,18 @@ entities:
       pos: -60.597137,2.4941769
       parent: 2
     - type: GasTank
-      toggleActionEntity: 9
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 9
   - uid: 35
     components:
     - type: Transform
       pos: -60.67739,-16.375868
       parent: 2
     - type: GasTank
-      toggleActionEntity: 36
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 36
   - uid: 37
     components:
     - type: Transform
       pos: -60.885513,-16.301537
       parent: 2
     - type: GasTank
-      toggleActionEntity: 38
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 38
   - uid: 7901
     components:
     - type: Transform
@@ -63867,12 +63833,6 @@ entities:
       pos: 7.2966156,3.4261322
       parent: 18684
     - type: GasTank
-      toggleActionEntity: 18686
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 18686
 - proto: ExtinguisherCabinetFilled
   entities:
   - uid: 8079
@@ -67361,17 +67321,6 @@ entities:
       rot: 1.1344640137963142 rad
       pos: 8.704285,-4.765991
       parent: 19645
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 19647
 - proto: FlippoEngravedLighter
   entities:
   - uid: 8459
@@ -92969,17 +92918,9 @@ entities:
     - type: Transform
       parent: 52
     - type: GasTank
-      toggleActionEntity: 54
     - type: Jetpack
-      toggleActionEntity: 55
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 55
-          - 54
     - type: InsideEntityStorage
 - proto: JetpackMini
   entities:
@@ -93012,15 +92953,7 @@ entities:
       pos: -80.43065,-27.481495
       parent: 2
     - type: GasTank
-      toggleActionEntity: 45
     - type: Jetpack
-      toggleActionEntity: 46
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 46
-          - 45
   - uid: 11663
     components:
     - type: Transform
@@ -93033,17 +92966,9 @@ entities:
     - type: Transform
       parent: 39
     - type: GasTank
-      toggleActionEntity: 41
     - type: Jetpack
-      toggleActionEntity: 42
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 42
-          - 41
     - type: InsideEntityStorage
 - proto: Jug
   entities:
@@ -93222,17 +93147,6 @@ entities:
     - type: Transform
       pos: -16.645802,-39.263855
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 57
     - type: Physics
       canCollide: True
 - proto: LampGold
@@ -93242,17 +93156,6 @@ entities:
     - type: Transform
       pos: -81.51543,-60.484127
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 63
     - type: Physics
       canCollide: True
   - uid: 11686
@@ -93268,17 +93171,6 @@ entities:
     - type: Transform
       pos: -13.529906,-7.4951572
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 61
     - type: Physics
       canCollide: True
   - uid: 11687
@@ -96717,14 +96609,8 @@ entities:
     - type: Transform
       parent: 28
     - type: GasTank
-      toggleActionEntity: 30
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 30
     - type: InsideEntityStorage
   - uid: 31
     components:
@@ -96964,52 +96850,28 @@ entities:
     - type: Transform
       parent: 10
     - type: GasTank
-      toggleActionEntity: 12
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 12
   - uid: 18
     components:
     - type: Transform
       parent: 17
     - type: GasTank
-      toggleActionEntity: 19
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 19
   - uid: 26
     components:
     - type: Transform
       pos: -80.34561,-30.474957
       parent: 2
     - type: GasTank
-      toggleActionEntity: 27
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 27
   - uid: 50
     components:
     - type: Transform
       parent: 49
     - type: GasTank
-      toggleActionEntity: 51
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 51
     - type: InsideEntityStorage
   - uid: 11982
     components:
@@ -98530,12 +98392,6 @@ entities:
       pos: -69.33881,-7.2971864
       parent: 2
     - type: GasTank
-      toggleActionEntity: 34
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 34
   - uid: 47
     components:
     - type: Transform
@@ -98543,12 +98399,6 @@ entities:
       pos: -66.068375,-6.7322707
       parent: 2
     - type: GasTank
-      toggleActionEntity: 48
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 48
 - proto: PlasmaWindowDirectional
   entities:
   - uid: 12110

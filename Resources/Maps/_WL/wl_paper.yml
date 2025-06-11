@@ -43574,17 +43574,6 @@ entities:
     - type: Transform
       pos: 17.415573,40.39855
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 20
 - proto: ClothingHeadHatPwig
   entities:
   - uid: 5867
@@ -44144,11 +44133,6 @@ entities:
       parent: 35
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 37
     - type: InsideEntityStorage
   - uid: 40
     components:
@@ -44156,11 +44140,6 @@ entities:
       parent: 39
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 41
     - type: InsideEntityStorage
   - uid: 5935
     components:
@@ -55145,17 +55124,6 @@ entities:
     - type: Transform
       pos: 62.482605,49.7167
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 34
 - proto: FlashPayload
   entities:
   - uid: 7520
@@ -77020,34 +76988,18 @@ entities:
     - type: Transform
       parent: 9
     - type: GasTank
-      toggleActionEntity: 11
     - type: Jetpack
-      toggleActionEntity: 12
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 12
-          - 11
     - type: InsideEntityStorage
   - uid: 15
     components:
     - type: Transform
       parent: 14
     - type: GasTank
-      toggleActionEntity: 16
     - type: Jetpack
-      toggleActionEntity: 17
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 17
-          - 16
     - type: InsideEntityStorage
   - uid: 38
     components:
@@ -77247,17 +77199,6 @@ entities:
     - type: Transform
       pos: 50.424248,31.737879
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 22
     - type: Physics
       canCollide: True
   - uid: 23
@@ -77265,17 +77206,6 @@ entities:
     - type: Transform
       pos: 24.463417,-1.4738253
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 24
     - type: Physics
       canCollide: True
   - uid: 10607
@@ -77296,17 +77226,6 @@ entities:
     - type: Transform
       pos: 43.691933,51.671413
       parent: 2
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 26
     - type: Physics
       canCollide: True
 - proto: LampGold
@@ -80033,14 +79952,11 @@ entities:
         actions: !type:Container
           showEnts: False
           occludes: True
-          ents:
-          - 29
+          ents: []
         PDA-pai: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 29
     - type: Physics
       canCollide: False
 - proto: Pen
