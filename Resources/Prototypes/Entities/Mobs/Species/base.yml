@@ -123,24 +123,18 @@
       - !type:WashCreamPieReaction
   - type: StatusEffects
     allowed:
-    - Stun
-    - KnockedDown
-    - SlowedDown
     - Stutter
-    - SeeingRainbows
     - Electrocution
     - Drunk
     - SlurredSpeech
     - RatvarianLanguage
     - PressureImmunity
     - Muted
-    - ForcedSleep
     - TemporaryBlindness
     - Pacified
     - StaminaModifier
     - Flashed
     - RadiationProtection
-    - Drowsiness
     - Adrenaline
   - type: Body
     prototype: Human
@@ -292,6 +286,7 @@
     normalState: human_small_fire # Corvax WL /tg/ resprite
     alternateState: human_big_fire # Corvax WL /tg/ resprite
   - type: MobCollision # WL-Changes: MobCollision works for players only
+  - type: StunVisuals
 
 - type: entity
   save: false
