@@ -78,8 +78,6 @@ namespace Content.Server.Ghost
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
 
         //WL-ReturnToLobby-start
-        [Dependency] private readonly IConfigurationManager _confMan = default!;
-
         public TimeSpan GhostReturnToLobbyButtonCooldown { get; private set; }
             = TimeSpan.FromSeconds(WLCVars.GhostReturnToLobbyButtonCooldown.DefaultValue);
 
@@ -132,7 +130,7 @@ namespace Content.Server.Ghost
 
             SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => _cachedSessionsDeathTime.Clear());
 
-            Subs.CVar(_confMan, WLCVars.GhostReturnToLobbyButtonCooldown,
+            Subs.CVar(_configurationManager, WLCVars.GhostReturnToLobbyButtonCooldown,
                 (newValue) => GhostReturnToLobbyButtonCooldown = TimeSpan.FromSeconds(newValue));
             //WL-ReturnToLobby-end
 
