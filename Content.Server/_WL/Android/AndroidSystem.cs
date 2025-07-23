@@ -148,7 +148,7 @@ namespace Content.Server._WL.Android
             if (!args.Key.Equals(ForcedSleepStatusEffect))
                 return;
 
-            EnsureComp<ForcedSleepingComponent>(android);
+            // FIXME: EnsureComp<ForcedSleepingComponent>(android);
         }
 
         private void OnSleepEnd(EntityUid android, AndroidComponent comp, StatusEffectEndedEvent args)
@@ -156,7 +156,7 @@ namespace Content.Server._WL.Android
             if (!args.Key.Equals(ForcedSleepStatusEffect))
                 return;
 
-            RemComp<ForcedSleepingComponent>(android);
+            // FIXME: RemComp<ForcedSleepingComponent>(android);
         }
 
         private void CheckAndDoForcedSleep(EntityUid android,
