@@ -339,18 +339,18 @@
   metabolisms:
     Narcotic:
       effects:
-# WL species start
-        conditions:
-        # Golem
-        - !type:OrganType
-          type: Golem
-          shouldHave: false
-# WL species end
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
         time: 16
         type: Add
         refresh: false
+# WL species start
+      conditions:
+      # Golem
+      - !type:OrganType
+        type: Golem
+        shouldHave: false
+# WL species end
 
 - type: reagent
   id: Nicotine
