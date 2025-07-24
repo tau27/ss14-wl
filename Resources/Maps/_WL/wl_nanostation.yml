@@ -10927,8 +10927,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 57.5,4.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2200.5646501
     - type: SpamEmitSound
       enabled: False
   - uid: 10551
@@ -10937,8 +10935,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -10.5,48.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2155.5313548
 - proto: BookAME
   entities:
   - uid: 13424
@@ -78207,15 +78203,11 @@ entities:
     - type: Transform
       pos: 28.5,12.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2140.1651075
   - uid: 7783
     components:
     - type: Transform
       pos: 10.5,18.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2296.1649445
 - proto: SMESBasic
   entities:
   - uid: 700
@@ -79445,15 +79437,11 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -14.5,48.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2162.5313428
   - uid: 10014
     components:
     - type: Transform
       pos: 48.5,47.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2125.5647761
     - type: SpamEmitSound
       enabled: False
   - uid: 10266
@@ -79462,8 +79450,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 54.5,4.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2130.5314048
     - type: SpamEmitSound
       enabled: False
 - proto: SpawnMechRipley
@@ -83672,8 +83658,6 @@ entities:
     - type: Transform
       pos: 42.5,25.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2137.1650405
 - proto: VendingMachineAtmosDrobe
   entities:
   - uid: 1835
@@ -83681,8 +83665,6 @@ entities:
     - type: Transform
       pos: 66.5,34.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2648.1979128
 - proto: VendingMachineBooze
   entities:
   - uid: 693
@@ -83690,22 +83672,16 @@ entities:
     - type: Transform
       pos: 26.5,61.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2699.1978998
   - uid: 1634
     components:
     - type: Transform
       pos: 40.5,20.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2281.1649685
   - uid: 6228
     components:
     - type: Transform
       pos: 52.5,3.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2164.1650535
 - proto: VendingMachineCargoDrobe
   entities:
   - uid: 7914
@@ -83713,8 +83689,6 @@ entities:
     - type: Transform
       pos: 1.5,0.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2211.1650034
 - proto: VendingMachineCart
   entities:
   - uid: 2835
@@ -83729,8 +83703,6 @@ entities:
     - type: Transform
       pos: 6.5,10.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2119.1650775
 - proto: VendingMachineChapel
   entities:
   - uid: 543
@@ -83745,8 +83717,6 @@ entities:
     - type: Transform
       pos: 24.5,22.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2636.1979438
 - proto: VendingMachineChefvend
   entities:
   - uid: 1319
@@ -83754,8 +83724,6 @@ entities:
     - type: Transform
       pos: 30.5,22.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2274.1649635
 - proto: VendingMachineChemDrobe
   entities:
   - uid: 840
@@ -83763,8 +83731,6 @@ entities:
     - type: Transform
       pos: 10.5,21.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2174.1650065
 - proto: VendingMachineChemicals
   entities:
   - uid: 398
@@ -83779,15 +83745,11 @@ entities:
     - type: Transform
       pos: 44.5,46.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2259.1649555
   - uid: 4767
     components:
     - type: Transform
       pos: 21.5,49.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2185.1650635
   - uid: 9988
     components:
     - type: Transform
@@ -83800,15 +83762,11 @@ entities:
     - type: Transform
       pos: 52.5,42.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2173.1650445
   - uid: 7973
     components:
     - type: Transform
       pos: -5.5,6.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2223.1649705
 - proto: VendingMachineCoffee
   entities:
   - uid: 2075
@@ -83816,29 +83774,21 @@ entities:
     - type: Transform
       pos: 14.5,37.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2202.1650605
   - uid: 5328
     components:
     - type: Transform
       pos: 7.5,10.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2135.1651055
   - uid: 5331
     components:
     - type: Transform
       pos: 45.5,46.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2238.1649935
   - uid: 11006
     components:
     - type: Transform
       pos: 14.5,62.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2154.1650595
 - proto: VendingMachineColaRed
   entities:
   - uid: 10406
@@ -83846,8 +83796,6 @@ entities:
     - type: Transform
       pos: -20.5,44.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2205.1650555
 - proto: VendingMachineCondiments
   entities:
   - uid: 1294
@@ -83855,15 +83803,11 @@ entities:
     - type: Transform
       pos: 36.5,21.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2144.1650525
   - uid: 2966
     components:
     - type: Transform
       pos: 50.5,44.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2185.1649735
 - proto: VendingMachineCuraDrobe
   entities:
   - uid: 9260
@@ -83871,8 +83815,6 @@ entities:
     - type: Transform
       pos: 38.5,7.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2226.1649765
 - proto: VendingMachineDetDrobe
   entities:
   - uid: 7515
@@ -83880,8 +83822,6 @@ entities:
     - type: Transform
       pos: 30.5,28.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2219.1649835
 - proto: VendingMachineDinnerware
   entities:
   - uid: 1315
@@ -83889,8 +83829,6 @@ entities:
     - type: Transform
       pos: 31.5,22.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2259.1650034
 - proto: VendingMachineDiscount
   entities:
   - uid: 2601
@@ -83898,15 +83836,11 @@ entities:
     - type: Transform
       pos: 18.5,45.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2165.1650335
   - uid: 6104
     components:
     - type: Transform
       pos: 13.5,62.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2205.1649535
 - proto: VendingMachineDonut
   entities:
   - uid: 1302
@@ -83914,15 +83848,11 @@ entities:
     - type: Transform
       pos: 70.5,16.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2163.1650195
   - uid: 6169
     components:
     - type: Transform
       pos: 46.5,46.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2123.1650575
 - proto: VendingMachineDrGibb
   entities:
   - uid: 11020
@@ -83930,8 +83860,6 @@ entities:
     - type: Transform
       pos: 8.5,10.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2253.1649455
 - proto: VendingMachineEngiDrobe
   entities:
   - uid: 4589
@@ -83939,8 +83867,6 @@ entities:
     - type: Transform
       pos: 68.5,23.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2180.1650695
 - proto: VendingMachineEngivend
   entities:
   - uid: 4588
@@ -83955,15 +83881,11 @@ entities:
     - type: Transform
       pos: 32.5,8.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2265.1649305
   - uid: 4365
     components:
     - type: Transform
       pos: 48.5,44.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2108.1650695
 - proto: VendingMachineGeneDrobe
   entities:
   - uid: 9384
@@ -83971,8 +83893,6 @@ entities:
     - type: Transform
       pos: -4.5,20.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2135.1650405
 - proto: VendingMachineHydrobe
   entities:
   - uid: 4769
@@ -83980,8 +83900,6 @@ entities:
     - type: Transform
       pos: 30.5,8.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2180.1650305
 - proto: VendingMachineJaniDrobe
   entities:
   - uid: 1690
@@ -83989,8 +83907,6 @@ entities:
     - type: Transform
       pos: 45.5,10.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2325.1649094
 - proto: VendingMachineLawDrobe
   entities:
   - uid: 8327
@@ -83998,8 +83914,6 @@ entities:
     - type: Transform
       pos: 48.5,33.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2198.1650545
 - proto: VendingMachineMedical
   entities:
   - uid: 4682
@@ -84014,8 +83928,6 @@ entities:
     - type: Transform
       pos: 11.5,12.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2110.1651025
 - proto: VendingMachineNutri
   entities:
   - uid: 4901
@@ -84023,8 +83935,6 @@ entities:
     - type: Transform
       pos: 30.5,7.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2189.1650405
 - proto: VendingMachinePride
   entities:
   - uid: 7974
@@ -84032,8 +83942,6 @@ entities:
     - type: Transform
       pos: -5.5,4.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2140.1650155
 - proto: VendingMachinePwrGame
   entities:
   - uid: 10026
@@ -84041,8 +83949,6 @@ entities:
     - type: Transform
       pos: 40.5,29.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2689.1978968
 - proto: VendingMachineRoboDrobe
   entities:
   - uid: 2181
@@ -84050,8 +83956,6 @@ entities:
     - type: Transform
       pos: 10.5,52.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2110.1650455
 - proto: VendingMachineRobotics
   entities:
   - uid: 2062
@@ -84059,8 +83963,6 @@ entities:
     - type: Transform
       pos: 14.5,52.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2224.1650045
 - proto: VendingMachineSalvage
   entities:
   - uid: 12860
@@ -84075,8 +83977,6 @@ entities:
     - type: Transform
       pos: 4.5,34.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2117.1650565
 - proto: VendingMachineSec
   entities:
   - uid: 6621
@@ -84084,8 +83984,6 @@ entities:
     - type: Transform
       pos: 37.5,35.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2689.1979098
 - proto: VendingMachineSecDrobe
   entities:
   - uid: 5042
@@ -84093,8 +83991,6 @@ entities:
     - type: Transform
       pos: 37.5,34.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2199.1650385
 - proto: VendingMachineSeeds
   entities:
   - uid: 628
@@ -84102,8 +83998,6 @@ entities:
     - type: Transform
       pos: 30.5,9.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2219.1649895
 - proto: VendingMachineSeedsUnlocked
   entities:
   - uid: 5199
@@ -84111,8 +84005,6 @@ entities:
     - type: Transform
       pos: 50.5,39.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2235.1649445
 - proto: VendingMachineShamblersJuice
   entities:
   - uid: 11022
@@ -84120,8 +84012,6 @@ entities:
     - type: Transform
       pos: -10.5,7.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2685.1978998
 - proto: VendingMachineSnack
   entities:
   - uid: 10015
@@ -84129,8 +84019,6 @@ entities:
     - type: Transform
       pos: -19.5,44.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2677.1979138
 - proto: VendingMachineSnackBlue
   entities:
   - uid: 100
@@ -84138,8 +84026,6 @@ entities:
     - type: Transform
       pos: 39.5,29.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2253.1649865
 - proto: VendingMachineSnackGreen
   entities:
   - uid: 9534
@@ -84147,8 +84033,6 @@ entities:
     - type: Transform
       pos: -1.5,30.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2198.1649865
 - proto: VendingMachineSnackOrange
   entities:
   - uid: 11070
@@ -84156,8 +84040,6 @@ entities:
     - type: Transform
       pos: 64.5,13.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2149.1650845
 - proto: VendingMachineSovietSoda
   entities:
   - uid: 2466
@@ -84165,8 +84047,6 @@ entities:
     - type: Transform
       pos: -0.5,30.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2153.1650905
 - proto: VendingMachineSpaceUp
   entities:
   - uid: 2465
@@ -84174,8 +84054,6 @@ entities:
     - type: Transform
       pos: 18.5,46.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2286.1648835
 - proto: VendingMachineStarkist
   entities:
   - uid: 9875
@@ -84183,8 +84061,6 @@ entities:
     - type: Transform
       pos: 65.5,13.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2208.1650105
 - proto: VendingMachineSustenance
   entities:
   - uid: 6353
@@ -84192,8 +84068,6 @@ entities:
     - type: Transform
       pos: 25.5,42.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2263.1649435
 - proto: VendingMachineSyndieDrobe
   entities:
   - uid: 7588
@@ -84201,8 +84075,6 @@ entities:
     - type: Transform
       pos: 18.5,6.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2114.1650675
 - proto: VendingMachineTankDispenserEngineering
   entities:
   - uid: 3974
@@ -84239,8 +84111,6 @@ entities:
     - type: Transform
       pos: 45.5,25.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2157.1650785
 - proto: VendingMachineVendomat
   entities:
   - uid: 6084
@@ -84248,8 +84118,6 @@ entities:
     - type: Transform
       pos: 53.5,33.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2265.1649425
 - proto: VendingMachineViroDrobe
   entities:
   - uid: 1812
@@ -84257,8 +84125,6 @@ entities:
     - type: Transform
       pos: -17.5,54.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2299.1649435
 - proto: VendingMachineWallMedical
   entities:
   - uid: 2463
@@ -84282,8 +84148,6 @@ entities:
     - type: Transform
       pos: -5.5,5.5
       parent: 2
-    - type: Advertise
-      nextAdvertisementTime: 2189.1650125
 - proto: VendingMachineYouTool
   entities:
   - uid: 4577
