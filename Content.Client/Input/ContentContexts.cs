@@ -1,4 +1,3 @@
-using Content.Shared._WL.Input;
 using Content.Shared.Input;
 using Robust.Shared.Input;
 
@@ -87,10 +86,6 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.Arcade1);
             human.AddFunction(ContentKeyFunctions.Arcade2);
             human.AddFunction(ContentKeyFunctions.Arcade3);
-
-            // WL-Changes-start
-            human.AddFunction(WLContentKeyFunctions.FallDownAndStandUp);
-            // WL-Changes-end
 
             // actions should be common (for ghosts, mobs, etc)
             common.AddFunction(ContentKeyFunctions.OpenActionsMenu);
