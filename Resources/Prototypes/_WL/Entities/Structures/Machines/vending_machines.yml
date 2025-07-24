@@ -11,8 +11,10 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
-  - type: Advertise
-    pack: CorpDrobeAds
+  # - type: Advertise
+  #   pack: CorpDrobeAds
+  - type: DatasetVocalizer
+    dataset: BoozeOMatAds
   - type: SpeakOnUIClosed
     pack: CorpDrobeGoodbyes
   - type: Speech
