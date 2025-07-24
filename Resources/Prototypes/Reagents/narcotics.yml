@@ -251,13 +251,13 @@
         sprintSpeedModifier: 1.3
       - !type:HealthChange
         conditions:
-          - !type:ReagentThreshold
-            min: 80 #please wait 3 minutes before using another stimpack
+        - !type:ReagentThreshold
+          min: 80 #please wait 3 minutes before using another stimpack
 # WL species start
-          # Golem
-          - !type:OrganType
-            type: Golem
-            shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
 # WL species end
         damage:
           types:
@@ -345,11 +345,11 @@
         type: Add
         refresh: false
 # WL species start
-      conditions:
-      # Golem
-      - !type:OrganType
-        type: Golem
-        shouldHave: false
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
 # WL species end
 
 - type: reagent
@@ -683,8 +683,12 @@
           shouldHave: false
 # WL species end
       - !type:Emote
-# WL species start
+        emote: Scream
+        probability: 0.08
         conditions:
+        - !type:ReagentThreshold
+          min: 4
+# WL species start
         # Golem
         - !type:OrganType
           type: Golem
@@ -694,11 +698,6 @@
           type: Biorobotic
           shouldHave: false
 # WL species end
-        emote: Scream
-        probability: 0.08
-        conditions:
-        - !type:ReagentThreshold
-          min: 4
       - !type:Emote
         emote: Cough
         probability: 0.08
