@@ -57,7 +57,7 @@
     targetZoom: "1.0, 1.0"
     maxZoom: "1.0, 1.0"
   - type: Speech
-    allowedEmotes: ['Howl', 'Growl']
+    allowedEmotes: ['Howl', 'Growl','Bark', 'Whine']
   - type: Vocal
     sounds:
       Male: MaleVulpkanin
