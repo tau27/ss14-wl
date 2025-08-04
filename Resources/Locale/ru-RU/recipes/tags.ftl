@@ -51,7 +51,9 @@ construction-graph-tag-radio = радио
 construction-graph-tag-pipe = газовая труба
 construction-graph-tag-human-head = человеческая голова
 construction-graph-tag-bucket = ведро
-construction-graph-tag-borg-arm = рука киборга
+# WL-Changes: киборг -> борг start
+construction-graph-tag-borg-arm = рука борга
+# WL-Changes: киборг -> борг end
 construction-graph-tag-borg-head = голова борга
 construction-graph-tag-medkit = аптечка
 construction-graph-tag-flower = цветок

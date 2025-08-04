@@ -84,7 +84,9 @@ guide-entry-artifact-reports = Отчёты об артефактах
 guide-entry-traversal-distorter = Поперечный искатель
 guide-entry-machine-upgrading = Улучшение оборудования
 guide-entry-robotics = Робототехника
-guide-entry-cyborgs = Киборги
+# WL-Changes: киборг -> борг start
+guide-entry-cyborgs = Борги
+# WL-Changes: киборг -> борг end
 guide-entry-security = Безопасность станции
 guide-entry-forensics = Криминалистика
 guide-entry-defusal = Обезвреживание крупной бомбы

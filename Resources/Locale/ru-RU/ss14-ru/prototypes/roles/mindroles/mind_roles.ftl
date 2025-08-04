@@ -22,8 +22,10 @@ ent-MindRoleGhostRoleTeamAntagonist = Роль призрака (Командн�
     .desc = { ent-MindRoleGhostRoleNeutral.desc }
 ent-MindRoleGhostRoleTeamAntagonistFlock = Роль призрака (Командный антагонист)
     .desc = { ent-MindRoleGhostRoleTeamAntagonist.desc }
-ent-MindRoleSiliconBrain = Роль мозг киборга
+# WL-Changes: киборг -> борг start
+ent-MindRoleSiliconBrain = Роль мозг борга
     .desc = { ent-BaseMindRole.desc }
+# WL-Changes: киборг -> борг end
 ent-MindRoleJob = Роль работа
     .desc = { ent-BaseMindRole.desc }
 ent-MindRoleSubvertedSilicon = Роль дефектный синтетик

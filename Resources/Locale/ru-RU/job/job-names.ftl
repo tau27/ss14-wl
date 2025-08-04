@@ -4,7 +4,9 @@ job-name-cadet = кадет СБ
 job-name-hos = глава службы безопасности
 job-name-detective = детектив
 job-name-brigmedic = бригмедик
-job-name-borg = киборг
+# WL-Changes: киборг -> борг start
+job-name-borg = борг
+# WL-Changes: киборг -> борг end
 job-name-scientist = учёный
 # WL-Changes-start
 job-name-research-assistant = студент-учёный
@@ -70,7 +72,9 @@ job-title-universal = универсальная
 # Role timers - Make these alphabetical or I cut you
 JobAtmosphericTechnician = атмосферный техник
 JobBartender = бармен
-JobBorg = киборг
+# WL-Changes: киборг -> борг start
+JobBorg = борг
+# WL-Changes: киборг -> борг end
 JobBotanist = ботаник
 JobBoxer = боксёр
 JobCaptain = капитан

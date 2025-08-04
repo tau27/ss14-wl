@@ -7,7 +7,9 @@ device-frequency-prototype-name-mailing-units = Почтовый блок
 device-frequency-prototype-name-pdas = КПК
 device-frequency-prototype-name-fax = Факс
 device-frequency-prototype-name-basic-device = Базовые устройства
-device-frequency-prototype-name-cyborg-control = Управление киборгами
+# WL-Changes: киборг -> борг start
+device-frequency-prototype-name-cyborg-control = Управление боргами
+# WL-Changes: киборг -> борг end
 device-frequency-prototype-name-robotics-console = Консоль управления робототехникой
 device-frequency-prototype-name-turret = Охранная турель
 device-frequency-prototype-name-turret-control = Управление охранной турелью

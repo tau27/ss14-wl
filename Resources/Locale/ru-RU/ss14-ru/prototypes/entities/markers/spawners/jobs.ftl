@@ -45,8 +45,10 @@ ent-SpawnPointMusician = музыкант
     .desc = { ent-SpawnPointJobBase.desc }
 ent-SpawnPointBoxer = боксёр
     .desc = { ent-SpawnPointJobBase.desc }
-ent-SpawnPointBorg = киборг
+# WL-Changes: киборг -> борг start
+ent-SpawnPointBorg = борг
     .desc = { ent-SpawnPointJobBase.desc }
+# WL-Changes: киборг -> борг end
 ent-SpawnPointCaptain = капитан
     .desc = { ent-SpawnPointJobBase.desc }
 ent-SpawnPointHeadOfPersonnel = глава персонала
