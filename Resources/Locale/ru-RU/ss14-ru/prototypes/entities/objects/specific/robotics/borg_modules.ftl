@@ -1,7 +1,5 @@
-# WL-Changes: киборг -> борг start
 ent-BaseBorgModule = модуль борга
     .desc = Техническая деталь, дающая боргам новые способности.
-# WL-Changes: киборг -> борг end
 ent-BaseProviderBorgModule = { "" }
     .desc = { "" }
 ent-ActionBorgSwapModule = Сменить модуль
@@ -32,7 +30,6 @@ ent-BaseXenoborgModuleScout = { ent-BaseBorgModule }
     .desc = { ent-BaseBorgModule.desc }
 ent-BaseXenoborgModuleStealth = { ent-BaseBorgModule }
     .desc = { ent-BaseBorgModule.desc }
-# WL-Changes: киборг -> борг start
 ent-BorgModuleCable = кабельный модуль борга
     .desc = Универсальный модуль борга, позволяющий юниту прокладывать и манипулировать электрическими системами.
 ent-BorgModuleFireExtinguisher = огнетушащий модуль борга
@@ -93,7 +90,6 @@ ent-BorgModuleL6C = модуль борга с L6C ROW
     .desc = Модуль, в который входит пулемёт L6C.
 ent-BorgModuleMartyr = модуль борга Мученик
     .desc = Модуль, поставляемый со взрывчаткой, с которой вы, скорее всего, не захотите связываться сами.
-# WL-Changes: киборг -> борг end
 ent-XenoborgModuleBasic = базовый модуль ксеноборга
     .desc = Необходимые вещи для любого ксеноборга.
 ent-XenoborgModuleTool = инструментальный модуль ксеноборга

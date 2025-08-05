@@ -1,4 +1,3 @@
-# WL-Changes: киборг -> борг start
 ent-PartSilicon = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
 ent-LeftArmBorg = левая рука борга
@@ -13,4 +12,3 @@ ent-LightHeadBorg = голова борга
     .desc = { ent-PartSilicon.desc }
 ent-TorsoBorg = туловище борга
     .desc = { ent-PartSilicon.desc }
-# WL-Changes: киборг -> борг end

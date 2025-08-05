@@ -17,11 +17,9 @@ ent-ReinforcementRadioSyndicateAncestorNukeops = { ent-ReinforcementRadioSyndica
 ent-ReinforcementRadioSyndicateSyndiCat = { ent-ReinforcementRadio }
     .desc = { ent-ReinforcementRadio.desc }
     .suffix = радио подкрепления синдикота
-# WL-Changes: киборг -> борг start
 ent-ReinforcementRadioSyndicateCyborgAssault = { ent-ReinforcementRadio }
     .desc = { ent-ReinforcementRadio.desc }
     .suffix = радио подкрепления штурмового борга Синдиката, Ядерные оперативники
-# WL-Changes: киборг -> борг end
 
 # Corvax-HiddenDesc-End
 

@@ -37,8 +37,6 @@ id-card-access-level-syndicate-agent = Агент Синдиката
 id-card-access-level-central-command = Центральное командование
 id-card-access-level-wizard = Волшебник
 id-card-access-level-station-ai = Искусственный Интеллект
-# WL-Changes: киборг -> борг start
 id-card-access-level-borg = Борг
-# WL-Changes: киборг -> борг end
 id-card-access-level-basic-silicon = Робот
 id-card-access-level-basic-xenoborg = Ксеноборг

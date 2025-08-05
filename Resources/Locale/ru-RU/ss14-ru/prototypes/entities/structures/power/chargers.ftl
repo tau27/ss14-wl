@@ -12,7 +12,5 @@ ent-TurboItemRecharger = турбозарядник
     .desc = Разогнанное зарядное устройство, оснащённое универсальным портом.
 ent-WallWeaponCapacitorRecharger = настенный зарядник энергооружия
     .desc = { ent-BaseItemRecharger.desc }
-# WL-Changes: киборг -> борг start
 ent-BorgCharger = станция зарядки боргов
     .desc = Стационарное устройство для зарядки различных роботов и боргов. Удивительно вместительное.
-# WL-Changes: киборг -> борг end

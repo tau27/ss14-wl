@@ -1,8 +1,6 @@
 robotics-console-window-title = Роботехническая консоль
-# WL-Changes: киборг -> борг start
 robotics-console-no-cyborgs = Борги отсутствуют!
 robotics-console-select-cyborg = Выберите борга из списка выше.
-# WL-Changes: киборг -> борг end
 robotics-console-model = [color=gray]Модель:[/color] { $name }
 # name is not formatted to prevent players trolling
 robotics-console-designation = [color=gray]Назначение:[/color]

@@ -1,4 +1,3 @@
-# WL-Changes: киборг -> борг:
 borg-player-not-allowed = Мозг не помещается!
 borg-player-not-allowed-eject = Мозг был извлечён из корпуса!
 borg-panel-not-open = Панель борга не открыта...

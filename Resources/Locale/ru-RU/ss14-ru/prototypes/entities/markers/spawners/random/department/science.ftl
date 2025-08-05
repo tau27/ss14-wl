@@ -4,7 +4,5 @@ ent-LootSpawnerScienceMinor = спавнер научных припасов
 ent-LootSpawnerScienceMajor = спавнер научных припасов
     .suffix = Большой
     .desc = { ent-MarkerBase.desc }
-# WL-Changes: киборг -> борг start
 ent-LootSpawnerRoboticsBorgModule = спавнер платы борга
     .desc = { ent-MarkerBase.desc }
-# WL-Changes: киборг -> борг end

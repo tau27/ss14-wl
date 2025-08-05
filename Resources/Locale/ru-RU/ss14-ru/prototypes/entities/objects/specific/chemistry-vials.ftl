@@ -1,9 +1,7 @@
 ent-BaseChemistryEmptyVial = пробирка
     .desc = Маленькая пробирка.
-# WL-Changes: киборг -> борг start
 ent-BorgVial = встроенная пробирка
     .desc = Внутренний отсек, установленный в борга. Рассчитан на 30 единиц любой жидкости.
-# WL-Changes: киборг -> борг end
 ent-VestineChemistryVial = { ent-BaseChemistryEmptyVial }
     .suffix = Вестин
     .desc = { ent-BaseChemistryEmptyVial.desc }

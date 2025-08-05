@@ -177,13 +177,11 @@ ghost-role-information-syndicate-monkey-reinforcement-name = Агент Синд
 ghost-role-information-syndicate-monkey-reinforcement-description = Кому-то нужно подкрепление. Вы, специально обученная обезьяна, поможете им.
 ghost-role-information-syndicate-kobold-reinforcement-name = Агент Синдиката-кобольд
 ghost-role-information-syndicate-kobold-reinforcement-description = Кому-то нужно подкрепление. Вы, специально обученный кобольд, поможете им.
-# WL-Changes: киборг -> борг start
 ghost-role-information-syndicate-cyborg-assault-name = Штурмовой борг Синдиката
 ghost-role-information-syndicate-cyborg-saboteur-name = Саботажный борг Синдиката
 ghost-role-information-syndicate-cyborg-description = Синдикату нужно подкрепление. Вы, холодная кремниевая машина для убийства, поможете им.
 ghost-role-information-derelict-cyborg-name = Заброшенный борг
 ghost-role-information-derelict-cyborg-description = Вы — обычный борг, который заблудился в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
-# WL-Changes: киборг -> борг end
 ghost-role-information-security-name = Служба безопасности
 ghost-role-information-security-description = Вы входите в состав оперативной группы службы безопасности, но, похоже, попали в странную ситуацию...
 ghost-role-information-medical-name = Медицинский

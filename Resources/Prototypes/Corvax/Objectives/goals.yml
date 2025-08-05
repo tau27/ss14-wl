@@ -41,13 +41,11 @@
   text: |
       - Постройка меха Рипли.
 
-# WL-Changes: киборг -> борг start
 - type: stationGoal
   id: StationGoalTwoCyborgs
   department: [ Science ]
   text: |
       - Постройка двух боргов.
-# WL-Changes: киборг -> борг end
 
 - type: stationGoal
   id: StationGoalFiveMedbots
