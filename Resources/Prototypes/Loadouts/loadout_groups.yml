@@ -64,6 +64,7 @@
   - TowelColorSilver
   - TowelColorWhite
   - TowelColorYellow
+  - Cane # WL-changes
 
 - type: loadoutGroup
   id: Glasses
