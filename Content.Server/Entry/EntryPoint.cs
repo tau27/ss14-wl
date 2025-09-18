@@ -1,4 +1,4 @@
-using Content.Server._WL.ChatGpt.Managers;
+//using Content.Server._WL.ChatGpt.Managers;
 using Content.Server.Acz;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -124,7 +124,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<PlayerRateLimitManager>().Initialize();
 
                 //WL-Changes-start
-                IoCManager.Resolve<IChatGptManager>().Initialize();
+                //IoCManager.Resolve<IChatGptManager>().Initialize();
                 //WL-Changes-end
             }
         }
