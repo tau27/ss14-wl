@@ -49,6 +49,9 @@ public sealed class LanguagesSystem : SharedLanguagesSystem
 
     public bool CanUnderstand(EntityUid source, EntityUid listener)
     {
+        if (source == listener)
+            return true;
+
         if (!TryComp<LanguagesSpeekingComponent>(source, out var source_lang))
             return true;
 
@@ -56,7 +59,7 @@ public sealed class LanguagesSystem : SharedLanguagesSystem
             return true;
 
         var message_language = source_lang.CurrentLanguage;
-        return listen_lang.IsUnderstanding && listen_lang.IsSpeeking && listen_lang.UnderstandingLanguages.Contains(message_language);
+        return listen_lang.IsUnderstanding && source_lang.IsSpeeking && listen_lang.UnderstandingLanguages.Contains(message_language);
     }
 
     public bool IsObfusEmoting(EntityUid source)
@@ -81,7 +84,7 @@ public sealed class LanguagesSystem : SharedLanguagesSystem
         }
     }
 
-    public string GetObfusWrappedMessage(string message, EntityUid source, SpeechVerbPrototype speech, string name)
+    public string GetObfusWrappedMessage(string message, EntityUid source, string name, SpeechVerbPrototype? speech = null)
     {
         //_sawmill = _logMan.GetSawmill(SawmillName);
         var obfusMessage = ObfuscateMessageFromSource(message, source);
@@ -97,15 +100,23 @@ public sealed class LanguagesSystem : SharedLanguagesSystem
         }
         else
         {
-            var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
-                    ("entityName", name),
-                    ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-                    ("fontType", speech.FontId),
-                    ("fontSize", speech.FontSize),
-                    ("message", FormattedMessage.EscapeText(obfusMessage)
-                )
-            );
-            return wrappedMessage;
+            if (speech == null)
+            {
+                var wrappedobfuscatedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",("entityName", name), ("message", FormattedMessage.EscapeText(obfusMessage)));
+                return wrappedobfuscatedMessage;
+            }
+            else
+            {
+                var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
+                        ("entityName", name),
+                        ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+                        ("fontType", speech.FontId),
+                        ("fontSize", speech.FontSize),
+                        ("message", FormattedMessage.EscapeText(obfusMessage)
+                    )
+                );
+                return wrappedMessage;
+            }
         }
     }
 }

@@ -72,7 +72,7 @@ public partial class WordsReplacementObfuscation : ObfuscationMethod
             {
                 if (buffer > 0)
                 {
-                    var index = PseudoRandom(buffer, global_seed, 0, Replacement.Count - 1);
+                    var index = PseudoRandom(buffer + i, global_seed, 0, Replacement.Count - 1);
                     builder.Append(Replacement[index]);
                     buffer = 0;
                 }
@@ -84,7 +84,7 @@ public partial class WordsReplacementObfuscation : ObfuscationMethod
             }
             else
             {
-                buffer += buffer * 41 + ch;
+                buffer += System.Math.Abs(buffer * 41 + ch + 13);
             }
         }
     }
@@ -102,6 +102,9 @@ public partial class ByCharReplacementObfuscation : ObfuscationMethod
 
     [DataField]
     public bool randlength = true;
+
+    [DataField]
+    public int minlength = 3;
 
     [DataField]
     public int maxlength = 10;
@@ -125,7 +128,7 @@ public partial class ByCharReplacementObfuscation : ObfuscationMethod
                 if (buffer > 0)
                 {
                     var length = randlength ? PseudoRandom(buffer, global_seed, 1, maxlength) : counter;
-                    for (int j = 0; j < length; j++)
+                    for (int j = 0; j <= length; j++)
                     {
                         var index = PseudoRandom(buffer*(j+3)+j, global_seed, 0, Replacement.Count - 1);
                         builder.Append(Replacement[index]);

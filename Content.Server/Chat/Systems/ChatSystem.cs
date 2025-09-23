@@ -460,7 +460,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("message", FormattedMessage.EscapeText(message)));
 
         //WL-Changes: Languages start
-        var obfusWrappedMessage = _languages.GetObfusWrappedMessage(message, source, speech, name);
+        var obfusWrappedMessage = _languages.GetObfusWrappedMessage(message, source, name, speech);
 
         SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, obfusWrappedMessage, source, range);
         //WL-Changes: Languages end
@@ -535,6 +535,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedUnknownMessage = Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
             ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
 
+        //WL-Changes: Languages start
+        var obfusWrappedMessage = _languages.GetObfusWrappedMessage(message, source, name);
+        var biobfMessage = ObfuscateMessageReadability(_languages.ObfuscateMessageFromSource(message, source), 0.2f);
+        var wrappedbiobfusMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
+            ("entityName", nameIdentity), ("message", FormattedMessage.EscapeText(biobfMessage)));
+        //WL-Changes: Languages start
+
 
         foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
         {
@@ -543,6 +550,19 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (session.AttachedEntity is not { Valid: true } playerEntity)
                 continue;
             listener = session.AttachedEntity.Value;
+
+            //WL-Changes: Languages start
+            if (!_languages.CanUnderstand(source, listener))
+            {
+                wrappedMessage = obfusWrappedMessage;
+                wrappedobfuscatedMessage = wrappedbiobfusMessage;
+                if (_languages.IsObfusEmoting(source))
+                {
+                    _chatManager.ChatMessageToOne(ChatChannel.Emotes, message, wrappedMessage, source, false, session.Channel);
+                    continue;
+                }
+            }
+            //WL-Changes: Languages end
 
             if (MessageRangeCheck(session, data, range) != MessageRangeCheckResult.Full)
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
@@ -728,7 +748,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (!_languages.CanUnderstand(source, listener))
             {
                 wrappedMessage = obfusWrappedMessage;
-                if (_languages.IsObfusEmoting(source))
+                if (_languages.IsObfusEmoting(source) && channel != ChatChannel.LOOC)
                     channel = ChatChannel.Emotes;
             }
 
