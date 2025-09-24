@@ -1,6 +1,7 @@
 using Content.Shared._WL.Languages;
 using Content.Shared._WL.Languages.Components;
 using Content.Shared.Chat;
+using Content.Shared.Radio;
 using Content.Shared.Speech;
 using Content.Shared.IdentityManagement;
 using Robust.Shared.Random;
@@ -12,7 +13,6 @@ public sealed class LanguagesSystem : SharedLanguagesSystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ILogManager _logMan = default!;
-    private ISawmill _sawmill = default!;
     public const string SawmillName = "languages.sys";
 
     public string GetHeardMessage(string message, EntityUid source, EntityUid listener)
@@ -53,10 +53,14 @@ public sealed class LanguagesSystem : SharedLanguagesSystem
             return true;
 
         if (!TryComp<LanguagesSpeekingComponent>(source, out var source_lang))
+        {
             return true;
+        }
 
         if (!TryComp<LanguagesSpeekingComponent>(listener, out var listen_lang))
+        {
             return true;
+        }
 
         var message_language = source_lang.CurrentLanguage;
         return listen_lang.IsUnderstanding && source_lang.IsSpeeking && listen_lang.UnderstandingLanguages.Contains(message_language);
@@ -64,8 +68,6 @@ public sealed class LanguagesSystem : SharedLanguagesSystem
 
     public bool IsObfusEmoting(EntityUid source)
     {
-        _sawmill = _logMan.GetSawmill(SawmillName);
-        _sawmill.Info("TRY TO EMOTE");
         if (!TryComp<LanguagesSpeekingComponent>(source, out var source_lang))
             return false;
         else
@@ -76,9 +78,6 @@ public sealed class LanguagesSystem : SharedLanguagesSystem
                 return false;
             else
             {
-                _sawmill.Info("EMOTES PROMOTES");
-                if (proto.Obfuscation.IsEmoting())
-                    _sawmill.Info("VANSUSI");
                 return proto.Obfuscation.IsEmoting();
             }
         }
@@ -86,7 +85,6 @@ public sealed class LanguagesSystem : SharedLanguagesSystem
 
     public string GetObfusWrappedMessage(string message, EntityUid source, string name, SpeechVerbPrototype? speech = null)
     {
-        //_sawmill = _logMan.GetSawmill(SawmillName);
         var obfusMessage = ObfuscateMessageFromSource(message, source);
         if (IsObfusEmoting(source))
         {
@@ -118,5 +116,19 @@ public sealed class LanguagesSystem : SharedLanguagesSystem
                 return wrappedMessage;
             }
         }
+    }
+
+    public string GetRadioObfusWrappedMessage(string message, EntityUid source, string name, SpeechVerbPrototype speech, RadioChannelPrototype channel)
+    {
+        var obfusMessage = ObfuscateMessageFromSource(message, source);
+        var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
+            ("color", channel.Color),
+            ("fontType", speech.FontId),
+            ("fontSize", speech.FontSize),
+            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+            ("channel", $"\\[{channel.LocalizedName}\\]"),
+            ("name", name),
+            ("message", obfusMessage));
+        return wrappedMessage;
     }
 }
