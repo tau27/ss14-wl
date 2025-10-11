@@ -4,7 +4,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: tramadol
+    currentLabel: reagent-name-tramadol
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -19,7 +19,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: paracetamol
+    currentLabel: reagent-name-paracetamol
   - type: SolutionContainerManager
     solutions:
       drink:
