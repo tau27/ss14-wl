@@ -1,12 +1,10 @@
-cpr-target-needs-cpr = [color=red]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } не имеет пульса и
-задыхвается![/color]
+cpr-target-needs-cpr = [color=red]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } не имеет пульса и задыхается![/color]
 
-fracture-examine = [color=red]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-BASIC($target, "выглядит", "выглядит") },
-будто что-то неправильной формы застряло { POSS-ADJ($target) } под кожей![/color]
-arterial-bleeding-examine = [color=red]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-BE($target) } фантанирует кровью![/color]
-bone-death-examine = [color=red]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-BE($target) } искалечен![/color]
+fracture-examine = [color=red]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-BASIC($target, "выглядит", "выглядит") } будто что-то неправильной формы застряло { POSS-ADJ($target) } под кожей![/color]
+arterial-bleeding-examine = [color=red]{ CAPITALIZE(SUBJECT($target)) } фантанирует кровью![/color]
+bone-death-examine = [color=red]{ CAPITALIZE(SUBJECT($target)) } искалечен![/color]
 
-wound-bleeding-modifier = [color=red]кровоточит {$wound}[/color]
+wound-bleeding-modifier = [color=red]кровоточащие {$wound}[/color]
 wound-tended-modifier = заботиться {$wound}
 wound-bandaged-modifier = имеет перевязку {$wound}
 wound-salved-modifier = спасено {$wound}
@@ -37,24 +35,19 @@ wound-count-modifier =
    *[other]{"ы"}
 }
 
--wound-plural-modifier-es-ru = { $count ->
-    [one]{"ый"}
-   *[other]{"ыe"}
-}
-
 -wound-plural-modifier-patch = { $count ->
     [one]{"область"}
    *[other]{"области"}
 }
 
-wound-incision-examine = [color=yellow]открыт{-wound-plural-modifier-es-ru(count: $count)} разрез{-wound-plural-modifier-s(count: $count)}[/color]
-wound-ribcage-open-examine = [color=yellow]открытую грудную клетку{-wound-plural-modifier-s(count: $count)}[/color]
+wound-incision-examine = [color=yellow]открытые разрезы[/color]
+wound-ribcage-open-examine = [color=yellow]открытую грудную клетку[/color]
 
 wound-bruise-80 = [color=crimson]ужасные гематомы[/color]
 wound-bruise-50 = [color=crimson]большие гематомы[color]
 wound-bruise-30 = [color=red]серьёзные ушибы[/color]
-wound-bruise-20 = [color=red]значительн{-wound-plural-modifier-es-ru(count: $count)} ушиб{-wound-plural-modifier-s(count: $count)}[/color]
-wound-bruise-10 = [color=orange]слаб{-wound-plural-modifier-es-ru(count: $count)} ушиб{-wound-plural-modifier-s(count: $count)}[/color]
+wound-bruise-20 = [color=red]значительныe ушибы[/color]
+wound-bruise-10 = [color=orange]слабыe ушибы[/color]
 wound-bruise-5 = [color=yellow]несколько синяков[/color]
 
 wound-cut-massive-45 = [color=crimson]глубокие резаные раны[/color]
@@ -119,23 +112,19 @@ wound-heat-small-7 = [color=orange]свежие слабые ожоги[/color]
 wound-heat-small-3 = [color=orange]слабые ожоги[/color]
 wound-heat-small-0 = [color=yellow]бледые послеожоговые шрамы[/color]
 
-wound-cold-petrified-45 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} некротических, заледенелых
-обморожений[/color]
+wound-cold-petrified-45 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} некротических, заледенелых обморожений[/color]
 wound-cold-petrified-35 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} тёмных, заледенелых обморожений[/color]
 wound-cold-petrified-25 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} заледенелых обморожений[/color]
-wound-cold-petrified-10 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} покрасневших, оттаивающих
-обморожений[/color]
+wound-cold-petrified-10 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} покрасневших, оттаивающих обморожений[/color]
 wound-cold-petrified-0 = [color=lightblue]массивные шрамы от обморожения[/color]
 
-wound-cold-severe-25 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} значительных обморожений, покрытых
-волдырями[/color]
+wound-cold-severe-25 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} значительных обморожений, покрытых волдырями[/color]
 wound-cold-severe-15 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} значительных обморожений[/color]
 wound-cold-severe-10 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} заживающих обморожений[/color]
 wound-cold-severe-5 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} оттаивающих обморожений[/color]
 wound-cold-severe-0 = [color=lightblue]шрамы от обморожения[/color]
 
-wound-cold-moderate-15 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} умеренных обморожений, покрытых
-волдырями[/color]
+wound-cold-moderate-15 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} умеренных обморожений, покрытых волдырями[/color]
 wound-cold-moderate-10 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} умеренных обморожений[/color]
 wound-cold-moderate-5 = [color=lightblue]{-wound-plural-modifier-patch(count: $count)} оттаивающих обморожений[/color]
 wound-cold-moderate-0 = [color=lightblue]бледнеющих красных областей[/color]

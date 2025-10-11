@@ -1,23 +1,23 @@
-tool-quality-incising-name = Incising
-tool-quality-incising-tool-name = Scalpel
+tool-quality-incising-name = Рассечение
+tool-quality-incising-tool-name = Скальпель
 
-tool-quality-clamping-name = Clamping
-tool-quality-clamping-tool-name = Hemostat
+tool-quality-clamping-name = Зажатие
+tool-quality-clamping-tool-name = Гемостат
 
-tool-quality-retracting-name = Retracting
-tool-quality-retracting-tool-name = Retractor
+tool-quality-retracting-name = Отведение
+tool-quality-retracting-tool-name = Ретрактор
 
-tool-quality-cauterizing-name = Cauterizing
-tool-quality-cauterizing-tool-name = Cautery
+tool-quality-cauterizing-name = Прижигание
+tool-quality-cauterizing-tool-name = Инструмент для прижигания
 
-tool-quality-bone-mending-name = Bone Mending
-tool-quality-bone-mending-tool-name = Bottle of Bone Gel
+tool-quality-bone-mending-name = Восстановление кости
+tool-quality-bone-mending-tool-name = Флакон костного геля
 
-tool-quality-bone-setting-name = Bone Setting
-tool-quality-bone-setting-tool-name = Bone Setter
+tool-quality-bone-setting-name = Репозиция кости
+tool-quality-bone-setting-tool-name = Костный репозитор
 
-tool-quality-recoupling-name = Recoupling
-tool-quality-recoupling-tool-name = Vascular Recoupler
+tool-quality-recoupling-name = Восстановление сосудов
+tool-quality-recoupling-tool-name = Восстановитель сосудов
 
-tool-quality-drilling-name = Drilling
-tool-quality-drilling-tool-name = Drill
+tool-quality-drilling-name = Сверление
+tool-quality-drilling-tool-name = Дрель

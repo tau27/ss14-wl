@@ -1,38 +1,26 @@
-reagent-name-paracetamol = paracetamol
-reagent-desc-paracetamol = Commonly known as Tylenol, this chemical is a mild, simple painkiller.
-
-reagent-name-tramadol = tramadol
-reagent-desc-tramadol = An effective painkiller. Don't mix with alcohol.
-
-reagent-name-oxycodone = oxycodone
-reagent-desc-oxycodone = A very effective painkiller. Don't mix with alcohol.
-
-reagent-name-sanguine = sanguine reagent
-reagent-desc-sanguine = A deeply crimson and oily gel that can replenish blood of any type, effective only at low doses.
-
-reagent-name-saline-glucose = saline-glucose solution
-reagent-desc-saline-glucose = A solution of saline and glucose that can be administered intravenously to encourage healing, effective only at low doses.
-
-reagent-name-cloneoxadone = cloneoxadone
-reagent-desc-cloneoxadone = A derivative of cryoxadone used in cloning processes. More potent, but requires lower temperatures to work.
-
-reagent-name-peridaxon = peridaxon
-reagent-desc-peridaxon = A beady medicine that encourages internal organs to recover from minor traumas.
-
-reagent-name-synthflesh = synthflesh
-reagent-desc-synthflesh = A resorbable collagen and protein mixture used for synthesizing equivalents to various bodily materials.
-
-reagent-name-coagulant = coagulant
-reagent-desc-coagulant = An experimental medicine that causes internal and external bleeding to clot. Authorities have expressed concern over the lead content.
-
-reagent-name-osseous = osseous reagent
-reagent-desc-osseous = An strange solution of pinkish gel and white shards that can heal internal bone fractures. Authorities have expressed concern over the lead content.
-
-reagent-name-convermol = convermol
-reagent-desc-convermol = A fast-acting medication that forces the body to respirate, damaging the muscles but effectively restoring access to air.
-
-reagent-name-salicylic-acid = salicylic acid
-reagent-desc-salicylic-acid = An awful-smelling compound that offers pain relief and healing for severe brute injuries. Extremely high doses can force the body to regenerate bones from nothing.
-
-reagent-name-oxandrolone = oxandrolone
-reagent-desc-oxandrolone = A heavy-duty burn medication that offers pain relief and healing for severe burn injuries. Extremely high doses can force the body to purge severely scarred tissue.
+reagent-name-paracetamol = парацетамол
+reagent-desc-paracetamol = Известный как Тайленол, этот химикат является мягким, простым обезболивающим.
+reagent-name-tramadol = трамадол
+reagent-desc-tramadol = Эффективное обезболивающее. Не смешивать с алкоголем.
+reagent-name-oxycodone = оксикодон
+reagent-desc-oxycodone = Очень эффективное обезболивающее. Не смешивать с алкоголем.
+reagent-name-sanguine = сангин
+reagent-desc-sanguine = Маслянистый гель глубокого малиового цвета, который может восполнить кровь любого типа, эффективен только в малых дозах.
+reagent-name-saline-glucose = солево-глюкозный раствор
+reagent-desc-saline-glucose = Раствор соли и глюкозы, который можно вводить внутривенно для стимулирования заживления, эффективен только в малых дозах.
+reagent-name-cloneoxadone = клоноксадон
+reagent-desc-cloneoxadone = Производное криоксадона, используемое в процессах клонирования. Более эффективен, но требует более низких температур для работы.
+reagent-name-peridaxon = перидаксон
+reagent-desc-peridaxon = Гранулированное лекарство, которое способствует восстановлению внутренних органов после незначительных травм.
+reagent-name-synthflesh = синтетическая плоть
+reagent-desc-synthflesh = Рассасывающаяся смесь коллагена и белка, используемая для синтеза эквивалентов различных тканей организма.
+reagent-name-coagulant = коагулянт
+reagent-desc-coagulant = Экспериментальное лекарство, вызывающее свёртывание внутренних и внешних кровотечений. Власти выразили обеспокоенность содержанием свинца.
+reagent-name-osseous = оссеус
+reagent-desc-osseous = Странный раствор розоватого геля и белых осколков, который может лечить внутренние переломы костей. Власти выразили обеспокоенность содержанием свинца.
+reagent-name-convermol = конвермол
+reagent-desc-convermol = Быстродействующее лекарство, которое заставляет организм дышать, повреждая мышцы, но эффективно восстанавливая доступ к воздуху.
+reagent-name-salicylic-acid = салициловая кислота
+reagent-desc-salicylic-acid = Соединение с ужасным запахом, которое обеспечивает обезболивание и заживление при тяжёлых физических травмах. Чрезвычайно высокие дозы могут заставить организм регенерировать кости из ничего.
+reagent-name-oxandrolone = оксандролон
+reagent-desc-oxandrolone = Мощное средство от ожогов, которое обеспечивает обезболивание и заживление при тяжёлых ожоговых травмах. Чрезвычайно высокие дозы могут заставить организм очищаться от сильно повреждённой рубцами ткани.```

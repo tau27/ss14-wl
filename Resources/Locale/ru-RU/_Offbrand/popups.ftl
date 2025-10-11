@@ -1,79 +1,66 @@
-own-heart-has-stopped-beating = Your heart has stopped beating.
-minor-pain-applied = Your body begins to ache.
-moderate-pain-applied = You struggle to keep your eyes open.
-severe-pain-applied = Your whole body is going numb.
-blackout-pain-applied = You feel like you're about to black out.
-fracture-applied = You felt something break inside of you.
-arterial-bleeding-applied = You felt something tear apart inside of you.
-
-tendable-nothing-to-tend = There are no wounds you could tend with { THE($tending) }.
-tendable-nothing-to-tend-repeat = You've finished tending what you could with { THE($tending) }.
-tendable-used-up = You used { THE($tending) } up.
-tendable-self-tending = You begin tending your { $wound } with { THE($tending) }.
-tendable-user-tending = You begin tending { $target }'s { $wound } with { THE($tending) }.
-tendable-other-tending = { $user } begins tending { $target }'s { $wound } with { THE($tending) }.
-
-persistent-tender-already-applied = { $target } already has { INDEFINITE($trigger) } { $trigger }.
-
-persistent-tender-reflexive-user-completed = You tightened { THE($trigger) } around yourself.
-persistent-tender-reflexive-other-completed = { $user } tightened { THE($trigger) } around { REFLEXIVE($user) }.
-persistent-tender-user-completed = You tightened { THE($trigger) } around { $target }.
-persistent-tender-other-completed = { $user } tightened { THE($trigger) } around { $target }.
-persistent-tender-reflexive-user-started = You begin to tighten { THE($trigger) } around yourself.
-persistent-tender-reflexive-other-started = { $user } begins to tighten { THE($trigger) } around { REFLEXIVE($user) }.
-persistent-tender-user-started = You begin to tighten { THE($trigger) } around { $target }.
-persistent-tender-other-started = { $user } begins to tighten { THE($trigger) } around { $target }.
-
-persistent-tender-removal-reflexive-user-completed = You removed { THE($effect) } from yourself.
-persistent-tender-removal-reflexive-other-completed = { $user } removed { THE($effect) } from { REFLEXIVE($user) }.
-persistent-tender-removal-user-completed = You removed { THE($effect) } from { $target }.
-persistent-tender-removal-other-completed = { $user } removed { THE($effect) } from { $target }.
-persistent-tender-removal-reflexive-user-started = You begin to loosen { THE($effect) } from yourself.
-persistent-tender-removal-reflexive-other-started = { $user } begins to loosen { THE($effect) } from { REFLEXIVE($user) }.
-persistent-tender-removal-user-started = You begin to loosen { THE($effect) } from { $target }.
-persistent-tender-removal-other-started = { $user } begins to loosen { THE($effect) } around { $target }.
-
-cpr-target-started-user = You begin to perform chest compressions on { $target }.
-cpr-target-started-others = { $user } begins performing chest compressions { $target }.
-cpr-wound-caused = You hear a loud, sickening crack.
-
-surgery-must-be-stripped = { $target } needs to remove { POSS-ADJ($target) } { $clothing }.
-surgery-must-be-down = { $target } needs to be laying down.
-
-neural-suppression-applied = Your thoughts turn inwards as the world and your body fade away.
-critical-brain-damage-applied = Your brain feels cut off from the world.
-brain-oxygen-depleted = Your brain struggles to control your limbs.
-severe-brain-damage-applied = Your brain struggles to direct your body.
-
-iv-bag-none-inserted = The IV stand doesn't have a bag in it.
-iv-bag-start-connection-user = You begin to search for a vein in { $target }...
-iv-bag-start-connection-others = { $user } is searching for a vein in { $target }...
-iv-bag-connected-user = You insert the cannula into one of { $target }'s veins.
-iv-bag-connected-others = { $user } inserts a cannula from { THE($source) } into one of { $target }'s veins.
-iv-bag-start-disconnection-user = You begin to extract the cannula from { $target }...
-iv-bag-start-disconnection-others = { $user } begins to unhook { $target } from { THE($source) }...
-iv-bag-disconnected-user = You remove the cannula from { $target }.
-iv-bag-disconnected-others = { $user } unhooked { $target } from { THE($source) }.
-
-backfired-gun = You struggle to aim the gun, and it backfires!
-backfired-hypospray = You struggle to aim the hypo, and you accidentally jam it into yourself.
-
-zombification-30-message-1 = A heat spreads through your body.
-zombification-30-message-2 = Your head feels warm.
-zombification-30-message-3 = You feel dizzy.
-zombification-30-message-4 = You feel light-headed.
-
-zombification-60-message-1 = Something's under your skin.
-zombification-60-message-2 = Something's burning.
-zombification-60-message-3 = Something's itching.
-zombification-60-message-4 = Sweat beads on you.
-
-zombification-90-message-1 = Your heart is racing.
-zombification-90-message-2 = A strange pain fills your body.
-zombification-90-message-3 = Something's running down your throat.
-zombification-90-message-4 = Your skin is withering.
-
-zombification-120-message-1 = Something's bursting open in your head.
-zombification-120-message-2 = You feel strange needles piercing your skin.
-zombification-120-message-3 = Your insides are squirming.
-zombification-120-message-4 = Something wants you to feel calm.
+own-heart-has-stopped-beating = Ваше сердце перестало биться.
+minor-pain-applied = Ваше тело начинает ныть.
+moderate-pain-applied = Вам трудно держать глаза открытыми.
+severe-pain-applied = Всё ваше тело немеет.
+blackout-pain-applied = Вы чувствуете, что вот-вот потеряете сознание.
+fracture-applied = Вы почувствовали, как что-то сломалось внутри вас.
+arterial-bleeding-applied = Вы почувствовали, как что-то разорвалось внутри вас.
+tendable-nothing-to-tend = Нет ран, которые можно обработать с помощью { $tending }.
+tendable-nothing-to-tend-repeat = Вы закончили обрабатывать всё, что можно обработать { $tending }.
+tendable-used-up = Вы полностью использовали { $tending }.
+tendable-self-tending = Вы начинаете обрабатывать свою { $wound } с помощью { $tending }.
+tendable-user-tending = Вы начинаете обрабатывать { $wound } { $target } с помощью { $tending }.
+tendable-other-tending = { $user } начинает обрабатывать { $wound } { $target } с помощью { $tending }.
+persistent-tender-already-applied = На { $target } уже наложен{ INDEFINITE($trigger) } { $trigger }.
+persistent-tender-reflexive-user-completed = Вы затянули { $trigger } на себе.
+persistent-tender-reflexive-other-completed = { $user } затянул{INDEFINITE($user)} { $trigger } на себе.
+persistent-tender-user-completed = Вы затянули { $trigger } на { $target }.
+persistent-tender-other-completed = { $user } затянул{INDEFINITE($user)} { $trigger } на { $target }.
+persistent-tender-reflexive-user-started = Вы начинаете затягивать { $trigger } на себе.
+persistent-tender-reflexive-other-started = { $user } начинает затягивать { $trigger } на себе.
+persistent-tender-user-started = Вы начинаете затягивать { $trigger } на { $target }.
+persistent-tender-other-started = { $user } начинает затягивать { $trigger } на { $target }.
+persistent-tender-removal-reflexive-user-completed = Вы сняли { $effect } с себя.
+persistent-tender-removal-reflexive-other-completed = { $user } снял{INDEFINITE($user)} { $effect } с себя.
+persistent-tender-removal-user-completed = Вы сняли { $effect } с { $target }.
+persistent-tender-removal-other-completed = { $user } снял{INDEFINITE($user)} { $effect } с { $target }.
+persistent-tender-removal-reflexive-user-started = Вы начинаете ослаблять { $effect } на себе.
+persistent-tender-removal-reflexive-other-started = { $user } начинает ослаблять { $effect } на себе.
+persistent-tender-removal-user-started = Вы начинаете ослаблять { $effect } на { $target }.
+persistent-tender-removal-other-started = { $user } начинает ослаблять { $effect } на { $target }.
+cpr-target-started-user = Вы начинаете делать непрямой массаж сердца { $target }.
+cpr-target-started-others = { $user } начинает делать непрямой массаж сердца { $target }.
+cpr-wound-caused = Вы слышите громкий, тошнотворный хруст.
+surgery-must-be-stripped = { $target } должен снять { POSS-ADJ($target) } { $clothing }.
+surgery-must-be-down = { $target } должен лежать.
+neural-suppression-applied = Ваши мысли обращаются внутрь, пока мир и ваше тело исчезают.
+critical-brain-damage-applied = Ваш мозг чувствует себя отрезанным от мира.
+brain-oxygen-depleted = Ваш мозг с трудом управляет вашими конечностями.
+severe-brain-damage-applied = Ваш мозг с трудом управляет вашим телом.
+iv-bag-none-inserted = На стойке для капельницы нет пакета.
+iv-bag-start-connection-user = Вы начинаете искать вену у { $target }...
+iv-bag-start-connection-others = { $user } ищет вену у { $target }...
+iv-bag-connected-user = Вы вводите канюлю в одну из вен { $target }.
+iv-bag-connected-others = { $user } вводит канюлю из { $source } в одну из вен { $target }.
+iv-bag-start-disconnection-user = Вы начинаете извлекать канюлю из { $target }...
+iv-bag-start-disconnection-others = { $user } начинает отсоединять { $target } от { $source }...
+iv-bag-disconnected-user = Вы извлекаете канюлю из { $target }.
+iv-bag-disconnected-others = { $user } отсоединил{INDEFINITE($user)} { $target } от { $source }.
+backfired-gun = Вам трудно прицелиться, и оружие даёт осечку!
+backfired-hypospray = Вам трудно прицелиться, и вы случайно вводите гипоспрей себе.
+zombification-30-message-1 = По вашему телу разливается тепло.
+zombification-30-message-2 = Ваша голова кажется тёплой.
+zombification-30-message-3 = У вас кружится голова.
+zombification-30-message-4 = Вы чувствуете лёгкость в голове.
+zombification-60-message-1 = Что-то под вашей кожей.
+zombification-60-message-2 = Что-то горит.
+zombification-60-message-3 = Что-то чешется.
+zombification-60-message-4 = На вас выступает пот.
+zombification-90-message-1 = Ваше сердце бешено колотится.
+zombification-90-message-2 = Странная боль наполняет ваше тело.
+zombification-90-message-3 = Что-то стекает по вашему горлу.
+zombification-90-message-4 = Ваша кожа увядает.
+zombification-120-message-1 = Что-то разрывается в вашей голове.
+zombification-120-message-2 = Вы чувствуете странные иглы, пронзающие вашу кожу.
+zombification-120-message-3 = Ваши внутренности извиваются.
+zombification-120-message-4 = Что-то хочет, чтобы вы успокоились.

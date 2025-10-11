@@ -1,1 +1,1 @@
-stack-suture = suture
+stack-suture = нити для швов

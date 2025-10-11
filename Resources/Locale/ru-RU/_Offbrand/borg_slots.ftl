@@ -1,1 +1,1 @@
-borg-slot-iv-bag-empty = iv bags
+borg-slot-iv-bag-empty = сумка для капельниц

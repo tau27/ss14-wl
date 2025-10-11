@@ -5,9 +5,9 @@
     [bad] [color=#E8CB2D]{$text}[/color]
     [awful] [color=#EF973C]{$text}[/color]
     [dangerous] [color=#FF6C7F]{$text}[/color]
-   *[other] unknown
+   *[other] неизвестно
     }
 
-offbrand-crew-monitoring-heart-rate = { -crew-monitor-vitals-rating(text: $rate, rating: $rating) }bpm
-offbrand-crew-monitoring-blood-pressure = { -crew-monitor-vitals-rating(text: $systolic, rating: $rating) }/{ -crew-monitor-vitals-rating(text: $diastolic, rating: $rating) }
-offbrand-crew-monitoring-oxygenation = { -crew-monitor-vitals-rating(text: $oxygenation, rating: $rating) }% air
+offbrand-crew-monitoring-heart-rate = [color=white]{ $rate }[/color]уд/мин
+offbrand-crew-monitoring-blood-pressure = [color=white]{ $systolic }[/color]/[color=white]{ $diastolic }[/color]
+offbrand-crew-monitoring-spo2 = [color=white]{ $value }[/color]% { LOC($spo2) }

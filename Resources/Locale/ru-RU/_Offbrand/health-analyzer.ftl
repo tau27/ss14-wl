@@ -1,20 +1,20 @@
 -health-analyzer-rating = { $rating ->
-    [good] ([color=#00D3B8]good[/color])
-    [okay] ([color=#30CC19]okay[/color])
-    [poor] ([color=#bdcc00]poor[/color])
-    [bad] ([color=#E8CB2D]bad[/color])
-    [awful] ([color=#EF973C]awful[/color])
-    [dangerous] ([color=#FF6C7F]dangerous[/color])
-   *[other] (unknown)
+    [good] ([color=#00D3B8]хорошо[/color])
+    [okay] ([color=#30CC19]удовлетворительно[/color])
+    [poor] ([color=#bdcc00]неудовлетворительно[/color])
+    [bad] ([color=#E8CB2D]плохо[/color])
+    [awful] ([color=#EF973C]ужасно[/color])
+    [dangerous] ([color=#FF6C7F]опасно[/color])
+   *[other] (неизвестно)
     }
 
-health-analyzer-window-entity-brain-health-text = Brain Activity:
-health-analyzer-window-entity-blood-pressure-text = Blood Pressure:
-health-analyzer-window-entity-blood-oxygenation-text = Blood Saturation:
-health-analyzer-window-entity-blood-flow-text = Blood Flow:
-health-analyzer-window-entity-heart-rate-text = Heart Rate:
-health-analyzer-window-entity-heart-health-text = Heart Health:
-health-analyzer-window-entity-lung-health-text = Lung Health:
+health-analyzer-window-entity-brain-health-text = Мозговая активность:
+health-analyzer-window-entity-blood-pressure-text = Кровяное давление:
+health-analyzer-window-entity-blood-oxygenation-text = Сатурация крови:
+health-analyzer-window-entity-blood-flow-text = Кровоток:
+health-analyzer-window-entity-heart-rate-text = Пульс:
+health-analyzer-window-entity-heart-health-text = Здоровье сердца:
+health-analyzer-window-entity-lung-health-text = Здоровье лёгких:
 
 health-analyzer-window-entity-brain-health-value = {$value}% { -health-analyzer-rating(rating: $rating) }
 health-analyzer-window-entity-heart-health-value = {$value}% { -health-analyzer-rating(rating: $rating) }
@@ -23,98 +23,110 @@ health-analyzer-window-entity-heart-rate-value = {$value}bpm { -health-analyzer-
 health-analyzer-window-entity-blood-oxygenation-value = {$value}% { -health-analyzer-rating(rating: $rating) }
 health-analyzer-window-entity-blood-pressure-value = {$systolic}/{$diastolic} { -health-analyzer-rating(rating: $rating) }
 health-analyzer-window-entity-blood-flow-value = {$value}% { -health-analyzer-rating(rating: $rating) }
-health-analyzer-window-entity-non-medical-reagents = [color=yellow]Patient has non-medical reagents in bloodstream.[/color]
+health-analyzer-window-entity-non-medical-reagents = [color=yellow]Пациент имеет немедицинские вещества в крови.[/color]
 
-wound-bone-death = [color=red]Patient has systemic bone failure.[/color]
-wound-internal-fracture = [color=red]Patient has internal fractures.[/color]
-wound-incision = [color=red]Patient has open incision.[/color]
-wound-clamped = [color=red]Patient has clamped arteries.[/color]
-wound-retracted = [color=red]Patient has retracted skin.[/color]
-wound-ribcage-open = [color=red]Patient has open ribcage.[/color]
-wound-arterial-bleeding = [color=red]Patient has arterial bleeding.[/color]
+wound-bone-death = [color=red]Пациент имеет системную костную смерть.[/color]
+wound-internal-fracture = [color=red]Пациент имеет внутренние переломы.[/color]
+wound-incision = [color=red]Пациент имеет открытый разрез.[/color]
+wound-clamped = [color=red]Пациент имеет пережатые сосуды.[/color]
+wound-retracted = [color=red]У пациента раздвинута кожа.[/color]
+wound-ribcage-open = [color=red]У пациента открыта грудная клетка.[/color]
+wound-arterial-bleeding = [color=red]У пациента артериальное кровотечение.[/color]
 
-health-analyzer-window-no-patient-damages = Patient has no injuries.
+health-analyzer-window-no-patient-damages = Пациент не имеет телесных повреждений.
 
 health-analyzer-status-tooltip =
-    {"[bold]"}Alive[/bold]: The patient is alive and conscious.
-    {"[bold]"}Critical[/bold]: The patient is unconscious and will die without intervention.
-    {"[bold]"}Dead[/bold]: The patient is dead and will rot without intervention.
+    {"[bold]"}Жив[/bold]: Пациент жив и в сознании.
+    {"[bold]"}Критическое состояние[/bold]: Пациент без сознания и умрёт без вмешательства.
+    {"[bold]"}Мёртв[/bold]: Пациент мёртв и сгниёт без вмешательства.
 
 health-analyzer-blood-saturation-tooltip =
-    A measure of how much oxygen (or nitrogen, etc.) the patient's brain is getting.
+    То, сколько кислорода (или азота и т.д.) получает мозг пациента.
 
     { $rating ->
-    [good] Your patient's brain is not at risk.
-    [okay] Your patient's brain may be damaged slightly.
-    [poor] Your patient's brain may be damaged.
-    [bad] Your patient's brain may be damaged substantially.
-    [awful] Your patient's brain is at [color=red]severe risk[/color] for fatal injury.
-    [dangerous] Your patient's brain is at [color=red]life-threatening risk[/color] for fatal injury.
-   *[other] Your patient is an enigma. Report this to developers if you see this message.
+    [good] Мозг пациента в безопасности.
+    [okay] Мозг пациента может слегка повредиться.
+    [poor] Мозг пациента может повредиться.
+    [bad] Мозг пациента может серьёзно повредиться.
+    [awful] Мозг пациента имеет [color=red]серьёзный риск[/color] фатальных повреждений.
+    [dangerous] Мозг пациента имеет [color=red]смертельно опасный[/color] фатальных повреждений.
+   *[other] Твой пациент загадочник. Чтобы разгадать загадку загадочника, обратись к разработчикам.
     }
 
-    Relevant metrics:
-    {"[color=#7af396]"}Blood Pressure[/color]: {$systolic}/{$diastolic}
-    {"[color=#7af396]"}Asphyxiation[/color]: {$asphyxiation}
+    Влияющие показатели:
+    {"[color=#7af396]"}Кровяное давление[/color]: {$systolic}/{$diastolic}
+    {"[color=#7af396]"}Асфиксия[/color]: {$asphyxiation}
 
 health-analyzer-blood-pressure-tooltip =
-    A measure of how much blood is in use by the body.
+    Показатель того, насколько хорошо кровь циркулирует по телу.
+    Капельницы можно использовать для восполнения объёма крови.
 
-    If [color=#7af396]Blood Flow[/color] is high but [color=#7af396]Blood Pressure[/color] is not, ensure your patient has adequate [color=#7af396]Blood Volume[/color].
+    Связанные показатели:
+    {"[color=#7af396]"}Объём крови[/color]:
+        Низкий объём крови может привести к снижению давления.
+    {"[color=#7af396]"}Активность мозга[/color]:
+        Низкая активность мозга может привести к снижению давления.
+    {"[color=#7af396]"}Пульс и состояние сердца[/color]:
+        Повреждение сердца или его остановка могут привести к снижению давления.
 
-    Relevant metrics:
-    {"[color=#7af396]"}Blood Flow[/color]: {$flow}%
+health-analyzer-blood-volume-tooltip =
+    Количество крове в теле пациента.
+
+    Если [color=#7af396]Кровоток[/color] высокий, но [color=#7af396]Кровяное давление[/color] нет, убедись, что пациент имеет достаточный [color=#7af396]Объём крови[/color].
+
+    Влияющие показатели:
+    {"[color=#7af396]"}Кровоток[/color]: {$flow}%
 
 health-analyzer-blood-flow-tooltip =
-    A measure of how much the patient's body can circulate available blood.
+    Количество крови, циркулирующее по телу пациента.
 
-    This primarily depends on your patient's heart having a pulse and being in good condition.
-    CPR can be administered if the heart is not providing enough blood flow.
+    Напрямую зависит от сердца пациента и его пульса.
+    СЛР может помочь, если сердце не прокачивает достаточно крови.
 
-    Relevant metrics:
-    {"[color=#7af396]"}Heart Rate[/color]: {$heartrate}bpm
-    {"[color=#7af396]"}Heart Health[/color]: {$health}%
+    Влияющие показатели:
+    {"[color=#7af396]"}Пульс[/color]: {$heartrate}bpm
+    {"[color=#7af396]"}Здоровье сердца[/color]: {$health}%
 
 health-analyzer-heart-rate-tooltip =
-    A measure of how fast the patient's heart is beating.
+    Скорость сердцебиения пациента.
 
-    It will raise due to pain and asphyxiation.
+    Падение может привести к асфиксии и боли.
 
-    It can stop due to severe pain, lack of blood, or severe brain damage.
+    Оно может остановиться от сильной боли, недостатока крови или серьёзных повреждений мозга.
 
-    {"[color=#731024]"}Inaprovaline[/color] can be administered to reduce the patient's heartrate.
+    {"[color=#731024]"}Инапровалин[/color] может быть использован для стабилизации пульса.
 
-    Relevant metrics:
-    {"[color=#7af396]"}Asphyxiation[/color]: {$asphyxiation}
+    Влияющие показатели:
+    {"[color=#7af396]"}Асфиксия[/color]: {$asphyxiation}
 
 health-analyzer-heart-health-tooltip =
-    A measure of the heart's integrity.
+    Показатель здоровья сердца.
 
-    It will decrease due to excessively high heartrate.
+    Уменьшается из-за чрезмерно высокого пульса.
 
-    Relevant metrics:
-    {"[color=#7af396]"}Heart Rate[/color]: {$heartrate}bpm
+    Влияющиеу показатели:
+    {"[color=#7af396]"}Пульс[/color]: {$heartrate}уд/мин
 
 health-analyzer-plain-temperature-tooltip =
-    The patient's body temperature.
+    Температура тела пациента.
 
 health-analyzer-cryostasis-temperature-tooltip =
-    The patient's body temperature.
+    Температура тела пациента.
 
-    This temperature has a cryostasis factor of {$factor}%.
+    Имеет криостазисный коэффициент {$factor}%.
 
 health-analyzer-lung-health-tooltip =
-    The patient's lung health.
+    Здоровье лёгких пациента.
 
-    The lower this number, the more difficulty they have breathing.
+    Чем ниже это число, тем труднее ему дышать.
 
-    If the lung health is low, consider putting the patient on higher-pressure internals.
+    Если здоровье лёгких низкое, подумайте о переводе пациента на баллоны с повышенным давлением.
 
 health-analyzer-blood-tooltip =
-    The patient's blood volume.
+    Объём крови пациента.
 
 health-analyzer-damage-tooltip =
-    The patient's total accumulated injuries.
+    Суммарные повреждения пациента.
 
 health-analyzer-brain-health-tooltip = { $dead ->
     [true] {-health-analyzer-brain-health-tooltip-dead}
@@ -123,19 +135,19 @@ health-analyzer-brain-health-tooltip = { $dead ->
 
 -health-analyzer-brain-health-tooltip-alive =
     { $rating ->
-    [good] Your patient is fine, and does not need any intervention.
-    [okay] Your patient has slight brain damage, but can likely heal it over time.
-    [poor] Your patient has brain damage.
-    [bad] Your patient has a large amount of brain damage. Administer [color=#731024]Inaprovaline[/color] to stabilize the brain before proceeding with treatment.
-    [awful] Your patient has a severe amount of brain damage. [bold]Administer [color=#731024]Inaprovaline[/color] to stabilize the brain immediately.[/bold] Consider moving to a cryopod or stasis bed if you do not have a treatment plan.
-    [dangerous] Your patient is at [color=red]severe risk of death[/color]. [bold]Administer [color=#731024]Inaprovaline[/color], and move the patient to a cryopod or stasis bed if you do not have a treatment plan.[/bold]
-   *[other] Your patient is an enigma. Report this to developers if you see this message.
+    [good] Пациент в порядке и не требует никаких дополнительных мер.
+    [okay] Пациент имеет лёгкие повреждения мозга, но они скоро восстановятся.
+    [poor] Пациент имеет повреждения мозга.
+    [bad] Пациент имеет значительные повреждения мозга. Используйте [color=#731024]Инапровалин[/color] для стабилизации мозга пациента перед последующими манипуляциями.
+    [awful] Пациент имеет значительные повреждения мозга. [bold]Используйту [color=#731024]Инапровалин[/color] для стабилизаци мозга немедленно.[/bold] Применение криокапсул или криостазисных кроватей может быть хорошей идеей.
+    [dangerous] Пациент в [color=red]смертельной опасности[/color]. [bold]Используйте [color=#731024]Инапровалин[/color] и перемести пациента на криостазисную кровать или в криокапсулу, если нет плана лучше.[/bold]
+   *[other] Твой пациент загадочник. Чтобы разгадать загадку загадочника, обратись к разработчикам.
     }
 
-    {"[color=#fedb79]"}Mannitol[/color] can be administered to heal brain damage if the [color=#7af396]Blood Saturation[/color] permits.
+    {"[color=#fedb79]"}Маннитол[/color] может быть использован для восстановления мозга, если [color=#7af396]Сатурация[/color] позволяет.
 
-    Relevant metrics:
-    {"[color=#7af396]"}Blood Saturation[/color]: {$saturation}%
+    Влияющие показатели:
+    {"[color=#7af396]"}Сатурация[/color]: {$saturation}%
 
 -health-analyzer-brain-health-tooltip-dead =
-    The patient has 0% brain activity and is dead.
+    Мозг пациента не проявляет активности. Он мёртв.

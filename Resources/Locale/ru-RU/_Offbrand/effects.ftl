@@ -1,6 +1,6 @@
-reagent-guidebook-status-effect = Causes { $effect } during metabolism{ $conditionCount ->
+reagent-guidebook-status-effect = Вызывает { $effect } при метаболизации{ $conditionCount ->
         [0] .
-        *[other] {" "}when { $conditions }.
+        *[other] {" "}когда { $conditions }.
     }
 
 reagent-effect-guidebook-status-effect-remove = { $chance ->
@@ -36,30 +36,30 @@ reagent-effect-guidebook-clamp-wounds = { $probability ->
         [1] Останавливает кровотечение с шансом { NATURALPERCENT($chance, 2) } на рану
    *[other] останавливает кровотечение с шансом { NATURALPERCENT($chance, 2) } на рану
 }
-reagent-effect-condition-guidebook-heart-damage = { $max ->
+reagent-effect-condition-guidebook-heart-damage = { $min ->
     [2147483648] если есть как минимум {NATURALFIXED($min, 2)} повреждений сердца
-    *[other] { $min ->
+    *[other] { $max ->
                 [0] если есть не более {NATURALFIXED($max, 2)} повреждений сердца
                 *[other] если повреждения сердца между {NATURALFIXED($min, 2)} и {NATURALFIXED($max, 2)}
              }
 }
-reagent-effect-condition-guidebook-lung-damage = { $max ->
+reagent-effect-condition-guidebook-lung-damage = { $min ->
     [2147483648] если есть как минимум {NATURALFIXED($min, 2)} повреждений лёгких
-    *[other] { $min ->
+    *[other] { $max ->
                 [0] если есть не более {NATURALFIXED($max, 2)} повреждений лёгких
                 *[other] если повреждения лёгких между {NATURALFIXED($min, 2)} и {NATURALFIXED($max, 2)}
              }
 }
-reagent-effect-condition-guidebook-brain-damage = { $max ->
+reagent-effect-condition-guidebook-brain-damage = { $min ->
     [2147483648] если есть как минимум {NATURALFIXED($min, 2)} повреждений мозга
-    *[other] { $min ->
+    *[other] { $max ->
                 [0] если есть не более {NATURALFIXED($max, 2)} повреждений мозга
                 *[other] если повреждения мозга между {NATURALFIXED($min, 2)} и {NATURALFIXED($max, 2)}
              }
 }
-reagent-effect-condition-guidebook-total-group-damage = { $max ->
+reagent-effect-condition-guidebook-total-group-damage = { $min ->
     [2147483648] если есть как минимум {NATURALFIXED($min, 2)} урона
-    *[other] { $min ->
+    *[other] { $max ->
                 [0] если есть не более {NATURALFIXED($max, 2)} урона
                 *[other] если урон между {NATURALFIXED($min, 2)} и {NATURALFIXED($max, 2)}
              }
@@ -83,18 +83,18 @@ reagent-effect-guidebook-zombify = { $chance ->
 }
 
 reagent-effect-condition-guidebook-total-dosage-threshold =
-    { $max ->
+    { $min ->
         [2147483648] общая доза {$reagent} не менее {NATURALFIXED($min, 2)}u
-        *[other] { $min ->
+        *[other] { $max ->
                     [0] общая доза {$reagent} не более {NATURALFIXED($max, 2)}u
                     *[other] общая доза {$reagent} между {NATURALFIXED($min, 2)}u и {NATURALFIXED($max, 2)}u
                  }
     }
 
 reagent-effect-condition-guidebook-metabolite-threshold =
-    { $max ->
+    { $min ->
         [2147483648] есть по крайней мере {NATURALFIXED($min, 2)}u метаболитов {$reagent}
-        *[other] { $min ->
+        *[other] { $max ->
                     [0] есть не более {NATURALFIXED($max, 2)}u метаболитов {$reagent}
                     *[other] метаболиты {$reagent} находяться между {NATURALFIXED($min, 2)}u и {NATURALFIXED($max, 2)}u
                  }
