@@ -1,44 +1,44 @@
 <Document>
-# Surgery
+# Хирургия
 
-Surgery is used for treating severe and often internal wounds.
+Хирургия используется для лечения тяжёлых и часто внутренних ран.
 
-## Pain Management
-
-<Box>
-  <GuideEntityEmbed Entity="OperatingTable" Caption="operating table" />
-  <GuideEntityEmbed Entity="NitrousOxideTankFilled" Caption="nitrous oxide" />
-  <GuideEntityEmbed Entity="ChemistryBottleTramadol" Caption="tramadol" />
-</Box>
-
-Pain management is an important part of surgery, as excessive pain will cause your patient to go into cardiac arrest.
-
-When powered, operating tables can entirely suppress your patients' ability to feel pain.
-
-Nitrous oxide can also be used for anesthesia.
-
-When none of the above are available, normal painkillers are an option.
-
-## Performing Surgery
-
-In order to conduct surgery, your patient must not have any clothing obstructing them, and must be laying down.
+## Управление болью
 
 <Box>
-  <GuideEntityEmbed Entity="ClothingOuterVestTank" Caption="tank harness" />
-  <GuideEntityEmbed Entity="ClothingOuterHospitalGown" Caption="hospital gown" />
+  <GuideEntityEmbed Entity="OperatingTable" Caption="операционный стол" />
+  <GuideEntityEmbed Entity="NitrousOxideTankFilled" Caption="закись азота" />
+  <GuideEntityEmbed Entity="ChemistryBottleTramadol" Caption="трамадол" />
 </Box>
 
-Hospital gowns and tank harnesses can be operated through.
+Управление болью - важная часть хирургии, поскольку чрезмерная боль вызовет остановку сердца у вашего пациента.
 
-Use surgical tools in the orders described below to perform operations.
+При питании операционные столы могут полностью подавлять способность пациентов чувствовать боль.
 
-## Surgical Steps
+Закись азота также может использоваться для анестезии.
 
-The following is a list of surgeries you can perform.
+Когда ничего из вышеперечисленного нет в наличии, обычные обезболивающие являются вариантом.
 
-### Opening An Incision
+## Проведение операции
 
-The first step of most surgeries.
+Для проведения операции на пациенте не должно быть одежды, препятствующей доступу, и он должен лежать.
+
+<Box>
+  <GuideEntityEmbed Entity="ClothingOuterVestTank" Caption="жилет для баллонов" />
+  <GuideEntityEmbed Entity="ClothingOuterHospitalGown" Caption="больничная рубашка" />
+</Box>
+
+Через больничные рубашки и жилеты для баллонов можно проводить операции.
+
+Используйте хирургические инструменты в порядке, описанном ниже, для выполнения операций.
+
+## Хирургические этапы
+
+Ниже приведён список операций, которые вы можете выполнять.
+
+### Открытие разреза
+
+Первый этап большинства операций.
 
 <Table Columns="3">
   <Box>
@@ -51,35 +51,35 @@ The first step of most surgeries.
     <GuideEntityEmbed Entity="Retractor" Caption="" />
   </Box>
   <Box>
-    1. Use a scalpel
+    1. Используйте скальпель
   </Box>
   <Box>
-    2. Clamp bleeding veins
+    2. Зажмите кровоточащие вены
   </Box>
   <Box>
-    3. Retract the skin
+    3. Отведите кожу
   </Box>
 </Table>
 
-### Closing An Incision
+### Закрытие разреза
 
-The last step of most surgeries.
-An incision must be open.
-The rib cage must be closed.
+Последний этап большинства операций.
+Разрез должен быть открыт.
+Грудная клетка должна быть закрыта.
 
 <Table Columns="1">
   <Box>
     <GuideEntityEmbed Entity="Cautery" Caption="" />
   </Box>
   <Box>
-    1. Cauterize the incision
+    1. Прижгите разрез
   </Box>
 </Table>
 
-### Bone Repair
+### Ремонт кости
 
-Mend fractures in your patient.
-An incision must be open.
+Лечение переломов у вашего пациента.
+Разрез должен быть открыт.
 
 <Table Columns="2">
   <Box>
@@ -89,54 +89,53 @@ An incision must be open.
     <GuideEntityEmbed Entity="BoneSetter" Caption="" />
   </Box>
   <Box>
-    1. Apply bone gel to broken bones
+    1. Нанесите костный гель на сломанные кости
   </Box>
   <Box>
-    2. Ensure bones are in place
+    2. Убедитесь, что кости на месте
   </Box>
   <Box>
     <GuideEntityEmbed Entity="BoneGel" Caption="" />
   </Box>
   <Box></Box>
   <Box>
-    3. Apply more bone gel
+    3. Нанесите ещё костного геля
   </Box>
   <Box></Box>
 </Table>
 
-### Artery Repair
+### Ремонт артерии
 
-Mend damaged arteries in your patient.
-An incision must be open.
+Лечение повреждённых артерий у вашего пациента.
+Разрез должен быть открыт.
 
 <Table Columns="1">
   <Box>
     <GuideEntityEmbed Entity="VascularRecoupler" Caption="" />
   </Box>
   <Box>
-    1. Repair the damaged blood vessels
+    1. Восстановите повреждённые кровеносные сосуды
   </Box>
 </Table>
 
-### Open The Rib Cage
+### Вскрытие грудной клетки
 
-For operating on internal organs.
-An incision must be open.
+Для операций на внутренних органах.
+Разрез должен быть открыт.
 
 <Table Columns="1">
   <Box>
     <GuideEntityEmbed Entity="Saw" Caption="" />
   </Box>
   <Box>
-    1. Open the ribs
+    1. Вскройте рёбра
   </Box>
 </Table>
 
+### Закрытие грудной клетки
 
-### Close The Rib Cage
-
-For when you're done operating on internal organs.
-The rib cage must be open.
+Для завершения операций на внутренних органах.
+Грудная клетка должна быть вскрыта.
 
 <Table Columns="2">
   <Box>
@@ -146,25 +145,25 @@ The rib cage must be open.
     <GuideEntityEmbed Entity="BoneSetter" Caption="" />
   </Box>
   <Box>
-    1. Apply bone gel to sawed bones
+    1. Нанесите костный гель на распиленные кости
   </Box>
   <Box>
-    2. Ensure bones are in place
+    2. Убедитесь, что кости на месте
   </Box>
   <Box>
     <GuideEntityEmbed Entity="BoneGel" Caption="" />
   </Box>
   <Box></Box>
   <Box>
-    3. Apply more bone gel
+    3. Нанесите ещё костного геля
   </Box>
   <Box></Box>
 </Table>
 
-### Heart Repair Surgery
+### Операция на сердце
 
-For when the patient's heart is damaged.
-The rib cage must be opened.
+Для случаев, когда сердце пациента повреждено.
+Грудная клетка должна быть вскрыта.
 
 <Table Columns="1">
   <Box>
@@ -172,28 +171,28 @@ The rib cage must be opened.
     <GuideEntityEmbed Entity="MedicatedSuture" />
   </Box>
   <Box>
-    1. Use sutures to mend the heart
+    1. Используйте швы для восстановления сердца
   </Box>
 </Table>
 
-### Dehusking
+### Восстановление после шелушения
 
-For when the patient has been husked by severe burns.
-The rib cage must be opened.
+Для случаев, когда пациент был "ошелушен" тяжёлыми ожогами.
+Грудная клетка должна быть вскрыта.
 
 <Table Columns="1">
   <Box>
     <GuideEntityEmbed Entity="RegenerativeMesh" Caption="" />
   </Box>
   <Box>
-    1. Use 10 regenerative meshes
+    1. Используйте 10 регенеративных сеток
   </Box>
 </Table>
 
-### Bone Death Repair
+### Лечение некроза костей
 
-For when the patient's bones are damaged past normal repair.
-The rib cage must be opened.
+Для случаев, когда кости пациента повреждены за пределами обычного восстановления.
+Грудная клетка должна быть вскрыта.
 
 <Table Columns="3">
   <Box>
@@ -206,13 +205,13 @@ The rib cage must be opened.
     <GuideEntityEmbed Entity="BoneGel" Caption="" />
   </Box>
   <Box>
-    1. Apply bone gel
+    1. Нанесите костный гель
   </Box>
   <Box>
-    2. Use 10 medicated sutures
+    2. Используйте 10 медикаментозных швов
   </Box>
   <Box>
-    3. Apply more bone gel
+    3. Нанесите ещё костного геля
   </Box>
 </Table>
 

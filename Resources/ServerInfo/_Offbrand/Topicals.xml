@@ -1,53 +1,53 @@
 <Document>
-# Topicals
+# Препараты
 
-When tending to external wounds, topical medications should be your first port of call.
-These can be used to stop bleeding, or to augment the speed at which wounds heal naturally.
+При обработке внешних ран препараты должны быть вашим первым выбором.
+Они могут использоваться для остановки кровотечения или для увеличения скорости естественного заживления ран.
 
-## Brutes
+## Физические травмы
 
 <Box>
   <GuideEntityEmbed Entity="Brutepack" />
 </Box>
 
-A bruise pack can bandage and tend to all types of brute injuries at a moderate level.
+Набор от ушибов может перевязывать и обрабатывать все типы физических травм на умеренном уровне.
 
 <Box>
   <GuideEntityEmbed Entity="MedicatedSuture" />
 </Box>
 
-A medicated suture can bandage and tend to all types of brute injuries.
+Медицинская нить может перевязывать и обрабатывать все типы физических травм.
 
 <Box>
   <GuideEntityEmbed Entity="Gauze" />
 </Box>
 
-Gauze can bandage and tend to lacerations and punctures, but is most effective on puncture wounds.
+Бинт может перевязывать и обрабатывать рваные раны и проколы, но наиболее эффективна против колотых ран.
 
 <Box>
   <GuideEntityEmbed Entity="Suture" />
 </Box>
 
-A simple suture can bandage and tend to lacerations and punctures, but is most effective on lacerations.
+Простой шов может перевязывать и обрабатывать рваные раны и проколы, но наиболее эффективен против рваных ран.
 
-## Burns
+## Ожоги
 
 <Box>
   <GuideEntityEmbed Entity="Ointment" />
 </Box>
 
-Ointment can tend to burns of all types, but is less effective against caustic burns.
+Мазь может обрабатывать ожоги всех типов, но менее эффективна против едких ожогов.
 
 <Box>
   <GuideEntityEmbed Entity="RegenerativeMesh" />
 </Box>
 
-Regenerative meshes can tend burns of all types, including caustic burns.
+Регенеративные сети могут обрабатывать ожоги всех типов, включая едкие ожоги.
 
 <Box>
   <GuideEntityEmbed Entity="AloeCream" />
 </Box>
 
-Aloe cream can effectively tend to heat burns.
+Алоэ-крем может эффективно обрабатывать термические ожоги.
 
 </Document>

@@ -1,47 +1,47 @@
 <Document>
-# Chemicals for Medical
+# Химикаты для медицины
 
-As a member of the [color=#5b97bc]Medical[/color] department, these are often the first things you'll be making in a shift.
+Как член отдела [color=#5b97bc]Медицины[/color], это часто первые вещи, которые вы будете производить за смену.
 
-## Basics
+## Основы
 
-These are the basic set of chemicals any [color=#5b97bc]Medical[/color] ward should have.
+Это базовый набор химикатов, который должен быть в любом [color=#5b97bc]Медицинском[/color] отделении.
 
-### Basic Healing Chemicals
+### Основные лечебные химикаты
 
 <GuideReagentEmbed Reagent="Bicaridine" />
 <GuideReagentEmbed Reagent="Dylovene" />
 <GuideReagentEmbed Reagent="Dermaline" />
 
-### Basic Stabilization Chemicals
+### Основные стабилизирующие химикаты
 
 <GuideReagentEmbed Reagent="Tramadol" />
 <GuideReagentEmbed Reagent="Paracetamol" />
 <GuideReagentEmbed Reagent="DexalinPlus" />
 <GuideReagentEmbed Reagent="Inaprovaline" />
 
-### Other Basic Chemicals
+### Другие основные химикаты
 
 <GuideReagentEmbed Reagent="Saline" />
 
-## Others
+## Другие
 
-These chemicals are harder to make and for less common types of injuries, but are still necessary for a [color=#5b97bc]Medical[/color] ward to efficiently treat people.
+Эти химикаты сложнее производить и они предназначены для менее распространённых типов травм, но всё же необходимы для эффективного лечения людей в [color=#5b97bc]Медицинском[/color] отделении.
 
 <GuideReagentEmbed Reagent="Sigynate" />
 <GuideReagentEmbed Reagent="Arithrazine" />
 <GuideReagentEmbed Reagent="Phalanximine" />
 
-## Cryogenics
+## Криогеника
 
-These chemicals are important for the usage of [color=cyan]Cryo Pods[/color], and are relatively easy to produce.
+Эти химикаты важны для использования [color=cyan]Криокапсул[/color] и относительно просты в производстве.
 
 <GuideReagentEmbed Reagent="Cryoxadone" />
 <GuideReagentEmbed Reagent="Doxarubixadone" />
 
-## Advanced Chemicals
+## Продвинутые химикаты
 
-These chemicals focus on one damage type only, but do a particularly good job at it.
+Эти химикаты фокусируются только на одном типе повреждений, но делают это особенно хорошо.
 
 <GuideReagentEmbed Reagent="Bruizine" />
 <GuideReagentEmbed Reagent="Lacerinol" />

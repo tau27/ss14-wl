@@ -1,28 +1,28 @@
 <Document>
-# Chemicals for Botany
+# Химикаты для ботаники
 
-Giving these chemicals to [color=#9fed58]Botany[/color] allows them to do a better job, often allowing them to make valuable chemicals for you.
+Предоставление этих химикатов [color=#9fed58]Ботанике[/color] позволяет им работать лучше, часто давая возможность производить ценные химикаты для вас.
 
-## Basic Chemicals
+## Основные химикаты
 
-These chemicals allow botanists to increase the potency of their plants, manipulate or reverse their growth speed, and allows them to heal their plants.
+Эти химикаты позволяют ботаникам увеличивать эффективность своих растений, управлять или обращать вспять их скорость роста, а также лечить свои растения.
 
 <GuideReagentEmbed Reagent="RobustHarvest" />
 <GuideReagentEmbed Reagent="Diethylamine" />
 <GuideReagentEmbed Reagent="Cryoxadone" />
 
-## Mutation Chemicals
+## Мутационные химикаты
 
-These chemicals allow botanists to mutate plants, and to handle the effects of their mutations.
+Эти химикаты позволяют ботаникам мутировать растения и управлять эффектами их мутаций.
 
 <GuideReagentEmbed Reagent="Dylovene" />
 <GuideReagentEmbed Reagent="Left4Zed" />
 <GuideReagentEmbed Reagent="Phalanximine" />
 <GuideReagentEmbed Reagent="UnstableMutagen" />
 
-## Nutritional Chemicals
+## Питательные химикаты
 
-While not strictly necessary for botanists, these chemicals can give novice botanists an easier time.
+Хотя они не строго необходимы ботаникам, эти химикаты могут облегчить работу начинающим ботаникам.
 
 <GuideReagentEmbed Reagent="EZNutrient" />
 <GuideReagentEmbed Reagent="Ammonia" />

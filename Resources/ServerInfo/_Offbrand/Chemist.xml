@@ -1,13 +1,13 @@
 <Document>
-# Chemist
+# Химик
 
-As the primary source of medication within the [color=#5b97bc]Medical[/color] department, Chemists are primarily responsible for creating medicines for [color=cyan]Physicians[/color] and [color=cyan]Paramedics[/color] to use. They are also responsible for supplying other departments' chemical needs, or filling out prescriptions for the crew.
+Как основной источник медикаментов в отделе [color=#5b97bc]Медицины[/color], Химики в основном отвечают за создание лекарств для использования [color=cyan]Врачами[/color] и [color=cyan]Парамедиками[/color]. Они также отвечают за поставку химикатов для других отделов или выполнение рецептов для экипажа.
 
-[textlink="Read the complete list of chemicals." link="Chemicals"]
+[textlink="Прочитать полный список химикатов." link="Chemicals"]
 
-## Basic Equipment
+## Основное оборудование
 
-### Machines
+### Машины
 
 <Box>
   <GuideEntityEmbed Entity="ChemDispenser" />
@@ -16,7 +16,7 @@ As the primary source of medication within the [color=#5b97bc]Medical[/color] de
   <GuideEntityEmbed Entity="ChemMaster" />
 </Box>
 
-### Chemical Storage
+### Химическое хранение
 
 <Box>
   <GuideEntityEmbed Entity="ChemistryEmptyBottle01" />
@@ -25,7 +25,7 @@ As the primary source of medication within the [color=#5b97bc]Medical[/color] de
   <GuideEntityEmbed Entity="PillCanister" />
 </Box>
 
-### Other Tools
+### Другие инструменты
 
 <Box>
   <GuideEntityEmbed Entity="HandLabeler"/>
@@ -33,33 +33,33 @@ As the primary source of medication within the [color=#5b97bc]Medical[/color] de
   <GuideEntityEmbed Entity="Dropper"/>
 </Box>
 
-## Mixing Chemicals
+## Смешивание химикатов
 
-Chemistry is straightforward once you understand how to read and execute recipes. The process overall is simple:
+Химия проста, как только вы поймёте, как читать и выполнять рецепты. Процесс в целом прост:
 
-- Begin by grabbing a container, such as a beaker, and inserting it into your [color=cyan]Chemical Dispenser[/color].
-- Dispense the required medicines for your recipe.
-- Eject the container from the dispenser.
-- If necessary, heat it up on a hot plate.
-- Once your chemical is done, you can transfer it to containers for distribution, such as a large jug or many small bottles.
+- Начните с того, что возьмите контейнер, такой как мензурка, и вставьте его в ваш [color=cyan]химический раздатчик[/color].
+- Выдавите необходимые лекарства для вашего рецепта.
+- Извлеките контейнер из диспенсера.
+- При необходимости нагрейте его на горячей плите.
+- Когда ваш химикат готов, вы можете перелить его в контейнеры для распределения, такие как большой кувшин или множество маленьких бутылочек.
 
-## Grinding Solids
+## Измельчение твёрдых веществ
 
-Some chemicals, such as those found in pills or plants, need to be ground up using your [color=cyan]Reagent Grinder[/color] before you can use them in recipes.
+Некоторые химикаты, такие как те, что содержатся в таблетках или растениях, необходимо измельчить с помощью вашего [color=cyan]Измельчителя реагентов[/color], прежде чем вы сможете использовать их в рецептах.
 
-## Unmixing Chemicals
+## Разделение химикатов
 
-Sometimes, you may make mistakes with what you dispense from the ChemMaster. The [color=cyan]ChemMaster[/color] can move different chemicals indepently to and from its internal storage.
+Иногда вы можете допустить ошибки с тем, что выдаёте из ХимМастер 4000. [color=cyan]Химмастера[/color] может перемещать разные химикаты независимо в своё внутреннее хранилище и из него.
 
-## Distributing Chemicals
+## Распределение химикатов
 
 <Box>
   <GuideEntityEmbed Entity="SmartFridge" />
 </Box>
 
-How you wish to distribute chemicals is largely up to you, although your boss may wish for you to distribute chemicals in a specific form.
+То, как вы хотите распределять химикаты, в значительной степени зависит от вас, хотя ваш начальник может пожелать, чтобы вы распределяли химикаты в определённой форме.
 
-### Bottles
+### Бутылки
 
 <Box>
   <GuideEntityEmbed Entity="ChemistryEmptyBottle01"/>
@@ -67,43 +67,43 @@ How you wish to distribute chemicals is largely up to you, although your boss ma
   <GuideEntityEmbed Entity="ChemBag"/>
 </Box>
 
-Bottles are often the main method in which smaller amounts of chemicals are distributed for smaller jobs, as well as an option for allowing every doctor to carry common medications on them.
+Бутылки часто являются основным методом распределения небольших количеств химикатов для мелких работ, а также вариантом, позволяющим каждому врачу носить с собой обычные лекарства.
 
-Your [color=cyan]chemistry bag[/color] can hold many bottles.
-Using a chemistry bag on a SmartFridge will insert all of the contained bottles.
+Ваша [color=cyan]химическая сумка[/color] может вмещать множество бутылок.
+Использование химической сумки на Умном холодильнике вставит все содержащиеся в ней бутылки.
 
-### Jugs
+### Кувшины
 
 <Box>
   <GuideEntityEmbed Entity="Jug"/>
 </Box>
 
-Chemicals can be stored in bulk in jugs, which allows efficient packaging, but only allows one person to hold a jug at a time.
-This is often how you'll be sending chemicals to [color=#9fed58]Botany[/color] should they not provide buckets.
+Химикаты могут храниться оптом в кувшинах, что позволяет эффективно упаковывать, но только один человек может держать кувшин за раз.
+Часто именно так вы будете отправлять химикаты в [color=#9fed58]Ботанику[/color], если они не предоставят вёдра.
 
-### Pills
+### Таблетки
 
 <Box>
   <GuideEntityEmbed Entity="PillCanister" />
   <GuideEntityEmbed Entity="Pill" />
 </Box>
 
-Pills can be created using the chemicals currently stored in a [color=cyan]ChemMaster[/color]. They're a great way to send out individually consumable portions, as well as the most space-efficient way to store a large amount of chemicals.
+Таблетки можно создавать с помощью химикатов, хранящихся в [color=cyan]ХимМастер 4000[/color]. Это отличный способ рассылать индивидуально потребляемые порции, а также самый эффективный по пространству способ хранения большого количества химикатов.
 
-However, pills have a delay after being eaten orally.
+Однако таблетки имеют задержку после перорального приёма.
 
-## Chemicals To Mix
+## Химикаты для смешивания
 
-[color=#5b97bc]Medical[/color] is the main department you will be preparing chemicals for, as the [color=cyan]Physicians[/color] and [color=cyan]Paramedics[/color] rely on your medicines to do their jobs.
+[color=#5b97bc]Медицина[/color] - это основной отдел, для которого вы будете готовить химикаты, поскольку [color=cyan]Врачи[/color] и [color=cyan]Парамедики[/color] полагаются на ваши лекарства для выполнения своей работы.
 
-[textlink="Read what chemists usually make for Medical." link="OffbrandChemistMedical"]
+[textlink="Прочитать, что химики обычно делают для Медицины." link="OffbrandChemistMedical"]
 
-[color=#9fed58]Botany[/color] is another department that you will frequently be sending chemicals to. They can be a great source of chemicals if you give them the tools to do their job.
+[color=#9fed58]Ботаника[/color] - это ещё один отдел, в который вы будете часто отправлять химикаты. Они могут быть отличным источником химикатов, если вы дадите им инструменты для работы.
 
-[textlink="Read what chemists usually make for Botany." link="OffbrandChemistBotany"]
+[textlink="Прочитать, что химики обычно делают для Ботаники." link="OffbrandChemistBotany"]
 
-If you don't have any outstanding requests from Medical or Botany, you can work on making rare chemicals or advanced topicals.
+Если у вас нет невыполненных запросов от Медицины или Ботаники, вы можете работать над созданием редких химикатов или продвинутых препаратов.
 
-[textlink="Read how to make advanced topicals." link="OffbrandChemistAdvancedTopicals"]
+[textlink="Прочитать, как делать продвинутые препараты." link="OffbrandChemistAdvancedTopicals"]
 
 </Document>
