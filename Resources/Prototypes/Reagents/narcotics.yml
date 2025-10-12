@@ -340,7 +340,6 @@
         effectProto: StatusEffectSeeingRainbow
         time: 16
         type: Add
-        refresh: false
 # WL species start
         conditions:
         # Golem
@@ -410,7 +409,6 @@
         effectProto: StatusEffectSeeingRainbow
         time: 10
         type: Add
-        refresh: false
 # WL species start
         conditions:
         # Golem
@@ -446,7 +444,6 @@
        - !type:GenericStatusEffect
          key: ForcedSleep
          component: ForcedSleeping
-         refresh: false
          type: Add
 
 - type: reagent
@@ -464,7 +461,6 @@
         effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 5
-        refresh: false
 # WL species start
         conditions:
         # Golem
@@ -488,7 +484,6 @@
         effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 5
-        refresh: false
 # WL species start
         conditions:
         # Golem

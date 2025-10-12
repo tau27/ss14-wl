@@ -106,7 +106,7 @@ reagent-effect-guidebook-status-effect =
         [update]{ $chance ->
                     [1] Вызывает
                     *[other] вызывают
-                } {LOC($key)} минимум на {NATURALFIXED($time, 3)} {MANY("second", $time)} эффект не накапливается
+                } {LOC($key)} минимум на {NATURALFIXED($time, 3)} {MANY("секунд", $time)} эффект не накапливается
         [add]   { $chance ->
                     [1] Вызывает
                     *[other] вызывают
@@ -126,15 +126,15 @@ reagent-effect-guidebook-status-effect-delay =
         [add]   { $chance ->
                     [1] Вызывает
                     *[other] вызывают
-                } {LOC($key)} минимум на {NATURALFIXED($time, 3)} {MANY("second", $time)} эффект накапливается
+                } {LOC($key)} минимум на {NATURALFIXED($time, 3)} {MANY("секунд", $time)} эффект накапливается
         *[set]  { $chance ->
                     [1] Вызывает
                     *[other] вызывают
-                } {LOC($key)} минимум на {NATURALFIXED($time, 3)} {MANY("second", $time)} эффект не накапливается
+                } {LOC($key)} минимум на {NATURALFIXED($time, 3)} {MANY("секунд", $time)} эффект не накапливается
         [remove]{ $chance ->
                     [1] Удаляет
                     *[other] удаляют
-                } {NATURALFIXED($time, 3)} {MANY("second", $time)} от {LOC($key)}
+                } {NATURALFIXED($time, 3)} {MANY("секунд", $time)} от {LOC($key)}
     } после задержки {NATURALFIXED($delay, 3)} секунд
 
 reagent-effect-guidebook-knockdown =
@@ -142,19 +142,19 @@ reagent-effect-guidebook-knockdown =
         [update]{ $chance ->
                     [1] Вызывает
                     *[other] вызывают
-                    } {LOC($key)} минимум на {NATURALFIXED($time, 3)} {MANY("second", $time)} эффект не накапливается
+                    } {LOC($key)} минимум на {NATURALFIXED($time, 3)} {MANY("секунд", $time)} эффект не накапливается
         [add]   { $chance ->
                     [1] Вызывает
                     *[other] вызывают
-                } knockdown минимум на {NATURALFIXED($time, 3)} {MANY("second", $time)} эффект накапливается
+                } knockdown минимум на {NATURALFIXED($time, 3)} {MANY("секунд", $time)} эффект накапливается
         *[set]  { $chance ->
                     [1] Вызывает
                     *[other] вызывают
-                } knockdown минимум на {NATURALFIXED($time, 3)} {MANY("second", $time)} эффект не накапливается
+                } knockdown минимум на {NATURALFIXED($time, 3)} {MANY("секунд", $time)} эффект не накапливается
         [remove]{ $chance ->
                     [1] Удаляет
                     *[other] удаляют
-                } {NATURALFIXED($time, 3)} {MANY("second", $time)} от нокдауна
+                } {NATURALFIXED($time, 3)} {MANY("секунд", $time)} от нокдауна
     }
 
 reagent-effect-guidebook-set-solution-temperature-effect =
