@@ -122,7 +122,6 @@
         effectProto: StatusEffectDrowsiness
         time: 4
         type: Add
-        refresh: false
 # WL species start
         conditions:
         # Android
@@ -484,7 +483,6 @@
         effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 10
-        refresh: false
 # WL species start
         conditions:
         # Golem
@@ -1127,7 +1125,6 @@
         component: SeeingRainbows
         type: Add
         time: 16
-        refresh: false
 # WL species end
 
 - type: reagent
