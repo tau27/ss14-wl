@@ -332,7 +332,7 @@ namespace Content.Shared.Chemistry.Reagent
             if (!prototype.Resolve(StatusEffect, out var effectProtoData))
                 return null;
 
-            var locName = Loc.GetString(effectProtoData.Id); //WL-Changes-offbrand-ftl-fix
+            var locName = Loc.GetString(effectProtoData.Name); //WL-Changes-offbrand-ftl-fix
 
             return Loc.GetString("reagent-guidebook-status-effect", ("effect", locName), //WL-Changes-offbrand-ftl-fix // effectProtoData.Name ?? string.Empty -> locName
                 ("conditionCount", Conditions?.Length ?? 0),
