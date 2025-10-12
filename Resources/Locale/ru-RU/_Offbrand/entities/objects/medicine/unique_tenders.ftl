@@ -7,6 +7,7 @@ ent-TourniquetOffbrand = жгут
 ent-Suture = шовный материал
     .desc = Стерильные швы, используемые для закрытия порезов и ран.
     .suffix = Полный
+
 ent-Suture1 = { ent-Suture }
     .desc = { ent-Suture.desc }
     .suffix = Один

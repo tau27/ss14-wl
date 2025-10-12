@@ -1,6 +1,7 @@
 ent-WoundIncision = открытый разрез
 
-ent-WoundRetracted = раздвинутая кожа
+ent-WoundClamped = зажатые артерии
 
-ent-WoundOpenRibCage = открытая грудная клетка
+ent-WoundRetracted = отслоенная кожа
 
+ent-WoundOpenRibCage = вскрытая грудная клетка
