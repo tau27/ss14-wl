@@ -1,2 +1,2 @@
 ent-BorgModuleOperatingRoom = операционный модуль борга
-    .desc = { ent-BaseBorgModule.desc }
+    .desc = { ent-BaseBorgModuleMedical.desc }
