@@ -24,7 +24,7 @@
     failDamage:
       types:
         Piercing: 5
-    wounds:
+    failWounds:
       - woundPrototype: WoundArterialBleeding
         woundDamage:
           types:
