@@ -18,7 +18,18 @@
     downDenialPopup: surgery-must-be-down
     whitelist:
       tags: [OperatableClothing]
-    chance: 0.5
+    # WL-Changes: Getto-surg start
+    successChance: 0.5
+    failPopups: SurgeryFailBase
+    failDamage:
+      types:
+        Piercing: 5
+    wounds:
+      - woundPrototype: WoundArterialBleeding
+        woundDamage:
+          types:
+            Slash: 5
+    # WL-Changes: Getto-surg end
   # End Offbrand
 
 # Cautery
