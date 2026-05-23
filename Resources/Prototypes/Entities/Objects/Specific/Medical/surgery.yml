@@ -18,6 +18,7 @@
     downDenialPopup: surgery-must-be-down
     whitelist:
       tags: [OperatableClothing]
+    chance: 0.5
   # End Offbrand
 
 # Cautery

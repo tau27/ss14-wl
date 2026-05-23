@@ -310,6 +310,9 @@
   - type: ContainerContainer
     containers:
       cavity_slot: !type:Container
+  # WL-Changes: Getto-surgery start
+  - type: SurgeryTarget
+  # WL-Changes: Getto-surgery end
 
 - type: entity
   abstract: true

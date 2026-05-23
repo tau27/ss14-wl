@@ -21,6 +21,7 @@ using Robust.Shared.Utility;
 // ReSharper disable once RedundantUsingDirective
 using Robust.Shared.Exceptions;
 #endif
+using Content.Shared._WL.Construction;
 
 namespace Content.Server.Construction
 {
@@ -373,7 +374,23 @@ namespace Content.Server.Construction
 
                     // If we're handling an event after its DoAfter finished...
                     if (doAfterState == DoAfterState.Completed)
-                        return  HandleResult.True;
+                    {
+                        // WL-Changes: Getto-sur start
+                        var evConstructAttempt = new ToolConstructAttemptedEvent
+                        {
+                            User = interactUsing.User,
+                            Used = interactUsing.Used
+                        };
+
+                        RaiseLocalEvent(uid, ref evConstructAttempt);
+                        if (evConstructAttempt.Cancelled)
+                        {
+                            return HandleResult.False;
+                        }
+                        // WL-Changes: Getto-sur start
+
+                        return HandleResult.True;
+                    }
 
                     var result  = _toolSystem.UseTool(
                         interactUsing.Used,

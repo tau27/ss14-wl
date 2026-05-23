@@ -3,6 +3,12 @@ using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Tools.Components;
 using Content.Shared.Whitelist;
+using Content.Shared.Tools.Systems;
+using Content.Shared.DoAfter;
+using Content.Shared.Random.Helpers;
+using Content.Shared._WL._Offbrand.Surgery;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._Offbrand.Surgery;
 
@@ -14,17 +20,32 @@ public sealed partial class SurgeryToolSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private StandingStateSystem _standingState = default!;
 
+    // WL-Changes: Getto-surg start
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    // WL-Changes: Getto-surg end
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<SurgeryToolComponent, ToolUseAttemptEvent>(OnToolAttemptUse);
+
+        // WL-Changes: Getto-surg start
+        //SubscribeLocalEvent<SurgeryToolComponent, SharedToolSystem.ToolDoAfterEvent>(OnAfterUseTool);
+        // WL-Changes: Getto-surg end
     }
 
     private void OnToolAttemptUse(Entity<SurgeryToolComponent> ent, ref ToolUseAttemptEvent args)
     {
         if (args.Target is not { } target)
             return;
+
+        // WL-Changes: Getto-surgery start
+        if (!HasComp<SurgeryTargetComponent>(target))
+            return;
+        // WL-Changes: Getto-surgery end
+
 
         if (_inventory.TryGetContainerSlotEnumerator(target, out var enumerator, ent.Comp.SlotsToCheck))
         {
@@ -50,5 +71,6 @@ public sealed partial class SurgeryToolSystem : EntitySystem
 
             return;
         }
+
     }
 }
