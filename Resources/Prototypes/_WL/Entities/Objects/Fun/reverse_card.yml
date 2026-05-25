@@ -13,7 +13,5 @@
     - state: reverse-back
       map: ["enum.PokerCardLayers.Flipped"]
   - type: ReverseCard
-    sound: !type:SoundPathSpecifier
-      path: /Audio/Misc/camera_snap.ogg
   - type: StaticPrice
     price: 100
