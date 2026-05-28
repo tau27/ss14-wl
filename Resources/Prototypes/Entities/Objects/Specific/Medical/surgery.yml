@@ -19,14 +19,14 @@
     whitelist:
       tags: [OperatableClothing]
     # WL-Changes: Getto-surg start
-    successChance: 0.5
+    successChance: 1
     failPopups: SurgeryFailBase
     failDamage:
       types:
         Piercing: 5
     failWounds:
       - woundPrototype: WoundArterialBleeding
-        woundDamage:
+        woundDamages:
           types:
             Slash: 5
     # WL-Changes: Getto-surg end

@@ -50,7 +50,7 @@
     lightningExplode: false
   - type: UniqueWoundOnDamage
     wounds:
-    - damageTypes: [Slash, Blunt, Piercing]
+    - damageTypes: [Slash, Piercing]
       minimumDamage: 15
       minimumTotalDamage: 25
       woundPrototype: WoundArterialBleeding
