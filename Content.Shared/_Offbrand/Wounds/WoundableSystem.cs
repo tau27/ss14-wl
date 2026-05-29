@@ -25,7 +25,7 @@ public sealed partial class WoundableSystem : OffbrandDamageSystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
-    private static readonly List<ProtoId<DamageTypePrototype>> UnwoundableDamages = new List<ProtoId<DamageTypePrototype>>() { "Poison", "Radiation", "Asphyxiation", "Cellural" };
+    private static readonly List<ProtoId<DamageTypePrototype>> UnwoundableDamages = new List<ProtoId<DamageTypePrototype>>() { "Poison", "Radiation", "Asphyxiation", "Cellular" };
 
     public override void Initialize()
     {
