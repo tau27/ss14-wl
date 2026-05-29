@@ -25,6 +25,8 @@ public sealed partial class WoundableSystem : OffbrandDamageSystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
+    private static readonly List<ProtoId<DamageTypePrototype>> UnwoundableDamages = new List<ProtoId<DamageTypePrototype>>() { "Poison", "Radiation", "Asphyxiation", "Cellural" };
+
     public override void Initialize()
     {
         base.Initialize();
@@ -273,14 +275,28 @@ public sealed partial class WoundableSystem : OffbrandDamageSystem
         var dict = ent.Comp2.Damage.DamageDict;
 
         var damageDone = new DamageSpecifier();
+        var damageFinal = new DamageSpecifier(); // WL-Changes: Offmed unwoundable fix
         foreach (var (type, newValue) in evt.Accumulator.DamageDict)
         {
+            // WL-Changes: Offmed unwoundable fix start
+            damageFinal.DamageDict[type] = newValue;
+            // WL-Changes: Offmed unwoundable fix end
+
             var oldValue = dict.GetValueOrDefault(type, FixedPoint2.Zero);
 
             damageDone.DamageDict[type] = newValue - oldValue;
         }
 
-        ent.Comp2.Damage = evt.Accumulator;
+        // WL-Changes: Offmed unwoundable fix start
+        foreach (var type in UnwoundableDamages)
+        {
+            var oldValue = dict.GetValueOrDefault(type, FixedPoint2.Zero);
+
+            damageFinal.DamageDict[type] = oldValue;
+        }
+        // WL-Changes: Offmed unwoundable fix end
+
+        ent.Comp2.Damage = damageFinal; // WL-Changes: Offmed unwoundable fix
         _damageable.OnEntityDamageChanged((ent, ent.Comp2), damageDone, interruptsDoAfters, origin);
     }
 

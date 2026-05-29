@@ -50,8 +50,8 @@ public sealed partial class SolutionAppearanceRelaySystem : EntitySystem
         if (!_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.Solution, out var solutionEntity, out _))
             return;
 
-        if (!TryComp<ContainedSolutionComponent>(solutionEntity, out var containedSolution))
-            return;
+        //if (!TryComp<ContainedSolutionComponent>(solutionEntity, out var containedSolution))
+        //    return;
 
         if (!_entityWhitelist.CheckBoth(container.Owner, ent.Comp.Blacklist, ent.Comp.Whitelist))
             return;

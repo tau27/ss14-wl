@@ -1,12 +1,21 @@
+# WL-Changes: Sol fix start
 - type: entity
-  parent: BaseItem
+  parent: Solution
+  id: SolutionIVBag
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 400
+# WL-Changes: Sol fix end
+
+- type: entity
+  parent: [ BaseItem, SolutionIVBag ]
   id: IVBag
   name: iv bag
   description: Used to hold blood or other fluids to administer intravenously to a patient.
   components:
-  - type: Solution
-    solution:
-      maxVol: 400
   - type: Sprite
     sprite: _Offbrand/iv_bag.rsi
     layers:
@@ -173,6 +182,7 @@
     node: ivstand
     containers:
     - iv_bag_slot
+  - type: SolutionManager
 
 - type: construction
   id: IVStand

@@ -1,0 +1,10 @@
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectPropofol
+  name: full pain suppression
+  components:
+  - type: PainSuppressionStatusEffect
+  - type: BlindnessStatusEffect
+  - type: ForcedSleepingStatusEffect
+  - type: StunnedStatusEffect
+  - type: KnockdownStatusEffect

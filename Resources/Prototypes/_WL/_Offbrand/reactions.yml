@@ -1,0 +1,9 @@
+- type: reaction
+  id: Propofol
+  reactants:
+    Impedrezene:
+      amount: 2
+    Tramadol:
+      amount: 1
+  products:
+    Propofol: 2

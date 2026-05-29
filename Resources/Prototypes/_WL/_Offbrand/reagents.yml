@@ -1,0 +1,48 @@
+- type: reagent
+  id: Propofol
+  name: reagent-name-propofol
+  group: Medicine
+  desc: reagent-desc-propofol
+  flavor: medicine
+  color: "#ffffff"
+  physicalDesc: reagent-physical-desc-opaque
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.1
+      statusEffects:
+      - statusEffect: StatusEffectHeartStrainOxycodoneAlcohol
+        conditions:
+        - !type:ReagentCondition
+          reagent: Ethanol
+          min: 1
+      effects:
+      - !type:ModifyStatusEffect # Offbrand
+        conditions:
+        - !type:ReagentCondition
+          reagent: Propofol
+          max: 1.8
+        effectProto: StatusEffectPropofol
+        time: 3
+        type: Add
+      - !type:Drunk
+        boozePower: 2
+        conditions:
+        - !type:ReagentCondition
+          reagent: Propofol
+          min: 10
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Propofol
+          min: 15
+        damage:
+          types:
+            Asphyxiation: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Ethanol
+          min: 1
+        damage:
+          types:
+            Asphyxiation: 0.75
