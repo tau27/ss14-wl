@@ -1,10 +1,9 @@
 - type: reaction
-  id: Nocturine
-  impact: High
+  id: Propofol
   reactants:
     Impedrezene:
       amount: 2
-    Vestine:
+    Tramadol:
       amount: 1
   products:
-    Nocturine: 1
+    Propofol: 2
