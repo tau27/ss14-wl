@@ -1,6 +1,7 @@
 using Content.Shared._Goobstation;
 using Content.Shared._Goobstation.Tools; // goob
 using Robust.Shared.Audio; // goob
+using Content.Shared._WL._Offbrand.Surgery;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
@@ -172,7 +173,21 @@ public abstract partial class SharedToolSystem : EntitySystem
             return false;
 
         var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target));
+
+        // WL-Changes: Offbrand getto sur start
+        var delayEv = new ToolSpeedModifierEvent(tool, 1);
+        RaiseLocalEvent(tool, ref delayEv);
+
         var doAfterLength = delay / toolComponent.SpeedModifier; // Goob - doAfterLength var
+
+        if (target is not null)
+        {
+            RaiseLocalEvent(target.Value, ref delayEv);
+
+            doAfterLength = doAfterLength / delayEv.Speed; // Goob - doAfterLength var
+        }
+        // WL-Changes: Offbrand getto sur end
+
         var doAfterArgs = new DoAfterArgs(EntityManager, user, doAfterLength, toolEvent, tool, target: target, used: tool)
         {
             BreakOnDamage = true,

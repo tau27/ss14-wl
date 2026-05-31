@@ -36,6 +36,7 @@ public sealed partial class ServerSurgeryToolSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SurgeryTargetComponent, ToolConstructAttemptedEvent>(OnToolAttemptUse);
+        SubscribeLocalEvent<SurgeryTargetComponent, ToolSpeedModifierEvent>(OnToolSpeedModifier);
     }
 
     private void OnToolAttemptUse(Entity<SurgeryTargetComponent> ent, ref ToolConstructAttemptedEvent args)
@@ -50,22 +51,16 @@ public sealed partial class ServerSurgeryToolSystem : EntitySystem
         {
             args.Cancel();
 
-            Logger.Debug("FAIL START");
-            Logger.Debug(ent.Owner.Id.ToString());
-
             if (_prototypeManager.Resolve(surgTool.FailPopups, out var messagePack))
             {
                 var message = Loc.GetString(_random.Pick(messagePack.Values),
-                        ("toolName", _entityManager.ToPrettyString(args.Used)),
-                        ("userName", _entityManager.ToPrettyString(args.User)));
+                        ("toolName", args.Used),
+                        ("userName", args.User));
                 _popup.PopupEntity(message, ent, PopupType.MediumCaution);
             }
 
-            Logger.Debug("tryWound");
-
             if (TryComp<WoundableComponent>(ent, out var woundable) && woundable is not null)
             {
-                Logger.Debug("startWound");
                 var length = surgTool.FailWounds.Count;
 
                 var shift = rand.Next(0, Math.Max(0, length - 1));
@@ -88,5 +83,14 @@ public sealed partial class ServerSurgeryToolSystem : EntitySystem
 
             _jittering.DoJitter(ent, TimeSpan.FromSeconds(JitterTime), false, JitterAmplitude, JitterFrequency);
         }
+    }
+
+    private void OnToolSpeedModifier(Entity<SurgeryTargetComponent> ent, ref ToolSpeedModifierEvent args)
+    {
+        if (!TryComp<SurgeryToolComponent>(args.Tool , out var surgTool))
+            return;
+
+        if (surgTool.SpeedModifier is not null)
+            args.Speed = args.Speed * surgTool.SpeedModifier.Value;
     }
 }
