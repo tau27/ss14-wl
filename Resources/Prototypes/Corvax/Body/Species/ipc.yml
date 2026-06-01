@@ -81,7 +81,7 @@
 - type: entity
   parent:
   - AppearanceIpc
-  - BaseSpeciesMob
+  - BaseSpeciesMobOld
   id: MobIpc
   name: Urist McHands
   components:
