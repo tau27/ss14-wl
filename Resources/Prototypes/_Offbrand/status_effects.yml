@@ -254,6 +254,7 @@
   name: pain stuttering
   components:
   - type: StutteringAccent
+    matchRandomProb: 0.1
 
 - type: entity
   parent: MobStatusEffectBase
@@ -269,7 +270,7 @@
   - type: GunAccuracyStatusEffect
     angleRangeModifier: 1.5
   - type: CauseStatusEffectRandomlyStatusEffect
-    probability: 0.3
+    probability: 0.1
     updateInterval: 5
     effects:
     - [StatusEffectPainStuttering, 5]
@@ -357,7 +358,8 @@
   components:
   - type: PopupOnAppliedStatusEffect
     message: severe-brain-damage-applied
-  - type: StutteringAccent
+  # - type: StutteringAccent
+  - type: ScrambledAccent
   - type: MeleeModifiersStatusEffect
     damageModifier:
       coefficients:
@@ -379,7 +381,7 @@
   - type: PopupOnAppliedStatusEffect
     message: brain-oxygen-depleted
     visualType: LargeCaution
-  - type: StutteringAccent
+  # - type: StutteringAccent
   - type: DrunkStatusEffect
   - type: KnockdownStatusEffect
   - type: KnockdownOnAppliedStatusEffect
