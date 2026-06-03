@@ -1687,6 +1687,13 @@
         conditions:
         - !type:TemperatureCondition
           max: 150.0
+      - !type:HealthChange
+        conditions:
+        - !type:TemperatureCondition
+          max: 150.0
+        damage:
+          types:
+            Cellular: 1
       # End Offbrand Additions
         # Begin Offbrand Removals
         # - !type:ReduceRotting

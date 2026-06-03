@@ -7,6 +7,7 @@
     Ointment: 3
     ChemistryBottleParacetamol: 3 # Offbrand
     ChemistryBottleEpinephrine: 3
+    ChemistryBottleMannitol: 3
     Syringe: 3
     PillCanisterTricordrazine: 2
   contrabandInventory:
@@ -24,6 +25,7 @@
     Bloodpack: 3
     ChemistryBottleInaprovaline: 3
     ChemistryBottleParacetamol: 3 # Offbrand
+    ChemistryBottleMannitol: 3 # Offbrand
     Syringe: 3
     PillTricordrazine: 10
   contrabandInventory:
@@ -64,7 +66,8 @@
   id: NanoMedCivilianInventory
   startingInventory:
     HandheldHealthAnalyzer: 3
-    Tourniquet: 5
+    TourniquetOffbrand: 5
+    Splints: 5
     Brutepack: 5
     AloeCream: 5
     Bloodpack: 5

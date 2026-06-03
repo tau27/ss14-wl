@@ -245,6 +245,11 @@ public sealed partial class MetabolizerSystem : EntitySystem
                     case AdjustReagent:
                         _entityEffects.ApplyEffect(solutionEntity.Value, effect, scale);
                         break;
+                    // WL-Offbrand start
+                    case AdjustReagentGaussian:
+                        _entityEffects.ApplyEffect(solutionEntity.Value, effect, scale);
+                        break;
+                    // WL-Offbrand end
                     default:
                         _entityEffects.ApplyEffect(actualEntity, effect, scale);
                         break;
