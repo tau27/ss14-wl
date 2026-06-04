@@ -12,8 +12,10 @@
   id: StrangeReagent
   reactants:
     Omnizine:
-      amount: 2
+      amount: 1
     Holywater:
       amount: 1
+    UnstableMutagen:
+      amount: 1
   products:
-    Propofol: 2
+    StrangeReagent: 1

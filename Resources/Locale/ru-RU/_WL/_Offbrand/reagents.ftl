@@ -7,5 +7,5 @@ reagent-desc-gibbis = Смесь машинного масла и агресси
 reagent-name-strange = странный реагент
 reagent-desc-strange = Странная смесь случайных веществ, каким-то образом способная воскрешать даже после смерти мозга, разрушая остальное тело и органы. Не признаётся галактическим медицинским сообществом как лекарство.
 
-reagent-physical-desc-strange = странно
-reagent-physical-desc-terror = ужасающе
+reagent-physical-desc-strange = странноe
+reagent-physical-desc-terror = ужасающеe
