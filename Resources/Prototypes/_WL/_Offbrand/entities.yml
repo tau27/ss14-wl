@@ -1,0 +1,12 @@
+- type: entity
+  parent: ChemistryEmptyVialSmall
+  id: StrangeChemistryVial
+  suffix: strange
+  components:
+  - type: Label
+    currentLabel: reagent-name-strange
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: StrangeReagent
+        Quantity: 5

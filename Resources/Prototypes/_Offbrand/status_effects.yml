@@ -359,7 +359,6 @@
   - type: PopupOnAppliedStatusEffect
     message: severe-brain-damage-applied
   # - type: StutteringAccent
-  - type: ScrambledAccent
   - type: MeleeModifiersStatusEffect
     damageModifier:
       coefficients:
@@ -395,6 +394,7 @@
   - type: PopupOnAppliedStatusEffect
     message: critical-brain-damage-applied
     visualType: LargeCaution
+  - type: ScrambledAccent
 
 - type: entity
   parent: MobStatusEffectBase

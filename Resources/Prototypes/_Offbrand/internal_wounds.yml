@@ -92,6 +92,8 @@
     duration: 5
   - type: MovementModStatusEffect
   - type: IdentityBlocker
+  - type: ExaminableStatusEffect
+    message: husking-examine
 
 - type: entity
   parent: WoundInternalBase

@@ -74,6 +74,13 @@
     Bloodstream:
       metabolismRate: 1
       effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Cellular: 33
+        conditions:
+          - !type:MobStateCondition
+              mobstate: Dead
       - !type:ModifyStatusEffect # Offbrand
         conditions:
           - !type:MobStateCondition
@@ -101,11 +108,4 @@
         conditions:
           - !type:MobStateCondition
               mobstate: Dead
-      - !type:HealthChange
-        conditions:
-          - !type:MobStateCondition
-              mobstate: Dead
-        damage:
-          types:
-            Cellular: 35
       - !type:ForceReturnToBody
