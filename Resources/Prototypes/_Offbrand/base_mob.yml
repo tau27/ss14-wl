@@ -6,17 +6,17 @@
   - type: Woundable
     damageContainer: Biological
     maximumDamage:
-      Blunt: [400, 10]
-      Slash: [400, 10]
-      Piercing: [400, 10]
-      Heat: [400, 10]
-      Cold: [400, 10]
-      Caustic: [400, 10]
-      Shock: [400, 10]
+      Blunt: [800, 10]
+      Slash: [800, 10]
+      Piercing: [800, 10]
+      Heat: [800, 10]
+      Cold: [800, 10]
+      Caustic: [800, 10]
+      Shock: [800, 10]
       Poison: [400, 10]
-      Radiation: [400, 10]
+      Radiation: [800, 10]
       Cellular: [400, 10]
-      Asphyxiation: [400, 0]
+      Asphyxiation: [200, 0]
       Bloodloss: [0, 0]
   - type: HealthExaminable
     examinableTypes:
