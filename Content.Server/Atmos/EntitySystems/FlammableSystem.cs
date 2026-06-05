@@ -161,7 +161,7 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
 
             Ignite(uid, args.Used, flammable, args.User);
-            args.Handled = true;
+            // args.Handled = true;
         }
 
         private void OnExtinguishActivateInWorld(EntityUid uid, ExtinguishOnInteractComponent component, ActivateInWorldEvent args)

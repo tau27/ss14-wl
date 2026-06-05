@@ -49,6 +49,10 @@ public sealed partial class ServerSurgeryToolSystem : EntitySystem
 
         if (!rand.Prob(surgTool.SuccessChance))
         {
+            var time = _timing.CurTime;
+            if (time <= surgTool.LastFail + surgTool.FailCooldown)
+                return;
+
             args.Cancel();
 
             if (_prototypeManager.Resolve(surgTool.FailPopups, out var messagePack))

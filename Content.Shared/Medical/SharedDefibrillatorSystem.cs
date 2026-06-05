@@ -112,8 +112,8 @@ public abstract partial class SharedDefibrillatorSystem : EntitySystem
         if (!targetCanBeAlive && _mobState.IsAlive(target, mobState))
             return false;
 
-        if (!targetCanBeAlive && !ent.Comp.CanDefibCrit && _mobState.IsCritical(target, mobState))
-            return false;
+        //if (!targetCanBeAlive && !ent.Comp.CanDefibCrit && _mobState.IsCritical(target, mobState)) WL-Offbrand fix defib on stopped heart
+        //    return false;
 
         return true;
     }

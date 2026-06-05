@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Offbrand.Surgery;
 
-[RegisterComponent]
+[RegisterComponent, AutoGenerateComponentState]
 [Access(typeof(SurgeryToolSystem))]
 public sealed partial class SurgeryToolComponent : Component
 {
@@ -44,5 +44,11 @@ public sealed partial class SurgeryToolComponent : Component
 
     [DataField]
     public List<SimpleWoundSpecifier> FailWounds = new List<SimpleWoundSpecifier>();
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LastFail;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan FailCooldown = TimeSpan.FromSeconds(1);
     // WL-Changes: Getto-surgery end
 }

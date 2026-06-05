@@ -44,6 +44,11 @@
     # WL-Changes: Getto-surg start
   - type: ComponentToggler
     components:
+    - type: Tool
+      qualities:
+        - Cauterizing
+      useSound:
+        path: /Audio/Effects/lightburn.ogg
     - type: SurgeryTool
       slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
       slotsDenialPopup: surgery-must-be-stripped
@@ -54,7 +59,7 @@
       failPopups: SurgeryFailBase
       failDamage:
         types:
-          Heat: 10
+          Heat: 3
       speedModifier: 0.4
     # WL-Changes: Getto-surg end
 

@@ -24,6 +24,8 @@
       qualities:
         - Incising
         - Cauterizing
+      useSound:
+        path: /Audio/Weapons/eblade1.ogg
     - type: SurgeryTool
       slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
       slotsDenialPopup: surgery-must-be-stripped
@@ -225,7 +227,13 @@
       doAfterDuration: 4.0
     - type: Contraband
       severity: Syndicate
-  # WL-Changes: Getto-surg end
+    # WL-Changes: Getto-surg start
+    - type: Tool
+      qualities:
+        - Incising
+        - Cauterizing
+      useSound:
+        path: /Audio/Weapons/eblade1.ogg
     - type: SurgeryTool
       slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
       slotsDenialPopup: surgery-must-be-stripped
@@ -244,7 +252,7 @@
             types:
               Slash: 5
       speedModifier: 0.7
-  # WL-Changes: Getto-surg end
+    # WL-Changes: Getto-surg end
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger.rsi
     layers:
