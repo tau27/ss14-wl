@@ -41,6 +41,22 @@
     color: orange
   - type: ItemTogglePointLight
   - type: PhysicalComposition
+    # WL-Changes: Getto-surg start
+  - type: ComponentToggler
+    components:
+    - type: SurgeryTool
+      slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+      slotsDenialPopup: surgery-must-be-stripped
+      downDenialPopup: surgery-must-be-down
+      whitelist:
+        tags: [OperatableClothing]
+      successChance: 0.5
+      failPopups: SurgeryFailBase
+      failDamage:
+        types:
+          Heat: 10
+      speedModifier: 0.4
+    # WL-Changes: Getto-surg end
 
 - type: entity
   abstract: true

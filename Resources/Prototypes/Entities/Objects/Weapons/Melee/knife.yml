@@ -54,12 +54,12 @@
     downDenialPopup: surgery-must-be-down
     whitelist:
       tags: [OperatableClothing]
-    successChance: 0.9
+    successChance: 0.85
     woundChance: 0.01
     failPopups: SurgeryFailBase
     failDamage:
       types:
-        Piercing: 5
+        Slash: 5
     failWounds:
       - woundPrototype: WoundArterialBleeding
         woundDamages:
@@ -308,6 +308,26 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  # WL-Changes: Getto-surg start
+  - type: SurgeryTool
+    slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+    slotsDenialPopup: surgery-must-be-stripped
+    downDenialPopup: surgery-must-be-down
+    whitelist:
+      tags: [OperatableClothing]
+    successChance: 0.75
+    woundChance: 0.005
+    failPopups: SurgeryFailBase
+    failDamage:
+      types:
+        Slash: 5
+    failWounds:
+      - woundPrototype: WoundArterialBleeding
+        woundDamages:
+          types:
+            Slash: 5
+    speedModifier: 0.25
+  # WL-Changes: Getto-surg end
 
 - type: entity
   name: reinforced shiv

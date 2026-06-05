@@ -43,3 +43,31 @@
 # White-List components
   - type: Execution
 # White-List components
+  # WL-Changes: Getto-surg start
+  - type: Tool
+    qualities:
+      - Sawing
+  - type: SurgeryTool
+    slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+    slotsDenialPopup: surgery-must-be-stripped
+    downDenialPopup: surgery-must-be-down
+    whitelist:
+      tags: [OperatableClothing]
+    successChance: 0.5
+    woundChance: 0.1
+    failPopups: SurgeryFailBase
+    failDamage:
+      types:
+        Blunt: 15
+        Slash: 20
+    failWounds:
+      - woundPrototype: WoundArterialBleeding
+        woundDamages:
+          types:
+            Slash: 5
+      - woundPrototype: WoundFracture
+        woundDamages:
+          types:
+            Blunt: 10
+    speedModifier: 3
+  # WL-Changes: Getto-surg end

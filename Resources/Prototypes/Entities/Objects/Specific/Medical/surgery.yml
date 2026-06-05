@@ -155,6 +155,26 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  # WL-Changes: Getto-surg start
+  - type: SurgeryTool
+    slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+    slotsDenialPopup: surgery-must-be-stripped
+    downDenialPopup: surgery-must-be-down
+    whitelist:
+      tags: [OperatableClothing]
+    successChance: 0.9
+    woundChance: 0.002
+    failPopups: SurgeryFailBase
+    failDamage:
+      types:
+        Slash: 3
+    failWounds:
+      - woundPrototype: WoundArterialBleeding
+        woundDamages:
+          types:
+            Slash: 5
+    speedModifier: 0.7
+  # WL-Changes: Getto-surg end
 
 - type: entity
   name: advanced scalpel

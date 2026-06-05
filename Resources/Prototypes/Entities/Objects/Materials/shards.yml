@@ -81,6 +81,29 @@
   - type: DeleteOnTrigger
   - type: StaticPrice
     price: 0
+  # WL-Changes: Getto-surg start
+  - type: Tool
+    qualities:
+      - Incising # WL-Changes: Getto surg
+  - type: SurgeryTool
+    slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+    slotsDenialPopup: surgery-must-be-stripped
+    downDenialPopup: surgery-must-be-down
+    whitelist:
+      tags: [OperatableClothing]
+    successChance: 0.5
+    woundChance: 0.005
+    failPopups: SurgeryFailBase
+    failDamage:
+      types:
+        Slash: 3
+    failWounds:
+      - woundPrototype: WoundArterialBleeding
+        woundDamages:
+          types:
+            Slash: 5
+    speedModifier: 0.1
+  # WL-Changes: Getto-surg end
 
 - type: entity
   parent: ShardBase

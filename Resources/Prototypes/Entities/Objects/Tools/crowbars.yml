@@ -33,6 +33,7 @@
   - type: Tool
     qualities:
       - Prying
+      - Retracting
     useSound:
       path: /Audio/Items/crowbar.ogg
   - type: ToolTileCompatible
@@ -52,6 +53,20 @@
   - type: Item
     sprite: Objects/Tools/crowbar.rsi
     size: Small
+  # WL-Changes: Getto-surg start
+  - type: SurgeryTool
+    slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+    slotsDenialPopup: surgery-must-be-stripped
+    downDenialPopup: surgery-must-be-down
+    whitelist:
+      tags: [OperatableClothing]
+    successChance: 0.9
+    failPopups: SurgeryFailBase
+    failDamage:
+      types:
+        Blunt: 2
+    speedModifier: 0.8
+  # WL-Changes: Getto-surg end
 
 # Standard (grey) Crowbar
 - type: entity

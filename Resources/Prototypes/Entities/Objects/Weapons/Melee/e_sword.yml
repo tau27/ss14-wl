@@ -19,6 +19,30 @@
       malus: 0.6
     - type: Execution
       doAfterDuration: 4.0
+    # WL-Changes: Getto-surg start
+    - type: Tool
+      qualities:
+        - Incising
+        - Cauterizing
+    - type: SurgeryTool
+      slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+      slotsDenialPopup: surgery-must-be-stripped
+      downDenialPopup: surgery-must-be-down
+      whitelist:
+        tags: [OperatableClothing]
+      successChance: 0.15
+      woundChance: 0.01
+      failPopups: SurgeryFailBase
+      failDamage:
+        types:
+          Heat: 15
+      failWounds:
+        - woundPrototype: WoundArterialBleeding
+          woundDamages:
+            types:
+              Slash: 5
+      speedModifier: 0.4
+    # WL-Changes: Getto-surg end
   - type: ItemToggleHot
   - type: ItemToggleSize
     activatedSize: Huge
@@ -201,6 +225,26 @@
       doAfterDuration: 4.0
     - type: Contraband
       severity: Syndicate
+  # WL-Changes: Getto-surg end
+    - type: SurgeryTool
+      slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+      slotsDenialPopup: surgery-must-be-stripped
+      downDenialPopup: surgery-must-be-down
+      whitelist:
+        tags: [OperatableClothing]
+      successChance: 0.35
+      woundChance: 0.01
+      failPopups: SurgeryFailBase
+      failDamage:
+        types:
+          Heat: 7
+      failWounds:
+        - woundPrototype: WoundArterialBleeding
+          woundDamages:
+            types:
+              Slash: 5
+      speedModifier: 0.7
+  # WL-Changes: Getto-surg end
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger.rsi
     layers:

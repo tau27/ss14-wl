@@ -50,6 +50,23 @@
   - type: PhysicalComposition
     materialComposition:
       Glass: 25
+  # WL-Changes: Getto-surg start
+  - type: Tool
+    qualities:
+      - BoneMending
+  - type: SurgeryTool
+    slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+    slotsDenialPopup: surgery-must-be-stripped
+    downDenialPopup: surgery-must-be-down
+    whitelist:
+      tags: [OperatableClothing]
+    successChance: 0.7
+    failPopups: SurgeryFailBase
+    failDamage:
+      types:
+        Blunt: 7
+    speedModifier: 0.4
+  # WL-Changes: Getto-surg end
 
 # Porcelain (like glass but no shard)
 - type: entity

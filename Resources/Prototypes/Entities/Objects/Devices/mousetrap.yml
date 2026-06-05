@@ -60,6 +60,23 @@
           mask:
             - ItemMask
     - type: Rotatable
+    # WL-Changes: Getto-surg start
+    - type: Tool
+      qualities:
+        - Clamping
+    - type: SurgeryTool
+      slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+      slotsDenialPopup: surgery-must-be-stripped
+      downDenialPopup: surgery-must-be-down
+      whitelist:
+        tags: [OperatableClothing]
+      successChance: 0.7
+      failPopups: SurgeryFailBase
+      failDamage:
+        types:
+          Blunt: 3
+      speedModifier: 0.4
+    # WL-Changes: Getto-surg end
 
 - type: entity
   name: mousetrap

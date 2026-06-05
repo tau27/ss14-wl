@@ -48,6 +48,22 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  # WL-Changes: Getto-surg start
+  - type: Tool
+    qualities:
+      - Clamping
+      - Recoupling
+  - type: SurgeryTool
+    slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+    slotsDenialPopup: surgery-must-be-stripped
+    downDenialPopup: surgery-must-be-down
+    whitelist:
+      tags: [OperatableClothing]
+    successChance: 0.8
+    woundChance: 0
+    failPopups: SurgeryFailBase
+    speedModifier: 0.6
+  # WL-Changes: Getto-surg end
 
 - type: entity
   id: CableHVStack

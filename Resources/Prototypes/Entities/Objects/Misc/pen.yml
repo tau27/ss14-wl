@@ -40,6 +40,23 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  # WL-Changes: Getto-surg start
+  - type: Tool
+    qualities:
+      - Drilling
+  - type: SurgeryTool
+    slotsToCheck: [INNERCLOTHING, OUTERCLOTHING]
+    slotsDenialPopup: surgery-must-be-stripped
+    downDenialPopup: surgery-must-be-down
+    whitelist:
+      tags: [OperatableClothing]
+    successChance: 0.6
+    failPopups: SurgeryFailBase
+    failDamage:
+      types:
+        Piercing: 2
+    speedModifier: 0.4
+  # WL-Changes: Getto-surg end
 
 - type: entity
   parent: Pen
