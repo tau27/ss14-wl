@@ -31,6 +31,7 @@
   id: TourniquetOffbrand
   name: tourniquet
   description: Can be clamped on a patient to prevent bleeding, but causes bruises after sustained use.
+  suffix: Offbrand
   components:
   - type: Tag
     tags:
@@ -40,8 +41,8 @@
     state: tourniquet
   - type: Item
     heldPrefix: tourniquet
-  - type: UpdateStatusEffectOnTrigger
-    effectProto: StatusEffectTourniquet
+  - type: SetStatusEffectOnTrigger
+    status: StatusEffectTourniquet
     targetUser: true
   - type: StatusEffectTriggerCondition
     effectProto: StatusEffectTourniquet
@@ -58,8 +59,8 @@
     sprite: _Offbrand/splints.rsi
     state: splint
   - type: Item
-  - type: UpdateStatusEffectOnTrigger
-    effectProto: StatusEffectSplints
+  - type: SetStatusEffectOnTrigger
+    status: StatusEffectSplints
     targetUser: true
   - type: StatusEffectTriggerCondition
     effectProto: StatusEffectSplints

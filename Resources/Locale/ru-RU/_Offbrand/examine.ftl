@@ -10,8 +10,8 @@ wound-tended-modifier = обработанные {$wound}
 wound-bandaged-modifier = перевязанные {$wound}
 wound-salved-modifier = обработанные {$wound}
 
-tourniquet-applied-examine = { CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } применяет турникет на { OBJECT($target) }.
-splints-applied-examine = { CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } накладывает шину { OBJECT($target) }.
+tourniquet-applied-examine = { CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } на своей конечности жгут-турникет.
+splints-applied-examine = { CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } на своей конечности шину.
 
 wound-count-modifier =
     { CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } { $count ->
