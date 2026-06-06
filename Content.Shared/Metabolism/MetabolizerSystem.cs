@@ -213,7 +213,7 @@ public sealed partial class MetabolizerSystem : EntitySystem
                 if (!_entityConditions.TryConditions(actualEntity, effect.Conditions))
                     _statusEffects.TryRemoveStatusEffect(actualEntity, effect.StatusEffect);
                 else
-                    _statusEffects.TryUpdateStatusEffectDuration(actualEntity, effect.StatusEffect, out _);
+                    _statusEffects.TryUpdateStatusEffectDuration(actualEntity, effect.StatusEffect, out _, TimeSpan.FromSeconds(1.1));
             }
             // End Offbrand - status effects
 
