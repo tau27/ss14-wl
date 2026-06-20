@@ -260,7 +260,7 @@
 # WL-Changes: Languages end
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganVulpkanin
   abstract: true
   suffix: vulpkanin

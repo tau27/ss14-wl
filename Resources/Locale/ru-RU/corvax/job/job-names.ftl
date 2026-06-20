@@ -5,8 +5,10 @@ job-name-senior-engineer = технический супервайзер
 job-name-senior-researcher = заведующий лабораторией
 job-name-senior-physician = дежурный врач
 # WL-Changes-end
+job-name-magistrate = магистрат
 job-name-senior-officer = инструктор СБ
 # Role timers
+JobMagistrate = магистрат
 JobIAA = агент внутренних дел
 # WL-Changes: Rename start
 JobPilot = офицер-пилот

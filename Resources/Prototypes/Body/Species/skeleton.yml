@@ -195,7 +195,7 @@
   #WL-Changes: Languages end
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganSkeletonPerson
   abstract: true
   suffix: SkeletonPerson

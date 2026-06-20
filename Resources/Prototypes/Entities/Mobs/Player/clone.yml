@@ -67,6 +67,7 @@
   - SouthernAccent
   - SpanishAccent
   - StutteringAccent
+  - GrowlingAccent # Corvax
   - TTS # Corvax-TTS
   eventComponents:
   - Puller

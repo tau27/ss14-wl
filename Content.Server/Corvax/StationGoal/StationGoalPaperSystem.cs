@@ -25,7 +25,9 @@ namespace Content.Server.Corvax.StationGoal
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private FaxSystem _fax = default!;
         [Dependency] private NewsSystem _news = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private StationSystem _station = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
 
         private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$"); //WL - Changes
 
