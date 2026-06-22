@@ -12,3 +12,8 @@
   id: CameraGhost
   kind: source
   path: "/Textures/_WL/Shaders/ghost.swsl"
+
+- type: shader
+  id: Mandelbrot
+  kind: source
+  path: "/Textures/Shaders/mandelbrot.swsl"

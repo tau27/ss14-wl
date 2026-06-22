@@ -235,10 +235,8 @@ uniform sampler2D lightMap;
 uniform sampler2D SCREEN_TEXTURE;
 uniform ARRAY_HIGHP vec2 renderScale;
 uniform ARRAY_HIGHP float maxDistance;
-uniform ARRAY_LOWP int count;
-uniform ARRAY_HIGHP float falloffPower[5];
-uniform ARRAY_HIGHP float intensity[5];
-uniform ARRAY_HIGHP vec2 position[5];
+uniform ARRAY_HIGHP float vars[5];
+uniform ARRAY_HIGHP vec2 position;
 
 
 ARRAY_HIGHP vec2 cx_mul( ARRAY_HIGHP vec2 a,  ARRAY_HIGHP vec2 b) {
@@ -284,7 +282,6 @@ void main()
     lowp vec3 lightSample = LIGHT.xyz;
 
      highp vec2 finalCoords = FRAGCOORD . xy ;
- highp vec4 colorDef = vec4 ( 1 , 1 , 1 , 0 ) ;
  highp vec2 superCoords = SCREEN_PIXEL_SIZE * FRAGCOORD . xy ;
  highp vec2 delta ;
  highp vec2 z ;
@@ -292,31 +289,27 @@ void main()
  highp float distance ;
  highp float deformation ;
  highp float angle ;
- for ( int i = 0 ;
- i < 5 && i < count ;
- i ++ ) {
- delta = FRAGCOORD . xy - position [ i ] ;
+ delta = FRAGCOORD . xy - position ;
  distance = length ( delta / renderScale ) ;
- deformation = intensity [ i ] / pow ( distance , 2 ) ;
+ deformation = 200 / pow ( distance , 2 ) ;
  angle = atan ( delta . x , delta . y ) ;
  if ( distance >= maxDistance ) {
  deformation = 0.0 ;
  }
  else {
+ deformation *= ( 1.0 - pow ( distance / maxDistance , 4.0 ) ) ;
  superCoords = cx_square ( superCoords ) ;
  }
- z = delta * falloffPower [ i ] ;
- c = z ;
+ z = delta * 0.005 ;
+ c = vec2 ( 0.74543 + 0.11301 i ) ;
  for ( int j = 0 ;
  j < 1000 && length ( z ) < 2 ;
  j ++ ) {
- z = cx_square ( z ) + c ;
+ z = cx_square ( z ) - c ;
  }
- if ( length ( z ) > 2 ) deformation *= length ( z ) * intensity [ i ] * 0 ;
- colorDef *= cx_square ( delta ) * deformation ;
- finalCoords -= cx_square ( delta ) * deformation ;
- }
- COLOR = zTextureSpec ( SCREEN_TEXTURE , finalCoords * SCREEN_PIXEL_SIZE ) + colorDef * 0.1 ;
+ if ( length ( z ) > 2 ) deformation *= length ( z ) * 1 ;
+ finalCoords -= cx_square ( z ) * deformation * 10 ;
+ COLOR = zTextureSpec ( SCREEN_TEXTURE , finalCoords * SCREEN_PIXEL_SIZE ) + vec4 ( 0 , 0 , length ( z ) - 2 , 0 ) * 0 ;
 
 
     LIGHT.xyz = lightSample;
