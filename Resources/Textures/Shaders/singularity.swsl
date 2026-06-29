@@ -38,7 +38,7 @@ void fragment() {
         if(deformation > 0.8)
             deformation = pow(deformation, 0.3);
 
-        finalCoords -= deformation * delta*3;
+        finalCoords -= deformation * delta;
     }
 
     COLOR = zTextureSpec(SCREEN_TEXTURE, finalCoords*SCREEN_PIXEL_SIZE );

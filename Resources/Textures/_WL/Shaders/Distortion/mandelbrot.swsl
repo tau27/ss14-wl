@@ -4,10 +4,8 @@ uniform sampler2D SCREEN_TEXTURE;
 uniform highp vec2 renderScale;
 uniform highp float maxDistance;
 
-uniform highp float[5] vars; // 0 - main frec/speed, 1 - spin speed, 2 - deform int, 3 - dist scale
+uniform highp float[5] vars;
 uniform highp vec2 position;
-
-uniform highp float curTime;
 
 highp vec2 cx_mul(highp vec2 a, highp vec2 b) {
     return vec2(a.x*b.x - a.y*b.y, a.x*b.y + a.y*b.x);
@@ -23,9 +21,6 @@ void fragment() {
     highp vec2 delta;
     highp vec2 z;
     highp vec2 c;
-    highp float lowCycle;
-    highp float lowTime;
-    highp float lowAngle;
     highp float distance;
     highp float deformation;
     highp float angle;
@@ -33,32 +28,34 @@ void fragment() {
     delta = FRAGCOORD.xy - position;
     distance = length(delta / renderScale);
 
-    lowTime = 0.0001*curTime*0.458*vars[0]/(2*3.14)+3.14/2;
-    lowAngle = -60*vars[1]*3.14/0.158*sin(lowTime);
-
-    deformation = vars[2]*2000000 / pow(distance, 2.5) * cos(lowTime)*cos(sin(lowTime)*564*3.14);
+    deformation = 200 / pow(distance, 2);//vars[1] / pow(distance, 2); // falloffPower[i]);
     angle = atan(delta.x, delta.y);
 
-    if (distance >= maxDistance*vars[3]) {
+    // ensure deformation goes to zero at max distance
+    // avoids long-range single-pixel shifts that are noticeable when leaving PVS.
+
+    if (distance >= maxDistance) {
         deformation = 0.0;
     } else {
         deformation *= (1.0 - pow(distance/maxDistance, 4.0));
+        // deformation *= (2*vars[1] - cos(angle));
     }
 
-    z = delta/renderScale*0.01;
+    z = delta*0.001;
     //c = vec2(0.74543, 0.11301);
-    c = z*5;
+    c = z;
 
-    z = cx_mul(z, normalize(vec2(cos(lowAngle), sin(lowAngle))));
-
-    for (int j = 0; j < 1 ; j++) {
-        z = cx_mul(cx_square(cx_square(cx_square(z))), z);
+    for (int j = 0; j < 1000 && length(z) < 2 && distance < maxDistance; j++) {
+        z = cx_square(z) + c;
     }
 
-    if ((int(distance*(cos(lowTime)*lowTime)) % 2+10 > 0) && (atan(z.x, z.y) > 0) || distance >= maxDistance*vars[3]/1.5)
-        deformation *= length(z)*0.0001;
+    if (length(z) > 2)
+        deformation *= length(z)*0.1;//vars[1];
 
-    finalCoords -= cx_square(c) * deformation;
+    // if(deformation > 0.8)
+    //     deformation = pow(deformation, 0.3);
+
+    finalCoords -= cx_square(z) * deformation*10;
 
     COLOR = zTextureSpec(SCREEN_TEXTURE, finalCoords*SCREEN_PIXEL_SIZE);
 }
