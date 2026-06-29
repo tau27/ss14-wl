@@ -43,10 +43,10 @@
   - type: ShaderSource
     shader: Shards
     vars:
-      - 0.0001
-      - 200
-      - 10
       - 1
+      - 1
+      - 1
+      - 0.5
       - 1
   - type: Item
     size: Normal
