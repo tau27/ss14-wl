@@ -237,6 +237,7 @@ uniform ARRAY_HIGHP vec2 renderScale;
 uniform ARRAY_HIGHP float maxDistance;
 uniform ARRAY_HIGHP float vars[5];
 uniform ARRAY_HIGHP vec2 position;
+uniform ARRAY_HIGHP float curTime;
 
 
 ARRAY_HIGHP vec2 cx_mul( ARRAY_HIGHP vec2 a,  ARRAY_HIGHP vec2 b) {
@@ -282,34 +283,38 @@ void main()
     lowp vec3 lightSample = LIGHT.xyz;
 
      highp vec2 finalCoords = FRAGCOORD . xy ;
- highp vec2 superCoords = SCREEN_PIXEL_SIZE * FRAGCOORD . xy ;
  highp vec2 delta ;
  highp vec2 z ;
  highp vec2 c ;
+ highp float lowCycle ;
+ highp float lowTime ;
+ highp float lowAngle ;
  highp float distance ;
  highp float deformation ;
  highp float angle ;
  delta = FRAGCOORD . xy - position ;
  distance = length ( delta / renderScale ) ;
- deformation = 200 / pow ( distance , 2 ) ;
+ lowTime = 0.0001 * curTime * 0.158 / ( 2 * 3.14 ) + 3.14 / 2 ;
+ lowAngle = - 40 * 3.14 / 0.158 * sin ( lowTime ) ;
+ deformation = 200000 / pow ( distance , 3 ) * cos ( lowTime ) * cos ( sin ( lowTime ) * 564 * 3.14 ) ;
  angle = atan ( delta . x , delta . y ) ;
- if ( distance >= maxDistance ) {
+ if ( distance >= maxDistance * 0.5 ) {
  deformation = 0.0 ;
  }
  else {
  deformation *= ( 1.0 - pow ( distance / maxDistance , 4.0 ) ) ;
- superCoords = cx_square ( superCoords ) ;
  }
- z = delta * 0.005 ;
- c = vec2 ( 0.74543 + 0.11301 i ) ;
+ z = delta / renderScale * 0.01 ;
+ c = z * 5 ;
+ z = cx_mul ( z , normalize ( vec2 ( cos ( lowAngle ) , sin ( lowAngle ) ) ) ) ;
  for ( int j = 0 ;
- j < 1000 && length ( z ) < 2 ;
+ j < 1 ;
  j ++ ) {
- z = cx_square ( z ) - c ;
+ z = cx_mul ( cx_square ( cx_square ( cx_square ( z ) ) ) , z ) ;
  }
- if ( length ( z ) > 2 ) deformation *= length ( z ) * 1 ;
- finalCoords -= cx_square ( z ) * deformation * 10 ;
- COLOR = zTextureSpec ( SCREEN_TEXTURE , finalCoords * SCREEN_PIXEL_SIZE ) + vec4 ( 0 , 0 , length ( z ) - 2 , 0 ) * 0 ;
+ if ( ( int ( distance * ( cos ( lowTime ) * lowTime ) ) % 2 + 10 > 0 ) && ( atan ( z . x , z . y ) > 0 ) || distance >= maxDistance / 3 ) deformation *= length ( z / pow ( renderScale , 100 ) ) * 0.0000001 ;
+ finalCoords -= cx_square ( c ) * deformation ;
+ COLOR = zTextureSpec ( SCREEN_TEXTURE , finalCoords * SCREEN_PIXEL_SIZE ) ;
 
 
     LIGHT.xyz = lightSample;

@@ -17,3 +17,8 @@
   id: Mandelbrot
   kind: source
   path: "/Textures/Shaders/mandelbrot.swsl"
+
+- type: shader
+  id: Shards
+  kind: source
+  path: "/Textures/Shaders/shards.swsl"

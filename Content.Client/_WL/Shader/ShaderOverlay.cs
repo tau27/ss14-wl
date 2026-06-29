@@ -6,6 +6,7 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Client._WL.Shaders
 {
@@ -14,6 +15,7 @@ namespace Content.Client._WL.Shaders
         [Dependency] private IEntityManager _entMan = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private IConfigurationManager _configManager = default!;
+        [Dependency] private IGameTiming _timing = default!;
         private SharedTransformSystem? _xformSystem = null;
 
         /// <summary>
@@ -79,6 +81,7 @@ namespace Content.Client._WL.Shaders
 
                 _positions[_count] = tempCoords;
                 _vars[_count] = source.Vars.ToArray();
+                _times[_count] = source.CreationTick.Value*_timing.TickPeriod;
                 _count++;
 
                 if (_count == MaxCount)
@@ -109,14 +112,14 @@ namespace Content.Client._WL.Shaders
 
                 shader?.SetParameter("SCREEN_TEXTURE", ScreenTexture);
 
+                shader?.SetParameter("curTime", (float)((_timing.CurTime - _times[_count]).TotalMilliseconds));
+
                 worldHandle.UseShader(shader);
                 _count++;
 
                 worldHandle.DrawRect(args.WorldAABB, Color.White);
-                worldHandle.UseShader(null);
-                //Logger.Debug(_count.ToString());
-                //Logger.Debug("Trying shader draw");
             }
+            worldHandle.UseShader(null);
         }
     }
 }
