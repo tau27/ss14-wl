@@ -116,6 +116,7 @@
   - type: Thieving
     stripTimeReduction: 2.5
   - type: NightVision
+    toggleAction: PulseEchoVision
     isEquipment: false
     color: "#000"
     pulseTime: 0.2
