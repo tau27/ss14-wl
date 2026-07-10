@@ -13,45 +13,48 @@
       limit: 3
       required: false
     enum.HumanoidVisualLayers.HeadTop:
-      limit: 1
-      required: true
+      limit: 4
+      required: false
     enum.HumanoidVisualLayers.Snout:
       limit: 1
-      required: true
+      required: false
     enum.HumanoidVisualLayers.SnoutCover:
       limit: 3
       required: false
     enum.HumanoidVisualLayers.Tail:
       limit: 1
-      required: true
+      required: false
     enum.HumanoidVisualLayers.LArm:
-      limit: 2
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.RArm:
-      limit: 2
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.LHand:
-      limit: 2
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.RHand:
-      limit: 2
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.LLeg:
-      limit: 2
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.RLeg:
-      limit: 2
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.LFoot:
-      limit: 2
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.RFoot:
-      limit: 2
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.UndergarmentTop:
       limit: 1
       required: false
     enum.HumanoidVisualLayers.UndergarmentBottom:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Chest:
       limit: 1
       required: false
     enum.HumanoidVisualLayers.Overlay:
@@ -62,6 +65,7 @@
 - type: entity
   parent: BaseSpeciesAppearance
   id: AppearanceAndroid
+  categories: [ HideSpawnMenu ]
   name: android appearance
   components:
   - type: InitialBody
@@ -97,7 +101,7 @@
   - MobRespirator
   - MobAtmosStandard
   - MobFlammable
-  - BaseSpeciesMob
+  - BaseSpeciesNoDna #WL - NoDnaAndorid
   id: MobAndroid
   components:
   - type: ZombieImmune
@@ -170,6 +174,7 @@
   - type: Blindable
   - type: EyeProtection
   - type: FlashImmunity
+    showInExamine: false
   - type: Icon
     sprite: _WL/Mobs/Species/Android/parts.rsi
     state: full
@@ -271,7 +276,7 @@
     cellSlotId: cell_slot
     fitsInCharger: true
   - type: PowerCellDraw
-    drawRate: 0.5
+    drawRate: 0.25
   - type: LockedWiresPanel
   - type: WiresPanel
   - type: Android
@@ -319,6 +324,26 @@
     understood:
       - Translate
     specieLanguage: Ternary
+  - type: Instrument
+    allowPercussion: false
+    handheld: false
+    program: 2
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.CharacterInformationUiKey.Key:
+        type: CharacterInformationBoundUserInterface
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+        requireInputValidation: true
+  - type: MobStateActions
+    actions:
+      Alive:
+        - ActionPAIPlayMidi
+  - type: Actions
   - type: MobCollision # WL-Changes: MobCollision works for players only
   - type: OfferItem # CorvaxGoob-Offer
 
