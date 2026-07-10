@@ -24,9 +24,9 @@
   description: language-toptranslate-desc
   color: '#00c5d7'
   keylang: 'ш'
-  maxlength: 5
   obfuscation:
     !type:ByCharReplacementObfuscation
+      maxlength: 5
       replacement:
       - les
       - as
