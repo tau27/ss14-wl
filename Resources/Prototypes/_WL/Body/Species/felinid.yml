@@ -113,8 +113,9 @@
       types:
         Blunt: 1
         Slash: 5
-  - type: Thieving
-    stripTimeReduction: 2.5
+  - type: StripModifiers
+    stripTimeReduction: 0
+    stripTimeMultiplier: 0.5
   - type: NightVision
     toggleAction: PulseEchoVision
     isEquipment: false
@@ -167,7 +168,7 @@
     - Alive
     damagePerUnit:
       types:
-        Cellular: -1.15
+        Cellular: -0.25
     damage:
       types:
         Heat: -0.7
