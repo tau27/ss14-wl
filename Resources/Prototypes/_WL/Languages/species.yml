@@ -84,6 +84,7 @@
   description: language-unati-desc
   color: '#ede028'
   keylang: 'у'
+  maxlength: 6
   obfuscation:
     !type:ByCharReplacementObfuscation
       replacement:

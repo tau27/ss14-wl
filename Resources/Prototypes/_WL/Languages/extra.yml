@@ -24,6 +24,7 @@
   description: language-toptranslate-desc
   color: '#00c5d7'
   keylang: 'ш'
+  maxlength: 5
   obfuscation:
     !type:ByCharReplacementObfuscation
       replacement:
@@ -172,7 +173,6 @@
       - zh
       - li
       - ":"
-      - " "
   icon:
     sprite: /Textures/_WL/Interface/Languages/languages.rsi
     state: felinid
