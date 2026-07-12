@@ -14,6 +14,20 @@ ent-RitiumPack1 = { ent-RitiumPack }
     .suffix = Один
     .desc = { ent-RitiumPack.desc }
 
+ent-RepairSpray = ремонтный спрей
+    .desc = Спрей с ремонтной пеной.
+
+ent-RepairSprayPlus = ремонтный спрей плюс
+    .desc = Продвинутый cпрей с ремонтной пеной и коагулянтом.
+
+ent-SkinPatch = синтетический кожный патч
+    .desc = Синтетическая кожа с клейким полимером. Восстанавливает корпус андроида после перегрева и кислотных повреждений.
+    .suffix = Полный
+
+ent-SkinPatch1 = { ent-SkinPatch }
+    .suffix = Один
+    .desc = { ent-SkinPatch.desc }
+
 ent-MineralOintment = минеральная мазь
     .suffix = Полный
     .desc = Используется для лечения физических повреждений.

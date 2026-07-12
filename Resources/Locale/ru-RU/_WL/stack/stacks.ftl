@@ -7,5 +7,6 @@ stack-chips-500 = фишки "500"
 stack-chips-2000 = фишки "2000"
 stack-biotube = биотрубки
 stack-ritium-pack = пакеты с ритиумом
+stack-skinpatch = синтетические кожные патчи
 stack-mineral-ointment = минеральные мази
 stack-mineral-paste = минеральные пасты

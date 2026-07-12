@@ -26,12 +26,14 @@
   - RightLegBorg
   - LightHeadBorg
   - TorsoBorg
+
 #WL-Workers-Recipes
 - type: latheRecipePack
   id: AndroidHeal
   recipes:
   - BioTube # WL android species
   - RitiumPack
+  - SkinPatch
 #WL-Workers-Recipes-END
 
 ## Dynamic
