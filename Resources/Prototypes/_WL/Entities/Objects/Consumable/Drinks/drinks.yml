@@ -46,6 +46,7 @@
   - type: Label
     currentLabel: reagent-name-insulator
 
+- type: entity
   parent: DrinkGlass
   id: DrinkDarkBeerGlass
   suffix: dark beer

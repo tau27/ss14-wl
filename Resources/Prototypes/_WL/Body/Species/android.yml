@@ -134,6 +134,7 @@
     maxBleedAmount: 1.0
     bloodRefreshAmount: 0.0
     bleedReductionAmount: 0.0
+    damageBleedModifiers: BloolossBioRobotic
   - type: Reactive
     groups:
       Flammable: [ Touch ]
@@ -218,7 +219,7 @@
       Unsexed: MaleAndroid
   - type: Emoting
   - type: BodyEmotes
-    soundsId: GeneralBodyEmotes
+    soundsId: GeneralBioroboticEmotes
   - type: Destructible
     thresholds:
       - trigger:
