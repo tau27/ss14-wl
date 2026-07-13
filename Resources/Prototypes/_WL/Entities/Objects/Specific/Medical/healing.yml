@@ -86,6 +86,9 @@
   - type: Tag
     tags:
     - Gauze
+  - type: Item
+    sprite: _WL/Entities/Objects/Specific/Medical/biorobotic.rsi
+    heldPrefix: spray
   - type: Sprite
     sprite: _WL/Entities/Objects/Specific/Medical/biorobotic.rsi
     state: spray
@@ -113,6 +116,9 @@
   - type: Tag
     tags:
     - Gauze
+  - type: Item
+    sprite: _WL/Entities/Objects/Specific/Medical/biorobotic.rsi
+    heldPrefix: spray_plus
   - type: Sprite
     sprite: _WL/Entities/Objects/Specific/Medical/biorobotic.rsi
     state: spray_plus
