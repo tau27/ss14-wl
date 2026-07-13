@@ -23,3 +23,17 @@
     Steel: 50
     Plastic: 75
     Cloth: 100
+
+- type: latheRecipe
+  id: SteelMesh
+  result: SteelMesh1
+  completetime: 1
+  materials:
+    Steel: 150
+
+- type: latheRecipe
+  id: RepairTape
+  result: RepairTape1
+  completetime: 1
+  materials:
+    Plastic: 50

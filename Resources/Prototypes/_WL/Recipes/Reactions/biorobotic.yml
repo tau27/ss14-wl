@@ -46,9 +46,9 @@
     Insulator:
       amount: 10
   products:
-    Oil: 5
+    SpaceGlue: 5
     ConcentratedInsulator: 3
-    WeldingFuel: 2
+    SodiumPolyacrylate: 2
 
 - type: reaction
   id: GlassFiber
@@ -123,10 +123,9 @@
     Ritium:
       amount: 10
   products:
-    Insulator: 4
-    Refrigerant: 2
-    Deionizer: 2
-    Oxidant: 2
+    Oxidant: 4
+    Refrigerant: 3
+    Deionizer: 3
 
 - type: reaction
   id: RPLKStim

@@ -170,3 +170,86 @@
   - type: Stack
     stackType: SkinPatch
     count: 1
+
+- type: entity
+  parent: BaseHealingItem
+  id: SteelMesh
+  name: steel mesh
+  description: Repair steel mesh.
+  suffix: Full
+  components:
+  - type: Tag
+    tags:
+    - Gauze
+  - type: Sprite
+    sprite: _WL/Entities/Objects/Specific/Medical/biorobotic.rsi
+    state: mesh
+  - type: Healing
+    damageContainers:
+      - BioRobotic
+    damage:
+      types:
+        Blunt: -15
+        Slash: 2
+        Piercing: 1
+    bloodlossModifier: 1
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+    delay: 4
+  - type: Stack
+    stackType: SteelMesh
+    count: 10
+  - type: StackPrice
+    price: 100
+
+- type: entity
+  id: SteelMesh1
+  parent: SteelMesh
+  suffix: One
+  components:
+  - type: Stack
+    stackType: SteelMesh
+    count: 1
+
+- type: entity
+  parent: BaseHealingItem
+  id: RepairTape
+  name: repair tape
+  description: Repair sticky tape.
+  suffix: Full
+  components:
+  - type: Tag
+    tags:
+    - Gauze
+  - type: Sprite
+    sprite: _WL/Entities/Objects/Specific/Medical/biorobotic.rsi
+    state: tape
+  - type: Healing
+    damageContainers:
+      - BioRobotic
+    damage:
+      types:
+        Slash: -2
+        Piercing: -2
+    bloodlossModifier: -3
+    healingBeginSound:
+      path: "/Audio/_WL/Items/tape/duct_tape.ogg"
+    healingEndSound:
+      path: "/Audio/_WL/Items/tape/duct_tape.ogg"
+    delay: 1.5
+  - type: Stack
+    stackType: RepairTape
+    count: 10
+  - type: StackPrice
+    price: 100
+
+- type: entity
+  id: RepairTape1
+  parent: RepairTape
+  suffix: One
+  components:
+  - type: Stack
+    stackType: RepairTape
+    count: 1

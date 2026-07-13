@@ -18,3 +18,17 @@
   icon: { sprite: "_WL/Entities/Objects/Specific/Medical/biorobotic.rsi", state: patch }
   spawn: SkinPatch
   maxCount: 10
+
+- type: stack
+  id: SteelMesh
+  name: stack-steelmesh
+  icon: { sprite: "_WL/Entities/Objects/Specific/Medical/biorobotic.rsi", state: mesh }
+  spawn: SteelMesh
+  maxCount: 10
+
+- type: stack
+  id: RepairTape
+  name: stack-repairtape
+  icon: { sprite: "_WL/Entities/Objects/Specific/Medical/biorobotic.rsi", state: tape }
+  spawn: RepairTape
+  maxCount: 10

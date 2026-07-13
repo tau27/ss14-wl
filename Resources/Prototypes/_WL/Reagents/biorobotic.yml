@@ -31,7 +31,7 @@
   desc: reagent-desc-oxidant
   flavor: metallic
   color: "#450b0b"
-  physicalDesc: reagent-physical-desc-ionizing
+  physicalDesc: reagent-physical-desc-dark-red
   viscosity: 0.1
   metabolisms:
     Bloodstream:
