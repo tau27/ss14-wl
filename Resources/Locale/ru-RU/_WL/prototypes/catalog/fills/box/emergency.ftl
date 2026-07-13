@@ -10,7 +10,7 @@ ent-BoxMimeBiorobotic = { ent-BoxSurvivalBiorobotic }
     .desc = { ent-BoxSurvivalBiorobotic.desc }
     .suffix = Мим, Биороботический, Аварийный
 
-ent-BoxSurvivalBioroboticEngineering = расширеный биороботический аварийный набор
+ent-BoxSurvivalBioroboticEngineering = расширенный биороботический аварийный набор
     .desc = Коробка с базовым набором для функционирования биосинтетической жизни. Согласно этикетке, содержит двойной азотный баллон.
     .suffix = Биороботический, Инженерный
 

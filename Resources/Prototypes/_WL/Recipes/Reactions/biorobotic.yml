@@ -129,7 +129,7 @@
     Oxidant: 2
 
 - type: reaction
-  id: PRLKStim
+  id: RPLKStim
   reactants:
     Oxidant:
       amount: 1
@@ -140,5 +140,5 @@
     SulfuricAcid:
       amount: 1
   products:
-    PRLKStim: 3
+    RPLKStim: 3
     SulfuricAcid: 1

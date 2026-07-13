@@ -55,12 +55,11 @@
       limit: 1
       required: false
     enum.HumanoidVisualLayers.Chest:
-      limit: 1
+      limit: 2
       required: false
     enum.HumanoidVisualLayers.Overlay:
-      limit: 1
-      required: true
-      default: [ AndroidSensors ]
+      limit: 3
+      required: false
 
 - type: entity
   parent: BaseSpeciesAppearance
