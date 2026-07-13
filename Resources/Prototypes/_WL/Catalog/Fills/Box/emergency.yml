@@ -37,7 +37,6 @@
         - id: BioroboticMedipen
         - id: Flare
         - id: SkinPatch1
-        - id: SkinPatch1
         - id: DrinkInsulatorBottleFull
 
 - type: entity
@@ -55,7 +54,6 @@
         - id: EmergencyOxygenTankFilled
         - id: BioroboticMedipen
         - id: Flare
-        - id: SkinPatch1
         - id: SkinPatch1
         - id: DrinkInsulatorBottleFull
 
@@ -110,7 +108,6 @@
         - id: Flare
         - id: SkinPatch1
         - id: DrinkInsulatorBottleFull
-        - id: FoodBreadNutriBatard
 
 - type: entity
   parent: BoxSurvivalBiorobotic
