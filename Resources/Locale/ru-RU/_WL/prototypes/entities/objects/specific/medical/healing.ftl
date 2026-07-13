@@ -37,7 +37,7 @@ ent-SteelMesh1 = { ent-SteelMesh }
     .desc = { ent-SteelMesh.desc }
 
 ent-RepairTape = ремонтная лента
-    .desc = Ремонтная клеякая лента. Идеально подходит для закрытия пробоин, истекающих ритиумом.
+    .desc = Ремонтная клейкая лента. Идеально подходит для закрытия пробоин, истекающих ритиумом.
     .suffix = Полный
 
 ent-RepairTape1 = { ent-RepairTape }
