@@ -177,7 +177,7 @@
       params:
         volume: -6
 
-- type: emoteSound
+- type: emoteSounds
   id: GeneralBioroboticEmotes
   sounds:
     Clap:

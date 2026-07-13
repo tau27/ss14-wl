@@ -81,7 +81,7 @@
   parent: BaseHealingItem
   id: RepairSpray
   name: repair spray
-  description: Spray with remont foam.
+  description: Spray with repair foam.
   components:
   - type: Tag
     tags:
@@ -108,7 +108,7 @@
   parent: BaseHealingItem
   id: RepairSprayPlus
   name: repair spray plus
-  description: Spray with remont foam and coagulant.
+  description: Spray with repair foam and coagulant.
   components:
   - type: Tag
     tags:

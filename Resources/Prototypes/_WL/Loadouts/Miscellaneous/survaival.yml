@@ -69,3 +69,12 @@
   storage:
     back:
     - BoxSurvivalMilitaryDoubleBiorobotic
+
+- type: loadout
+  id: EmergencyBioroboticSecurity
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BioroboticBreather
+  storage:
+    back:
+    - BoxSurvivalBioroboticSecurity

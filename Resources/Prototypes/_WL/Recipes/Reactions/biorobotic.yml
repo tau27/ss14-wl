@@ -11,7 +11,7 @@
     FerrochromicAcid: 4
     Oxygen: 1
     Hydrogen: 2
-    Flourine: 1
+    Fluorine: 1
 
 - type: reaction
   id: RepairFoam
