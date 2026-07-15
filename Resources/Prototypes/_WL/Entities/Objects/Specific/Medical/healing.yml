@@ -239,6 +239,7 @@
       types:
         Slash: -2
         Piercing: -2
+        Shock: -2
     bloodlossModifier: -3
     healingBeginSound:
       path: "/Audio/_WL/Items/tape/duct_tape.ogg"
