@@ -163,8 +163,10 @@
   - type: Languages
     speaking:
       - Translate
+      - SikTair
     understood:
       - Translate
+      - SikTair
     specieLanguage: SikTair
   # WL-Changes: Languages
 
@@ -290,22 +292,22 @@
 - type: entity
   parent: [ OrganBaseStomach, OrganTajaranInternal, OrganTajaranMetabolizer ]
   id: OrganTajaranStomach
-  components:  
-  - type: SolutionManager  
+  components:
+  - type: SolutionManager
     solutions:
-    - SolutionStomach      
-    - SolutionTajaranFood  
+    - SolutionStomach
+    - SolutionTajaranFood
 
-- type: entity  
+- type: entity
   parent: SolutionFood
-  id: SolutionTajaranFood  
-  categories: [ HideSpawnMenu ]  
-  components:  
-  - type: Solution  
-    solution:  
-      maxVol: 5  
-      reagents:  
-      - ReagentId: UncookedAnimalProteins  
+  id: SolutionTajaranFood
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: UncookedAnimalProteins
         Quantity: 5
 
 - type: entity

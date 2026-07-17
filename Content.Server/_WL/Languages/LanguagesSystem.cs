@@ -106,9 +106,6 @@ public sealed partial class LanguagesSystem : SharedLanguagesSystem
         if (langs.Count == 0)
             return;
 
-        if (component.SpecieLanguage != null)
-            AddLanguage(ent, component.SpecieLanguage);
-
         foreach (ProtoId<LanguagePrototype> protoid in langs)
         {
             var proto = GetLanguagePrototype(protoid);

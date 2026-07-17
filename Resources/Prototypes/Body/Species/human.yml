@@ -101,8 +101,10 @@
   - type: Languages
     speaking:
       - Translate
+      - OldEarth
     understood:
       - Translate
+      - OldEarth
     specieLanguage: OldEarth
   #WL-Changes: Languages end
 

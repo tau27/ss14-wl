@@ -321,8 +321,10 @@
   - type: Languages
     speaking:
       - Translate
+      - Ternary
     understood:
       - Translate
+      - Ternary
     specieLanguage: Ternary
   - type: Instrument
     allowPercussion: false
