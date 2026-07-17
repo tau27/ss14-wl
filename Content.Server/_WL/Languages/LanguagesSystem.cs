@@ -291,21 +291,22 @@ public sealed partial class LanguagesSystem : SharedLanguagesSystem
         RadioChannelPrototype channel,
         bool colorize = true)
     {
-        var isSelf = listener == source;
         var canUnderstand = CanUnderstand(source, listener, msg);
 
         var language = GetLanguagePrototype(source, msg);
 
-        var color = GetColor(language, colorize, channel.Color);
+        var color = GetColor(language, colorize && canUnderstand, channel.Color);
 
         var (fontSize, fontId) = GetFontParams(language, speech.FontSize, speech.FontId);
 
         string message;
-        if (isSelf || canUnderstand)
+
+        if (canUnderstand)
         {
             if (TryProcessLanguageMessage(source, msg, out var parsed))
                 message = parsed;
-            else message = msg;
+            else
+                message = msg;
         }
         else
             message = ObfuscateMessageFromSource(msg, source);
@@ -314,7 +315,7 @@ public sealed partial class LanguagesSystem : SharedLanguagesSystem
             ? "chat-radio-message-wrap-bold-lang"
             : "chat-radio-message-wrap-lang";
 
-        if (!isSelf && !canUnderstand && IsObfusEmoting(source, msg))
+        if (!canUnderstand && IsObfusEmoting(source, msg))
             locId = "chat-radio-message-wrap-emote-lang";
 
         var wrappedMessage = Loc.GetString(locId,
