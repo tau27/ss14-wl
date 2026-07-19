@@ -141,8 +141,10 @@
   - type: Languages
     speaking:
       - Translate
+      - Urlum
     understood:
       - Translate
+      - Urlum
     specieLanguage: Urlum
   - type: AddHeightItem
 

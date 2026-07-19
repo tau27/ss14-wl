@@ -154,8 +154,10 @@
   - type: Languages
     speaking:
       - Translate
+      - OldEarth
     understood:
       - Translate
+      - OldEarth
     specieLanguage: OldEarth
   - type: Inventory
     femaleDisplacements:

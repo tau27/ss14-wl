@@ -146,8 +146,10 @@
   - type: Languages
     speaking:
       - Translate
+      - Arachny
     understood:
       - Translate
+      - Arachny
     specieLanguage: Arachny
   #WL-Changes: Languages end
 
