@@ -1,10 +1,16 @@
+using System.Linq;
+using Content.Shared._Goobstation.Sparks;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Atmos;
+using Content.Shared.Atmos.EntitySystems;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Construction;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
@@ -12,6 +18,7 @@ using Content.Shared.Popups;
 using Content.Shared.RCD.Components;
 using Content.Shared.Tag;
 using Content.Shared.Tiles;
+using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -21,7 +28,9 @@ using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using System.Linq;
+using Robust.Shared.Utility;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.RCD.Systems;
 
@@ -44,6 +53,15 @@ public sealed partial class RCDSystem : EntitySystem
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private TagSystem _tags = default!;
+    // WL-Changes-start
+    [Dependency] private SharedAtmosPipeLayersSystem _pipeLayersSystem = default!; // rpd port from FunkyStation
+    [Dependency] private IEntityManager _entityManager = default!; // rpd port from FunkyStation
+    [Dependency] private IRobustRandom _random = default!; // Ignition
+    [Dependency] private SharedIgnitionSourceSystem _source = default!; // Ignition
+    [Dependency] private SparksSystem _sparks = default!;
+    [Dependency] private ExamineSystemShared _examine = default!; // BRPD
+    // WL-Changes-end
+
 
     private readonly int _instantConstructionDelay = 0;
     private readonly EntProtoId _instantConstructionFx = "EffectRCDConstruct0";
@@ -53,17 +71,32 @@ public sealed partial class RCDSystem : EntitySystem
 
     private HashSet<EntityUid> _intersectingEntities = new();
 
+    [Access(Other = AccessPermissions.Read)]
+    public Dictionary<string, (string Tooltip, SpriteSpecifier? Sprite)> PrototypesGroupingInfo = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<RCDComponent, MapInitEvent>(OnMapInit);
+        // WL-Changes-start: rpd port from FunkyStation
+        SubscribeLocalEvent<RCDComponent, GetVerbsEvent<UtilityVerb>>(OnGetUtilityVerb);
+        SubscribeLocalEvent<RCDComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAlternativeVerb);
+        // WL-Changes-end
         SubscribeLocalEvent<RCDComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<RCDComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<RCDComponent, RCDDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<RCDComponent, DoAfterAttemptEvent<RCDDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<RCDComponent, RCDSystemMessage>(OnRCDSystemMessage);
         SubscribeNetworkEvent<RCDConstructionGhostRotationEvent>(OnRCDconstructionGhostRotationEvent);
+        // WL-Changes-start
+        SubscribeNetworkEvent<RCDConstructionGhostFlipEvent>(OnRCDConstructionGhostFlipEvent); // rpd port from FunkyStation
+        SubscribeNetworkEvent<RPDEyeRotationEvent>(OnRPDEyeRotationEvent); // rpd port from FunkyStation
+        SubscribeNetworkEvent<RDChangeModeEvent>(OnRDChangeModeEvent); // Ignition
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReload); // dehardcode
+        SubscribeNetworkEvent<RPDLayerUpdateEvent>(OnLayerChanged);
+        UpdateProtoList(); // dehardcode
+        // WL-Changes-end
     }
 
     #region Event handling
@@ -100,6 +133,65 @@ public sealed partial class RCDSystem : EntitySystem
         Dirty(uid, component);
     }
 
+    // WL-Changes-start
+    private void OnProtoReload(PrototypesReloadedEventArgs args) // dehardcode
+    {
+        if (args.WasModified<RDGroupPrototype>())
+            UpdateProtoList();
+    }
+
+    private void UpdateProtoList() // deharcode
+    {
+        PrototypesGroupingInfo.Clear();
+        var enume = _protoManager.EnumeratePrototypes<RDGroupPrototype>();
+        foreach (var proto in enume)
+        {
+            if (proto.Name == null)
+                continue;
+            PrototypesGroupingInfo.Add(proto.ID, (proto.Name, proto.Sprite));
+        }
+    }
+
+    private void OnLayerChanged(RPDLayerUpdateEvent ev, EntitySessionEventArgs session)
+    {
+        if (session.SenderSession.AttachedEntity is not { } player)
+            return;
+
+        var rcd = GetEntity(ev.NetEntity);
+
+        if (!_hands.TryGetActiveItem(player, out var held) || held != rcd)
+            return;
+
+        if (!TryComp<RCDComponent>(rcd, out var rcdComp) || rcdComp.CurrentLayer == ev.NewLayer)
+            return;
+
+        rcdComp.CurrentLayer = ev.NewLayer;
+        Dirty(rcd, rcdComp);
+    }
+
+    private void OnRDChangeModeEvent(RDChangeModeEvent ev, EntitySessionEventArgs session) // Ignition
+    {
+        if (session.SenderSession.AttachedEntity is not { } player)
+            return;
+
+        var rcd = GetEntity(ev.Rcd);
+
+
+        if (!_hands.TryGetActiveItem(player, out var held) || held != rcd)
+            return;
+
+        if (!TryComp<RCDComponent>(rcd, out var rcdComp) || !rcdComp.EnableIgnite)
+            return;
+
+        if (_random.Prob(rcdComp.IgniteChance))
+        {
+            _source.SetIgnited((rcd, null), true);
+            _sparks.DoSparks(Transform(rcd).Coordinates);
+            Timer.Spawn(rcdComp.IgnitedTime, () => _source.SetIgnited((rcd, null), false));
+        }
+    }
+    // WL-Changes-end
+
     private void OnExamine(EntityUid uid, RCDComponent component, ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -121,15 +213,84 @@ public sealed partial class RCDSystem : EntitySystem
         }
 
         args.PushMarkup(msg);
+
+        // WL-Changes-start: rpd port from FunkyStation
+        if (component.IsRpd)
+        {
+            var modeLoc = $"rcd-rpd-mode-{component.CurrentMode.ToString().ToLowerInvariant()}";
+            args.PushMarkup(Loc.GetString("rcd-component-examine-rpd-mode", ("mode", Loc.GetString(modeLoc))));
+        }
+        // WL-Changes-end
     }
 
-    private void OnAfterInteract(EntityUid uid, RCDComponent component, AfterInteractEvent args)
+    // WL-Changes-start: rpd port from FunkyStation
+    private void OnRPDEyeRotationEvent(RPDEyeRotationEvent ev, EntitySessionEventArgs session)
     {
-        if (args.Handled || !args.CanReach)
+        var uid = GetEntity(ev.NetEntity);
+
+        if (session.SenderSession.AttachedEntity is not { } player)
             return;
 
-        var user = args.User;
+        if (_hands.GetActiveItem(player) != uid)
+            return;
+
+        if (!TryComp<RCDComponent>(uid, out var rcd))
+            return;
+
+        // Update the layer if different
+        if (rcd.LastKnownEyeRotation != ev.EyeRotation)
+        {
+            rcd.LastKnownEyeRotation = ev.EyeRotation;
+            Dirty(uid, rcd); // WL-Changes: Sync
+        }
+    }
+
+    private void OnGetUtilityVerb(EntityUid uid, RCDComponent component, GetVerbsEvent<UtilityVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || !component.IsRpd)
+            return;
+
+        var verb = new UtilityVerb
+        {
+            Act = () => SwitchPipeMode(uid, component, args.User),
+            Text = Loc.GetString("rcd-verb-switch-mode"),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
+            Impact = LogImpact.Low
+        };
+
+        args.Verbs.Add(verb);
+    }
+
+    private void OnGetAlternativeVerb(EntityUid uid, RCDComponent component, GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || !component.IsRpd || !args.Using.HasValue)
+            return;
+
+        // Only show when alt-clicking the RPD itself (args.Using is the held item)
+        if (args.Using.Value != uid)
+            return;
+
+        var verb = new AlternativeVerb
+        {
+            Act = () => SwitchPipeMode(uid, component, args.User),
+            Text = Loc.GetString("rcd-verb-switch-mode"),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
+            Impact = LogImpact.Low
+        };
+
+        args.Verbs.Add(verb);
+    }
+    // WL-Changes-end
+    private void OnAfterInteract(EntityUid uid, RCDComponent component, AfterInteractEvent args)
+    {
+        // WL-Changes-start: BRPD
+        var distance = component.Range > 0 ? component.Range : SharedInteractionSystem.MaxRaycastRange;
         var location = args.ClickLocation;
+        if (args.Handled || !args.CanReach && !_transform.InRange(Transform(uid).Coordinates, location, distance))
+            return;
+        // WL-Changes-end
+
+        var user = args.User;
         var prototype = _protoManager.Index(component.ProtoId);
 
         // Initial validity checks
@@ -230,7 +391,8 @@ public sealed partial class RCDSystem : EntitySystem
             BreakOnMove = true,
             AttemptFrequency = AttemptFrequency.EveryTick,
             CancelDuplicate = false,
-            BlockDuplicate = false
+            BlockDuplicate = false,
+            DistanceThreshold = distance // WL-Changes: BRPD
         };
 
         args.Handled = true;
@@ -325,6 +487,46 @@ public sealed partial class RCDSystem : EntitySystem
         Dirty(uid, rcd);
     }
 
+    // WL-Changes-start: rpd port from FunkyStation
+    private void OnRCDConstructionGhostFlipEvent(RCDConstructionGhostFlipEvent ev, EntitySessionEventArgs session)
+    {
+        var uid = GetEntity(ev.NetEntity);
+
+        if (session.SenderSession.AttachedEntity is not { } player)
+            return;
+
+        if (_hands.GetActiveItem(player) != uid)
+            return;
+
+        if (!TryComp<RCDComponent>(uid, out var rcd))
+            return;
+
+        rcd.UseMirrorPrototype = ev.UseMirrorPrototype;
+        Dirty(uid, rcd);
+    }
+
+    private void SwitchPipeMode(EntityUid uid, RCDComponent component, EntityUid? user = null)
+    {
+        if (!component.IsRpd)
+            return;
+
+        // Cycle through modes
+        component.CurrentMode = component.CurrentMode switch
+        {
+            RpdMode.Primary => RpdMode.Secondary,
+            RpdMode.Secondary => RpdMode.Tertiary,
+            RpdMode.Tertiary => RpdMode.Free,
+            RpdMode.Free => RpdMode.Primary,
+            _ => RpdMode.Free
+        };
+
+        Dirty(uid, component);
+
+        if (user != null)
+            _audio.PlayPredicted(component.SoundSwitchMode, uid, user.Value);
+    }
+    // WL-Changes-end: rpd port from FunkyStation
+
     #endregion
 
     #region Entity construction/deconstruction rule checks
@@ -358,13 +560,36 @@ public sealed partial class RCDSystem : EntitySystem
             return false;
         }
 
-        // Exit if the target / target location is obstructed
-        var unobstructed = (target == null)
-            ? _interaction.InRangeUnobstructed(user, _mapSystem.GridTileToWorld(gridUid, mapGrid, position), popup: popMsgs)
-            : _interaction.InRangeUnobstructed(user, target.Value, popup: popMsgs);
+        // WL-Changes-start: BRPD
+        var fail = false;
 
-        if (!unobstructed)
+        // Exit if the target / target location is obstructed
+        if (component.Range > 0)
+        {
+            var unobstructedBasic = target == null
+            ? _interaction.InRangeUnobstructed(user, _mapSystem.GridTileToWorld(gridUid, mapGrid, position), component.Range)
+            : _interaction.InRangeUnobstructed(user, target.Value, component.Range);
+            fail = !unobstructedBasic;
+        }
+        else
+        {
+            var unobstructedVision = target == null
+            ? _examine.InRangeUnOccluded(user, _mapSystem.GridTileToWorld(gridUid, mapGrid, position), component.Range)
+            : _examine.InRangeUnOccluded(user, target.Value, component.Range);
+            var unobstructedBasic = target == null
+            ? _interaction.InRangeUnobstructed(user, _mapSystem.GridTileToWorld(gridUid, mapGrid, position), component.Range)
+            : _interaction.InRangeUnobstructed(user, target.Value, component.Range);
+
+            fail = !unobstructedVision && !unobstructedBasic;
+        }
+
+        if (fail)
+        {
+            if (popMsgs)
+                _popup.PopupClient(Loc.GetString("interaction-system-user-interaction-cannot-reach"), user, user);
             return false;
+        }
+        // WL-Changes-end
 
         // Return whether the operation location is valid
         switch (prototype.Mode)
@@ -373,7 +598,7 @@ public sealed partial class RCDSystem : EntitySystem
             case RcdMode.ConstructObject:
                 return IsConstructionLocationValid(uid, component, gridUid, mapGrid, tile, position, direction, user, popMsgs);
             case RcdMode.Deconstruct:
-                return IsDeconstructionStillValid(uid, tile, target, user, popMsgs);
+                return IsDeconstructionStillValid(uid, component, tile, target, user, popMsgs); // WL-Changes: rpd port from FunkyStation
         }
 
         return false;
@@ -460,11 +685,23 @@ public sealed partial class RCDSystem : EntitySystem
         _intersectingEntities.Clear();
         _lookup.GetLocalEntitiesIntersecting(gridUid, position, _intersectingEntities, -0.05f, LookupFlags.Uncontained);
 
+        // WL-Changes-start
+        var proto = (component.UseMirrorPrototype && !string.IsNullOrEmpty(prototype.MirrorPrototype))
+                    ? prototype.MirrorPrototype
+                    : prototype.Prototype;
+
+        if (component.IsRpd && prototype.HasLayers && proto != null &&
+            _protoManager.TryIndex<EntityPrototype>(proto, out var entityProto) &&
+            entityProto.TryGetComponent<AtmosPipeLayersComponent>(out var atmosPipeLayers, _entityManager.ComponentFactory) &&
+            _pipeLayersSystem.TryGetAlternativePrototype(atmosPipeLayers, component.CurrentLayer, out var newProtoId))
+            proto = newProtoId;
+        // WL-Changes-end
+
         foreach (var ent in _intersectingEntities)
         {
             // If the entity is the exact same prototype as what we are trying to build, then block it.
             // This is to prevent spamming objects on the same tile (e.g. lights)
-            if (prototype.Prototype != null && MetaData(ent).EntityPrototype?.ID == prototype.Prototype)
+            if (proto != null && MetaData(ent).EntityPrototype?.ID == proto) // WL-Changes
             {
                 var isIdentical = true;
 
@@ -474,6 +711,23 @@ public sealed partial class RCDSystem : EntitySystem
                     if (entDirection != direction)
                         isIdentical = false;
                 }
+
+                // WL-Changes-start: pipes for rpd
+                if (prototype.AllowCrossDirection)
+                {
+                    var entDirection = Transform(ent).LocalRotation.GetCardinalDir();
+                    if (entDirection is Direction.South or Direction.North)
+                    {
+                        if (entDirection is Direction.East or Direction.West)
+                            isIdentical = false;
+                    }
+                    else if (entDirection is Direction.East or Direction.West)
+                    {
+                        if (entDirection is Direction.South or Direction.North)
+                            isIdentical = false;
+                    }
+                }
+                // WL-Changes-end
 
                 if (isIdentical)
                 {
@@ -520,11 +774,23 @@ public sealed partial class RCDSystem : EntitySystem
         return true;
     }
 
-    private bool IsDeconstructionStillValid(EntityUid uid, TileRef tile, EntityUid? target, EntityUid user, bool popMsgs = true)
+    private bool IsDeconstructionStillValid(EntityUid uid, RCDComponent component, TileRef tile, EntityUid? target, EntityUid user, bool popMsgs = true) // WL-Changes: rpd port from FunkyStation
     {
         // Attempt to deconstruct a floor tile
         if (target == null)
         {
+            // WL-Changes-start: rpd port from FunkyStation
+            /* commented by WL, if u need - uncomment
+            if (component.IsRpd)
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-deconstruct-target-not-on-whitelist-message"), uid, user);
+
+                return false;
+            }
+            */
+            // WL-Changes-end
+
             // The tile is empty
             if (tile.Tile.IsEmpty)
             {
@@ -558,8 +824,19 @@ public sealed partial class RCDSystem : EntitySystem
         // Attempt to deconstruct an object
         else
         {
+            // WL-Changes-start: rpd port from FunkyStation
+            // The object is not in the RPD whitelist
+            if (!TryComp<RCDDeconstructableComponent>(target, out var deconstructible) || !deconstructible.RpdDeconstructable && component.IsRpd)
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-deconstruct-target-not-on-whitelist-message"), uid, user);
+
+                return false;
+            }
+
             // The object is not in the whitelist
-            if (!TryComp<RCDDeconstructableComponent>(target, out var deconstructible) || !deconstructible.Deconstructable)
+            if (!deconstructible.Deconstructable)
+            // WL-Changes-end
             {
                 if (popMsgs)
                     _popup.PopupClient(Loc.GetString("rcd-component-deconstruct-target-not-on-whitelist-message"), uid, user);
@@ -596,7 +873,39 @@ public sealed partial class RCDSystem : EntitySystem
                 break;
 
             case RcdMode.ConstructObject:
-                var ent = Spawn(prototype.Prototype, _mapSystem.GridTileToLocal(gridUid, mapGrid, position));
+                // WL-Changes-start: rpd port from FunkyStation
+                var proto = (component.UseMirrorPrototype && !string.IsNullOrEmpty(prototype.MirrorPrototype))
+                    ? prototype.MirrorPrototype
+                    : prototype.Prototype;
+
+                var setLayer = false; // WL_changes
+
+                if (component.IsRpd && prototype.HasLayers)
+                {
+                    if (_protoManager.TryIndex<EntityPrototype>(proto, out var entityProto) &&
+                        entityProto.TryGetComponent<AtmosPipeLayersComponent>(out var atmosPipeLayers, _entityManager.ComponentFactory)) // WL-changes
+                    {
+                        if (_pipeLayersSystem.TryGetAlternativePrototype(atmosPipeLayers, component.CurrentLayer, out var newProtoId))
+                            proto = newProtoId;
+                        else
+                            setLayer = true; // WL-changes
+                    }
+                }
+
+                // Calculate rotation before spawn
+                var rotation = prototype.Rotation switch
+                {
+                    RcdRotation.Fixed => Angle.Zero,
+                    RcdRotation.Camera => Transform(uid).LocalRotation,
+                    RcdRotation.User => direction.ToAngle(),
+                    _ => Angle.Zero // Fallback
+                };
+
+                var entityCoords = _mapSystem.GridTileToLocal(gridUid, mapGrid, position);
+                var mapCoords = _transform.ToMapCoordinates(entityCoords);
+
+                var ent = Spawn(proto, mapCoords, rotation: rotation);
+                // WL-Changes-end
 
                 switch (prototype.Rotation)
                 {
@@ -610,6 +919,9 @@ public sealed partial class RCDSystem : EntitySystem
                         Transform(ent).LocalRotation = direction.ToAngle();
                         break;
                 }
+
+                if (setLayer && TryComp<AtmosPipeLayersComponent>(ent, out var layers)) // WL-changes
+                    _pipeLayersSystem.SetPipeLayer((ent, layers), component.CurrentLayer);
 
                 _adminLogger.Add(LogType.RCD, LogImpact.High, $"{ToPrettyString(user):user} used RCD to spawn {ToPrettyString(ent)} at {position} on grid {gridUid}");
                 break;
@@ -655,7 +967,7 @@ public sealed partial class RCDDoAfterEvent : DoAfterEvent
     public NetCoordinates Location { get; private set; }
 
     [DataField(required: true)]
-    public NetEntity TargetGridId {get ; private set; }
+    public NetEntity TargetGridId { get; private set; }
 
     [DataField]
     public Direction Direction { get; private set; }
