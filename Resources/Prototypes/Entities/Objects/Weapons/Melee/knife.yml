@@ -6,7 +6,9 @@
   - type: Tag
     tags:
     - Knife
-  - type: Sharp
+  - type: Sharp # WL-Changes
+  - type: Execution
+    doAfterDuration: 4.0
   - type: Utensil
     types:
       - Knife
@@ -39,13 +41,9 @@
     size: Small
   - type: Tool
     qualities:
-      - Slicing
+    - Slicing
     useSound:
       path: /Audio/Items/Culinary/chop.ogg
-  # White-List components
-  - type: Execution
-    doAfterDuration: 4.0
-  # White-List components End
 
 - type: entity
   parent: BaseKnife
@@ -409,7 +407,6 @@
     components:
     - type: Execution
       doAfterDuration: 4.0
-    - type: Sharp
     - type: Utensil
       types:
       - Knife

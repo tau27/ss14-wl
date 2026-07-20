@@ -497,5 +497,10 @@ public enum LogType
     /// <summary>
     /// Events related to players connecting/disconnecting.
     /// </summary>
-    Connection = 106,
+    Connection = 105,
+
+    /// <summary>
+    /// Silicon law changes.
+    /// </summary>
+    SiliconLaw = 106,
 }

@@ -12,6 +12,7 @@ using Content.Server._WL.Poly;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
+using Content.Server.Corvax.Api.AHelp; // Corvax-API
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
@@ -112,8 +113,9 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/force_preset", ActionForcePreset);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/set_motd", ActionForceMotd);
         RegisterActorHandler(HttpMethod.Patch, "/admin/actions/panic_bunker", ActionPanicPunker);
+        AHelpBotApiSystem.RegisterStatusHostHandler(_statusHost, _entitySystemManager); // Corvax-API
 
-        //WL-Changes-start
+        //WL-Changes: Start
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/ahelp", ActionAhelp);
         RegisterHandler(HttpMethod.Post, "/player/actions/link/account", LinkDiscordAccount);
 
@@ -124,7 +126,7 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterHandler(HttpMethod.Get, "/admin/info/poly/random_message", PolyMessage);
 
         RegisterParameterizedHandler(HttpMethod.Get, $"/admin/info/poly/images/{{${Constants.PolyMapImage}}}.png", PolyImage);
-        //wL-Changes-end
+        //wL-Changes: Start
     }
 
     public void Initialize()

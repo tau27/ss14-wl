@@ -53,5 +53,7 @@ namespace Content.Server.Chat.Managers
         //WL-Changes-start
         event Action<ChatMessage> OnAfterChatMessage;
         //WL-Changes-end
+
+        string PrependFollowButtonIfAppropriate(string wrappedMessage, EntityUid source, INetChannel recipient);
     }
 }
