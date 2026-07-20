@@ -18,12 +18,12 @@ using Content.Shared.Standing;
 using Content.Shared.Strip.Components;
 using Content.Shared.Throwing;
 using Robust.Shared.Physics.Components;
-// WL Golem species start
+// WL-Changes: Golem start
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Buckle;
 using Robust.Shared.Prototypes;
 using Content.Shared._WL.Slippery;
-// WL Golem species end
+// WL-Changes: Golem end
 using Content.Shared.Tools.Systems;
 
 namespace Content.Shared.Mobs.Systems;

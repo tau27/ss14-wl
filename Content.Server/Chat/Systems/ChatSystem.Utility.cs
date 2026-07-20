@@ -66,13 +66,38 @@ public sealed partial class ChatSystem
     /// </summary>
     private void SendInVoiceRange(ChatChannel channel, string message, string wrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null)
     {
+        // WL-Changes: Lang X Chat start
+        var obfuscatedMessage = _languages.ObfuscateMessageFromSource(message, source);
+        var obfuscatedWrapMessage = wrappedMessage;
+        var obfuscatedChannel = channel;
+
+        if (_languages.IsObfusEmoting(source, message) && channel != ChatChannel.Looc) {
+            obfuscatedChannel = ChatChannel.Emotes;
+            obfuscatedWrapMessage = _languages.GetEmoteWrappedMessage(obfuscatedMessage, source, name);
+        } else {
+            obfuscatedWrapMessage = _languages.GetWrappedMessage(obfuscatedMessage, source, name, speech, false);
+        }
+        // WL-Changes: Lang X Chat end
+
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)
                 continue;
             var entHideChat = entRange == MessageRangeCheckResult.HideChat;
-            _chatManager.ChatMessageToOne(channel, message, wrappedMessage, source, entHideChat, session.Channel, author: author);
+
+            //WL-Changes: Lang X Chat start
+            if (session.AttachedEntity is not { Valid: true } playerEntity)
+            {
+                continue;
+            }
+
+            var listener = playerEntity.Value;
+            if (!_languages.CanUnderstand(source, listener, message))
+                _chatManager.ChatMessageToOne(obfuscatedChannel, obfuscatedMessage, obfuscatedWrapMessage, source, entHideChat, session.Channel, author: author);
+            else
+            //WL-Changes: Lang X Chat end
+                _chatManager.ChatMessageToOne(channel, message, wrappedMessage, source, entHideChat, session.Channel, author: author);
         }
 
         _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
