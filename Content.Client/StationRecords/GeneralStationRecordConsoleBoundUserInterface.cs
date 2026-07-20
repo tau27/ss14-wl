@@ -52,7 +52,7 @@ public sealed partial class GeneralStationRecordConsoleBoundUserInterface : Boun
             _recordsSys.TryGetRecord(key, out record, stationRecords);
         }
 
-        _window?.UpdateState(comp.ActiveKey, record, listing, comp.Filter, comp.CanDeleteEntries);
+        _window?.UpdateState(comp.ActiveKey, record, listing, comp.Filter, comp.CanDeleteEntries/*WL: Records start*/, comp.CanPrintEntries/*WL: Records end*/);
     }
 
     private void SelectStationRecord(uint? key)

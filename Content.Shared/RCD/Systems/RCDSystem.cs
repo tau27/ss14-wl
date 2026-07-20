@@ -142,7 +142,7 @@ public sealed partial class RCDSystem : EntitySystem
     private void UpdateProtoList() // deharcode
     {
         PrototypesGroupingInfo.Clear();
-        var enume = _protoManager.EnumeratePrototypes<RDGroupPrototype>();
+        var enume = ProtoMan.EnumeratePrototypes<RDGroupPrototype>();
         foreach (var proto in enume)
         {
             if (proto.Name == null)
@@ -282,14 +282,18 @@ public sealed partial class RCDSystem : EntitySystem
     // WL-Changes-end
     private void OnAfterInteract(EntityUid uid, RCDComponent component, AfterInteractEvent args)
     {
+        if (args.Handled || !args.CanReach)
+            return;
+
+        var user = args.User;
+        var location = args.ClickLocation;
+        var prototype = ProtoMan.Index(component.ProtoId);
+
         // WL-Changes-start: BRPD
         var distance = component.Range > 0 ? component.Range : SharedInteractionSystem.MaxRaycastRange;
-        var location = args.ClickLocation;
         if (args.Handled || !args.CanReach && !_transform.InRange(Transform(uid).Coordinates, location, distance))
             return;
         // WL-Changes-end
-
-        var prototype = ProtoMan.Index(component.ProtoId);
 
         // Initial validity checks
         if (!location.IsValid(EntityManager))
@@ -689,7 +693,7 @@ public sealed partial class RCDSystem : EntitySystem
                     : prototype.Prototype;
 
         if (component.IsRpd && prototype.HasLayers && proto != null &&
-            _protoManager.TryIndex<EntityPrototype>(proto, out var entityProto) &&
+            ProtoMan.TryIndex<EntityPrototype>(proto, out var entityProto) &&
             entityProto.TryGetComponent<AtmosPipeLayersComponent>(out var atmosPipeLayers, _entityManager.ComponentFactory) &&
             _pipeLayersSystem.TryGetAlternativePrototype(atmosPipeLayers, component.CurrentLayer, out var newProtoId))
             proto = newProtoId;
@@ -880,7 +884,7 @@ public sealed partial class RCDSystem : EntitySystem
 
                 if (component.IsRpd && prototype.HasLayers)
                 {
-                    if (_protoManager.TryIndex<EntityPrototype>(proto, out var entityProto) &&
+                    if (ProtoMan.TryIndex<EntityPrototype>(proto, out var entityProto) &&
                         entityProto.TryGetComponent<AtmosPipeLayersComponent>(out var atmosPipeLayers, _entityManager.ComponentFactory)) // WL-changes
                     {
                         if (_pipeLayersSystem.TryGetAlternativePrototype(atmosPipeLayers, component.CurrentLayer, out var newProtoId))

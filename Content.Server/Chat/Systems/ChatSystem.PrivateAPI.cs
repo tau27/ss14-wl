@@ -3,6 +3,7 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Radio;
+using Content.Shared._WL.Languages;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
@@ -66,14 +67,15 @@ public sealed partial class ChatSystem
             return;
         var obfuscatedMessage = _languages.ObfuscateMessageFromSource(message, source);
 
-        string obfusWrappedMessage;
+        var isEmoting = _languages.IsObfusEmoting(source, message);
 
-        if (_languages.IsObfusEmoting(source, message))
-            obfusWrappedMessage = _languages.GetEmoteWrappedMessage(obfuscatedMessage, source, name);
-        else
-            obfusWrappedMessage = _languages.GetWrappedMessage(obfuscatedMessage, source, name, speech, false);
+        var obfusWrappedMessage = isEmoting ? _languages.GetEmoteWrappedMessage(obfuscatedMessage, source, name)
+            : _languages.GetWrappedMessage(obfuscatedMessage, source, name, speech, false);
 
-        SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, obfusWrappedMessage, source, range);
+        var obfuscationChannel = isEmoting ? ChatChannel.Emotes
+            : ChatChannel.Local;
+
+        SendInVoiceRangeObfuscated(ChatChannel.Local, message, wrappedMessage, obfuscationChannel, obfuscatedMessage, obfusWrappedMessage, source, range);
         // WL-Change: Lang X Chat End
 
         var ev = new EntitySpokeEvent(source, message, originalMessage, null, null, /*WL-Changes: Languages*/obfuscatedMessage, null/*WL-Changes: Languages*/);
@@ -197,13 +199,13 @@ public sealed partial class ChatSystem
             if (MessageRangeCheck(session, data, range) != MessageRangeCheckResult.Full)
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
-            if ((data.Range <= WhisperClearRange || data.Observer) /*WL-Change: No talk in vacuum*/ && TryEntitySpeak(source))
+            if (data.Range <= WhisperClearRange || data.Observer)
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, /*WL-Changes: Languages*/afterMessage, afterWrappedMessage/*WL-Changes: Languages*/, source, false, session.Channel);
             //If listener is too far, they only hear fragments of the message
-            else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange) /*WL-Change: No talk in vacuum*/ && TryEntitySpeak(source))
+            else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, /*WL-Changes: Languages*/afterObfusMessage, afterWrappedObfuscatedMessage/*WL-Changes: Languages*/, source, false, session.Channel);
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
-            else /*WL-Change: No talk in vacuum*/ if (TryEntitySpeak(source))
+            else
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, /*WL-Changes: Languages*/afterObfusMessage, afterUnknownMessage/*WL-Changes: Languages*/, source, false, session.Channel);
 
         }

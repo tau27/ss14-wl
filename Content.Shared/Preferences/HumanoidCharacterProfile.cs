@@ -342,7 +342,7 @@ namespace Content.Shared.Preferences
         }
 
         // WL-Changes: Height start
-        public static string RandomHeight(SpeciesPrototype species)
+        public static int RandomHeight(SpeciesPrototype species)
         {
             var random = IoCManager.Resolve<IRobustRandom>();
 

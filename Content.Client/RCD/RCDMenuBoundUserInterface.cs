@@ -23,9 +23,10 @@ public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
 
     // WL-Changes: dehardcode start
     [Dependency] private IEntityManager _entityManager = default!;
-    private RCDSystem _rcd;
-    private HandsSystem _hands; // Ignition
+    [Dependency] private RCDSystem _rcd = default!;
+    [Dependency] private HandsSystem _hands = default!; // Ignition
     // WL-Changes: dehardcode end
+    private SimpleRadialMenu? _menu;
 
     private const string TopLevelActionCategory = "Main";
 
@@ -42,9 +43,8 @@ public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
 
     private bool IsRpd => EntMan.TryGetComponent<RCDComponent>(Owner, out var rcd) && rcd.IsRpd; // WL-Changes: rpd port from FunkyStation
 
-        _rcd = _entityManager.System<RCDSystem>();
-        _hands = _entityManager.System<HandsSystem>();
-        // WL-Changes-end
+    public RCDMenuBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
     }
 
     protected override void Open()

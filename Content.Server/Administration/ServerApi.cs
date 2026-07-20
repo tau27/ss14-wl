@@ -116,12 +116,7 @@ public sealed partial class ServerApi : IPostInjectInit
         AHelpBotApiSystem.RegisterStatusHostHandler(_statusHost, _entitySystemManager); // Corvax-API
 
         //WL-Changes: Start
-        RegisterActorHandler(HttpMethod.Post, "/admin/actions/ahelp", ActionAhelp);
-        RegisterHandler(HttpMethod.Post, "/player/actions/link/account", LinkDiscordAccount);
-
         RegisterHandler(HttpMethod.Post, "/player/info/discord", GetLinkedAccount);
-
-        RegisterActorHandler(HttpMethod.Patch, "/admin/actions/server/shutdown", ShutdownServer);
 
         RegisterHandler(HttpMethod.Get, "/admin/info/poly/random_message", PolyMessage);
 
@@ -311,40 +306,6 @@ public sealed partial class ServerApi : IPostInjectInit
             _sawmill.Info($"Игрок {session.Name} подключил к игровому аккаунту дискорд-аккаунт с ID {discord_user_id}.");
 
             await RespondOk(context);
-        });
-    }
-
-    private async Task ActionAhelp(IStatusHandlerContext context, Actor actor)
-    {
-        var body = await ReadJson<AhelpBody>(context);
-        if (body == null)
-            return;
-
-        await RunOnMainThread(async () =>
-        {
-            var bwoink = _entitySystemManager.GetEntitySystem<BwoinkSystem>();
-            var ticker = _entitySystemManager.GetEntitySystem<GameTicker>();
-
-            var targetUsername = body.TargetUsername;
-            var senderNetId = actor.Record;
-
-            if (!_playerManager.TryGetSessionByUsername(targetUsername, out var session))
-            {
-                await RespondBadRequest(context, "Указанного guid игрока нет на сервере на данный момент.");
-                return;
-            }
-
-            var record = actor.Record;
-
-            var sent = await bwoink.HandleDiscordAhelp(new(session.UserId, senderNetId.UserId, body.Message),
-                record.LastSeenUserName,
-                record.UserId,
-                !actor.IsStuffBot
-            );
-
-            _sawmill.Info($"Администратор {record.LastSeenUserName} дистанционно отправил сообщение \"{body.Message}\" игроку {session.Name}");
-
-            await (sent ? RespondOk(context) : RespondError(context, ErrorCode.BadRequest, HttpStatusCode.NotAcceptable, "Вы не являетесь администратором!"));
         });
     }
     //WL-Changes-end

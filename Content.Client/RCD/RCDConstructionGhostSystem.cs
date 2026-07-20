@@ -55,7 +55,7 @@ public sealed partial class RCDConstructionGhostSystem : EntitySystem
             var placerEntity = _placementManager.CurrentPermission?.MobUid;
 
             if (!TryComp<RCDComponent>(placerEntity, out var rcd) ||
-                string.IsNullOrEmpty(_protoManager.Index(rcd.ProtoId).MirrorPrototype))
+                string.IsNullOrEmpty(ProtoMan.Index(rcd.ProtoId).MirrorPrototype))
                 return false;
 
             _useMirrorPrototype = !rcd.UseMirrorPrototype;

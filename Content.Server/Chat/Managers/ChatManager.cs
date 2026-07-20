@@ -64,10 +64,6 @@ internal sealed partial class ChatManager : IChatManager
 
     private readonly Dictionary<NetUserId, ChatUser> _players = new();
 
-    //WL-Changes-start
-    public event Action<ChatMessage> OnAfterChatMessage = (msg) => { };
-    //WL-Changes-end
-
     public void Initialize()
     {
         IoCManager.Instance!.TryResolveType(out _sponsorsManager); // Corvax-Sponsors
@@ -130,7 +126,7 @@ internal sealed partial class ChatManager : IChatManager
         // _sawmill might have not been initialized when DispatchServerAnnouncement is called
         // during server setup when some cvars are changed
         _sawmill?.Info(message);
-        
+
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Server announcement: {message}");
     }
 
@@ -395,10 +391,6 @@ internal sealed partial class ChatManager : IChatManager
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume);
         _netManager.ServerSendMessage(new MsgChatMessage() { Message = msg }, client);
 
-        //WL-Changes-start
-        OnAfterChatMessage.Invoke(msg);
-        //WL-Changes-end
-
         if (!recordReplay)
             return;
 
@@ -424,10 +416,6 @@ internal sealed partial class ChatManager : IChatManager
             var msg = new ChatMessage(channel, message, customWrapMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume);
             _netManager.ServerSendMessage(new MsgChatMessage { Message = msg }, client);
         }
-
-        //WL-Changes-start
-        OnAfterChatMessage.Invoke(msg);
-        //WL-Changes-end
 
         if (!recordReplay)
             return;
@@ -464,9 +452,6 @@ internal sealed partial class ChatManager : IChatManager
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume);
 
         _netManager.ServerSendToAll(new MsgChatMessage() { Message = msg });
-        //WL-Changes-start
-        OnAfterChatMessage.Invoke(msg);
-        //WL-Changes-end
 
         if (!recordReplay)
             return;

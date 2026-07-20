@@ -53,7 +53,7 @@ public sealed partial class JukeboxSystem : SharedJukeboxSystem
     private void StartPlaying(EntityUid uid, JukeboxComponent component)
     {
         if (string.IsNullOrEmpty(component.SelectedSongId) ||
-            !_protoManager.Resolve(component.SelectedSongId, out var jukeboxProto))
+            !ProtoMan.Resolve(component.SelectedSongId, out var jukeboxProto))
         {
             return;
         }
@@ -86,7 +86,7 @@ public sealed partial class JukeboxSystem : SharedJukeboxSystem
         if (!args.IsInDetailsRange)
             return;
 
-        if (!_protoManager.TryIndex(component.SelectedSongId, out var proto) ||
+        if (!ProtoMan.TryIndex(component.SelectedSongId, out var proto) ||
             component.AudioStream == null ||
             !TryComp<AudioComponent>(component.AudioStream, out var audioComp) ||
             audioComp.State is AudioState.Paused)

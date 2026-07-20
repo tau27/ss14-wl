@@ -145,7 +145,7 @@ public sealed partial class SalvageSystem
         component.Missions.Clear();
 
         //WL-Changes-start
-        var difficulties = _prototypeManager.EnumeratePrototypes<SalvageDifficultyPrototype>();
+        var difficulties = ProtoMan.EnumeratePrototypes<SalvageDifficultyPrototype>();
         //WL-Changes-end
 
         for (var i = 0; i < MissionLimit; i++)

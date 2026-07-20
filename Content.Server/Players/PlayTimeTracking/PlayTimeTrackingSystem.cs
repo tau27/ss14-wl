@@ -243,7 +243,7 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
     public bool IsAllowed(ICommonSession player, ProtoId<JobPrototype> job)
     {
         // WL-Changes-start
-        if (!_prototypes.TryIndex(job, out var job_proto))
+        if (!ProtoMan.TryIndex(job, out var job_proto))
             return false;
 
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
@@ -308,7 +308,7 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
         foreach (var job in ProtoMan.EnumeratePrototypes<JobPrototype>())
         {
             if (!JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, ProtoMan, /*WL-Changes-start*/_cfg/*WL-Changes-end*/, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter))
-                roles.Add(job.ID);
+                disallowed.Add(job.ID);
         }
 
         return disallowed;

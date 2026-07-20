@@ -92,7 +92,8 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
         GeneralStationRecord? record,
         Dictionary<uint, string>? recordListing,
         StationRecordsFilter? filter,
-        bool canDeleteEntries)
+        bool canDeleteEntries,
+        bool canPrintRecords) // WL-Changes: Records
     {
         if (filter != null)
         {
@@ -109,7 +110,7 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
 
         StationRecordsFilterType.SelectId((int)_currentFilterType);
 
-        PrintButton.Disabled = !state.CanPrintRecords; // WL-Records
+        PrintButton.Disabled = !canPrintRecords; // WL-Changes: Records
 
         if (recordListing == null)
         {

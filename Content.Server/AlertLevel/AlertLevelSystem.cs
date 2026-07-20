@@ -149,7 +149,7 @@ public sealed partial class AlertLevelSystem : EntitySystem
             // WL-Changes: Alert Level Rework
             || component.CurrentLevel == level
             || !component.AlertLevels.Levels.Contains(level)
-            || !_prototypeManager.TryIndex<AlertLevelPrototype>(level, out var prototype)
+            || !ProtoMan.TryIndex<AlertLevelPrototype>(level, out var prototype)
             || prototype == null)
             return;
             // WL-Changes-end

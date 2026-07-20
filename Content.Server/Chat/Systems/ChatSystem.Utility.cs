@@ -61,24 +61,9 @@ public sealed partial class ChatSystem
         return initialResult;
     }
 
-    /// <summary>
-    ///     Sends a chat message to the given players in range of the source entity.
-    /// </summary>
-    private void SendInVoiceRange(ChatChannel channel, string message, string wrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null)
+    // WL-Changes: Lang X Chat start
+    private void SendInVoiceRangeObfuscated(ChatChannel channel, string message, string wrappedMessage, ChatChannel obfuscatedChannel, string obfuscatedMessage, string obfuscatedWrapMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null)
     {
-        // WL-Changes: Lang X Chat start
-        var obfuscatedMessage = _languages.ObfuscateMessageFromSource(message, source);
-        var obfuscatedWrapMessage = wrappedMessage;
-        var obfuscatedChannel = channel;
-
-        if (_languages.IsObfusEmoting(source, message) && channel != ChatChannel.Looc) {
-            obfuscatedChannel = ChatChannel.Emotes;
-            obfuscatedWrapMessage = _languages.GetEmoteWrappedMessage(obfuscatedMessage, source, name);
-        } else {
-            obfuscatedWrapMessage = _languages.GetWrappedMessage(obfuscatedMessage, source, name, speech, false);
-        }
-        // WL-Changes: Lang X Chat end
-
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
             var entRange = MessageRangeCheck(session, data, range);
@@ -92,12 +77,30 @@ public sealed partial class ChatSystem
                 continue;
             }
 
-            var listener = playerEntity.Value;
+            var listener = playerEntity;
             if (!_languages.CanUnderstand(source, listener, message))
                 _chatManager.ChatMessageToOne(obfuscatedChannel, obfuscatedMessage, obfuscatedWrapMessage, source, entHideChat, session.Channel, author: author);
             else
             //WL-Changes: Lang X Chat end
                 _chatManager.ChatMessageToOne(channel, message, wrappedMessage, source, entHideChat, session.Channel, author: author);
+        }
+
+        _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
+    }
+    // WL-Changes: Lang X Chat start
+
+    /// <summary>
+    ///     Sends a chat message to the given players in range of the source entity.
+    /// </summary>
+    private void SendInVoiceRange(ChatChannel channel, string message, string wrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null)
+    {
+        foreach (var (session, data) in GetRecipients(source, VoiceRange))
+        {
+            var entRange = MessageRangeCheck(session, data, range);
+            if (entRange == MessageRangeCheckResult.Disallowed)
+                continue;
+            var entHideChat = entRange == MessageRangeCheckResult.HideChat;
+            _chatManager.ChatMessageToOne(channel, message, wrappedMessage, source, entHideChat, session.Channel, author: author);
         }
 
         _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));

@@ -219,7 +219,7 @@ namespace Content.Server.GameTicking
                 // had no available job priorities (ie Captain on Dev) set, then the player will spawn as a ghost
                 // Corvax-Sponsors-Start
                 var sponsorPrototypes = _sponsors != null && _sponsors.TryGetServerPrototypes(player.UserId, out var prototypes) ? prototypes.ToArray() : [];
-                character.Appearance = HumanoidCharacterAppearance.EnsureValid(character.Appearance, character.Species, character.Sex, sponsorPrototypes);
+                character.Appearance = HumanoidCharacterAppearance.EnsureValid(character.Appearance, character.Species, character.Sex);
                 // Corvax-Sponsors-End
             }
 
