@@ -15,7 +15,7 @@ namespace Content.Server.Speech.Muting
         public override void Initialize()
         {
             base.Initialize();
-            SubscribeLocalEvent<MutedComponent, SpeakAttemptEvent>(OnSpeakAttempt);
+            // SubscribeLocalEvent<MutedComponent, SpeakAttemptEvent>(OnSpeakAttempt); WL-Chages: Languages
             SubscribeLocalEvent<MutedComponent, EmoteEvent>(OnEmote, before: new[] { typeof(VocalSystem), typeof(MumbleAccentSystem) });
             SubscribeLocalEvent<MutedComponent, ScreamActionEvent>(OnScreamAction, before: new[] { typeof(VocalSystem) });
         }

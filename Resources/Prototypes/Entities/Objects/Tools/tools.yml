@@ -363,7 +363,7 @@
     - CableTerminal
     - Deconstruct
   - type: LimitedCharges
-    maxCharges: 30
+    maxCharges: 300 # WL-Changes: rpd port from FunkyStation
   - type: Sprite
     sprite: Objects/Tools/rcd.rsi
     state: icon
@@ -376,7 +376,7 @@
     - Belt
   - type: PhysicalComposition
     materialComposition:
-      Steel: 600
+      Steel: 400 # WL-Changes
       Plastic: 100
   # WL-Sounds-Start
   - type: EmitSoundOnPickup
@@ -399,6 +399,8 @@
   - type: ActivatableUI
     inHandsOnly: true
     key: enum.RcdUiKey.Key
+  - type: IgnitionSource # WL-Changes: RD Ignite
+    temperature: 800
 
 - type: entity
   id: RCDEmpty
@@ -416,9 +418,9 @@
   suffix: AutoRecharge
   components:
   - type: LimitedCharges
-    maxCharges: 20
+    maxCharges: 200 # WL-Changes: rpd port from FunkyStation
   - type: AutoRecharge
-    rechargeDuration: 10
+    rechargeDuration: 1 # WL-Changes
 
 - type: entity
   id: RCDExperimental
@@ -428,7 +430,7 @@
   description: A bluespace-enhanced rapid construction device that passively generates its own compressed matter.
   components:
   - type: AutoRecharge
-    rechargeDuration: 1
+    rechargeDuration: 0.1
 
 - type: entity
   name: compressed matter

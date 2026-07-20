@@ -194,8 +194,10 @@
   - type: Languages
     speaking:
       - Translate
+      - SintaUnati
     understood:
       - Translate
+      - SintaUnati
     specieLanguage: SintaUnati
   #WL-Changes: Languages end
 
