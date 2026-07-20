@@ -860,10 +860,10 @@
   - type: Sprite
     layers:
     - state: default
-    - state: stripe_top
-      color: *color-supply-top
-    - state: stripe_bottom
-      color: *color-supply-bottom
+    # - state: stripe_top
+    #   color: *color-supply-top
+    # - state: stripe_bottom
+    #   color: *color-supply-bottom
     - sprite: *icon-rsi
       offset: *icon-offset
       state: SeniorCourier

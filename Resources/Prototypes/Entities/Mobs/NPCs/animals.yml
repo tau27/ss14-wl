@@ -2088,12 +2088,6 @@
       behaviors:
       - !type:GibBehavior
         recursive: false
-  # WL-Night-Vision-Start
-  - type: NightVision
-    color: "#A3A3A3"
-    activateSound: null
-    deactivateSound: null
-  # WL-Night-Vision-End
 
 - type: entity
   abstract: true
@@ -2757,12 +2751,6 @@
         Heat: -0.03
         Cold: -0.03
         Shock: -0.03
-  # WL-Night-Vision-Start
-  - type: NightVision
-    color: "#A3A3A3"
-    activateSound: null
-    deactivateSound: null
-  # WL-Night-Vision-End
 
 - type: entity
   parent: [SolutionWeapon, SolutionTiny]

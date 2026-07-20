@@ -131,12 +131,6 @@
     qualities: Slicing
   - type: TTS # Corvax-TTS
     voice: Rat
-  # WL-Night-Vision-Start
-  - type: NightVision
-    color: "#A3A3A3"
-    activateSound: null
-    deactivateSound: null
-  # WL-Night-Vision-End
 
 - type: entity
   id: MobRatKingBuff
@@ -313,7 +307,7 @@
     sprite: Mobs/Effects/onfire.rsi
     normalState: Mouse_burning
   # WL-Night-Vision-Start
-  - type: NightVision
+  - type: NightVisionEye
     color: "#A3A3A3"
     activateSound: null
     deactivateSound: null

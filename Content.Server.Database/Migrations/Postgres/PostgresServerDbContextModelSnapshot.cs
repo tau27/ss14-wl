@@ -890,7 +890,31 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("custom_vote_log", (string)null);
                 });
 
-            // WL-Changes: DS connect start
+            modelBuilder.Entity("Content.Server.Database.CustomVoteLogOption", b =>
+                {
+                    b.Property<int>("VoteId")
+                        .HasColumnType("integer")
+                        .HasColumnName("vote_id");
+
+                    b.Property<short>("OptionIdx")
+                        .HasColumnType("smallint")
+                        .HasColumnName("option_idx");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("text");
+
+                    b.Property<int>("VoteCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("vote_count");
+
+                    b.HasKey("VoteId", "OptionIdx")
+                        .HasName("PK_custom_vote_log_option");
+
+                    b.ToTable("custom_vote_log_option", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.DiscordConnection", b =>
                 {
                     b.Property<int>("Id")
@@ -919,32 +943,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsUnique();
 
                     b.ToTable("discord_connections", (string)null);
-                });
-            // WL-Changes: DS connect end
-
-            modelBuilder.Entity("Content.Server.Database.CustomVoteLogOption", b =>
-                {
-                    b.Property<int>("VoteId")
-                        .HasColumnType("integer")
-                        .HasColumnName("vote_id");
-
-                    b.Property<short>("OptionIdx")
-                        .HasColumnType("smallint")
-                        .HasColumnName("option_idx");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("text");
-
-                    b.Property<int>("VoteCount")
-                        .HasColumnType("integer")
-                        .HasColumnName("vote_count");
-
-                    b.HasKey("VoteId", "OptionIdx")
-                        .HasName("PK_custom_vote_log_option");
-
-                    b.ToTable("custom_vote_log_option", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
@@ -1335,7 +1333,7 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("species");
 
-                    b.Property<string>("TTSVoice")  // Corvax-TTS
+                    b.Property<string>("TTSVoice")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ttsvoice");

@@ -117,7 +117,7 @@
   - type: StripModifiers
     stripTimeReduction: 0
     stripTimeMultiplier: 0.5
-  - type: NightVision
+  - type: NightVisionEye
     toggleAction: PulseEchoVision
     isEquipment: false
     color: "#000"

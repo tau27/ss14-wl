@@ -6,7 +6,6 @@
   - type: Tag
     tags:
     - Knife
-  - type: Sharp # WL-Changes
   - type: Execution
     doAfterDuration: 4.0
   - type: Utensil
