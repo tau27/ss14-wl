@@ -97,10 +97,7 @@
   id: MobFelinid
   components:
   - type: Vocal
-    sounds:
-      Male: MaleFelinid
-      Female: FemaleFelinid
-      Unsexed: MaleFelinid
+    emoteSounds: FemaleFelinid
   - type: MovementSpeedModifier
     baseSprintSpeed: 5.1
 #  - type: Damageable
