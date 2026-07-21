@@ -52,11 +52,11 @@ namespace Content.Server.Database
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
+        public DbSet<ProfileJobSkills> ProfileJobSkills { get; set; } = null!; // WL-Changes
         public DbSet<CustomVoteLog> CustomVoteLog { get; set; } = null!;
         public DbSet<CustomVoteLogOption> CustomVoteLogOption { get; set; } = null!;
 
         //WL-Changes: Start
-        public DbSet<ProfileJobSkills> ProfileJobSkills { get; set; } = null!;
         public DbSet<DiscordConnection> DiscordConnections { get; set; } = null!;
         //WL-Changes: End
 
