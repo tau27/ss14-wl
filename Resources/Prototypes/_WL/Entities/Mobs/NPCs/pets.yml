@@ -105,10 +105,7 @@
   - type: TypingIndicator
     proto: vulpkanin
   - type: Vocal
-    sounds:
-      Male: MaleVulpkanin
-      Female: FemaleVulpkanin
-      Unsexed: FemaleVulpkanin
+    emoteSounds: MaleVulpkanin
   - type: NightVisionEye
     color: "#A3A3A3"
     activateSound: /Audio/_WL/Effects/sniff.ogg
