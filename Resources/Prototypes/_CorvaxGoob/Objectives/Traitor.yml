@@ -51,7 +51,7 @@
     title: objective-condition-teach-lesson-title
   - type: PickRandomPerson
     conditions:
-    - !type:BodyMindFilter
+    - !type:BodyWhitelistCondition
       whitelist:
         components:
         - CommandStaff
