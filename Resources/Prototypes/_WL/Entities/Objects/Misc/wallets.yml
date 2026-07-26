@@ -32,16 +32,18 @@
     maxItemSize: Small
     whitelist:
       tags:
-      - Trash
       - Paper
       components:
       - Passport
       - IgnitionSource # For lighters
       - Cash
       - Injector # Hypospray and medipens
+      - NukeDisk
     blacklist:
       tags:
       - CigPack
+      components:
+      - Storage
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -119,8 +121,8 @@
     - 0,0,4,1
     whitelist:
       tags:
-      - Trash
       - Paper
+      - HighRiskItem
       components:
       - Passport
       - IdCard # Hiding cards from others, kinda cool
