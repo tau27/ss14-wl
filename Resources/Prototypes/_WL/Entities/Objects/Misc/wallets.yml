@@ -33,6 +33,7 @@
     whitelist:
       tags:
       - Paper
+      - Pen
       components:
       - Passport
       - IgnitionSource # For lighters
@@ -57,6 +58,7 @@
   - type: ContainerContainer
     containers:
       idSlot: !type:ContainerSlot
+        showEnts: true
       storagebase: !type:Container
   - type: Tag
     tags:
@@ -124,6 +126,7 @@
       tags:
       - Paper
       - HighRiskItem
+      - Pen
       components:
       - Passport
       - IdCard # Hiding cards from others, kinda cool
