@@ -25,12 +25,9 @@ public sealed partial class StationAiEmoteVisibilitySystem : EntitySystem
     {
 
         if (ev.ChatType != InGameICChatType.Emote)
-        {
             return;
-        }
 
         var coreQuery = EntityQueryEnumerator<StationAiCoreComponent>();
-        var range = 10;
 
         while (coreQuery.MoveNext(out var coreUid, out var core))
         {
@@ -50,17 +47,16 @@ public sealed partial class StationAiEmoteVisibilitySystem : EntitySystem
             if (core.RemoteEntity is not { } remoteEntity)
                 continue;
 
-            if (!_examine.InRangeUnOccluded(remoteEntity, ev.Source, range))
+            if (!_examine.InRangeUnOccluded(remoteEntity, ev.Source, ev.VoiceRange))
                 continue;
 
             if (!_examine.CanExamine(heldAi.Value, ev.Source))
                 continue;
 
             ev.Recipients[actor.PlayerSession] = new ChatSystem.ICChatRecipientData(
-                Range: 10f,
+                Range: ev.VoiceRange,
                 Observer: false
             );
-
         }
     }
 }
