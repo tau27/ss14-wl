@@ -229,7 +229,15 @@ namespace Content.Server.Preferences.Managers
                 profile.Confederation, // WL-Records
                 profile.Country, // WL-Records
                 jobSkills // WL-Skills
-            );
+            )
+            {
+                // WL-Changes-Start: Speech barks
+                BarkVoice = profile.BarkVoice,
+                BarkPitch = profile.BarkPitch,
+                BarkMinDelay = profile.BarkMinDelay,
+                BarkMaxDelay = profile.BarkMaxDelay,
+                // WL-Changes-End
+            };
         }
 
         private async void HandleSelectCharacterMessage(MsgSelectCharacter message)

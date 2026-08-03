@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared.Corvax.TTS;
+using Content.Shared._WL.Barks; // WL-Changes
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.IdentityManagement;
@@ -52,6 +53,16 @@ public sealed partial class HumanoidProfileSystem : EntitySystem
         {
             _TTSComponent.VoicePrototypeId = profile.TTSVoice;
         }
+        // WL-Changes-Start: Speech barks
+        if (TryComp<SpeechBarksComponent>(ent, out var barks))
+        {
+            barks.Voice = profile.BarkVoice;
+            barks.Pitch = profile.BarkPitch;
+            barks.MinDelay = profile.BarkMinDelay;
+            barks.MaxDelay = profile.BarkMaxDelay;
+            Dirty(ent.Owner, barks);
+        }
+        // WL-Changes-End
         // Corvax-TTS-end
         //Wl-Changes: Height start
         ent.Comp.Height = profile.Height;
