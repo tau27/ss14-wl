@@ -1,5 +1,6 @@
 using Content.Shared._WL.Research.Prototypes;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -13,28 +14,41 @@ public sealed partial class ResearchServerNewComponent : Component
     /// </summary>
     [AutoNetworkedField]
     [DataField("serverName"), ViewVariables(VVAccess.ReadWrite)]
-    public string ServerName = "MAINSERVER";
+    public string ServerName = "RDMAINSERVER";
 
     [AutoNetworkedField]
     [DataField("points")]
-    public Dictionary<ProtoId<ResearchPointsTypePrototype>, int> PointsDict { get; set; } = new();
+    public Dictionary<ProtoId<ResearchPointsTypePrototype>, double> PointsDict { get; set; } = new();
 
-    /// <summary>
-    /// A unique numeric id representing the server
-    /// </summary>
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
     public int Id;
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public List<ResearchPointsTypePrototype> AllowedPointsTypes = new();
+    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
+    public List<ProtoId<ResearchPointsTypePrototype>> AllowedPointsTypes = new();
 
     [ViewVariables(VVAccess.ReadOnly)]
     public List<EntityUid> Clients = new();
+
+    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
+    public Dictionary<ProtoId<ResearchCategoryPrototype>, ResearchField> ResearchedData = new();
 
     [DataField("nextUpdateTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextUpdateTime = TimeSpan.Zero;
 
     [DataField("researchConsoleUpdateTime"), ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan ResearchConsoleUpdateTime = TimeSpan.FromSeconds(1);
+}
+
+[ByRefEvent]
+public record struct GetServerResearchEvent
+{
+    public EntityUid Server;
+    public Dictionary<ProtoId<ResearchCategoryPrototype>, (Dictionary<ProtoId<ResearchTypePrototype>, double>, double, ProtoId<ResearchPointsTypePrototype>)> ResearchData;
+
+    public GetServerResearchEvent(EntityUid server)
+    {
+        Server = server;
+        ResearchData = new();
+    }
 }
