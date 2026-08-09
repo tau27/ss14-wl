@@ -1,14 +1,17 @@
+using Robust.Shared.Serialization;
+
 namespace Content.Shared._WL.Types;
 
+//[Serializable, NetSerializable]
 public sealed class RobustableArray<T>
 {
     private readonly T[] _data;
     private readonly int[] _dimensions;
     private readonly int[] _strides;
 
-    public RobustableArray(int[] dimensions)
+    public RobustableArray(ReadOnlySpan<int> dimensions)
     {
-        _dimensions = dimensions;
+        _dimensions = dimensions.ToArray();
         _strides = new int[dimensions.Length];
 
         var total = 1;
@@ -16,7 +19,7 @@ public sealed class RobustableArray<T>
         for (int i = dimensions.Length - 1; i >= 0; i--)
         {
             _strides[i] = total;
-            total *= dimensions.Length
+            total *= dimensions[i];
         }
 
         _data = new T[total];
@@ -24,19 +27,25 @@ public sealed class RobustableArray<T>
 
     public T Get(ReadOnlySpan<int> index)
     {
-        return _data[GetOffset[index]];
+        return _data[GetOffset(index)];
     }
 
     public void Set(ReadOnlySpan<int> index, T value)
     {
-        _data[GetOffset[index]] = value;
+        _data[GetOffset(index)] = value;
     }
 
     private int GetOffset(ReadOnlySpan<int> index)
     {
         int offset = 0;
 
-        for (int i = 0, i < index.Leght, i++)
+        var debugString = _strides.ToString();
+        if (debugString is not null)
+            Logger.Debug(debugString);
+        else
+            Logger.Debug("STRIDES NULL");
+
+        for (int i = 0; i < index.Length; i++)
         {
             offset += _strides[i] * index[i];
         }

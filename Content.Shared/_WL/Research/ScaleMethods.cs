@@ -13,9 +13,17 @@ public abstract partial class ScaleMethod
 
     public double GetModifier(int x, int size)
     {
-        double sized = x/size;
+        double sized = Math.Clamp((double)x/(double)size, 0, 1);
 
-        return (GetModifier(sized) + min) * max;
+        return GetModifier(sized) * max + min;
+    }
+}
+
+public sealed partial class ConstMethod : ScaleMethod
+{
+    internal override double GetModifier(double x)
+    {
+        return 0.5;
     }
 }
 

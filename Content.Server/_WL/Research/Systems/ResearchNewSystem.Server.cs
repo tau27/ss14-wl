@@ -47,7 +47,8 @@ public sealed partial class ResearchSystemNew
 
         if (!CanRun(uid))
             return;
-        // ModifyServerPoints(uid, GetPointsPerSecond(uid, component) * time, component);
+
+        MakeResearch(uid, component);
     }
 
     private void MakeResearch(EntityUid ent, ResearchServerNewComponent? server = null)
@@ -73,6 +74,7 @@ public sealed partial class ResearchSystemNew
                 server.ResearchedData.Add(categoryId, new ResearchField(categoryProto.ResearchTypes.ToArray(), categoryProto.MaxPoints));
 
                 server.PointsDict[pointsType] += server.ResearchedData[categoryId].ResearchData(rawData, points);
+                Logger.Debug(server.PointsDict[pointsType].ToString());
             }
         }
 

@@ -30,7 +30,7 @@ public sealed partial class ResearchServerNewComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public List<EntityUid> Clients = new();
 
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
     public Dictionary<ProtoId<ResearchCategoryPrototype>, ResearchField> ResearchedData = new();
 
     [DataField("nextUpdateTime", customTypeSerializer: typeof(TimeOffsetSerializer))]

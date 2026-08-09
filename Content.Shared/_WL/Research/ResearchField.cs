@@ -1,5 +1,5 @@
 using System.Linq;
-usnig Content.Shared._WL.Types;
+using Content.Shared._WL.Types;
 using Content.Shared._WL.Research.Components;
 using Content.Shared._WL.Research.Prototypes;
 using Robust.Shared.Prototypes;
@@ -21,12 +21,12 @@ public struct ResearchPoint
         Value = 0;
     }
 
-    public double AddPoints(double value)
+    public ResearchPoint AddPoints(double value, out double diff)
     {
-        var diff = Math.Min(Max, Value + value) - Value;
-        Value = Math.Min(Max, Value + value);
+        diff = Math.Min(Max, Value + value) - Value;
+        Value += diff;
 
-        return diff;
+        return this;
     }
 
     public bool IsMax()
@@ -35,7 +35,7 @@ public struct ResearchPoint
     }
 }
 
-[Serializable, NetSerializable]
+//[Serializable, NetSerializable]
 public sealed partial class ResearchField
 {
     public int Rank { get; private set; }
@@ -73,7 +73,7 @@ public sealed partial class ResearchField
 
     private (RobustableArray<ResearchPoint>, double) GenField(ResearchTypePrototype[] researchProtos, ReadOnlySpan<int> sizes)
     {
-        var field = RobustableArray<ResearchPoint>(sizes);
+        var field = new RobustableArray<ResearchPoint>(sizes);
 
         var count = 1;
         var rank = sizes.Length;
@@ -85,23 +85,23 @@ public sealed partial class ResearchField
 
         double sum = 0;
 
-        for (int i = count; i > 0; i--)
+        for (int i = count - 1; i >= 0; i--)
         {
             int[] coords = new int[rank];
-            var timedCount = count;
-            double max = 1;
+            double max = 0;
+            var offset = i;
 
-            for (int j = 0; j < rank; j++)
+            for (int j = rank - 1; j >= 0; j--)
             {
-                timedCount /= sizes[j];
-                coords[j] = i % (count/timedCount);
+                coords[j] = offset % sizes[j];
+                offset /= sizes[j];
 
                 max += researchProtos[j].GetScale(coords[j]);
             }
 
             sum += max;
 
-            field.SetValue(new ResearchPoint(max), coords);
+            field.Set(coords, new ResearchPoint(max));
         }
 
         return (field, sum);
@@ -125,10 +125,10 @@ public sealed partial class ResearchField
             }
         }
 
-        if (FieldArray.Get(coords.AsSpan()) is not ResearchPoint point)
-            return 0;
+        var point = FieldArray.Get(coords.AsSpan()).AddPoints(points * _fieldScale, out var diff);
+        FieldArray.Set(coords.AsSpan(), point);
 
-        return point.AddPoints(points);
+        return diff / _fieldScale;
     }
 
     /*

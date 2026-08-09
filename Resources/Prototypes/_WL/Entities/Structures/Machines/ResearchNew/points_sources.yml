@@ -15,9 +15,9 @@
   - type: PointsSourceDebug
     pointsType: IT
     category: DebugCategory1
-    typesDict:
+    researches:
       DebugType1: 10
-      DebugType2: 5
+      DebugType2: 0
   - type: PointLight
     radius: 1.5
     energy: 3.0
