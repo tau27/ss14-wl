@@ -17,7 +17,7 @@ public sealed partial class ResearchSystemNew
     {
         foreach (var type in ent.Comp.AllowedPointsTypes)
         {
-            ent.Comp.PointsDict.TryAdd(type, 0);
+            ent.Comp.PointsDict.TryAdd(type, (0, 0, 0));
         }
 
         var unusedId = EntityQuery<ResearchServerNewComponent>(true)
@@ -56,6 +56,11 @@ public sealed partial class ResearchSystemNew
         if (!Resolve(ent, ref server))
             return;
 
+        foreach (var (key, (value, maxValue, _)) in server.PointsDict)
+        {
+            server.PointsDict[key] = (value, maxValue, 0);
+        }
+
         var ev = new GetServerResearchEvent(ent);
         foreach (var client in server.Clients)
         {
@@ -64,21 +69,31 @@ public sealed partial class ResearchSystemNew
 
         foreach (var (categoryId, (rawData, points, pointsType)) in ev.ResearchData)
         {
+            var (pointsValue, maxPoints, pointsPS) = server.PointsDict[pointsType];
+            double addValue;
+
             if (server.ResearchedData.ContainsKey(categoryId))
             {
-                server.PointsDict[pointsType] += server.ResearchedData[categoryId].ResearchData(rawData, points);
+                addValue = server.ResearchedData[categoryId].ResearchData(rawData, points);
             }
             else
             {
                 var categoryProto = ProtoMan.Index(categoryId);
                 server.ResearchedData.Add(categoryId, new ResearchField(categoryProto.ResearchTypes.ToArray(), categoryProto.MaxPoints));
 
-                server.PointsDict[pointsType] += server.ResearchedData[categoryId].ResearchData(rawData, points);
-                Logger.Debug(server.PointsDict[pointsType].ToString());
+                addValue = server.ResearchedData[categoryId].ResearchData(rawData, points);
             }
+
+            server.PointsDict[pointsType] = (pointsValue + addValue, maxPoints + addValue, pointsPS + addValue);
         }
 
         Dirty(ent, server);
+
+        var ev2 = new ResearchServerNewUpdatedEvent();
+        foreach (var client in server.Clients)
+        {
+            RaiseLocalEvent(client, ref ev2);
+        }
     }
 
     /// <summary>

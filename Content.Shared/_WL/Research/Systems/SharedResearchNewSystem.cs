@@ -7,4 +7,5 @@ using Robust.Shared.Utility;
 namespace Content.Shared._WL.Research.Systems;
 
 public abstract partial class SharedResearchNewSystem : EntitySystem
-{ }
+{
+}

@@ -14,6 +14,7 @@ public sealed partial class ResearchSystemNew
         SubscribeLocalEvent<ResearchClientNewComponent, MapInitEvent>(OnClientMapInit);
         SubscribeLocalEvent<ResearchClientNewComponent, ComponentShutdown>(OnClientShutdown);
         SubscribeLocalEvent<ResearchClientNewComponent, BoundUIOpenedEvent>(OnClientUIOpen);
+        SubscribeLocalEvent<ResearchClientNewComponent, TerminalServerSelectionMessage>(OnTerminalSelect);
         SubscribeLocalEvent<ResearchClientNewComponent, AnchorStateChangedEvent>(OnClientAnchorStateChanged);
 
         SubscribeLocalEvent<ResearchClientNewComponent, ResearchClientSyncMessage>(OnClientSyncMessage);
@@ -84,6 +85,14 @@ public sealed partial class ResearchSystemNew
         {
             UnregisterClient(ent, ent.Comp);
         }
+    }
+
+    private void OnTerminalSelect(EntityUid uid, ResearchClientNewComponent component, TerminalServerSelectionMessage args)
+    {
+        if (!this.IsPowered(uid, EntityManager))
+            return;
+
+        _uiSystem.TryToggleUi(uid, ResearchClientUiKey.Key, args.Actor);
     }
 
     private void UpdateClientInterface(EntityUid uid, ResearchClientNewComponent? component = null)

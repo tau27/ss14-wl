@@ -18,7 +18,7 @@ public sealed partial class ResearchServerNewComponent : Component
 
     [AutoNetworkedField]
     [DataField("points")]
-    public Dictionary<ProtoId<ResearchPointsTypePrototype>, double> PointsDict { get; set; } = new();
+    public Dictionary<ProtoId<ResearchPointsTypePrototype>, (double, double, double)> PointsDict { get; set; } = new(); // current, max, per second
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
@@ -52,3 +52,6 @@ public record struct GetServerResearchEvent
         ResearchData = new();
     }
 }
+
+[ByRefEvent]
+public readonly record struct ResearchServerNewUpdatedEvent();

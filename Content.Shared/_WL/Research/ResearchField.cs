@@ -130,16 +130,4 @@ public sealed partial class ResearchField
 
         return diff / _fieldScale;
     }
-
-    /*
-    public bool Equals(ResearchField? other)
-    {
-        if (other == null ||
-                Rank != other.Rank ||
-                ResearchTypes != other.ResearchTypes)
-            return false;
-
-        return true;
-    }
-    */
 }

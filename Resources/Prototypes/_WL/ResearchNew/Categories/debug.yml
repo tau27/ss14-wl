@@ -1,7 +1,7 @@
 - type: researchCategory
   id: DebugCategory1
   name: debug
-  maxPoints: 10000
+  maxPoints: 100000000
   researchTypes:
     - DebugType1
     - DebugType2
