@@ -31,6 +31,12 @@
     - Instrument
     - BioChem
     - Experimental
+  - type: ResearchDatabase
+    supportedDisciplines:
+      - Industrial
+      - Arsenal
+      - Experimental
+      - CivilianServices
   - type: ApcPowerReceiver
     powerLoad: 200
   - type: ExtensionCableReceiver

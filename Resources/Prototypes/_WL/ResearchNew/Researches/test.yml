@@ -1,0 +1,14 @@
+- type: technology
+  id: TestResearch1
+  name: research-test-name
+  icon:
+    sprite: Structures/Machines/seed_extractor.rsi
+    state: seedextractor
+  discipline: CivilianServices
+  tier: 1
+  pointsCost:
+    IT: 1
+  recipeUnlocks:
+  - SeedExtractorMachineCircuitboard
+  - HydroponicsTrayMachineCircuitboard
+  - ReagentGrinderIndustrialMachineCircuitboard

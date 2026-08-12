@@ -33,6 +33,9 @@ public sealed partial class ResearchServerNewComponent : Component
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public Dictionary<ProtoId<ResearchCategoryPrototype>, ResearchField> ResearchedData = new();
 
+    [ViewVariables(VVAccess.ReadOnly)]
+    public List<ProtoId<ResearchPrototype>> ResearchQueue = new();
+
     [DataField("nextUpdateTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextUpdateTime = TimeSpan.Zero;
 
@@ -52,6 +55,9 @@ public record struct GetServerResearchEvent
         ResearchData = new();
     }
 }
+
+[ByRefEvent]
+public readonly record struct GetResearchSpeedEvent(double Speed);
 
 [ByRefEvent]
 public readonly record struct ResearchServerNewUpdatedEvent();

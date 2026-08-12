@@ -2,6 +2,8 @@ using System.Linq;
 using Content.Server.Power.EntitySystems;
 using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Components;
+using Content.Shared._WL.Research.Prototypes;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._WL.Research.Systems;
 
@@ -94,6 +96,21 @@ public sealed partial class ResearchSystemNew
         {
             RaiseLocalEvent(client, ref ev2);
         }
+    }
+
+    public double GetResearchSpeed(EntityUid uid, ProtoId<ResearchPrototype> researchProto, ResearchServerNewComponent? server = null)
+    {
+        if (!Resolve(uid, ref server))
+            return 0;
+
+        var ev = new GetResearchSpeedEvent(1);
+
+        foreach (var client in server.Clients)
+        {
+            RaiseLocalEvent(client, ref ev);
+        }
+
+        return ev.Speed;
     }
 
     /// <summary>
