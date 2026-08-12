@@ -39,6 +39,7 @@ public sealed partial class NanoChatUiFragment : BoxContainer
     private const string DirectoryVisibleTexture = "/Textures/_WL/Interface/NanoChat/eye-open.svg.192dpi.png";
     private const string DirectoryHiddenTexture = "/Textures/_WL/Interface/NanoChat/eye-slash.svg.192dpi.png";
     private const float MessageBubbleMaxWidth = 300f;
+    internal const float FollowBottomThreshold = 28f;
 
     private static readonly Color AccentColor = Color.FromHex("#58BCE8");
     private static readonly Color SelectedEntryColor = Color.FromHex("#27404D");
@@ -415,7 +416,6 @@ public sealed partial class NanoChatUiFragment : BoxContainer
         }
 
         _lastRenderedChat = current;
-        RequestScrollToBottom();
     }
 
     private void SubmitMessage()
@@ -584,16 +584,28 @@ public sealed partial class NanoChatUiFragment : BoxContainer
             return false;
 
         var latestMessage = nextMessages![^1];
-        return latestMessage.Sender == nextState.OwnNumber || IsNearBottom();
+        var viewportBottom = MessagesScroll.VScrollTarget + MessagesScroll.Size.Y;
+        return ShouldFollowNewMessage(
+            latestMessage.Sender,
+            nextState.OwnNumber,
+            MessageList.Size.Y,
+            viewportBottom);
     }
 
-    private bool IsNearBottom()
+    /// <summary>
+    ///     Decides whether a new message should move the viewport. The dimensions must describe the
+    ///     existing list before it is rebuilt, so an incoming message cannot change this decision.
+    /// </summary>
+    internal static bool ShouldFollowNewMessage(
+        uint sender,
+        uint ownNumber,
+        float contentHeight,
+        float viewportBottom)
     {
-        if (!MessagesScroll.Visible)
+        if (sender == ownNumber)
             return true;
 
-        var hiddenHeight = MessageList.DesiredSize.Y - (MessagesScroll.VScroll + MessagesScroll.Size.Y);
-        return hiddenHeight <= 28f || MathHelper.CloseToPercent(hiddenHeight, 0f, 0.08f);
+        return contentHeight - viewportBottom <= FollowBottomThreshold;
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -601,6 +613,11 @@ public sealed partial class NanoChatUiFragment : BoxContainer
         base.FrameUpdate(args);
 
         if (!_scrollToBottom || !MessagesScroll.Visible)
+            return;
+
+        // UI frame updates run before queued layout updates. Keep the request until the newly
+        // rebuilt message list has been measured and the scroll range reflects its final height.
+        if (!MessageList.IsMeasureValid || !MessagesScroll.IsArrangeValid)
             return;
 
         _scrollToBottom = false;
