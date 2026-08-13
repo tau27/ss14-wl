@@ -51,6 +51,22 @@ public sealed partial class ResearchSystemNew
             return;
 
         MakeResearch(uid, component);
+
+        TryUpdateResearches(uid, component);
+    }
+
+    private void TryUpdateResearches(EntityUid uid, ResearchServerNewComponent? server = null, ResearchDatabaseComponent? database = null)
+    {
+        if (!Resolve(uid, ref server) || !Resolve(uid, ref database))
+            return;
+
+        UpdateResearchesProgress(uid, database, server);
+        UpdateResearchesStatus(uid, database, server);
+
+        foreach (var client in server.Clients)
+        {
+            SyncClientWithServer(client);
+        }
     }
 
     private void MakeResearch(EntityUid ent, ResearchServerNewComponent? server = null)
@@ -98,7 +114,7 @@ public sealed partial class ResearchSystemNew
         }
     }
 
-    public double GetResearchSpeed(EntityUid uid, ProtoId<ResearchPrototype> researchProto, ResearchServerNewComponent? server = null)
+    public int GetResearchSpeed(EntityUid uid, ResearchServerNewComponent? server = null)
     {
         if (!Resolve(uid, ref server))
             return 0;
@@ -124,7 +140,6 @@ public sealed partial class ResearchSystemNew
     public void RegisterClient(EntityUid client, EntityUid server, ResearchClientNewComponent? clientComponent = null,
         ResearchServerNewComponent? serverComponent = null,  bool dirtyServer = true)
     {
-        Logger.Debug("Try register");
         if (!Resolve(client, ref clientComponent, false) || !Resolve(server, ref serverComponent, false))
             return;
 

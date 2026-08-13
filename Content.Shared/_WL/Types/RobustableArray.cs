@@ -39,12 +39,6 @@ public sealed class RobustableArray<T>
     {
         int offset = 0;
 
-        var debugString = _strides.ToString();
-        if (debugString is not null)
-            Logger.Debug(debugString);
-        else
-            Logger.Debug("STRIDES NULL");
-
         for (int i = 0; i < index.Length; i++)
         {
             offset += _strides[i] * index[i];

@@ -30,6 +30,11 @@ public sealed class AnimatedProgressBar : Robust.Client.UserInterface.Controls.R
 
     public float StripeSkew { get; set; } = 1f;
 
+    public void SetTime(float time)
+    {
+        _time = time;
+    }
+
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
@@ -69,7 +74,7 @@ public sealed class AnimatedProgressBar : Robust.Client.UserInterface.Controls.R
 
         var skew = size.Y * StripeSkew;
 
-        for (var x = -skew - period + offset; x < fillWidth + period; x += period)
+        for (var x = -period + offset; x < skew + fillWidth + period; x += period)
         {
             _polygon.Clear();
 

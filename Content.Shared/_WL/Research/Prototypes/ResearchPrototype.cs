@@ -28,10 +28,10 @@ public sealed partial class ResearchPrototype : IPrototype
     public int Tier;
 
     [DataField(required: true)]
-    public List<ProtoId<ResearchPrototype>> ParentsResearches = new();
-
-    [DataField(required: true)]
     public Dictionary<ProtoId<ResearchPointsTypePrototype>, double> PointsCost = new();
+
+    [DataField("parents")]
+    public List<ProtoId<ResearchPrototype>> ParentsResearches = new();
 
     [DataField]
     public bool Hidden;

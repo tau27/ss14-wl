@@ -44,18 +44,22 @@ public readonly record struct ResearchDatabaseModifiedEvent(List<string>? NewlyU
 [ByRefEvent]
 public readonly record struct ResearchDatabaseSynchronizedEvent;
 
+[Serializable, NetSerializable]
 public struct ResearchState
 {
-    public ResearchStatus Status = ResearchStatus.NotResearched;
+    public ResearchStatus Status { get; set; }
 
-    public ResearchDepsStatus DepsState = ResearchDepsStatus.Allowed;
+    public ResearchDepsStatus DepsState { get; set; }
 
-    public int ResearchedPackages = 0;
+    public double ResearchedPackages = 0;
 
     public ProtoId<ResearchModePrototype> ModeId = "Default";
 
     public ResearchState()
-    { }
+    {
+        Status = ResearchStatus.NotResearched;
+        DepsState = ResearchDepsStatus.Allowed;
+    }
 }
 
 [Serializable, NetSerializable]

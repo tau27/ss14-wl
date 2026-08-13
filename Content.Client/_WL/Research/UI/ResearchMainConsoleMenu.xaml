@@ -4,8 +4,8 @@
                       xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
                       xmlns:wl="clr-namespace:Content.Client._WL.UI"
                       Title="{Loc 'research-console-menu-title'}"
-                      MinSize="625 400"
-                      SetSize="760 550">
+                      MinSize="1140 400"
+                      SetSize="1140 550">
     <BoxContainer Orientation="Vertical"
                   HorizontalExpand="True"
                   VerticalExpand="True">
@@ -64,19 +64,53 @@
                                               Margin="0 2 10 2" />
                             </BoxContainer>
                             <customControls:VSeparator/>
-                            <BoxContainer Name="PointsValuesContainer"
-                                          Orientation="Vertical"
-                                          VerticalExpand="True"
+                            <BoxContainer Orientation="Vertical"
                                           HorizontalExpand="True"
-                                          SizeFlagsStretchRatio="2"
-                                          Margin="0 2 10 2" />
+                                          VerticalExpand="True"
+                                          HorizontalAlignment="Center"
+                                          Margin="0 2 10 2">
+                                <BoxContainer Orientation="Horizontal"
+                                              HorizontalExpand="True"
+                                              VerticalExpand="False"
+                                              VerticalAlignment="Top"
+                                              HorizontalAlignment="Center"
+                                              Margin="44 2 10 2">
+                                    <BoxContainer Orientation="Horizontal"
+                                                  VerticalExpand="False"
+                                                  HorizontalExpand="True"
+                                                  MinWidth="120"
+                                                  Margin="10 0 0 0">
+                                        <Label Text="Кол-во" StyleClasses="LabelKeyText" HorizontalAlignment="Center"/>
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Horizontal"
+                                                  VerticalExpand="False"
+                                                  HorizontalExpand="True"
+                                                  MinWidth="120"
+                                                  Margin="35 0 0 0">
+                                        <Label Text="Макс" StyleClasses="LabelKeyText" HorizontalAlignment="Center"/>
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Horizontal"
+                                                  VerticalExpand="False"
+                                                  HorizontalExpand="True"
+                                                  MinWidth="120"
+                                                  Margin="10 0 0 0">
+                                        <Label Text="В секунду" StyleClasses="LabelKeyText" HorizontalAlignment="Center"/>
+                                    </BoxContainer>
+                                </BoxContainer>
+                                <BoxContainer Name="PointsValuesContainer"
+                                              Orientation="Vertical"
+                                              VerticalExpand="True"
+                                              HorizontalExpand="True"
+                                              SizeFlagsStretchRatio="2"
+                                              Margin="0 2 10 2" />
+                            </BoxContainer>
                         </BoxContainer>
                     </BoxContainer>
                 </PanelContainer>
                 <Control MinHeight="10"/>
                 <wl:AnimatedProgressBar HorizontalExpand="True"
-                                MinHeight="20"
-                                Progress="0.1">
+                                MinHeight="200"
+                                Value="10.1">
                     <Label Text="{Loc 'research-console-unlocked-text'}" HorizontalAlignment="Center"/>
                 </wl:AnimatedProgressBar>
                 <Label Text="{Loc 'research-console-unlocked-text'}" HorizontalAlignment="Center"/>
@@ -101,7 +135,7 @@
                           HorizontalExpand="True"
                           SizeFlagsStretchRatio="3"
                           Margin="0 0 10 10">
-                <PanelContainer VerticalExpand="True" MinSize="0 200">
+                <PanelContainer VerticalExpand="True" MinSize="300 200">
                     <PanelContainer.PanelOverride>
                         <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
                     </PanelContainer.PanelOverride>
@@ -111,11 +145,16 @@
                         SizeFlagsStretchRatio="2"
                         VerticalExpand="True">
                         <BoxContainer
-                            Name="TechnologyCardsContainer"
-                            MinSize="100 256"
+                            Name="ResearchQueueContainer"
+                            MinSize="300 256"
                             Orientation="Vertical"
                             SizeFlagsStretchRatio="2"
                             VerticalExpand="True">
+                            <wl:AnimatedProgressBar HorizontalExpand="True"
+                                            MinSize="300 40"
+                                            Value="10.1">
+                                <Label Text="{Loc 'research-console-unlocked-text'}" HorizontalAlignment="Center"/>
+                            </wl:AnimatedProgressBar>
                         </BoxContainer>
                     </ScrollContainer>
                 </PanelContainer>

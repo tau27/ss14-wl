@@ -10,7 +10,28 @@ public sealed partial class ResearchSystemNew
 {
     private void InitializeTerminal()
     {
+        SubscribeLocalEvent<ResearchMainConsoleComponent, TerminalStartResearchMessage>(OnStartResearch);
         SubscribeLocalEvent<ResearchMainConsoleComponent, ResearchServerNewUpdatedEvent>(OnServerUpdated);
+    }
+
+    private void OnStartResearch(EntityUid uid, ResearchMainConsoleComponent component, TerminalStartResearchMessage args)
+    {
+        var act = args.Actor;
+
+        if (!this.IsPowered(uid, EntityManager))
+            return;
+
+        if (!ProtoMan.TryIndex<ResearchPrototype>(args.Id, out var technologyPrototype))
+            return;
+
+        if(!TryGetClientServer(uid, out var serverUid, out var serverComp))
+            return;
+
+        if (!TryStartResearch(serverUid.Value, args.Id, serverComp))
+            return;
+
+        SyncClientWithServer(uid);
+        UpdateConsoleInterface(uid, component);
     }
 
     private void OnServerUpdated(EntityUid uid, ResearchMainConsoleComponent component, ref ResearchServerNewUpdatedEvent args)
@@ -29,11 +50,16 @@ public sealed partial class ResearchSystemNew
         ResearchMainConsoleBoundInterfaceState state;
 
         var pointsData = new Dictionary<ProtoId<ResearchPointsTypePrototype>, (double, double, double)>();
+        var researchData = new Dictionary<ProtoId<ResearchPrototype>, ResearchState>();
+
         if (TryGetClientServer(uid, out _, out var serverComponent, clientComponent) &&
                 clientComponent.ConnectedToServer)
             pointsData = serverComponent.PointsDict;
 
-        state = new ResearchMainConsoleBoundInterfaceState(pointsData);
+        if (TryComp<ResearchDatabaseComponent>(uid, out var database))
+            researchData = database.Researches;
+
+        state = new ResearchMainConsoleBoundInterfaceState(pointsData, researchData);
 
         _uiSystem.SetUiState(uid, ResearchMainConsoleUiKey.Key, state);
     }

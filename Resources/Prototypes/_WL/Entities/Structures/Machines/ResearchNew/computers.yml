@@ -18,6 +18,7 @@
       state: generic_panel_open
   - type: ResearchClientNew
   - type: ResearchMainConsole
+  - type: ResearchDatabase
   - type: ActivatableUI
     key: enum.ResearchMainConsoleUiKey.Key
   - type: UserInterface

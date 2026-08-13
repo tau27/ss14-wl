@@ -57,7 +57,7 @@ public record struct GetServerResearchEvent
 }
 
 [ByRefEvent]
-public readonly record struct GetResearchSpeedEvent(double Speed);
+public readonly record struct GetResearchSpeedEvent(int Speed);
 
 [ByRefEvent]
 public readonly record struct ResearchServerNewUpdatedEvent();

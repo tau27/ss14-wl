@@ -24,13 +24,11 @@ public sealed class ResearchMainConsoleBoundUserInterface : BoundUserInterface
         _consoleMenu = this.CreateWindow<ResearchMainConsoleMenu>();
         _consoleMenu.SetEntity(owner);
 
-        /*
-        _consoleMenu.OnTechnologyCardPressed += id =>
+        _consoleMenu.OnResearchStartPressed += id =>
         {
-            SendMessage(new ConsoleUnlockTechnologyMessage(id));
+            SendMessage(new TerminalStartResearchMessage(id));
         };
 
-        */
         _consoleMenu.OnServerButtonPressed += () =>
         {
             SendMessage(new TerminalServerSelectionMessage());
@@ -61,6 +59,6 @@ public sealed class ResearchMainConsoleBoundUserInterface : BoundUserInterface
             return;
 
         _consoleMenu?.UpdatePoints(castState);
-        //_consoleMenu?.UpdateInformationPanel(castState);
+        _consoleMenu?.UpdateResearches(castState);
     }
 }

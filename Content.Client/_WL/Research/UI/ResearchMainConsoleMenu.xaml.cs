@@ -14,18 +14,20 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Robust.Shared.Timing;
 
 namespace Content.Client._WL.Research.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class ResearchMainConsoleMenu : FancyWindow
 {
-    public Action<string>? OnTechnologyCardPressed;
+    public Action<string>? OnResearchStartPressed;
     public Action? OnServerButtonPressed;
 
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
     //private readonly ResearchSystem _research;
     private readonly SpriteSystem _sprite;
     private readonly AccessReaderSystem _accessReader;
@@ -102,9 +104,10 @@ public sealed partial class ResearchMainConsoleMenu : FancyWindow
                     VerticalExpand = true,
                     HorizontalExpand = true,
                     Margin = new Thickness(4),
+                    MinWidth = 120,
                     Children = { new Label
                         {
-                            Text = value.ToString("N2"),
+                            Text = value.ToString("N"),
                             FontColorOverride = typeProto.Color,
                             HorizontalAlignment = Label.HAlignment.Center
                         }
@@ -116,38 +119,30 @@ public sealed partial class ResearchMainConsoleMenu : FancyWindow
 
             PointsValuesContainer.AddChild(valuesContainer);
         }
+    }
 
-        /*
-        //SyncTechnologyList(AvailableCardsContainer, availableTech);
-
-        if (!_entity.TryGetComponent(Entity, out TechnologyDatabaseComponent? database))
+    public void UpdateResearches(ResearchMainConsoleBoundInterfaceState state)
+    {
+        if (!_entity.TryGetComponent<ResearchDatabaseComponent>(Entity, out var database))
             return;
 
-        // i can't figure out the spacing so here you go
-        TechnologyCardsContainer.AddChild(new Control
+        ResearchQueueContainer.Children.Clear();
+        ResearchQueueContainer.AddChild(new Control
         {
             MinHeight = 10
         });
 
-        var hasAccess = _player.LocalEntity is not { } local ||
-                        !_entity.TryGetComponent<AccessReaderComponent>(Entity, out var access) ||
-                        _accessReader.IsAllowed(local, Entity, access);
-        foreach (var techId in database.CurrentTechnologyCards)
+        foreach (var (resId, resState) in database.Researches)
         {
-            var tech = _prototype.Index<TechnologyPrototype>(techId);
-            var cardControl = new TechnologyCardControl(tech, _prototype, _sprite, _research.GetTechnologyDescription(tech, includeTier: false), state.Points, hasAccess);
-            cardControl.OnPressed += () => OnTechnologyCardPressed?.Invoke(techId);
-            TechnologyCardsContainer.AddChild(cardControl);
+            var resProto = _prototype.Index<ResearchPrototype>(resId);
+            var cardControl = new ResearchQueueCardControl(resProto, resState, _prototype, _sprite, (float)_timing.CurTime.TotalMilliseconds/1000f);
+            cardControl.OnPressed += () => OnResearchStartPressed?.Invoke(resId);
+            ResearchQueueContainer.AddChild(cardControl);
         }
+    /*
 
         var unlockedTech = database.UnlockedTechnologies.Select(x => _prototype.Index<TechnologyPrototype>(x));
-        SyncTechnologyList(UnlockedCardsContainer, unlockedTech);
-        */
-    }
-
-    /*
-    public void UpdateInformationPanel(ResearchConsoleBoundInterfaceState state)
-    {
+        // SyncTechnologyList(UnlockedCardsContainer, unlockedTech);
         var amountMsg = new FormattedMessage();
         amountMsg.AddMarkupOrThrow(Loc.GetString("research-console-menu-research-points-text",
             ("points", state.Points)));
@@ -207,8 +202,10 @@ public sealed partial class ResearchMainConsoleMenu : FancyWindow
             };
             TierDisplayContainer.AddChild(control);
         }
+        */
     }
 
+    /*
     /// <summary>
     ///     Synchronize a container for technology cards with a list of technologies,
     ///     creating or removing UI cards as appropriate.

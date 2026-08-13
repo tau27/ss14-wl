@@ -18,7 +18,7 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
 
     private void OnRDBInit(EntityUid uid, ResearchDatabaseComponent component, MapInitEvent args)
     {
-        var avalibleResearches = GetAvailableResearches(uid, component);
+        var avalibleResearches = GetAvaliableResearches(uid, component);
 
         foreach (var researchProto in avalibleResearches)
         {
@@ -28,7 +28,7 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
         Dirty(uid, component);
     }
 
-    public List<ResearchPrototype> GetAvailableResearches(EntityUid uid, ResearchDatabaseComponent? component = null)
+    public List<ResearchPrototype> GetAvaliableResearches(EntityUid uid, ResearchDatabaseComponent? component = null)
     {
         if (!Resolve(uid, ref component, false))
             return new List<ResearchPrototype>();
@@ -36,7 +36,7 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
         var availableTechnologies = new List<ResearchPrototype>();
         foreach (var tech in ProtoMan.EnumeratePrototypes<ResearchPrototype>())
         {
-            if (!component.SupportedDisciplines.Contains(tech.Discipline))
+            if (component.SupportedDisciplines.Contains(tech.Discipline))
                 availableTechnologies.Add(tech);
         }
 

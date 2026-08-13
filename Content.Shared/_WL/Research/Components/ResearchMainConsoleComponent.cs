@@ -12,11 +12,28 @@ public sealed partial class ResearchMainConsoleComponent : Component
 public sealed class ResearchMainConsoleBoundInterfaceState : BoundUserInterfaceState
 {
     public Dictionary<ProtoId<ResearchPointsTypePrototype>, (double, double, double)> PointsData;
-    public ResearchMainConsoleBoundInterfaceState(Dictionary<ProtoId<ResearchPointsTypePrototype>, (double, double, double)> pointsData)
+
+    public Dictionary<ProtoId<ResearchPrototype>, ResearchState> ResearchesData;
+
+    public ResearchMainConsoleBoundInterfaceState(Dictionary<ProtoId<ResearchPointsTypePrototype>, (double, double, double)> pointsData,
+            Dictionary<ProtoId<ResearchPrototype>, ResearchState> researchesData)
     {
         PointsData = pointsData;
+        ResearchesData = researchesData;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed class TerminalStartResearchMessage : BoundUserInterfaceMessage
+{
+    public string Id;
+
+    public TerminalStartResearchMessage(string id)
+    {
+        Id = id;
+    }
+}
+
 
 [Serializable, NetSerializable]
 public enum ResearchMainConsoleUiKey : byte

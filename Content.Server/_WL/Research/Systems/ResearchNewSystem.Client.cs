@@ -56,7 +56,6 @@ public sealed partial class ResearchSystemNew
 
     private void OnClientMapInit(EntityUid uid, ResearchClientNewComponent component, MapInitEvent args)
     {
-        Logger.Debug("Try client inig");
         if (GetServers(uid).FirstOrNull() is { } server)
             RegisterClient(uid, server, component, server);
     }
@@ -97,7 +96,6 @@ public sealed partial class ResearchSystemNew
 
     private void UpdateClientInterface(EntityUid uid, ResearchClientNewComponent? component = null)
     {
-        Logger.Debug("Try update interface");
         if (!Resolve(uid, ref component, false))
             return;
 
@@ -122,8 +120,8 @@ public sealed partial class ResearchSystemNew
     /// <param name="component">The client's Researchclient component</param>
     /// <returns>If the server was successfully retrieved.</returns>
     public bool TryGetClientServer(EntityUid uid,
-        [NotNullWhen(returnValue: true)] out EntityUid? server,
-        [NotNullWhen(returnValue: true)] out ResearchServerNewComponent? serverComponent,
+        [NotNullWhen(true)] out EntityUid? server,
+        [NotNullWhen(true)] out ResearchServerNewComponent? serverComponent,
         ResearchClientNewComponent? component = null)
     {
         server = null;
