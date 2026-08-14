@@ -31,7 +31,7 @@ public sealed partial class ResearchQueueCardControl : Control
         */
 
         MainBar.MinValue = 0f;
-        MainBar.MaxValue = (float)researchProto.PackagesCost;
+        MainBar.MaxValue = (float)researchState.PackagesCostModed;
         MainBar.Value = (float)researchState.ResearchedPackages;
         MainBar.SetTime(time);
 

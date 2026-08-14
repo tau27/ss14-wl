@@ -53,6 +53,8 @@ public struct ResearchState
 
     public double ResearchedPackages = 0;
 
+    public double PackagesCostModed = 0;
+
     public ProtoId<ResearchModePrototype> ModeId = "Default";
 
     public ResearchState()

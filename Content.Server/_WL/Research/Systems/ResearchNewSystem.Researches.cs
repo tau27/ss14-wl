@@ -77,7 +77,7 @@ public sealed partial class ResearchSystemNew
         var researchSpeed = GetResearchSpeed(uid, server);
         var modeProto = ProtoMan.Index<ResearchModePrototype>(mainResearchState.ModeId);
 
-        int cost = (int)(mainResearchProto.PackagesCost * modeProto.PackagesModifier);
+        int cost = (int)(mainResearchState.PackagesCostModed);
 
         mainResearchState.ResearchedPackages = Math.Min(mainResearchState.ResearchedPackages + researchSpeed, cost);
 
@@ -110,7 +110,7 @@ public sealed partial class ResearchSystemNew
         //TODO: add finish research event
     }
 
-    private bool TryStartResearch(EntityUid uid, ProtoId<ResearchPrototype> researchId, ResearchServerNewComponent? server = null, ResearchDatabaseComponent? database = null)
+    private bool TryStartResearch(EntityUid uid, ProtoId<ResearchPrototype> researchId, ResearchServerNewComponent? server = null, ResearchDatabaseComponent? database = null, ProtoId<ClothingHeadHatBeretSupplyDepartmentBeret>? modeId)
     {
         if (!Resolve(uid, ref database) || !Resolve(uid, ref server))
             return false;
@@ -127,6 +127,14 @@ public sealed partial class ResearchSystemNew
             researchState.Status = ResearchStatus.Researching;
         else
             researchState.Status = ResearchStatus.InQueue;
+
+        modId ??= researchState.ModeId;
+
+        var modeProto = ProtoMan.Index<ResearchModePrototype>(modId);
+        var researchProto = ProtoMan.Index<ResearchModePrototype>(researchId);
+
+        researchState.ModeId = modId;
+        researchState.PackagesCostModed = modProto.PackagesModifier * researchProto.PackagesCost;
 
         database.Researches[researchId] = researchState;
 
