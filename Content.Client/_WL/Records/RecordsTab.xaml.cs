@@ -7,7 +7,9 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
+using Robust.Shared.IoC;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Client._WL.Records;
@@ -36,6 +38,7 @@ public sealed partial class RecordsTab : Control
     private string _employmentStorage = string.Empty;
     private int _height;
     private RecordsPreviewWindow? _previewWindow;
+    private readonly IPrototypeManager _prototypeManager = IoCManager.Resolve<IPrototypeManager>();
 
     public RecordsTab()
     {
@@ -494,23 +497,50 @@ public sealed partial class RecordsTab : Control
             return;
 
         var specialty = new LineEdit { Text = record.Specialty, HorizontalExpand = true, MinWidth = 230 };
-        var specialtyGroup = new RecordOptionButton { HorizontalExpand = true, MinWidth = 230, MaxWidth = 600 };
+        var specialtyGroup = new RecordOptionButton
+        {
+            HorizontalExpand = true,
+            MinWidth = 230,
+            MaxWidth = 600,
+            CompactItems = true,
+            Filterable = true,
+        };
         var specialtyGroupValues = new List<string> { string.Empty };
         specialtyGroup.AddItem(Loc.GetString("records-value-not-specified"), 0);
-        foreach (var group in StructuredCharacterRecords.SpecialtyGroups)
+        foreach (var section in SpecialtyGroupCatalog.GetSections(_prototypeManager))
         {
-            specialtyGroupValues.Add(group);
-            specialtyGroup.AddItem(Loc.GetString($"records-specialty-group-value-{group}"), specialtyGroupValues.Count - 1);
+            var sectionName = Loc.GetString($"records-specialty-section-{section.Id}");
+            var groupNames = section.Groups
+                .Select(group => Loc.GetString($"records-specialty-group-value-{group}"));
+            specialtyGroup.AddSectionHeader(sectionName, $"{sectionName} {string.Join(' ', groupNames)}");
+
+            foreach (var group in section.Groups)
+            {
+                specialtyGroupValues.Add(group);
+                specialtyGroup.AddItem(
+                    Loc.GetString($"records-specialty-group-value-{group}"),
+                    specialtyGroupValues.Count - 1);
+            }
         }
         var specialtyGroupIndex = specialtyGroupValues.IndexOf(record.SpecialtyGroup);
         if (specialtyGroupIndex < 0 && !string.IsNullOrWhiteSpace(record.SpecialtyGroup))
         {
             specialtyGroupValues.Add(record.SpecialtyGroup);
             specialtyGroupIndex = specialtyGroupValues.Count - 1;
-            specialtyGroup.AddItem(record.SpecialtyGroup, specialtyGroupIndex);
+            var displayName = SpecialtyGroupCatalog.ContainsGroup(_prototypeManager, record.SpecialtyGroup)
+                ? Loc.GetString($"records-specialty-group-value-{record.SpecialtyGroup}")
+                : record.SpecialtyGroup;
+            specialtyGroup.AddItem(displayName, specialtyGroupIndex);
         }
         specialtyGroup.SelectId(Math.Max(0, specialtyGroupIndex));
-        var specialtySubgroup = new RecordOptionButton { HorizontalExpand = true, MinWidth = 230, MaxWidth = 600 };
+        var specialtySubgroup = new RecordOptionButton
+        {
+            HorizontalExpand = true,
+            MinWidth = 230,
+            MaxWidth = 600,
+            CompactItems = true,
+            Filterable = true,
+        };
         var specialtySubgroupValues = new List<string>();
         void PopulateSpecialtySubgroups(string selected)
         {
@@ -520,7 +550,7 @@ public sealed partial class RecordsTab : Control
             specialtySubgroup.AddItem(Loc.GetString("records-value-not-specified"), 0);
 
             var selectedGroup = specialtyGroupValues[specialtyGroup.SelectedId];
-            foreach (var subgroup in SpecialtyGroupCatalog.GetSubgroups(selectedGroup))
+            foreach (var subgroup in SpecialtyGroupCatalog.GetSubgroups(_prototypeManager, selectedGroup))
             {
                 specialtySubgroupValues.Add(subgroup);
                 specialtySubgroup.AddItem(
@@ -533,7 +563,7 @@ public sealed partial class RecordsTab : Control
             {
                 specialtySubgroupValues.Add(selected);
                 subgroupIndex = specialtySubgroupValues.Count - 1;
-                var displayName = SpecialtyGroupCatalog.ContainsSubgroup(selected)
+                var displayName = SpecialtyGroupCatalog.ContainsSubgroup(_prototypeManager, selected)
                     ? Loc.GetString(SpecialtyGroupCatalog.GetSubgroupLocalizationKey(selected))
                     : selected;
                 specialtySubgroup.AddItem(displayName, subgroupIndex);
@@ -780,7 +810,7 @@ public sealed partial class RecordsTab : Control
         _previewWindow.SetRecords(
             RecordViewBuilder.Medical(identity, _medicalStorage, _species, Loc.GetString),
             RecordViewBuilder.Security(identity, _securityStorage, Loc.GetString),
-            RecordViewBuilder.Employment(identity, _employmentStorage, Loc.GetString),
+            RecordViewBuilder.Employment(identity, _employmentStorage, _prototypeManager, Loc.GetString),
             RecordTabs.CurrentTab);
     }
 

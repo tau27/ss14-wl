@@ -102,45 +102,6 @@ public static class StructuredCharacterRecords
     public const int MaxEmploymentHistoryLength = 4096;
     public const int MaxNotesTextLength = 4096;
 
-    /// <summary>
-    /// Canonical specialty groups from the WL education article.
-    /// The concrete specialty remains free-form.
-    /// </summary>
-    public static readonly IReadOnlyList<string> SpecialtyGroups = new[]
-    {
-        "mathematics-and-mechanics",
-        "computer-science",
-        "physical-sciences",
-        "chemical-sciences",
-        "biological-sciences",
-        "planetary-and-environmental-sciences",
-        "construction-and-architecture",
-        "electronics-and-communications",
-        "information-technology",
-        "energy",
-        "mechanical-engineering",
-        "materials-and-chemical-technology",
-        "resource-use-and-transport",
-        "technosphere-safety",
-        "clinical-medicine",
-        "preventive-medicine",
-        "medical-biological-sciences",
-        "pharmaceutical-sciences",
-        "agronomy-and-crop-production",
-        "forestry-and-water-management",
-        "animal-husbandry-and-veterinary",
-        "agricultural-engineering-and-food-technology",
-        "law-and-politics",
-        "economics-and-management",
-        "psychology-and-sociology",
-        "history-and-philosophy",
-        "pedagogy-and-philology",
-        "arts-and-cognitive-sciences",
-        "military-training-and-education",
-        "strategy-and-operational-art",
-        "security-and-law-enforcement",
-    };
-
     private const string MedicalPrefix = "WL_MEDICAL_V1:";
     private const string SecurityPrefix = "WL_SECURITY_V1:";
     private const string EmploymentV1Prefix = "WL_EMPLOYMENT_V1:";
