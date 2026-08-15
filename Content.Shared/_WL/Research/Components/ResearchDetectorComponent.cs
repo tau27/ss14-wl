@@ -7,7 +7,7 @@ namespace Content.Shared._WL.Research.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ResearchDetectorComponent : Component
 {
-    [DataField("detectType"), required: true]
+    [DataField("detectType", required: true)]
     public ProtoId<ResearchTypePrototype> ResearchType;
 
     [DataField("extrimalType")]
@@ -22,7 +22,7 @@ public sealed partial class ResearchDetectorComponent : Component
     [DataField]
     public float Range = 10f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool Active = true;
 }
 
@@ -35,7 +35,7 @@ public record struct GetResearchDataEvent
 
     public Dictionary<ProtoId<ResearchCategoryPrototype>, (double, Dictionary<ProtoId<ResearchPointsTypePrototype>, double>)> ResearchData;
 
-    public GetServerResearchEvent(EntityUid detector, ProtoId<ResearchTypePrototype> researchType)
+    public GetResearchDataEvent(EntityUid detector, ProtoId<ResearchTypePrototype> researchType)
     {
         Detector = detector;
         ResearchType = researchType;

@@ -1,3 +1,5 @@
+using System.Numerics;
+using System.Linq;
 using Content.Server.Power.EntitySystems;
 using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Methods;
@@ -10,6 +12,7 @@ namespace Content.Server._WL.Research.Systems;
 public sealed partial class ResearchSystemNew
 {
     [Dependency] private SharedResearchConditionsSystem _researchConditions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private void InitializeSource()
     {
@@ -59,6 +62,8 @@ public sealed partial class ResearchSystemNew
 
         var box = Box2.CenteredAround(worldPos, new Vector2(range));
 
+        finded = new List<EntityUid>();
+
         foreach (var entity in _lookup.GetEntitiesIntersecting(entXForm.MapID, box))
         {
             if (HasComp<ResearchSourceComponent>(entity))
@@ -76,7 +81,7 @@ public sealed partial class ResearchSystemNew
         if (!TryFindResearches(ent.Owner, ent.Comp.Range, out var sources))
             return;
 
-        var ev = GetResearchDataEvent(ent.Owner, ent.Comp.ResearchType);
+        var ev = new GetResearchDataEvent(ent.Owner, ent.Comp.ResearchType);
         foreach (var source in sources)
         {
             RaiseLocalEvent(source, ref ev);
@@ -88,25 +93,27 @@ public sealed partial class ResearchSystemNew
 
             foreach (var (type, value) in data)
             {
+                var timedType = type;
+
                 if (type != ent.Comp.ExtrimalPointsType && ent.Comp.DefaultPointsType is not null)
-                    type = ent.Comp.DefaultPointsType.Value;
+                    timedType = ent.Comp.DefaultPointsType.Value;
 
                 AddResearch(category, ent.Comp.ResearchType, researchValue, type, value / normileCoof * ent.Comp.ResearchPercent, ref args);
             }
         }
     }
 
-    private void OnSourceDetect(Entity<ResearchSourceComponent> ent, ref GetServerResearchEvent args)
+    private void OnSourceDetect(Entity<ResearchSourceComponent> ent, ref GetResearchDataEvent args)
     {
         if (args.ResearchData.ContainsKey(ent.Comp.Category))
             return;
 
         var categoryProto = ProtoMan.Index<ResearchCategoryPrototype>(ent.Comp.Category);
 
-        if (!cateroryProto.ResearchTypes.Contains(args.ResearchType))
+        if (!categoryProto.ResearchTypes.Contains(args.ResearchType))
             return;
 
-        var typeProto = ProtoMan.Index<ResearchTypePrototype>(args.Type);
+        var typeProto = ProtoMan.Index<ResearchTypePrototype>(args.ResearchType);
 
         var (researchValue, poitsDict) = _researchConditions.GetCondition(ent, typeProto.Condition, args.Detector);
 

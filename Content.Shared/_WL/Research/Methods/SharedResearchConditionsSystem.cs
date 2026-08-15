@@ -1,3 +1,4 @@
+using Content.Shared._WL.Research.Prototypes;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._WL.Research.Methods;
@@ -5,12 +6,12 @@ namespace Content.Shared._WL.Research.Methods;
 public sealed partial class SharedResearchConditionsSystem : EntitySystem, IResearchConditionRaiser
 {
     // ResearchValue, dict of points
-    public (double, Dictionary<ProtoId<ReseachPointsTypePrototype>, double>) GetCondition<T>(EntityUid target, T condition, EntityUid? sourceEnt = null) where T : ResearchCondition
+    public (double, Dictionary<ProtoId<ResearchPointsTypePrototype>, double>) GetCondition<T>(EntityUid target, T condition, EntityUid? sourceEnt = null) where T : ResearchCondition
     {
         return condition.RaiseEvent(target, this, sourceEnt);
     }
 
-    public (double, Dictionary<ProtoId<ReseachPointsTypePrototype>, double>) RaiseConditionEvent<T>(EntityUid target, T effect, EntityUid? sourceEnt) where T : ResearchConditionBase<T>
+    public (double, Dictionary<ProtoId<ResearchPointsTypePrototype>, double>) RaiseConditionEvent<T>(EntityUid target, T effect, EntityUid? sourceEnt) where T : ResearchConditionBase<T>
     {
         var conditionEv = new ResearchConditionEvent<T>(effect, sourceEnt);
         RaiseLocalEvent(target, ref conditionEv);
@@ -30,15 +31,15 @@ public abstract partial class ResearchConditionSystem<T, TCon> : EntitySystem wh
 
 public interface IResearchConditionRaiser
 {
-    bool RaiseConditionEvent<T>(EntityUid target, T condition, EntityUid? sourceEnt) where T : ResearchConditionBase<T>;
+    (double, Dictionary<ProtoId<ResearchPointsTypePrototype>, double>) RaiseConditionEvent<T>(EntityUid target, T condition, EntityUid? sourceEnt) where T : ResearchConditionBase<T>;
 }
 
 public abstract partial class ResearchConditionBase<T> : ResearchCondition where T : ResearchConditionBase<T>
 {
-    public override bool RaiseEvent(EntityUid target, IResearchConditionRaiser raiser, EntityUid? sourceEnt)
+    public override (double, Dictionary<ProtoId<ResearchPointsTypePrototype>, double>) RaiseEvent(EntityUid target, IResearchConditionRaiser raiser, EntityUid? sourceEnt)
     {
         if (this is not T type)
-            return false;
+            return (0, new Dictionary<ProtoId<ResearchPointsTypePrototype>, double>());
 
         return raiser.RaiseConditionEvent(target, type, sourceEnt);
     }
@@ -48,14 +49,12 @@ public abstract partial class ResearchConditionBase<T> : ResearchCondition where
 public abstract partial class ResearchCondition
 {
     [DataField]
-    public ProtoId<ResearchPointsType> BaseType;
+    public ProtoId<ResearchPointsTypePrototype> BaseType;
 
     [DataField]
-    public ProtoId<ResearchPointsType> ExtrimalType = "Experimental";
+    public ProtoId<ResearchPointsTypePrototype> ExtrimalType = "Experimental";
 
-    public abstract bool RaiseEvent(EntityUid target, IResearchConditionRaiser raiser, EntityUid? sourceEnt);
-
-    public abstract string ResearchConditionGuidebookText(IPrototypeManager prototype);
+    public abstract (double, Dictionary<ProtoId<ResearchPointsTypePrototype>, double>) RaiseEvent(EntityUid target, IResearchConditionRaiser raiser, EntityUid? sourceEnt);
 }
 
 [ByRefEvent]
@@ -66,7 +65,7 @@ public partial record struct ResearchConditionEvent<T>(T Condition, EntityUid? S
     public double Result;
 
     [DataField]
-    public Dictionary<ProtoId<ReseachPointsTypePrototype>, double> Points;
+    public Dictionary<ProtoId<ResearchPointsTypePrototype>, double> Points = new();
 
     public readonly T Condition = Condition;
 

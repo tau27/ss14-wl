@@ -4,6 +4,7 @@
   minValue: 1
   maxValue: 100
   scale: !type:ConstMethod
+  condition: !type:TemperatureResearchCondition
 
 - type: researchType
   id: DebugType2
@@ -11,3 +12,4 @@
   minValue: 1
   maxValue: 100
   scale: !type:LinearMethod
+  condition: !type:TemperatureResearchCondition

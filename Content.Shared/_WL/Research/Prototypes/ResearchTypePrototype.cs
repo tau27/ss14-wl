@@ -1,4 +1,5 @@
 using Content.Shared._WL.Research;
+using Content.Shared._WL.Research.Methods;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 

@@ -13,6 +13,6 @@ public sealed partial class ResearchSourceComponent : Component
     [DataField(required: true)]
     public ProtoId<ResearchCategoryPrototype> Category;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool Active = true;
 }
