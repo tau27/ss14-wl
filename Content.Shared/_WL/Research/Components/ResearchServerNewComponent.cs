@@ -47,7 +47,7 @@ public sealed partial class ResearchServerNewComponent : Component
 public record struct GetServerResearchEvent
 {
     public EntityUid Server;
-    public Dictionary<ProtoId<ResearchCategoryPrototype>, (Dictionary<ProtoId<ResearchTypePrototype>, double>, double, ProtoId<ResearchPointsTypePrototype>)> ResearchData;
+    public Dictionary<ProtoId<ResearchCategoryPrototype>, (Dictionary<ProtoId<ResearchTypePrototype>, double>, Dictionary<ProtoId<ResearchPointsTypePrototype>, double>)> ResearchData;
 
     public GetServerResearchEvent(EntityUid server)
     {

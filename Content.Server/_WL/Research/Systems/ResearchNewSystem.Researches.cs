@@ -110,7 +110,7 @@ public sealed partial class ResearchSystemNew
         //TODO: add finish research event
     }
 
-    private bool TryStartResearch(EntityUid uid, ProtoId<ResearchPrototype> researchId, ResearchServerNewComponent? server = null, ResearchDatabaseComponent? database = null, ProtoId<ClothingHeadHatBeretSupplyDepartmentBeret>? modeId)
+    private bool TryStartResearch(EntityUid uid, ProtoId<ResearchPrototype> researchId, ResearchServerNewComponent? server = null, ResearchDatabaseComponent? database = null, ProtoId<ResearchModePrototype>? modeId = null)
     {
         if (!Resolve(uid, ref database) || !Resolve(uid, ref server))
             return false;
@@ -128,13 +128,13 @@ public sealed partial class ResearchSystemNew
         else
             researchState.Status = ResearchStatus.InQueue;
 
-        modId ??= researchState.ModeId;
+        modeId ??= researchState.ModeId;
 
-        var modeProto = ProtoMan.Index<ResearchModePrototype>(modId);
-        var researchProto = ProtoMan.Index<ResearchModePrototype>(researchId);
+        var modeProto = ProtoMan.Index<ResearchModePrototype>(modeId);
+        var researchProto = ProtoMan.Index<ResearchPrototype>(researchId);
 
-        researchState.ModeId = modId;
-        researchState.PackagesCostModed = modProto.PackagesModifier * researchProto.PackagesCost;
+        researchState.ModeId = modeId.Value;
+        researchState.PackagesCostModed = modeProto.PackagesModifier * researchProto.PackagesCost;
 
         database.Researches[researchId] = researchState;
 

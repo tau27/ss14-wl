@@ -23,6 +23,9 @@ public sealed partial class PointsSourceDebugComponent : Component
     [DataField]
     public bool Active = true;
 
-    [DataField("researches")]
-    public Dictionary<ProtoId<ResearchTypePrototype>, double> TypesDict { get; set; } = new();
+    [DataField("researche")]
+    public ProtoId<ResearchTypePrototype> Type;
+
+    [DataField("researchValue")]
+    public double Value = 10;
 }

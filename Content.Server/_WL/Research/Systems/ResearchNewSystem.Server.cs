@@ -85,24 +85,24 @@ public sealed partial class ResearchSystemNew
             RaiseLocalEvent(client, ref ev);
         }
 
-        foreach (var (categoryId, (rawData, points, pointsType)) in ev.ResearchData)
+        foreach (var (categoryId, (rawData, pointsData)) in ev.ResearchData)
         {
-            var (pointsValue, maxPoints, pointsPS) = server.PointsDict[pointsType];
-            double addValue;
-
-            if (server.ResearchedData.ContainsKey(categoryId))
-            {
-                addValue = server.ResearchedData[categoryId].ResearchData(rawData, points);
-            }
-            else
+            if (!server.ResearchedData.ContainsKey(categoryId))
             {
                 var categoryProto = ProtoMan.Index(categoryId);
                 server.ResearchedData.Add(categoryId, new ResearchField(categoryProto.ResearchTypes.ToArray(), categoryProto.MaxPoints));
-
-                addValue = server.ResearchedData[categoryId].ResearchData(rawData, points);
             }
 
-            server.PointsDict[pointsType] = (pointsValue + addValue, maxPoints + addValue, pointsPS + addValue);
+            var pointsSum = pointsData.Values.Sum();
+            var addValue = server.ResearchedData[categoryId].ResearchData(rawData, pointsSum);
+
+            var pointsCoof = addValue / pointsSum;
+
+            foreach (var (type, value) in pointsData)
+            {
+                var (pointsValue, maxPoints, pointsPS) = server.PointsDict[type];
+                server.PointsDict[type] = (pointsValue + value * pointsCoof, maxPoints + value * pointsCoof, pointsPS + value * pointsCoof);
+            }
         }
 
         Dirty(ent, server);

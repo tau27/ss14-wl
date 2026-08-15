@@ -23,6 +23,9 @@ public sealed partial class ResearchTypePrototype : IPrototype
     public string LocalizedName => Loc.GetString(Name);
 
     [DataField(required: true)]
+    public ResearchCondition Condition;
+
+    [DataField(required: true)]
     public ScaleMethod Scale;
 
     [DataField]
