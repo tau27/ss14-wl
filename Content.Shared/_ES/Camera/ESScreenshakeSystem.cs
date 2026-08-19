@@ -11,7 +11,7 @@ namespace Content.Shared._ES.Camera;
 ///     Handles sending rotational or translational screenshake to an entity, managing the screenshake commands
 ///     of every entity currently screenshaking, and setting offset/rotation when updated
 /// </summary>
-public partial sealed class ESScreenshakeSystem : EntitySystem
+public sealed partial class ESScreenshakeSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
 
