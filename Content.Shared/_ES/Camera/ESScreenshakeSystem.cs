@@ -3,7 +3,6 @@ using System.Numerics;
 using Content.Shared.Camera;
 using Robust.Shared.Noise;
 using Robust.Shared.Player;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._ES.Camera;
@@ -12,10 +11,9 @@ namespace Content.Shared._ES.Camera;
 ///     Handles sending rotational or translational screenshake to an entity, managing the screenshake commands
 ///     of every entity currently screenshaking, and setting offset/rotation when updated
 /// </summary>
-public sealed class ESScreenshakeSystem : EntitySystem
+public partial sealed class ESScreenshakeSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     #region Internal
 

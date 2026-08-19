@@ -67,7 +67,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] private SharedStaminaSystem _stamina = default!;
     [Dependency] private DamageExamineSystem _damageExamine = default!;
     // ES START
-    [Dependency] private readonly ESScreenshakeSystem _shake = default!;
+    [Dependency] private ESScreenshakeSystem _shake = default!;
     // ES END
 
     [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
