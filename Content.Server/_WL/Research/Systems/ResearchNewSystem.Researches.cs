@@ -121,17 +121,23 @@ public sealed partial class ResearchSystemNew
         if (GetResearchState(uid, researchId, server, database) != ResearchDepsStatus.Allowed)
             return false;
 
+        modeId ??= researchState.ModeId;
+
+        var modeProto = ProtoMan.Index<ResearchModePrototype>(modeId);
+        var researchProto = ProtoMan.Index<ResearchPrototype>(researchId);
+
+        foreach (var (type, value) in researchProto.PointsCost)
+        {
+            if (!TryModifyPoints(uid, type, -value * modeProto.PointsModifier, false, server))
+                return false;
+        }
+
         server.ResearchQueue.Add(researchId);
 
         if (server.ResearchQueue.Count == 1)
             researchState.Status = ResearchStatus.Researching;
         else
             researchState.Status = ResearchStatus.InQueue;
-
-        modeId ??= researchState.ModeId;
-
-        var modeProto = ProtoMan.Index<ResearchModePrototype>(modeId);
-        var researchProto = ProtoMan.Index<ResearchPrototype>(researchId);
 
         researchState.ModeId = modeId.Value;
         researchState.PackagesCostModed = modeProto.PackagesModifier * researchProto.PackagesCost;

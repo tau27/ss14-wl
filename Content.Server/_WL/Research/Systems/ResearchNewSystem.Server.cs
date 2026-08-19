@@ -100,8 +100,7 @@ public sealed partial class ResearchSystemNew
 
             foreach (var (type, value) in pointsData)
             {
-                var (pointsValue, maxPoints, pointsPS) = server.PointsDict[type];
-                server.PointsDict[type] = (pointsValue + value * pointsCoof, maxPoints + value * pointsCoof, pointsPS + value * pointsCoof);
+                TryModifyPoints(ent, type, value * pointsCoof, true, server);
             }
         }
 
@@ -112,6 +111,29 @@ public sealed partial class ResearchSystemNew
         {
             RaiseLocalEvent(client, ref ev2);
         }
+    }
+
+    private bool TryModifyPoints(EntityUid uid, ProtoId<ResearchPointsTypePrototype> type, double value, bool modifyStatistic = false, ResearchServerNewComponent? server = null)
+    {
+        if (!Resolve(uid, ref server))
+            return false;
+
+        if (!server.PointsDict.ContainsKey(type))
+            return false;
+
+        var (pointsValue, maxPoints, pointsPS) = server.PointsDict[type];
+
+        if (pointsValue + value < 0 || maxPoints + value < 0)
+            return false;
+
+        if (modifyStatistic)
+            server.PointsDict[type] = (pointsValue + value, maxPoints + value, pointsPS + value);
+        else
+            server.PointsDict[type] = (pointsValue + value, maxPoints, pointsPS);
+
+        Dirty(uid, server);
+
+        return true;
     }
 
     public int GetResearchSpeed(EntityUid uid, ResearchServerNewComponent? server = null)
