@@ -3,6 +3,7 @@ using Content.Shared.Chat;
 using Content.Shared.GameTicking;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Muting;
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
@@ -22,6 +23,7 @@ public abstract partial class SharedLanguagesSystem : EntitySystem
     [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     private FrozenDictionary<char, LanguagePrototype> _keylan = default!;
 
@@ -210,7 +212,7 @@ public abstract partial class SharedLanguagesSystem : EntitySystem
     {
         var language = GetLanguagePrototype(source, msg);
 
-        if (HasComp<MutedComponent>(source))
+        if (_statusEffects.HasEffectComp<MutedStatusEffectComponent>(source))
             return 0f;
 
         if (language == null)

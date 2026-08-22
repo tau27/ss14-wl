@@ -5,6 +5,7 @@ using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Muting;
+using Content.Shared.StatusEffectNew;
 using Content.Server.Atmos.EntitySystems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -20,6 +21,7 @@ public sealed partial class LanguagesSystem : SharedLanguagesSystem
     [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     private static readonly Color DefaultChatTextColor = Color.LightGray;
 
@@ -427,7 +429,7 @@ public sealed partial class LanguagesSystem : SharedLanguagesSystem
 
             var pressure_prob = MathF.Min(fixed_pressure / (FullTalkPressure - MinTalkPressure), 1f);
 
-            if (HasComp<MutedComponent>(source))
+            if (_statusEffects.HasEffectComp<MutedStatusEffectComponent>(source))
                 pressure_prob = 0f;
 
             var full_prob = MathF.Min(pressure_prob + language.PressurePass, 1f);

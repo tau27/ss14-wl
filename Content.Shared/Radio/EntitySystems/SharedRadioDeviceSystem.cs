@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._WL.Languages.Components; // WL-Changes
 using Content.Shared.Chat;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -254,6 +255,16 @@ public abstract partial class SharedRadioDeviceSystem : EntitySystem
     {
         if (ent.Owner == args.RadioSource)
             return;
+
+        // WL-Changes-Start
+        if (TryComp<LanguagesComponent>(ent, out var languagesRadio))
+        {
+            if (TryComp<LanguagesComponent>(args.MessageSource, out var languagesSource))
+            {
+                languagesRadio.CurrentLanguage = languagesSource.CurrentLanguage;
+            }
+        }
+        // WL-Changes-End
 
         var nameEv = new TransformSpeakerNameEvent(args.MessageSource, Name(args.MessageSource));
         RaiseLocalEvent(args.MessageSource, nameEv);
