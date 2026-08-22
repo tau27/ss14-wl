@@ -155,8 +155,8 @@ public sealed partial class HumanoidProfileEditor
         if (Profile is null)
             return;
 
-        _ttsTab?.UpdateControls(Profile, Profile.Sex);
-        _ttsTab?.SetSelectedVoice(Profile.TTSVoice);
+        _ttsTab.UpdateControls(Profile, Profile.Voice);
+        _ttsTab.SetSelectedVoice(Profile.TTSVoice);
         _barkTab?.SetSelectedBark(
             Profile.BarkVoice,
             Profile.BarkPitch,

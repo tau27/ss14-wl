@@ -20,7 +20,6 @@
     - !type:AgeRequirement
       age: 6 # WL-Changes-AgeRequirement
       # WL-Changes-end
-  weight: 9
   startingGear: SeniorOfficerGear
   icon: "JobIconSeniorOfficer"
   supervisors: job-supervisors-hos

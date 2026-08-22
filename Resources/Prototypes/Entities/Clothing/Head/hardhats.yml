@@ -28,7 +28,7 @@
   # WL-Sounds-End
   - type: PointLight
     enabled: false
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     radius: 7
     netsync: false

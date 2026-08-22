@@ -118,7 +118,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
         // WL-Changes-Start: Speech barks
         // Copy both speech systems. Each listener independently chooses whether
         // they hear TTS or barks, so the telephone proxy must support both.
-        if(TryComp<TTSComponent>(args.MessageSource, out var ttsSpeaker))
+        if (TryComp<TTSComponent>(args.MessageSource, out var ttsSpeaker))
         {
             var ttsTelephone = EnsureComp<TTSComponent>(speaker);
             ttsTelephone.VoicePrototypeId = ttsSpeaker.VoicePrototypeId;
@@ -471,6 +471,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
         {
             var activeListener = AddComp<ActiveListenerComponent>(entity);
             activeListener.Range = entity.Comp.ListeningRange;
+            Dirty(entity, activeListener);
         }
 
         if (!microphoneOn && HasComp<ActiveListenerComponent>(entity))

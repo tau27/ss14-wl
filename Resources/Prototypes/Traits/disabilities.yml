@@ -64,8 +64,10 @@
     # components:
       # - BorgChassis
   # WL-Changes-end
-  components:
-    - type: Muted
+  specials:
+  - !type:ApplyStatusEffectSpecial
+    statusEffects:
+    - TraitStatusEffectMuted
 
 - type: trait
   id: Paracusia

@@ -156,6 +156,8 @@ ent-ClothingUniformJumpsuitAtmosCasual = повседневный комбине
 ent-ClothingUniformJumpsuitPsychologist = костюм психотерапевта
     .desc = Я не теряю вещи. Я кладу вещи в места, которые потом ускользают от меня.
 # WL-change-psych-end
+ent-ClothingUniformJumpsuitTramDriver = комбинезон водителя трамвая
+    .desc = Безупречно выглаженный комбинезон для настоящих профессионалов.
 ent-ClothingUniformJumpsuitReporter = костюм репортёра
     .desc = Хороший репортёр остаётся скептиком всю свою жизнь.
 ent-ClothingUniformJumpsuitSafari = костюм для сафари
