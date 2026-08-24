@@ -195,6 +195,7 @@ namespace Content.Server.Database
         private static async Task DeleteCharacterSlot(ServerDbContext db, NetUserId userId, int slot)
         {
             var profile = await db.Profile.Include(p => p.Preference)
+                .Include(p => p.JobSubnames)
                 .Where(p => p.Preference.UserId == userId.UserId && p.Slot == slot)
                 .SingleOrDefaultAsync();
 
@@ -304,6 +305,12 @@ namespace Content.Server.Database
             profile.Country = humanoid.Country; // WL-Records
             profile.Species = humanoid.Species;
             profile.TTSVoice = humanoid.TTSVoice; // Corvax-TTS
+            // WL-Changes-Start: Speech barks
+            profile.BarkVoice = humanoid.BarkVoice;
+            profile.BarkPitch = humanoid.BarkPitch;
+            profile.BarkMinDelay = humanoid.BarkMinDelay;
+            profile.BarkMaxDelay = humanoid.BarkMaxDelay;
+            // WL-Changes-End
             profile.Age = humanoid.Age;
             profile.Height = humanoid.Height; // WL-Height
             profile.Sex = humanoid.Sex.ToString();

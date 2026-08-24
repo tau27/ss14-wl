@@ -2,8 +2,10 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared._WL.Skills; // WL-Skills
+using Content.Shared._WL.Records; // WL-Changes-Records
 using Content.Shared.CCVar;
 using Content.Shared.Corvax.TTS;
+using Content.Shared._WL.Barks; // WL-Changes
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.EntityEffects.Effects;
 using Content.Shared.GameTicking;
@@ -38,12 +40,13 @@ namespace Content.Shared.Preferences
     {
         public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
         public static readonly ProtoId<EmoteSoundsPrototype> DefaultVoice = "MaleHuman";
+        private static readonly ProtoId<ConfederationRecordsPrototype> DefaultConfederation = "NoConfederation";
         //private static readonly Regex RestrictedNameRegex = new("[^А-Яа-яёЁ0-9' -]"); // Corvax-Localization + WL-Changes. Also - we dont't need it
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
         //WL-Changes-start
         public const int MaxDescLength = 512 * 2; // WL-CharacterInfo: Increase
-        public const int MaxRecordLength = 4096; // WL-Records
+        public const int MaxRecordLength = 32768; // WL-Changes-Records: structured record storage
 
         [DataField]
         private Dictionary<string, string> _jobSubnames = new();
@@ -99,6 +102,20 @@ namespace Content.Shared.Preferences
 
         [DataField] //Corvax-TTS
         public string TTSVoice { get; set; } = HumanoidProfileSystem.DefaultVoice;
+
+        // WL-Changes-Start: Speech barks
+        [DataField]
+        public ProtoId<BarkPrototype> BarkVoice { get; set; } = "Human1";
+
+        [DataField]
+        public float BarkPitch { get; set; } = SpeechBarksComponent.DefaultPitch;
+
+        [DataField]
+        public float BarkMinDelay { get; set; } = SpeechBarksComponent.DefaultMinDelay;
+
+        [DataField]
+        public float BarkMaxDelay { get; set; } = SpeechBarksComponent.DefaultMaxDelay;
+        // WL-Changes-End
 
         [DataField]
         public int Age { get; set; } = 18;
@@ -263,6 +280,12 @@ namespace Content.Shared.Preferences
                 other.Country, // WL-Records
                 other.Skills) // WL-Skills
         {
+            // WL-Changes-Start: Speech barks
+            BarkVoice = other.BarkVoice;
+            BarkPitch = other.BarkPitch;
+            BarkMinDelay = other.BarkMinDelay;
+            BarkMaxDelay = other.BarkMaxDelay;
+            // WL-Changes-End
         }
 
         /// <summary>
@@ -600,6 +623,28 @@ namespace Content.Shared.Preferences
         }
         // Corvax-TTS-End
 
+        // WL-Changes-Start: Speech barks
+        public HumanoidCharacterProfile WithBarkVoice(ProtoId<BarkPrototype> voice)
+        {
+            return new(this) { BarkVoice = voice };
+        }
+
+        public HumanoidCharacterProfile WithBarkPitch(float pitch)
+        {
+            return new(this) { BarkPitch = pitch };
+        }
+
+        public HumanoidCharacterProfile WithBarkMinDelay(float delay)
+        {
+            return new(this) { BarkMinDelay = delay };
+        }
+
+        public HumanoidCharacterProfile WithBarkMaxDelay(float delay)
+        {
+            return new(this) { BarkMaxDelay = delay };
+        }
+        // WL-Changes-End
+
         public HumanoidCharacterProfile WithCharacterAppearance(HumanoidCharacterAppearance appearance)
         {
             return new(this) { Appearance = appearance };
@@ -876,6 +921,12 @@ namespace Content.Shared.Preferences
             if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
             if (FlavorText != other.FlavorText) return false;
             if (TTSVoice != other.TTSVoice) return false; // Corvax-TTS
+            // WL-Changes-Start: Speech barks
+            if (BarkVoice != other.BarkVoice) return false;
+            if (BarkPitch != other.BarkPitch) return false;
+            if (BarkMinDelay != other.BarkMinDelay) return false;
+            if (BarkMaxDelay != other.BarkMaxDelay) return false;
+            // WL-Changes-End
             return Appearance.Equals(other.Appearance);
         }
 
@@ -976,21 +1027,20 @@ namespace Content.Shared.Preferences
             var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex);
             var oocText = OocText.Length > MaxDescLength ? FormattedMessage.RemoveMarkup(OocText)[..MaxDescLength] : FormattedMessage.RemoveMarkup(OocText); // WL-OOCText
 
-            // WL-Records-Start
-            var medicalRecord = MedicalRecord.Length > MaxRecordLength
-                ? FormattedMessage.RemoveMarkupOrThrow(MedicalRecord)[..MaxRecordLength]
-                : FormattedMessage.RemoveMarkupOrThrow(MedicalRecord);
-            var securityRecord = SecurityRecord.Length > MaxRecordLength
-                ? FormattedMessage.RemoveMarkupOrThrow(SecurityRecord)[..MaxRecordLength]
-                : FormattedMessage.RemoveMarkupOrThrow(SecurityRecord);
-            var employmentRecord = EmploymentRecord.Length > MaxRecordLength
-                ? FormattedMessage.RemoveMarkupOrThrow(EmploymentRecord)[..MaxRecordLength]
-                : FormattedMessage.RemoveMarkupOrThrow(EmploymentRecord);
-            var fullName = FullName;
-            var dateOfBirth = DateOfBirth;
-            var confederation = Confederation;
-            var country = Country;
-            // WL-Records-End
+            // WL-Changes-Records-Start
+            // Structured storage sanitizes each user-facing field separately and migrates legacy text to notes.
+            var medicalRecord = StructuredCharacterRecords.NormalizeMedical(MedicalRecord);
+            var securityRecord = StructuredCharacterRecords.NormalizeSecurity(SecurityRecord);
+            var employmentRecord = StructuredCharacterRecords.NormalizeEmployment(EmploymentRecord);
+            var fullName = StructuredCharacterRecords.NormalizeShortText(FullName);
+            var dateOfBirth = StructuredCharacterRecords.NormalizeShortText(DateOfBirth);
+            var confederation = StructuredCharacterRecords.NormalizeShortText(Confederation);
+            var country = StructuredCharacterRecords.NormalizeShortText(Country);
+            if (!prototypeManager.HasIndex<ConfederationRecordsPrototype>(confederation))
+                confederation = prototypeManager.HasIndex(DefaultConfederation)
+                    ? DefaultConfederation.Id
+                    : string.Empty;
+            // WL-Changes-Records-End
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
@@ -1117,6 +1167,14 @@ namespace Content.Shared.Preferences
                 TTSVoice = HumanoidProfileSystem.DefaultSexVoice[sex];
             // Corvax-TTS-End
 
+            // WL-Changes-Start: Speech barks
+            if (!prototypeManager.HasIndex<BarkPrototype>(BarkVoice))
+                BarkVoice = "Human1";
+            BarkPitch = SpeechBarksComponent.SanitizePitch(BarkPitch);
+            (BarkMinDelay, BarkMaxDelay) =
+                SpeechBarksComponent.SanitizeDelays(BarkMinDelay, BarkMaxDelay);
+            // WL-Changes-End
+
             // Checks prototypes exist for all loadouts and dump / set to default if not.
             var toRemove = new ValueList<string>();
 
@@ -1228,6 +1286,12 @@ namespace Content.Shared.Preferences
             hashCode.Add((int)Sex);
             hashCode.Add(Voice);
             hashCode.Add(TTSVoice); // Corvax-TTS
+            // WL-Changes-Start: Speech barks
+            hashCode.Add(BarkVoice);
+            hashCode.Add(BarkPitch);
+            hashCode.Add(BarkMinDelay);
+            hashCode.Add(BarkMaxDelay);
+            // WL-Changes-End
             hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);

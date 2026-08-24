@@ -1,3 +1,5 @@
+using Content.Shared._WL.Languages;
+using Content.Shared._WL.Languages.Components;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Forensics.Components;
@@ -9,7 +11,9 @@ using Content.Shared.Roles;
 using Content.Shared.StationRecords.Components;
 using Content.Shared.StationRecords.Events;
 using Robust.Shared.Enums;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared.StationRecords.Systems;
 
@@ -39,6 +43,10 @@ public sealed partial class StationRecordsSystem : EntitySystem
     [Dependency] private StationRecordKeyStorageSystem _keyStorage = default!;
     [Dependency] private SharedIdCardSystem _idCard = default!;
 
+    // WL-Changes-start
+    [Dependency] private SharedRoleSystem _role = default!;
+    // WL-Changes-end
+
     [Dependency] private EntityQuery<IdCardComponent> _idCardQuery = default!;
     [Dependency] private EntityQuery<PdaComponent> _pdaQuery = default!;
     [Dependency] private EntityQuery<StationRecordsComponent> _recordsQuery = default!;
@@ -46,14 +54,18 @@ public sealed partial class StationRecordsSystem : EntitySystem
     [Dependency] private EntityQuery<FingerprintComponent> _fingerprintQuery = default!;
     [Dependency] private EntityQuery<DnaComponent> _dnaQuery = default!;
 
-    [SubscribeLocalEvent]
-    private void OnPlayerSpawn(PlayerSpawnCompleteEvent args)
+    // WL-Changes-Records-Start
+    /// <summary>
+    /// Creates a station record from the fully initialized spawned character.
+    /// </summary>
+    public void CreateGeneralRecord(PlayerSpawnCompleteEvent args)
     {
         if (!_recordsQuery.TryComp(args.Station, out var stationRecords))
             return;
 
         CreateGeneralRecord((args.Station, stationRecords), args.Mob, args.Profile, args.JobId);
     }
+    // WL-Changes-Records-End
 
     [SubscribeLocalEvent]
     private void OnRename(ref EntityRenamedEvent ev)
@@ -97,6 +109,10 @@ public sealed partial class StationRecordsSystem : EntitySystem
         _fingerprintQuery.TryComp(player, out var fingerprintComponent);
         _dnaQuery.TryComp(player, out var dnaComponent);
 
+        // WL-Changes-start
+        TryComp<LanguagesComponent>(player, out var languageComponent);
+        // WL-Changes-end
+
         CreateGeneralRecord(
             station,
             idUid.Value,
@@ -107,7 +123,8 @@ public sealed partial class StationRecordsSystem : EntitySystem
             jobId,
             fingerprintComponent?.Fingerprint,
             dnaComponent?.DNA,
-            profile);
+            profile,
+            /*WL-Changes-start*/languageComponent?.Speaking.ToList() ?? []/*WL-Changes-end*/);
     }
 
     /// <summary>
@@ -146,14 +163,15 @@ public sealed partial class StationRecordsSystem : EntitySystem
         string jobId,
         string? mobFingerprint,
         string? dna,
-        HumanoidCharacterProfile profile)
+        HumanoidCharacterProfile profile,
+        /*WL-Changes-start*/List<ProtoId<LanguagePrototype>> languages/*WL-Changes-end*/)
     {
         if (!ProtoMan.TryIndex<JobPrototype>(jobId, out var jobPrototype))
             throw new ArgumentException($"Invalid job prototype ID: {jobId}");
 
         // when adding a record that already exists use the old one
         // this happens when respawning as the same character
-        if (GetRecordByName(station.AsNullable(), name) is {} id)
+        if (GetRecordByName(station.AsNullable(), name) is { } id)
         {
             SetIdKey(idUid, new StationRecordKey(id, station));
             return;
@@ -163,14 +181,28 @@ public sealed partial class StationRecordsSystem : EntitySystem
         {
             Name = name,
             Age = age,
-            JobTitle = jobPrototype.LocalizedName,
+            // WL-Changes-start
+            JobTitle = _role.GetSubname(profile, jobId) ?? jobPrototype.LocalizedName,
+            // WL-Changes-end
             JobIcon = jobPrototype.Icon,
             JobPrototype = jobId,
             Species = species,
             Gender = gender,
             DisplayPriority = jobPrototype.RealDisplayWeight,
             Fingerprint = mobFingerprint,
-            DNA = dna
+            DNA = dna,
+            // WL-Changes-start
+            EmploymentRecord = profile.EmploymentRecord,
+            MedicalRecord = profile.MedicalRecord,
+            SecurityRecord = profile.SecurityRecord,
+            Confederation = profile.Confederation,
+            Country = profile.Country,
+            DateOfBirth = profile.DateOfBirth,
+            Height = profile.Height,
+            Sex = profile.Sex, // WL-Changes-Records
+            Fullname = profile.FullName,
+            Languages = languages
+            // WL-Changes-end
         };
 
         var key = AddRecordEntry(station.AsNullable(), record);

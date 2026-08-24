@@ -1,14 +1,11 @@
-﻿using Content.Shared.Pinpointer;
+﻿using System.Numerics;
+using Content.Shared.Pinpointer;
+using Content.Shared.Atmos;
 using Robust.Client.Graphics;
-using Robust.Client.ResourceManagement;
-using Robust.Shared.Collections;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
-using System.Numerics;
-using Content.Shared.Atmos;
-using System.Linq;
 using Robust.Shared.Utility;
 
 namespace Content.Client._WL.Silicon;
@@ -16,8 +13,7 @@ namespace Content.Client._WL.Silicon;
 [Virtual]
 public partial class AiNavMapOverlay
 {
-    [Dependency] public IEntityManager _entManager = default!;
-    [Dependency] public IResourceCache _cache = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public EntityUid? Owner;
     public EntityUid? MapUid;
@@ -51,7 +47,7 @@ public partial class AiNavMapOverlay
     private readonly Dictionary<Vector2i, Vector2i> _vertLines = new();
     private readonly Dictionary<Vector2i, Vector2i> _vertLinesReversed = new();
 
- // These lines need to be offset by one pixel inward
+    // These lines need to be offset by one pixel inward
     private readonly Dictionary<Vector2i, Vector2i> _horizLinesSouth = new();
     private readonly Dictionary<Vector2i, Vector2i> _horizLinesSouthReversed = new();
     private readonly Dictionary<Vector2i, Vector2i> _vertLinesWest = new();
@@ -246,7 +242,7 @@ public partial class AiNavMapOverlay
         foreach (var (origin, terminal) in _vertLines)
         {
             var offset = new Vector2(0, -1 / 32f);
-            _tileLines.Add((origin , terminal + offset));
+            _tileLines.Add((origin, terminal + offset));
         }
 
         foreach (var (origin, terminal) in _horizLinesSouth)
@@ -258,7 +254,7 @@ public partial class AiNavMapOverlay
         foreach (var (origin, terminal) in _vertLinesWest)
         {
             var offset = new Vector2(1 / 32f, 0);
-            _tileLines.Add((origin + offset, terminal + offset + new Vector2(0,-1 / 32f)));
+            _tileLines.Add((origin + offset, terminal + offset + new Vector2(0, -1 / 32f)));
         }
     }
 

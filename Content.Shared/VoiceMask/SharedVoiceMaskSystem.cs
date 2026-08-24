@@ -18,8 +18,19 @@ public sealed class VoiceMaskBuiState : BoundUserInterfaceState
     public readonly bool AccentHide;
     public readonly LocId TitleText;
     public readonly string TTSVoice; // Corvax-TTS
+    // WL-Changes-Start: Speech barks
+    public readonly string BarkVoice;
+    public readonly float BarkPitch;
 
-    public VoiceMaskBuiState(string name, string? verb, bool active, bool accentHide, LocId titleText, string voice) // Corvax-TTS
+    public VoiceMaskBuiState(
+        string name,
+        string? verb,
+        bool active,
+        bool accentHide,
+        LocId titleText,
+        string voice,
+        string barkVoice,
+        float barkPitch)
     {
         Name = name;
         Verb = verb;
@@ -27,7 +38,10 @@ public sealed class VoiceMaskBuiState : BoundUserInterfaceState
         AccentHide = accentHide;
         TitleText = titleText;
         TTSVoice = voice;  // Corvax-TTS
+        BarkVoice = barkVoice;
+        BarkPitch = barkPitch;
     }
+    // WL-Changes-End
 }
 
 [Serializable, NetSerializable]

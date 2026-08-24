@@ -68,11 +68,11 @@ public sealed partial class SkillsAdminWindow : FancyWindow
             var skillSelector = new SkillSelector(skillType, currentLevel, costs, color, 1)
             {
                 Margin = new Thickness(0, 5),
-                HorizontalExpand = true
+                HorizontalExpand = true,
+                IsLocked = false
             };
 
-            skillSelector.IsLocked = false;
-            skillSelector.UpdateAvailability(int.MaxValue, _skillsSystem);
+            skillSelector.UpdateAvailability(int.MaxValue);
 
             skillSelector.OnSkillLevelChanged += (newLevel) =>
             {
