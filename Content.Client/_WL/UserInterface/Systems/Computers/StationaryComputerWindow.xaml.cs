@@ -16,10 +16,10 @@ namespace Content.Client._WL.UserInterface.Systems.Computers;
 [GenerateTypedNameReferences]
 public sealed partial class StationaryComputerWindow : FancyWindow
 {
-    [Dependency] private readonly IResourceCache _resCache = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly IClipboardManager _clipboard = default!;
-    [Dependency] private readonly ILogManager _logMan = default!;
+    [Dependency] private IResourceCache _resCache = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private IClipboardManager _clipboard = default!;
+    [Dependency] private ILogManager _logMan = default!;
 
     public Color ConsoleColor { get; private set; } = Color.White;
     public string CurrentRoot { get; private set; } = string.Empty;
@@ -32,7 +32,7 @@ public sealed partial class StationaryComputerWindow : FancyWindow
     public event Action<CmdLineEdit.CmdLineCommandEntry>? OnCommandEntered;
 
     private readonly List<Label> _lines;
-    private bool _hasPendingCommand;
+    // private bool _hasPendingCommand;
 
     private readonly VectorFont _font;
 
@@ -81,13 +81,13 @@ public sealed partial class StationaryComputerWindow : FancyWindow
 
     public void UnlockLineEdit()
     {
-        _hasPendingCommand = false;
+        // _hasPendingCommand = false;
         SetInputEnabled(true);
     }
 
     public void LockLineEdit()
     {
-        _hasPendingCommand = true;
+        // _hasPendingCommand = true;
         SetInputEnabled(false);
     }
 

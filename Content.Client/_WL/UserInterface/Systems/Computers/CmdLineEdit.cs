@@ -13,7 +13,7 @@ namespace Content.Client._WL.UserInterface.Systems.Computers;
 
 public sealed class CmdLineEdit : HistoryLineEdit
 {
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     public const string StyleClassCmdLineEdit = "cmdLineEdit";
 
