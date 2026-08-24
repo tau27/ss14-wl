@@ -7,131 +7,11 @@ namespace Content.Server._WL.StationaryComputer;
 
 public sealed partial class StationaryComputerSystem : SharedStationaryComputerSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
-    private static readonly string EmptyResponse = string.Empty;
+    private static readonly string EmptyResponse = "stationary-computer-response-unknown-command";
 
-    // TODO: мейби переделать в отдельный класс под команды и мейби сделать это на клиенте, а к серверу обращаться только в экстренных случаях, но мне так лень.
-    private readonly Dictionary<
-        string,
-        Func<
-            List<string>,
-            Dictionary<string, List<string>>,
-            Entity<StationaryComputerComponent>,
-            IEntityManager, string?>> Commands = new()
-            {
-                ["change"] = (pos, options, ent, entMan) =>
-                {
-                    if (!TryVerifyPassword(ent, options, out var resp))
-                        return resp;
-
-                    if (options.TryGetValue("color", out var values) && values.Count >= 1)
-                    {
-                        Color color;
-                        if (Color.TryFromName(values[0], out var color_))
-                        {
-                            color = color_;
-                        }
-                        else
-                        {
-
-                            if (!Color.TryFromHex(values[0], out var color2))
-                                return Robust.Shared.Localization.Loc.GetString("stationary-computer-response-unknown-color");
-
-                            color = color2;
-                        }
-
-                        ent.Comp.ConsoleColor = color.WithAlpha(255);
-                    }
-
-                    return null;
-                },
-
-                ["clear"] = (pos, options, ent, entMan) =>
-                {
-                    if (!TryVerifyPassword(ent, options, out var resp))
-                        return resp;
-
-                    ent.Comp.Content.Clear();
-                    return null;
-                },
-
-                ["delete"] = (pos, options, ent, entMan) =>
-                {
-                    if (!TryVerifyPassword(ent, options, out var resp))
-                        return resp;
-
-                    var list = ent.Comp.Content;
-                    var count = list.Count;
-
-                    if (count == 0)
-                        return null;
-
-                    if (options.TryGetValue("blocks", out var blockArgs) &&
-                        blockArgs.Count > 0 &&
-                        int.TryParse(blockArgs[0], out var blocks))
-                    {
-                        var toDelete = Math.Clamp(blocks * 2, 0, count);
-                        if (toDelete > 0)
-                        {
-                            list.RemoveRange(count - toDelete, toDelete);
-                            return null;
-                        }
-                    }
-
-                    if (options.TryGetValue("lines", out var lineArgs) &&
-                        lineArgs.Count > 0 &&
-                        int.TryParse(lineArgs[0], out var lines))
-                    {
-                        var toDelete = Math.Clamp(lines, 0, count);
-                        if (toDelete > 0)
-                        {
-                            list.RemoveRange(count - toDelete, toDelete);
-                            return null;
-                        }
-                    }
-
-                    if (pos.Count >= 1 && int.TryParse(pos[0], out var positionalLines))
-                    {
-                        var toDelete = Math.Clamp(positionalLines, 0, count);
-                        if (toDelete > 0)
-                        {
-                            list.RemoveRange(count - toDelete, toDelete);
-                            return null;
-                        }
-                    }
-
-                    return null;
-                },
-                ["lock"] = (pos, options, ent, entMan) =>
-                {
-                    if (!TryVerifyPassword(ent, options, out var resp))
-                        return resp;
-
-                    if (pos.Count == 0)
-                        return Robust.Shared.Localization.Loc.GetString("stationary-computer-response-invalid-agruments-number");
-
-                    ent.Comp.Locked = true;
-                    ent.Comp.Password = pos[0];
-
-                    return null;
-                },
-
-                ["unlock"] = (pos, options, ent, entMan) =>
-                {
-                    if (pos.Count == 0)
-                        return Robust.Shared.Localization.Loc.GetString("stationary-computer-response-invalid-agruments-number");
-
-                    var inputPassword = pos[0];
-                    if (string.IsNullOrWhiteSpace(inputPassword) || inputPassword != ent.Comp.Password)
-                        return Robust.Shared.Localization.Loc.GetString("stationary-computer-response-invalid-password");
-
-                    ent.Comp.Locked = false;
-                    ent.Comp.Password = null;
-
-                    return null;
-                }
-            };
     public override void Initialize()
     {
         base.Initialize();
@@ -148,7 +28,11 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
 
         component.AddContent(args.RawText, args.Root);
 
-        var response = InvokeCommand((uid, component), args.CommandName, args.Positional, args.Flags, EntityManager);
+        var ev = new CheckCommandEnterEvent(args.CommandName, args.Positional, args.Flags);
+
+        RaiseLocalEvent(uid, ref ev);
+
+        var response = ev.Handled ? ev.Response : _loc.GetString("stationary-computer-response-unknown-command");
 
         component.AddContent(response);
 
@@ -157,62 +41,61 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
         UpdateUIState(uid, state);
     }
 
-    public string? InvokeCommand(
+    [SubscribeLocalEvent]
+    public void OnCommandEvent(Entity<StationaryComputerComponent> ent, ref CheckCommandEnterEvent args)
+    {
+        if (TryClientCommand(ent, args.Name, args.Positional, args.Options, out var output))
+            args.Handle(output);
+    }
+
+    private bool TryClientCommand(
         Entity<StationaryComputerComponent> ent,
         string name,
         List<string> positional,
         Dictionary<string, List<string>> options,
-        IEntityManager entMan
+        out string? output
         )
     {
-        if (!Commands.TryGetValue(name, out var action))
-            return null;
+        output = null;
 
-        return action(positional, options, ent, entMan);
+        switch (name)
+        {
+            case "clear":
+                ent.Comp.Content.Clear();
+                return true;
+
+            case "style":
+                if (options.TryGetValue("color", out var values) && values.Count >= 1)
+                {
+                    Color color;
+                    if (Color.TryFromName(values[0], out var color_))
+                    {
+                        color = color_;
+                    }
+                    else
+                    {
+
+                        if (!Color.TryFromHex(values[0], out var color2))
+                        {
+                            output = _loc.GetString("stationary-computer-response-unknown-color");
+                            return true;
+                        }
+
+                        color = color2;
+                    }
+
+                    ent.Comp.ConsoleColor = color.WithAlpha(255);
+                }
+
+                output = _loc.GetString("stationary-computer-response-style-changed");
+                return true;
+        }
+
+        return false;
     }
 
     private void UpdateUIState(Entity<UserInterfaceComponent?> ent, StationaryComputerBUIState state)
     {
         _ui.SetUiState(ent, StationaryComputerUiKey.Key, state);
-    }
-    public static bool TryVerifyPassword(Entity<StationaryComputerComponent> computer, string password, [NotNullWhen(false)] out string? response)
-    {
-        response = null;
-
-        if (!computer.Comp.Locked)
-            return true;
-
-        if (string.IsNullOrWhiteSpace(password))
-        {
-            response = Robust.Shared.Localization.Loc.GetString("stationary-computer-response-invalid-auth");
-            return false;
-        }
-
-        var comp = computer.Comp;
-        if (password == comp.Password)
-            return true;
-
-        response = Robust.Shared.Localization.Loc.GetString("stationary-computer-response-invalid-auth");
-        return false;
-    }
-
-    public static bool TryVerifyPassword(Entity<StationaryComputerComponent> computer, Dictionary<string, List<string>> commandOptions, [NotNullWhen(false)] out string? response)
-    {
-        const string passwordOption = "pw"; //
-
-        if (!computer.Comp.Locked)
-        {
-            response = null;
-            return true;
-        }
-
-        if (!commandOptions.TryGetValue(passwordOption, out var values) || values.Count == 0)
-        {
-            response = Robust.Shared.Localization.Loc.GetString("stationary-computer-response-invalid-auth");
-            return false;
-        }
-
-        var password = values[0];
-        return TryVerifyPassword(computer, password, out response);
     }
 }

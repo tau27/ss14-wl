@@ -10,7 +10,7 @@ namespace Content.Shared._WL.StationaryComputer;
 public sealed partial class StationaryComputerComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string CurrentRoot { get; set; } = "NT:\\";
+    public string CurrentRoot { get; set; } = "~/";
 
     [DataField, AutoNetworkedField]
     public List<string> BaseContent { get; set; } = new();
@@ -38,3 +38,27 @@ public sealed partial class StationaryComputerComponent : Component
 
 [Serializable, NetSerializable]
 public readonly record struct StationaryComputerContentEntry(string Content, string? Root);
+
+[ByRefEvent]
+public record struct CheckCommandEnterEvent
+{
+    public readonly string Name;
+    public readonly List<string> Positional;
+    public readonly Dictionary<string, List<string>> Options;
+
+    public string? Response { get; private set; }
+    public bool Handled { get; private set; }
+
+    public CheckCommandEnterEvent(string name, List<string> positional, Dictionary<string, List<string>> options)
+    {
+        Name = name;
+        Positional = positional;
+        Options = options;
+    }
+
+    public void Handle(string? response)
+    {
+        Handled = true;
+        Response = response;
+    }
+}

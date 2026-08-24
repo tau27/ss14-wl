@@ -24,10 +24,10 @@ public sealed partial class StationaryComputerWindow : FancyWindow
     public Color ConsoleColor { get; private set; } = Color.White;
     public string CurrentRoot { get; private set; } = string.Empty;
 
-    public const string RootPostfix = ">";
+    public const string RootPostfix = "> ";
     public const int MaxLineLength = 1024;
 
-    public static readonly ProtoId<FontPrototype> FontPrototypeId = "Default";
+    public static readonly ProtoId<FontPrototype> FontPrototypeId = "JetBrainsMono";
 
     public event Action<CmdLineEdit.CmdLineCommandEntry>? OnCommandEntered;
 
@@ -57,6 +57,10 @@ public sealed partial class StationaryComputerWindow : FancyWindow
         InputLine.OnCommandEntered += entry =>
         {
             Caret.ResetAnimation();
+
+            AddOutputLine(null, DiscPathLabel.Text + entry.RawText);
+            DiscPathLabel.Text = "";
+            InputLine.SetText(string.Empty, true);
 
             OnCommandEntered?.Invoke(entry);
 
@@ -96,7 +100,7 @@ public sealed partial class StationaryComputerWindow : FancyWindow
             ReservesSpace = true,
             Margin = new Thickness(4, 0),
             Modulate = ConsoleColor,
-            Text = root != null ? $"{root}{RootPostfix} {text}" : text,
+            Text = root != null ? $"{root}{RootPostfix}{text}" : text,
             FontOverride = _font,
             MouseFilter = MouseFilterMode.Stop,
         };

@@ -1,12 +1,11 @@
 - type: entity
   parent: BaseComputerAiAccess
   id: StationaryComputer
+  suffix: DEBUG
   components:
   - type: StationaryComputer
     baseContent:
-    - stationary-computer-welcome-string-1
-    - stationary-computer-welcome-string-2
-    - ""
+    - stationary-computer-welcome-string
   - type: ActivatableUI
     key: enum.StationaryComputerUiKey.Key
   - type: UserInterface

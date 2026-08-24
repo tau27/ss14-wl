@@ -21,7 +21,7 @@
                         </BoxContainer>
                         <BoxContainer HorizontalExpand="True" Margin="4 0 4 4">
                             <Label Name="DiscPathLabel" HorizontalAlignment="Left"/>
-                            <this:CmdLineEdit Name="InputLine" Access="Public" HorizontalAlignment="Left" Margin="9 0 0 0"/>
+                            <this:CmdLineEdit Name="InputLine" Access="Public" HorizontalAlignment="Left"/>
                             <this:BlinkingCaret Name="Caret" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                         </BoxContainer>
                     </BoxContainer>
