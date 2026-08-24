@@ -32,7 +32,7 @@ public sealed partial class StationaryComputerSystem : SharedStationaryComputerS
 
         RaiseLocalEvent(uid, ref ev);
 
-        var response = ev.Handled ? ev.Response : _loc.GetString("stationary-computer-response-unknown-command");
+        var response = ev.Handled ? ev.Response : _loc.GetString(EmptyResponse);
 
         component.AddContent(response);
 
