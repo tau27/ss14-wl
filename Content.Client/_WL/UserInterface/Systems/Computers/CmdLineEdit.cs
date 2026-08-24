@@ -11,7 +11,7 @@ using static Robust.Client.UserInterface.StylesheetHelpers;
 
 namespace Content.Client._WL.UserInterface.Systems.Computers;
 
-public sealed class CmdLineEdit : HistoryLineEdit
+public sealed partial class CmdLineEdit : HistoryLineEdit
 {
     [Dependency] private IResourceCache _resourceCache = default!;
 
