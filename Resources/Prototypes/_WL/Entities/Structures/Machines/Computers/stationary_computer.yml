@@ -14,5 +14,29 @@
         type: StationaryComputerBUI
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
-  - type: ApcPowerReceiver
-    powerLoad: 400
+
+- type: entity
+  parent: BaseComputerAiAccess
+  id: PointsReaderDebugComputer
+  suffix: DEBUG
+  name: DebugPointsReader
+  components:
+  - type: DataReader
+  - type: ItemSlots
+    slots:
+      storage_slot:
+        name: хуеприёмник
+  - type: ActivatableUI
+    key: enum.PointsDataReaderUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PointsDataReaderUiKey.Key:
+        type: PointsDataReadBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: DataStorage
+    name: UwU points
+    allowedStorageFormats:
+      - PointsFormat
+    currentStorageFormat: PointsFormat
+    size: 65536

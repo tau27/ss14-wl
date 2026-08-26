@@ -15,7 +15,7 @@ public abstract partial class ScaleMethod
     {
         double sized = Math.Clamp((double)x/(double)size, 0, 1);
 
-        return GetModifier(sized) * max + min;
+        return GetModifier(sized) * (max - min) + min;
     }
 }
 

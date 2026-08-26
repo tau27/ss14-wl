@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Components;
 using Content.Shared._WL.Research.Prototypes;
+using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -9,14 +10,8 @@ namespace Content.Shared._WL.Research.Systems;
 
 public abstract partial class SharedResearchNewSystem : EntitySystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ResearchDatabaseComponent, MapInitEvent>(OnRDBInit);
-    }
-
-    private void OnRDBInit(EntityUid uid, ResearchDatabaseComponent component, MapInitEvent args)
+    [SubscribeLocalEvent]
+    private void OnRDBInit(EntityUid uid, ResearchDatabaseComponent component, ref MapInitEvent args)
     {
         var avalibleResearches = GetAvaliableResearches(uid, component);
 
@@ -41,5 +36,17 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
         }
 
         return availableTechnologies;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnInsertAttempt(Entity<DataReaderComponent> ent, ref ItemSlotInsertAttemptEvent args)
+    {
+        if (args.Slot.ID != ent.Comp.SlotId || args.Cancelled)
+            return;
+
+        if (HasComp<DataStorageComponent>(args.Item))
+            return;
+
+        args.Cancelled = true;
     }
 }

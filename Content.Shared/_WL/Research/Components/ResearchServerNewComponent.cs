@@ -16,16 +16,17 @@ public sealed partial class ResearchServerNewComponent : Component
     [DataField("serverName"), ViewVariables(VVAccess.ReadWrite)]
     public string ServerName = "RDMAINSERVER";
 
-    [AutoNetworkedField]
-    [DataField("points")]
-    public Dictionary<ProtoId<ResearchPointsTypePrototype>, (double, double, double)> PointsDict { get; set; } = new(); // current, max, per second
+    [DataField("points"), AutoNetworkedField]
+    public Dictionary<ProtoId<ResearchPointsTypePrototype>, (double, double)> PointsStatistic { get; set; } = new(); // max, per second
+
+    /*
+    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
+    public List<ProtoId<ResearchPointsTypePrototype>> AllowedPointsTypes = new();
+    */
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
     public int Id;
-
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
-    public List<ProtoId<ResearchPointsTypePrototype>> AllowedPointsTypes = new();
 
     [ViewVariables(VVAccess.ReadOnly)]
     public List<EntityUid> Clients = new();

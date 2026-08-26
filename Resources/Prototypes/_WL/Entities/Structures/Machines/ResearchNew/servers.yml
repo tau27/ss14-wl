@@ -22,15 +22,13 @@
     energy: 3.0
     color: "#b211b2"
   - type: LitOnPowered
+  - type: DataStorage
+    name: UwU points
+    allowedStorageFormats:
+      - PointsFormat
+    currentStorageFormat: PointsFormat
+    size: 65536
   - type: ResearchServerNew
-    allowedPointsTypes:
-    - IT
-    - Physics
-    - Social
-    - Mech
-    - Instrument
-    - BioChem
-    - Experimental
   - type: ResearchDatabase
     supportedDisciplines:
       - Industrial

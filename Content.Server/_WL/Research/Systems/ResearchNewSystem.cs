@@ -23,6 +23,8 @@ public sealed partial class ResearchSystemNew : SharedResearchNewSystem
         InitializeServer();
         InitializeSource();
         InitializeTerminal();
+        InitializeData();
+        InitializeCommands();
     }
 
     public HashSet<Entity<ResearchServerNewComponent>> GetServers(EntityUid client)

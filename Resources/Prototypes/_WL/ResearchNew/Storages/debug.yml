@@ -1,0 +1,26 @@
+- type: storageFormat
+  id: PointsFormat
+  name: uwu points
+  color: "#ffffff"
+  storagesList:
+    - type: PointsDataStorage
+      allowedPointsTypes:
+      - IT
+      - Physics
+      - Social
+      - Mech
+      - Instrument
+      - BioChem
+      - Experimental
+
+- type: entity
+  parent: TreasureDatadiskEncrypted
+  id: DebugPointsStorage
+  name: debug points storage
+  components:
+    - type: DataStorage
+      name: UwU points
+      allowedStorageFormats:
+        - PointsFormat
+      currentStorageFormat: PointsFormat
+      size: 128

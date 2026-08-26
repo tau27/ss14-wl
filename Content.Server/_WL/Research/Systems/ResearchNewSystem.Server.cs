@@ -17,9 +17,12 @@ public sealed partial class ResearchSystemNew
 
     private void OnServerStartup(Entity<ResearchServerNewComponent> ent, ref ComponentStartup args)
     {
-        foreach (var type in ent.Comp.AllowedPointsTypes)
+        if (TryComp<PointsDataStorageComponent>(ent, out var storage))
         {
-            ent.Comp.PointsDict.TryAdd(type, (0, 0, 0));
+            foreach (var type in storage.AllowedPointsTypes)
+            {
+                ent.Comp.PointsStatistic.TryAdd(type, (0, 0));
+            }
         }
 
         var unusedId = EntityQuery<ResearchServerNewComponent>(true)
@@ -74,9 +77,12 @@ public sealed partial class ResearchSystemNew
         if (!Resolve(ent, ref server))
             return;
 
-        foreach (var (key, (value, maxValue, _)) in server.PointsDict)
+        if (!TryComp<PointsDataStorageComponent>(ent, out var pointsStorage))
+            return;
+
+        foreach (var (key, (maxValue, _)) in server.PointsStatistic)
         {
-            server.PointsDict[key] = (value, maxValue, 0);
+            server.PointsStatistic[key] = (maxValue, 0);
         }
 
         var ev = new GetServerResearchEvent(ent);
@@ -94,14 +100,14 @@ public sealed partial class ResearchSystemNew
             }
 
             var pointsSum = pointsData.Values.Sum();
+            if (pointsSum <= 0)
+                continue;
+
             var addValue = server.ResearchedData[categoryId].ResearchData(rawData, pointsSum);
 
             var pointsCoof = addValue / pointsSum;
 
-            foreach (var (type, value) in pointsData)
-            {
-                TryModifyPoints(ent, type, value * pointsCoof, true, server);
-            }
+            TryModifyPoints(ent, pointsData, true, server);
         }
 
         Dirty(ent, server);
@@ -113,23 +119,27 @@ public sealed partial class ResearchSystemNew
         }
     }
 
-    private bool TryModifyPoints(EntityUid uid, ProtoId<ResearchPointsTypePrototype> type, double value, bool modifyStatistic = false, ResearchServerNewComponent? server = null)
+    private bool TryModifyPoints(EntityUid uid, Dictionary<ProtoId<ResearchPointsTypePrototype>, double> pointsData, bool modifyStatistic = false, ResearchServerNewComponent? server = null, PointsDataStorageComponent? storage = null)
     {
-        if (!Resolve(uid, ref server))
+        if (!Resolve(uid, ref server) || !Resolve(uid, ref storage))
             return false;
 
-        if (!server.PointsDict.ContainsKey(type))
-            return false;
+        TryWritePoints(uid, ref pointsData, out var writedData, storage);
 
-        var (pointsValue, maxPoints, pointsPS) = server.PointsDict[type];
+        if (!modifyStatistic)
+            return true;
 
-        if (pointsValue + value < 0 || maxPoints + value < 0)
-            return false;
+        foreach (var (type, value) in writedData)
+        {
+            if (!server.PointsStatistic.ContainsKey(type))
+                continue;
 
-        if (modifyStatistic)
-            server.PointsDict[type] = (pointsValue + value, maxPoints + value, pointsPS + value);
-        else
-            server.PointsDict[type] = (pointsValue + value, maxPoints, pointsPS);
+            if (modifyStatistic)
+            {
+                var (maxPoints, pointsPS) = server.PointsStatistic[type];
+                server.PointsStatistic[type] = (maxPoints + value, pointsPS + value);
+            }
+        }
 
         Dirty(uid, server);
 

@@ -117,7 +117,7 @@ public sealed partial class ResearchField
             if (researchData.TryGetValue(ResearchTypes[i], out var value))
             {
                 var type = protoMan.Index(ResearchTypes[i]);
-                coords[i] = (int)Math.Clamp((value - type.MinValue) / type.MaxValue * type.Size, 0, type.Size - 1);
+                coords[i] = (int)Math.Clamp((value - type.MinValue) / (type.MaxValue - type.MinValue) * type.Size, 0, type.Size - 1);
             }
             else
             {

@@ -52,7 +52,7 @@ public sealed partial class ResearchSystemNew
                 continue;
 
             var bufferState = database.Researches[proto];
-            bufferState.DepsState = GetResearchState(uid, proto, server, database);
+            bufferState.DepsState = GetResearchState(uid, proto, bufferState, server, database);
 
             database.Researches[proto] = bufferState;
         }
@@ -75,7 +75,7 @@ public sealed partial class ResearchSystemNew
             return;
 
         var researchSpeed = GetResearchSpeed(uid, server);
-        var modeProto = ProtoMan.Index<ResearchModePrototype>(mainResearchState.ModeId);
+        // var modeProto = ProtoMan.Index(mainResearchState.ModeId);
 
         int cost = (int)(mainResearchState.PackagesCostModed);
 
@@ -118,7 +118,7 @@ public sealed partial class ResearchSystemNew
         if (!database.Researches.TryGetValue(researchId, out var researchState))
             return false;
 
-        if (GetResearchState(uid, researchId, server, database) != ResearchDepsStatus.Allowed)
+        if (GetResearchState(uid, researchId, researchState, server, database) != ResearchDepsStatus.Allowed)
             return false;
 
         modeId ??= researchState.ModeId;
@@ -126,11 +126,7 @@ public sealed partial class ResearchSystemNew
         var modeProto = ProtoMan.Index<ResearchModePrototype>(modeId);
         var researchProto = ProtoMan.Index<ResearchPrototype>(researchId);
 
-        foreach (var (type, value) in researchProto.PointsCost)
-        {
-            if (!TryModifyPoints(uid, type, -value * modeProto.PointsModifier, false, server))
-                return false;
-        }
+        TryModifyPoints(uid, researchProto.PointsCost, false, server); // TODO: apply modifier, -1 & value check
 
         server.ResearchQueue.Add(researchId);
 
@@ -150,12 +146,13 @@ public sealed partial class ResearchSystemNew
         return true;
     }
 
-    public ResearchDepsStatus GetResearchState(EntityUid uid, ProtoId<ResearchPrototype> researchProto, ResearchServerNewComponent? server = null, ResearchDatabaseComponent? database = null)
+    public ResearchDepsStatus GetResearchState(EntityUid uid, ProtoId<ResearchPrototype> researchProto, ResearchState researchState, ResearchServerNewComponent? server = null, ResearchDatabaseComponent? database = null, PointsDataStorageComponent? storage = null)
     {
-        if (!Resolve(uid, ref database) || !Resolve(uid, ref server))
+        if (!Resolve(uid, ref database) || !Resolve(uid, ref server) || !Resolve(uid, ref storage))
             return ResearchDepsStatus.Invalid;
 
-        var research = ProtoMan.Index<ResearchPrototype>(researchProto);
+        var research = ProtoMan.Index(researchProto);
+        var modeProto = ProtoMan.Index(researchState.ModeId);
 
         foreach (var parent in research.ParentsResearches)
         {
@@ -166,8 +163,8 @@ public sealed partial class ResearchSystemNew
 
         foreach (var (type, value) in research.PointsCost)
         {
-            if (!server.PointsDict.TryGetValue(type, out var serverValue) ||
-                    value > serverValue.Item1)
+            if (!storage.PointsDict.TryGetValue(type, out var storageValue) ||
+                    value > storageValue * modeProto.PointsModifier)
                 return ResearchDepsStatus.PointsReq;
         }
 

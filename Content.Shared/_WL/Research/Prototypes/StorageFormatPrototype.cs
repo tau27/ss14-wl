@@ -1,10 +1,12 @@
+using Content.Shared._WL.Research;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._WL.Research.Prototypes;
 
 [Prototype]
-public sealed partial class ResearchPointsTypePrototype : IPrototype
+public sealed partial class StorageFormatPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;
@@ -15,9 +17,9 @@ public sealed partial class ResearchPointsTypePrototype : IPrototype
     [ViewVariables(VVAccess.ReadOnly)]
     public string LocalizedName => Loc.GetString(Name);
 
-    [DataField]
-    public Color Color { get; set; }
+    [DataField(required: true)]
+    public Color Color;
 
-    [DataField]
-    public double PointsSizeCoof = 500;
+    [DataField(required: true)]
+    public ComponentRegistry StoragesList;
 }

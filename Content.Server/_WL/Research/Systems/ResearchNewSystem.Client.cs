@@ -11,19 +11,12 @@ public sealed partial class ResearchSystemNew
 {
     private void InitializeClient()
     {
-        SubscribeLocalEvent<ResearchClientNewComponent, MapInitEvent>(OnClientMapInit);
-        SubscribeLocalEvent<ResearchClientNewComponent, ComponentShutdown>(OnClientShutdown);
-        SubscribeLocalEvent<ResearchClientNewComponent, BoundUIOpenedEvent>(OnClientUIOpen);
         SubscribeLocalEvent<ResearchClientNewComponent, TerminalServerSelectionMessage>(OnTerminalSelect);
-        SubscribeLocalEvent<ResearchClientNewComponent, AnchorStateChangedEvent>(OnClientAnchorStateChanged);
 
         SubscribeLocalEvent<ResearchClientNewComponent, ResearchClientSyncMessage>(OnClientSyncMessage);
         SubscribeLocalEvent<ResearchClientNewComponent, ResearchClientServerSelectedMessage>(OnClientSelected);
         SubscribeLocalEvent<ResearchClientNewComponent, ResearchClientServerDeselectedMessage>(OnClientDeselected);
-        SubscribeLocalEvent<ResearchClientNewComponent, ResearchRegistrationNewChangedEvent>(OnClientRegistrationChanged);
     }
-
-    #region UI
 
     private void OnClientSelected(EntityUid uid, ResearchClientNewComponent component, ResearchClientServerSelectedMessage args)
     {
@@ -47,29 +40,33 @@ public sealed partial class ResearchSystemNew
     {
         UpdateClientInterface(uid, component);
     }
-    #endregion
 
-    private void OnClientRegistrationChanged(EntityUid uid, ResearchClientNewComponent component, ref ResearchRegistrationNewChangedEvent args)
+    [SubscribeLocalEvent]
+    private void OnClientRegistrationChanged(Entity<ResearchClientNewComponent> ent, ref ResearchRegistrationNewChangedEvent args)
     {
-        UpdateClientInterface(uid, component);
+        UpdateClientInterface(ent, ent.Comp);
     }
 
-    private void OnClientMapInit(EntityUid uid, ResearchClientNewComponent component, MapInitEvent args)
+    [SubscribeLocalEvent]
+    private void OnClientMapInit(Entity<ResearchClientNewComponent> ent, ref MapInitEvent args)
     {
-        if (GetServers(uid).FirstOrNull() is { } server)
-            RegisterClient(uid, server, component, server);
+        if (GetServers(ent).FirstOrNull() is { } server)
+            RegisterClient(ent, server, ent.Comp, server);
     }
 
-    private void OnClientShutdown(EntityUid uid, ResearchClientNewComponent component, ComponentShutdown args)
+    [SubscribeLocalEvent]
+    private void OnClientShutdown(Entity<ResearchClientNewComponent> ent, ref ComponentShutdown args)
     {
-        UnregisterClient(uid, component);
+        UnregisterClient(ent, ent.Comp);
     }
 
-    private void OnClientUIOpen(EntityUid uid, ResearchClientNewComponent component, BoundUIOpenedEvent args)
+    [SubscribeLocalEvent]
+    private void OnClientUIOpen(Entity<ResearchClientNewComponent> ent, ref BoundUIOpenedEvent args)
     {
-        UpdateClientInterface(uid, component);
+        UpdateClientInterface(ent, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnClientAnchorStateChanged(Entity<ResearchClientNewComponent> ent, ref AnchorStateChangedEvent args)
     {
         if (args.Anchored)
@@ -111,14 +108,6 @@ public sealed partial class ResearchSystemNew
         _uiSystem.SetUiState(uid, ResearchClientUiKey.Key, state);
     }
 
-    /// <summary>
-    /// Tries to get the server belonging to a client
-    /// </summary>
-    /// <param name="uid">The client</param>
-    /// <param name="server">It's server. Null if false.</param>
-    /// <param name="serverComponent">The server's ResearchServerNewComponent. Null if false</param>
-    /// <param name="component">The client's Researchclient component</param>
-    /// <returns>If the server was successfully retrieved.</returns>
     public bool TryGetClientServer(EntityUid uid,
         [NotNullWhen(true)] out EntityUid? server,
         [NotNullWhen(true)] out ResearchServerNewComponent? serverComponent,

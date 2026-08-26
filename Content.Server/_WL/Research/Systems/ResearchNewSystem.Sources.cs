@@ -90,6 +90,8 @@ public sealed partial class ResearchSystemNew
         foreach (var (category, (researchValue, data)) in ev.ResearchData)
         {
             var normileCoof = data.Values.Sum();
+            if (normileCoof <= 0)
+                continue;
 
             foreach (var (type, value) in data)
             {
