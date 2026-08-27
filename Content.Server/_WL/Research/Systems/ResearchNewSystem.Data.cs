@@ -5,6 +5,8 @@ using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Methods;
 using Content.Shared._WL.Research.Components;
 using Content.Shared._WL.Research.Prototypes;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Containers;
 
@@ -12,6 +14,8 @@ namespace Content.Server._WL.Research.Systems;
 
 public sealed partial class ResearchSystemNew
 {
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+
     public readonly ComponentRegistry StorageFormatComponents = new ComponentRegistry(new Dictionary<string, EntityPrototype.ComponentRegistryEntry>()
         {
              {"PointsDataStorage", new EntityPrototype.ComponentRegistryEntry(new PointsDataStorageComponent()) }
@@ -51,10 +55,7 @@ public sealed partial class ResearchSystemNew
 
         ent.Comp.LocalSize = dataStorage.LocalSize;
 
-        foreach (var type in ent.Comp.AllowedPointsTypes)
-        {
-            ent.Comp.PointsDict.TryAdd(type, 0);
-        }
+        ent.Comp.Points = new ResearchPointsSpecifier(ent.Comp.AllowedPointsTypes, 0);
     }
 
     [SubscribeLocalEvent]
@@ -78,62 +79,20 @@ public sealed partial class ResearchSystemNew
             ent.Comp.ExpiredSize += args.Count;
     }
 
-    public double GetPointsSize(Dictionary<ProtoId<ResearchPointsTypePrototype>, double> points)
-    {
-        double size = 0;
-
-        foreach (var (pointsId, value) in points)
-        {
-            var pointsProto = ProtoMan.Index(pointsId);
-
-            size += value / pointsProto.PointsSizeCoof;
-        }
-
-        return size;
-    }
-
-    public double GetPointsSize(ProtoId<ResearchPointsTypePrototype> pointsId, double pointsValue)
-    {
-        var pointsProto = ProtoMan.Index(pointsId);
-
-        var size = pointsValue / pointsProto.PointsSizeCoof;
-
-        return size;
-    }
-
     public bool TryWritePoints(
             EntityUid uid,
-            ref Dictionary<ProtoId<ResearchPointsTypePrototype>, double> writePoints,
-            out Dictionary<ProtoId<ResearchPointsTypePrototype>, double> writedPoints,
+            ref ResearchPointsSpecifier writePoints,
+            out ResearchPointsSpecifier writedPoints,
             PointsDataStorageComponent? storage = null)
     {
-        var pointsSize = GetPointsSize(writePoints);
-        writedPoints = new Dictionary<ProtoId<ResearchPointsTypePrototype>, double>();
+        writedPoints = new();
 
-        if (!Resolve(uid, ref storage) ||
-                pointsSize + storage.ExpiredLocalSize > storage.LocalSize)
+        if (!Resolve(uid, ref storage))
             return false;
 
-        if (writePoints.Count == 0)
-            return true;
+        writedPoints = storage.Points.SizedAdd(ProtoMan, writePoints, storage.LocalSize - storage.ExpiredLocalSize);
 
-        storage.ExpiredLocalSize += pointsSize;
-
-        var ev = new ExpiredSizeUpdatedEvent(pointsSize);
-        RaiseLocalEvent(uid, ref ev);
-
-        if (!ev.CanUpdate)
-            return false;
-
-        foreach (var (type, value) in writePoints)
-        {
-            storage.PointsDict[type] += value;
-            writePoints[type] -= value;
-            writedPoints.Add(type, value);
-        }
-
-        if (writePoints.Values.Sum() != 0)
-            return false;
+        storage.ExpiredLocalSize += writedPoints.GetSize(ProtoMan);
 
         return true;
     }
@@ -143,25 +102,25 @@ public sealed partial class ResearchSystemNew
         if (!Resolve(uid, ref reader, ref storage, false))
             return;
 
-        if (!_itemSlots.TryGetSlot(uid, comp.SlotId, out var itemSlot))
+        if (!_itemSlots.TryGetSlot(uid, reader.SlotId, out var itemSlot))
             return;
 
         var portState = PortState.Empty;
-        var diskPoints = new Dictionary<ProtoId<ResearchPointsPrototype>, double>();
+        var diskPoints = new ResearchPointsSpecifier();
 
         if (itemSlot.Item is { } disk)
         {
             portState = PortState.WrongFormat;
             if (TryComp<PointsDataStorageComponent>(disk, out var diskStorage))
             {
-                diskPoints = diskStorage.PointsDict;
+                diskPoints = diskStorage.Points;
 
                 if (TryComp<DataStorageComponent>(disk, out var dataStorage))
                     portState = dataStorage.WriteAllowed ? PortState.ReadWrite : PortState.ReadOnly;
             }
         }
 
-        var state = new PointsDataReadBoundUserInterfaceState(portState, storage.PointsDict, diskPoints);
+        var state = new PointsDataReadBoundUserInterfaceState(portState, storage.Points, diskPoints);
 
         _uiSystem.SetUiState(uid, PointsDataReaderUiKey.Key, state);
     }

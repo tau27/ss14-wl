@@ -1,3 +1,4 @@
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -19,5 +20,5 @@ public sealed partial class ResearchPointsTypePrototype : IPrototype
     public Color Color { get; set; }
 
     [DataField]
-    public double PointsSizeCoof = 500;
+    public FixedPoint2 PointsSizeCoof = 500;
 }

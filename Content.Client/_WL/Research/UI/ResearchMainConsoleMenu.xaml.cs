@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
+using Content.Shared.FixedPoint;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared._WL.Research.Components;
@@ -89,7 +90,7 @@ public sealed partial class ResearchMainConsoleMenu : FancyWindow
                 Margin = new Thickness(10, 1, 0, 0)
             };
 
-            var enumValues = new List<double>();
+            var enumValues = new List<FixedPoint2>();
 
             enumValues.Add(curValue);
             enumValues.Add(maxValue);
@@ -107,7 +108,7 @@ public sealed partial class ResearchMainConsoleMenu : FancyWindow
                     MinWidth = 120,
                     Children = { new Label
                         {
-                            Text = value.ToString("N"),
+                            Text = value.ToString(),
                             FontColorOverride = typeProto.Color,
                             HorizontalAlignment = Label.HAlignment.Center
                         }

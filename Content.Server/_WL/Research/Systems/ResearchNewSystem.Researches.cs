@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Power.EntitySystems;
+using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Components;
 using Content.Shared._WL.Research.Prototypes;
 using Content.Shared.Research.Prototypes;
@@ -77,9 +78,9 @@ public sealed partial class ResearchSystemNew
         var researchSpeed = GetResearchSpeed(uid, server);
         // var modeProto = ProtoMan.Index(mainResearchState.ModeId);
 
-        int cost = (int)(mainResearchState.PackagesCostModed);
+        var cost = (int)(mainResearchState.PackagesCostModed);
 
-        mainResearchState.ResearchedPackages = Math.Min(mainResearchState.ResearchedPackages + researchSpeed, cost);
+        mainResearchState.ResearchedPackages = Math.Min(mainResearchState.ResearchedPackages.Int() + researchSpeed, cost);
 
         if (mainResearchState.ResearchedPackages >= cost)
         {
@@ -126,7 +127,7 @@ public sealed partial class ResearchSystemNew
         var modeProto = ProtoMan.Index<ResearchModePrototype>(modeId);
         var researchProto = ProtoMan.Index<ResearchPrototype>(researchId);
 
-        TryModifyPoints(uid, researchProto.PointsCost, false, server); // TODO: apply modifier, -1 & value check
+        TryModifyPoints(uid, -researchProto.PointsCost * modeProto.PackagesModifier, false, server); // TODO: apply modifier, -1 & value check
 
         server.ResearchQueue.Add(researchId);
 
@@ -161,12 +162,8 @@ public sealed partial class ResearchSystemNew
                 return ResearchDepsStatus.ParentsReq;
         }
 
-        foreach (var (type, value) in research.PointsCost)
-        {
-            if (!storage.PointsDict.TryGetValue(type, out var storageValue) ||
-                    value > storageValue * modeProto.PointsModifier)
+        if (!storage.Points.IsSuperset(research.PointsCost * modeProto.PointsModifier))
                 return ResearchDepsStatus.PointsReq;
-        }
 
         return ResearchDepsStatus.Allowed;
     }

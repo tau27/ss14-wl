@@ -1,4 +1,5 @@
 using Content.Shared._WL.Research.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -17,7 +18,7 @@ public sealed partial class ResearchServerNewComponent : Component
     public string ServerName = "RDMAINSERVER";
 
     [DataField("points"), AutoNetworkedField]
-    public Dictionary<ProtoId<ResearchPointsTypePrototype>, (double, double)> PointsStatistic { get; set; } = new(); // max, per second
+    public Dictionary<ProtoId<ResearchPointsTypePrototype>, (FixedPoint2, FixedPoint2)> PointsStatistic { get; set; } = new(); // max, per second
 
     /*
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
@@ -48,7 +49,7 @@ public sealed partial class ResearchServerNewComponent : Component
 public record struct GetServerResearchEvent
 {
     public EntityUid Server;
-    public Dictionary<ProtoId<ResearchCategoryPrototype>, (Dictionary<ProtoId<ResearchTypePrototype>, double>, Dictionary<ProtoId<ResearchPointsTypePrototype>, double>)> ResearchData;
+    public Dictionary<ProtoId<ResearchCategoryPrototype>, (Dictionary<ProtoId<ResearchTypePrototype>, FixedPoint2>, ResearchPointsSpecifier)> ResearchData;
 
     public GetServerResearchEvent(EntityUid server)
     {

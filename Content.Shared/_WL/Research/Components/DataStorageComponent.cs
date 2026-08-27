@@ -1,4 +1,5 @@
 using Content.Shared._WL.Research.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -17,13 +18,13 @@ public sealed partial class DataStorageComponent : Component
     public string Name;
 
     [DataField(required: true), ViewVariables(VVAccess.ReadWrite)]
-    public double Size;
+    public FixedPoint2 Size;
 
     [ViewVariables(VVAccess.ReadOnly)]
-    public double LocalSize;
+    public FixedPoint2 LocalSize;
 
     [ViewVariables(VVAccess.ReadOnly)]
-    public double ExpiredSize = 0;
+    public FixedPoint2 ExpiredSize = 0;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public bool CanBeFormatted = false;
@@ -33,4 +34,4 @@ public sealed partial class DataStorageComponent : Component
 }
 
 [ByRefEvent]
-public record struct ExpiredSizeUpdatedEvent(double Count, bool CanUpdate = true);
+public record struct ExpiredSizeUpdatedEvent(FixedPoint2 Count, bool CanUpdate = true);

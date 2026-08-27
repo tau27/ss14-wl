@@ -1,6 +1,8 @@
+using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Components;
 using Content.Shared._WL.Research.Prototypes;
 using Content.Shared.Research.Components;
+using Content.Shared.FixedPoint;
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Prototypes;
@@ -32,10 +34,13 @@ public sealed partial class ResearchSystemNew
         if (!TryComp<PointsDataStorageComponent>(uid, out var storage))
             return;
 
-        if (!ProtoMan.TryIndex<ResearchPointsTypePrototype>(args[1], out var _))
+        if (!ProtoMan.TryIndex<ResearchPointsTypePrototype>(args[1], out var pointsProto))
+        {
             shell.WriteError("Points type proto is wrong");
+            return;
+        }
 
-        var pointsDict = new Dictionary<ProtoId<ResearchPointsTypePrototype>, double>() { { args[1], Convert.ToDouble(args[2]) } };
+        var pointsDict = new ResearchPointsSpecifier(pointsProto, FixedPoint2.New(args[2]));
 
         if (TryWritePoints(uid.Value, ref pointsDict, out _, storage))
             shell.WriteLine("Points written");

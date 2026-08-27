@@ -1,5 +1,6 @@
 using Content.Shared.Research.Prototypes;
 using Content.Shared._WL.Research.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -28,16 +29,16 @@ public sealed partial class ResearchPrototype : IPrototype
     public int Tier;
 
     [DataField(required: true)]
-    public Dictionary<ProtoId<ResearchPointsTypePrototype>, double> PointsCost = new();
+    public ResearchPointsSpecifier PointsCost = new();
+
+    [DataField]
+    public FixedPoint2 PackagesCost = 120;
 
     [DataField("parents")]
     public List<ProtoId<ResearchPrototype>> ParentsResearches = new();
 
     [DataField]
     public bool Hidden;
-
-    [DataField]
-    public int PackagesCost = 120;
 
     [DataField]
     public List<ProtoId<LatheRecipePrototype>> RecipeUnlocks = new();

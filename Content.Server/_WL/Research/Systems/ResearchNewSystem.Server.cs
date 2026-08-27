@@ -99,7 +99,7 @@ public sealed partial class ResearchSystemNew
                 server.ResearchedData.Add(categoryId, new ResearchField(categoryProto.ResearchTypes.ToArray(), categoryProto.MaxPoints));
             }
 
-            var pointsSum = pointsData.Values.Sum();
+            var pointsSum = pointsData.GetTotal();
             if (pointsSum <= 0)
                 continue;
 
@@ -119,7 +119,7 @@ public sealed partial class ResearchSystemNew
         }
     }
 
-    private bool TryModifyPoints(EntityUid uid, Dictionary<ProtoId<ResearchPointsTypePrototype>, double> pointsData, bool modifyStatistic = false, ResearchServerNewComponent? server = null, PointsDataStorageComponent? storage = null)
+    private bool TryModifyPoints(EntityUid uid, ResearchPointsSpecifier pointsData, bool modifyStatistic = false, ResearchServerNewComponent? server = null, PointsDataStorageComponent? storage = null)
     {
         if (!Resolve(uid, ref server) || !Resolve(uid, ref storage))
             return false;
@@ -129,7 +129,7 @@ public sealed partial class ResearchSystemNew
         if (!modifyStatistic)
             return true;
 
-        foreach (var (type, value) in writedData)
+        foreach (var (type, value) in writedData.PointsDict)
         {
             if (!server.PointsStatistic.ContainsKey(type))
                 continue;

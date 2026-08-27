@@ -1,5 +1,6 @@
 using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Methods;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -15,10 +16,10 @@ public sealed partial class ResearchTypePrototype : IPrototype
     private LocId Name { get; set; }
 
     [DataField(required: true)]
-    public double MinValue;
+    public FixedPoint2 MinValue;
 
     [DataField(required: true)]
-    public double MaxValue;
+    public FixedPoint2 MaxValue;
 
     [ViewVariables(VVAccess.ReadOnly)]
     public string LocalizedName => Loc.GetString(Name);
@@ -32,7 +33,7 @@ public sealed partial class ResearchTypePrototype : IPrototype
     [DataField]
     public int Size = 100;
 
-    public double GetScale(int x)
+    public FixedPoint2 GetScale(int x)
     {
         return Scale.GetModifier(x, Size);
     }

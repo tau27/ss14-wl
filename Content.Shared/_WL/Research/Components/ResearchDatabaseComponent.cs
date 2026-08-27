@@ -2,6 +2,7 @@ using Content.Shared.Lathe;
 using Content.Shared.Research.Prototypes;
 using Content.Shared._WL.Research.Prototypes;
 using Content.Shared._WL.Research.Systems;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -51,9 +52,9 @@ public struct ResearchState
 
     public ResearchDepsStatus DepsState { get; set; }
 
-    public double ResearchedPackages = 0;
+    public FixedPoint2 ResearchedPackages = 0;
 
-    public double PackagesCostModed = 0;
+    public FixedPoint2 PackagesCostModed = 0;
 
     public ProtoId<ResearchModePrototype> ModeId = "Default";
 

@@ -33,18 +33,18 @@ public sealed class PointsDataReadBoundUserInterfaceState : BoundUserInterfaceSt
 {
     public PortState PortState;
 
-    public Dictionary<ProtoId<ResearchPointsTypePrototype>, double> StoragePointsData;
+    public ResearchPointsSpecifier StoragePointsData;
 
-    public Dictionary<ProtoId<ResearchPointsTypePrototype>, double>? DiskPointsData;
+    public ResearchPointsSpecifier DiskPointsData;
 
     public PointsDataReadBoundUserInterfaceState(
             PortState portState,
-            Dictionary<ProtoId<ResearchPointsTypePrototype>, double> storagePointsData,
-            Dictionary<ProtoId<ResearchPointsTypePrototype>, double>? diskPointsData = null
+            ResearchPointsSpecifier storagePointsData,
+            ResearchPointsSpecifier? diskPointsData = null
         )
     {
         PortState = portState;
         StoragePointsData = storagePointsData;
-        DiskPointsData = diskPointsData;
+        DiskPointsData = diskPointsData ?? new ResearchPointsSpecifier();
     }
 }

@@ -8,7 +8,7 @@ namespace Content.Shared._WL.Research.Components;
 public sealed partial class PointsDataStorageComponent : BaseDataStorageComponent
 {
     [ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<ProtoId<ResearchPointsTypePrototype>, double> PointsDict { get; set; } = new();
+    public ResearchPointsSpecifier Points { get; set; } = new();
 
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public List<ProtoId<ResearchPointsTypePrototype>> AllowedPointsTypes = new();

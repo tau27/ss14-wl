@@ -1,4 +1,5 @@
 using Content.Shared._WL.Research.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -7,8 +8,8 @@ namespace Content.Shared._WL.Research.Components;
 public abstract partial class BaseDataStorageComponent : Component
 {
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public double LocalSize;
+    public FixedPoint2 LocalSize;
 
     [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public double ExpiredLocalSize = 0;
+    public FixedPoint2 ExpiredLocalSize = 0;
 }

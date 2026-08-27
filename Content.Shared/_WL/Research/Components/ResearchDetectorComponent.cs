@@ -1,4 +1,5 @@
 using Content.Shared._WL.Research.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -17,7 +18,7 @@ public sealed partial class ResearchDetectorComponent : Component
     public ProtoId<ResearchPointsTypePrototype>? DefaultPointsType = null;
 
     [DataField]
-    public double ResearchPercent = 0.01;
+    public FixedPoint2 ResearchPercent = 0.01;
 
     [DataField]
     public float Range = 10f;
@@ -33,7 +34,7 @@ public record struct GetResearchDataEvent
 
     public ProtoId<ResearchTypePrototype> ResearchType;
 
-    public Dictionary<ProtoId<ResearchCategoryPrototype>, (double, Dictionary<ProtoId<ResearchPointsTypePrototype>, double>)> ResearchData;
+    public Dictionary<ProtoId<ResearchCategoryPrototype>, (FixedPoint2, ResearchPointsSpecifier)> ResearchData;
 
     public GetResearchDataEvent(EntityUid detector, ProtoId<ResearchTypePrototype> researchType)
     {

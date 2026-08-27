@@ -2,6 +2,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Prototypes;
 using Content.Shared._WL.Research.Components;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._WL.Research.Systems;
@@ -49,19 +50,21 @@ public sealed partial class ResearchSystemNew
 
         ResearchMainConsoleBoundInterfaceState state;
 
-        var pointsData = new Dictionary<ProtoId<ResearchPointsTypePrototype>, (double, double, double)>();
+        var pointsData = new Dictionary<ProtoId<ResearchPointsTypePrototype>, (FixedPoint2, FixedPoint2, FixedPoint2)>();
         var researchData = new Dictionary<ProtoId<ResearchPrototype>, ResearchState>();
 
         if (TryGetClientServer(uid, out var server, out var serverComponent, clientComponent) &&
                 clientComponent.ConnectedToServer &&
                 TryComp<PointsDataStorageComponent>(server, out var serverStorage))
-            foreach (var (key, value) in serverStorage.PointsDict)
+        {
+            foreach (var (key, value) in serverStorage.Points.PointsDict)
             {
                 if (serverComponent.PointsStatistic.TryGetValue(key, out var statistics))
                     pointsData.TryAdd(key, (value, statistics.Item1, statistics.Item2));
                 else
                     pointsData.TryAdd(key, (value, 0, 0));
             }
+        }
 
         if (TryComp<ResearchDatabaseComponent>(uid, out var database))
             researchData = database.Researches;

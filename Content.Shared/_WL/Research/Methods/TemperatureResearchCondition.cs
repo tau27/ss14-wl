@@ -16,14 +16,14 @@ public sealed partial class TemperatureResearchConditionSystem : ResearchConditi
 
         if (entity.Comp.CurrentTemperature < args.Condition.MinExtrimal)
         {
-            args.Points.Add(args.Condition.ExtrimalType, args.Condition.MinExtrimal - entity.Comp.CurrentTemperature);
+            args.Points.PointsDict.Add(args.Condition.ExtrimalType, args.Condition.MinExtrimal - entity.Comp.CurrentTemperature);
         }
         else if (entity.Comp.CurrentTemperature > args.Condition.MaxExtrimal)
         {
-            args.Points.Add(args.Condition.ExtrimalType, entity.Comp.CurrentTemperature - args.Condition.MaxExtrimal);
+            args.Points.PointsDict.Add(args.Condition.ExtrimalType, entity.Comp.CurrentTemperature - args.Condition.MaxExtrimal);
         }
 
-        args.Points.Add(args.Condition.BaseType, 100);
+        args.Points.PointsDict.Add(args.Condition.BaseType, 100);
     }
 }
 

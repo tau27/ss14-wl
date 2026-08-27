@@ -5,6 +5,7 @@ using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Methods;
 using Content.Shared._WL.Research.Components;
 using Content.Shared._WL.Research.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._WL.Research.Systems;
@@ -35,24 +36,24 @@ public sealed partial class ResearchSystemNew
     private void AddResearch(
         ProtoId<ResearchCategoryPrototype> category,
         ProtoId<ResearchTypePrototype> resType,
-        double resValue,
+        FixedPoint2 resValue,
         ProtoId<ResearchPointsTypePrototype> pointsType,
-        double pointsValue,
+        FixedPoint2 pointsValue,
         ref GetServerResearchEvent args)
     {
         if (!args.ResearchData.ContainsKey(category))
         {
             args.ResearchData.Add(
                 category,
-                (new Dictionary<ProtoId<ResearchTypePrototype>, double>() {[resType] = resValue},
-                 new Dictionary<ProtoId<ResearchPointsTypePrototype>, double>() {[pointsType] = pointsValue})
+                (new Dictionary<ProtoId<ResearchTypePrototype>, FixedPoint2>() {[resType] = resValue},
+                 new ResearchPointsSpecifier(pointsType, pointsValue))
             );
             return;
         }
 
         if (args.ResearchData[category].Item1.TryAdd(resType, resValue))
-            if (!args.ResearchData[category].Item2.TryAdd(pointsType, pointsValue))
-                args.ResearchData[category].Item2[pointsType] = args.ResearchData[category].Item2[pointsType] + pointsValue;
+            if (!args.ResearchData[category].Item2.PointsDict.TryAdd(pointsType, pointsValue))
+                args.ResearchData[category].Item2.PointsDict[pointsType] = args.ResearchData[category].Item2[pointsType] + pointsValue;
     }
 
     private bool TryFindResearches(EntityUid ent, float range, out List<EntityUid> finded)
@@ -89,11 +90,11 @@ public sealed partial class ResearchSystemNew
 
         foreach (var (category, (researchValue, data)) in ev.ResearchData)
         {
-            var normileCoof = data.Values.Sum();
+            var normileCoof = data.GetTotal();
             if (normileCoof <= 0)
                 continue;
 
-            foreach (var (type, value) in data)
+            foreach (var (type, value) in data.PointsDict)
             {
                 var timedType = type;
 
@@ -117,27 +118,27 @@ public sealed partial class ResearchSystemNew
 
         var typeProto = ProtoMan.Index<ResearchTypePrototype>(args.ResearchType);
 
-        var (researchValue, poitsDict) = _researchConditions.GetCondition(ent, typeProto.Condition, args.Detector);
+        var (researchValue, points) = _researchConditions.GetCondition(ent, typeProto.Condition, args.Detector);
 
         if (categoryProto.PointsType is not null)
         {
-            Dictionary<ProtoId<ResearchPointsTypePrototype>, double> newDict = new();
+            Dictionary<ProtoId<ResearchPointsTypePrototype>, FixedPoint2> newDict = new();
 
-            double points = 0;
+            FixedPoint2 pointsSum = 0;
 
-            foreach (var (type, value) in poitsDict)
+            foreach (var (type, value) in points.PointsDict)
             {
                 if (type != categoryProto.ExtrimalPoints)
-                    points += value;
+                    pointsSum += value;
                 else
                     newDict.Add(type, value);
             }
 
-            newDict.Add(categoryProto.PointsType.Value, points);
+            newDict.Add(categoryProto.PointsType.Value, pointsSum);
 
-            poitsDict = newDict;
+            points = new(newDict);
         }
 
-        args.ResearchData.Add(ent.Comp.Category, (researchValue, poitsDict));
+        args.ResearchData.Add(ent.Comp.Category, (researchValue, points));
     }
 }
