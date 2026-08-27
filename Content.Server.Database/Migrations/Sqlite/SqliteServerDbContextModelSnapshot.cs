@@ -1139,7 +1139,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("age");
 
-                    // WL-Changes-Start: Speech barks
                     b.Property<float>("BarkMaxDelay")
                         .HasColumnType("REAL")
                         .HasColumnName("bark_max_delay");
@@ -1156,7 +1155,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("bark_voice");
-                    // WL-Changes-End
+
+                    b.Property<string>("BrainSource")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("brain_source");
 
                     b.Property<string>("CharacterName")
                         .IsRequired()
