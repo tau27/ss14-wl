@@ -107,7 +107,7 @@ public sealed partial class ResearchSystemNew
 
             var pointsCoof = addValue / pointsSum;
 
-            TryModifyPoints(ent, pointsData, true, server);
+            TryModifyPoints(ent, pointsData * pointsCoof, true, server);
         }
 
         Dirty(ent, server);

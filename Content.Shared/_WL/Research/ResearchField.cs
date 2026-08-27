@@ -24,7 +24,7 @@ public struct ResearchPoint
 
     public ResearchPoint AddPoints(FixedPoint2 value, out FixedPoint2 diff)
     {
-        diff = FixedPoint2.New(Math.Min(Max.Double(), (Value + value).Double()) - Value.Double());
+        diff = Math.Min(Max.Double(), (Value + value).Double()) - Value.Double();
         Value += diff;
 
         return this;

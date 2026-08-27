@@ -6,10 +6,10 @@ namespace Content.Shared._WL.Research;
 public abstract partial class ScaleMethod
 {
     [DataField]
-    public int min = 1;
+    public FixedPoint2 min = 1;
 
     [DataField]
-    public int max = 100;
+    public FixedPoint2 max = 100;
 
     internal abstract FixedPoint2 GetModifier(FixedPoint2 x); // D [0, 1]; E [0, 1]. 0 => 0, 1 => 1.
 
