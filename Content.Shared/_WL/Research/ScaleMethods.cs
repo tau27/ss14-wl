@@ -15,7 +15,7 @@ public abstract partial class ScaleMethod
 
     public FixedPoint2 GetModifier(int x, int size)
     {
-        FixedPoint2 sized = Math.Clamp((double)x / (double)size, 0, 1);
+        FixedPoint2 sized = FixedPoint2.Clamp(x / size, 0, 1);
 
         return GetModifier(sized) * (max - min) + min;
     }

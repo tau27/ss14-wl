@@ -24,7 +24,15 @@ public struct ResearchPoint
 
     public ResearchPoint AddPoints(FixedPoint2 value, out FixedPoint2 diff)
     {
-        diff = Math.Min(Max.Double(), (Value + value).Double()) - Value.Double();
+        diff = FixedPoint2.Min(Max, (Value + value)) - Value;
+        Value += diff;
+
+        return this;
+    }
+
+    public ResearchPoint AddPercent(FixedPoint2 value, out FixedPoint2 diff)
+    {
+        diff = FixedPoint2.Min(Max - Value, (Max * value));
         Value += diff;
 
         return this;
@@ -118,7 +126,7 @@ public sealed partial class ResearchField
             if (researchData.TryGetValue(ResearchTypes[i], out var value))
             {
                 var type = protoMan.Index(ResearchTypes[i]);
-                coords[i] = Math.Clamp((value - type.MinValue).Int() / (type.MaxValue - type.MinValue).Int() * type.Size, 0, type.Size - 1);
+                coords[i] = FixedPoint2.Clamp((value - type.MinValue) / (type.MaxValue - type.MinValue) * type.Size, 0, type.Size - 1).Int();
             }
             else
             {
@@ -126,7 +134,7 @@ public sealed partial class ResearchField
             }
         }
 
-        var point = FieldArray.Get(coords.AsSpan()).AddPoints(points * _fieldScale, out var diff);
+        var point = FieldArray.Get(coords.AsSpan()).AddPercent(points, out var diff);
         FieldArray.Set(coords.AsSpan(), point);
 
         return diff / _fieldScale;
