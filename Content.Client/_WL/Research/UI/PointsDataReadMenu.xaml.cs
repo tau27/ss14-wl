@@ -65,7 +65,7 @@ public sealed partial class PointsDataReadMenu : FancyWindow
     public void SetEntity(EntityUid uid)
     {
         _owner = uid;
-        //MaterialStorageControl.SetOwner(uid);
+        DataStorageCard.SetOwner(uid);
     }
 
     public void UpdatePoints(PointsDataReadBoundUserInterfaceState state)
@@ -85,7 +85,7 @@ public sealed partial class PointsDataReadMenu : FancyWindow
                 HorizontalExpand = true,
                 HorizontalAlignment = HAlignment.Center,
                 MinWidth = 120,
-                MinHeight = 40
+                MinHeight = 30
             };
 
             StoragePoints.AddChild(storageLabel);
@@ -103,7 +103,7 @@ public sealed partial class PointsDataReadMenu : FancyWindow
                 HorizontalExpand = true,
                 HorizontalAlignment = HAlignment.Center,
                 MinWidth = 120,
-                MinHeight = 40
+                MinHeight = 30
             };
 
             DiskPoints.AddChild(diskLabel);

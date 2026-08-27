@@ -21,10 +21,11 @@
                     <PanelContainer.PanelOverride>
                         <gfx:StyleBoxFlat BackgroundColor="#000000" BorderColor="#3B3E56" BorderThickness="1" />
                     </PanelContainer.PanelOverride>
-                    <TextureRect Name="ResearchIcon"
-                                 TextureScale="1.5 1.5"
-                                 VerticalAlignment="Center"
-                                 HorizontalAlignment="Center"/>
+                    <EntityPrototypeView Name="DiskSprite"
+                                         Scale="2 2"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center"
+                                         Access="Public"/>
                 </PanelContainer>
                     <BoxContainer Orientation="Vertical"
                                   VerticalExpand="True"
@@ -35,16 +36,17 @@
                                       VerticalExpand="True"
                                       HorizontalExpand="True"
                                       Margin="0">
-                            <Label Name="ResearchName" Access="Public"/>
+                            <Label Name="DiskName" Text="Uwu" Access="Public"/>
                         </BoxContainer>
-                        <BoxContainer Orientation="Vertical"
+                        <BoxContainer Orientation="Horizontal"
                                       VerticalExpand="True"
                                       HorizontalExpand="True"
                                       Margin="0">
-                            <Label Name="ResearchProgress" Access="Public" Text="10/20" VerticalAlignment="Bottom"/>
+                            <Label Name="FormatLabel" Access="Public" Text="Points" VerticalAlignment="Bottom"/>
+                            <Label Name="SizeLabel" Access="Public" Text="10/20" VerticalAlignment="Bottom"/>
                         </BoxContainer>
                     </BoxContainer>
-                <Button Name="ResearchButton" Access="Public" SetSize="40 40" Text="X" HorizontalAlignment="Left"/>
+                <Button Name="FormatButton" Access="Public" SetSize="40 40" Text="F" HorizontalAlignment="Left"/>
             </BoxContainer>
         </wl:AnimatedProgressBar>
     </BoxContainer>
