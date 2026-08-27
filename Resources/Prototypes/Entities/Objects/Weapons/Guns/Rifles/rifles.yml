@@ -65,9 +65,6 @@
   # Goobstation edit end
   # White-List components
   - type: Execution
-  - type: Tag
-    tags:
-    - Rifle
   # White-List components end
 
 - type: entity
