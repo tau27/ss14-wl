@@ -1,7 +1,6 @@
 using System.Linq;
 using Content.Shared._WL.Records; // WL-Records
 using Content.Shared._WL.Skills; // WL-Skills
-using Content.Shared._WL.Records;
 using Content.Shared.Roles;
 using Content.Client._WL.Skills.Ui; // WL-Skills
 using Content.Client._WL.Records; // WL-Records

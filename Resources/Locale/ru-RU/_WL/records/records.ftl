@@ -203,11 +203,6 @@ brain-source-synthetic = Синтетический
 brain-source-synthetic-desc = Синтетический мозг.
 brain-source-translplanted = Трансплантированный
 brain-source-translplanted-desc = Трансплантированный мозг.
-records-confederation-social = Социалистическая Конфедерация
-records-confederation-interspecies-alliance = Межвидовой Альянс
-records-confederation-holy-empire-of-edem = Священная Империя Эдема
-records-confederation-metafront = Метафронт
-records-confederation-no = Другое
 
 # Медицинские записи
 records-medical-template =
