@@ -1228,7 +1228,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnName("bark_voice");
 
                     b.Property<string>("BrainSource")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("brain_source");
 
