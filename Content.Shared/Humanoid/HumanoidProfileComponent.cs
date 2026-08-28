@@ -47,6 +47,6 @@ public sealed partial class HumanoidProfileComponent : Component
     [ViewVariables] public int Height = 165;
 
     [DataField, AutoNetworkedField]
-    public ProtoId<BrainSourcePrototype> BrainSource = string.Empty;
+    public string BrainSource = string.Empty;
     // WL-Height-End
 }
