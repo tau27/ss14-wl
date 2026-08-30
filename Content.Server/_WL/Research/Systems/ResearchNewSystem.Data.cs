@@ -23,7 +23,12 @@ public sealed partial class ResearchSystemNew
     );
 
     private void InitializeData()
-    { }
+    {
+        Subs.BuiEvents<PointsDataStorageComponent>(PointsDataReaderUiKey.Key, subs =>
+        {
+            subs.Event<PointsTransferMessage>(OnPointsTransferMessage);
+        });
+    }
 
     [SubscribeLocalEvent]
     private void OnDataStorageInit(Entity<DataStorageComponent> ent, ref MapInitEvent args)
@@ -79,6 +84,46 @@ public sealed partial class ResearchSystemNew
             ent.Comp.ExpiredSize += args.Count;
     }
 
+    private void OnPointsTransferMessage(Entity<PointsDataStorageComponent> ent, ref PointsTransferMessage args)
+    {
+        if (!TryComp<DataReaderComponent>(ent, out var reader) ||
+                !_itemSlots.TryGetSlot(ent, reader.SlotId, out var itemSlot) ||
+                itemSlot.Item is not { } disk)
+            return;
+
+        if (args.Direction)
+            TryTransferPoints(ent, disk, args.Points, out _, ent.Comp);
+        else
+            TryTransferPoints(disk, ent, args.Points, out _, null, ent.Comp);
+
+        UpdatePointsReaderInterface(ent, null, ent.Comp);
+    }
+
+    public bool TryDrawPoints(
+            EntityUid uid,
+            ref ResearchPointsSpecifier drawPoints,
+            out ResearchPointsSpecifier drawedPoints,
+            PointsDataStorageComponent? storage = null)
+    {
+        drawedPoints = new();
+
+        if (!Resolve(uid, ref storage))
+            return false;
+
+        if (!drawPoints.AnyPositive())
+            return false;
+
+        storage.Points -= drawPoints;
+
+        var negativePoints = ResearchPointsSpecifier.GetNegative(storage.Points);
+        storage.Points -= negativePoints;
+        drawedPoints = drawPoints + negativePoints;
+
+        drawPoints -= drawedPoints;
+
+        return true;
+    }
+
     public bool TryWritePoints(
             EntityUid uid,
             ref ResearchPointsSpecifier writePoints,
@@ -90,9 +135,42 @@ public sealed partial class ResearchSystemNew
         if (!Resolve(uid, ref storage))
             return false;
 
+        if (!writePoints.AnyPositive())
+            return false;
+
         writedPoints = storage.Points.SizedAdd(ProtoMan, writePoints, storage.LocalSize - storage.ExpiredLocalSize);
 
         storage.ExpiredLocalSize += writedPoints.GetSize(ProtoMan);
+
+        return true;
+    }
+
+    public bool TryTransferPoints(
+            EntityUid sourceUid,
+            EntityUid recipientUid,
+            ResearchPointsSpecifier transferPoints,
+            out ResearchPointsSpecifier tranferedPoints,
+            PointsDataStorageComponent? sourceStorage = null,
+            PointsDataStorageComponent? recipientStorage = null)
+    {
+        tranferedPoints = new();
+
+        if (!Resolve(sourceUid, ref sourceStorage) || !Resolve(recipientUid, ref recipientStorage))
+            return false;
+
+        if (!transferPoints.AnyPositive())
+            return false;
+
+        if (!TryDrawPoints(sourceUid, ref transferPoints, out var drawedPoints, sourceStorage))
+            return false;
+
+        if (!TryWritePoints(recipientUid, ref drawedPoints, out var writedPoints, recipientStorage))
+            return false;
+
+        if (!TryWritePoints(sourceUid, ref drawedPoints, out var returnedPoints, sourceStorage))
+            return false;
+
+        transferPoints += returnedPoints;
 
         return true;
     }

@@ -19,32 +19,43 @@
                               HorizontalExpand="True"
                               VerticalExpand="True"
                               Margin="8">
-                    <BoxContainer Name="StoragePoints" SizeFlagsStretchRatio="3" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-                        <Label Text="10 очко" HorizontalExpand="True" MinWidth="120"/>
-                    </BoxContainer>
-                    <BoxContainer Name="PointsSpins" SizeFlagsStretchRatio="3" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-                        <SpinBox Name="Amount"
-                                 Access="Public"
-                                 HorizontalExpand="True"
-                                 Value="0"
-                                 MaxWidth="120"/>
-                    </BoxContainer>
-                    <BoxContainer Name="DiskPoints" SizeFlagsStretchRatio="3" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-                        <Label Text="10 очко" HorizontalExpand="True" MinWidth="120"/>
-                    </BoxContainer>
+                    <BoxContainer Name="PointsLabels"
+                                  SizeFlagsStretchRatio="3"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True"
+                                  VerticalExpand="True"
+                                  Margin="8 0" />
+                    <BoxContainer Name="StoragePoints"
+                                  SizeFlagsStretchRatio="3"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True"
+                                  VerticalExpand="True"
+                                  Margin="8 0" />
+                    <BoxContainer Name="PointsSpins"
+                                  SizeFlagsStretchRatio="3"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True"
+                                  VerticalExpand="True"
+                                  Margin="8 0" />
+                    <BoxContainer Name="DiskPoints"
+                                  SizeFlagsStretchRatio="3"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True"
+                                  VerticalExpand="True"
+                                  Margin="8 0" />
                 </BoxContainer>
             </PanelContainer>
                 <Control MinWidth="10"/>
-                <BoxContainer SizeFlagsStretchRatio="3" Orientation="Vertical" HorizontalExpand="True" >
-                    <BoxContainer SizeFlagsStretchRatio="3" Orientation="Horizontal" HorizontalAlignment="Center" HorizontalExpand="True" >
-                        <Button Name="ButtonMinimum" StyleClasses="OpenRight" Text="Minimum" MaxWidth="150" />
+                <BoxContainer SizeFlagsStretchRatio="2" Orientation="Vertical" HorizontalExpand="True" >
+                    <BoxContainer SizeFlagsStretchRatio="2" Orientation="Horizontal" HorizontalAlignment="Center" HorizontalExpand="True" >
+                        <Button Name="ButtonMinimum" StyleClasses="OpenRight" Text="Минимум" MaxWidth="150" />
                         <Button Name="ButtonMaximum" StyleClasses="OpenBoth" Text="Максимум" MaxWidth="150" />
                         <Button Name="ButtonTransfer" Text="Перевод" MaxWidth="150" />
                     </BoxContainer>
-                    <BoxContainer SizeFlagsStretchRatio="3" HorizontalAlignment="Center" Orientation="Vertical" HorizontalExpand="True">
+                    <BoxContainer SizeFlagsStretchRatio="2" HorizontalAlignment="Center" Orientation="Vertical" HorizontalExpand="True">
                         <Label Text="С диска" HorizontalExpand="True"
                                         StyleClasses="highlight" MinWidth="120"/>
-                        <controls:SwitchButton Name="BreakerButton" MinWidth="150"/>
+                        <controls:SwitchButton Name="DirectionButton" MinWidth="150"/>
                         <Label Text="На диск" HorizontalExpand="True"
                                         StyleClasses="highlight" MinWidth="120"/>
                     </BoxContainer>

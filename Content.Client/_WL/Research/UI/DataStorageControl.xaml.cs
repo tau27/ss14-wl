@@ -16,7 +16,7 @@ namespace Content.Client._WL.Research.UI;
 public sealed partial class DataStorageControl : Control
 {
     [Dependency] private IEntityManager _entityManager = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
 
     private readonly ItemSlotsSystem _itemSlots;
 
@@ -71,11 +71,10 @@ public sealed partial class DataStorageControl : Control
     {
         base.FrameUpdate(args);
 
+        SetDisk(_disk);
+
         if (_owner == null)
-        {
-            DiskSprite.SetPrototype(NoDiskEffectId);
-            _disk = null;
-        }
+            return;
 
         if (!_entityManager.TryGetComponent<DataReaderComponent>(_owner, out var reader) ||
             !_itemSlots.TryGetSlot(_owner.Value, reader.SlotId, out var itemSlot))
@@ -84,9 +83,7 @@ public sealed partial class DataStorageControl : Control
         if (_disk == itemSlot.Item)
             return;
 
-        _currentBoard = itemSlot.Item;
-
-        DiskSprite.SetEntity(disk);
+        _disk = itemSlot.Item;
     }
 
     private void SetDisk(EntityUid? disk)
@@ -102,7 +99,7 @@ public sealed partial class DataStorageControl : Control
             return;
         }
 
-        DiskSprite.SetEntity(Disk);
+        DiskSprite.SetEntity(disk);
 
         if (!_entityManager.TryGetComponent<DataStorageComponent>(disk, out var storage))
         {
@@ -111,14 +108,19 @@ public sealed partial class DataStorageControl : Control
             SizeLabel.Visible = false;
 
             DiskName.Text = "Это чайник.";
+            return;
         }
 
         FormatButton.Disabled = false;
         FormatLabel.Visible = true;
         SizeLabel.Visible = true;
-        FormatLabel.Visible = true;
-        SizeLabel.Visible = true;
 
-        DiskName.Text = "Это чайник.";
+        DiskName.Text = storage.Name;
+
+        var formatProto = _protoMan.Index(storage.CurrentStorageFormat);
+        FormatLabel.Text = formatProto.LocalizedName;
+        FormatLabel.FontColorOverride = formatProto.Color;
+
+        SizeLabel.Text = $"{storage.ExpiredSize} / {storage.Size}";
     }
 }

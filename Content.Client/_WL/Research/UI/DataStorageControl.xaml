@@ -36,14 +36,14 @@
                                       VerticalExpand="True"
                                       HorizontalExpand="True"
                                       Margin="0">
-                            <Label Name="DiskName" Text="Uwu" Access="Public"/>
+                            <Label Name="DiskName" Access="Public"/>
                         </BoxContainer>
                         <BoxContainer Orientation="Horizontal"
                                       VerticalExpand="True"
                                       HorizontalExpand="True"
                                       Margin="0">
-                            <Label Name="FormatLabel" Access="Public" Text="Points" VerticalAlignment="Bottom"/>
-                            <Label Name="SizeLabel" Access="Public" Text="10/20" VerticalAlignment="Bottom"/>
+                            <Label Name="FormatLabel" Access="Public" VerticalAlignment="Bottom" Margin="0 0 8 0"/>
+                            <Label Name="SizeLabel" Access="Public" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                         </BoxContainer>
                     </BoxContainer>
                 <Button Name="FormatButton" Access="Public" SetSize="40 40" Text="F" HorizontalAlignment="Left"/>

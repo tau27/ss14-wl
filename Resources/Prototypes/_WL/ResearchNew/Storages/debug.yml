@@ -1,7 +1,7 @@
 - type: storageFormat
   id: PointsFormat
-  name: uwu points
-  color: "#ffffff"
+  name: ВЫСШИЙ БАЛЛ
+  color: green
   storagesList:
     - type: PointsDataStorage
       allowedPointsTypes:
@@ -19,7 +19,7 @@
   name: debug points storage
   components:
     - type: DataStorage
-      name: UwU points
+      name: Многа очко
       allowedStorageFormats:
         - PointsFormat
       currentStorageFormat: PointsFormat

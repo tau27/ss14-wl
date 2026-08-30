@@ -84,6 +84,32 @@ namespace Content.Shared._WL.Research
 
         #endregion constructors
 
+        public static ResearchPointsSpecifier GetPositive(ResearchPointsSpecifier pointsSpec)
+        {
+            ResearchPointsSpecifier newPoints = new();
+
+            foreach (var (key, value) in pointsSpec.PointsDict)
+            {
+                if (value > 0)
+                    newPoints.PointsDict[key] = value;
+            }
+
+            return newPoints;
+        }
+
+        public static ResearchPointsSpecifier GetNegative(ResearchPointsSpecifier pointsSpec)
+        {
+            ResearchPointsSpecifier newPoints = new();
+
+            foreach (var (key, value) in pointsSpec.PointsDict)
+            {
+                if (value < 0)
+                    newPoints.PointsDict[key] = value;
+            }
+
+            return newPoints;
+        }
+
         public void TrimZeros()
         {
             foreach (var (key, value) in PointsDict)

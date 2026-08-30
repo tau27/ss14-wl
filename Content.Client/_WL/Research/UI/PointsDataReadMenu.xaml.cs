@@ -25,7 +25,7 @@ namespace Content.Client._WL.Research.UI;
 public sealed partial class PointsDataReadMenu : FancyWindow
 {
     [Dependency] private IEntityManager _entityManager = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
 
     /*
     private readonly ItemSlotsSystem _itemSlots;
@@ -37,11 +37,14 @@ public sealed partial class PointsDataReadMenu : FancyWindow
 
     private ResearchPointsSpecifier _points = new();
 
+    private ResearchPointsSpecifier _maxPointsStorage = new();
+    private ResearchPointsSpecifier _maxPointsDisk = new();
+
     public static readonly EntProtoId NoBoardEffectId = "FlatpackerNoBoardEffect";
 
-    private EntityUid? _currentBoard = EntityUid.Invalid;
+    public static readonly Color NoPointsColor = Color.FromHex("#222222");
 
-    public event Action? PackButtonPressed;
+    public event Action<ResearchPointsSpecifier, bool>? TransferButtonPressed;
 
     public PointsDataReadMenu()
     {
@@ -51,12 +54,16 @@ public sealed partial class PointsDataReadMenu : FancyWindow
         ButtonTransfer.StyleClasses.Add(StyleClass.ButtonOpenLeft);
         ButtonTransfer.StyleClasses.Add(StyleClass.Positive);
 
+        ButtonTransfer.OnPressed += OnTransfer;
+
+        ButtonMinimum.OnPressed += OnMinimum;
+        ButtonMaximum.OnPressed += OnMaximum;
+
         /*
         _itemSlots = _entityManager.System<ItemSlotsSystem>();
         _flatpack = _entityManager.System<FlatpackSystem>();
         _materialStorage = _entityManager.System<MaterialStorageSystem>();
 
-        PackButton.OnPressed += _ => PackButtonPressed?.Invoke();
 
         InsertLabel.SetMarkup(Loc.GetString("flatpacker-ui-insert-board"));
         */
@@ -70,14 +77,38 @@ public sealed partial class PointsDataReadMenu : FancyWindow
 
     public void UpdatePoints(PointsDataReadBoundUserInterfaceState state)
     {
+        PointsLabels.Children.Clear();
         StoragePoints.Children.Clear();
         PointsSpins.Children.Clear();
         DiskPoints.Children.Clear();
+
         _points = new();
+        _maxPointsStorage = new();
+        _maxPointsDisk = new();
 
         foreach (var (key, value) in state.StoragePointsData.PointsDict)
         {
+            var diskPointsExist = state.DiskPointsData.PointsDict.TryGetValue(key, out var diskDictValue);
+            var diskValue = diskPointsExist ? diskDictValue : FixedPoint2.New(0);
+
             _points.PointsDict.Add(key, 0);
+
+            _maxPointsStorage.PointsDict.Add(key, value);
+            _maxPointsDisk.PointsDict.Add(key, diskValue);
+
+            var pointsTypeProto = _protoMan.Index(key);
+
+            var pointsLabel = new Label
+            {
+                Text = pointsTypeProto.LocalizedName,
+                HorizontalExpand = true,
+                HorizontalAlignment = HAlignment.Center,
+                MinWidth = 120,
+                MinHeight = 29,
+                FontColorOverride = pointsTypeProto.Color
+            };
+
+            PointsLabels.AddChild(pointsLabel);
 
             var storageLabel = new Label
             {
@@ -85,17 +116,11 @@ public sealed partial class PointsDataReadMenu : FancyWindow
                 HorizontalExpand = true,
                 HorizontalAlignment = HAlignment.Center,
                 MinWidth = 120,
-                MinHeight = 30
+                MinHeight = 29,
+                FontColorOverride = pointsTypeProto.Color
             };
 
             StoragePoints.AddChild(storageLabel);
-
-            var diskValue = FixedPoint2.New(0);
-
-            if (state.DiskPointsData.PointsDict.TryGetValue(key, out var diskDictValue))
-            {
-                diskValue = diskDictValue;
-            }
 
             var diskLabel = new Label
             {
@@ -103,7 +128,8 @@ public sealed partial class PointsDataReadMenu : FancyWindow
                 HorizontalExpand = true,
                 HorizontalAlignment = HAlignment.Center,
                 MinWidth = 120,
-                MinHeight = 30
+                MinHeight = 29,
+                FontColorOverride = diskPointsExist ? pointsTypeProto.Color : NoPointsColor
             };
 
             DiskPoints.AddChild(diskLabel);
@@ -114,7 +140,7 @@ public sealed partial class PointsDataReadMenu : FancyWindow
                 HorizontalExpand = true,
                 Value = (int) _points.PointsDict[key],
                 MinWidth = 120,
-                IsValid = val => val is >= 0 and <= 1000000,
+                IsValid = val => val is >= 0 and <= 1000000
             };
             box.ValueChanged += args => UpdatePointsValue(key, args.Value);
 
@@ -126,5 +152,38 @@ public sealed partial class PointsDataReadMenu : FancyWindow
     {
         if (_points.PointsDict.ContainsKey(type))
             _points.PointsDict[type] = value;
+    }
+
+    private void OnTransfer(BaseButton.ButtonEventArgs eventArgs)
+    {
+        TransferButtonPressed?.Invoke(_points, DirectionButton.Pressed);
+    }
+
+    private void OnMinimum(BaseButton.ButtonEventArgs eventArgs)
+    {
+        foreach (var children in PointsSpins.Children)
+        {
+            if (children is not SpinBox spin)
+                continue;
+
+            spin.Value = 0;
+        }
+    }
+
+    private void OnMaximum(BaseButton.ButtonEventArgs eventArgs)
+    {
+        var maxDict = DirectionButton.Pressed ? _maxPointsStorage : _maxPointsDisk;
+
+        var counter = -1;
+
+        foreach (var (_, value) in maxDict.PointsDict)
+        {
+            counter += 1;
+
+            if (PointsSpins.Children[counter] is not SpinBox spin)
+                continue;
+
+            spin.Value = value.Int();
+        }
     }
 }

@@ -1,3 +1,4 @@
+using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Components;
 using Robust.Client.UserInterface;
 
@@ -19,12 +20,7 @@ namespace Content.Client._WL.Research.UI
             _menu = this.CreateWindow<PointsDataReadMenu>();
             _menu.SetEntity(Owner);
 
-            /*
-            _menu.PackButtonPressed += () =>
-            {
-                SendMessage(new FlatpackCreatorStartPackBuiMessage());
-            };
-            */
+            _menu.TransferButtonPressed += OnTransferPressed;
 
             _menu.OpenCentered();
         }
@@ -37,6 +33,11 @@ namespace Content.Client._WL.Research.UI
                 return;
 
             _menu?.UpdatePoints(castState);
+        }
+
+        private void OnTransferPressed(ResearchPointsSpecifier points, bool direction)
+        {
+            SendMessage(new PointsTransferMessage(points, direction));
         }
     }
 }
