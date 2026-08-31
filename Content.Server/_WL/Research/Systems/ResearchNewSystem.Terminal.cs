@@ -28,10 +28,9 @@ public sealed partial class ResearchSystemNew
         if(!TryGetClientServer(uid, out var serverUid, out var serverComp))
             return;
 
-        if (!TryStartResearch(serverUid.Value, args.Id, serverComp))
+        if (!TryStartResearch(serverUid.Value, args.Id))
             return;
 
-        SyncClientWithServer(uid);
         UpdateConsoleInterface(uid, component);
     }
 
@@ -48,8 +47,6 @@ public sealed partial class ResearchSystemNew
         if (!Resolve(uid, ref component, ref clientComponent, false))
             return;
 
-        ResearchMainConsoleBoundInterfaceState state;
-
         var pointsData = new Dictionary<ProtoId<ResearchPointsTypePrototype>, (FixedPoint2, FixedPoint2, FixedPoint2)>();
         var researchData = new Dictionary<ProtoId<ResearchPrototype>, ResearchState>();
 
@@ -64,12 +61,12 @@ public sealed partial class ResearchSystemNew
                 else
                     pointsData.TryAdd(key, (value, 0, 0));
             }
+
+            if (TryComp<TechnologyServerComponent>(server, out var techServer))
+                researchData = techServer.Researches;
         }
 
-        if (TryComp<ResearchDatabaseComponent>(uid, out var database))
-            researchData = database.Researches;
-
-        state = new ResearchMainConsoleBoundInterfaceState(pointsData, researchData);
+        var state = new ResearchMainConsoleBoundInterfaceState(pointsData, researchData);
 
         _uiSystem.SetUiState(uid, ResearchMainConsoleUiKey.Key, state);
     }

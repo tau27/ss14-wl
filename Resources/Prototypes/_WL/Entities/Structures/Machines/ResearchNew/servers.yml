@@ -28,8 +28,9 @@
       - PointsFormat
     currentStorageFormat: PointsFormat
     size: 65536
+  - type: ResearchDataServer
   - type: ResearchServerNew
-  - type: ResearchDatabase
+  - type: TechnologyServer
     supportedDisciplines:
       - Industrial
       - Arsenal

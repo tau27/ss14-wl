@@ -42,10 +42,21 @@ public sealed partial class ResearchSystemNew
 
         var pointsDict = new ResearchPointsSpecifier(pointsProto, FixedPoint2.New(args[2]));
 
-        if (TryWritePoints(uid.Value, ref pointsDict, out _, storage))
-            shell.WriteLine("Points written");
+        if (pointsDict.AnyPositive())
+        {
+            if (TryWritePoints(uid.Value, ref pointsDict, out _, storage))
+                shell.WriteLine("Points written");
+            else
+                shell.WriteError("No.");
+        }
         else
-            shell.WriteError("No.");
+        {
+            var drawDict = -pointsDict;
+            if (TryDrawPoints(uid.Value, ref drawDict, out _, storage))
+                shell.WriteLine("Points drawed");
+            else
+                shell.WriteError("No.");
+        }
     }
 
     private CompletionResult WritePointsCompletion(IConsoleShell shell, string[] args)

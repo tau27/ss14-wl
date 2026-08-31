@@ -11,7 +11,7 @@ namespace Content.Shared._WL.Research.Systems;
 public abstract partial class SharedResearchNewSystem : EntitySystem
 {
     [SubscribeLocalEvent]
-    private void OnRDBInit(EntityUid uid, ResearchDatabaseComponent component, ref MapInitEvent args)
+    private void OnRDBInit(EntityUid uid, TechnologyServerComponent component, ref MapInitEvent args)
     {
         var avalibleResearches = GetAvaliableResearches(uid, component);
 
@@ -23,7 +23,7 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
         Dirty(uid, component);
     }
 
-    public List<ResearchPrototype> GetAvaliableResearches(EntityUid uid, ResearchDatabaseComponent? component = null)
+    public List<ResearchPrototype> GetAvaliableResearches(EntityUid uid, TechnologyServerComponent? component = null)
     {
         if (!Resolve(uid, ref component, false))
             return new List<ResearchPrototype>();

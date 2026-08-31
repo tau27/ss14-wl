@@ -20,11 +20,6 @@ public sealed partial class ResearchServerNewComponent : Component
     [DataField("points"), AutoNetworkedField]
     public Dictionary<ProtoId<ResearchPointsTypePrototype>, (FixedPoint2, FixedPoint2)> PointsStatistic { get; set; } = new(); // max, per second
 
-    /*
-    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
-    public List<ProtoId<ResearchPointsTypePrototype>> AllowedPointsTypes = new();
-    */
-
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
     public int Id;
@@ -32,30 +27,11 @@ public sealed partial class ResearchServerNewComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public List<EntityUid> Clients = new();
 
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<ProtoId<ResearchCategoryPrototype>, ResearchField> ResearchedData = new();
-
-    [ViewVariables(VVAccess.ReadOnly)]
-    public List<ProtoId<ResearchPrototype>> ResearchQueue = new();
-
     [DataField("nextUpdateTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextUpdateTime = TimeSpan.Zero;
 
     [DataField("researchConsoleUpdateTime"), ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan ResearchConsoleUpdateTime = TimeSpan.FromSeconds(1);
-}
-
-[ByRefEvent]
-public record struct GetServerResearchEvent
-{
-    public EntityUid Server;
-    public Dictionary<ProtoId<ResearchCategoryPrototype>, (Dictionary<ProtoId<ResearchTypePrototype>, FixedPoint2>, ResearchPointsSpecifier)> ResearchData;
-
-    public GetServerResearchEvent(EntityUid server)
-    {
-        Server = server;
-        ResearchData = new();
-    }
 }
 
 [ByRefEvent]

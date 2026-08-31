@@ -10,40 +10,22 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._WL.Research.Components;
 
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedResearchNewSystem), typeof(SharedLatheSystem)), AutoGenerateComponentState]
-public sealed partial class ResearchDatabaseComponent : Component
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class TechnologyServerComponent : Component
 {
     [AutoNetworkedField]
     [DataField]
     public List<ProtoId<TechDisciplinePrototype>> SupportedDisciplines = new();
 
     [AutoNetworkedField]
-    [DataField]
     public Dictionary<ProtoId<ResearchPrototype>, ResearchState> Researches = new();
 
-    /// todo: if you unlock all the recipes in a tech, it doesn't count as unlocking the tech. sadge
     [AutoNetworkedField]
-    [DataField]
-    public List<ProtoId<LatheRecipePrototype>> UnlockedRecipes = new();
+    public List<ProtoId<ResearchPrototype>> ResearchQueue = new();
 }
 
-/// <summary>
-/// Event raised on the database whenever its
-/// technologies or recipes are modified.
-/// </summary>
-/// <remarks>
-/// This event is forwarded from the
-/// server to all of it's clients.
-/// </remarks>
 [ByRefEvent]
 public readonly record struct ResearchDatabaseModifiedEvent(List<string>? NewlyUnlockedRecipes);
-
-/// <summary>
-/// Event raised on a database after being synchronized
-/// with the values from another database.
-/// </summary>
-[ByRefEvent]
-public readonly record struct ResearchDatabaseSynchronizedEvent;
 
 [Serializable, NetSerializable]
 public struct ResearchState

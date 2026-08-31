@@ -53,31 +53,29 @@ public sealed partial class ResearchSystemNew
         if (!CanRun(uid))
             return;
 
-        MakeResearch(uid, component);
+        if (TryComp<ResearchDataServerComponent>(uid, out var dataServer))
+            MakeResearch(uid, component, dataServer);
 
-        TryUpdateResearches(uid, component);
+        if (TryComp<TechnologyServerComponent>(uid, out var techServer))
+            TryUpdateResearches(uid, component, techServer);
     }
 
-    private void TryUpdateResearches(EntityUid uid, ResearchServerNewComponent? server = null, ResearchDatabaseComponent? database = null)
+    private void TryUpdateResearches(EntityUid uid, ResearchServerNewComponent? server = null, TechnologyServerComponent? techServer = null)
     {
-        if (!Resolve(uid, ref server) || !Resolve(uid, ref database))
+        if (!Resolve(uid, ref server) || !Resolve(uid, ref techServer))
             return;
 
-        UpdateResearchesProgress(uid, database, server);
-        UpdateResearchesStatus(uid, database, server);
-
-        foreach (var client in server.Clients)
-        {
-            SyncClientWithServer(client);
-        }
+        UpdateResearchesProgress(uid, techServer, server);
+        UpdateResearchesStatus(uid, techServer, server);
     }
 
-    private void MakeResearch(EntityUid ent, ResearchServerNewComponent? server = null)
+    private void MakeResearch(
+            EntityUid ent,
+            ResearchServerNewComponent? server = null,
+            ResearchDataServerComponent? data = null,
+            PointsDataStorageComponent? pointsStorage = null)
     {
-        if (!Resolve(ent, ref server))
-            return;
-
-        if (!TryComp<PointsDataStorageComponent>(ent, out var pointsStorage))
+        if (!Resolve(ent, ref server, ref data, ref pointsStorage))
             return;
 
         foreach (var (key, (maxValue, _)) in server.PointsStatistic)
@@ -93,10 +91,10 @@ public sealed partial class ResearchSystemNew
 
         foreach (var (categoryId, (rawData, pointsData)) in ev.ResearchData)
         {
-            if (!server.ResearchedData.ContainsKey(categoryId))
+            if (!data.ResearchedData.ContainsKey(categoryId))
             {
                 var categoryProto = ProtoMan.Index(categoryId);
-                server.ResearchedData.Add(categoryId, new ResearchField(categoryProto.ResearchTypes.ToArray(), categoryProto.MaxPoints));
+                data.ResearchedData.Add(categoryId, new ResearchField(categoryProto.ResearchTypes.ToArray(), categoryProto.MaxPoints));
             }
 
             var pointsSum = pointsData.GetTotal();
@@ -105,7 +103,7 @@ public sealed partial class ResearchSystemNew
 
             Logger.Debug(string.Join(Environment.NewLine, rawData));
 
-            var addValue = server.ResearchedData[categoryId].ResearchData(rawData, pointsSum);
+            var addValue = data.ResearchedData[categoryId].ResearchData(rawData, pointsSum);
 
             var pointsCoof = addValue / pointsSum;
 
@@ -182,7 +180,6 @@ public sealed partial class ResearchSystemNew
 
         serverComponent.Clients.Add(client);
         clientComponent.Server = server;
-        // SyncClientWithServer(client, clientComponent: clientComponent);
 
         if (dirtyServer && !TerminatingOrDeleted(server))
             Dirty(server, serverComponent);
@@ -224,7 +221,6 @@ public sealed partial class ResearchSystemNew
 
         serverComponent.Clients.Remove(client);
         clientComponent.Server = null;
-        // SyncClientWithServer(client, clientComponent: clientComponent);
 
         if (dirtyServer && !TerminatingOrDeleted(server))
         {

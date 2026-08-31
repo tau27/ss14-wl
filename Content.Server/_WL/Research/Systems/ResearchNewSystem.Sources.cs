@@ -101,7 +101,7 @@ public sealed partial class ResearchSystemNew
                 if (type != ent.Comp.ExtrimalPointsType && ent.Comp.DefaultPointsType is not null)
                     timedType = ent.Comp.DefaultPointsType.Value;
 
-                AddResearch(category, ent.Comp.ResearchType, researchValue, type, value / normileCoof * ent.Comp.ResearchPercent, ref args);
+                AddResearch(category, ent.Comp.ResearchType, researchValue, timedType, value / normileCoof * ent.Comp.ResearchPercent, ref args);
             }
         }
     }

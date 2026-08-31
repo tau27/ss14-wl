@@ -18,7 +18,8 @@ public sealed partial class ResearchSystemNew
 
     public readonly ComponentRegistry StorageFormatComponents = new ComponentRegistry(new Dictionary<string, EntityPrototype.ComponentRegistryEntry>()
         {
-             {"PointsDataStorage", new EntityPrototype.ComponentRegistryEntry(new PointsDataStorageComponent()) }
+             {"PointsDataStorage", new EntityPrototype.ComponentRegistryEntry(new PointsDataStorageComponent()) },
+             {"RecipesStorageComponent", new EntityPrototype.ComponentRegistryEntry(new RecipesStorageComponent()) }
         }
     );
 
@@ -70,18 +71,27 @@ public sealed partial class ResearchSystemNew
     }
 
     [SubscribeLocalEvent]
+    private void OnDataUpdated(Entity<DataReaderComponent> ent, ref DataUpdatedEvent args)
+    {
+        UpdatePointsReaderInterface(ent.Owner, ent.Comp);
+    }
+
+    [SubscribeLocalEvent]
     private void OnDataReaderStartup(Entity<DataReaderComponent> ent, ref ComponentStartup args)
     {
         UpdatePointsReaderInterface(ent.Owner, ent.Comp);
     }
 
     [SubscribeLocalEvent]
-    private void OnExpiredSizeUpdate(Entity<DataStorageComponent> ent, ref ExpiredSizeUpdatedEvent args)
+    private void OnPointsSizeCheck(Entity<PointsDataStorageComponent> ent, ref RecalcExpiredSizeEvent args)
     {
-        if (args.Count + ent.Comp.ExpiredSize > ent.Comp.Size)
-            args.CanUpdate = false;
-        else
-            ent.Comp.ExpiredSize += args.Count;
+        args.Count += ent.Comp.ExpiredLocalSize;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnRecipeSizeCheck(Entity<RecipesStorageComponent> ent, ref RecalcExpiredSizeEvent args)
+    {
+        args.Count += ent.Comp.ExpiredLocalSize;
     }
 
     private void OnPointsTransferMessage(Entity<PointsDataStorageComponent> ent, ref PointsTransferMessage args)
@@ -99,27 +109,29 @@ public sealed partial class ResearchSystemNew
         UpdatePointsReaderInterface(ent, null, ent.Comp);
     }
 
-    public bool TryDrawPoints(
+    public bool TryDeletePoints(
             EntityUid uid,
-            ref ResearchPointsSpecifier drawPoints,
-            out ResearchPointsSpecifier drawedPoints,
+            ref ResearchPointsSpecifier deletePoints,
+            out ResearchPointsSpecifier deletedPoints,
             PointsDataStorageComponent? storage = null)
     {
-        drawedPoints = new();
+        deletedPoints = new();
 
         if (!Resolve(uid, ref storage))
             return false;
 
-        if (!drawPoints.AnyPositive())
+        if (!deletePoints.AnyPositive())
             return false;
 
-        storage.Points -= drawPoints;
+        storage.Points -= deletePoints;
 
         var negativePoints = ResearchPointsSpecifier.GetNegative(storage.Points);
         storage.Points -= negativePoints;
-        drawedPoints = drawPoints + negativePoints;
+        deletedPoints = deletePoints + negativePoints;
 
-        drawPoints -= drawedPoints;
+        deletePoints -= deletedPoints;
+
+        RecalcPointsSize(uid, storage);
 
         return true;
     }
@@ -140,7 +152,7 @@ public sealed partial class ResearchSystemNew
 
         writedPoints = storage.Points.SizedAdd(ProtoMan, writePoints, storage.LocalSize - storage.ExpiredLocalSize);
 
-        storage.ExpiredLocalSize += writedPoints.GetSize(ProtoMan);
+        RecalcPointsSize(uid, storage);
 
         return true;
     }
@@ -161,18 +173,143 @@ public sealed partial class ResearchSystemNew
         if (!transferPoints.AnyPositive())
             return false;
 
-        if (!TryDrawPoints(sourceUid, ref transferPoints, out var drawedPoints, sourceStorage))
+        if (!TryDeletePoints(sourceUid, ref transferPoints, out var deletedPoints, sourceStorage))
             return false;
 
-        if (!TryWritePoints(recipientUid, ref drawedPoints, out var writedPoints, recipientStorage))
+        if (!TryWritePoints(recipientUid, ref deletedPoints, out var writedPoints, recipientStorage))
             return false;
 
-        if (!TryWritePoints(sourceUid, ref drawedPoints, out var returnedPoints, sourceStorage))
+        if (!TryWritePoints(sourceUid, ref deletedPoints, out var returnedPoints, sourceStorage))
             return false;
 
         transferPoints += returnedPoints;
 
         return true;
+    }
+
+    public bool TryWriteRecipes(
+            EntityUid uid,
+            ref List<ProtoId<LatheRecipePrototype>> writeRecipes,
+            out List<ProtoId<LatheRecipePrototype>> writedRecipes,
+            RecipesStorageComponent? storage = null)
+    {
+        writedRecipes = new List<ProtoId<LatheRecipePrototype>>();
+
+        if (!Resolve(uid, ref storage))
+            return false;
+
+        if (writeRecipes.Count == 0)
+            return true;
+
+        var allowedRecipesCount = storage.SizePerTech > 0
+            ? ((storage.LocalSize - storageExpiredSize) / storage.SizePerTech).Int()
+            : writeRecipes.Count;
+
+        writedRecipes = writeRecipes.GetRange(0, allowedRecipesCount);
+
+        storage.Recipes.AddRange(writedRecipes);
+
+        RecalcRecipesSize(uid, storage);
+
+        return true;
+    }
+
+    public bool TryDeleteRecipes(
+            EntityUid uid,
+            ref List<ProtoId<LatheRecipePrototype>> deleteRecipes,
+            out List<ProtoId<LatheRecipePrototype>> deletedRecipes,
+            RecipesStorageComponent? storage = null)
+    {
+        deletedRecipes = new List<ProtoId<LatheRecipePrototype>>();
+
+        if (!Resolve(uid, ref storage))
+            return false;
+
+        if (deleteRecipes.Count == 0)
+            return true;
+
+        var allowedRecipesCount = storage.SizePerTech > 0
+            ? ((storage.LocalSize - storageExpiredSize) / storage.SizePerTech).Int()
+            : writeRecipes.Count;
+
+        writedRecipes = writeRecipes.GetRange(0, allowedRecipesCount);
+
+        foreach (var recipe in deleteRecipes)
+        {
+            if (storage.Recipes.Remove(recipe))
+            {
+                deleteRecipe.Remove(recipe);
+                deletedRecipe.Add(recipe);
+            }
+        }
+
+        RecalcRecipesSize(uid, storage);
+
+        return true;
+    }
+
+    public bool TryTransferRecipes(
+            EntityUid sourceUid,
+            EntityUid recipientUid,
+            ref List<ProtoId<LatheRecipePrototype>> transferRecipes,
+            out List<ProtoId<LatheRecipePrototype>> tranferedRecipes,
+            RecipesStorageComponent? sourceStorage = null,
+            RecpesStorageComponent? recipientStorage = null)
+    {
+        tranferedRecipes = new List<ProtoId<LatheRecipePrototype>>();
+
+        if (!Resolve(sourceUid, ref sourceStorage) || !Resolve(recipientUid, ref recipientStorage))
+            return false;
+
+        if (!transferRecipes.Count == 0)
+            return true;
+
+        if (!TryDeleteRecipes(sourceUid, ref transferRecipes, out var deletedRecipes, sourceStorage))
+            return false;
+
+        if (!TryWriteRecipes(recipientUid, ref deletedRecipes, out var writedRecipes, recipientStorage))
+            return false;
+
+        if (!TryWriteRecipes(sourceUid, ref deletedRecipes, out var returnedRecipes, sourceStorage))
+            return false;
+
+        transferRecipes.AddRange(returnedRecipes);
+
+        return true;
+    }
+
+    private void RecalcStorageSize(EntityUid uid, DataStorageComponent? storage = null)
+    {
+        if (!Resolve(uid, ref storage))
+            return;
+
+        var ev = new RecalcExpiredSizeEvent();
+        RaiseLocalEvent(uid, ref ev);
+
+        storage.ExpiredSize = ev.ExpiredSize;
+
+        RaiseLocalEvent(uid, new DataUpdatedEvent());
+    }
+
+    private void RecalcPointsSize(EntityUid uid, PointsDataStorageComponent? storage = null)
+    {
+        if (!Resolve(uid, ref storage))
+            return;
+
+        storage.ExpiredLocalSize = storage.Points.GetSize();
+        RecalcStorageSize(uid);
+    }
+
+    private void RecalcRecipesSize(EntityUid uid, RecipesStorageComponent? storage = null)
+    {
+        if (!Resolve(uid, ref storage))
+            return;
+
+        storage.ExpiredLocalSize = storage.SizePerTech > 0
+            ? storage.Recipes.Count * storage.SizePerTech
+            : 0;
+
+        RecalcStorageSize(uid);
     }
 
     private void UpdatePointsReaderInterface(EntityUid uid, DataReaderComponent? reader = null, PointsDataStorageComponent? storage = null)

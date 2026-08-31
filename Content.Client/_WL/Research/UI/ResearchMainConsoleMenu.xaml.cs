@@ -124,16 +124,13 @@ public sealed partial class ResearchMainConsoleMenu : FancyWindow
 
     public void UpdateResearches(ResearchMainConsoleBoundInterfaceState state)
     {
-        if (!_entity.TryGetComponent<ResearchDatabaseComponent>(Entity, out var database))
-            return;
-
         ResearchQueueContainer.Children.Clear();
         ResearchQueueContainer.AddChild(new Control
         {
             MinHeight = 10
         });
 
-        foreach (var (resId, resState) in database.Researches)
+        foreach (var (resId, resState) in state.ResearchesData)
         {
             var resProto = _prototype.Index<ResearchPrototype>(resId);
             var cardControl = new ResearchQueueCardControl(resProto, resState, _prototype, _sprite, (float)_timing.CurTime.TotalMilliseconds/1000f);
