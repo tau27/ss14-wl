@@ -34,7 +34,7 @@ public sealed partial class DataStorageComponent : Component
 }
 
 [ByRefEvent]
-public record struct RecalcExpiredSizeEvent(FixedPoint2 ExpiredSize = 0);
+public record struct RecalcExpiredSizeEvent(FixedPoint2 ExpiredSize);
 
 [ByRefEvent]
 public record struct DataUpdatedEvent();

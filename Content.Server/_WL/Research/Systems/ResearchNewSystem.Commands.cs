@@ -52,7 +52,7 @@ public sealed partial class ResearchSystemNew
         else
         {
             var drawDict = -pointsDict;
-            if (TryDrawPoints(uid.Value, ref drawDict, out _, storage))
+            if (TryDeletePoints(uid.Value, ref drawDict, out _, storage))
                 shell.WriteLine("Points drawed");
             else
                 shell.WriteError("No.");

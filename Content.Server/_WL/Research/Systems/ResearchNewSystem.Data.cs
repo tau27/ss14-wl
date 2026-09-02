@@ -5,6 +5,7 @@ using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Methods;
 using Content.Shared._WL.Research.Components;
 using Content.Shared._WL.Research.Prototypes;
+using Content.Shared.Research.Prototypes;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
@@ -67,31 +68,31 @@ public sealed partial class ResearchSystemNew
     [SubscribeLocalEvent]
     private void OnDiskInserted(Entity<DataReaderComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        UpdatePointsReaderInterface(ent.Owner, ent.Comp);
+        UpdateReaderInterface(ent.Owner, ent.Comp);
     }
 
     [SubscribeLocalEvent]
     private void OnDataUpdated(Entity<DataReaderComponent> ent, ref DataUpdatedEvent args)
     {
-        UpdatePointsReaderInterface(ent.Owner, ent.Comp);
+        UpdateReaderInterface(ent.Owner, ent.Comp);
     }
 
     [SubscribeLocalEvent]
     private void OnDataReaderStartup(Entity<DataReaderComponent> ent, ref ComponentStartup args)
     {
-        UpdatePointsReaderInterface(ent.Owner, ent.Comp);
+        UpdateReaderInterface(ent.Owner, ent.Comp);
     }
 
     [SubscribeLocalEvent]
     private void OnPointsSizeCheck(Entity<PointsDataStorageComponent> ent, ref RecalcExpiredSizeEvent args)
     {
-        args.Count += ent.Comp.ExpiredLocalSize;
+        args.ExpiredSize += ent.Comp.ExpiredLocalSize;
     }
 
     [SubscribeLocalEvent]
     private void OnRecipeSizeCheck(Entity<RecipesStorageComponent> ent, ref RecalcExpiredSizeEvent args)
     {
-        args.Count += ent.Comp.ExpiredLocalSize;
+        args.ExpiredSize += ent.Comp.ExpiredLocalSize;
     }
 
     private void OnPointsTransferMessage(Entity<PointsDataStorageComponent> ent, ref PointsTransferMessage args)
@@ -151,6 +152,7 @@ public sealed partial class ResearchSystemNew
             return false;
 
         writedPoints = storage.Points.SizedAdd(ProtoMan, writePoints, storage.LocalSize - storage.ExpiredLocalSize);
+        writePoints -= writedPoints;
 
         RecalcPointsSize(uid, storage);
 
@@ -202,7 +204,7 @@ public sealed partial class ResearchSystemNew
             return true;
 
         var allowedRecipesCount = storage.SizePerTech > 0
-            ? ((storage.LocalSize - storageExpiredSize) / storage.SizePerTech).Int()
+            ? ((storage.LocalSize - storage.ExpiredLocalSize) / storage.SizePerTech).Int()
             : writeRecipes.Count;
 
         writedRecipes = writeRecipes.GetRange(0, allowedRecipesCount);
@@ -228,18 +230,12 @@ public sealed partial class ResearchSystemNew
         if (deleteRecipes.Count == 0)
             return true;
 
-        var allowedRecipesCount = storage.SizePerTech > 0
-            ? ((storage.LocalSize - storageExpiredSize) / storage.SizePerTech).Int()
-            : writeRecipes.Count;
-
-        writedRecipes = writeRecipes.GetRange(0, allowedRecipesCount);
-
         foreach (var recipe in deleteRecipes)
         {
             if (storage.Recipes.Remove(recipe))
             {
-                deleteRecipe.Remove(recipe);
-                deletedRecipe.Add(recipe);
+                deleteRecipes.Remove(recipe);
+                deletedRecipes.Add(recipe);
             }
         }
 
@@ -254,14 +250,14 @@ public sealed partial class ResearchSystemNew
             ref List<ProtoId<LatheRecipePrototype>> transferRecipes,
             out List<ProtoId<LatheRecipePrototype>> tranferedRecipes,
             RecipesStorageComponent? sourceStorage = null,
-            RecpesStorageComponent? recipientStorage = null)
+            RecipesStorageComponent? recipientStorage = null)
     {
         tranferedRecipes = new List<ProtoId<LatheRecipePrototype>>();
 
         if (!Resolve(sourceUid, ref sourceStorage) || !Resolve(recipientUid, ref recipientStorage))
             return false;
 
-        if (!transferRecipes.Count == 0)
+        if (transferRecipes.Count == 0)
             return true;
 
         if (!TryDeleteRecipes(sourceUid, ref transferRecipes, out var deletedRecipes, sourceStorage))
@@ -283,12 +279,13 @@ public sealed partial class ResearchSystemNew
         if (!Resolve(uid, ref storage))
             return;
 
-        var ev = new RecalcExpiredSizeEvent();
+        var ev = new RecalcExpiredSizeEvent(FixedPoint2.Zero);
         RaiseLocalEvent(uid, ref ev);
 
         storage.ExpiredSize = ev.ExpiredSize;
 
-        RaiseLocalEvent(uid, new DataUpdatedEvent());
+        var ev2 = new DataUpdatedEvent();
+        RaiseLocalEvent(uid, ref ev2);
     }
 
     private void RecalcPointsSize(EntityUid uid, PointsDataStorageComponent? storage = null)
@@ -296,7 +293,7 @@ public sealed partial class ResearchSystemNew
         if (!Resolve(uid, ref storage))
             return;
 
-        storage.ExpiredLocalSize = storage.Points.GetSize();
+        storage.ExpiredLocalSize = storage.Points.GetSize(ProtoMan);
         RecalcStorageSize(uid);
     }
 
@@ -310,6 +307,18 @@ public sealed partial class ResearchSystemNew
             : 0;
 
         RecalcStorageSize(uid);
+    }
+
+    private void UpdateReaderInterface(EntityUid uid, DataReaderComponent? reader = null)
+    {
+        if (!Resolve(uid, ref reader))
+            return;
+
+        if (TryComp<PointsDataStorageComponent>(uid, out var points))
+            UpdatePointsReaderInterface(uid, reader, points);
+
+        if (TryComp<RecipesStorageComponent>(uid, out var recipes))
+            UpdateRecipesReaderInterface(uid, reader, recipes);
     }
 
     private void UpdatePointsReaderInterface(EntityUid uid, DataReaderComponent? reader = null, PointsDataStorageComponent? storage = null)
@@ -338,5 +347,33 @@ public sealed partial class ResearchSystemNew
         var state = new PointsDataReadBoundUserInterfaceState(portState, storage.Points, diskPoints);
 
         _uiSystem.SetUiState(uid, PointsDataReaderUiKey.Key, state);
+    }
+
+    private void UpdateRecipesReaderInterface(EntityUid uid, DataReaderComponent? reader = null, RecipesStorageComponent? storage = null)
+    {
+        if (!Resolve(uid, ref reader, ref storage, false))
+            return;
+
+        if (!_itemSlots.TryGetSlot(uid, reader.SlotId, out var itemSlot))
+            return;
+
+        var portState = PortState.Empty;
+        var diskRecipes = new List<ProtoId<LatheRecipePrototype>>();
+
+        if (itemSlot.Item is { } disk)
+        {
+            portState = PortState.WrongFormat;
+            if (TryComp<RecipesStorageComponent>(disk, out var diskStorage))
+            {
+                diskRecipes = diskStorage.Recipes;
+
+                if (TryComp<DataStorageComponent>(disk, out var dataStorage))
+                    portState = dataStorage.WriteAllowed ? PortState.ReadWrite : PortState.ReadOnly;
+            }
+        }
+
+        var state = new RecipesReaderBoundUserInterfaceState(portState, storage.Recipes, diskRecipes);
+
+        _uiSystem.SetUiState(uid, RecipesReaderUiKey.Key, state);
     }
 }

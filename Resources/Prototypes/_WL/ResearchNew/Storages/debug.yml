@@ -24,3 +24,24 @@
         - PointsFormat
       currentStorageFormat: PointsFormat
       size: 128
+
+- type: storageFormat
+  id: RecipesFormat
+  name: ЭКЩОТИЧЕСИЕ МАСЛА
+  color: blue
+  storagesList:
+    - type: RecipesStorage
+      recipes:
+        - DoubleEmergencyOxygenTank
+
+- type: entity
+  parent: TreasureDatadiskEncrypted
+  id: DebugRecipesStorage
+  name: debug recipes storage
+  components:
+    - type: DataStorage
+      name: Многа очко
+      allowedStorageFormats:
+        - RecipesFormat
+      currentStorageFormat: RecipesFormat
+      size: 128
