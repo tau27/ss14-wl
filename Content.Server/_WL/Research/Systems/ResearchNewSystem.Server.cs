@@ -101,8 +101,6 @@ public sealed partial class ResearchSystemNew
             if (pointsSum <= 0)
                 continue;
 
-            Logger.Debug(string.Join(Environment.NewLine, rawData));
-
             var addValue = data.ResearchedData[categoryId].ResearchData(rawData, pointsSum);
 
             var pointsCoof = addValue / pointsSum;

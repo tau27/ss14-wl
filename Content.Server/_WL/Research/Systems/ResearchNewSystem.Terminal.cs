@@ -36,7 +36,7 @@ public sealed partial class ResearchSystemNew
 
     private void OnServerUpdated(EntityUid uid, ResearchMainConsoleComponent component, ref ResearchServerNewUpdatedEvent args)
     {
-        if (!_uiSystem.IsUiOpen(uid, ResearchMainConsoleUiKey.Key))
+        if (!UI.IsUiOpen(uid, ResearchMainConsoleUiKey.Key))
             return;
 
         UpdateConsoleInterface(uid, component);
@@ -68,6 +68,6 @@ public sealed partial class ResearchSystemNew
 
         var state = new ResearchMainConsoleBoundInterfaceState(pointsData, researchData);
 
-        _uiSystem.SetUiState(uid, ResearchMainConsoleUiKey.Key, state);
+        UI.SetUiState(uid, ResearchMainConsoleUiKey.Key, state);
     }
 }

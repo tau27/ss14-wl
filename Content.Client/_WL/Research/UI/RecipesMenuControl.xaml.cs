@@ -37,12 +37,17 @@ public sealed partial class RecipesMenuControl : ScrollContainer
 
     public void SetRecipes(int count)
     {
-        count = Math.Min(RecipesList.Children.Count, count);
+        count = Math.Min(RecipesList.Children.Count(), count);
         _choosedRecipes.Clear();
 
-        foreach (var button in RecipesList.Children.GetRange(0, count))
+        foreach (var control in RecipesList.Children.ToList().GetRange(0, count))
         {
+            /*
+            if (control is not Button button)
+                continue;
+
             button.OnPressed.Invoke();
+            */
         }
     }
 
