@@ -26,12 +26,12 @@ public sealed partial class ResearchScannerMenu : FancyWindow
     {
         if (state.ClearOutput)
         {
-            Output.PushNewline();
-            Output.AddMarkupOrThrow(state.Message.ToString());
+            Output = state.Message;
         }
         else
         {
-            Output = state.Message;
+            Output.PushNewline();
+            Output.AddMarkupOrThrow(state.Message.ToString());
         }
 
         ScannerText.SetMarkup(Output.ToMarkup());

@@ -1,3 +1,4 @@
+/*
 using System.Numerics;
 using System.Linq;
 using Content.Server.Power.EntitySystems;
@@ -13,7 +14,7 @@ namespace Content.Server._WL.Research.Systems;
 
 public sealed partial class ResearchSystemNew
 {
-    private void InitializeScanners()
+    private void InitializeDeconstructor()
     { }
 
     [SubscribeLocalEvent]
@@ -49,3 +50,4 @@ public sealed partial class ResearchSystemNew
         UI.SetUiState(uid, ResearchScannerUiKey.Key, state);
     }
 }
+*/
