@@ -10,9 +10,6 @@ namespace Content.Shared._WL.Research.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ResearchServerNewComponent : Component
 {
-    /// <summary>
-    /// The name of the server
-    /// </summary>
     [AutoNetworkedField]
     [DataField("serverName"), ViewVariables(VVAccess.ReadWrite)]
     public string ServerName = "RDMAINSERVER";
