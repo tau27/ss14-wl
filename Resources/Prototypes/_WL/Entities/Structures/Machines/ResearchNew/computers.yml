@@ -44,3 +44,44 @@
   - type: GuideHelp
     guides:
     - Science
+
+- type: entity
+  parent: BaseComputerAiAccess
+  id: UniversalComputer
+  name: aero computer
+  description: OH MY PC
+  components:
+  - type: Sprite
+    sprite: _WL/Structures/Machines/universal_computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerKeys"]
+      state: rd_key
+  - type: UniversalComputer
+    menuProgram: MenuProgram
+    programs:
+      - StaticProgram
+  - type: ActivatableUI
+    key: enum.UCMenuUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.UCMenuUiKey.Key:
+        type: UniversalComputerBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: ApcPowerReceiver
+    powerLoad: 50
+  - type: PowerState
+    idlePowerDraw: 50
+    workingPowerDraw: 1000
+  - type: Computer
+    board: ResearchComputerCircuitboard
+  - type: AccessReader
+    access: [["Research"]]
+  - type: PointLight
+    radius: 1.5
+    energy: 4.0
+    color: "#b53ca1"

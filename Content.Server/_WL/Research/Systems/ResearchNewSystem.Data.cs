@@ -68,19 +68,19 @@ public sealed partial class ResearchSystemNew
     [SubscribeLocalEvent]
     private void OnDiskInserted(Entity<DataReaderComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        UpdateReaderInterface(ent.Owner, ent.Comp);
+        UpdateReaderInterface(ent, ent.Comp);
     }
 
     [SubscribeLocalEvent]
     private void OnDataUpdated(Entity<DataReaderComponent> ent, ref DataUpdatedEvent args)
     {
-        UpdateReaderInterface(ent.Owner, ent.Comp);
+        UpdateReaderInterface(ent, ent.Comp);
     }
 
     [SubscribeLocalEvent]
     private void OnDataReaderStartup(Entity<DataReaderComponent> ent, ref ComponentStartup args)
     {
-        UpdateReaderInterface(ent.Owner, ent.Comp);
+        UpdateReaderInterface(ent, ent.Comp);
     }
 
     [SubscribeLocalEvent]
