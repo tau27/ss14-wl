@@ -13,8 +13,8 @@ namespace Content.Shared._WL.Research.Systems;
 
 public sealed partial class SharedComputerSystem : EntitySystem
 {
-    [Dependency] protected SharedUserInterfaceSystem UI = default!;
-    [Dependency] protected SharedAppearanceSystem Appearance = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
@@ -43,7 +43,7 @@ public sealed partial class SharedComputerSystem : EntitySystem
 
         var program = ProtoMan.Index(programId);
 
-        UI.SetUi(uid, program.UIKey, program.UIData);
+        _ui.SetUi(uid, program.UIKey, program.UIData);
 
         EntityManager.AddComponents(uid, program.Components);
     }
@@ -117,26 +117,26 @@ public sealed partial class SharedComputerSystem : EntitySystem
             Dirty(uid, activatable);
         }
 
-        Appearance.SetData(uid, UnversalComputerVisuals.ProgramPrototype, programId);
+        _appearance.SetData(uid, UnversalComputerVisuals.ProgramPrototype, programId);
 
         computer.CurrentProgram = programId;
         computer.InMenu = computer.MenuProgram == programId;
 
         UpdateComputerInterface(uid, computer);
 
-        UI.CloseUi(uid, prevProgram.UIKey);
-        UI.OpenUi(uid, program.UIKey);
+        _ui.CloseUi(uid, prevProgram.UIKey);
+        _ui.OpenUi(uid, program.UIKey);
 
         Dirty(uid, computer);
     }
 
-    protected void UpdateComputerInterface(EntityUid uid, UniversalComputerComponent? computer = null)
+    private void UpdateComputerInterface(EntityUid uid, UniversalComputerComponent? computer = null)
     {
         if (!Resolve(uid, ref computer, false))
             return;
 
         var state = new UniversalComputerBoundInterfaceState(computer.Programs);
 
-        UI.SetUiState(uid, UCMenuUiKey.Key, state);
+        _ui.SetUiState(uid, UCMenuUiKey.Key, state);
     }
 }

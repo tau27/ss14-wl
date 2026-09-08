@@ -22,7 +22,7 @@ public sealed partial class ComputerVisualizerSystem : VisualizerSystem<Universa
         }
         else
         {
-            SpriteSystem.LayerSetRsiState((uid, args.Sprite), 0, "empty");
+            SpriteSystem.LayerSetRsiState((uid, args.Sprite), 0, "error");
             args.Sprite?.LayerSetShader(0, null, null);
         }
     }
