@@ -6,12 +6,12 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._WL.Research;
 
-public sealed partial class ComputerVisualizerSystem : VisualizerSystem<UniversalComputerComponent>
+public sealed partial class ComputerVisualizerSystem : VisualizerSystem<UniversalComputerVisualsComponent>
 {
-    protected override void OnAppearanceChange(EntityUid uid, UniversalComputerComponent component, ref AppearanceChangeEvent args)
+    protected override void OnAppearanceChange(EntityUid uid, UniversalComputerVisualsComponent component, ref AppearanceChangeEvent args)
     {
         AppearanceSystem.TryGetData<bool>(uid, PowerDeviceVisuals.Powered, out var powered, args.Component);
-        AppearanceSystem.TryGetData<string>(uid, UnversalComputerVisuals.ProgramPrototype, out var currentProgram, args.Component);
+        AppearanceSystem.TryGetData<string>(uid, UniversalComputerVisuals.ProgramPrototype, out var currentProgram, args.Component);
 
         if (powered
             && currentProgram != null

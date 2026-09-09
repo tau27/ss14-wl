@@ -76,12 +76,14 @@ public sealed partial class ResearchSystemNew
         Dirty(uid, techServer);
     }
 
-    private void FinishResearch(EntityUid uid, ProtoId<ResearchPrototype> researchProto, ResearchServerNewComponent? server = null)
+    private void FinishResearch(EntityUid uid, ProtoId<ResearchPrototype> researchId, ResearchServerNewComponent? server = null, RecipesStorageComponent? recipes = null)
     {
-        if (!Resolve(uid, ref server))
+        if (!Resolve(uid, ref server, ref recipes))
             return;
 
-        //TODO: add finish research event
+        var research = ProtoMan.Index(researchId);
+
+        TryWriteRecipes(uid, ref research.RecipeUnlocks, out _, recipes);
     }
 
     private bool TryStartResearch(EntityUid uid, ProtoId<ResearchPrototype> researchId, TechnologyServerComponent? techServer = null, ProtoId<ResearchModePrototype>? modeId = null)
@@ -119,9 +121,9 @@ public sealed partial class ResearchSystemNew
         return true;
     }
 
-    public ResearchDepsStatus GetResearchState(EntityUid uid, ProtoId<ResearchPrototype> researchProto, ResearchState researchState, TechnologyServerComponent? techServer = null, PointsDataStorageComponent? storage = null)
+    public ResearchDepsStatus GetResearchState(EntityUid uid, ProtoId<ResearchPrototype> researchProto, ResearchState researchState, TechnologyServerComponent? techServer = null, PointsDataStorageComponent? points = null, RecipesStorageComponent? recipes = null)
     {
-        if (!Resolve(uid, ref techServer) || !Resolve(uid, ref storage))
+        if (!Resolve(uid, ref techServer) || !Resolve(uid, ref points) || !Resolve(uid, ref recipes))
             return ResearchDepsStatus.Invalid;
 
         var research = ProtoMan.Index(researchProto);
@@ -134,8 +136,11 @@ public sealed partial class ResearchSystemNew
                 return ResearchDepsStatus.ParentsReq;
         }
 
-        if (!storage.Points.IsSuperset(research.PointsCost * modeProto.PointsModifier))
-                return ResearchDepsStatus.PointsReq;
+        if (!points.Points.IsSuperset(research.PointsCost * modeProto.PointsModifier))
+            return ResearchDepsStatus.PointsReq;
+
+        if (!CanWriteRecipes(uid, research.RecipeUnlocks, recipes))
+            return ResearchDepsStatus.StorageReq;
 
         return ResearchDepsStatus.Allowed;
     }

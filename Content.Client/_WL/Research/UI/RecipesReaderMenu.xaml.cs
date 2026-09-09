@@ -36,7 +36,7 @@ public sealed partial class RecipesReaderMenu : FancyWindow
 
     public static readonly Color NoPointsColor = Color.FromHex("#222222");
 
-    public event Action<ResearchPointsSpecifier, bool>? TransferButtonPressed;
+    // public event Action<ResearchPointsSpecifier, bool>? TransferButtonPressed;
 
     public RecipesReaderMenu()
     {

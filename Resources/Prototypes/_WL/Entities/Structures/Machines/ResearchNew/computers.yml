@@ -116,6 +116,7 @@
     menuProgram: MenuProgram
     programs:
       - StaticProgram
+  - type: UniversalComputerVisuals
   - type: ActivatableUI
     key: enum.UCMenuUiKey.Key
   - type: UserInterface

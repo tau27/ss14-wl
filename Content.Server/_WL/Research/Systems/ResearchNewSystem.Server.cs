@@ -58,6 +58,12 @@ public sealed partial class ResearchSystemNew
 
         if (TryComp<TechnologyServerComponent>(uid, out var techServer))
             TryUpdateResearches(uid, component, techServer);
+
+        var ev = new ResearchServerNewUpdatedEvent();
+        foreach (var client in component.Clients)
+        {
+            RaiseLocalEvent(client, ref ev);
+        }
     }
 
     private void TryUpdateResearches(EntityUid uid, ResearchServerNewComponent? server = null, TechnologyServerComponent? techServer = null)
@@ -109,12 +115,6 @@ public sealed partial class ResearchSystemNew
         }
 
         Dirty(ent, server);
-
-        var ev2 = new ResearchServerNewUpdatedEvent();
-        foreach (var client in server.Clients)
-        {
-            RaiseLocalEvent(client, ref ev2);
-        }
     }
 
     private bool TryModifyPoints(EntityUid uid, ResearchPointsSpecifier pointsData, bool modifyStatistic = false, ResearchServerNewComponent? server = null, PointsDataStorageComponent? storage = null)

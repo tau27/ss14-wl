@@ -25,6 +25,9 @@ public sealed partial class UniversalComputerComponent : Component
     public bool InMenu = true;
 }
 
+[RegisterComponent]
+public sealed partial class UniversalComputerVisualsComponent : Component;
+
 [Serializable, NetSerializable]
 public enum UCMenuUiKey : byte
 {
@@ -32,7 +35,7 @@ public enum UCMenuUiKey : byte
 }
 
 [Serializable, NetSerializable]
-public enum UnversalComputerVisuals : byte
+public enum UniversalComputerVisuals : byte
 {
     ProgramPrototype
 }

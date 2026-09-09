@@ -102,7 +102,7 @@ public sealed partial class SharedComputerSystem : EntitySystem
     }
     */
 
-    public void OpenProgram(EntityUid uid, ProtoId<ProgramPrototype> programId, UniversalComputerComponent? computer = null)
+    public void OpenProgram(EntityUid uid, ProtoId<ProgramPrototype> programId, UniversalComputerComponent? computer = null, EntityUid? actor = null)
     {
         if (!Resolve(uid, ref computer) || HasComp<EmpDisabledComponent>(uid))
             return;
@@ -117,7 +117,8 @@ public sealed partial class SharedComputerSystem : EntitySystem
             Dirty(uid, activatable);
         }
 
-        _appearance.SetData(uid, UnversalComputerVisuals.ProgramPrototype, programId);
+        if (TryComp<UniversalComputerVisualsComponent>(uid, out var _))
+            _appearance.SetData(uid, UniversalComputerVisuals.ProgramPrototype, programId);
 
         computer.CurrentProgram = programId;
         computer.InMenu = computer.MenuProgram == programId;
@@ -125,7 +126,7 @@ public sealed partial class SharedComputerSystem : EntitySystem
         UpdateComputerInterface(uid, computer);
 
         _ui.CloseUi(uid, prevProgram.UIKey);
-        _ui.OpenUi(uid, program.UIKey);
+        _ui.OpenUi(uid, program.UIKey, actor, true);
 
         Dirty(uid, computer);
     }

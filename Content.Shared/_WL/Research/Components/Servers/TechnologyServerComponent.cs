@@ -64,5 +64,6 @@ public enum ResearchDepsStatus: byte
     SpecialReq = 1,
     ParentsReq = 2,
     PointsReq = 3,
-    Invalid = 4
+    StorageReq = 4,
+    Invalid = 5
 }

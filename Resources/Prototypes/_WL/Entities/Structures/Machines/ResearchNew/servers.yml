@@ -122,6 +122,17 @@
     enabled: false
     sound:
       collection: ServerFans
+  - type: DataReader
+  - type: ItemSlots
+    slots:
+      storage_slot:
+        name: data-reader-slot-name
+  - type: UserInterface
+    interfaces:
+      enum.UCMenuUiKey.Key:
+        type: UniversalComputerBoundUserInterface
+  - type: ActivatableUI
+    key: enum.UCMenuUiKey.Key
 
 - type: entity
   parent: BaseRDServer
@@ -149,18 +160,22 @@
       - state: variant-research
       - state: server_o
         map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: UniversalComputer
+    programs:
+      - PointsReaderProgram
+      - RecipesReaderProgram
 
 - type: entity
   parent: BaseRDServer
   id: RDServerTechnology
   name: technology server
-  description: Thats collect some data for you.
+  description: Thats process some data for you.
   components:
   - type: DataStorage
     name: datastorage-points-name
     allowedStorageFormats:
-      - PointsFormat
-    currentStorageFormat: PointsFormat
+      - TechServerFormat
+    currentStorageFormat: TechServerFormat
     size: 65536
   - type: ResearchServerNew
     serverName: RDTechnology
@@ -181,3 +196,37 @@
       - state: variant-research
       - state: server_o
         map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: UniversalComputer
+    programs:
+      - PointsReaderProgram
+      - RecipesReaderProgram
+
+- type: entity
+  parent: BaseRDServer
+  id: RDServerStorage
+  name: storage server
+  description: Thats store some data for you.
+  components:
+  - type: DataStorage
+    name: datastorage-points-name
+    allowedStorageFormats:
+      - TechServerFormat
+    currentStorageFormat: TechServerFormat
+    size: 65536
+  - type: ResearchServerNew
+    serverName: RDStorage
+  - type: Sprite
+    sprite: Structures/Machines/server.rsi
+    snapCardinals: true
+    layers:
+      - state: server-off
+      - state: server-on
+        visible: false
+        map: ["enum.PowerDeviceVisualLayers.Powered"]
+      - state: variant-research
+      - state: server_o
+        map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: UniversalComputer
+    programs:
+      - PointsReaderProgram
+      - RecipesReaderProgram

@@ -66,6 +66,15 @@ public sealed partial class ResearchSystemNew
     }
 
     [SubscribeLocalEvent]
+    private void OnRecipesStorageStartup(Entity<RecipesStorageComponent> ent, ref ComponentStartup args)
+    {
+        if (!TryComp<DataStorageComponent>(ent, out var dataStorage))
+            return;
+
+        ent.Comp.LocalSize = dataStorage.LocalSize;
+    }
+
+    [SubscribeLocalEvent]
     private void OnDiskInserted(Entity<DataReaderComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         UpdateReaderInterface(ent, ent.Comp);
@@ -187,6 +196,20 @@ public sealed partial class ResearchSystemNew
         transferPoints += returnedPoints;
 
         return true;
+    }
+
+    public bool CanWriteRecipes(
+            EntityUid uid,
+            List<ProtoId<LatheRecipePrototype>> writeRecipes,
+            RecipesStorageComponent? storage = null)
+    {
+        if (!Resolve(uid, ref storage))
+            return false;
+
+        if (storage.SizePerTech <= 0)
+            return true;
+
+        return (storage.LocalSize - storage.ExpiredLocalSize >= writeRecipes.Count * storage.SizePerTech);
     }
 
     public bool TryWriteRecipes(
