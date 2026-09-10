@@ -96,7 +96,7 @@ public sealed partial class DataStorageControl : Control
             FormatLabel.Visible = false;
             SizeLabel.Visible = false;
 
-            DiskName.Text = "Диск отсутствует!";
+            DiskName.Text = Loc.GetString("ui-data-storage-empty");
             return;
         }
 
@@ -108,11 +108,11 @@ public sealed partial class DataStorageControl : Control
             FormatLabel.Visible = false;
             SizeLabel.Visible = false;
 
-            DiskName.Text = "Это чайник.";
+            DiskName.Text = Loc.GetString("ui-data-storage-wrong-format");
             return;
         }
 
-        FormatButton.Disabled = false;
+        FormatButton.Disabled = storage.CanBeFormatted;
         FormatLabel.Visible = true;
         SizeLabel.Visible = true;
 

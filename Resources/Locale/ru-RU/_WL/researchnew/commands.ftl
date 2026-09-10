@@ -1,1 +1,1 @@
-reseach-command-write-points = Записать/удалить сырые данные.
+research-command-write-points = Записать/удалить сырые данные.

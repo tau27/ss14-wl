@@ -21,26 +21,26 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
 {
     public Action<string>? OnTechnologyPressed;
 
-    protected bool Draggable { get; } = true;
-    protected float WorldMinRange;
-    protected float WorldMaxRange;
-    protected float WorldRange;
+    private bool Draggable { get; } = true;
+    private float WorldMinRange;
+    private float WorldMaxRange;
+    private float WorldRange;
 
     private ProtoId<ResearchPrototype>? _rootResearch;
     private Dictionary<ProtoId<ResearchPrototype>, ResearchState> _researches;
 
     private ProtoId<ResearchPrototype>? _hoveredNode;
 
-    protected const float LayerRadius = 10f;
+    private const float LayerRadius = 10f;
 
     public const int UIDisplayRadius = 320;
-    protected const int MinimapMargin = 4;
+    private const int MinimapMargin = 4;
 
-    protected int MidPoint => SizeFull / 2;
-    protected int SizeFull => (int) ((UIDisplayRadius + MinimapMargin) * 2 * UIScale);
-    protected Vector2 MidPointVector => new Vector2(MidPoint, MidPoint);
-    protected int ScaledMinimapRadius => (int) (UIDisplayRadius * UIScale);
-    protected float MinimapScale => WorldRange != 0 ? ScaledMinimapRadius / WorldRange : 0f;
+    private int MidPoint => SizeFull / 2;
+    private int SizeFull => (int) ((UIDisplayRadius + MinimapMargin) * 2 * UIScale);
+    private Vector2 MidPointVector => new Vector2(MidPoint, MidPoint);
+    private int ScaledMinimapRadius => (int) (UIDisplayRadius * UIScale);
+    private float MinimapScale => WorldRange != 0 ? ScaledMinimapRadius / WorldRange : 0f;
     private float NodeRadius => 3 * UIScale;
 
     private readonly Font _font;
@@ -52,7 +52,7 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
 
     [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private IEntityManager _entMan = default!;
-    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private readonly SpriteSystem _sprite;
 
     public TechnologyTreeControl()
@@ -114,7 +114,7 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
             var diff = range - WorldRange;
             const float lerpRate = 10f;
 
-            WorldRange += (float) Math.Clamp(diff, -lerpRate * MathF.Abs(diff) * Timing.FrameTime.TotalSeconds, lerpRate * MathF.Abs(diff) * Timing.FrameTime.TotalSeconds);
+            WorldRange += (float) Math.Clamp(diff, -lerpRate * MathF.Abs(diff) * _timing.FrameTime.TotalSeconds, lerpRate * MathF.Abs(diff) * _timing.FrameTime.TotalSeconds);
         }
     }
 
@@ -182,12 +182,12 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
         range = Math.Clamp(range + value, WorldMinRange, WorldMaxRange);
     }
 
-    protected Vector2 ScalePosition(Vector2 value)
+    private Vector2 ScalePosition(Vector2 value)
     {
         return ScalePosition(value, MinimapScale, MidPointVector);
     }
 
-    protected static Vector2 ScalePosition(Vector2 value, float minimapScale, Vector2 midpointVector)
+    private static Vector2 ScalePosition(Vector2 value, float minimapScale, Vector2 midpointVector)
     {
         return value * minimapScale + midpointVector;
     }

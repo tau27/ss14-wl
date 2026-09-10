@@ -48,7 +48,7 @@ public sealed partial class ResearchHintControl : Control
             return;
 
         IconTexture.Texture = _sprite.Frame0(proto.Icon);
-        IconTexture.TextureScale = 2;
+        IconTexture.TextureScale = new Vector2(2f);;
         ResearchName.Text = proto.LocalizedName;
     }
 }

@@ -17,7 +17,7 @@ public sealed partial class ResearchSystemNew
 
     private void InitializeCommands()
     {
-        _consoleHost.RegisterCommand("writepoints", Loc.GetString("anomaly-command-pulse"), "writepoints <uid> <protoId> <value>",
+        _consoleHost.RegisterCommand("writepoints", Loc.GetString("research-command-write-points"), "writepoints <uid> <protoId> <value>",
             WritePointsCommand,
             WritePointsCompletion);
     }
@@ -26,7 +26,10 @@ public sealed partial class ResearchSystemNew
     private void WritePointsCommand(IConsoleShell shell, string argstr, string[] args)
     {
         if (args.Length != 3)
+        {
             shell.WriteError("Argument length must be 3");
+            return;
+        }
 
         if (!NetEntity.TryParse(args[0], out var uidNet) || !TryGetEntity(uidNet, out var uid))
             return;
