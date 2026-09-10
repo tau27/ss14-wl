@@ -8,7 +8,7 @@
   tier: 1
   pointsCost:
     IT: 1
-  parentsResearches: []
+  children: []
   recipeUnlocks:
   - SeedExtractorMachineCircuitboard
   - HydroponicsTrayMachineCircuitboard

@@ -129,9 +129,9 @@ public sealed partial class ResearchSystemNew
         var research = ProtoMan.Index(researchProto);
         var modeProto = ProtoMan.Index(researchState.ModeId);
 
-        foreach (var parent in research.ParentsResearches)
+        if (researchState.Parent is not null)
         {
-            if (!techServer.Researches.TryGetValue(parent, out var parentState) ||
+            if (!techServer.Researches.TryGetValue(researchState.Parent.Value, out var parentState) ||
                     parentState.Status != ResearchStatus.Researched)
                 return ResearchDepsStatus.ParentsReq;
         }

@@ -50,6 +50,8 @@ public sealed partial class ResearchSystemNew
         var pointsData = new Dictionary<ProtoId<ResearchPointsTypePrototype>, (FixedPoint2, FixedPoint2, FixedPoint2)>();
         var researchData = new Dictionary<ProtoId<ResearchPrototype>, ResearchState>();
 
+        ProtoId<ResearchPrototype>? rootResearch = null;
+
         if (TryGetClientServer(uid, out var server, out var serverComponent, clientComponent) &&
                 clientComponent.ConnectedToServer &&
                 TryComp<PointsDataStorageComponent>(server, out var serverStorage))
@@ -63,10 +65,13 @@ public sealed partial class ResearchSystemNew
             }
 
             if (TryComp<TechnologyServerComponent>(server, out var techServer))
+            {
+                rootResearch = techServer.RootResearch;
                 researchData = techServer.Researches;
+            }
         }
 
-        var state = new ResearchMainConsoleBoundInterfaceState(pointsData, researchData);
+        var state = new ResearchMainConsoleBoundInterfaceState(pointsData, researchData, rootResearch);
 
         UI.SetUiState(uid, ResearchMainConsoleUiKey.Key, state);
     }

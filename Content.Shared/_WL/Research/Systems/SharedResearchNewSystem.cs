@@ -29,12 +29,11 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnRDBInit(EntityUid uid, TechnologyServerComponent component, ref MapInitEvent args)
     {
-        var avalibleResearches = GetAvaliableResearches(uid, component);
+        var researchTree = new Dictionary<ProtoId<ResearchPrototype>, ResearchState>();
+        researchTree.Add(component.RootResearch, new ResearchState());
 
-        foreach (var researchProto in avalibleResearches)
-        {
-            component.Researches.Add(researchProto, new ResearchState());
-        }
+        TryGenerateTechTree(component.RootResearch, ref researchTree);
+        component.Researches = researchTree;
 
         Dirty(uid, component);
     }
@@ -82,21 +81,6 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
         args.Handled = true;
     }
 
-    public List<ResearchPrototype> GetAvaliableResearches(EntityUid uid, TechnologyServerComponent? component = null)
-    {
-        if (!Resolve(uid, ref component, false))
-            return new List<ResearchPrototype>();
-
-        var availableTechnologies = new List<ResearchPrototype>();
-        foreach (var tech in ProtoMan.EnumeratePrototypes<ResearchPrototype>())
-        {
-            if (component.SupportedDisciplines.Contains(tech.Discipline))
-                availableTechnologies.Add(tech);
-        }
-
-        return availableTechnologies;
-    }
-
     [SubscribeLocalEvent]
     private void OnInsertAttempt(Entity<DataReaderComponent> ent, ref ItemSlotInsertAttemptEvent args)
     {
@@ -107,5 +91,21 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
             return;
 
         args.Cancelled = true;
+    }
+
+    public bool TryGenerateTechTree(ProtoId<ResearchPrototype> rootResearch, ref Dictionary<ProtoId<ResearchPrototype>, ResearchState> tree)
+    {
+        var research = ProtoMan.Index(rootResearch);
+
+        foreach (var child in research.ChildrenResearches)
+        {
+            if (!tree.TryAdd(child, new ResearchState(rootResearch)))
+                return false;
+
+            if (!TryGenerateTechTree(child, ref tree))
+                return false;
+        }
+
+        return true;
     }
 }

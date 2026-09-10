@@ -44,6 +44,9 @@ public sealed partial class ResearchMainConsoleMenu : FancyWindow
         _sprite = _entity.System<SpriteSystem>();
         _accessReader = _entity.System<AccessReaderSystem>();
 
+        TabContainer.SetTabTitle(0, Loc.GetString("ui-main-terminal-tab-statistic"));
+        TabContainer.SetTabTitle(1, Loc.GetString("ui-main-terminal-tab-tech"));
+
         ServerButton.OnPressed += _ => OnServerButtonPressed?.Invoke();
     }
 
@@ -124,6 +127,8 @@ public sealed partial class ResearchMainConsoleMenu : FancyWindow
 
     public void UpdateResearches(ResearchMainConsoleBoundInterfaceState state)
     {
+        TabContainer.SetTabVisible(1, state.RootResearch is not null);
+
         ResearchQueueContainer.Children.Clear();
         ResearchQueueContainer.AddChild(new Control
         {
@@ -137,6 +142,9 @@ public sealed partial class ResearchMainConsoleMenu : FancyWindow
             cardControl.OnPressed += () => OnResearchStartPressed?.Invoke(resId);
             ResearchQueueContainer.AddChild(cardControl);
         }
+
+        if (state.RootResearch is { } research)
+            TechTree.SetResearches(research, state.ResearchesData);
     /*
 
         var unlockedTech = database.UnlockedTechnologies.Select(x => _prototype.Index<TechnologyPrototype>(x));

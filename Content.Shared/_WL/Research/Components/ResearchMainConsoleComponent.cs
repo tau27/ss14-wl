@@ -16,12 +16,16 @@ public sealed class ResearchMainConsoleBoundInterfaceState : BoundUserInterfaceS
 
     public Dictionary<ProtoId<ResearchPrototype>, ResearchState> ResearchesData;
 
+    public ProtoId<ResearchPrototype>? RootResearch;
+
     public ResearchMainConsoleBoundInterfaceState(
             Dictionary<ProtoId<ResearchPointsTypePrototype>, (FixedPoint2, FixedPoint2, FixedPoint2)> pointsData,
-            Dictionary<ProtoId<ResearchPrototype>, ResearchState> researchesData)
+            Dictionary<ProtoId<ResearchPrototype>, ResearchState> researchesData,
+            ProtoId<ResearchPrototype>? rootResearch)
     {
         PointsData = pointsData;
         ResearchesData = researchesData;
+        RootResearch = rootResearch;
     }
 }
 

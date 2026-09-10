@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.Research.Prototypes;
 using Content.Shared._WL.Research.Prototypes;
 using Content.Shared._WL.Research.Components;

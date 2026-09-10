@@ -34,8 +34,8 @@ public sealed partial class ResearchPrototype : IPrototype
     [DataField]
     public FixedPoint2 PackagesCost = 120;
 
-    [DataField("parents")]
-    public List<ProtoId<ResearchPrototype>> ParentsResearches = new();
+    [DataField("children")]
+    public List<ProtoId<ResearchPrototype>> ChildrenResearches = new();
 
     [DataField]
     public bool Hidden;

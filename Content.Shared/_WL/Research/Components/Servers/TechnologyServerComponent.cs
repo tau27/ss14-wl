@@ -13,9 +13,8 @@ namespace Content.Shared._WL.Research.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class TechnologyServerComponent : Component
 {
-    [AutoNetworkedField]
-    [DataField]
-    public List<ProtoId<TechDisciplinePrototype>> SupportedDisciplines = new();
+    [DataField(required: true), AutoNetworkedField]
+    public ProtoId<ResearchPrototype> RootResearch;
 
     [AutoNetworkedField]
     public Dictionary<ProtoId<ResearchPrototype>, ResearchState> Researches = new();
@@ -40,10 +39,18 @@ public struct ResearchState
 
     public ProtoId<ResearchModePrototype> ModeId = "Default";
 
+    public ProtoId<ResearchPrototype>? Parent = null;
+
     public ResearchState()
+    {
+        new ResearchState(null);
+    }
+
+    public ResearchState(ProtoId<ResearchPrototype>? parent)
     {
         Status = ResearchStatus.NotResearched;
         DepsState = ResearchDepsStatus.Allowed;
+        Parent = parent;
     }
 }
 
