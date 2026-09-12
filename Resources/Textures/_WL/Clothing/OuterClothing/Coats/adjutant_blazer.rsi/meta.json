@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Made by ReArtInt, folded & open states by whitleyvk (git)",
+  "copyright": "Edited Bubberstation/blob/HEAD/icons/mob/clothing/suits/jacket.dmi by whitleyvk (git)",
   "size": {
     "x": 32,
     "y": 32
@@ -14,15 +14,11 @@
       "name": "icon-open"
     },
     {
-      "name": "equipped-INNERCLOTHING",
+      "name": "equipped-OUTERCLOTHING",
       "directions": 4
     },
     {
-      "name": "folded-equipped-INNERCLOTHING",
-      "directions": 4
-    },
-    {
-      "name": "open-equipped-INNERCLOTHING",
+      "name": "open-equipped-OUTERCLOTHING",
       "directions": 4
     },
     {
@@ -32,8 +28,14 @@
     {
       "name": "inhand-right",
       "directions": 4
+    },
+    {
+      "name": "open-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "open-inhand-right",
+      "directions": 4
     }
   ]
 }
-
-
