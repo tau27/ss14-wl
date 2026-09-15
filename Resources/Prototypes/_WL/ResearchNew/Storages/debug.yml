@@ -31,8 +31,6 @@
   color: blue
   storagesList:
     - type: RecipesStorage
-      recipes:
-        - DoubleEmergencyOxygenTank
 
 - type: entity
   parent: TreasureDatadiskEncrypted
@@ -45,3 +43,8 @@
         - RecipesFormat
       currentStorageFormat: RecipesFormat
       size: 128
+    - type: Blueprint
+      providedRecipes: [ ]
+    - type: Tag
+      tags:
+      - BlueprintAutolathe

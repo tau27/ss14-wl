@@ -13,7 +13,6 @@ namespace Content.Shared._WL.Research
     [DataDefinition, Serializable, NetSerializable]
     public sealed partial class ResearchPointsSpecifier : IEquatable<ResearchPointsSpecifier>, IRobustCloneable<ResearchPointsSpecifier>
     {
-
         [DataField("points")]
         public Dictionary<ProtoId<ResearchPointsTypePrototype>, FixedPoint2> PointsDict { get; set; } = new();
 

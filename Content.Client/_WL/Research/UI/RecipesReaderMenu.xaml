@@ -46,6 +46,7 @@
                         <Label Text="С диска" HorizontalExpand="True"
                                         StyleClasses="highlight" MinWidth="120"/>
                         <controls:SwitchButton Name="DirectionButton" MinWidth="150"/>
+                        <controls:SwitchButton Name="CopyButton" MinWidth="150"/>
                         <Label Text="На диск" HorizontalExpand="True"
                                         StyleClasses="highlight" MinWidth="120"/>
                     </BoxContainer>

@@ -49,6 +49,7 @@ public sealed partial class ResearchSystemNew
 
         var pointsData = new Dictionary<ProtoId<ResearchPointsTypePrototype>, (FixedPoint2, FixedPoint2, FixedPoint2)>();
         var researchData = new Dictionary<ProtoId<ResearchPrototype>, ResearchState>();
+        var researchQueue = new List<ProtoId<ResearchPrototype>>();
 
         ProtoId<ResearchPrototype>? rootResearch = null;
 
@@ -68,10 +69,11 @@ public sealed partial class ResearchSystemNew
             {
                 rootResearch = techServer.RootResearch;
                 researchData = techServer.Researches;
+                researchQueue = techServer.ResearchQueue;
             }
         }
 
-        var state = new ResearchMainConsoleBoundInterfaceState(pointsData, researchData, rootResearch);
+        var state = new ResearchMainConsoleBoundInterfaceState(pointsData, researchData, researchQueue, rootResearch);
 
         UI.SetUiState(uid, ResearchMainConsoleUiKey.Key, state);
     }

@@ -1,22 +1,20 @@
 - type: research
   id: RootResearch
   name: research-root-name
+  description: research-root-desc
   icon:
     sprite: Structures/Machines/tech_disk_printer.rsi
     state: display
   discipline: Experimental
-  tier: 1
+  packagesCost: 10
   pointsCost:
-    IT: 1
+    pointsDict:
+      IT: 1
   children:
   - SalvageWeapons
   - Hydroponics
   - BasicRobotics
   - SalvageEquipment
-  recipeUnlocks:
-  - SeedExtractorMachineCircuitboard
-  - HydroponicsTrayMachineCircuitboard
-  - ReagentGrinderIndustrialMachineCircuitboard
 
 - type: research
   id: SalvageWeapons
@@ -25,9 +23,9 @@
     sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
     state: icon
   discipline: Arsenal
-  tier: 1
   pointsCost:
-    IT: 1
+    points:
+      BioChem: 1
   recipeUnlocks:
   - WeaponProtoKineticAccelerator
   - ShuttleGunKineticCircuitboard
@@ -39,9 +37,9 @@
     sprite: Structures/Machines/exosuit_fabricator.rsi
     state: fab-idle
   discipline: Experimental
-  tier: 1
   pointsCost:
-    IT: 1
+    pointsDict:
+      IT: 1
   children:
     - BasicAnomalousResearch
     - BasicXenoArcheology
@@ -57,9 +55,9 @@
     sprite: Objects/Tools/handdrill.rsi
     state: handdrill
   discipline: Industrial
-  tier: 1
   pointsCost:
-    IT: 1
+    pointsDict:
+      IT: 1
   recipeUnlocks:
   - MiningDrill
   - MineralScannerEmpty
@@ -74,9 +72,9 @@
     sprite: Structures/Machines/seed_extractor.rsi
     state: seedextractor
   discipline: CivilianServices
-  tier: 1
   pointsCost:
-    IT: 1
+    pointsDict:
+      IT: 1
   recipeUnlocks:
   - SeedExtractorMachineCircuitboard
   - HydroponicsTrayMachineCircuitboard
@@ -89,9 +87,9 @@
     sprite: Objects/Specific/Research/anomalyscanner.rsi
     state: icon
   discipline: Experimental
-  tier: 1
   pointsCost:
-    IT: 5000
+    pointsDict:
+      IT: 5000
   recipeUnlocks:
     - AnomalyScanner
     - AnomalyLocator
@@ -106,9 +104,9 @@
     sprite: Structures/Machines/artifact_analyzer.rsi
     state: display
   discipline: Experimental
-  tier: 1
   pointsCost:
-    IT: 1
+    pointsDict:
+      IT: 1
   recipeUnlocks:
     - NodeScanner
     - AnalysisComputerCircuitboard

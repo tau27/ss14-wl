@@ -144,21 +144,6 @@ public sealed partial class ResearchSystemNew
         return true;
     }
 
-    public int GetResearchSpeed(EntityUid uid, ResearchServerNewComponent? server = null)
-    {
-        if (!Resolve(uid, ref server))
-            return 0;
-
-        var ev = new GetResearchSpeedEvent(1);
-
-        foreach (var client in server.Clients)
-        {
-            RaiseLocalEvent(client, ref ev);
-        }
-
-        return ev.Speed;
-    }
-
     /// <summary>
     /// Registers a client to the specified server.
     /// </summary>

@@ -36,7 +36,7 @@ public sealed partial class ResearchSystemNew
 
     private void UpdateResearchesProgress(EntityUid uid, TechnologyServerComponent? techServer = null, ResearchServerNewComponent? server = null)
     {
-        if (!Resolve(uid, ref techServer) || !Resolve(uid, ref server))
+        if (!Resolve(uid, ref techServer, ref server))
             return;
 
         if (techServer.ResearchQueue.Count == 0)
@@ -48,7 +48,7 @@ public sealed partial class ResearchSystemNew
         if (!techServer.Researches.TryGetValue(mainResearchProto, out var mainResearchState))
             return;
 
-        var researchSpeed = GetResearchSpeed(uid, server);
+        var researchSpeed = GetResearchSpeed(uid, server, techServer);
         // var modeProto = ProtoMan.Index(mainResearchState.ModeId);
 
         var cost = (int)(mainResearchState.PackagesCostModed);
@@ -132,7 +132,7 @@ public sealed partial class ResearchSystemNew
         if (researchState.Parent is not null)
         {
             if (!techServer.Researches.TryGetValue(researchState.Parent.Value, out var parentState) ||
-                    parentState.Status != ResearchStatus.Researched)
+                    parentState.Status != ResearchStatus.Researched && !techServer.ResearchQueue.Contains(researchState.Parent.Value))
                 return ResearchDepsStatus.ParentsReq;
         }
 
@@ -142,6 +142,24 @@ public sealed partial class ResearchSystemNew
         if (!CanWriteRecipes(uid, research.RecipeUnlocks, recipes))
             return ResearchDepsStatus.StorageReq;
 
+        if (researchState.Status != ResearchStatus.NotResearched)
+            return ResearchDepsStatus.OnResearch;
+
         return ResearchDepsStatus.Allowed;
+    }
+
+    public int GetResearchSpeed(EntityUid uid, ResearchServerNewComponent? server = null, TechnologyServerComponent? techServer = null)
+    {
+        if (!Resolve(uid, ref server, ref techServer))
+            return 0;
+
+        var ev = new GetResearchSpeedEvent(techServer.BaseResearchSpeed);
+
+        foreach (var client in server.Clients)
+        {
+            RaiseLocalEvent(client, ref ev);
+        }
+
+        return ev.Speed;
     }
 }

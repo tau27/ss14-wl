@@ -40,8 +40,14 @@
                         <BoxContainer Orientation="Vertical"
                                       VerticalExpand="True"
                                       HorizontalExpand="True"
+                                      Margin="4">
+                            <Label Name="ResearchStatusLabel" Access="Public" VerticalAlignment="Center"/>
+                        </BoxContainer>
+                        <BoxContainer Orientation="Vertical"
+                                      VerticalExpand="True"
+                                      HorizontalExpand="True"
                                       Margin="0">
-                            <Label Name="ResearchProgress" Access="Public" Text="10/20" VerticalAlignment="Bottom"/>
+                            <Label Name="ResearchProgress" Access="Public" VerticalAlignment="Bottom"/>
                         </BoxContainer>
                     </BoxContainer>
                 <Button Name="ResearchButton" Access="Public" SetSize="40 40" Text="X" HorizontalAlignment="Left"/>

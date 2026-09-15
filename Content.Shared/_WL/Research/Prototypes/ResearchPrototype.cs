@@ -14,19 +14,16 @@ public sealed partial class ResearchPrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     [DataField(required: true)]
-    private LocId Name { get; set; }
+    public LocId Name { get; set; }
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public string LocalizedName => Loc.GetString(Name);
+    [DataField]
+    public LocId Description = string.Empty;
 
     [DataField(required: true)]
     public SpriteSpecifier Icon = default!;
 
     [DataField(required: true)]
     public ProtoId<TechDisciplinePrototype> Discipline;
-
-    [DataField(required: true)]
-    public int Tier;
 
     [DataField(required: true)]
     public ResearchPointsSpecifier PointsCost = new();

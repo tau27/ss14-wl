@@ -5,6 +5,7 @@ using Content.Shared._WL.Research;
 using Content.Shared._WL.Research.Methods;
 using Content.Shared._WL.Research.Components;
 using Content.Shared._WL.Research.Prototypes;
+using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
@@ -29,6 +30,11 @@ public sealed partial class ResearchSystemNew
         Subs.BuiEvents<PointsDataStorageComponent>(PointsDataReaderUiKey.Key, subs =>
         {
             subs.Event<PointsTransferMessage>(OnPointsTransferMessage);
+        });
+
+        Subs.BuiEvents<RecipesStorageComponent>(RecipesReaderUiKey.Key, subs =>
+        {
+            subs.Event<RecipesTransferMessage>(OnRecipesTransferMessage);
         });
     }
 
@@ -104,6 +110,14 @@ public sealed partial class ResearchSystemNew
         args.ExpiredSize += ent.Comp.ExpiredLocalSize;
     }
 
+    [SubscribeLocalEvent]
+    private void OnRecipesWrited(Entity<BlueprintComponent> ent, ref RecipesWritedEvent args)
+    {
+        ent.Comp.ProvidedRecipes.UnionWith(args.Recipes);
+
+        Dirty(ent, ent.Comp);
+    }
+
     private void OnPointsTransferMessage(Entity<PointsDataStorageComponent> ent, ref PointsTransferMessage args)
     {
         if (!TryComp<DataReaderComponent>(ent, out var reader) ||
@@ -116,7 +130,33 @@ public sealed partial class ResearchSystemNew
         else
             TryTransferPoints(disk, ent, args.Points, out _, null, ent.Comp);
 
-        UpdatePointsReaderInterface(ent, null, ent.Comp);
+        UpdateReaderInterface(ent);
+    }
+
+    private void OnRecipesTransferMessage(Entity<RecipesStorageComponent> ent, ref RecipesTransferMessage args)
+    {
+        Logger.Debug("Getted reciped 0-1");
+        if (!TryComp<DataReaderComponent>(ent, out var reader) ||
+                !_itemSlots.TryGetSlot(ent, reader.SlotId, out var itemSlot) ||
+                itemSlot.Item is not { } disk)
+            return;
+
+        EntityUid storage = args.Direction ? ent : disk;
+        EntityUid recipient = args.Direction ? disk : ent;
+
+        var storageComp = args.Direction ? ent.Comp : null;
+        var recipientComp = args.Direction ? null : ent.Comp;
+
+        Logger.Debug("Getted reciped");
+
+        var recipes = args.Recipes;
+
+        if (args.Copy)
+            TryWriteRecipes(recipient, ref recipes, out _, recipientComp);
+        else
+            TryTransferRecipes(storage, recipient, ref recipes, out _, storageComp, recipientComp);
+
+        UpdateReaderInterface(ent);
     }
 
     public bool TryDeletePoints(
@@ -230,11 +270,23 @@ public sealed partial class ResearchSystemNew
             ? ((storage.LocalSize - storage.ExpiredLocalSize) / storage.SizePerTech).Int()
             : writeRecipes.Count;
 
-        writedRecipes = writeRecipes.GetRange(0, allowedRecipesCount);
+        writedRecipes = writeRecipes.GetRange(0, Math.Min(writeRecipes.Count, allowedRecipesCount));
 
-        storage.Recipes.AddRange(writedRecipes);
+        foreach (var recipe in new List<ProtoId<LatheRecipePrototype>>(writedRecipes))
+        {
+            if (storage.Recipes.Contains(recipe))
+                writedRecipes.Remove(recipe);
+            else
+            {
+                writeRecipes.Remove(recipe);
+                storage.Recipes.Add(recipe);
+            }
+        }
 
         RecalcRecipesSize(uid, storage);
+
+        var ev = new RecipesWritedEvent(writedRecipes);
+        RaiseLocalEvent(uid, ref ev);
 
         return true;
     }
@@ -253,7 +305,7 @@ public sealed partial class ResearchSystemNew
         if (deleteRecipes.Count == 0)
             return true;
 
-        foreach (var recipe in deleteRecipes)
+        foreach (var recipe in new List<ProtoId<LatheRecipePrototype>>(deleteRecipes))
         {
             if (storage.Recipes.Remove(recipe))
             {

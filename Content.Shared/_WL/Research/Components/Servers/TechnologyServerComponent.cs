@@ -16,6 +16,9 @@ public sealed partial class TechnologyServerComponent : Component
     [DataField(required: true), AutoNetworkedField]
     public ProtoId<ResearchPrototype> RootResearch;
 
+    [DataField, AutoNetworkedField]
+    public int BaseResearchSpeed = 1;
+
     [AutoNetworkedField]
     public Dictionary<ProtoId<ResearchPrototype>, ResearchState> Researches = new();
 
@@ -72,5 +75,6 @@ public enum ResearchDepsStatus: byte
     ParentsReq = 2,
     PointsReq = 3,
     StorageReq = 4,
-    Invalid = 5
+    OnResearch = 5,
+    Invalid = 6
 }

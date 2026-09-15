@@ -29,7 +29,8 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
     private ProtoId<ResearchPrototype>? _rootResearch;
     private Dictionary<ProtoId<ResearchPrototype>, ResearchState> _researches;
 
-    private ProtoId<ResearchPrototype>? _hoveredNode;
+    private ProtoId<ResearchPrototype>? _hoveredResearch;
+    public ProtoId<ResearchPrototype>? SelectedResearch;
 
     private const float LayerRadius = 10f;
 
@@ -67,10 +68,11 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
         _font = new VectorFont(fontResource, 16);
 
 
-        SetSize = new Vector2(SizeFull, SizeFull);
+        // SetSize = new Vector2(SizeFull, SizeFull);
         MouseFilter = MouseFilterMode.Stop;
         WorldMinRange = 1f;
         WorldMaxRange = 32f;
+        RectClipContent = true;
 
         _rootResearch = null;
         _researches = new();
@@ -86,7 +88,7 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
     {
         base.Draw(handle);
 
-        _hoveredNode = null;
+        _hoveredResearch = null;
 
         var offsetVec = new Vector2(Offset.X, -Offset.Y);
 
@@ -99,7 +101,7 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
         if (_rootResearch is not null)
             RecursyDrawPoints(handle, _rootResearch.Value, 0f, MathHelper.TwoPi, 0, 1, offsetVec);
 
-        if (_hoveredNode is { } hovered)
+        if (_hoveredResearch is { } hovered)
         {
             var cursor = (UserInterfaceManager.MousePositionScaled.Position * UIScale) - GlobalPixelPosition;
             DrawNodeHint(handle, cursor, hovered);
@@ -134,16 +136,20 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
 
         var cursor = (UserInterfaceManager.MousePositionScaled.Position * UIScale) - GlobalPixelPosition;
 
+        if (SelectedResearch == protoId)
+        {
+            DrawCircle(handle, pos, scaledRadius, Color.Gray);
+        }
+
         var hovered = (cursor - pos).LengthSquared() <= scaledRadius * scaledRadius;
         if (hovered)
         {
-            // render hovered node if we have one
-            _hoveredNode = protoId;
+            _hoveredResearch = protoId;
             DrawCircle(handle, pos, scaledRadius, Color.White);
         }
 
         var texture = _sprite.Frame0(proto.Icon);
-        var size = scaledRadius / 1.4f;
+        var size = scaledRadius / 1.4f * 2;
         handle.DrawTextureRect(texture, UIBox2.FromDimensions(pos - new Vector2(size / 2), new Vector2(size)));
 
         /*
@@ -223,6 +229,17 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
 
         if (args.Function == EngineKeyFunctions.Use)
             _draggin = false;
+
+        if (args.Handled || args.Function != EngineKeyFunctions.UIClick)
+            return;
+
+        if (_hoveredResearch == null)
+            return;
+
+        SelectedResearch = _hoveredResearch;
+
+        OnTechnologyPressed?.Invoke(SelectedResearch.Value);
+        UserInterfaceManager.ClickSound();
     }
 
     private Vector2 RadialToVector(float radius, float angle)
@@ -249,7 +266,7 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
 
     private void DrawNodeHint(DrawingHandleScreen handle, Vector2 position, ProtoId<ResearchPrototype> protoId)
     {
-        var size = new Vector2(0.7f, 0.5f) * ScaledMinimapRadius;
+        var size = new Vector2(1.2f, 0.5f) * ScaledMinimapRadius;
 
         var box = UIBox2.FromDimensions(position, size);
 
@@ -257,21 +274,5 @@ public sealed partial class TechnologyTreeControl : LayoutContainer
         ResearchHint.Visible = true;
         ResearchHint.Arrange(box);
         ResearchHint.SetSize = size;
-    }
-}
-
-public record struct TechnologyPoint
-{
-    public string Name;
-    public Color Color = Color.White;
-    public int Layer = 0;
-    public List<int> Childs = new();
-
-    public TechnologyPoint(string name, Color color, int layer, List<int> childs)
-    {
-        Name = name;
-        Color = color;
-        Layer = layer;
-        Childs = childs;
     }
 }

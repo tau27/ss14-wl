@@ -6,6 +6,7 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Lathe;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -15,6 +16,7 @@ namespace Content.Shared._WL.Research.Systems;
 public abstract partial class SharedResearchNewSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedLatheSystem _lathe = default!;
     [Dependency] protected SharedPopupSystem Popup = default!;
     [Dependency] protected SharedAudioSystem Audio = default!;
     [Dependency] protected SharedUserInterfaceSystem UI = default!;
@@ -107,5 +109,56 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
         }
 
         return true;
+    }
+
+        public FormattedMessage GetResearchDescription(
+        ProtoId<ResearchPrototype> researchId,
+        bool includeCosts = true)
+    {
+        var research = ProtoMan.Index(researchId);
+        var description = new FormattedMessage();
+        var discipline = ProtoMan.Index(research.Discipline);
+
+        if (research.Description != string.Empty)
+        {
+            description.AddMarkupOrThrow(Loc.GetString(research.Description));
+            description.PushNewline();
+            description.PushNewline();
+        }
+
+        description.AddMarkupOrThrow(Loc.GetString("research-console-tier-discipline-info",
+            ("tier", 0), ("color", discipline.Color), ("discipline", Loc.GetString(discipline.Name))));
+        description.PushNewline();
+        description.PushNewline();
+
+        if (includeCosts && !research.PointsCost.Empty)
+        {
+            description.AddMarkupOrThrow(Loc.GetString("points-spec-points-start"));
+            description.PushNewline();
+            foreach (var (typeId, value) in research.PointsCost.PointsDict)
+            {
+                var type = ProtoMan.Index(typeId);
+
+                description.AddMarkupOrThrow(Loc.GetString("points-spec-points-entry",
+                            ("type", type.LocalizedName),
+                            ("color", type.Color),
+                            ("value", value)
+                        ));
+                description.PushNewline();
+            }
+        }
+
+        description.PushNewline();
+
+        description.AddMarkupOrThrow(Loc.GetString("research-console-unlocks-list-start"));
+        foreach (var recipe in research.RecipeUnlocks)
+        {
+            var recipeProto = ProtoMan.Index(recipe);
+            description.PushNewline();
+            description.AddMarkupOrThrow(Loc.GetString("research-console-unlocks-list-entry",
+                ("name", _lathe.GetRecipeName(recipeProto))));
+        }
+
+        return description;
     }
 }

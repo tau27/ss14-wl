@@ -22,6 +22,8 @@ public sealed class AnimatedProgressBar : Robust.Client.UserInterface.Controls.R
 
     public Color StripeColor { get; set; } = new(1f, 1f, 1f, 0.18f);
 
+    public Color PausedColor { get; set; } = Color.FromHex("#cd610a", Color.Orange);
+
     public float StripeWidth { get; set; } = 14f;
 
     public float StripeGap { get; set; } = 14f;
@@ -29,6 +31,8 @@ public sealed class AnimatedProgressBar : Robust.Client.UserInterface.Controls.R
     public float StripeSpeed { get; set; } = 40f;
 
     public float StripeSkew { get; set; } = 1f;
+
+    public bool Paused = false;
 
     public void SetTime(float time)
     {
@@ -39,8 +43,8 @@ public sealed class AnimatedProgressBar : Robust.Client.UserInterface.Controls.R
     {
         base.FrameUpdate(args);
 
-        // Накапливаем время для анимации.
-        _time += args.DeltaSeconds;
+        if (!Paused)
+            _time += args.DeltaSeconds;
     }
 
     protected override void Draw(DrawingHandleScreen handle)
@@ -59,8 +63,10 @@ public sealed class AnimatedProgressBar : Robust.Client.UserInterface.Controls.R
         if (fillWidth <= 0f)
             return;
 
+        var color = Paused ? PausedColor : FillColor;
+
         var fillRect = new UIBox2(0f, 0f, fillWidth, size.Y);
-        handle.DrawRect(fillRect, FillColor);
+        handle.DrawRect(fillRect, color);
 
         var period = StripeWidth + StripeGap;
 

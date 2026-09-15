@@ -15,19 +15,19 @@ public sealed partial class RecipesMenuControl : ScrollContainer
 {
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private IPrototypeManager _protoMan = default!;
-    // private readonly MaterialStorageSystem _materialStorage;
 
     private EntityUid? _owner;
 
-    // private Dictionary<ProtoId<MaterialPrototype>, int> _currentMaterials = new();
-    private List<ProtoId<LatheRecipePrototype>> _choosedRecipes = new();
+    private List<ProtoId<LatheRecipePrototype>> _recipes;
+    public List<ProtoId<LatheRecipePrototype>> ChoosedRecipes { get; private set; }
 
     public RecipesMenuControl()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        // _materialStorage = _entityManager.System<MaterialStorageSystem>();
+        _recipes = new();
+        ChoosedRecipes = new();
     }
 
     public void SetOwner(EntityUid owner)
@@ -35,26 +35,29 @@ public sealed partial class RecipesMenuControl : ScrollContainer
         _owner = owner;
     }
 
-    public void SetRecipes(int count)
+    public void SetRecipes(int recipesCount)
     {
-        count = Math.Min(RecipesList.Children.Count(), count);
-        _choosedRecipes.Clear();
+        recipesCount = Math.Min(RecipesList.Children.Count(), recipesCount);
+        ChoosedRecipes.Clear();
 
-        foreach (var control in RecipesList.Children.ToList().GetRange(0, count))
+        var count = -1;
+        foreach (var control in RecipesList.Children.ToList().GetRange(0, recipesCount))
         {
-            /*
+            count += 1;
+
             if (control is not Button button)
                 continue;
 
-            button.OnPressed.Invoke();
-            */
+            ToggleChooseRecipe(button, _recipes[count]);
         }
     }
 
     public void UpdateRecipes(List<ProtoId<LatheRecipePrototype>> recipesRawList)
     {
+        _recipes = recipesRawList;
+
         RecipesList.Children.Clear();
-        foreach (var id in recipesRawList)
+        foreach (var id in _recipes)
         {
             var mainButton = new Button {
                 VerticalExpand = true,
@@ -63,22 +66,22 @@ public sealed partial class RecipesMenuControl : ScrollContainer
                 Text = id
             };
 
-            mainButton.OnPressed += args => ToogleChooseRecipe(args, id);
+            mainButton.OnPressed += args => ToggleChooseRecipe(args.Button, id);
 
             RecipesList.AddChild(mainButton);
         }
     }
 
-    private void ToogleChooseRecipe(BaseButton.ButtonEventArgs eventArgs, ProtoId<LatheRecipePrototype> protoId)
+    private void ToggleChooseRecipe(BaseButton button, ProtoId<LatheRecipePrototype> protoId)
     {
-        if (_choosedRecipes.Remove(protoId))
+        if (ChoosedRecipes.Remove(protoId))
         {
-            eventArgs.Button.Pressed = false;
+            button.Pressed = false;
         }
         else
         {
-            _choosedRecipes.Add(protoId);
-            eventArgs.Button.Pressed = true;
+            ChoosedRecipes.Add(protoId);
+            button.Pressed = true;
         }
     }
 }

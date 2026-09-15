@@ -38,17 +38,23 @@ public sealed partial class ResearchHintControl : Control
     {
         _protoId = protoId;
         _state = state;
+        UpdateHint();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
 
+        UpdateHint();
+    }
+
+    private void UpdateHint()
+    {
         if (!_protoMan.TryIndex<ResearchPrototype>(_protoId, out var proto))
             return;
 
         IconTexture.Texture = _sprite.Frame0(proto.Icon);
         IconTexture.TextureScale = new Vector2(2f);;
-        ResearchName.Text = proto.LocalizedName;
+        ResearchName.Text = Loc.GetString(proto.Name);
     }
 }

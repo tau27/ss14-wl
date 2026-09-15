@@ -42,17 +42,20 @@ public sealed class RecipesReaderBoundUserInterfaceState : BoundUserInterfaceSta
     }
 }
 
-/*
 [Serializable, NetSerializable]
-public sealed class PointsTransferMessage : BoundUserInterfaceMessage
+public sealed class RecipesTransferMessage : BoundUserInterfaceMessage
 {
-    public readonly ResearchPointsSpecifier Points;
+    public readonly List<ProtoId<LatheRecipePrototype>> Recipes;
     public readonly bool Direction;
+    public readonly bool Copy;
 
-    public PointsTransferMessage(ResearchPointsSpecifier points, bool direction)
+    public RecipesTransferMessage(List<ProtoId<LatheRecipePrototype>> recipes, bool direction, bool copy)
     {
-        Points = points;
+        Recipes = recipes;
         Direction = direction;
+        Copy = copy;
     }
 }
-*/
+
+[ByRefEvent]
+public record struct RecipesWritedEvent(List<ProtoId<LatheRecipePrototype>> Recipes);

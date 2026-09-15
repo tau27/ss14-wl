@@ -36,19 +36,19 @@ public sealed partial class RecipesReaderMenu : FancyWindow
 
     public static readonly Color NoPointsColor = Color.FromHex("#222222");
 
-    // public event Action<ResearchPointsSpecifier, bool>? TransferButtonPressed;
+    public event Action<List<ProtoId<LatheRecipePrototype>>, bool, bool>? TransferButtonPressed;
 
     public RecipesReaderMenu()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        /*
         ButtonTransfer.StyleClasses.Add(StyleClass.ButtonOpenLeft);
         ButtonTransfer.StyleClasses.Add(StyleClass.Positive);
 
         ButtonTransfer.OnPressed += OnTransfer;
 
+        /*
         ButtonMinimum.OnPressed += OnMinimum;
         ButtonMaximum.OnPressed += OnMaximum;
 
@@ -75,18 +75,13 @@ public sealed partial class RecipesReaderMenu : FancyWindow
         DiskRecipesMenu.UpdateRecipes(state.DiskRecipesData);
     }
 
-    /*
-    private void UpdatePointsValue(ProtoId<ResearchPointsTypePrototype> type, double value)
-    {
-        if (_points.PointsDict.ContainsKey(type))
-            _points.PointsDict[type] = value;
-    }
-
     private void OnTransfer(BaseButton.ButtonEventArgs eventArgs)
     {
-        TransferButtonPressed?.Invoke(_points, DirectionButton.Pressed);
+        var recipes = DirectionButton.Pressed ? StorageRecipesMenu.ChoosedRecipes : DiskRecipesMenu.ChoosedRecipes;
+        TransferButtonPressed?.Invoke(recipes, DirectionButton.Pressed, CopyButton.Pressed);
     }
 
+    /*
     private void OnMinimum(BaseButton.ButtonEventArgs eventArgs)
     {
         foreach (var children in PointsSpins.Children)

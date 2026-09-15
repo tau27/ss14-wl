@@ -22,7 +22,7 @@ public sealed partial class ResearchQueueCardControl : Control
         var discipline = prototypeManager.Index<TechDisciplinePrototype>(researchProto.Discipline);
         //Background.PanelOverride.BorderColor = discipline.Color;
 
-        ResearchName.Text = researchProto.LocalizedName;
+        ResearchName.Text = Loc.GetString(researchProto.Name);
         ResearchIcon.Texture = spriteSys.Frame0(researchProto.Icon);
 
         /*
@@ -39,7 +39,13 @@ public sealed partial class ResearchQueueCardControl : Control
 
         switch (researchState.Status)
         {
-            case ResearchStatus.NotResearched:
+            case ResearchStatus.Researching:
+                MainBar.Paused = false;
+                ResearchStatusLabel.Text = Loc.GetString("research-status-researching");
+                break;
+            case ResearchStatus.InQueue:
+                MainBar.Paused = true;
+                ResearchStatusLabel.Text = Loc.GetString("research-status-inqueue");
                 break;
         }
 
