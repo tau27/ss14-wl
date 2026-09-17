@@ -113,25 +113,28 @@ entity-effect-guidebook-even-health-change =
             }
     } { $changes }
 
+# WL-Changes: rm LOC from $key start
 entity-effect-guidebook-status-effect-old =
     { $type ->
         [update]{ $chance ->
                 [1] Вызывает
                 *[other] вызвать
-            } { LOC($key) } минимум на { NATURALFIXED($time, 3) } { MANY("секунд", $time) } без накопления эффекта
+            } { $key } минимум на { NATURALFIXED($time, 3) } { MANY("секунд", $time) } без накопления эффекта
         [add]   { $chance ->
                 [1] Вызывает
                 *[other] вызвать
-            } { LOC($key) } минимум на { NATURALFIXED($time, 3) } { MANY("секунд", $time) } с накоплением эффекта
+            } { $key } минимум на { NATURALFIXED($time, 3) } { MANY("секунд", $time) } с накоплением эффекта
         [set]  { $chance ->
                 [1] Вызывает
                 *[other] вызвать
-            } { LOC($key) } на { NATURALFIXED($time, 3) } { MANY("секунд", $time) } без накопления эффекта
+            } { $key } на { NATURALFIXED($time, 3) } { MANY("секунд", $time) } без накопления эффекта
         *[remove]{ $chance ->
                 [1] Удаляет
                 *[other] удалить
-            } { NATURALFIXED($time, 3) } { MANY("секунд", $time) } { LOC($key) }
+            } { NATURALFIXED($time, 3) } { MANY("секунд", $time) } { $key }
     }
+
+# WL-Changes: rm LOC from $key end
 
 entity-effect-guidebook-status-effect =
     { $type ->
