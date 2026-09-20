@@ -217,7 +217,8 @@
         - !type:MetabolizerTypeCondition
           type: [Vox]
 #WL-changes-start
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 1.5
         conditions:
         - !type:MetabolizerTypeCondition

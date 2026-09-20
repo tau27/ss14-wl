@@ -110,7 +110,8 @@
           types:
             Poison: 1.5
 #WL-changes-start
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 1.5
         conditions:
         - !type:MetabolizerTypeCondition
@@ -439,7 +440,8 @@
         conditions:
         minScale: 2
 #WL-changes-start
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: -6
         conditions:
         - !type:MetabolizerTypeCondition

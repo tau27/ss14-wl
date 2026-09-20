@@ -366,7 +366,8 @@
         satiationType: Thirst
         factor: 4
 #WL-changes-start
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: -1
         conditions:
         - !type:MetabolizerTypeCondition
@@ -722,7 +723,8 @@
       - !type:Satiate
         satiationType: Thirst
         factor: 3 # Slightly worse for quenching thirst than just straight water
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: -1.5
         conditions:
         - !type:MetabolizerTypeCondition

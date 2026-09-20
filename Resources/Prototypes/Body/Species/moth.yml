@@ -193,8 +193,10 @@
       275: 0.8
       250: 0.7
   #WL-Changes: Languages & hunger start
-  - type: Hunger
-    baseDecayRate: 0.024 # WL-Changes: hunger cpeed moth
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: MothHunger
   - type: Languages
     list:
     - language: Translate

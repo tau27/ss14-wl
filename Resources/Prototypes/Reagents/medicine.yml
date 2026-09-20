@@ -786,7 +786,8 @@
         - !type:MetabolizerTypeCondition
           type: [ Golem ]
         amount: -2500
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: -6
         conditions:
         - !type:MetabolizerTypeCondition

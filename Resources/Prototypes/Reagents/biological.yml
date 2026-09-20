@@ -229,7 +229,8 @@
         satiationType: Thirst
         factor: 1.5
 #WL-changes-start
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 200
         conditions:
         - !type:MetabolizerTypeCondition
@@ -283,7 +284,8 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 1.5
         conditions:
         - !type:MetabolizerTypeCondition

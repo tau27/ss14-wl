@@ -5,6 +5,7 @@ using Robust.Client.UserInterface.Controllers;
 using Content.Shared.CCVar;
 using Content.Client.CharacterInfo;
 using static Content.Client.CharacterInfo.CharacterInfoSystem;
+using Content.Client.Roles; // WL-Changes: Subnames
 
 namespace Content.Client.UserInterface.Systems.Chat;
 

@@ -18659,16 +18659,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 81.5,11.5
-- proto: BlueTomatoSeeds_wl_paper
-  entities:
-  - uid: 978
-    components:
-    - type: Transform
-      parent: 977
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 977
 - proto: BookAME
   entities:
   - uid: 979

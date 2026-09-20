@@ -124,8 +124,6 @@
   - BaseSpeciesMobOrganic
   id: MobCischi
   components:
-  - type: Hunger
-  - type: Thirst
   - type: Damageable
     damageModifierSet: Cischi
   - type: CuffedMeleeWeapon

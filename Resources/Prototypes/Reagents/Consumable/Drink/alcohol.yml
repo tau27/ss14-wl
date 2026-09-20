@@ -295,7 +295,8 @@
           type: [ Golem ]
           inverted: true
 #WL-changes-end
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 1.5
         conditions:
         - !type:MetabolizerTypeCondition

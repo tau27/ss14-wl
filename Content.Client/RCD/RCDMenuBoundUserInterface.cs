@@ -24,7 +24,6 @@ public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
 
     // WL-Changes: dehardcode start
     [Dependency] private IEntityManager _entityManager = default!;
-    [Dependency] private RCDSystem _rcd = default!;
     [Dependency] private HandsSystem _hands = default!; // Ignition
     // WL-Changes: dehardcode end
     private SimpleRadialMenu? _menu;

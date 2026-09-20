@@ -43,7 +43,8 @@
         - !type:MetabolizerTypeCondition
           type: [ Moth ]
 #WL-changes-start
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Golem ]
@@ -306,7 +307,8 @@
           min: 160.15 # not quite enough for cryo, but can speed it up if you wanna take the risk
         amount: -10000
 #WL-changes-start
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: -500
         conditions:
         - !type:MetabolizerTypeCondition
