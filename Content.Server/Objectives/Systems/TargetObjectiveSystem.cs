@@ -64,17 +64,24 @@ public sealed partial class TargetObjectiveSystem : EntitySystem
             targetName = mind.CharacterName;
         }
 
-        var jobName = "Unknown";
+        var jobName = "Unknown" ;// WL-Changes: Subnames
 
-        if (_job.MindTryGetJob(target, out var jobProto))
+        var deptName = Loc.GetString("department-Unknown");
+        if (_job.MindTryGetJobId(target, out var jobId))
         {
+            if (jobId.HasValue && _job.TryGetDepartment(jobId.Value, out var deptProto))
+            {
+                deptName = Loc.GetString(deptProto.Name);
+            }
+            
+            // WL-Changes: Subnames start
             if (mind != null)
                 jobName = _role.GetSubnameByMind(mind, jobProto.ID) ?? jobProto.LocalizedName;
             else
                 jobName = _role.GetSubnameByEntity(target, jobProto.ID) ?? jobProto.LocalizedName;
+            // WL-Changes: Subnames end
         }
-
-        return Loc.GetString(title, ("targetName", targetName), ("job", jobName));
+        return Loc.GetString(title, ("targetName", targetName), ("job", jobName), ("department", deptName));
     }
 
 }
