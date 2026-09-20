@@ -10,7 +10,6 @@ using Content.Server.Chat.Managers;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Database;
-using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Robust.Shared.Network;
 

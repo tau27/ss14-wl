@@ -36,11 +36,13 @@ public sealed partial class AudioTab : Control
         // Corvax-TTS-Start
         // WL-Changes-Start: Speech mode and barks volume
         var ttsEnabled = _cfg.GetCVar(CCCVars.TTSEnabled);
+        /*
         SliderVolumeTts.Visible = ttsEnabled;
         Control.AddOptionPercentSlider(
             CCCVars.TTSVolume,
             SliderVolumeTts,
             scale: ContentAudioSystem.TtsMultiplier);
+        */
 
         var speechModes = new List<OptionDropDownCVar<SpeechMode>.ValueOption>();
         if (ttsEnabled)

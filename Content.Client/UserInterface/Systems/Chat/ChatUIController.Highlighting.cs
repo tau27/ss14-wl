@@ -167,7 +167,7 @@ public sealed partial class ChatUIController : IOnSystemChanged<CharacterInfoSys
         if (!_charInfoIsAttach)
             return;
 
-        var (_, _, _, job, entityName) = data;
+        var (_, _, _, job, entityName, jobName) = data; // WL-Changes: subnames
 
         // Mark this entity's name as our character name for the "UpdateHighlights" function.
         var newHighlights = "@" + entityName;
@@ -191,7 +191,7 @@ public sealed partial class ChatUIController : IOnSystemChanged<CharacterInfoSys
         }
 
         // WL-Changes: Subnames start
-        if (data.JobName is { } subname)
+        if (jobName is { } subname)
             newHighlights += '\n' + subname;
         // WL-Changes: Subnames end
 

@@ -31,7 +31,6 @@ using Content.Shared.UserInterface;
 using Content.Shared.Whitelist;
 using Content.Shared.Tag; // WL android species //
 using Content.Shared.Wires;
-using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;

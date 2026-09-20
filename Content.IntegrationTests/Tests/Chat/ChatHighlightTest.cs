@@ -43,7 +43,8 @@ public sealed class ChatHighlightTest : GameTest
             new Dictionary<string, List<Shared.Objectives.ObjectiveInfo>>(),
             null,
             Captain,
-            "John Doe"
+            "John Doe",
+            "Captain" // WL-Changes: Subnames
         );
 
         var method = chatController.GetType().GetMethod(
@@ -127,7 +128,8 @@ public sealed class ChatHighlightTest : GameTest
             new Dictionary<string, List<Shared.Objectives.ObjectiveInfo>>(),
             null,
             Captain,
-            "John Doe"
+            "John Doe",
+            "Captain" // WL-Changes: subnames
         );
 
         var method = chatController.GetType().GetMethod(

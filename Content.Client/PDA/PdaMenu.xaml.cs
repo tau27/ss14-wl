@@ -147,7 +147,7 @@ namespace Content.Client.PDA
             ToHomeScreen();
         }
 
-        // WL-Changes-start: Loc -> _locMan
+        // WL-Changes-start: Loc -> Loc
         public void UpdateState(PdaUpdateState state)
         {
             FlashLightToggleButton.IsActive = state.FlashlightEnabled;
@@ -155,7 +155,7 @@ namespace Content.Client.PDA
             if (state.PdaOwnerInfo.ActualOwnerName != null)
             {
                 _pdaOwner = state.PdaOwnerInfo.ActualOwnerName;
-                PdaOwnerLabel.SetMarkup(_locMan.GetString("comp-pda-ui-owner",
+                PdaOwnerLabel.SetMarkup(Loc.GetString("comp-pda-ui-owner",
                     ("actualOwnerName", _pdaOwner)));
                 PdaOwnerLabel.Visible = true;
             }
@@ -167,31 +167,31 @@ namespace Content.Client.PDA
 
             if (state.PdaOwnerInfo.IdOwner != null || state.PdaOwnerInfo.JobTitle != null)
             {
-                _owner = state.PdaOwnerInfo.IdOwner ?? _locMan.GetString("comp-pda-ui-unknown");
-                _jobTitle = state.PdaOwnerInfo.JobTitle ?? _locMan.GetString("comp-pda-ui-unassigned");
-                IdInfoLabel.SetMarkup(_locMan.GetString("comp-pda-ui",
+                _owner = state.PdaOwnerInfo.IdOwner ?? Loc.GetString("comp-pda-ui-unknown");
+                _jobTitle = state.PdaOwnerInfo.JobTitle ?? Loc.GetString("comp-pda-ui-unassigned");
+                IdInfoLabel.SetMarkup(Loc.GetString("comp-pda-ui",
                     ("owner", _owner),
                     ("jobTitle", _jobTitle)));
             }
             else
             {
-                IdInfoLabel.SetMarkup(_locMan.GetString("comp-pda-ui-blank"));
+                IdInfoLabel.SetMarkup(Loc.GetString("comp-pda-ui-blank"));
             }
 
-            _stationName = state.StationName ?? _locMan.GetString("comp-pda-ui-unknown");
-            StationNameLabel.SetMarkup(_locMan.GetString("comp-pda-ui-station",
+            _stationName = state.StationName ?? Loc.GetString("comp-pda-ui-unknown");
+            StationNameLabel.SetMarkup(Loc.GetString("comp-pda-ui-station",
                 ("station", _stationName)));
 
 
             var stationTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
 
-            StationTimeLabel.SetMarkup(_locMan.GetString("comp-pda-ui-station-time",
+            StationTimeLabel.SetMarkup(Loc.GetString("comp-pda-ui-station-time",
                 ("time", stationTime.ToString("hh\\:mm\\:ss"))));
 
             var alertColor = state.PdaOwnerInfo.StationAlertColor;
             (_alertLevel, _, _instructions) = _alert.AlertLevelData(state.PdaOwnerInfo.StationAlertLevel);
 
-            StationAlertLevelLabel.SetMarkup(_locMan.GetString(
+            StationAlertLevelLabel.SetMarkup(Loc.GetString(
                 "comp-pda-ui-station-alert-level",
                 ("color", alertColor),
                 ("level", _alertLevel)
@@ -226,7 +226,7 @@ namespace Content.Client.PDA
 
                 ProgramList.AddChild(new Label()
                 {
-                    Text = _locMan.GetString("comp-pda-io-no-programs-available"),
+                    Text = Loc.GetString("comp-pda-io-no-programs-available"),
                     HorizontalAlignment = HAlignment.Center,
                     VerticalAlignment = VAlignment.Center,
                     VerticalExpand = true
@@ -347,12 +347,12 @@ namespace Content.Client.PDA
 
             var stationTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
 
-            StationTimeLabel.SetMarkup(_locMan.GetString("comp-pda-ui-station-time",
+            StationTimeLabel.SetMarkup(Loc.GetString("comp-pda-ui-station-time",
                 ("time", stationTime.ToString("hh\\:mm\\:ss"))));
 
             UpdateETA(); // WL-Changes: ETA in PDA
         }
-        // WL-Changes-end: Loc -> _locMan
+        // WL-Changes-end: Loc -> Loc
 
         // WL-Changes-start: ETA in PDA
         private void UpdateETA()
@@ -360,7 +360,7 @@ namespace Content.Client.PDA
             if (RoundEnd) // закончился ли раунд?
             {
                 ETAButton.Visible = true;
-                ETALabel.SetMarkup(_locMan.GetString("comp-pda-ui-arrived-cc"));
+                ETALabel.SetMarkup(Loc.GetString("comp-pda-ui-arrived-cc"));
                 return;
             }
             if (_beforeETA.HasValue) // Пристыковался ли эвак к станции?
@@ -369,11 +369,11 @@ namespace Content.Client.PDA
                 if (_eta <= TimeSpan.Zero)
                 {
                     ETAButton.Visible = true;
-                    ETALabel.SetMarkup(_locMan.GetString("comp-pda-ui-departed"));
+                    ETALabel.SetMarkup(Loc.GetString("comp-pda-ui-departed"));
                     return;
                 }
                 ETAButton.Visible = true;
-                ETALabel.SetMarkup(_locMan.GetString($"comp-pda-ui-arrive",
+                ETALabel.SetMarkup(Loc.GetString($"comp-pda-ui-arrive",
                     ("time", _eta.ToString(@"mm\:ss", CultureInfo.CurrentCulture))));
                 return;
             }
@@ -381,7 +381,7 @@ namespace Content.Client.PDA
             {
                 _eta = _expectedETA.Value - _gameTiming.CurTime;
                 ETAButton.Visible = true;
-                ETALabel.SetMarkup(_locMan.GetString($"comp-pda-ui-eta",
+                ETALabel.SetMarkup(Loc.GetString($"comp-pda-ui-eta",
                     ("time", _eta.ToString(@"mm\:ss", CultureInfo.CurrentCulture))));
                 return;
             }

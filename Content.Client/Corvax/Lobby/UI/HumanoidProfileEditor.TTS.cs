@@ -154,10 +154,10 @@ public sealed partial class HumanoidProfileEditor
 
     private void UpdateTTSVoicesControls()
     {
-        // WL-Changes-Start: Speech barks
-        if (Profile is null)
+        if (Profile is null || _ttsTab is null)
             return;
 
+        // WL-Changes-Start: Speech barks
         _barkTab?.SetSelectedBark(
             Profile.BarkVoice,
             Profile.BarkPitch,
@@ -165,8 +165,8 @@ public sealed partial class HumanoidProfileEditor
             Profile.BarkMaxDelay);
         // WL-Changes-End
 
-        _ttsTab.UpdateControls(Profile, Profile.Voice);
-        _ttsTab.SetSelectedVoice(Profile.TTSVoice);
+        _ttsTab?.UpdateControls(Profile, Profile.Voice);
+        _ttsTab?.SetSelectedVoice(Profile.TTSVoice);
     }
 
     private void SetVoice(string newVoice)

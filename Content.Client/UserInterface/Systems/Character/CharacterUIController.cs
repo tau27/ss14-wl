@@ -150,7 +150,7 @@ public sealed partial class CharacterUIController : UIController, IOnStateEntere
             return;
         }
 
-        var (entity, objectives, briefing, jobId, entityName) = data;
+        var (entity, objectives, briefing, jobId, entityName, jobName) = data;
 
         _window.SpriteView.SetEntity(entity);
 
@@ -160,7 +160,7 @@ public sealed partial class CharacterUIController : UIController, IOnStateEntere
         _window.SubText.Text = job != null ? Loc.GetString(job.Name) : null;
 
         // WL-Changes: Subnames start
-        if (data.JobName is { } subname)
+        if (jobName is { } subname)
             _window.SubText.Text = subname;
         // WL-Changes: Subnames end
 
