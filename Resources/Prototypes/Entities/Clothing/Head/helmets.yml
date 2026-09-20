@@ -367,15 +367,6 @@
       - state: equipped-HELMET-unshaded
         shader: shaded
     quickEquip: true
-  - type: ToggleableVisuals
-    spriteLayer: light
-    clothingVisuals:
-      head:
-      - state: on-equipped-HELMET
-      - state: equipped-HELMET-unshaded
-        shader: unshaded
-      - state: equipped-HELMET-unshaded
-        shader: shaded
     # WL-Changes-End
   - type: IngestionBlocker
   - type: FireProtection
