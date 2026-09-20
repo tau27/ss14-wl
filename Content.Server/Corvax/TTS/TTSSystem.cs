@@ -37,6 +37,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private StationSystem _stationSystem = default!;
     [Dependency] private SharedTransformSystem _xforms = default!;
     [Dependency] private IRobustRandom _rng = default!;
+    [Dependency] private LanguagesSystem _languages = default!; //WL-Changes: Languages
 
     private readonly List<string> _sampleText = new()
     {
@@ -435,7 +436,7 @@ public sealed partial class TTSSystem : EntitySystem
             var listener = session.AttachedEntity.Value;
             var xform = xformQuery.GetComponent(listener);
             var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
-            if (distance > ChatSystem.VoiceRange)
+            if (distance > SharedChatSystem.VoiceRange)
                 continue;
 
             var check = _languages.CanUnderstand(uid, listener, message);
@@ -475,16 +476,16 @@ public sealed partial class TTSSystem : EntitySystem
             var listener = session.AttachedEntity.Value;
             var xform = xformQuery.GetComponent(listener);
             var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
-            if (distance > ChatSystem.VoiceRange * ChatSystem.VoiceRange)
+            if (distance > SharedChatSystem.VoiceRange * SharedChatSystem.VoiceRange)
                 continue;
 
             var check = _languages.CanUnderstand(uid, listener, message);
 
             if (!check && !_languages.NeedTTS(uid)) continue;
             if (check)
-                RaiseNetworkEvent(distance > ChatSystem.WhisperClearRange ? obfTtsEvent : fullTtsEvent, session);
+                RaiseNetworkEvent(distance > SharedChatSystem.WhisperClearRange ? obfTtsEvent : fullTtsEvent, session);
             else
-                RaiseNetworkEvent(distance > ChatSystem.WhisperClearRange ? langObfusTtsEvent : langFullTtsEvent, session);
+                RaiseNetworkEvent(distance > SharedChatSystem.WhisperClearRange ? langObfusTtsEvent : langFullTtsEvent, session);
         }
     }
     //WL-Changes: Languages end

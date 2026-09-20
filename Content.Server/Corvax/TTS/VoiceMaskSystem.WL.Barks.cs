@@ -15,8 +15,7 @@ namespace Content.Server.VoiceMask;
 
 public partial class VoiceMaskSystem
 {
-    [SubscribeLocalEvent]
-    private static void TransformBark(VoiceMaskComponent component, TransformSpeakerBarkEvent args)
+    private static void TransformBark(VoiceMaskComponent component, ref TransformSpeakerBarkEvent args)
     {
         if (!component.Active)
             return;
@@ -31,7 +30,7 @@ public partial class VoiceMaskSystem
         VoiceMaskComponent component,
         InventoryRelayedEvent<TransformSpeakerBarkEvent> args)
     {
-        TransformBark(component, args.Args);
+        TransformBark(component, ref args.Args);
     }
 
     [SubscribeLocalEvent]
@@ -40,7 +39,7 @@ public partial class VoiceMaskSystem
         VoiceMaskComponent component,
         ImplantRelayEvent<TransformSpeakerBarkEvent> args)
     {
-        TransformBark(component, args.Args);
+        TransformBark(component, ref args.Args);
     }
 
     [SubscribeLocalEvent]
@@ -49,7 +48,7 @@ public partial class VoiceMaskSystem
         VoiceMaskComponent component,
         ref TransformSpeakerBarkEvent args)
     {
-        TransformBark(component, args);
+        TransformBark(component, ref args);
     }
 
     [SubscribeLocalEvent]

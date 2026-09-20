@@ -14,6 +14,7 @@ using Content.Shared.Forensics.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
+using Content.Shared._WL.Forensics; // WL-Changes
 // todo: remove this stinky LINQy
 
 namespace Content.Shared.Forensics.Systems;
@@ -207,8 +208,8 @@ public sealed partial class SharedForensicScannerSystem : EntitySystem
             scanner.Comp.LastScannedName,
             scanner.Comp.Fingerprints,
             scanner.Comp.Fibers,
-            scanner.Comp.TouchDNAs,
-            scanner.Comp.SolutionDNAs,
+            scanner.Comp.DNAs,
+            scanner.Comp.DNAs,
             scanner.Comp.Residues,
             Loc.GetString);
 

@@ -46,6 +46,14 @@ namespace Content.Server.PDA
         [Dependency] private ContainerSystem _containerSystem = default!;
         [Dependency] private IdCardSystem _idCard = default!;
         [Dependency] private IPrototypeManager _prototype = default!;
+        // WL-Changes-start: ETA in PDA
+        [Dependency] private RoundEndSystem _roundEnd = default!;
+
+        [Access(typeof(EmergencyShuttleSystem), Other = AccessPermissions.None)]
+        public TimeSpan? BeforeETA;
+        [Access(typeof(RoundEndSystem), Other = AccessPermissions.None)]
+        public bool RoundEnd = false;
+        // WL-Changes-end
 
         public override void Initialize()
         {

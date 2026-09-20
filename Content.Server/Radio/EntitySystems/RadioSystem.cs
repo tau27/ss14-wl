@@ -1,6 +1,7 @@
 //WL-Changes: Languages start
 using Content.Server._WL.Languages;
 using Content.Shared._WL.Languages;
+using Robust.Shared.Prototypes;
 //WL-Changes: Languages end
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;

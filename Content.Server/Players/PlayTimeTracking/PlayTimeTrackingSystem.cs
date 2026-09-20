@@ -1,7 +1,6 @@
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.Afk;
-using Content.Server.Afk.Events;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;

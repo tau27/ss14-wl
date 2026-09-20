@@ -703,10 +703,10 @@ public sealed partial class RCDSystem : EntitySystem
                     : prototype.Prototype;
 
         if (component.IsRpd && prototype.HasLayers && proto != null &&
-            ProtoMan.TryIndex<EntityPrototype>(proto, out var entityProto) &&
-            entityProto.TryGetComponent<AtmosPipeLayersComponent>(out var atmosPipeLayers, _entityManager.ComponentFactory) &&
-            _pipeLayersSystem.TryGetAlternativePrototype(atmosPipeLayers, component.CurrentLayer, out var newProtoId))
-            proto = newProtoId;
+                ProtoMan.TryIndex<EntityPrototype>(proto, out var entityProto) &&
+                ProtoMan.TryGetVariantCollection<EntityPrototype>(entityProto, out var altPrototypes) &&
+                (int)component.CurrentLayer <= altPrototypes.Count)
+            proto = altPrototypes[(int)component.CurrentLayer];
         // WL-Changes-end
 
         foreach (var ent in _intersectingEntities)
@@ -894,29 +894,15 @@ public sealed partial class RCDSystem : EntitySystem
 
                 if (component.IsRpd && prototype.HasLayers)
                 {
+                    // WL-Changes: RCD start
                     if (ProtoMan.TryIndex<EntityPrototype>(proto, out var entityProto) &&
-                        entityProto.TryGetComponent<AtmosPipeLayersComponent>(out var atmosPipeLayers, _entityManager.ComponentFactory)) // WL-changes
-                    {
-                        if (_pipeLayersSystem.TryGetAlternativePrototype(atmosPipeLayers, component.CurrentLayer, out var newProtoId))
-                            proto = newProtoId;
-                        else
-                            setLayer = true; // WL-Changes
-                    }
+                            ProtoMan.TryGetVariantCollection<EntityPrototype>(entityProto, out var altPrototypes) &&
+                            (int)component.CurrentLayer < altPrototypes.Count)
+                        proto = altPrototypes[(int)component.CurrentLayer];
+                    else
+                        setLayer = true;
+                    // WL-Changes: RCD end
                 }
-
-                // Calculate rotation before spawn
-                var rotation = prototype.Rotation switch
-                {
-                    RcdRotation.Fixed => Angle.Zero,
-                    RcdRotation.Camera => Transform(uid).LocalRotation,
-                    RcdRotation.User => direction.ToAngle(),
-                    _ => Angle.Zero // Fallback
-                };
-
-                var entityCoords = _mapSystem.GridTileToLocal(gridUid, mapGrid, position);
-                var mapCoords = _transform.ToMapCoordinates(entityCoords);
-
-                var ent = Spawn(proto, mapCoords, rotation: rotation);
                 // WL-Changes-end
 
                 Angle rotation;
@@ -935,9 +921,10 @@ public sealed partial class RCDSystem : EntitySystem
                         throw new NotImplementedException($"Rotation type {prototype.Rotation} in RCD prototype {prototype.ID} does not have a direction conversion.");
                 }
 
+                var ent = SpawnAttachedTo(prototype.Prototype, _mapSystem.GridTileToLocal(gridUid, mapGrid, position), rotation: rotation);
+
                 if (setLayer && TryComp<AtmosPipeLayersComponent>(ent, out var layers)) // WL-changes
                     _pipeLayersSystem.SetPipeLayer((ent, layers), component.CurrentLayer);
-                var ent = SpawnAttachedTo(prototype.Prototype, _mapSystem.GridTileToLocal(gridUid, mapGrid, position), rotation: rotation);
 
                 _adminLogger.Add(LogType.RCD, LogImpact.High, $"{ToPrettyString(user):user} used RCD to spawn {ToPrettyString(ent)} at {position} on grid {gridUid}");
                 break;

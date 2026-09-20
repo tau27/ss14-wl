@@ -9,7 +9,7 @@ public sealed partial class TTSSystem
 {
     private static readonly Regex RegexInvalidChars = new Regex(@"[^a-zA-ZäöüÄÖÜа-яА-ЯёЁ0-9,\-+?!. ]"); // WL-Changes
     private static readonly Regex RegexLatToCyr = new Regex(@"[a-zA-Z]", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-    private static readonly Regex RegexWordBoundary = new new Regex(@"(?<![a-zA-ZäöüÄÖÜа-яёА-ЯЁ])[a-zA-ZäöüÄÖÜа-яёА-ЯЁ]+?(?![a-zA-ZäöüÄÖÜа-яёА-ЯЁ])", RegexOptions.Multiline | RegexOptions.IgnoreCase); // WL-Changes
+    private static readonly Regex RegexWordBoundary = new Regex(@"(?<![a-zA-ZäöüÄÖÜа-яёА-ЯЁ])[a-zA-ZäöüÄÖÜа-яёА-ЯЁ]+?(?![a-zA-ZäöüÄÖÜа-яёА-ЯЁ])", RegexOptions.Multiline | RegexOptions.IgnoreCase); // WL-Changes
     private static readonly Regex RegexDecimal = new Regex(@"(?<=[1-90])(\.|,)(?=[1-90])");
     private static readonly Regex RegexDigits = new Regex(@"\d+");
 

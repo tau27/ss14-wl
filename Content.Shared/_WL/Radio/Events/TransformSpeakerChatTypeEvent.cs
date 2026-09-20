@@ -1,6 +1,6 @@
 using Content.Shared.Chat;
 
-namespace Content.Server._WL.Radio.Events;
+namespace Content.Shared._WL.Radio.Events;
 
 public sealed class TransformSpeakerChatTypeEvent(EntityUid sender, InGameICChatType chatType = InGameICChatType.Speak) : EntityEventArgs
 {

@@ -37,13 +37,14 @@ public sealed partial class DragonRiftComponent : SharedDragonRiftComponent
     [DataField]
     public float SpawnCooldown = 30f;
 
+    [DataField("spawn")]
+    public EntProtoId SpawnPrototype = "MobCarpDragon";
+
     //WL-Changes-Start
     [ViewVariables(VVAccess.ReadWrite), DataField("spawnSharkChance")]
     public float SharkSpawnChance = 0.1f;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("spawnShark", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string SharkSpawnPrototype = "MobSharkDragon";
+    [ViewVariables(VVAccess.ReadWrite), DataField("spawnShark")]
+    public EntProtoId SharkSpawnPrototype = "MobSharkDragon";
     //WL-Changes-End
-    [DataField("spawn")]
-    public EntProtoId SpawnPrototype = "MobCarpDragon";
 }

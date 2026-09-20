@@ -6,7 +6,7 @@ namespace Content.Server.Destructible;
 ///     When attached to an <see cref="Robust.Shared.GameObjects.EntityUid"/>, allows it to take damage
 ///     and triggers thresholds when reached.
 /// </summary>
-[RegisterComponent, Access(typeof(DestructibleSystem))]
+[RegisterComponent] //, Access(typeof(DestructibleSystem))] WL-Changes: Flammable TODO: ВРЕМЕННОЕ решение, убрать при переписи flammable
 public sealed partial class DestructibleComponent : Component
 {
     /// <summary>

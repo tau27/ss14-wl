@@ -3,6 +3,7 @@ using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.GameObjects;
 using System.Diagnostics.CodeAnalysis;
@@ -64,7 +65,7 @@ public sealed partial class TargetObjectiveSystem : EntitySystem
             targetName = mind.CharacterName;
         }
 
-        var jobName = "Unknown" ;// WL-Changes: Subnames
+        var jobName = "Unknown";// WL-Changes: Subnames
 
         var deptName = Loc.GetString("department-Unknown");
         if (_job.MindTryGetJobId(target, out var jobId))
@@ -73,15 +74,20 @@ public sealed partial class TargetObjectiveSystem : EntitySystem
             {
                 deptName = Loc.GetString(deptProto.Name);
             }
-            
+
             // WL-Changes: Subnames start
-            if (mind != null)
-                jobName = _role.GetSubnameByMind(mind, jobProto.ID) ?? jobProto.LocalizedName;
-            else
-                jobName = _role.GetSubnameByEntity(target, jobProto.ID) ?? jobProto.LocalizedName;
+            if (jobId is not null &&
+                    ProtoMan.TryIndex<JobPrototype>(jobId, out var jobProto))
+            {
+                jobName = jobProto.LocalizedName;
+
+                if (mind != null)
+                    jobName = _role.GetSubnameByMind(mind, jobId) ?? jobName;
+                else
+                    jobName = _role.GetSubnameByEntity(target, jobId) ?? jobName;
+            }
             // WL-Changes: Subnames end
         }
         return Loc.GetString(title, ("targetName", targetName), ("job", jobName), ("department", deptName));
     }
-
 }

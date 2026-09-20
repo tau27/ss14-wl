@@ -9,6 +9,7 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
 using Content.Shared._WL.Languages.Components; // WL-Changes
+using Content.Shared._WL.Radio.Events; // WL-Changes
 
 using Robust.Shared.Prototypes;
 

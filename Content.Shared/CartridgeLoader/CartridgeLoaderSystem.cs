@@ -99,7 +99,7 @@ public sealed partial class CartridgeLoaderSystem : EntitySystem
 
     private void RefreshSlotCartridgeStatus(Entity<CartridgeLoaderComponent> loader)
     {
-        if (_itemSlotsSystem.GetItemOrNull(loader, CartridgeLoaderComponent.CartridgeSlotId) is not { } cartridgeUid ||
+        if (_itemSlotsSystem.GetItemOrNull((loader, null), CartridgeLoaderComponent.CartridgeSlotId) is not { } cartridgeUid ||
             !TryComp<CartridgeComponent>(cartridgeUid, out var cartridge))
             return;
 

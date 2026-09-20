@@ -59,8 +59,10 @@ public sealed partial class CharacterInfoSystem : EntitySystem
             }
 
             if (_jobs.MindTryGetJob(mindId, out var j))
+            {
                 job = j;
                 jobName = _roles.GetSubnameBySesssion(args.SenderSession, j.ID) ?? j.LocalizedName; // WL-Changes: Subnames
+            }
 
             // Get briefing
             briefing = _roles.MindGetBriefing(mindId);
