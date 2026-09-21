@@ -16,7 +16,7 @@ namespace Content.Client.UserInterface.Systems.Chat;
 public sealed partial class ChatUIController : IOnSystemChanged<CharacterInfoSystem>
 {
     [Dependency] private ILocalizationManager _loc = default!;
-    [Dependency] private RoleSystem _roles = default!; // WL-Changes: subroles
+    [UISystemDependency] private readonly RoleSystem _roles = default!; // WL-Changes: subroles
     [UISystemDependency] private readonly CharacterInfoSystem _characterInfo = default!;
 
     private string _chatSpeechDoubleQuoteBegin = default!;
