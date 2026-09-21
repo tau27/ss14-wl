@@ -502,5 +502,6 @@
   - type: ContainerContainer
     containers:
       SecPinSlot: !type:ContainerSlot
-      storagebase: !type:Container                                                    #wl-secpins-end
+      storagebase: !type:Container
+      #wl-secpins-end
   - type: Appearance

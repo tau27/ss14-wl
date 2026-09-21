@@ -208,7 +208,7 @@
   description: Special hardsuit helmet, made for the captain of the station.
   components:
   - type: Sprite
-    sprite: _WL/Clothing/Head/Hardsuits/capspace.rsi #WL-Resprite: Cap suit
+    sprite: Clothing/Head/Hardsuits/capspace.rsi #WL-Resprite: Cap suit TODO:RESPRITE
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -632,7 +632,7 @@
   description: A pressure resistant and fireproof hood worn by special cleanup units.
   components:
   - type: Sprite
-    sprite: _WL/Clothing/Head/Hardsuits/cburn.rsi # WL-CBURN
+    sprite: Clothing/Head/Hardsuits/cburn.rsi # WL-CBURN TODO:RESPRITE
   - type: PointLight
     color: orange # Corvax-Resprite
   - type: PressureProtection

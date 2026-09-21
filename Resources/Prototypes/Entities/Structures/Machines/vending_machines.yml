@@ -19,7 +19,7 @@
     sound:
       path: /Audio/Ambience/Objects/vending_machine_hum.ogg
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/empty.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/empty.rsi # WL-resprites TODO:RESPRITE
     snapCardinals: true
   - type: Physics
     bodyType: Static
@@ -256,7 +256,7 @@
   - type: SpeakOnUIClosed
     pack: BoozeOMatGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/boozeomat.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/boozeomat.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -288,7 +288,7 @@
   - type: SpeakOnUIClosed
     pack: BruiseOMatGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/bruiseomat.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/bruiseomat.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -316,7 +316,7 @@
     ejectState: eject-unshaded
     denyState: deny-unshaded
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/cart.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/cart.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -347,7 +347,7 @@
   - type: SpeakOnUIClosed
     pack: ChefvendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/chefvend.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/chefvend.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -379,7 +379,7 @@
   - type: SpeakOnUIClosed
     pack: CigaretteMachineGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/cigs.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/cigs.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -404,7 +404,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/clothing.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/clothing.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -433,7 +433,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/winterdrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/winterdrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: [ "enum.VendingMachineVisualLayers.Base" ]
@@ -468,7 +468,7 @@
   - type: SpeakOnUIClosed
     pack: HotDrinksMachineGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/coffee.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/coffee.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -504,7 +504,7 @@
   - type: SpeakOnUIClosed
     pack: RobustSoftdrinksGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/cola.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/cola.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -524,7 +524,7 @@
   suffix: Black
   components:
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/cola-black.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/cola-black.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -545,7 +545,7 @@
   description: It vends cola, in space.
   components:
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/cola-red.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/cola-red.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -568,7 +568,7 @@
   - type: VendingMachine
     pack: SpaceUpInventory
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/spaceup.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/spaceup.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -590,7 +590,7 @@
   - type: VendingMachine
     pack: SodaInventory
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/soda.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/soda.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -613,7 +613,7 @@
   - type: VendingMachine
     pack: StarkistInventory
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/starkist.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/starkist.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -644,7 +644,7 @@
   - type: DatasetVocalizer
     dataset: RobustSoftdrinksAds
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/shamblersjuice.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/shamblersjuice.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -677,7 +677,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/pwrgame.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/pwrgame.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -710,7 +710,7 @@
   - type: SpeakOnUIClosed
     pack: DrGibbGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/gib.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/gib.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -731,7 +731,7 @@
   description: Popular with the administration.
   components:
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/smite.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/smite.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: [ "enum.VendingMachineVisualLayers.Base" ]
@@ -772,7 +772,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/dinnerware.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/dinnerware.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -801,7 +801,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/magivend.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/magivend.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -829,7 +829,7 @@
   - type: SpeakOnUIClosed
     pack: DiscountDansGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/discount.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/discount.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -855,7 +855,7 @@
     ejectState: eject-unshaded
     denyState: deny-unshaded
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/engivend.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/engivend.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -891,7 +891,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/civil-medical.rsi # WL-resprites await
+    sprite: Structures/Machines/VendingMachines/medical.rsi # WL-resprites await TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -919,7 +919,7 @@
   - type: VendingMachineVisuals
     offState: off
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/medical.rsi # WL-resprites await
+    sprite: Structures/Machines/VendingMachines/medical.rsi # WL-resprites await TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -947,7 +947,7 @@
   - type: SpeakOnUIClosed
     pack: NutriMaxGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/nutri.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/nutri.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -979,7 +979,7 @@
   - type: SpeakOnUIClosed
     pack: SecTechGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/sec.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/sec.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1016,7 +1016,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/seeds.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/seeds.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1055,7 +1055,7 @@
   - type: SpeakOnUIClosed
     pack: GetmoreChocolateCorpGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/snack.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/snack.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1081,7 +1081,7 @@
     ejectState: eject-unshaded
     denyState: deny-unshaded
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/sustenance.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/sustenance.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1101,7 +1101,7 @@
   suffix: Blue
   components:
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/snack-blue.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/snack-blue.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1121,7 +1121,7 @@
   suffix: Orange
   components:
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/snack-orange.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/snack-orange.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1141,7 +1141,7 @@
   suffix: Green
   components:
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/snack-green.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/snack-green.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1161,7 +1161,7 @@
   suffix: Teal
   components:
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/snack-teal.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/snack-teal.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1193,7 +1193,7 @@
   - type: SpeakOnUIClosed
     pack: BodaGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/sovietsoda.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/sovietsoda.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1225,7 +1225,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/theater.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/theater.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1258,7 +1258,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/vendomat.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/vendomat.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1288,7 +1288,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/robotics.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/robotics.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1319,7 +1319,7 @@
     ejectState: eject-unshaded
     denyState: deny-unshaded
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/youtool.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/youtool.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1350,7 +1350,7 @@
   - type: SpeakOnUIClosed
     pack: GoodCleanFunGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/games.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/games.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1378,7 +1378,7 @@
   - type: SpeakOnUIClosed
     pack: ChangGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/changs.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/changs.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1403,7 +1403,7 @@
   - type: VendingMachineVisuals
     denyState: deny-unshaded
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/mining.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/mining.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1436,7 +1436,7 @@
   - type: SpeakOnUIClosed
     pack: DonutGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/donut.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/donut.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1465,7 +1465,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/hydrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/hydrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1494,7 +1494,7 @@
   - type: SpeakOnUIClosed
     pack: LawDrobeGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/lawdrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/lawdrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1519,7 +1519,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/secdrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/secdrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1548,7 +1548,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/bardrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/bardrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1570,7 +1570,7 @@
   - type: VendingMachineVisuals
     denyState: deny-unshaded
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/chapdrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/chapdrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1599,7 +1599,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/cargodrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/cargodrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1628,7 +1628,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/medidrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/medidrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1653,7 +1653,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/chemdrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/chemdrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1679,7 +1679,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/curadrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/curadrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1704,7 +1704,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/atmosdrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/atmosdrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1734,7 +1734,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/engidrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/engidrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1764,7 +1764,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/chefdrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/chefdrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1789,7 +1789,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/detdrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/detdrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1814,7 +1814,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/janidrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/janidrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1843,7 +1843,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/scidrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/scidrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1868,7 +1868,7 @@
   - type: SpeakOnUIClosed
     pack: SyndieDrobeGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/syndiedrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/syndiedrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1897,7 +1897,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/robodrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/robodrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1922,7 +1922,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/genedrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/genedrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1948,7 +1948,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/virodrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/virodrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -1970,7 +1970,7 @@
   - type: VendingMachine
     pack: CentDrobeInventory
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/centdrobe.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/centdrobe.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -2001,7 +2001,7 @@
   - type: VendingMachineVisuals
     denyState: deny-unshaded
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/happyhonk.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/happyhonk.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -2041,7 +2041,7 @@
     energy: 2.0 # reduced energy since the color is pure white
     color: "#FFFFFF"
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/pride.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/pride.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -2095,7 +2095,7 @@
     normalState: normal
     denyState: deny
   - type: Sprite
-    sprite: _WL/Structures/Machines/VendingMachines/chemvend.rsi # WL-resprites
+    sprite: Structures/Machines/VendingMachines/chemvend.rsi # WL-resprites TODO:RESPRITE
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]

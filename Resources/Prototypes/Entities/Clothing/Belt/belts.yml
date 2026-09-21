@@ -174,7 +174,7 @@
 # Weirdly the only webbing with a storage whitelist and item mapper.
 # Might be worth making less common (armory only?) and removing the whitelist to eliminate the inconsistency.
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: ClothingBeltStorageBase # WL-Changes: remove secbelt because secpins
   id: ClothingBeltSecurityWebbing
   name: security carrier
   description: Unique and versatile chest rig, can hold security gear.
@@ -208,6 +208,7 @@
         - Gauze
         - Ointment
         - PillCanister
+        - Stunbaton
       components:
         - FlashOnTrigger
         - SmokeOnTrigger

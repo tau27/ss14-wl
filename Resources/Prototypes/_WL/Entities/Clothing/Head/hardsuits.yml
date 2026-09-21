@@ -16,10 +16,10 @@
   name: blue shield hardsuit helmet
   description: A special helmet worn by the bodyguards of the "first persons".
   components:
-  - type: Sprite
-    sprite: _WL/Clothing/Head/Hardsuits/blueshield.rsi
-  - type: Clothing
-    sprite: _WL/Clothing/Head/Hardsuits/blueshield.rsi
+#   - type: Sprite TODO:RESPRITE
+#     sprite: _WL/Clothing/Head/Hardsuits/blueshield.rsi
+#   - type: Clothing
+#     sprite: _WL/Clothing/Head/Hardsuits/blueshield.rsi
   - type: PointLight # Corvax-Resprite
     color: cyan
   - type: Armor

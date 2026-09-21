@@ -240,7 +240,7 @@
   suffix: Shuttle
   components:
   - type: Sprite
-    sprite: _WL/Structures/Doors/Airlocks/Standard/shuttle.rsi #WL workers Lyvsi airlock resprite
+    sprite: Structures/Doors/Airlocks/Standard/shuttle-base.rsi #WL workers Lyvsi airlock resprite TODO:RESPRITE
     layers:
     - state: docking-clamp
       offset: 0, -1
@@ -252,7 +252,7 @@
   suffix: Shuttle, Glass
   components:
   - type: Sprite
-    sprite: _WL/Structures/Doors/Airlocks/Glass/shuttle.rsi #WL workers Lyvsi airlock resprite
+    sprite: Structures/Doors/Airlocks/Glass/shuttle-base.rsi #WL workers Lyvsi airlock resprite TODO:RESPRITE
     state: "assembly"
 
 #Virology
@@ -338,7 +338,7 @@
   suffix: ShuttleSyndicate
   components:
   - type: Sprite
-    sprite: _WL/Structures/Doors/Airlocks/Standard/shuttle_syndicate.rsi #WL workers Lyvsi airlock resprite
+    sprite: Structures/Doors/Airlocks/Standard/shuttle-syndicate.rsi #WL workers Lyvsi airlock resprite TODO:RESPRITE
     state: "assembly"
 
 - type: entity
@@ -347,7 +347,7 @@
   suffix: ShuttleSyndicate, Glass
   components:
   - type: Sprite
-    sprite: _WL/Structures/Doors/Airlocks/Glass/shuttle_syndicate.rsi #WL workers Lyvsi airlock resprite
+    sprite: Structures/Doors/Airlocks/Glass/shuttle-syndicate.rsi #WL workers Lyvsi airlock resprite TODO:RESPRITE
     state: "assembly"
 
 #High Security

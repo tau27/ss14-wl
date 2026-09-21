@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: AirlockRCDResistant
   id: AirlockShuttle
   suffix: Docking
@@ -29,7 +29,7 @@
           position: "0,-0.5"
         hard: false
   - type: Sprite
-    sprite: _WL/Structures/Doors/Airlocks/Standard/shuttle.rsi #WL workers Lyvsi airlock resprite
+    sprite: Structures/Doors/Airlocks/Standard/shuttle-base.rsi #WL workers Lyvsi airlock resprite TODO:RESPRITE
     layers:
     - state: docking-clamp
       offset: 0, -1
@@ -112,7 +112,7 @@
   suffix: Glass, Docking
   components:
   - type: Sprite
-    sprite: _WL/Structures/Doors/Airlocks/Glass/shuttle.rsi #WL workers Lyvsi airlock resprite
+    sprite: Structures/Doors/Airlocks/Standard/shuttle-base.rsi #WL workers Lyvsi airlock resprite TODO:RESPRITE
   - type: Occluder
     enabled: false
   - type: Door
@@ -135,7 +135,7 @@
     noRot: false
   - type: Rotatable
   - type: Sprite
-    sprite: _WL/Structures/Doors/Airlocks/Glass/shuttle.rsi #WL workers Lyvsi airlock resprite
+    sprite: Structures/Doors/Airlocks/Standard/shuttle-base.rsi #WL workers Lyvsi airlock resprite TODO:RESPRITE
     state: closed
     snapCardinals: false
   - type: Construction
@@ -147,14 +147,14 @@
   parent: AirlockGlassShuttle
   components:
   - type: Sprite
-    sprite: _WL/Structures/Doors/Airlocks/Glass/shuttle_syndicate.rsi #WL-Changes: Lyvsi airlock resprite
+    sprite: Structures/Doors/Airlocks/Glass/shuttle-syndicate.rsi #WL-Changes: Lyvsi airlock resprite TODO:RESPRITE
 
 - type: entity
   parent: AirlockShuttle
   id: AirlockShuttleSyndicate
   components:
   - type: Sprite
-    sprite: _WL/Structures/Doors/Airlocks/Standard/shuttle_syndicate.rsi #WL-Changes: Lyvsi airlock resprite
+    sprite: Structures/Doors/Airlocks/Standard/shuttle-syndicate.rsi #WL-Changes: Lyvsi airlock resprite TODO:RESPRITE
 
 - type: entity
   parent: AirlockShuttle

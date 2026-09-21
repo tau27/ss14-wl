@@ -14,10 +14,8 @@
   - type: Clickable
   # WL-Changes: Animated Water Start
   - type: Sprite
-    sprite: _WL/Tiles/Planet/water.rsi
+    sprite: Tiles/TileEntities/liquid-water.rsi # TODO:RESPRITE
     drawdepth: BelowFloor
-    layers:
-      - state: water
   - type: Solution
     id: pool
     solution:

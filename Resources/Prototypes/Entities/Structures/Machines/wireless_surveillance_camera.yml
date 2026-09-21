@@ -13,13 +13,6 @@
         path: /Audio/Machines/button.ogg
       soundDeactivate:
         path: /Audio/Machines/button.ogg
-    - type: Appearance
-    - type: GenericVisualizer
-      visuals:
-        enum.ToggleableVisuals.Enabled:
-          enable:
-            True: { visible: true }
-            False: { visible: false }
     #WL-Changes: включение/выключение End
     - type: InteractionOutline
     - type: Eye
@@ -78,12 +71,12 @@
       noRot: true
       sprite: Structures/monitors.rsi
       #WL-Changes start
-      layers:
-      - state: television
-      - state: on
-        visible: false
-        shader: unshaded
-        map: [ "enable" ]
+#       layers:
+#       - state: television
+#       - state: on
+#         visible: false
+#         shader: unshaded
+#         map: [ "enable" ]
       #WL-Changes end
 
 - type: entity
@@ -99,12 +92,12 @@
       noRot: true
       sprite: Structures/monitors.rsi
       #WL-Changes: анимация включения/выключения Start
-      layers:
-      - state: mobilevision
-      - state: on
-        visible: false
-        shader: unshaded
-        map: [ "enable" ]
+#       layers:
+#       - state: mobilevision
+#       - state: on
+#         visible: false
+#         shader: unshaded
+#         map: [ "enable" ]
       #WL-Changes: анимация включения/выключения End
 
 - type: entity
