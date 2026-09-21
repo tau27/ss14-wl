@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ ClothingOuterStorageBase, TemperatureProtection ] # WL-Changes: Add temp protection
   id: ClothingOuterCoatBomber
   name: bomber jacket
   description: A thick, well-worn WW2 leather bomber jacket.
@@ -8,11 +8,6 @@
     sprite: Clothing/OuterClothing/Coats/bomber.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/bomber.rsi
-  # WL-Changes-start
-  - type: TemperatureProtection
-    heatingCoefficient: 1.1
-    coolingCoefficient: 0.1
- # WL-Changes-end
 
 - type: entity
   parent: [ ClothingOuterArmorBase, ClothingOuterStorageBase, AllowSuitStorageClothing, BaseSecurityContraband ]

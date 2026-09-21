@@ -1427,6 +1427,8 @@
   # Corvax-Contraband-end
   - type: Pda
     id: TramDriverIDCard
+  - type: Sprite
+    sprite: Objects/Devices/pda.rsi #WL TODO: Resprite
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
@@ -1436,6 +1438,7 @@
     borderColor: "#454a50"
     accentVColor: "#ffc500"
   - type: Icon
+    sprite: Objects/Devices/pda.rsi #WL TODO: Resprite
     state: pda-tramdriver
 
 - type: entity

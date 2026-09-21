@@ -161,7 +161,6 @@
          150: Critical
          200: Dead
      - type: Temperature
-       currentTemperature: 334
        specificHeat: 42
      - type: TemperatureDamage
        heatDamageThreshold: 1273.15

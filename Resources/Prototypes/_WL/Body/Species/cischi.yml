@@ -176,7 +176,6 @@
 #         Quantity: 0.1
 
   - type: Temperature
-    currentTemperature: 283.15
     specificHeat: 42
 
   - type: TemperatureDamage

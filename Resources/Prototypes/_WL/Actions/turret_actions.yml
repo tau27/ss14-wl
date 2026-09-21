@@ -4,6 +4,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: Interface/eject.png
+  - type: Sprite
+    sprite: Interface/eject.png
   - type: InstantAction
     event: !type:TurretExitRidingActionEvent

@@ -680,7 +680,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadBase, BaseFoldable]
+  parent: [ClothingHeadBase, BaseFoldable, TemperatureProtection] # WL-Changes
   id: ClothingHeadHatUshanka
   name: ushanka
   description: "\"Perfect for winter in Siberia, da?\""
@@ -702,9 +702,6 @@
     - state: icon-up
       map: ["foldedLayer"]
       visible: false
-  - type: TemperatureProtection # CorvaxWL-Changes
-    heatingCoefficient: 1.01    # CorvaxWL-Changes
-    coolingCoefficient: 0.4     # CorvaxWL-Changes
 
 - type: entity
   parent: ClothingHeadBase

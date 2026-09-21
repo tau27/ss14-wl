@@ -129,76 +129,8 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
 
-            //WL-ReturnToLobby-start
-            SubscribeLocalEvent<GhostComponent, GoLobbyActionEvent>(OnReturnToLobby);
-            SubscribeLocalEvent<GhostComponent, MindAddedMessage>(OnMindAdded);
-            SubscribeLocalEvent<GhostComponent, PlayerAttachedEvent>(OnAttached);
-
-            SubscribeLocalEvent<GhostRoleComponent, TakeGhostRoleEvent>(OnGhostRoleTaked);
-
-            SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => _cachedSessionsDeathTime.Clear());
-
-            Subs.CVar(_configurationManager, WLCVars.GhostReturnToLobbyButtonCooldown,
-                (newValue) => GhostReturnToLobbyButtonCooldown = TimeSpan.FromSeconds(newValue));
-            //WL-ReturnToLobby-end
-
             SubscribeLocalEvent<GhostComponent, GetVisMaskEvent>(OnGhostVis);
         }
-
-        //WL-ReturnToLobby-start
-        public override void Update(float frameTime)
-        {
-            base.Update(frameTime);
-
-            var query = EntityQueryEnumerator<GhostComponent, ActionsComponent, ActorComponent>();
-            while (query.MoveNext(out var uid, out var ghostComp, out var actionsComp, out var actorComp))
-            {
-                if (ghostComp.WasGivenReturnButtonAction)
-                    continue;
-
-                if (!_cachedSessionsDeathTime.TryGetValue(actorComp.PlayerSession.UserId, out var deathTime))
-                    continue;
-
-                if (deathTime + GhostReturnToLobbyButtonCooldown > _gameTiming.CurTime)
-                    continue;
-
-                ghostComp.WasGivenReturnButtonAction = true;
-
-                _actions.AddAction(uid, ref ghostComp.ReturnToLobbyActionEntity, ghostComp.ReturnToLobbyAction, component: actionsComp);
-            }
-        }
-
-        private void OnReturnToLobby(EntityUid ghost, GhostComponent component, GoLobbyActionEvent args)
-        {
-            if (!_player.TryGetSessionByEntity(ghost, out var session))
-                return;
-
-            _gameTicker.Respawn(session);
-            _cachedSessionsDeathTime.Remove(session.UserId);
-        }
-
-        private void OnAttached(EntityUid entity, GhostComponent component, PlayerAttachedEvent args)
-        {
-            if (!_player.TryGetSessionByEntity(entity, out var session))
-                return;
-
-            _cachedSessionsDeathTime.TryAdd(session.UserId, _gameTiming.CurTime);
-        }
-
-        private void OnMindAdded(EntityUid ghost, GhostComponent component, MindAddedMessage args)
-        {
-            var user = args.Mind.Comp.UserId;
-            if (user == null)
-                return;
-
-            _cachedSessionsDeathTime.TryAdd(user.Value, _gameTiming.CurTime);
-        }
-
-        private void OnGhostRoleTaked(EntityUid entity, GhostRoleComponent component, ref TakeGhostRoleEvent args)
-        {
-            _cachedSessionsDeathTime.Remove(args.Player.UserId);
-        }
-        //WL-ReturnToLobby-end
 
         private void OnGhostVis(Entity<GhostComponent> ent, ref GetVisMaskEvent args)
         {

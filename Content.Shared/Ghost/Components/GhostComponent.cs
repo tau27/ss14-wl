@@ -70,16 +70,6 @@ public sealed partial class GhostComponent : Component
     [DataField]
     public int BooIntensity = 6;
 
-    //WL-ReturnToLobby-start
-    [DataField]
-    public EntProtoId ReturnToLobbyAction = "ActionGhostReturnToLobby";
-
-    [DataField]
-    public EntityUid? ReturnToLobbyActionEntity;
-
-    public bool WasGivenReturnButtonAction = false;
-    //WL-ReturnToLobby-end
-
     /// <summary>
     /// Is this ghost allowed to interact with entities?
     /// </summary>
