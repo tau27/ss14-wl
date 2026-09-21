@@ -397,7 +397,7 @@
    id: OrganGolemFootRight
 
  - type: entity
-   parent: [ OrganGolemInternal, OrganGolemMetabolizer ]
+   parent: [ OrganBaseChildInternal, OrganGolemInternal, OrganGolemMetabolizer ]
    id: OrganGolemCore
    name: Spark
    description: "A prison for the soul"
