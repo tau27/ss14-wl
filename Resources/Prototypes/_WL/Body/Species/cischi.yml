@@ -124,10 +124,10 @@
   - BaseSpeciesMobOrganic
   id: MobCischi
   components:
-  - type: Hunger
-  - type: Thirst
   - type: Damageable
     damageModifierSet: Cischi
+  - type: CuffedMeleeWeapon
+    weaponId: CuffedHumanAttack
 
   - type: Inventory
     templateId: cischi
@@ -176,7 +176,6 @@
 #         Quantity: 0.1
 
   - type: Temperature
-    currentTemperature: 283.15
     specificHeat: 42
 
   - type: TemperatureDamage
@@ -230,11 +229,13 @@
 
   - type: NoSlip
 
+  #WL-Changes: Languages start
   - type: Languages
-    speaking:
-      - Translate
-    understood:
-      - Translate
+    list:
+    - language: Translate
+      languageLevel: 4
+    specieLanguage: Translate
+  #WL-Changes: Languages end
 
 - type: entity
   parent: OrganBase
