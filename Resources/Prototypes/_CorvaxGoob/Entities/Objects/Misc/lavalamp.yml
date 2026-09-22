@@ -27,7 +27,7 @@
         volume: -3
     soundDeactivate:
       # WL-Changes-Start
-      # path: /Audio/_CorvaxGoob/Machine/terminal_off.ogg 
+      # path: /Audio/_CorvaxGoob/Machine/terminal_off.ogg
       path: /Audio/Machines/lightswitch.ogg
       # WL-Changes-end
       params:
@@ -60,6 +60,8 @@
         Blunt: 4
   - type: Injurable
     damageContainer: Inorganic
+  - type: Damageable
+    damageModifierSet: Glass
   - type: Destructible
     thresholds:
     - trigger:
