@@ -61,9 +61,9 @@ tilemap:
   41: FloorMining
   40: FloorMiningDark
   42: FloorMiningLight
-  85: FloorOldConcreteOutside
-  9: FloorOldConcreteOutsideMono
-  89: FloorOldConcreteOutsideSmooth
+  85: FloorOldConcrete
+  9: FloorOldConcreteMono
+  89: FloorOldConcreteSmooth
   2: FloorPlanetDirt
   51: FloorRedCircuit
   56: FloorReinforced

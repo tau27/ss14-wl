@@ -51,7 +51,7 @@ tilemap:
   3: FloorGrayConcrete
   38: FloorGrayConcreteMono
   72: FloorGrayConcreteOutsideMono
-  84: FloorGrayConcreteOutsideSmooth
+  84: FloorConcreteSmooth
   63: FloorGrayConcreteSmooth
   65: FloorGreenCircuit
   80: FloorGym
