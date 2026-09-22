@@ -32,17 +32,6 @@ namespace Content.Server.Database
 
         void Shutdown();
 
-        //WL-Changes-start
-        #region Discord
-        Task<ulong?> GetPlayerDiscordId(Guid guid, CancellationToken token);
-        Task LinkPlayerDiscord(NetUserId userId, ulong discord_id, CancellationToken token);
-
-        Task<bool> IsLinkedToDiscord(NetUserId userId, CancellationToken token);
-
-        Task<PlayerRecord?> GetPlayerByDiscordId(ulong discord_id, CancellationToken token);
-        #endregion
-        //WL-Changes-end
-
         Task<bool> HasPendingModelChanges();
 
         #region Preferences
@@ -482,32 +471,6 @@ namespace Content.Server.Database
             _sqliteInMemoryConnection?.Dispose();
             _db.Shutdown();
         }
-
-        //WL-Changes-start
-        public Task<ulong?> GetPlayerDiscordId(Guid guid, CancellationToken token)
-        {
-            DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetPlayerDiscordId(guid, token));
-        }
-
-        public Task LinkPlayerDiscord(NetUserId userId, ulong discord_id, CancellationToken token)
-        {
-            DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.LinkPlayerDiscord(userId, discord_id, token));
-        }
-
-        public Task<bool> IsLinkedToDiscord(NetUserId userId, CancellationToken token)
-        {
-            DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.IsLinkedToDiscord(userId, token));
-        }
-
-        public Task<PlayerRecord?> GetPlayerByDiscordId(ulong discord_id, CancellationToken token)
-        {
-            DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetPlayerByDiscordId(discord_id, token));
-        }
-        //WL-Changes-end
 
         public Task<Preference> InitPrefsAsync(
             NetUserId userId,
