@@ -544,7 +544,7 @@
   components:
   - type: StationTeleporterConsole
     autoLinkKey: Nanotrasen
-  
+
 - type: entity
   parent: ComputerStationTeleportersControl
   id: ComputerSyndicateTeleportersControl
@@ -570,7 +570,7 @@
     access: [["SyndicateAgent"]]
   - type: StationTeleporterConsole
     portalColor: "#c61414"
-  
+
 - type: entity
   parent: BaseComputerAiAccess
   id: ComputerResearchAndDevelopment
@@ -781,7 +781,7 @@
   - type: UserInterface
     interfaces:
       enum.CommunicationsConsoleUiKey.Key:
-        type: WLCommunicationsConsoleBoundUserInterface # Corvax-WL
+        type: CommunicationsConsoleBoundUserInterface # Corvax-WL TODO: fix console to wl again
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: Computer
