@@ -3,13 +3,11 @@
   id: DrinkBerryshake
   suffix: ягодный милкшейк
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: Berryshake
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Berryshake
+        Quantity: 30
   - type: Icon
     sprite: _WL/Objects/Consumable/Drinks/berryshake.rsi
     state: icon
@@ -49,13 +47,11 @@
   id: DrinkChocoshake
   suffix: шоколадный милкшейк
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: Chocoshake
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Chocoshake
+        Quantity: 30
   - type: Icon
     sprite: _WL/Objects/Consumable/Drinks/chocoshake.rsi
     state: icon
