@@ -44,10 +44,7 @@ public struct ResearchState
 
     public ProtoId<ResearchPrototype>? Parent = null;
 
-    public ResearchState()
-    {
-        new ResearchState(null);
-    }
+    public ResearchState() : this(null) {}
 
     public ResearchState(ProtoId<ResearchPrototype>? parent)
     {
