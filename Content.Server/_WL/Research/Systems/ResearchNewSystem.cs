@@ -13,7 +13,6 @@ namespace Content.Server._WL.Research.Systems;
 public sealed partial class ResearchSystemNew : SharedResearchNewSystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()

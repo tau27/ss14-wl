@@ -121,7 +121,7 @@ public sealed partial class ResearchSystemNew
     private void OnPointsTransferMessage(Entity<PointsDataStorageComponent> ent, ref PointsTransferMessage args)
     {
         if (!TryComp<DataReaderComponent>(ent, out var reader) ||
-                !_itemSlots.TryGetSlot(ent, reader.SlotId, out var itemSlot) ||
+                !_itemSlots.TryGetSlot(ent.Owner, reader.SlotId, out var itemSlot) ||
                 itemSlot.Item is not { } disk)
             return;
 
@@ -135,9 +135,8 @@ public sealed partial class ResearchSystemNew
 
     private void OnRecipesTransferMessage(Entity<RecipesStorageComponent> ent, ref RecipesTransferMessage args)
     {
-        Logger.Debug("Getted reciped 0-1");
         if (!TryComp<DataReaderComponent>(ent, out var reader) ||
-                !_itemSlots.TryGetSlot(ent, reader.SlotId, out var itemSlot) ||
+                !_itemSlots.TryGetSlot(ent.Owner, reader.SlotId, out var itemSlot) ||
                 itemSlot.Item is not { } disk)
             return;
 
@@ -146,8 +145,6 @@ public sealed partial class ResearchSystemNew
 
         var storageComp = args.Direction ? ent.Comp : null;
         var recipientComp = args.Direction ? null : ent.Comp;
-
-        Logger.Debug("Getted reciped");
 
         var recipes = args.Recipes;
 
@@ -421,7 +418,7 @@ public sealed partial class ResearchSystemNew
 
         var state = new PointsDataReadBoundUserInterfaceState(portState, storage.Points, diskPoints);
 
-        _uiSystem.SetUiState(uid, PointsDataReaderUiKey.Key, state);
+        UI.SetUiState(uid, PointsDataReaderUiKey.Key, state);
     }
 
     private void UpdateRecipesReaderInterface(EntityUid uid, DataReaderComponent? reader = null, RecipesStorageComponent? storage = null)
@@ -449,6 +446,6 @@ public sealed partial class ResearchSystemNew
 
         var state = new RecipesReaderBoundUserInterfaceState(portState, storage.Recipes, diskRecipes);
 
-        _uiSystem.SetUiState(uid, RecipesReaderUiKey.Key, state);
+        UI.SetUiState(uid, RecipesReaderUiKey.Key, state);
     }
 }

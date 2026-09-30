@@ -88,7 +88,7 @@ public sealed partial class ResearchSystemNew
         if (!this.IsPowered(uid, EntityManager))
             return;
 
-        _uiSystem.TryToggleUi(uid, ResearchClientUiKey.Key, args.Actor);
+        UI.TryToggleUi(uid, ResearchClientUiKey.Key, args.Actor);
     }
 
     private void UpdateClientInterface(EntityUid uid, ResearchClientNewComponent? component = null)
@@ -105,7 +105,7 @@ public sealed partial class ResearchSystemNew
             GetServerIds(uid),
             serverComponent?.Id ?? -1);
 
-        _uiSystem.SetUiState(uid, ResearchClientUiKey.Key, state);
+        UI.SetUiState(uid, ResearchClientUiKey.Key, state);
     }
 
     public bool TryGetClientServer(EntityUid uid,

@@ -12,15 +12,15 @@ public sealed partial class TemperatureResearchConditionSystem : ResearchConditi
 
     protected override void Condition(Entity<TemperatureComponent> entity, ref ResearchConditionEvent<TemperatureResearchCondition> args)
     {
-        args.Result = entity.Comp.CurrentTemperature;
+        args.Result = entity.Comp.Temperature;
 
-        if (entity.Comp.CurrentTemperature < args.Condition.MinExtrimal)
+        if (entity.Comp.Temperature < args.Condition.MinExtrimal)
         {
-            args.Points.PointsDict.Add(args.Condition.ExtrimalType, args.Condition.MinExtrimal - entity.Comp.CurrentTemperature);
+            args.Points.PointsDict.Add(args.Condition.ExtrimalType, args.Condition.MinExtrimal - entity.Comp.Temperature);
         }
-        else if (entity.Comp.CurrentTemperature > args.Condition.MaxExtrimal)
+        else if (entity.Comp.Temperature > args.Condition.MaxExtrimal)
         {
-            args.Points.PointsDict.Add(args.Condition.ExtrimalType, entity.Comp.CurrentTemperature - args.Condition.MaxExtrimal);
+            args.Points.PointsDict.Add(args.Condition.ExtrimalType, entity.Comp.Temperature - args.Condition.MaxExtrimal);
         }
 
         args.Points.PointsDict.Add(args.Condition.BaseType, 100);

@@ -84,7 +84,7 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnInsertAttempt(Entity<DataReaderComponent> ent, ref ItemSlotInsertAttemptEvent args)
+    private void OnDataInsertAttempt(Entity<DataReaderComponent> ent, ref ItemSlotInsertAttemptEvent args)
     {
         if (args.Slot.ID != ent.Comp.SlotId || args.Cancelled)
             return;
@@ -111,7 +111,7 @@ public abstract partial class SharedResearchNewSystem : EntitySystem
         return true;
     }
 
-        public FormattedMessage GetResearchDescription(
+    public FormattedMessage GetResearchDescription(
         ProtoId<ResearchPrototype> researchId,
         bool includeCosts = true)
     {
