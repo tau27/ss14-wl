@@ -20,7 +20,7 @@ public sealed partial class LightRadiationEmissionResearchConditionSystem : Rese
 
         if (radiationIntensity > args.Condition.MaxEmission)
         {
-            args.Points.PointsDict.Add(args.Condition.ExtrimalType, radiationIntensity - args.Condition.MaxEmission);
+            args.Points.PointsDict.Add(args.Condition.ExtrimalType, (radiationIntensity - args.Condition.MaxEmission) * 10f);
         }
 
         args.Points.PointsDict.Add(args.Condition.BaseType, 100);

@@ -11,7 +11,7 @@ public sealed partial class ReceivedRadiationResearchConditionSystem : ResearchC
 
         if (args.Result > args.Condition.MaxRadiation)
         {
-            args.Points.PointsDict.Add(args.Condition.ExtrimalType, args.Result - args.Condition.MaxRadiation);
+            args.Points.PointsDict.Add(args.Condition.ExtrimalType, (args.Result - args.Condition.MaxRadiation) * 10f);
         }
 
         args.Points.PointsDict.Add(args.Condition.BaseType, 100);
