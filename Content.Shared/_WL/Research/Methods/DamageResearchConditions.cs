@@ -13,11 +13,9 @@ public sealed partial class TotalDamageResearchConditionSystem : ResearchConditi
     {
         args.Result = _damageable.GetTotalDamage(entity.Owner);
 
-        var extrimalPoints = args.Result > args.Condition.MaxDamage ? args.Result : 0;
-
         if (args.Result > args.Condition.MaxDamage)
         {
-            args.Points.PointsDict.Add(args.Condition.ExtrimalType, 100);
+            args.Points.PointsDict.Add(args.Condition.ExtrimalType, args.Result - args.Condition.MaxDamage);
         }
 
         args.Points.PointsDict.Add(args.Condition.BaseType, 100);
