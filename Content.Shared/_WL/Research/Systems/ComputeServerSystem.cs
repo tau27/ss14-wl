@@ -11,21 +11,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._WL.Research.Systems;
 
-public sealed partial class SharedComputerSystem : EntitySystem
+public sealed partial class ComputeServerSystem : EntitySystem
 {
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        Subs.BuiEvents<UniversalComputerComponent>(UCMenuUiKey.Key,
-            subs =>
-        {
-            subs.Event<ProgramOpenMessage>(OnProgramOpenMessage);
-        });
-    }
 
     [SubscribeLocalEvent]
     private void OnMapInit(Entity<UniversalComputerComponent> ent, ref MapInitEvent args)

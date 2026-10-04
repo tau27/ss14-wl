@@ -40,6 +40,12 @@ public sealed partial class DAnalyzerSystem : SharedDAnalyzerSystem
         UpdateDAnalyzerInterface(ent, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
+    private void OnItemRemoved(Entity<DAnalyzerComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        UpdateDAnalyzerInterface(ent, ent.Comp);
+    }
+
     private void OnStartDAnalyze(Entity<DAnalyzerComponent> ent, ref DAnalyzeMessage args)
     {
         var (uid, comp) = ent;
