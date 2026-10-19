@@ -1,9 +1,13 @@
 using System.Linq;
+using Content.Shared.Examine;
 using Content.Shared.Emp;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.UserInterface;
 using Content.Shared._WL.Research.Prototypes;
 using Content.Shared._WL.Research.Components;
+using Robust.Shared.Containers;
+using Robust.Shared.Timing;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -15,64 +19,94 @@ public sealed partial class ComputeServerSystem : EntitySystem
 {
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+
+    private void StartColdStart(EntityUid uid, ComputeServerComponent? component = null, TimeSpan? timerOverride = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        component.StartState = ColdStartState.Starting;
+        component.ColdStartTime = _timing.CurTime;
+        component.CurrentColdStartCooldown = timerOverride ?? component.BaseColdStartCooldown;
+
+        Dirty(uid, component);
+    }
+
+    private void EnableBoard(EntityUid server, EntityUid board, ComputeServerComponent? serverComp = null, ComputeBoardComponent? boardComp = null)
+    {
+        if (!Resolve(server, ref serverComp) || !Resolve(board, ref boardComp))
+            return;
+
+        serverComp.CurrentBoard = board;
+        StartColdStart(server, serverComp, boardComp.ColdStartTimeOverride);
+
+        Dirty(server, serverComp);
+    }
+
+    private void DisableBoard(EntityUid uid, ComputeServerComponent? server = null)
+    {
+        if (!Resolve(uid, ref server))
+            return;
+
+        server.CurrentBoard = null;
+        server.StartState = ColdStartState.Idle;
+
+        Dirty(uid, server);
+    }
 
     [SubscribeLocalEvent]
-    private void OnMapInit(Entity<UniversalComputerComponent> ent, ref MapInitEvent args)
+    private void GetVerb(Entity<ComputeServerComponent> ent, ref GetVerbsEvent<Verb> args)
     {
-        foreach (var programId in ent.Comp.Programs)
+        if (!args.CanAccess || !args.CanInteract) // || !ShouldAddVerb(uid, component, args))
+            return;
+
+        if (_container.TryGetContainer(ent, ent.Comp.ContainerName, out var container))
         {
-            InitProgram(ent, programId, ent.Comp);
+            var index = 0;
+
+            foreach (var board in container.ContainedEntities)
+            {
+            if (!TryComp<ComputeBoardComponent>(board, out var boardComp))
+                continue;
+
+                var verb = new Verb
+                {
+                    Priority = index,
+                    Category = VerbCategory.Programs,
+                    Disabled = ent.Comp.CurrentBoard == board,
+                    Act = () =>
+                    {
+                        EnableBoard(ent, board, ent.Comp, boardComp);
+
+                        _popup.PopupEntity(Loc.GetString("compute-server-program-timer-popup", ("program", Loc.GetString(boardComp.Name))), ent);
+                    },
+                    Text = Loc.GetString(boardComp.Name),
+                };
+
+                args.Verbs.Add(verb);
+
+                index++;
+            }
         }
 
-        OpenProgram(ent, ent.Comp.MenuProgram, ent.Comp);
-    }
-
-    private void InitProgram(EntityUid uid, ProtoId<ProgramPrototype> programId, UniversalComputerComponent? computer = null)
-    {
-        if (!Resolve(uid, ref computer))
-            return;
-
-        var program = ProtoMan.Index(programId);
-
-        _ui.SetUi(uid, program.UIKey, program.UIData);
-
-        EntityManager.AddComponents(uid, program.Components);
-    }
-
-    [SubscribeLocalEvent]
-    private void GetVerb(Entity<UniversalComputerComponent> ent, ref GetVerbsEvent<Verb> args)
-    {
-        if (ent.Comp.InMenu)// || !ShouldAddVerb(uid, component, args))
-            return;
-
-        args.Verbs.Add(new ActivationVerb
+        var idleVerb = new Verb
         {
-            Act = () => OpenProgram(ent, ent.Comp.MenuProgram, ent.Comp),
-            Text = Loc.GetString(ent.Comp.VerbText),
-            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/close.svg.192dpi.png")),
-        });
-    }
+            Priority = -1,
+            Category = VerbCategory.Programs,
+            Disabled = ent.Comp.StartState == ColdStartState.Idle,
+            Act = () =>
+            {
+                DisableBoard(ent, ent.Comp);
 
-    [SubscribeLocalEvent]
-    private void GetActivationVerb(Entity<UniversalComputerComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
-    {
-        if (ent.Comp.InMenu)// || !ShouldAddVerb(uid, component, args))
-            return;
+                _popup.PopupEntity(Loc.GetString("compute-server-disabled-popup"), ent);
+            },
+            Text = Loc.GetString("compute-server-verb-idle"),
+        };
 
-        args.Verbs.Add(new ActivationVerb
-        {
-            Act = () => OpenProgram(ent, ent.Comp.MenuProgram, ent.Comp),
-            Text = Loc.GetString(ent.Comp.VerbText),
-            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/close.svg.192dpi.png")),
-        });
-    }
-
-    private void OnProgramOpenMessage(Entity<UniversalComputerComponent> ent, ref ProgramOpenMessage args)
-    {
-        if (!ProtoMan.TryIndex<ProgramPrototype>(args.Program, out var program))
-            return;
-
-        OpenProgram(ent, program, ent.Comp);
+        args.Verbs.Add(idleVerb);
     }
 
     /*
@@ -93,42 +127,59 @@ public sealed partial class ComputeServerSystem : EntitySystem
     }
     */
 
-    public void OpenProgram(EntityUid uid, ProtoId<ProgramPrototype> programId, UniversalComputerComponent? computer = null, EntityUid? actor = null)
+    [SubscribeLocalEvent]
+    private void OnExamineServer(Entity<ComputeServerComponent> ent, ref ExaminedEvent args)
     {
-        if (!Resolve(uid, ref computer) || HasComp<EmpDisabledComponent>(uid))
-            return;
+        var boardName = "compute-server-unknown-board";
 
-        var prevProgram = ProtoMan.Index(computer.CurrentProgram);
+        if (ent.Comp.CurrentBoard is {} board &&
+                TryComp<ComputeBoardComponent>(board, out var boardComp))
+            boardName = boardComp.Name;
 
-        var program = ProtoMan.Index(programId);
-
-        if (TryComp<ActivatableUIComponent>(uid, out var activatable))
+        switch (ent.Comp.StartState)
         {
-            activatable.Key = program.UIKey;
-            Dirty(uid, activatable);
+            case ColdStartState.Idle:
+                args.PushText(Loc.GetString("compute-server-idle-examine-message"));
+                break;
+
+            case ColdStartState.Starting:
+                args.PushText(
+                    Loc.GetString(
+                        "compute-server-examine-message",
+                        ("mode", Loc.GetString("compute-server-starting")),
+                        ("program", Loc.GetString(boardName))
+                    )
+                );
+                break;
+
+            case ColdStartState.Ready:
+                args.PushText(
+                    Loc.GetString(
+                        "compute-server-examine-message",
+                        ("mode", Loc.GetString("compute-server-ready")),
+                        ("program", Loc.GetString(boardName))
+                    )
+                );
+                break;
+
+            case ColdStartState.Invalid:
+                args.PushText(Loc.GetString("compute-server-invalid-examine-message"));
+                break;
         }
-
-        if (TryComp<UniversalComputerVisualsComponent>(uid, out var _))
-            _appearance.SetData(uid, UniversalComputerVisuals.ProgramPrototype, programId);
-
-        computer.CurrentProgram = programId;
-        computer.InMenu = computer.MenuProgram == programId;
-
-        UpdateComputerInterface(uid, computer);
-
-        _ui.CloseUi(uid, prevProgram.UIKey);
-        _ui.OpenUi(uid, program.UIKey, actor, true);
-
-        Dirty(uid, computer);
     }
 
-    private void UpdateComputerInterface(EntityUid uid, UniversalComputerComponent? computer = null)
+    public override void Update(float frameTime)
     {
-        if (!Resolve(uid, ref computer, false))
-            return;
+        var query = EntityQueryEnumerator<ComputeServerComponent>();
 
-        var state = new UniversalComputerBoundInterfaceState(computer.Programs);
+        while (query.MoveNext(out var uid, out var server))
+        {
+            if (server.StartState != ColdStartState.Starting ||
+                    _timing.CurTime - server.ColdStartTime < server.CurrentColdStartCooldown)
+                continue;
 
-        _ui.SetUiState(uid, UCMenuUiKey.Key, state);
+            server.StartState = ColdStartState.Ready;
+            _popup.PopupEntity(Loc.GetString("compute-server-program-start-popup"), uid);
+        }
     }
 }

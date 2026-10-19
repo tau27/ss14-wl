@@ -71,6 +71,7 @@ public sealed partial class ResearchSystemNew : SharedResearchNewSystem
         {
             if (server.NextUpdateTime > _timing.CurTime)
                 continue;
+
             server.NextUpdateTime = _timing.CurTime + server.ResearchConsoleUpdateTime;
 
             UpdateServer(uid, (int) server.ResearchConsoleUpdateTime.TotalSeconds, server);

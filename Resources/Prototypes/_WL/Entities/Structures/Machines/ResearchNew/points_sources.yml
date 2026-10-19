@@ -114,3 +114,20 @@
     - type: ResearchSource
       category: DebugCategory1
       pointsType: BioChem
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: MachichiMochi
+  name: check check
+  suffix: Machine Board
+  components:
+    - type: ComputeBoard
+      name: Сасать америка
+    - type: MachineBoard
+      prototype: ImpCoffeeMachineEmpty
+      stackRequirements:
+        Steel: 5
+      tagRequirements:
+          GlassBeaker:
+            amount: 1
+            defaultPrototype: Beaker

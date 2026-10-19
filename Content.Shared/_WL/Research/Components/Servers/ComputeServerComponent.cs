@@ -11,11 +11,32 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._WL.Research.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class ComputeServerComponent: Component
+public sealed partial class ComputeServerComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
-    public string ContainerName = "server_boards";
+    [DataField, AutoNetworkedField]
+    public string ContainerName = "storagebase";
 
     [DataField, AutoNetworkedField]
     public EntityUid? CurrentBoard = null;
+
+    [AutoNetworkedField]
+    public TimeSpan ColdStartTime;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan BaseColdStartCooldown = TimeSpan.FromSeconds(3);
+
+    [ViewVariables, AutoNetworkedField]
+    public TimeSpan CurrentColdStartCooldown = TimeSpan.FromSeconds(3);
+
+    [AutoNetworkedField]
+    public ColdStartState StartState = ColdStartState.Idle;
+
+}
+
+public enum ColdStartState
+{
+    Idle = 0,
+    Starting = 1,
+    Ready = 2,
+    Invalid = 3
 }
